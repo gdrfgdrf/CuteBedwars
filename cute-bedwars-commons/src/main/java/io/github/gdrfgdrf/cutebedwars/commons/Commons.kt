@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.commons.common
+package io.github.gdrfgdrf.cutebedwars.commons
 
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
 import org.bukkit.plugin.java.JavaPlugin

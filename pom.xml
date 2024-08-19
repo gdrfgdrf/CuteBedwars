@@ -18,6 +18,7 @@
         <module>cute-bedwars-packer</module>
         <module>cute-bedwars-locale</module>
         <module>cute-bedwars-commands</module>
+        <module>cute-bedwars-database-default-impl-beans</module>
     </modules>
 
     <repositories>

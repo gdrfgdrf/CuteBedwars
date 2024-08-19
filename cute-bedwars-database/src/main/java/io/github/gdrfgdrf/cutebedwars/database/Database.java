@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.database;
 
-import io.github.gdrfgdrf.cutebedwars.beans.Config;
-import io.github.gdrfgdrf.cutebedwars.commons.common.Constants;
+import io.github.gdrfgdrf.cutebedwars.commons.Config;
+import io.github.gdrfgdrf.cutebedwars.commons.Constants;
 import io.github.gdrfgdrf.cutebedwars.commons.extension.StringExtensionKt;
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase;
 import io.github.gdrfgdrf.cutebedwars.database.common.DatabaseImplDescription;

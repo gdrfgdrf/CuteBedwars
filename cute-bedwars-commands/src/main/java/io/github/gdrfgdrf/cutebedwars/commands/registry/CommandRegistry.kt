@@ -1,7 +1,7 @@
-package io.github.gdrfgdrf.cutebedwars.command.registry
+package io.github.gdrfgdrf.cutebedwars.commands.registry
 
-import io.github.gdrfgdrf.cutebedwars.command.RootCommand
-import io.github.gdrfgdrf.cutebedwars.command.manager.SubCommandManager
+import io.github.gdrfgdrf.cutebedwars.commands.RootCommand
+import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.commons.enums.CommandPermissions
 import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo

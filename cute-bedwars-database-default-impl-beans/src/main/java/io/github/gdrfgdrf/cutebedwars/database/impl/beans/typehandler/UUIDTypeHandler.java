@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.beans.typehandler;
+package io.github.gdrfgdrf.cutebedwars.database.impl.beans.typehandler;
 
 import io.github.gdrfgdrf.cuteframework.utils.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;

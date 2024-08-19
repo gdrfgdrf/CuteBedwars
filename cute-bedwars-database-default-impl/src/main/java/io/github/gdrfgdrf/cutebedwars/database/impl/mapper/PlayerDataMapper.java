@@ -1,8 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import io.github.gdrfgdrf.cutebedwars.beans.PlayerData;
-import io.github.gdrfgdrf.cutebedwars.beans.typehandler.UUIDTypeHandler;
+import io.github.gdrfgdrf.cutebedwars.database.impl.beans.PlayerData;
+import io.github.gdrfgdrf.cutebedwars.database.impl.beans.typehandler.UUIDTypeHandler;
 import org.apache.ibatis.annotations.*;
 
 import java.util.UUID;

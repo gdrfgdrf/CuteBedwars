@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.commons.extension
 
-import io.github.gdrfgdrf.cutebedwars.commons.common.logger
+import io.github.gdrfgdrf.cutebedwars.commons.logger
 
 fun String.logInfo() {
     logger().info(this)

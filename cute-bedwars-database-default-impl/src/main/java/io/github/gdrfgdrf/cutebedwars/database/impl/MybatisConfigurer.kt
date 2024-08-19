@@ -2,10 +2,12 @@ package io.github.gdrfgdrf.cutebedwars.database.impl
 
 import com.baomidou.mybatisplus.core.MybatisConfiguration
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder
-import io.github.gdrfgdrf.cutebedwars.beans.Config
-import io.github.gdrfgdrf.cutebedwars.commons.common.Constants
+import com.baomidou.mybatisplus.core.mapper.BaseMapper
+import io.github.gdrfgdrf.cutebedwars.commons.Config
+import io.github.gdrfgdrf.cutebedwars.commons.Constants
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.database
+import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import org.apache.ibatis.builder.xml.XMLMapperBuilder
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl
 import org.apache.ibatis.logging.nologging.NoLoggingImpl
@@ -34,7 +36,18 @@ object MybatisConfigurer {
         val environment = Environment(database().displayName, transactionFactory, dataSource)
         val configuration = MybatisConfiguration(environment)
 
-        DefaultDatabase.MAPPERS.forEach {
+        val searchResult = HashSet<Class<*>>()
+
+        ClassUtils.searchJar(
+            MybatisConfigurer::class.java.classLoader,
+            "io.github.gdrfgdrf.cutebedwars.database.impl.mapper",
+            { clazz ->
+                return@searchJar clazz.superclass == BaseMapper::class.java
+            },
+            searchResult
+        )
+
+        searchResult.forEach {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }

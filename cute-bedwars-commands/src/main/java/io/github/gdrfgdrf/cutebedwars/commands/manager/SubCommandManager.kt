@@ -1,6 +1,6 @@
-package io.github.gdrfgdrf.cutebedwars.command.manager
+package io.github.gdrfgdrf.cutebedwars.commands.manager
 
-import io.github.gdrfgdrf.cutebedwars.command.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils

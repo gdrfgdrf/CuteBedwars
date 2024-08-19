@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.beans;
+package io.github.gdrfgdrf.cutebedwars.commons;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

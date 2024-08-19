@@ -1,7 +1,7 @@
-package io.github.gdrfgdrf.cutebedwars.command
+package io.github.gdrfgdrf.cutebedwars.commands
 
-import io.github.gdrfgdrf.cutebedwars.command.base.SubCommand
-import io.github.gdrfgdrf.cutebedwars.command.manager.SubCommandManager
+import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
 import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.extension.send

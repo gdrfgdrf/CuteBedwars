@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.commons.common
+package io.github.gdrfgdrf.cutebedwars.commons
 
 object Constants {
     const val OWNER = "cute-bedwars"

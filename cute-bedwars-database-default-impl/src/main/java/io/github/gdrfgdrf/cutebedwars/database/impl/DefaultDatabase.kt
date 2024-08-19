@@ -1,14 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl
 
-import io.github.gdrfgdrf.cutebedwars.beans.Config
-import io.github.gdrfgdrf.cutebedwars.commons.common.Constants
+import io.github.gdrfgdrf.cutebedwars.commons.Config
+import io.github.gdrfgdrf.cutebedwars.commons.Constants
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logWarn
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.Mappers
-import io.github.gdrfgdrf.cutebedwars.database.impl.mapper.PlayerDataMapper
 import io.github.gdrfgdrf.cuteframework.bean.BeanManager
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Component
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Order
@@ -53,12 +52,6 @@ class DefaultDatabase : IDatabase {
             throw DatabaseException("The service could not be gotten because MyBatis has not been loaded")
         }
         return BeanManager.getInstance().getBean(serviceClass.simpleName) as T
-    }
-
-    companion object {
-        val MAPPERS = arrayOf(
-            PlayerDataMapper::class.java
-        )
     }
 
 }
