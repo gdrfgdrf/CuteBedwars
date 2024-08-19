@@ -16,6 +16,8 @@
         <module>cute-bedwars-database-default-impl</module>
         <module>cute-bedwars-commons</module>
         <module>cute-bedwars-packer</module>
+        <module>cute-bedwars-locale</module>
+        <module>cute-bedwars-commands</module>
     </modules>
 
     <repositories>
@@ -32,6 +34,8 @@
                 <artifactId>commons</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 

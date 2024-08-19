@@ -20,4 +20,8 @@ object JavaPluginHolder : Holder() {
     override fun <T> get(name: String): T {
         return map[name] as T
     }
+
+    fun get(): JavaPlugin {
+        return get(JAVA_PLUGIN_NAME)
+    }
 }

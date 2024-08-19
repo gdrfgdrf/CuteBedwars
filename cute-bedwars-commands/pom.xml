@@ -9,8 +9,7 @@
         <version>0.1.0</version>
     </parent>
 
-    <artifactId>core</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>commands</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -21,30 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>holders</artifactId>
-            <version>0.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>beans</artifactId>
-            <version>0.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>database</artifactId>
-            <version>0.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>commons</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>commands</artifactId>
+            <artifactId>locale</artifactId>
             <version>0.1.0</version>
         </dependency>
     </dependencies>

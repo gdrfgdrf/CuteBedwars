@@ -3,3 +3,13 @@ main: io.github.gdrfgdrf.cutebedwars.CuteBedwars
 version: 0.1.0
 depend:
   - CuteFramework-MinecraftPlugin
+
+commands:
+  cutebedwars:
+    description: The root command of CuteBedwars
+    usage: /cutebedwars
+    permission: cutebedwars.user.root
+  cbw:
+    description: The root command of CuteBedwars
+    usage: /cbw
+    permission: cutebedwars.user.root
