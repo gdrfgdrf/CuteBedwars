@@ -1,0 +1,5 @@
+name: CuteBedwars
+main: io.github.gdrfgdrf.cutebedwars.CuteBedwars
+version: 0.1.0
+depend:
+  - CuteFramework-MinecraftPlugin
