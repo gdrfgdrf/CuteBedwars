@@ -32,6 +32,6 @@ public class Config {
         config.databaseImpl = "default-sqlite";
         config.databaseUsername = "";
         config.databasePassword = "";
-        config.enableDatabaseLogging = true;
+        config.enableDatabaseLogging = false;
     }
 }

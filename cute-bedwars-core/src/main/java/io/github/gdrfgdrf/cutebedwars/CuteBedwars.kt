@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars
 
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.listener.PlayerJoinListener
+import io.github.gdrfgdrf.cutebedwars.works.Closer
 import io.github.gdrfgdrf.cutebedwars.works.Loader
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -23,6 +24,7 @@ class CuteBedwars : JavaPlugin() {
 
     override fun onDisable() {
         super.onDisable()
+        Closer.close()
 
         "CuteBedwars is disabled".logInfo()
     }

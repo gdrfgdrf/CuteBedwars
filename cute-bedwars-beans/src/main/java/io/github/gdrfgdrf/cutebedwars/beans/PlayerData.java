@@ -18,6 +18,6 @@ import java.util.UUID;
 public class PlayerData implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
-    @TableField
-    private String uuid;
+    @TableField(typeHandler = UUIDTypeHandler.class)
+    private UUID uuid;
 }
