@@ -13,10 +13,14 @@
     <file url="file://$PROJECT_DIR$/cute-bedwars-core/cute-bedwars-core-command/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cute-bedwars-database-default-impl-beans/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cute-bedwars-database-default-impl-beans/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-database-default-impl/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-database-default-impl/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-database/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-database/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cute-bedwars-game-beans/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cute-bedwars-game-beans/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-holders/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-holders/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cute-bedwars-locale/src/main/java" charset="UTF-8" />

@@ -28,13 +28,18 @@ public class Database {
 
     private IDatabase database;
 
-    private Database() {}
+    private Database() {
+    }
 
     public static Database getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Database();
         }
         return INSTANCE;
+    }
+
+    public static IDatabase get() {
+        return getInstance().database;
     }
 
     public void initialize() {
@@ -57,7 +62,9 @@ public class Database {
                     customDatabaseImplFolder.mkdirs();
                 }
 
-                File customDatabaseImplFile = new File(Constants.CUSTOM_DATABASE_IMPL_FOLDER_NAME + databaseImpl);
+                File customDatabaseImplFile = new File(
+                        Constants.CUSTOM_DATABASE_IMPL_FOLDER_NAME + databaseImpl
+                );
                 StringExtensionKt.logInfo("Custom database: " + customDatabaseImplFile);
 
                 databaseClass = initCustom(customDatabaseImplFile);
@@ -94,7 +101,10 @@ public class Database {
         JarEntry descriptionFile = jarFile.getJarEntry(Constants.DATABASE_IMPL_DESCRIPTION_FILE_NAME);
 
         InputStream inputStream = jarFile.getInputStream(descriptionFile);
-        DatabaseImplDescription description = JacksonUtils.readInputStream(inputStream, DatabaseImplDescription.class);
+        DatabaseImplDescription description = JacksonUtils.readInputStream(
+                inputStream,
+                DatabaseImplDescription.class
+        );
 
         String databaseImplClass = description.getDatabaseImplClass();
         if (StringUtils.isBlank(databaseImplClass)) {
@@ -110,8 +120,7 @@ public class Database {
         return (Class<? extends IDatabase>) databaseClass;
     }
 
-    private void load(Class<? extends IDatabase> databaseImplClass) throws
-            Exception {
+    private void load(Class<? extends IDatabase> databaseImplClass) throws Exception {
         StringExtensionKt.logInfo("Loading the database class " + databaseImplClass.getName());
 
         IDatabase instance;
@@ -136,10 +145,6 @@ public class Database {
         } catch (Exception e) {
             throw new CloseDatabaseException("An error occurred while trying to close the database");
         }
-    }
-
-    public static IDatabase get() {
-        return getInstance().database;
     }
 
 }

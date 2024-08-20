@@ -12,7 +12,6 @@ import io.github.gdrfgdrf.cuteframework.bean.annotation.Order
 @Component(name = "ITeamService")
 class TeamServiceImpl : BetterServiceImpl<TeamMapper, Team>(), IITeamService {
     override fun insert(team: AbstractTeam): Int {
-        val result = mapper?.insert(team as Team) ?: return -1
-        return result
+        return super.insert(team as Team)
     }
 }

@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.github.dreamyoung.mprelation.JoinColumn;
 import com.github.dreamyoung.mprelation.OneToMany;
 import io.github.gdrfgdrf.cutebedwars.beans.game.AbstractGame;
-import lombok.Data;
+import io.github.gdrfgdrf.cutebedwars.beans.game.AbstractTeam;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
@@ -19,7 +19,6 @@ import java.util.List;
  * @author gdrfgdrf
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
 @TableName("games")
 public class Game extends AbstractGame implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
@@ -38,4 +37,19 @@ public class Game extends AbstractGame implements Serializable {
     @OneToMany
     @JoinColumn(name = "id", referencedColumnName = "game_id")
     private List<Team> teams = new ArrayList<>();
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public List<AbstractTeam> getTeams() {
+        return new ArrayList<>(teams);
+    }
 }

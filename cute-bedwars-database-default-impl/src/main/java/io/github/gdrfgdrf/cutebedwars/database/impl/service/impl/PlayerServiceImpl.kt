@@ -12,9 +12,8 @@ import java.util.*
 @Order(2)
 @Component(name = "IPlayerService")
 class PlayerServiceImpl : BetterServiceImpl<PlayerDataMapper, PlayerData>(), IIPlayerService {
-    override fun insert(abstractPlayerData: AbstractPlayerData): Int {
-        val result = mapper?.insert(abstractPlayerData as PlayerData) ?: return -1
-        return result
+    override fun insert(playerData: AbstractPlayerData): Int {
+        return super.insert(playerData as PlayerData)
     }
 
     override fun exist(uuid: UUID): Boolean {

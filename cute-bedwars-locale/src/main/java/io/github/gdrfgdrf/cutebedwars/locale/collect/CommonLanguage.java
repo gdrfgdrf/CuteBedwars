@@ -8,4 +8,7 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
  */
 public class CommonLanguage implements LanguageCollect {
     public static LanguageString PREFIX;
+    public static LanguageString COMMON_TOP;
+    public static LanguageString COMMON_BOTTOM;
+    public static LanguageString NONE;
 }

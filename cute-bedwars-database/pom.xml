@@ -21,7 +21,6 @@
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>beans</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>

@@ -21,7 +21,6 @@
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>holders</artifactId>
-            <version>0.1.0</version>
         </dependency>
     </dependencies>
 

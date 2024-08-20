@@ -21,31 +21,26 @@
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>core</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>holders</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>beans</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>database</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>database-default-impl</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
@@ -56,19 +51,16 @@
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>locale</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>commands</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>database-default-impl-beans</artifactId>
-            <version>0.1.0</version>
         </dependency>
     </dependencies>
 

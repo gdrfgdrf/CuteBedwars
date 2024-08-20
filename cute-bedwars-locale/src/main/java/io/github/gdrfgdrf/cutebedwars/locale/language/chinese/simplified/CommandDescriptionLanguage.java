@@ -7,5 +7,5 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
  * @author gdrfgdrf
  */
 class CommandDescriptionLanguage implements LanguageBlock {
-    public static final LanguageString HELP = new LanguageString("&a显示帮助");
+    public static final LanguageString HELP = new LanguageString("显示帮助");
 }

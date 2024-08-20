@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <writeAnnotations>
+      <writeAnnotation name="com.baomidou.mybatisplus.annotation.TableField" />
+    </writeAnnotations>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -11,6 +16,7 @@
       <set>
         <option value="$PROJECT_DIR$/cute-bedwars-compatibility/pom.xml" />
         <option value="$PROJECT_DIR$/cute-bedwars-core/cute-bedwars-core-command/pom.xml" />
+        <option value="$PROJECT_DIR$/cute-bedwars-game-beans/pom.xml" />
       </set>
     </option>
   </component>

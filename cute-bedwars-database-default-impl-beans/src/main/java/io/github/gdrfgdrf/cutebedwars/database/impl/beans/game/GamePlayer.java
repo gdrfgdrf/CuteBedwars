@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.github.gdrfgdrf.cutebedwars.beans.game.AbstractGamePlayer;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
@@ -14,7 +13,6 @@ import java.io.Serializable;
  * @author gdrfgdrf
  */
 @EqualsAndHashCode(callSuper = true)
-@Data
 @TableName("game_players")
 public class GamePlayer extends AbstractGamePlayer implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
@@ -23,4 +21,34 @@ public class GamePlayer extends AbstractGamePlayer implements Serializable {
     private Long gameId;
     @TableField(value = "team_id")
     private Long teamId;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public Long getGameId() {
+        return gameId;
+    }
+
+    @Override
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
+    }
+
+    @Override
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    @Override
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
 }

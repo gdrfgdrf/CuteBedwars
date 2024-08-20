@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
 import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.extension.send
+import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
@@ -17,7 +17,7 @@ object RootCommand : TabExecutor {
         label: String,
         args: Array<String>,
     ): Boolean {
-        if (!"cbw".equals(label, true)) {
+        if (!"cbw".equals(label, true) && !"cutebedwars".equals(label, true)) {
             return true
         }
 
@@ -33,35 +33,43 @@ object RootCommand : TabExecutor {
             return true
         }
 
-        CommandLanguage.NOT_FOUND
-            ?.get()!!
-            .send(sender)
+        localizationScope(sender) {
+            message(CommandLanguage.NOT_FOUND)
+                .send()
+        }
         return true
     }
 
     private fun execute(sender: CommandSender, args: Array<String>, subCommand: SubCommand) {
-        if (subCommand.hasPermission(sender)) {
-            if (!subCommand.command.onlyPlayer || sender is Player) {
-                if (args.isEmpty()) {
-                    subCommand.run(sender, args)
-                    return
+        localizationScope(sender) {
+            if (subCommand.hasPermission(sender)) {
+                if (!subCommand.command.onlyPlayer || sender is Player) {
+                    if (args.isEmpty()) {
+                        subCommand.run(sender, args)
+                        return@localizationScope
+                    }
+                    if (subCommand.command.argsRange.contains(args.size - 1)) {
+                        subCommand.run(sender, args)
+                        return@localizationScope
+                    }
+
+                    if (subCommand.syntax() != null) {
+                        message(CommandLanguage.SYNTAX_ERROR)
+                            .format(subCommand.syntax()!!.get().string)
+                            .send()
+                    } else {
+                        message(CommandLanguage.SYNTAX_ERROR)
+                            .format("null")
+                            .send()
+                    }
+                } else {
+                    message(CommandLanguage.ONLY_PLAYER)
+                        .send()
                 }
-                if (subCommand.command.argsRange.contains(args.size - 1)) {
-                    subCommand.run(sender, args)
-                    return
-                }
-                CommandLanguage.SYNTAX_ERROR
-                    ?.get()!!
-                    .send(sender)
             } else {
-                CommandLanguage.ONLY_PLAYER
-                    ?.get()!!
-                    .send(sender)
+                message(CommandLanguage.NO_PERMISSION)
+                    .send()
             }
-        } else {
-            CommandLanguage.NO_PERMISSION
-                ?.get()!!
-                .send(sender)
         }
     }
 

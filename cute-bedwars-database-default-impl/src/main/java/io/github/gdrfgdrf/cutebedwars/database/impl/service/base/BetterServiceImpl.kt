@@ -12,4 +12,9 @@ open class BetterServiceImpl<M : BaseMapper<T>, T>: ServiceImpl<M, T>() {
             }
             return field
         }
+
+    fun insert(t: T): Int {
+        val result = mapper?.insert(t) ?: return -1
+        return result
+    }
 }

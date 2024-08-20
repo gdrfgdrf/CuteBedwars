@@ -12,7 +12,6 @@ import io.github.gdrfgdrf.cuteframework.bean.annotation.Order
 @Component(name = "IGamePlayerService")
 class GamePlayerServiceImpl : BetterServiceImpl<GamePlayerMapper, GamePlayer>(), IIGamePlayerService {
     override fun insert(gamePlayer: AbstractGamePlayer): Int {
-        val result = mapper?.insert(gamePlayer as GamePlayer) ?: return -1
-        return result
+        return super.insert(gamePlayer as GamePlayer)
     }
 }
