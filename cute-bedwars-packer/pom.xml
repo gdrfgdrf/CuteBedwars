@@ -65,7 +65,12 @@
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>request</artifactId>
+            <artifactId>requests</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>abstracts</artifactId>
         </dependency>
     </dependencies>
 

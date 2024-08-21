@@ -30,6 +30,12 @@ class DefaultDatabase : IDatabase {
         }
         if (Config.INSTANCE.enableDatabaseLogging == false) {
             LogFactory.useNoLogging()
+        } else {
+            tryImplementation(LogFactory::useSlf4jLogging)
+            tryImplementation(LogFactory::useCommonsLogging)
+            tryImplementation(LogFactory::useLog4J2Logging)
+            tryImplementation(LogFactory::useJdkLogging)
+            tryImplementation(LogFactory::useNoLogging)
         }
 
         MybatisConfigurer.initialize()
@@ -39,8 +45,6 @@ class DefaultDatabase : IDatabase {
 
     override fun close() {
         MybatisConfigurer.sqlSessionFactory = null
-        MybatisConfigurer.initialize()
-
         Mappers.clear()
 
         "$displayName is closed".logInfo()
@@ -52,6 +56,14 @@ class DefaultDatabase : IDatabase {
             throw DatabaseException("The service could not be gotten because MyBatis has not been loaded")
         }
         return BeanManager.getInstance().getBean(serviceClass.simpleName) as T
+    }
+
+    private fun tryImplementation(runnable: () -> Unit) {
+        runCatching {
+            runnable()
+        }.onFailure {
+
+        }
     }
 
 }

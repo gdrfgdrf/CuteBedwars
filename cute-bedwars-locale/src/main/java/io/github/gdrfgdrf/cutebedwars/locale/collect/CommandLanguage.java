@@ -14,7 +14,4 @@ public class CommandLanguage implements LanguageCollect {
     public static LanguageString SYNTAX_ERROR;
     public static LanguageString ONLY_PLAYER;
     public static LanguageString NOT_FOUND;
-
-    public static LanguageString RELOAD_WARRING;
-    public static LanguageString RELOADING_PLUGIN;
 }

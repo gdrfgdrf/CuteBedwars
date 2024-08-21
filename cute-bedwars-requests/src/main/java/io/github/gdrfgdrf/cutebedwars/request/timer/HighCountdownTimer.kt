@@ -1,7 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.request.timer
 
-import io.github.gdrfgdrf.cutebedwars.commons.extension.launchIO
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.commons.extension.*
 import io.github.gdrfgdrf.cutebedwars.request.Request
 import io.github.gdrfgdrf.cutebedwars.request.enums.RequestStatuses
 import io.github.gdrfgdrf.cuteframework.utils.thread.ThreadPoolService
@@ -33,10 +32,13 @@ object HighCountdownTimer {
         requests[request] = System.currentTimeMillis()
         request.status = RequestStatuses.READY
     }
+
+    fun remove(request: Request) {
+        requests.remove(request)
+    }
 }
 
 internal object HighCountdownWorker : Runnable {
-    @OptIn(DelicateCoroutinesApi::class)
     override fun run() {
         "High countdown worker is running".logInfo()
 
@@ -45,7 +47,7 @@ internal object HighCountdownWorker : Runnable {
                 val now = System.currentTimeMillis()
 
                 HighCountdownTimer.requests.forEach { (request, startTime) ->
-                    if (request.status == RequestStatuses.STOPPED) {
+                    if (request.status == RequestStatuses.STOPPED || request.status == RequestStatuses.RUNNING) {
                         HighCountdownTimer.requests.remove(request)
                         return@forEach
                     }
@@ -54,16 +56,17 @@ internal object HighCountdownWorker : Runnable {
                     val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout, request.timeUnit)
                     if (now - startTime >= convertedTimeout) {
                         HighCountdownTimer.requests.remove(request)
-                        GlobalScope.launchIO {
+                        request.status = RequestStatuses.RUNNING
+
+                        ThreadPoolService.newTask {
                             request.endRun(request)
                             request.status = RequestStatuses.STOPPED
                         }
-
-                        request.status = RequestStatuses.RUNNING
                     }
 
                     if (now - request.lastEachSecondRun >= 1000) {
-                        GlobalScope.launchIO {
+                        ThreadPoolService.newTask {
+                            request.passedSecond++
                             request.eachSecond(request)
                             request.lastEachSecondRun = System.currentTimeMillis()
                         }
@@ -72,9 +75,13 @@ internal object HighCountdownWorker : Runnable {
                     if (request.status != RequestStatuses.RUNNING) {
                         request.status = RequestStatuses.WAIT_NEXT_ROUND
                     }
+
+                    if (HighCountdownTimer.requests.isEmpty()) {
+                        sleepSafely(50)
+                    }
                 }
             }.onFailure {
-                "An error occurred for the high countdown worker".logInfo()
+                "An error occurred for the high countdown worker".logError(it)
             }
         }
 

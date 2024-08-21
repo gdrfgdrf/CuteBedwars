@@ -5,14 +5,24 @@ import io.github.gdrfgdrf.cutebedwars.locale.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import org.bukkit.command.CommandSender
 
-fun middleWork(commandSender: CommandSender, work: LocalizationContext.() -> Unit) {
+fun middleWork(prefix: String? = null, commandSender: CommandSender, work: LocalizationContext.() -> Unit) {
     localizationScope(commandSender) {
-        message(CommonLanguage.COMMON_TOP)
-            .send()
+        if (prefix != null) {
+            message(CommonLanguage.COMMON_TOP)
+                .send(prefix)
+        } else {
+            message(CommonLanguage.COMMON_TOP)
+                .send()
+        }
 
         work(this)
 
-        message(CommonLanguage.COMMON_BOTTOM)
-            .send()
+        if (prefix != null) {
+            message(CommonLanguage.COMMON_BOTTOM)
+                .send(prefix)
+        } else {
+            message(CommonLanguage.COMMON_BOTTOM)
+                .send()
+        }
     }
 }

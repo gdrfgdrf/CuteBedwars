@@ -14,7 +14,4 @@ class CommandLanguage implements LanguageBlock {
     public static final LanguageString SYNTAX_ERROR = new LanguageString("&c语法错误: %s");
     public static final LanguageString ONLY_PLAYER = new LanguageString("&c该指令仅玩家可执行");
     public static final LanguageString NOT_FOUND = new LanguageString("&c没有找到该指令");
-
-    public static final LanguageString RELOAD_WARRING = new LanguageString("&c这将会重载整个插件，可能会出现无法预料的问题，请在 &e%s &c秒内再次输入 &e/cbw reload &c以确认");
-    public static final LanguageString RELOADING_PLUGIN = new LanguageString("&a重载插件中...");
 }

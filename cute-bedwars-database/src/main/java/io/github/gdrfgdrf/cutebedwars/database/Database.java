@@ -23,25 +23,16 @@ import java.util.jar.JarFile;
 /**
  * @author gdrfgdrf
  */
-public class Database {
-    private static Database INSTANCE;
+public class Database extends io.github.gdrfgdrf.cutebedwars.abstracts.database.Database {
+    private static final Database INSTANCE = new Database();
 
     private IDatabase database;
 
-    private Database() {
-    }
-
-    public static Database getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Database();
-        }
-        return INSTANCE;
-    }
-
     public static IDatabase get() {
-        return getInstance().database;
+        return INSTANCE.database;
     }
 
+    @Override
     public void initialize() {
         StringExtensionKt.logInfo("Initializing the database");
 
@@ -134,6 +125,7 @@ public class Database {
         instance.load();
     }
 
+    @Override
     public void close() {
         StringExtensionKt.logInfo("Closing the database " + database.getDisplayName());
 
@@ -145,6 +137,7 @@ public class Database {
         } catch (Exception e) {
             throw new CloseDatabaseException("An error occurred while trying to close the database");
         }
+        database = null;
     }
 
 }

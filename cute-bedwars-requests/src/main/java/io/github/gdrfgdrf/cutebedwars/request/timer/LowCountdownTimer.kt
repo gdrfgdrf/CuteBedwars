@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.request.timer
 
 import io.github.gdrfgdrf.cutebedwars.commons.extension.launchIO
+import io.github.gdrfgdrf.cutebedwars.commons.extension.logError
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.commons.extension.sleepSafely
 import io.github.gdrfgdrf.cutebedwars.request.Request
@@ -35,10 +36,13 @@ object LowCountdownTimer {
         request.status = RequestStatuses.READY
     }
 
+    fun remove(request: Request) {
+        requests.remove(request)
+    }
+
 }
 
 internal object LowCountdownWorker : Runnable {
-    @OptIn(DelicateCoroutinesApi::class)
     override fun run() {
         "Low countdown worker is running".logInfo()
 
@@ -47,7 +51,7 @@ internal object LowCountdownWorker : Runnable {
                 val now = System.currentTimeMillis()
 
                 LowCountdownTimer.requests.forEach { (request, startTime) ->
-                    if (request.status == RequestStatuses.STOPPED) {
+                    if (request.status == RequestStatuses.STOPPED || request.status == RequestStatuses.RUNNING) {
                         LowCountdownTimer.requests.remove(request)
                         return@forEach
                     }
@@ -56,16 +60,16 @@ internal object LowCountdownWorker : Runnable {
                     val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout, request.timeUnit)
                     if (now - startTime >= convertedTimeout) {
                         LowCountdownTimer.requests.remove(request)
-                        GlobalScope.launchIO {
+                        request.status = RequestStatuses.RUNNING
+
+                        ThreadPoolService.newTask {
                             request.endRun(request)
                             request.status = RequestStatuses.STOPPED
                         }
-
-                        request.status = RequestStatuses.RUNNING
                     }
 
                     if (now - request.lastEachSecondRun >= 1000) {
-                        GlobalScope.launchIO {
+                        ThreadPoolService.newTask {
                             request.passedSecond++
                             request.eachSecond(request)
                             request.lastEachSecondRun = System.currentTimeMillis()
@@ -80,7 +84,7 @@ internal object LowCountdownWorker : Runnable {
                 }
 
             }.onFailure {
-                "An error occurred for the low countdown worker".logInfo()
+                "An error occurred for the low countdown worker".logError(it)
             }
         }
 

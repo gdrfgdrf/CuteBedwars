@@ -7,10 +7,10 @@ import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import java.net.URL
 import java.util.*
 
-object SubCommandManager {
+object SubCommandManager : io.github.gdrfgdrf.cutebedwars.abstracts.commands.SubCommandManager() {
     private val map = LinkedHashMap<Commands, SubCommand>()
 
-    fun scanAndRegister() {
+    override fun scanAndRegister() {
         val classes = LinkedHashSet<Class<*>>()
 
         ClassUtils.searchJar(SubCommandManager::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.commands.sub", {
@@ -41,7 +41,7 @@ object SubCommandManager {
         return map[commands]
     }
 
-    fun clear() {
+    override fun clear() {
         map.clear()
     }
 

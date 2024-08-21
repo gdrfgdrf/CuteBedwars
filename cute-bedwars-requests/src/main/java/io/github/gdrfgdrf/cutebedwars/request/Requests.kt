@@ -1,16 +1,18 @@
 package io.github.gdrfgdrf.cutebedwars.request
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.Requests
 import io.github.gdrfgdrf.cutebedwars.commons.Config
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.locale.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.request.enums.RequestStatuses
 import io.github.gdrfgdrf.cutebedwars.request.enums.RequestTypes
 import io.github.gdrfgdrf.cutebedwars.request.timer.HighCountdownTimer
 import io.github.gdrfgdrf.cutebedwars.request.timer.LowCountdownTimer
 import org.bukkit.command.CommandSender
 import java.util.concurrent.ConcurrentHashMap
 
-object Requests {
+object Requests : Requests() {
     var GLOBAL_TIMEOUT: Long? = null
         get() {
             if (field == null) {
@@ -20,7 +22,7 @@ object Requests {
                     val customDefinition = Config.INSTANCE.requestTimeout
 
                     if (customDefinition <= 0) {
-                        3000
+                        30000
                     } else {
                        customDefinition
                     }
@@ -31,18 +33,21 @@ object Requests {
 
     private val playerRequestMap = ConcurrentHashMap<CommandSender, ConcurrentHashMap<RequestTypes, Request>>()
 
-    fun initialize() {
+    override fun initialize() {
         "Initializing request system".logInfo()
 
         HighCountdownTimer.start()
         LowCountdownTimer.start()
     }
 
-    fun reset() {
+    override fun reset() {
         "Resetting request system".logInfo()
 
         HighCountdownTimer.reset()
         LowCountdownTimer.reset()
+
+        GLOBAL_TIMEOUT = null
+        playerRequestMap.clear()
     }
 
     fun auto(high: Boolean = false, type: RequestTypes, sender: CommandSender): Pair<Boolean, Request?> {
@@ -56,7 +61,7 @@ object Requests {
                     .format(type.displayName)
                     .send()
             }
-            removeForAuto(type, sender)
+            removeForAuto(high, type, sender)
         })
 
         if (high) {
@@ -72,10 +77,20 @@ object Requests {
         return Pair(true, request)
     }
 
-    fun removeForAuto(type: RequestTypes, sender: CommandSender) {
+    fun removeForAuto(high: Boolean = false, type: RequestTypes, sender: CommandSender) {
         val requestMap = playerRequestMap.computeIfAbsent(sender) {
             ConcurrentHashMap()
         }
+        val request = requestMap[type]
+        if (request != null) {
+            request.status = RequestStatuses.STOPPED
+            if (high) {
+                HighCountdownTimer.remove(request)
+            } else {
+                LowCountdownTimer.remove(request)
+            }
+        }
+
         requestMap.remove(type)
 
         if (requestMap.isEmpty()) {

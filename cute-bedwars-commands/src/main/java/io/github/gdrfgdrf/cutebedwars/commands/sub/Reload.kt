@@ -1,10 +1,16 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.Disabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.Enabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.Plugin
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.PluginState
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
 import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandSyntaxLanguage
+import io.github.gdrfgdrf.cutebedwars.locale.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.request.Requests
@@ -32,16 +38,31 @@ object Reload : SubCommand(
                 return@localizationScope
             }
             if (new) {
-                message(CommandLanguage.RELOAD_WARRING)
+                message(CommonLanguage.RELOAD_WARRING)
                     .format(TimeUnit.SECONDS.convert(request.timeout, request.timeUnit))
                     .send()
                 return@localizationScope
             }
+            Requests.removeForAuto(type = RequestTypes.RELOAD, sender = sender)
 
-            request.status = RequestStatuses.STOPPED
-            Requests.removeForAuto(RequestTypes.RELOAD, sender)
+            if (Plugin.get().state() == PluginState.LOADING) {
+                message(CommonLanguage.PHASE_ERROR)
+                    .send()
+                return@localizationScope
+            }
 
-            message(CommandLanguage.RELOADING_PLUGIN)
+            message(CommonLanguage.RELOADING_PLUGIN)
+                .send()
+
+            Plugin.get().state(PluginState.LOADING)
+
+            Disabler.get().reloadPhase()
+            Loader.get().reloadPhase()
+            Enabler.get().reloadPhase()
+
+            Plugin.get().state(PluginState.RUNNING)
+
+            message(CommonLanguage.RELOAD_FINISHED)
                 .send()
         }
     }

@@ -19,7 +19,7 @@ object Help : SubCommand(
     override fun description(): LanguageString? = CommandDescriptionLanguage.HELP
 
     override fun run(sender: CommandSender, args: Array<String>) {
-        middleWork(sender) {
+        middleWork("", sender) {
             val accessibleUserCommand = arrayListOf<Pair<Commands, SubCommand>>()
             SubCommandManager.forEachUser { commands, subCommand ->
                 if (!subCommand.hasPermission(sender)) {
@@ -30,7 +30,7 @@ object Help : SubCommand(
             }
             if (accessibleUserCommand.isEmpty()) {
                 message(CommonLanguage.NONE)
-                    .send()
+                    .send("")
             } else {
                 accessibleUserCommand.forEach {
                     send(this@middleWork, it.first, it.second)
@@ -51,13 +51,13 @@ object Help : SubCommand(
                 }
 
                 message(CommandLanguage.COMMAND_HELP_ADMIN_INFIX)
-                    .send()
+                    .send("")
 
                 message(CommonLanguage.NONE)
-                    .send()
+                    .send("")
             } else {
                 message(CommandLanguage.COMMAND_HELP_ADMIN_INFIX)
-                    .send()
+                    .send("")
 
                 accessibleAdminCommand.forEach {
                     send(this@middleWork, it.first, it.second)
@@ -74,11 +74,11 @@ object Help : SubCommand(
         if (subCommand.syntax() != null && subCommand.description() != null) {
             localizationContext.message(CommandLanguage.COMMAND_FORMAT)
                 .format(subCommand.syntax()!!.get().string, subCommand.description()!!.get().string)
-                .send()
+                .send("")
         } else {
             localizationContext.message(CommandLanguage.COMMAND_FORMAT)
                 .format(commands.get(), "null")
-                .send()
+                .send("")
         }
     }
 }

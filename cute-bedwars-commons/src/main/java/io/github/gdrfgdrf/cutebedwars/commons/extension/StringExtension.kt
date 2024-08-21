@@ -10,7 +10,7 @@ fun String.logWarn() {
     logger().warning(this)
 }
 
-fun String.error(e: Throwable) {
+fun String.logError(e: Throwable) {
     logger().severe(this)
     e.printStackTrace()
 }

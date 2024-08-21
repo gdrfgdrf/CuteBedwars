@@ -19,7 +19,8 @@
         <module>cute-bedwars-locale</module>
         <module>cute-bedwars-commands</module>
         <module>cute-bedwars-database-default-impl-beans</module>
-        <module>cute-bedwars-request</module>
+        <module>cute-bedwars-requests</module>
+        <module>cute-bedwars-abstracts</module>
     </modules>
 
     <repositories>
@@ -87,7 +88,13 @@
 
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-                <artifactId>request</artifactId>
+                <artifactId>requests</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>abstracts</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
