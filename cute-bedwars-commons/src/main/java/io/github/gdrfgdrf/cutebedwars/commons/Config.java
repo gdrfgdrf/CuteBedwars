@@ -27,11 +27,15 @@ public class Config {
     @JsonProperty(value = "database-password")
     private String databasePassword;
 
+    @JsonProperty(value = "request-timeout")
+    private Long requestTimeout;
+
     public static void reset(Config config) {
         config.language = "chinese_simplified";
         config.databaseImpl = "default-sqlite";
         config.databaseUsername = "";
         config.databasePassword = "";
         config.enableDatabaseLogging = false;
+        config.requestTimeout = 30000L;
     }
 }

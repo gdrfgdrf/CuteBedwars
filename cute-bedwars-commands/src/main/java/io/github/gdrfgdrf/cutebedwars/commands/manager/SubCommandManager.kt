@@ -12,15 +12,6 @@ object SubCommandManager {
 
     fun scanAndRegister() {
         val classes = LinkedHashSet<Class<*>>()
-        val urlEnumeration: Enumeration<URL> = SubCommandManager::class.java.classLoader
-            .getResources("io.github.gdrfgdrf.cutebedwars.commands.sub".replace(".", "/"))
-
-        println("============================")
-        while (urlEnumeration.hasMoreElements()) {
-            val url = urlEnumeration.nextElement()
-            println(url)
-        }
-        println("============================")
 
         ClassUtils.searchJar(SubCommandManager::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.commands.sub", {
             return@searchJar it.superclass == SubCommand::class.java

@@ -7,7 +7,8 @@ enum class Commands(
     val permissions: CommandPermissions,
 ) {
     ROOT("cbw", false, 0..Int.MAX_VALUE, CommandPermissions.ROOT),
-    HELP("help", false, 0..0, CommandPermissions.HELP)
+    HELP("help", false, 0..0, CommandPermissions.HELP),
+    RELOAD("reload", false, 0..0, CommandPermissions.RELOAD)
 
     ;
 

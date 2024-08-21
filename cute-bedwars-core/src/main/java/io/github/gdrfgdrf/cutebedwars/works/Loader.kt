@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.commons.Constants
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.database.Database
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
+import io.github.gdrfgdrf.cutebedwars.request.Requests
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
@@ -20,18 +21,19 @@ object Loader {
 
         loadConfig()
         loadLanguage()
+        loadRequest()
 
-        Database.getInstance().initialize()
+        loadDatabase()
     }
 
-    private fun createFolders() {
+    fun createFolders() {
         val baseFolder = File(Constants.BASE_FOLDER)
         if (!baseFolder.exists()) {
             baseFolder.mkdirs()
         }
     }
 
-    private fun loadConfig() {
+    fun loadConfig() {
         "Loading the configuration file".logInfo()
 
         Config.INSTANCE = ConfigManager.getInstance().load(
@@ -41,7 +43,7 @@ object Loader {
         )
     }
 
-    private fun loadLanguage() {
+    fun loadLanguage() {
         "Loading the language".logInfo()
 
         LanguageLoader.getInstance().load(
@@ -51,5 +53,13 @@ object Loader {
             Constants.OWNER,
             Config.INSTANCE.language,
         )
+    }
+
+    fun loadRequest() {
+        Requests.initialize()
+    }
+
+    fun loadDatabase() {
+        Database.getInstance().initialize()
     }
 }

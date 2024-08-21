@@ -8,4 +8,5 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
  */
 public class CommandDescriptionLanguage implements LanguageCollect {
     public static LanguageString HELP;
+    public static LanguageString RELOAD;
 }

@@ -9,4 +9,5 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
  */
 class CommandSyntaxLanguage implements LanguageBlock {
     public static final LanguageString HELP = new LanguageString(Commands.HELP.get());
+    public static final LanguageString RELOAD = new LanguageString(Commands.RELOAD.get());
 }

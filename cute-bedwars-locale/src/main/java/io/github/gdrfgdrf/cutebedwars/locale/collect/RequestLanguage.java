@@ -6,7 +6,7 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
 /**
  * @author gdrfgdrf
  */
-public class CommandSyntaxLanguage implements LanguageCollect {
-    public static LanguageString HELP;
-    public static LanguageString RELOAD;
+public class RequestLanguage implements LanguageCollect {
+    public static LanguageString CREATE_FAILED;
+    public static LanguageString TIMEOUT;
 }

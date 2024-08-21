@@ -8,7 +8,8 @@ enum class CommandPermissions(
     val string: String
 ) {
     ROOT(Groups.USER, "root"),
-    HELP(Groups.USER, "help")
+    HELP(Groups.USER, "help"),
+    RELOAD(Groups.USER, "reload")
 
     ;
 
