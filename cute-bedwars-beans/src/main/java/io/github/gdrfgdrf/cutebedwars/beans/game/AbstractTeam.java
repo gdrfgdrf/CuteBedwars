@@ -12,5 +12,5 @@ public abstract class AbstractTeam {
     public abstract Long getGameId();
     public abstract void setGameId(Long gameId);
 
-    public abstract List<AbstractGamePlayer> getGamePlayers();
+    public abstract List<AbstractPlayer> getGamePlayers();
 }

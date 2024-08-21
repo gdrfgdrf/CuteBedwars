@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.beans.game;
 /**
  * @author gdrfgdrf
  */
-public abstract class AbstractGamePlayer {
+public abstract class AbstractPlayer {
     public abstract Long getId();
     public abstract void setId(Long id);
 

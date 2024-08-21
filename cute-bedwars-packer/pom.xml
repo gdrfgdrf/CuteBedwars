@@ -72,6 +72,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>abstracts</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>area</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

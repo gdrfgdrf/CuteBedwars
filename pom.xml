@@ -21,6 +21,7 @@
         <module>cute-bedwars-database-default-impl-beans</module>
         <module>cute-bedwars-requests</module>
         <module>cute-bedwars-abstracts</module>
+        <module>cute-bedwars-area</module>
     </modules>
 
     <repositories>
@@ -95,6 +96,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
                 <artifactId>abstracts</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>area</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
