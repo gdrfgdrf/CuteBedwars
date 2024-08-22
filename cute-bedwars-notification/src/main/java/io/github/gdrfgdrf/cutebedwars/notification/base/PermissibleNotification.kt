@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.notification.base
 
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Permissions
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 
 interface PermissibleNotification {
-    fun permission(): Permissions?
+    fun permission(): IPermissions?
 }

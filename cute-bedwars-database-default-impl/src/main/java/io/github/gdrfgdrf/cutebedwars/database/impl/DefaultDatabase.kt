@@ -1,13 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl
 
-import io.github.gdrfgdrf.cutebedwars.commons.Config
-import io.github.gdrfgdrf.cutebedwars.commons.Constants
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logWarn
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.Mappers
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logWarn
 import io.github.gdrfgdrf.cuteframework.bean.BeanManager
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Component
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Order
@@ -24,11 +24,11 @@ class DefaultDatabase : IDatabase {
     override fun load() {
         "The default database implementation is only applicable when the number of players is small, and it is recommended to replace another database implementation if resources are available".logWarn()
 
-        val file = File(Constants.DEFAULT_DATABASE_FILE_NAME)
+        val file = File(IConstants.DEFAULT_DATABASE_FILE_NAME())
         if (!file.exists()) {
             file.createNewFile()
         }
-        if (Config.INSTANCE.enableDatabaseLogging == false) {
+        if (IConfig.getEnableDatabaseLogging() == false) {
             LogFactory.useNoLogging()
         } else {
             tryImplementation(LogFactory::useSlf4jLogging)

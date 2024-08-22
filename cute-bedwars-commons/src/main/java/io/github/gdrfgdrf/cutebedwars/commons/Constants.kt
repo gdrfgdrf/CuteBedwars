@@ -1,6 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.commons
 
-object Constants {
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+
+@ServiceImpl("constants")
+object Constants : IConstants {
     const val OWNER = "cute-bedwars"
     const val BASE_FOLDER = "cute-bedwars/"
     const val CONFIG_FILE_NAME = "config.json"
@@ -10,4 +14,13 @@ object Constants {
     const val CUSTOM_DATABASE_IMPL_FOLDER_NAME = BASE_FOLDER + "custom-database-impl/"
 
     const val AREA_FOLDER = BASE_FOLDER + "areas/"
+
+    const val GLOBAL_TIMEOUT = 30000L
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T> get(key: String): T {
+        val declaredField = Constants::class.java.getDeclaredField(key)
+        declaredField.isAccessible = true
+        return declaredField.get(this) as T
+    }
 }

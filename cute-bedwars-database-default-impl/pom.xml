@@ -20,12 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>database</artifactId>
+            <artifactId>utils</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>database</artifactId>
         </dependency>
 
         <dependency>

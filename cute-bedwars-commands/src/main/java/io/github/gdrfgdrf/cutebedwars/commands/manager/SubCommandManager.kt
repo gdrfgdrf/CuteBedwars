@@ -1,14 +1,16 @@
 package io.github.gdrfgdrf.cutebedwars.commands.manager
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
-import java.net.URL
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.*
 
-object SubCommandManager : io.github.gdrfgdrf.cutebedwars.abstracts.commands.SubCommandManager() {
-    private val map = LinkedHashMap<Commands, SubCommand>()
+@ServiceImpl("subcommand_manager")
+object SubCommandManager : ISubCommandManager {
+    private val map = LinkedHashMap<ICommands, SubCommand>()
 
     override fun scanAndRegister() {
         val classes = LinkedHashSet<Class<*>>()
@@ -22,7 +24,7 @@ object SubCommandManager : io.github.gdrfgdrf.cutebedwars.abstracts.commands.Sub
             field.isAccessible = true
             val subCommand = field.get(null)
 
-            "Registering the sub command ${(subCommand as SubCommand).command.string}".logInfo()
+            "Registering the sub command ${(subCommand as SubCommand).command.string()}".logInfo()
 
             register(subCommand)
         }
@@ -33,11 +35,11 @@ object SubCommandManager : io.github.gdrfgdrf.cutebedwars.abstracts.commands.Sub
     }
 
     fun get(command: String): SubCommand? {
-        val commands = Commands.get(command) ?: return null
+        val commands = ICommands.find(command) ?: return null
         return map[commands]
     }
 
-    fun get(commands: Commands): SubCommand? {
+    fun get(commands: ICommands): SubCommand? {
         return map[commands]
     }
 
@@ -45,7 +47,7 @@ object SubCommandManager : io.github.gdrfgdrf.cutebedwars.abstracts.commands.Sub
         map.clear()
     }
 
-    fun filterAndFindFirst(filter: (Commands, SubCommand) -> Boolean): Pair<Commands, SubCommand>? {
+    fun filterAndFindFirst(filter: (ICommands, SubCommand) -> Boolean): Pair<ICommands, SubCommand>? {
         for (entry in map) {
             val commands = entry.key
             val subCommand = entry.value
@@ -57,24 +59,24 @@ object SubCommandManager : io.github.gdrfgdrf.cutebedwars.abstracts.commands.Sub
         return null
     }
 
-    fun forEach(runnable: (Commands, SubCommand) -> Unit) {
+    fun forEach(runnable: (ICommands, SubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
             runnable(commands, subCommand)
         }
     }
 
-    fun forEachUser(runnable: (Commands, SubCommand) -> Unit) {
+    fun forEachUser(runnable: (ICommands, SubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
-            if (commands.permissions.needOps()) {
+            if (commands.permissions().needOps()) {
                 return@forEach
             }
             runnable(commands, subCommand)
         }
     }
 
-    fun forEachAdmin(runnable: (Commands, SubCommand) -> Unit) {
+    fun forEachAdmin(runnable: (ICommands, SubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
-            if (!commands.permissions.needOps()) {
+            if (!commands.permissions().needOps()) {
                 return@forEach
             }
             runnable(commands, subCommand)

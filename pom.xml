@@ -23,6 +23,9 @@
         <module>cute-bedwars-abstracts</module>
         <module>cute-bedwars-game-management</module>
         <module>cute-bedwars-notification</module>
+        <module>cute-bedwars-enums</module>
+        <module>cute-bedwars-languages</module>
+        <module>cute-bedwars-utils</module>
     </modules>
 
     <repositories>
@@ -111,10 +114,34 @@
                 <artifactId>notification</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>enums</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>languages</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>utils</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>io.github.gdrfgdrf.multimodulemediator</groupId>
+            <artifactId>multi-module-mediator</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.yitter</groupId>
             <artifactId>yitter-idgenerator</artifactId>

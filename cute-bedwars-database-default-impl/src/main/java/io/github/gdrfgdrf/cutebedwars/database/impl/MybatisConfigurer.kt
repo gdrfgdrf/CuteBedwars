@@ -3,10 +3,10 @@ package io.github.gdrfgdrf.cutebedwars.database.impl
 import com.baomidou.mybatisplus.core.MybatisConfiguration
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
-import io.github.gdrfgdrf.cutebedwars.commons.Config
-import io.github.gdrfgdrf.cutebedwars.commons.Constants
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.database
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import org.apache.ibatis.builder.xml.XMLMapperBuilder
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl
@@ -51,7 +51,7 @@ object MybatisConfigurer {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }
-        if (Config.INSTANCE.enableDatabaseLogging == true) {
+        if (IConfig.getEnableDatabaseLogging() == true) {
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
             configuration.logImpl = NoLoggingImpl::class.java
@@ -67,12 +67,11 @@ object MybatisConfigurer {
 
         val dataSource = SimpleDriverDataSource()
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
-        dataSource.url = "jdbc:sqlite:" + Constants.DEFAULT_DATABASE_FILE_NAME
+        dataSource.url = "jdbc:sqlite:" + IConstants.DEFAULT_DATABASE_FILE_NAME()
 
-        val config = Config.INSTANCE
-        if (!config.databaseUsername.isNullOrBlank() && !config.databasePassword.isNullOrBlank()) {
-            dataSource.username = config.databaseUsername
-            dataSource.password = config.databasePassword
+        if (!IConfig.getDatabaseUsername().isNullOrBlank() && !IConfig.getDatabasePassword().isNullOrBlank()) {
+            dataSource.username = IConfig.getDatabaseUsername()
+            dataSource.password = IConfig.getDatabasePassword()
         }
 
         return dataSource

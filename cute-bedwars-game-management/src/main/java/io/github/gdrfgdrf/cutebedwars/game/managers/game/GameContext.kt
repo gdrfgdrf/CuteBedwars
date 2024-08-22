@@ -1,12 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.game.managers.game
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Team
 import io.github.gdrfgdrf.cutebedwars.game.managers.area.AreaContext
 import io.github.gdrfgdrf.cutebedwars.game.managers.team.TeamContext
-import io.github.gdrfgdrf.cutebedwars.locale.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.notification.Notifications
 import org.bukkit.command.CommandSender
 
 class GameContext(
@@ -37,21 +36,21 @@ class GameContext(
             needDisableGame = true
 
             if (sender == null) {
-                Notifications.messageAdministrator {
+                INotifications.get().messageAdministrator {
                     arrayOf(
-                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
                             ),
-                        message(AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
                             .format()
                     )
                 }
             } else {
                 localizationScope(sender) {
                     if (withHeader) {
-                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
@@ -59,7 +58,7 @@ class GameContext(
                             .send()
                     }
 
-                    message(AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
+                    message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
                         .format()
                         .send()
                 }
@@ -74,21 +73,21 @@ class GameContext(
             needDisableGame = true
 
             if (sender == null) {
-                Notifications.messageAdministrator {
+                INotifications.get().messageAdministrator {
                     arrayOf(
-                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
                             ),
-                        message(AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
                             .format()
                     )
                 }
             } else {
                 localizationScope(sender) {
                     if (withHeader) {
-                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
@@ -96,7 +95,7 @@ class GameContext(
                             .send()
                     }
 
-                    message(AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
+                    message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
                         .format()
                         .send()
                 }

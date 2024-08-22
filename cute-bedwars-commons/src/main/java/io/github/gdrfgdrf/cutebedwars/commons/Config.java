@@ -2,15 +2,21 @@ package io.github.gdrfgdrf.cutebedwars.commons;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Method;
 
 /**
  * @author gdrfgdrf
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Config {
-    public static Config INSTANCE;
+@ServiceImpl(("config"))
+public class Config implements IConfig {
+    public static IConfig INSTANCE;
 
     @JsonProperty(defaultValue = "chinese_simplified")
     private String language;
@@ -41,5 +47,17 @@ public class Config {
         config.databasePassword = "";
         config.enableDatabaseLogging = false;
         config.requestTimeout = 30000L;
+    }
+
+    @Override
+    @SuppressWarnings("ALL")
+    public <T> T get(@NotNull String key) {
+        try {
+            Method method = Config.class.getMethod("get" + key);
+            return (T) method.invoke(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

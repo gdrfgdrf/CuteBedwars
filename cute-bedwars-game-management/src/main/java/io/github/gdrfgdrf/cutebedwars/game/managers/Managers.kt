@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.managers
 
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.game.managers.area.AreaManager
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import java.util.concurrent.ConcurrentHashMap
 
 object Managers {

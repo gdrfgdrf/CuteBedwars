@@ -1,17 +1,22 @@
 package io.github.gdrfgdrf.cutebedwars.works
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.SubCommandManager
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.Disabler
-import io.github.gdrfgdrf.cutebedwars.abstracts.database.Database
-import io.github.gdrfgdrf.cutebedwars.abstracts.requests.Requests
-import io.github.gdrfgdrf.cutebedwars.commons.utils.thread.ThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
+import io.github.gdrfgdrf.multimodulemediator.Mediator
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
-object Disabler : Disabler() {
+@ServiceImpl("disabler")
+object Disabler : IDisabler {
+    private val threadPoolService = Mediator.get<IThreadPoolService>(IThreadPoolService::class.java)!!
+
     fun disable() {
         disableDatabase()
         disableRequest()
         disableThreadPool()
-        SubCommandManager.get().clear()
+        ISubCommandManager.get().clear()
     }
 
     override fun reloadPhase() {
@@ -21,15 +26,15 @@ object Disabler : Disabler() {
     }
 
     private fun disableDatabase() {
-        Database.get().close()
+        IDatabase.get().close()
     }
 
     private fun disableRequest() {
-        Requests.get().reset()
+        IRequests.get().reset()
     }
 
     private fun disableThreadPool() {
-        ThreadPoolService.terminate()
+        threadPoolService.terminate()
     }
 
 

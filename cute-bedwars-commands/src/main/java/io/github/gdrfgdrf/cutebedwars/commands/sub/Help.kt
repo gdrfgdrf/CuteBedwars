@@ -1,26 +1,26 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.LocalizationContext
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandDescriptionLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandSyntaxLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.extension.middleWork
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object Help : SubCommand(
-    command = Commands.HELP,
+    command = ICommands.get("HELP"),
 ){
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.HELP
     override fun description(): LanguageString? = CommandDescriptionLanguage.HELP
 
     override fun run(sender: CommandSender, args: Array<String>) {
         middleWork("", sender) {
-            val accessibleUserCommand = arrayListOf<Pair<Commands, SubCommand>>()
+            val accessibleUserCommand = arrayListOf<Pair<ICommands, SubCommand>>()
             SubCommandManager.forEachUser { commands, subCommand ->
                 if (!subCommand.hasPermission(sender)) {
                     return@forEachUser
@@ -29,7 +29,7 @@ object Help : SubCommand(
                 accessibleUserCommand.add(commands to subCommand)
             }
             if (accessibleUserCommand.isEmpty()) {
-                message(CommonLanguage.NONE)
+                message(io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage.NONE)
                     .send("")
             } else {
                 accessibleUserCommand.forEach {
@@ -37,7 +37,7 @@ object Help : SubCommand(
                 }
             }
 
-            val accessibleAdminCommand = arrayListOf<Pair<Commands, SubCommand>>()
+            val accessibleAdminCommand = arrayListOf<Pair<ICommands, SubCommand>>()
             SubCommandManager.forEachAdmin { commands, subCommand ->
                 if (!subCommand.hasPermission(sender)) {
                     return@forEachAdmin
@@ -68,7 +68,7 @@ object Help : SubCommand(
 
     private fun send(
         localizationContext: LocalizationContext,
-        commands: Commands,
+        commands: ICommands,
         subCommand: SubCommand,
     ) {
         if (subCommand.syntax() != null && subCommand.description() != null) {

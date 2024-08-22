@@ -1,10 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.game.managers.area
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.managers.game.GameContext
-import io.github.gdrfgdrf.cutebedwars.locale.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.notification.Notifications
 import org.bukkit.command.CommandSender
 
 class AreaContext(
@@ -27,15 +26,15 @@ class AreaContext(
 
         if (!success) {
             if (sender == null) {
-                Notifications.messageAdministrator {
+                INotifications.get().messageAdministrator {
                     arrayOf(
-                        message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
+                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.AREA_VALIDATE_FAILED)
                             .format(manager.area.name),
                     )
                 }
             } else {
                 localizationScope(sender) {
-                    message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
+                    message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.AREA_VALIDATE_FAILED)
                         .format(manager.area.name)
                 }
             }

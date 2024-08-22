@@ -1,27 +1,30 @@
 package io.github.gdrfgdrf.cutebedwars.request
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.requests.Requests
-import io.github.gdrfgdrf.cutebedwars.commons.Config
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
-import io.github.gdrfgdrf.cutebedwars.locale.collect.RequestLanguage
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestStatuses
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequest
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.request.enums.RequestStatuses
-import io.github.gdrfgdrf.cutebedwars.request.enums.RequestTypes
+import io.github.gdrfgdrf.cutebedwars.languages.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.request.timer.HighCountdownTimer
 import io.github.gdrfgdrf.cutebedwars.request.timer.LowCountdownTimer
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 import java.util.concurrent.ConcurrentHashMap
 
-object Requests : Requests() {
+@ServiceImpl("request")
+object Requests : IRequests {
     var GLOBAL_TIMEOUT: Long? = null
         get() {
             if (field == null) {
-                field = if (Config.INSTANCE?.requestTimeout == null) {
+                field = if (IConfig.getRequestTimeout() == null) {
                     30000
                 } else {
-                    val customDefinition = Config.INSTANCE.requestTimeout
+                    val customDefinition = IConfig.getRequestTimeout()
 
-                    if (customDefinition <= 0) {
+                    if (customDefinition!! <= 0) {
                         30000
                     } else {
                        customDefinition
@@ -31,7 +34,7 @@ object Requests : Requests() {
             return field
         }
 
-    private val playerRequestMap = ConcurrentHashMap<CommandSender, ConcurrentHashMap<RequestTypes, Request>>()
+    private val playerRequestMap = ConcurrentHashMap<CommandSender, ConcurrentHashMap<IRequestTypes, IRequest>>()
 
     override fun initialize() {
         "Initializing request system".logInfo()
@@ -50,7 +53,7 @@ object Requests : Requests() {
         playerRequestMap.clear()
     }
 
-    fun auto(high: Boolean = false, type: RequestTypes, sender: CommandSender): Pair<Boolean, Request?> {
+    override fun auto(high: Boolean, type: IRequestTypes, sender: CommandSender): Pair<Boolean, IRequest?> {
         if (playerRequestMap.containsKey(sender)) {
             return Pair(false, playerRequestMap[sender]?.get(type))
         }
@@ -58,7 +61,7 @@ object Requests : Requests() {
         val request = Request(eachSecond = {}, endRun = {
             localizationScope(sender) {
                 message(RequestLanguage.TIMEOUT)
-                    .format(type.displayName)
+                    .format(type.displayName())
                     .send()
             }
             removeForAuto(high, type, sender)
@@ -77,17 +80,17 @@ object Requests : Requests() {
         return Pair(true, request)
     }
 
-    fun removeForAuto(high: Boolean = false, type: RequestTypes, sender: CommandSender) {
+    override fun removeForAuto(high: Boolean, type: IRequestTypes, sender: CommandSender) {
         val requestMap = playerRequestMap.computeIfAbsent(sender) {
             ConcurrentHashMap()
         }
         val request = requestMap[type]
         if (request != null) {
-            request.status = RequestStatuses.STOPPED
+            request.status(IRequestStatuses.get("STOPPED"))
             if (high) {
-                HighCountdownTimer.remove(request)
+                HighCountdownTimer.remove(request as Request)
             } else {
-                LowCountdownTimer.remove(request)
+                LowCountdownTimer.remove(request as Request)
             }
         }
 
@@ -98,7 +101,7 @@ object Requests : Requests() {
         }
     }
 
-    fun make(high: Boolean = false, endRun: Request.() -> Unit): Request {
+    override fun make(high: Boolean, endRun: IRequest.() -> Unit): IRequest {
         val request = Request(eachSecond = {}, endRun = endRun)
 
         if (high) {
@@ -110,7 +113,7 @@ object Requests : Requests() {
         return request
     }
 
-    fun make(high: Boolean = false, eachSecond: Request.() -> Unit, endRun: Request.() -> Unit): Request {
+    override fun make(high: Boolean, eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest {
         val request = Request(eachSecond = eachSecond, endRun = endRun)
 
         if (high) {
@@ -120,14 +123,6 @@ object Requests : Requests() {
         }
 
         return request
-    }
-
-    fun put(high: Boolean = false, request: Request) {
-        if (high) {
-            HighCountdownTimer.put(request)
-        } else {
-            LowCountdownTimer.put(request)
-        }
     }
 
 

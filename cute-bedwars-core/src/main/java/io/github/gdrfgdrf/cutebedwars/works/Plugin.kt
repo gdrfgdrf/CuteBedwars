@@ -1,16 +1,18 @@
 package io.github.gdrfgdrf.cutebedwars.works
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.Plugin
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.PluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
-object Plugin : Plugin() {
-    var state: PluginState? = null
+@ServiceImpl("plugin")
+object Plugin : IPlugin {
+    var state: IPluginState? = null
 
-    override fun state(): PluginState? {
+    override fun state(): IPluginState? {
         return state
     }
 
-    override fun state(state: PluginState) {
+    override fun state(state: IPluginState) {
         this.state = state
     }
 }

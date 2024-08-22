@@ -1,9 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.commands
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
@@ -22,8 +22,10 @@ object RootCommand : TabExecutor {
         }
 
         if (args.isEmpty()) {
-            val helpCommand = SubCommandManager.get(Commands.HELP.string) ?: return true
-            execute(sender, args, helpCommand)
+            ICommands.find("HELP")?.let {
+                val helpCommand = SubCommandManager.get(it) ?: return true
+                execute(sender, args, helpCommand)
+            }
             return true
         }
 
@@ -43,12 +45,12 @@ object RootCommand : TabExecutor {
     private fun execute(sender: CommandSender, args: Array<String>, subCommand: SubCommand) {
         localizationScope(sender) {
             if (subCommand.hasPermission(sender)) {
-                if (!subCommand.command.onlyPlayer || sender is Player) {
+                if (!subCommand.command.onlyPlayer() || sender is Player) {
                     if (args.isEmpty()) {
                         subCommand.run(sender, args)
                         return@localizationScope
                     }
-                    if (subCommand.command.argsRange.contains(args.size - 1)) {
+                    if (subCommand.command.argsRange().contains(args.size - 1)) {
                         subCommand.run(sender, args)
                         return@localizationScope
                     }
@@ -84,7 +86,7 @@ object RootCommand : TabExecutor {
         if (args.size == 1) {
             SubCommandManager.forEach { _, subCommand ->
                 if (subCommand.hasPermission(sender)) {
-                    result.add(subCommand.command.string)
+                    result.add(subCommand.command.string())
                 }
             }
         } else {

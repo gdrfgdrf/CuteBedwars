@@ -1,12 +1,15 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.commands
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.base.AbstractContent
-import io.github.gdrfgdrf.cutebedwars.abstracts.manager.AbstractManager
+import io.github.gdrfgdrf.multimodulemediator.Mediator
+import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
+import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
-abstract class CommandRegistry : AbstractContent(CommandRegistry::class.java) {
-    abstract fun registerCommands()
+@Service("command_registry")
+@KotlinSingleton
+interface CommandRegistry {
+    fun registerCommands()
 
     companion object {
-        fun get(): CommandRegistry = AbstractManager.get(CommandRegistry::class.java)
+        fun get(): CommandRegistry = Mediator.get(CommandRegistry::class.java)!!
     }
 }

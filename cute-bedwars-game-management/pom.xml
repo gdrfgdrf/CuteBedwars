@@ -25,17 +25,12 @@
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>commons</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>locale</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>notification</artifactId>
+            <artifactId>utils</artifactId>
         </dependency>
     </dependencies>
 

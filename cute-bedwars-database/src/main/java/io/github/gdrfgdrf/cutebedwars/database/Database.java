@@ -1,9 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.database;
 
-import io.github.gdrfgdrf.cutebedwars.commons.Config;
-import io.github.gdrfgdrf.cutebedwars.commons.Constants;
-import io.github.gdrfgdrf.cutebedwars.commons.extension.StringExtensionKt;
-import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase;
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants;
+import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase;
 import io.github.gdrfgdrf.cutebedwars.database.common.DatabaseImplDescription;
 import io.github.gdrfgdrf.cutebedwars.database.exception.CloseDatabaseException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.InitDatabaseClassException;
@@ -12,7 +11,9 @@ import io.github.gdrfgdrf.cuteframework.api.loader.JarClassLoader;
 import io.github.gdrfgdrf.cuteframework.bean.BeanManager;
 import io.github.gdrfgdrf.cuteframework.utils.StringUtils;
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils;
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl;
 import lombok.Cleanup;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,40 +24,52 @@ import java.util.jar.JarFile;
 /**
  * @author gdrfgdrf
  */
-public class Database extends io.github.gdrfgdrf.cutebedwars.abstracts.database.Database {
-    private static final Database INSTANCE = new Database();
+@Slf4j
+@ServiceImpl(value = "database", instanceGetter = "getInstance")
+public class Database implements IDatabase {
+    private static Database INSTANCE;
 
-    private IDatabase database;
+    private io.github.gdrfgdrf.cutebedwars.database.base.IDatabase database;
 
-    public static IDatabase get() {
+    private Database() {
+    }
+
+    public static Database getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Database();
+        }
+        return INSTANCE;
+    }
+
+    public static io.github.gdrfgdrf.cutebedwars.database.base.IDatabase get() {
         return INSTANCE.database;
     }
 
     @Override
     public void initialize() {
-        StringExtensionKt.logInfo("Initializing the database");
+        log.info("Initializing the database");
 
-        Class<? extends IDatabase> databaseClass;
+        Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseClass;
 
         try {
-            String databaseImpl = Config.INSTANCE.getDatabaseImpl();
+            String databaseImpl = IConfig.Companion.getDatabaseImpl();
             if (StringUtils.isBlank(databaseImpl)) {
                 throw new IllegalArgumentException("No database implementation is specified in the configuration file");
             }
-            StringExtensionKt.logInfo("Database: " + databaseImpl);
+            log.info("Database: " + databaseImpl);
 
             if ("default-sqlite".equals(databaseImpl)) {
                 databaseClass = initDefault();
             } else {
-                File customDatabaseImplFolder = new File(Constants.CUSTOM_DATABASE_IMPL_FOLDER_NAME);
+                File customDatabaseImplFolder = new File(IConstants.Companion.CUSTOM_DATABASE_IMPL_FOLDER_NAME());
                 if (!customDatabaseImplFolder.exists()) {
                     customDatabaseImplFolder.mkdirs();
                 }
 
                 File customDatabaseImplFile = new File(
-                        Constants.CUSTOM_DATABASE_IMPL_FOLDER_NAME + databaseImpl
+                        IConstants.Companion.CUSTOM_DATABASE_IMPL_FOLDER_NAME() + databaseImpl
                 );
-                StringExtensionKt.logInfo("Custom database: " + customDatabaseImplFile);
+                log.info("Custom database: " + customDatabaseImplFile);
 
                 databaseClass = initCustom(customDatabaseImplFile);
             }
@@ -75,21 +88,21 @@ public class Database extends io.github.gdrfgdrf.cutebedwars.abstracts.database.
     }
 
     @SuppressWarnings("unchecked")
-    private Class<? extends IDatabase> initDefault() throws ClassNotFoundException {
-        StringExtensionKt.logInfo("Initializing the default database");
+    private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initDefault() throws ClassNotFoundException {
+        log.info("Initializing the default database");
 
         Class<?> defaultDatabaseClass =
                 Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.DefaultDatabase");
-        return (Class<? extends IDatabase>) defaultDatabaseClass;
+        return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultDatabaseClass;
     }
 
     @SuppressWarnings("all")
-    private Class<? extends IDatabase> initCustom(File implFile) throws IOException, ClassNotFoundException {
-        StringExtensionKt.logInfo("Initializing the custom database");
+    private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initCustom(File implFile) throws IOException, ClassNotFoundException {
+        log.info("Initializing the custom database");
 
         @Cleanup
         JarFile jarFile = new JarFile(implFile);
-        JarEntry descriptionFile = jarFile.getJarEntry(Constants.DATABASE_IMPL_DESCRIPTION_FILE_NAME);
+        JarEntry descriptionFile = jarFile.getJarEntry(IConstants.Companion.DATABASE_IMPL_DESCRIPTION_FILE_NAME());
 
         InputStream inputStream = jarFile.getInputStream(descriptionFile);
         DatabaseImplDescription description = JacksonUtils.readInputStream(
@@ -108,15 +121,15 @@ public class Database extends io.github.gdrfgdrf.cutebedwars.abstracts.database.
 
         JarClassLoader jarClassLoader = new JarClassLoader(implFile);
         Class<?> databaseClass = jarClassLoader.loadClass(databaseImplClass);
-        return (Class<? extends IDatabase>) databaseClass;
+        return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) databaseClass;
     }
 
-    private void load(Class<? extends IDatabase> databaseImplClass) throws Exception {
-        StringExtensionKt.logInfo("Loading the database class " + databaseImplClass.getName());
+    private void load(Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseImplClass) throws Exception {
+        log.info("Loading the database class " + databaseImplClass.getName());
 
-        IDatabase instance;
+        io.github.gdrfgdrf.cutebedwars.database.base.IDatabase instance;
         if ("io.github.gdrfgdrf.cutebedwars.database.impl.DefaultDatabase".equals(databaseImplClass.getPackageName())) {
-            instance = (IDatabase) BeanManager.getInstance().getBean("DefaultDatabase");
+            instance = (io.github.gdrfgdrf.cutebedwars.database.base.IDatabase) BeanManager.getInstance().getBean("DefaultDatabase");
         } else {
             instance = databaseImplClass.getConstructor().newInstance();
         }
@@ -127,7 +140,7 @@ public class Database extends io.github.gdrfgdrf.cutebedwars.abstracts.database.
 
     @Override
     public void close() {
-        StringExtensionKt.logInfo("Closing the database " + database.getDisplayName());
+        log.info("Closing the database " + database.getDisplayName());
 
         if (database == null) {
             throw new CloseDatabaseException("The database cannot be closed because it is not loaded");

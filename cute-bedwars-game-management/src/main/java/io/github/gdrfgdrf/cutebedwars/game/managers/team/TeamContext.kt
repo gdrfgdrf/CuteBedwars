@@ -1,14 +1,14 @@
 package io.github.gdrfgdrf.cutebedwars.game.managers.team
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Team
-import io.github.gdrfgdrf.cutebedwars.commons.utils.StringUtils
 import io.github.gdrfgdrf.cutebedwars.game.managers.exception.UndefinablePropertyException
 import io.github.gdrfgdrf.cutebedwars.game.managers.game.GameContext
-import io.github.gdrfgdrf.cutebedwars.locale.collect.AreaManagementLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.notification.Notifications
+import io.github.gdrfgdrf.cutebedwars.utils.StringUtils
 import org.bukkit.command.CommandSender
 
 class TeamContext(
@@ -29,7 +29,7 @@ class TeamContext(
                     needDisableGame = true
 
                     if (sender == null) {
-                        Notifications.messageAdministrator {
+                        INotifications.get().messageAdministrator {
                             arrayOf(
                                 message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                                     .format(
@@ -46,7 +46,7 @@ class TeamContext(
                     } else {
                         localizationScope(sender) {
                             if (withHeader) {
-                                message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                                message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
                                     .format(
                                         area.name,
                                         game.name

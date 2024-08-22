@@ -1,16 +1,16 @@
 package io.github.gdrfgdrf.cutebedwars.notification.impl
 
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Permissions
-import io.github.gdrfgdrf.cutebedwars.locale.LocalizationContext
-import io.github.gdrfgdrf.cutebedwars.locale.LocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.notification.base.AbstractNotification
 import io.github.gdrfgdrf.cutebedwars.notification.base.PermissibleNotification
 import org.bukkit.command.CommandSender
 
-class MessageNotification(val messageGetter: LocalizationContext.() -> Array<LocalizationMessage>) : AbstractNotification(),
+class MessageNotification(val messageGetter: ILocalizationContext.() -> Array<ILocalizationMessage>) : AbstractNotification(),
     PermissibleNotification {
-    var permission: Permissions? = null
+    var permission: IPermissions? = null
 
     override fun notify(prefix: String?, sender: CommandSender) {
         localizationScope(sender) {
@@ -26,5 +26,5 @@ class MessageNotification(val messageGetter: LocalizationContext.() -> Array<Loc
         }
     }
 
-    override fun permission(): Permissions? = permission
+    override fun permission(): IPermissions? = permission
 }

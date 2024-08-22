@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars
 
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.works.Disabler
 import io.github.gdrfgdrf.cutebedwars.works.Enabler
 import io.github.gdrfgdrf.cutebedwars.works.Loader

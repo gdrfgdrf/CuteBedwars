@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>languages</artifactId>
         </dependency>
     </dependencies>
 

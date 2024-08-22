@@ -1,12 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.commands.base
 
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
-import org.bukkit.command.ConsoleCommandSender
 
 abstract class SubCommand(
-    val command: Commands,
+    val command: ICommands,
 ) {
     abstract fun syntax(): LanguageString?
     abstract fun description(): LanguageString?
@@ -17,6 +16,6 @@ abstract class SubCommand(
     }
 
     fun hasPermission(sender: CommandSender): Boolean {
-        return command.permissions.hasPermission(sender)
+        return command.permissions().hasPermission(sender)
     }
 }

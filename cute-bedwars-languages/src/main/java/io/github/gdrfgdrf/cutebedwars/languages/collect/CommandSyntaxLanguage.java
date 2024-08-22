@@ -1,0 +1,13 @@
+package io.github.gdrfgdrf.cutebedwars.languages.collect;
+
+import io.github.gdrfgdrf.cuteframework.locale.LanguageString;
+import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
+
+/**
+ * @author gdrfgdrf
+ */
+public class CommandSyntaxLanguage implements LanguageCollect {
+    public static LanguageString HELP;
+    public static LanguageString RELOAD;
+    public static LanguageString CREATE_AREA;
+}

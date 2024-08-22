@@ -1,8 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.game.managers.area
 
 import com.github.yitter.idgen.YitIdHelper
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
-import io.github.gdrfgdrf.cutebedwars.commons.Constants
 import io.github.gdrfgdrf.cuteframework.utils.FileUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import java.io.File
@@ -19,7 +19,7 @@ class AreaManager(val area: Area) {
             area.name = "temp_name_${area.id}"
         }
 
-        val folder = File(Constants.AREA_FOLDER)
+        val folder = File(IConstants.AREA_FOLDER())
         if (!folder.exists()) {
             folder.mkdirs()
         }

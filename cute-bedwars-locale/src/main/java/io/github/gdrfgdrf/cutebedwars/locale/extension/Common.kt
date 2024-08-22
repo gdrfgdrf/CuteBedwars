@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.locale.extension
 
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.LocalizationContext
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import org.bukkit.command.CommandSender
 

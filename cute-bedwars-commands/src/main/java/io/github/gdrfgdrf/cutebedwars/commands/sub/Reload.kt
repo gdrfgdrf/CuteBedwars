@@ -1,34 +1,32 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.Disabler
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.Enabler
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.Plugin
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.PluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IEnabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
-import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandDescriptionLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommandSyntaxLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.CommonLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.collect.RequestLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.request.Requests
-import io.github.gdrfgdrf.cutebedwars.request.enums.RequestStatuses
-import io.github.gdrfgdrf.cutebedwars.request.enums.RequestTypes
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object Reload : SubCommand(
-    Commands.RELOAD,
+    ICommands.get("RELOAD"),
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.RELOAD
     override fun description(): LanguageString? = CommandDescriptionLanguage.RELOAD
 
     override fun run(sender: CommandSender, args: Array<String>) {
         localizationScope(sender) {
-            val pair = Requests.auto(type = RequestTypes.RELOAD, sender = sender)
+            val pair = IRequests.get().auto(type = IRequestTypes.get("RELOAD"), sender = sender)
             val new = pair.first
             val request = pair.second
 
@@ -39,13 +37,13 @@ object Reload : SubCommand(
             }
             if (new) {
                 message(CommonLanguage.RELOAD_WARRING)
-                    .format(TimeUnit.SECONDS.convert(request.timeout, request.timeUnit))
+                    .format(TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
                     .send()
                 return@localizationScope
             }
-            Requests.removeForAuto(type = RequestTypes.RELOAD, sender = sender)
+            IRequests.get().removeForAuto(type = IRequestTypes.get("RELOAD"), sender = sender)
 
-            if (Plugin.get().state() == PluginState.LOADING) {
+            if (IPlugin.get().state() == IPluginState.get("LOADING")) {
                 message(CommonLanguage.PHASE_ERROR)
                     .send()
                 return@localizationScope
@@ -54,13 +52,13 @@ object Reload : SubCommand(
             message(CommonLanguage.RELOADING_PLUGIN)
                 .send()
 
-            Plugin.get().state(PluginState.LOADING)
+            IPlugin.get().state(IPluginState.get("LOADING"))
 
-            Disabler.get().reloadPhase()
-            Loader.get().reloadPhase()
-            Enabler.get().reloadPhase()
+            IDisabler.get().reloadPhase()
+            ILoader.get().reloadPhase()
+            IEnabler.get().reloadPhase()
 
-            Plugin.get().state(PluginState.RUNNING)
+            IPlugin.get().state(IPluginState.get("RUNNING"))
 
             message(CommonLanguage.RELOAD_FINISHED)
                 .send()

@@ -2,29 +2,35 @@ package io.github.gdrfgdrf.cutebedwars.works
 
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
-import io.github.gdrfgdrf.cutebedwars.abstracts.database.Database
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.PluginState
-import io.github.gdrfgdrf.cutebedwars.abstracts.requests.Requests
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
+import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
-import io.github.gdrfgdrf.cutebedwars.commons.Config
-import io.github.gdrfgdrf.cutebedwars.commons.Constants
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logError
-import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.game.managers.Managers
 import io.github.gdrfgdrf.cutebedwars.game.managers.area.AreaManager
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
+import io.github.gdrfgdrf.multimodulemediator.Registry
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
-object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
+@ServiceImpl("loader")
+object Loader : ILoader {
     private var idGeneratorInitialized = false
 
     fun load(javaPlugin: JavaPlugin) {
-        Plugin.state = PluginState.LOADING
+        Registry.register(Loader::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars")
+
+        Plugin.state = IPluginState.get("LOADING")
 
         createFolders()
 
@@ -37,7 +43,12 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
         loadDatabase()
 
         if (!idGeneratorInitialized) {
-            val options = IdGeneratorOptions(Config.INSTANCE.workerId)
+            val options = if (IConfig.getWorkerId() != null && IConfig.getWorkerId()!! >= 0) {
+                IdGeneratorOptions(IConfig.getWorkerId()!!)
+            } else {
+                IdGeneratorOptions()
+            }
+
             YitIdHelper.setIdGenerator(options)
             idGeneratorInitialized = true
         }
@@ -55,7 +66,7 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
     }
 
     private fun createFolders() {
-        val baseFolder = File(Constants.BASE_FOLDER)
+        val baseFolder = File(IConstants.BASE_FOLDER())
         if (!baseFolder.exists()) {
             baseFolder.mkdirs()
         }
@@ -64,10 +75,12 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
     private fun loadConfig() {
         "Loading the configuration file".logInfo()
 
-        Config.INSTANCE = ConfigManager.getInstance().load(
-            Constants.OWNER,
-            Constants.CONFIG_FILE_NAME,
-            Config::class.java
+        IConfig.set(
+            ConfigManager.getInstance().load(
+                IConstants.OWNER(),
+                IConstants.CONFIG_FILE_NAME(),
+                Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config")
+            )
         )
     }
 
@@ -76,23 +89,23 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
 
         LanguageLoader.getInstance().load(
             Loader::class.java.classLoader,
-            "io.github.gdrfgdrf.cutebedwars.locale.collect",
-            "io.github.gdrfgdrf.cutebedwars.locale.language",
-            Constants.OWNER,
-            Config.INSTANCE.language,
+            "io.github.gdrfgdrf.cutebedwars.languages.collect",
+            "io.github.gdrfgdrf.cutebedwars.languages.language",
+            IConstants.OWNER(),
+            IConfig.getLanguage(),
         )
     }
 
     private fun loadRequest() {
-        Requests.get().initialize()
+        IRequests.get().initialize()
     }
 
     private fun loadDatabase() {
-        Database.get().initialize()
+        IDatabase.get().initialize()
     }
 
     private fun loadAreas() {
-        val folder = File(Constants.AREA_FOLDER)
+        val folder = File(IConstants.AREA_FOLDER())
         if (!folder.exists()) {
             folder.mkdirs()
         }

@@ -82,6 +82,16 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>notification</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>languages</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>utils</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,18 +1,19 @@
 package io.github.gdrfgdrf.cutebedwars.request.timer
 
-import io.github.gdrfgdrf.cutebedwars.commons.extension.*
-import io.github.gdrfgdrf.cutebedwars.request.Request
-import io.github.gdrfgdrf.cutebedwars.request.enums.RequestStatuses
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestStatuses
+import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequest
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
 import io.github.gdrfgdrf.cuteframework.utils.thread.ThreadPoolService
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
 object HighCountdownTimer {
     var stop = false
         private set
-    val requests = ConcurrentHashMap<Request, Long>()
+    val requests = ConcurrentHashMap<IRequest, Long>()
 
     fun start() {
         "Starting high countdown timer".logInfo()
@@ -28,17 +29,19 @@ object HighCountdownTimer {
         requests.clear()
     }
 
-    fun put(request: Request) {
+    fun put(request: IRequest) {
         requests[request] = System.currentTimeMillis()
-        request.status = RequestStatuses.READY
+        request.status(IRequestStatuses.get("READY"))
     }
 
-    fun remove(request: Request) {
+    fun remove(request: IRequest) {
         requests.remove(request)
     }
 }
 
 internal object HighCountdownWorker : Runnable {
+    private val threadPoolService = IThreadPoolService.get()
+
     override fun run() {
         "High countdown worker is running".logInfo()
 
@@ -47,33 +50,33 @@ internal object HighCountdownWorker : Runnable {
                 val now = System.currentTimeMillis()
 
                 HighCountdownTimer.requests.forEach { (request, startTime) ->
-                    if (request.status == RequestStatuses.STOPPED || request.status == RequestStatuses.RUNNING) {
+                    if (request.status() == IRequestStatuses.get("STOPPED") || request.status() == IRequestStatuses.get("RUNNING")) {
                         HighCountdownTimer.requests.remove(request)
                         return@forEach
                     }
-                    request.status = RequestStatuses.TRY_RUNNING
+                    request.status(IRequestStatuses.get("TRY_RUNNING"))
 
-                    val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout, request.timeUnit)
+                    val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout(), request.timeUnit())
                     if (now - startTime >= convertedTimeout) {
                         HighCountdownTimer.requests.remove(request)
-                        request.status = RequestStatuses.RUNNING
+                        request.status(IRequestStatuses.get("RUNNING"))
 
-                        ThreadPoolService.newTask {
-                            request.endRun(request)
-                            request.status = RequestStatuses.STOPPED
+                        threadPoolService.newTask {
+                            request.endRun()(request)
+                            request.status(IRequestStatuses.get("STOPPED"))
                         }
                     }
 
-                    if (now - request.lastEachSecondRun >= 1000) {
-                        ThreadPoolService.newTask {
-                            request.passedSecond++
-                            request.eachSecond(request)
-                            request.lastEachSecondRun = System.currentTimeMillis()
+                    if (now - request.lastEachSecondRun() >= 1000) {
+                        threadPoolService.newTask {
+                            request.passedSecond(request.passedSecond() + 1)
+                            request.eachSecond()(request)
+                            request.lastEachSecondRun(System.currentTimeMillis())
                         }
                     }
 
-                    if (request.status != RequestStatuses.RUNNING) {
-                        request.status = RequestStatuses.WAIT_NEXT_ROUND
+                    if (request.status() != IRequestStatuses.get("RUNNING")) {
+                        request.status(IRequestStatuses.get("WAIT_NEXT_ROUND"))
                     }
 
                     if (HighCountdownTimer.requests.isEmpty()) {
