@@ -9,8 +9,7 @@
         <version>0.1.0</version>
     </parent>
 
-    <artifactId>core</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>game-management</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,11 +18,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>holders</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>beans</artifactId>
@@ -36,12 +30,12 @@
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>abstracts</artifactId>
+            <artifactId>locale</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>game-management</artifactId>
+            <artifactId>notification</artifactId>
         </dependency>
     </dependencies>
 

@@ -21,7 +21,8 @@
         <module>cute-bedwars-database-default-impl-beans</module>
         <module>cute-bedwars-requests</module>
         <module>cute-bedwars-abstracts</module>
-        <module>cute-bedwars-area</module>
+        <module>cute-bedwars-game-management</module>
+        <module>cute-bedwars-notification</module>
     </modules>
 
     <repositories>
@@ -101,13 +102,25 @@
 
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-                <artifactId>area</artifactId>
+                <artifactId>game-management</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>notification</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.yitter</groupId>
+            <artifactId>yitter-idgenerator</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
         <dependency>
             <groupId>io.github.gdrfgdrf</groupId>
             <artifactId>cute-framework-minecraft-plugin</artifactId>

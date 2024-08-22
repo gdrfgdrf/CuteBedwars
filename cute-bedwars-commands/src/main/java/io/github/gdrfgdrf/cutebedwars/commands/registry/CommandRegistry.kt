@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.commands.registry
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.CommandRegistry
 import io.github.gdrfgdrf.cutebedwars.commands.RootCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
-import io.github.gdrfgdrf.cutebedwars.commons.enums.CommandPermissions
+import io.github.gdrfgdrf.cutebedwars.commons.enums.Permissions
 import io.github.gdrfgdrf.cutebedwars.commons.enums.Commands
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
@@ -18,12 +18,10 @@ object CommandRegistry : CommandRegistry() {
 
         SubCommandManager.scanAndRegister()
 
-        val userPermission = CommandPermissions.Groups.USER.get()
-        val administratorPermission = CommandPermissions.Groups.ADMIN.get()
+        val userPermission = Permissions.Groups.USER.get()
+        val administratorPermission = Permissions.Groups.ADMIN.get()
 
-        SubCommandManager.forEach { _, subCommand ->
-            val permissions = subCommand.command.permissions
-
+        Permissions.entries.forEach { permissions ->
             if (permissions.needOps()) {
                 permissions.putToGroup(administratorPermission)
                 return@forEach

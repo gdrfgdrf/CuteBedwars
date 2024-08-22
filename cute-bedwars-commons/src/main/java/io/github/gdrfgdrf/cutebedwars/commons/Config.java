@@ -15,6 +15,9 @@ public class Config {
     @JsonProperty(defaultValue = "chinese_simplified")
     private String language;
 
+    @JsonProperty(value = "worker-id")
+    private short workerId;
+
     @JsonProperty(value = "default-sqlite")
     private String databaseImpl;
 
@@ -32,6 +35,7 @@ public class Config {
 
     public static void reset(Config config) {
         config.language = "chinese_simplified";
+        config.workerId = 0;
         config.databaseImpl = "default-sqlite";
         config.databaseUsername = "";
         config.databasePassword = "";

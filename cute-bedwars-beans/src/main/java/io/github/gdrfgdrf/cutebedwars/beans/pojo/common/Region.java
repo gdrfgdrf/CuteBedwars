@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
 import lombok.Data;
 
 /**
@@ -9,22 +10,20 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Region {
-    @JsonProperty(value = "top-front-left")
-    private Coordinate topFrontLeft;
-    @JsonProperty(value = "top-front-right")
-    private Coordinate topFrontRight;
-    @JsonProperty(value = "top-back-left")
-    private Coordinate topBackLeft;
-    @JsonProperty(value = "top-back-right")
-    private Coordinate topBackRight;
+public class Region implements PropertyConvertible {
+    @JsonProperty(value = "first-coordinate")
+    private Coordinate firstCoordinate;
+    @JsonProperty(value = "second-coordinate")
+    private Coordinate secondCoordinate;
 
-    @JsonProperty(value = "bottom-front-left")
-    private Coordinate bottomFrontLeft;
-    @JsonProperty(value = "bottom-front-right")
-    private Coordinate bottomFrontRight;
-    @JsonProperty(value = "bottom-back-left")
-    private Coordinate bottomBackLeft;
-    @JsonProperty(value = "bottom-back-right")
-    private Coordinate bottomBackRight;
+
+    @Override
+    public Object convert(Class<?> targetType, Object obj) {
+        String[] split = obj.toString().split(" ");
+        Coordinate coordinate = new Coordinate();
+        for (String s : split) {
+            coordinate.convert(float.class, s);
+        }
+        return coordinate;
+    }
 }

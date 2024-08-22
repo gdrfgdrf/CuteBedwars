@@ -4,11 +4,11 @@ enum class Commands(
     val string: String,
     val onlyPlayer: Boolean = true,
     val argsRange: IntRange,
-    val permissions: CommandPermissions,
+    val permissions: Permissions,
 ) {
-    ROOT("cbw", false, 0..Int.MAX_VALUE, CommandPermissions.ROOT),
-    HELP("help", false, 0..0, CommandPermissions.HELP),
-    RELOAD("reload", false, 0..0, CommandPermissions.RELOAD)
+    ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT),
+    HELP("help", false, 0..0, Permissions.HELP),
+    RELOAD("reload", false, 0..0, Permissions.RELOAD)
 
     ;
 

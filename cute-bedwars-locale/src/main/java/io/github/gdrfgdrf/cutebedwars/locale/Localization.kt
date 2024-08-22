@@ -16,7 +16,7 @@ fun <R> localizationScope(sender: CommandSender, work: LocalizationContext.() ->
 }
 
 class LocalizationMessage(
-    private val sender: CommandSender,
+    private var sender: CommandSender,
     private val raw: String
 ) {
     private var finalString = raw
@@ -162,6 +162,10 @@ class LocalizationMessage(
 }
 
 class LocalizationContext(val sender: CommandSender) {
+    fun message(string: String): LocalizationMessage {
+        return LocalizationMessage(sender, string)
+    }
+
     fun message(languageString: LanguageString): LocalizationMessage {
         return LocalizationMessage(sender, languageString.get().string)
     }

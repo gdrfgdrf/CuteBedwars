@@ -1,19 +1,28 @@
 package io.github.gdrfgdrf.cutebedwars.works
 
+import com.github.yitter.contract.IdGeneratorOptions
+import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.Database
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.PluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.Requests
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
 import io.github.gdrfgdrf.cutebedwars.commons.Config
 import io.github.gdrfgdrf.cutebedwars.commons.Constants
+import io.github.gdrfgdrf.cutebedwars.commons.extension.logError
 import io.github.gdrfgdrf.cutebedwars.commons.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.game.managers.Managers
+import io.github.gdrfgdrf.cutebedwars.game.managers.area.AreaManager
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
+import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
+    private var idGeneratorInitialized = false
+
     fun load(javaPlugin: JavaPlugin) {
         Plugin.state = PluginState.LOADING
 
@@ -26,6 +35,14 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
         loadLanguage()
         loadRequest()
         loadDatabase()
+
+        if (!idGeneratorInitialized) {
+            val options = IdGeneratorOptions(Config.INSTANCE.workerId)
+            YitIdHelper.setIdGenerator(options)
+            idGeneratorInitialized = true
+        }
+
+        loadAreas()
     }
 
     override fun reloadPhase() {
@@ -34,6 +51,7 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
         loadLanguage()
         loadRequest()
         loadDatabase()
+        loadAreas()
     }
 
     private fun createFolders() {
@@ -71,5 +89,29 @@ object Loader : io.github.gdrfgdrf.cutebedwars.abstracts.core.Loader() {
 
     private fun loadDatabase() {
         Database.get().initialize()
+    }
+
+    private fun loadAreas() {
+        val folder = File(Constants.AREA_FOLDER)
+        if (!folder.exists()) {
+            folder.mkdirs()
+        }
+        val files = folder.listFiles { _, filename ->
+            return@listFiles !filename.endsWith(".json")
+        }
+        if (files == null) {
+            return
+        }
+
+        files.forEach {
+            runCatching {
+                val area = JacksonUtils.readFile<Area>(it, Area::class.java)
+                val areaManager = AreaManager(area)
+
+                Managers.register(areaManager)
+            }.onFailure {
+                "Unable to load area $it".logError(it)
+            }
+        }
     }
 }

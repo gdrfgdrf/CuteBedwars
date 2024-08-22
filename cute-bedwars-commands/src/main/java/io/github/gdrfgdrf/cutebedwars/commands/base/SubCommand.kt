@@ -17,9 +17,6 @@ abstract class SubCommand(
     }
 
     fun hasPermission(sender: CommandSender): Boolean {
-        if (sender is ConsoleCommandSender) {
-            return true
-        }
-        return sender.hasPermission(command.permissions.get())
+        return command.permissions.hasPermission(sender)
     }
 }

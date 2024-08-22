@@ -1,15 +1,19 @@
 package io.github.gdrfgdrf.cutebedwars.commons.enums
 
+import org.bukkit.command.CommandSender
+import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.permissions.Permission
 import org.bukkit.permissions.PermissionDefault
 
-enum class CommandPermissions(
+enum class Permissions(
     val groups: Groups,
     val string: String
 ) {
     ROOT(Groups.USER, "root"),
     HELP(Groups.USER, "help"),
-    RELOAD(Groups.USER, "reload")
+    RELOAD(Groups.USER, "reload"),
+    RECEIVE_NOTIFICATION(Groups.USER, "receive_notification"),
+    RECEIVE_ADMINISTRATION_NOTIFICATION(Groups.ADMIN, "receive_administration_notification")
 
     ;
 
@@ -24,6 +28,13 @@ enum class CommandPermissions(
 
     fun needOps(): Boolean {
         return groups == Groups.ADMIN
+    }
+
+    fun hasPermission(sender: CommandSender): Boolean {
+        if (sender is ConsoleCommandSender) {
+            return true
+        }
+        return sender.hasPermission(get())
     }
 
     enum class Groups(

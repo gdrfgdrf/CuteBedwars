@@ -75,7 +75,12 @@
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>area</artifactId>
+            <artifactId>game-management</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>notification</artifactId>
         </dependency>
     </dependencies>
 
