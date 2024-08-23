@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.commands
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
@@ -77,6 +76,7 @@ object RootCommand : TabExecutor {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun onTabComplete(
         sender: CommandSender,
         command: Command,
@@ -93,11 +93,14 @@ object RootCommand : TabExecutor {
             }
         } else {
             if (args.size > 1) {
-                val pair = SubCommandManager.filterAndFindFirst { _, subCommand ->
-                    return@filterAndFindFirst subCommand.hasPermission(sender)
-                } ?: return result
+                val pair = SubCommandManager.search { _, subCommand ->
+                    return@search subCommand.command.string() == args[0] && subCommand.hasPermission(sender)
+                } ?: return arrayListOf()
 
-                return pair.second.tab(sender, args)
+                val newArray = arrayOfNulls<String>(args.size - 1)
+                System.arraycopy(args, 1, newArray, 0, args.size - 1)
+
+                return pair.second.tab(sender, newArray as Array<String>)
             }
         }
 

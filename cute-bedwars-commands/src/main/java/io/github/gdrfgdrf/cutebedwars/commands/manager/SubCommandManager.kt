@@ -47,7 +47,7 @@ object SubCommandManager : ISubCommandManager {
         map.clear()
     }
 
-    fun filterAndFindFirst(filter: (ICommands, SubCommand) -> Boolean): Pair<ICommands, SubCommand>? {
+    fun search(filter: (ICommands, SubCommand) -> Boolean): Pair<ICommands, SubCommand>? {
         for (entry in map) {
             val commands = entry.key
             val subCommand = entry.value

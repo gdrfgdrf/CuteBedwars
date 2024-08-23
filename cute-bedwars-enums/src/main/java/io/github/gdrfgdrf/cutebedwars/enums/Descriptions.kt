@@ -13,7 +13,7 @@ enum class Descriptions(
     DESCRIPTION(DescriptionLanguage::DESCRIPTION),
 
     AREA_ID(DescriptionLanguage::AREA_ID),
-    AREA_NAME(DescriptionLanguage::AREA_NAME)
+    AREA_NAME(DescriptionLanguage::AREA_NAME),
 
     ;
 

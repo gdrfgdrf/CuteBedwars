@@ -20,5 +20,6 @@ interface IDescriptions {
             }
             return null
         }
+        fun values(): Array<*> = Mediator.get(IDescriptions::class.java)!!
     }
 }
