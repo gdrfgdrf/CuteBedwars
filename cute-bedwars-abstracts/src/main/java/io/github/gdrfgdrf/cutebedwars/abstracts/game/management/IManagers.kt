@@ -8,8 +8,11 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 @KotlinSingleton
 interface IManagers {
     fun register(areaManager: IAreaManager)
+    fun unregister(areaManager: IAreaManager)
     fun get(id: Long): IAreaManager?
     fun get(name: String): IAreaManager?
+
+    fun createArea(name: String): IAreaManager
 
     companion object {
         fun get(): IManagers = Mediator.get(IManagers::class.java)!!

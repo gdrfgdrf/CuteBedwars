@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.beans.pojo.generator;
+package io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.level;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

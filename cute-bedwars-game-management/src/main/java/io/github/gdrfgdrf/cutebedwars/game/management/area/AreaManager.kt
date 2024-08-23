@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.io.File
 
-@ServiceImpl("area_manager")
+@ServiceImpl("area_manager", needArgument = true)
 class AreaManager(argumentSet: ArgumentSet): IAreaManager {
     val area: Area = argumentSet.args[0] as Area
 

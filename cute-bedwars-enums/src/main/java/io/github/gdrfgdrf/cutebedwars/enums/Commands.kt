@@ -17,10 +17,10 @@ enum class Commands(
     HELP("help", false, 0..0, Permissions.HELP),
     RELOAD("reload", false, 0..0, Permissions.RELOAD),
     QUERY_DESCRIPTION("query-description", false, 1..1, Permissions.QUERY_DESCRIPTION,
-        arrayOf(IParam.get("DESCRIPTION"))),
+        arrayOf(IParam.get("DESCRIPTION", "NOT_BLANK_STRING"))),
 
     CREATE_AREA("create-area", false, 1..1, Permissions.CREATE_AREA,
-        arrayOf(IParam.get("AREA_NAME")))
+        arrayOf(IParam.get("AREA_NAME", "NOT_BLANK_STRING")))
 
     ;
 

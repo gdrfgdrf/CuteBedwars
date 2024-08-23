@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.game.management
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("area_manager", singleton = false)
 interface IAreaManager {
@@ -10,6 +11,6 @@ interface IAreaManager {
     fun area(): Area
 
     companion object {
-        fun get(area: Area): IAreaManager = Mediator.get(IAreaManager::class.java)!!
+        fun get(area: Area): IAreaManager = Mediator.get(IAreaManager::class.java, ArgumentSet(arrayOf(area)))!!
     }
 }

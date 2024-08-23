@@ -52,8 +52,21 @@ object RootCommand : TabExecutor {
                         val newArray = arrayOfNulls<String>(args.size - 1)
                         System.arraycopy(args, 1, newArray, 0, args.size - 1)
 
-                        subCommand.run(sender, newArray as Array<String>)
-                        return@localizationScope
+                        var validateSuccess = true
+                        newArray.forEachIndexed { index, realParam ->
+                            if ((subCommand.command).params()!!.size <= index || realParam.isNullOrEmpty()) {
+                                return@localizationScope
+                            }
+
+                            val param = subCommand.command.params()!![index]
+                            if (!param.validate(realParam)) {
+                                validateSuccess = false
+                            }
+                        }
+                        if (validateSuccess) {
+                            subCommand.run(sender, newArray as Array<String>)
+                            return@localizationScope
+                        }
                     }
 
                     if (subCommand.syntax() != null) {

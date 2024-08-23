@@ -30,11 +30,6 @@ object Reload : SubCommand(
             val new = pair.first
             val request = pair.second
 
-            if (request == null) {
-                message(RequestLanguage.CREATE_FAILED)
-                    .send()
-                return@localizationScope
-            }
             if (new) {
                 message(CommonLanguage.RELOAD_WARRING)
                     .format(TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))

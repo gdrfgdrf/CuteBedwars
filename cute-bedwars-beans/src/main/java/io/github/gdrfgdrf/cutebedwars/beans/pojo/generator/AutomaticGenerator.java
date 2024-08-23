@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Item;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.level.AutomaticLevel;
 import lombok.Data;
 
 import java.util.ArrayList;

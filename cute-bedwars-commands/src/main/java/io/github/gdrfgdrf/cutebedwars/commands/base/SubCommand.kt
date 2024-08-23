@@ -11,7 +11,7 @@ abstract class SubCommand(
     abstract fun description(): LanguageString?
 
     abstract fun run(sender: CommandSender, args: Array<String>)
-    open fun tab(player: CommandSender, args: Array<String>): MutableList<String> {
+    open fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
         return arrayListOf()
     }
 
