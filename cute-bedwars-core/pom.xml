@@ -21,17 +21,12 @@
     <dependencies>
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>holders</artifactId>
+            <artifactId>abstracts</artifactId>
         </dependency>
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>beans</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>game-management</artifactId>
+            <artifactId>utils</artifactId>
         </dependency>
     </dependencies>
 

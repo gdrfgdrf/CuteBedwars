@@ -1,8 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.enums
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParam
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
+import net.md_5.bungee.api.chat.BaseComponent
 
 @EnumService("commands_enum")
 interface ICommands {
@@ -11,6 +14,7 @@ interface ICommands {
     fun onlyPlayer(): Boolean
     fun argsRange(): IntRange
     fun permissions(): IPermissions
+    fun params(): Array<IParam>?
     fun get(): String
 
     companion object {

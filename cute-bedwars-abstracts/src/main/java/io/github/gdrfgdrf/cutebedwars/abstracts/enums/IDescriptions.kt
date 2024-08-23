@@ -9,8 +9,16 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 interface IDescriptions {
     fun name_(): String
     fun value(): () -> LanguageString?
+    fun administration(): Boolean
 
     companion object {
         fun get(name: String): IDescriptions = Mediator.get(IDescriptions::class.java, ArgumentSet(arrayOf(name)))!!
+        fun find(name: String): IDescriptions? {
+            runCatching {
+                return Mediator.get(IDescriptions::class.java, ArgumentSet(arrayOf(name)))
+            }.onFailure {
+            }
+            return null
+        }
     }
 }

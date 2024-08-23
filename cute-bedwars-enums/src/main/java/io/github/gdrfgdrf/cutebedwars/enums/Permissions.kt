@@ -15,7 +15,12 @@ enum class Permissions(
     ROOT(PermissionGroups.USER, "root"),
     HELP(PermissionGroups.USER, "help"),
     RELOAD(PermissionGroups.USER, "reload"),
+    QUERY_DESCRIPTION(PermissionGroups.USER, "description.query"),
+    QUERY_ADMINISTRATION_DESCRIPTION(PermissionGroups.ADMIN, "description.query_administration"),
+
+
     CREATE_AREA(PermissionGroups.ADMIN, "create.area"),
+
 
     RECEIVE_NOTIFICATION(PermissionGroups.USER, "receive_notification"),
     RECEIVE_ADMINISTRATION_NOTIFICATION(PermissionGroups.ADMIN, "receive_administration_notification")

@@ -1,13 +1,19 @@
-package io.github.gdrfgdrf.cutebedwars.game.managers.area
+package io.github.gdrfgdrf.cutebedwars.game.management.area
 
 import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
 import io.github.gdrfgdrf.cuteframework.utils.FileUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.io.File
 
-class AreaManager(val area: Area) {
+@ServiceImpl("area_manager")
+class AreaManager(argumentSet: ArgumentSet): IAreaManager {
+    val area: Area = argumentSet.args[0] as Area
+
     val context: AreaContext
     private var file: File? = null
 
@@ -29,7 +35,13 @@ class AreaManager(val area: Area) {
         area.games.forEach(context::addGame)
     }
 
-    fun save() {
+    constructor(area: Area): this(ArgumentSet(arrayOf(area)))
+
+    override fun area(): Area {
+        return area
+    }
+
+    override fun save() {
         if (file == null) {
             throw IllegalArgumentException("file is required")
         }

@@ -7,10 +7,10 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
-import io.github.gdrfgdrf.cutebedwars.game.managers.Managers
-import io.github.gdrfgdrf.cutebedwars.game.managers.area.AreaManager
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
@@ -119,9 +119,9 @@ object Loader : ILoader {
         files.forEach {
             runCatching {
                 val area = JacksonUtils.readFile<Area>(it, Area::class.java)
-                val areaManager = AreaManager(area)
+                val areaManager = IAreaManager.get(area)
 
-                Managers.register(areaManager)
+                IManagers.get().register(areaManager)
             }.onFailure {
                 "Unable to load area $it".logError(it)
             }

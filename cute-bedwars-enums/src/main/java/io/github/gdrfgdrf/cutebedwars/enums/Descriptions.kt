@@ -7,18 +7,17 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("descriptions_enum")
 enum class Descriptions(
-    val value: () -> LanguageString?
+    val value: () -> LanguageString?,
+    val administration: Boolean = false
 ): IDescriptions {
+    DESCRIPTION(DescriptionLanguage::DESCRIPTION),
+
     AREA_ID(DescriptionLanguage::AREA_ID),
     AREA_NAME(DescriptionLanguage::AREA_NAME)
 
     ;
 
-    override fun name_(): String {
-        return name
-    }
-
-    override fun value(): () -> LanguageString? {
-        return value
-    }
+    override fun name_(): String = name
+    override fun value(): () -> LanguageString? = value
+    override fun administration(): Boolean = administration
 }

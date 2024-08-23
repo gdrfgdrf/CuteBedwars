@@ -108,7 +108,7 @@ class LocalizationMessage(
     }
 
     override fun send() {
-        val message = LocalizationMessage(sender, io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage.PREFIX.get().string)
+        val message = LocalizationMessage(sender, CommonLanguage.PREFIX.get().string)
         send(message)
     }
 

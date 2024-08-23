@@ -16,4 +16,8 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString RELOAD_WARRING;
     public static LanguageString RELOADING_PLUGIN;
     public static LanguageString RELOAD_FINISHED;
+
+    public static LanguageString DESCRIPTION_FORMAT;
+    public static LanguageString NOT_FOUND_DESCRIPTION;
+    public static LanguageString DESCRIPTION_ERROR;
 }

@@ -7,7 +7,7 @@ import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ComponentBuilder
 import org.bukkit.command.CommandSender
 
-@Service("localization_message")
+@Service("localization_message", singleton = false)
 interface ILocalizationMessage {
     fun format(vararg any: Any): ILocalizationMessage
     fun openUrl(value: String): ILocalizationMessage

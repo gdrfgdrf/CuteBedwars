@@ -1,8 +1,8 @@
-package io.github.gdrfgdrf.cutebedwars.game.managers.area
+package io.github.gdrfgdrf.cutebedwars.game.management.area
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
-import io.github.gdrfgdrf.cutebedwars.game.managers.game.GameContext
+import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import org.bukkit.command.CommandSender
 

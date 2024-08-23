@@ -40,6 +40,7 @@ object RootCommand : TabExecutor {
         return true
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun execute(sender: CommandSender, args: Array<String>, subCommand: SubCommand) {
         localizationScope(sender) {
             if (subCommand.hasPermission(sender)) {
@@ -49,7 +50,10 @@ object RootCommand : TabExecutor {
                         return@localizationScope
                     }
                     if (subCommand.command.argsRange().contains(args.size - 1)) {
-                        subCommand.run(sender, args)
+                        val newArray = arrayOfNulls<String>(args.size - 1)
+                        System.arraycopy(args, 1, newArray, 0, args.size - 1)
+
+                        subCommand.run(sender, newArray as Array<String>)
                         return@localizationScope
                     }
 

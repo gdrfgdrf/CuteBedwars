@@ -1,11 +1,11 @@
-package io.github.gdrfgdrf.cutebedwars.game.managers.team
+package io.github.gdrfgdrf.cutebedwars.game.management.team
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Team
-import io.github.gdrfgdrf.cutebedwars.game.managers.exception.UndefinablePropertyException
-import io.github.gdrfgdrf.cutebedwars.game.managers.game.GameContext
+import io.github.gdrfgdrf.cutebedwars.game.management.exception.UndefinablePropertyException
+import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.utils.StringUtils

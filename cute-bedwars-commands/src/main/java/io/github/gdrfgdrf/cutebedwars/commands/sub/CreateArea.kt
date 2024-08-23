@@ -11,7 +11,6 @@ object CreateArea : SubCommand(
     command = ICommands.get("CREATE_AREA")
 ){
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_AREA
-
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_AREA
 
     override fun run(sender: CommandSender, args: Array<String>) {

@@ -16,4 +16,8 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString RELOAD_WARRING = new LanguageString("&c这将会重载整个插件，可能会出现无法预料的问题，请在 &e%s &c秒内再次输入 &e/cbw reload &c以确认");
     public static final LanguageString RELOADING_PLUGIN = new LanguageString("&a重载插件中...");
     public static final LanguageString RELOAD_FINISHED = new LanguageString("&a重载插件成功");
+
+    public static final LanguageString DESCRIPTION_FORMAT = new LanguageString("&a&l%s&8&l: &r&e%s");
+    public static final LanguageString NOT_FOUND_DESCRIPTION = new LanguageString("&c没有找到描述 %s");
+    public static final LanguageString DESCRIPTION_ERROR = new LanguageString("&c该描述加载错误，无法查询");
 }

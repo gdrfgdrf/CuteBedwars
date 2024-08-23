@@ -19,7 +19,7 @@ import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object Reload : SubCommand(
-    ICommands.get("RELOAD"),
+    command = ICommands.get("RELOAD"),
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.RELOAD
     override fun description(): LanguageString? = CommandDescriptionLanguage.RELOAD

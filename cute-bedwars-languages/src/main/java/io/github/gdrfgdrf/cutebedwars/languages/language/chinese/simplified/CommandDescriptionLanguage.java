@@ -9,5 +9,7 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
 class CommandDescriptionLanguage implements LanguageBlock {
     public static final LanguageString HELP = new LanguageString("显示帮助");
     public static final LanguageString RELOAD = new LanguageString("重载插件");
+    public static final LanguageString QUERY_DESCRIPTION = new LanguageString("查询描述");
+
     public static final LanguageString CREATE_AREA = new LanguageString("创建区域");
 }
