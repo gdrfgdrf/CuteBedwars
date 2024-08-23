@@ -6,7 +6,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import org.bukkit.command.CommandSender
 
-@Service("request")
+@Service("requests")
 @KotlinSingleton
 interface IRequests {
     fun initialize()

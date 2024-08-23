@@ -29,7 +29,7 @@ object Help : SubCommand(
                 accessibleUserCommand.add(commands to subCommand)
             }
             if (accessibleUserCommand.isEmpty()) {
-                message(io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage.NONE)
+                message(CommonLanguage.NONE)
                     .send("")
             } else {
                 accessibleUserCommand.forEach {

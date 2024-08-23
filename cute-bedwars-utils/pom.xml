@@ -22,6 +22,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>holders</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>abstracts</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

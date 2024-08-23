@@ -14,7 +14,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 import java.util.concurrent.ConcurrentHashMap
 
-@ServiceImpl("request")
+@ServiceImpl("requests")
 object Requests : IRequests {
     var GLOBAL_TIMEOUT: Long? = null
         get() {

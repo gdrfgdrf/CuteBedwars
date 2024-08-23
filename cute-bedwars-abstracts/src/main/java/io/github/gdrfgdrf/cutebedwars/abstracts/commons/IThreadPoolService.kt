@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
-@Service("thread.pool")
+@Service("thread_pool")
 @KotlinSingleton
 interface IThreadPoolService {
     fun newTask(runnable: () -> Unit)

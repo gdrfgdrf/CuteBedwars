@@ -22,10 +22,8 @@ object RootCommand : TabExecutor {
         }
 
         if (args.isEmpty()) {
-            ICommands.find("HELP")?.let {
-                val helpCommand = SubCommandManager.get(it) ?: return true
-                execute(sender, args, helpCommand)
-            }
+            val helpCommand = SubCommandManager.get("help") ?: return true
+            execute(sender, args, helpCommand)
             return true
         }
 

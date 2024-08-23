@@ -5,7 +5,6 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("database")
-@KotlinSingleton
 interface IDatabase {
     fun initialize()
     fun close()

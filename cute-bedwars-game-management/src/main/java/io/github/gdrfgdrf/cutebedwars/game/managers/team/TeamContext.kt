@@ -36,7 +36,7 @@ class TeamContext(
                                         area.name,
                                         game.name
                                     ),
-                                message(AreaManagementLanguage.TEAM_NEED_POSITIVE_ERROR)
+                                message(AreaManagementLanguage.GAME_TEAM_NEED_POSITIVE_ERROR)
                                     .format(
                                         team.name,
                                         StringUtils.fieldNameToJsonKey(it.name)
@@ -46,7 +46,7 @@ class TeamContext(
                     } else {
                         localizationScope(sender) {
                             if (withHeader) {
-                                message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                                message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                                     .format(
                                         area.name,
                                         game.name
@@ -54,7 +54,7 @@ class TeamContext(
                                     .send()
                             }
 
-                            message(AreaManagementLanguage.TEAM_NEED_POSITIVE_ERROR)
+                            message(AreaManagementLanguage.GAME_TEAM_NEED_POSITIVE_ERROR)
                                 .format(
                                     team.name,
                                     StringUtils.fieldNameToJsonKey(it.name)

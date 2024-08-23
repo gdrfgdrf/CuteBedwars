@@ -18,13 +18,13 @@ interface ICommands {
         fun values(): Array<*> = Mediator.get(ICommands::class.java)!!
 
         private val map = HashMap<String, ICommands>()
-        init {
-            values().forEach {
-                map[(it as ICommands).string()] = it
-            }
-        }
 
         fun find(command: String): ICommands? {
+            if (map.isEmpty()) {
+                values().forEach {
+                    map[(it as ICommands).string()] = it
+                }
+            }
             return map[command]
         }
     }

@@ -10,7 +10,13 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("disabler")
 object Disabler : IDisabler {
-    private val threadPoolService = Mediator.get<IThreadPoolService>(IThreadPoolService::class.java)!!
+    private var threadPoolService: IThreadPoolService? = null
+        get() {
+            if (field == null) {
+                field = Mediator.get<IThreadPoolService>(IThreadPoolService::class.java)!!
+            }
+            return field
+        }
 
     fun disable() {
         disableDatabase()
@@ -34,7 +40,7 @@ object Disabler : IDisabler {
     }
 
     private fun disableThreadPool() {
-        threadPoolService.terminate()
+        threadPoolService?.terminate()
     }
 
 
