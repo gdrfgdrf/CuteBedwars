@@ -46,7 +46,7 @@ public class Config implements IConfig {
         config.databaseUsername = "";
         config.databasePassword = "";
         config.enableDatabaseLogging = false;
-        config.requestTimeout = 30000L;
+        config.requestTimeout = 10000L;
     }
 
     @Override
