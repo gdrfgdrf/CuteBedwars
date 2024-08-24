@@ -8,6 +8,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 @KotlinSingleton
 interface IThreadPoolService {
     fun newTask(runnable: () -> Unit)
+    fun newTask(runnable: Runnable)
     fun terminate()
 
     companion object {

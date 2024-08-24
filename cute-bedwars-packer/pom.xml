@@ -97,6 +97,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>enums</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>tasks</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

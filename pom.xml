@@ -26,6 +26,7 @@
         <module>cute-bedwars-enums</module>
         <module>cute-bedwars-languages</module>
         <module>cute-bedwars-utils</module>
+        <module>cute-bedwars-tasks</module>
     </modules>
 
     <repositories>
@@ -130,6 +131,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
                 <artifactId>utils</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>tasks</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>

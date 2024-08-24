@@ -33,6 +33,13 @@ object ThreadPoolService : IThreadPoolService {
         EXECUTOR_SERVICE?.execute(runnable)
     }
 
+    override fun newTask(runnable: Runnable) {
+        if (EXECUTOR_SERVICE == null) {
+            prepare()
+        }
+        EXECUTOR_SERVICE?.execute(runnable)
+    }
+
     override fun terminate() {
         EXECUTOR_SERVICE?.shutdownNow()
         EXECUTOR_SERVICE = null
