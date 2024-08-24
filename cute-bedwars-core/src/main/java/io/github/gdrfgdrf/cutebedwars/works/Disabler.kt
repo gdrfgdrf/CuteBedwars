@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
+import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
@@ -22,6 +23,7 @@ object Disabler : IDisabler {
         disableDatabase()
         disableRequest()
         disableThreadPool()
+        disableTaskManager()
         ISubCommandManager.get().clear()
     }
 
@@ -41,6 +43,10 @@ object Disabler : IDisabler {
 
     private fun disableThreadPool() {
         threadPoolService?.terminate()
+    }
+
+    private fun disableTaskManager() {
+        ITaskManager.get().terminate()
     }
 
 

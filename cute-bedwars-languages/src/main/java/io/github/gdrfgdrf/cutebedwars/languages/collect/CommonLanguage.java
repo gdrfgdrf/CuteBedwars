@@ -23,6 +23,7 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString DESCRIPTION_ERROR;
 
     public static LanguageString DUPLICATE_AREA_NAME_WARNING;
+    public static LanguageString DUPLICATE_AREA_ID_ERROR;
     public static LanguageString CREATING_AREA;
     public static LanguageString CREATE_AREA_FINISHED;
 }

@@ -6,6 +6,9 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 @EnumService("param_types_enum")
 interface IParamTypes {
     fun name_(): String
+    fun tab(args: Array<String>): MutableList<String> {
+        return arrayListOf()
+    }
     fun validate(any: Any): Boolean
 
     companion object {

@@ -17,6 +17,10 @@ class Param(
         return "<" + description.name_().lowercase() + ">"
     }
 
+    override fun tab(args: Array<String>): MutableList<String> {
+        return type.tab(args)
+    }
+
     override fun validate(any: Any): Boolean {
         return type.validate(any)
     }

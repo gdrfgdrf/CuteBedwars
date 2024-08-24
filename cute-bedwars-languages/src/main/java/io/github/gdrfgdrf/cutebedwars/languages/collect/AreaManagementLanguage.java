@@ -17,4 +17,6 @@ public class AreaManagementLanguage implements LanguageCollect {
     public static LanguageString GAME_MAX_PLAYER_ERROR;
 
     public static LanguageString GAME_TEAM_NEED_POSITIVE_ERROR;
+    public static LanguageString GAME_TEAM_COUNT_ERROR;
+    public static LanguageString GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER;
 }

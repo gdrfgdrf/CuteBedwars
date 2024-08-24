@@ -11,7 +11,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
@@ -42,6 +42,7 @@ object Loader : ILoader {
         loadLanguage()
         loadRequest()
         loadDatabase()
+        loadTaskManager()
 
         if (!idGeneratorInitialized) {
             val options = if (IConfig.getWorkerId() != null && IConfig.getWorkerId()!! >= 0) {
@@ -63,6 +64,7 @@ object Loader : ILoader {
         loadLanguage()
         loadRequest()
         loadDatabase()
+        loadTaskManager()
         loadAreas()
     }
 

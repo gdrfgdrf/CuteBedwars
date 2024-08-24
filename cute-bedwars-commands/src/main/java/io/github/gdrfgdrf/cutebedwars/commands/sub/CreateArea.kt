@@ -22,10 +22,12 @@ object CreateArea : SubCommand(
     override fun run(sender: CommandSender, args: Array<String>) {
         localizationScope(sender) {
             val areaName = args[0]
+            val managers = IManagers.get()
+            val requests = IRequests.get()
 
-            val sameNameArea = IManagers.get().get(areaName)
-            if (sameNameArea != null) {
-                val pair = IRequests.get().auto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
+            val sameNameArea = managers.get(areaName)
+            if (sameNameArea != null && sameNameArea.size >= 1) {
+                val pair = requests.auto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
                 val new = pair.first
                 val request = pair.second
 
@@ -36,13 +38,21 @@ object CreateArea : SubCommand(
                     return@localizationScope
                 }
             }
-            IRequests.get().removeForAuto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
+            requests.removeForAuto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
 
             message(CommonLanguage.CREATING_AREA)
                 .format(areaName)
                 .send()
 
-            val areaManager = IManagers.get().createArea(areaName)
+            val areaManager = managers.createArea(areaName)
+            if (managers.get(areaManager.area().id) != null) {
+                message(CommonLanguage.DUPLICATE_AREA_ID_ERROR)
+                    .format(areaManager.area().id)
+                    .send()
+                return@localizationScope
+            }
+
+            managers.register(areaManager)
 
             message(CommonLanguage.CREATE_AREA_FINISHED)
                 .format(areaName, areaManager.area().id)

@@ -22,7 +22,8 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString NOT_FOUND_DESCRIPTION = new LanguageString("&c没有找到描述 %s");
     public static final LanguageString DESCRIPTION_ERROR = new LanguageString("&c描述 %s 加载错误，无法查询");
 
-    public static final LanguageString DUPLICATE_AREA_NAME_WARNING = new LanguageString("&c已经有了一个与 &e%s &c同名的区域，若继续创建，加入时则需要使用 &earea_id &c加入。请在 &e%s &c秒内再次输入以确定");
+    public static final LanguageString DUPLICATE_AREA_NAME_WARNING = new LanguageString("&c名为 &e%s &c的区域已经存在，若继续创建，加入时则需要使用 &earea_id &c加入。请在 &e%s &c秒内再次输入以确定");
+    public static final LanguageString DUPLICATE_AREA_ID_ERROR = new LanguageString("&c无法创建区域，因为程序生成的 &earea_id %s &c和其他区域重复，出现该错误一般为服务器的系统时间被回拨，请检查服务器的系统时间是否为最新");
     public static final LanguageString CREATING_AREA = new LanguageString("&e正在创建区域 %s");
     public static final LanguageString CREATE_AREA_FINISHED = new LanguageString("&a区域 &e&l%s &r&a已创建，&earea_id &a为 &e&l%s");
 }

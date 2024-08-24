@@ -53,19 +53,23 @@ internal object LowCountdownWorker : Runnable {
                 LowCountdownTimer.requests.forEach { (request, startTime) ->
                     if (request.status() == IRequestStatuses.valueOf("STOPPED") || request.status() == IRequestStatuses.valueOf("RUNNING")) {
                         LowCountdownTimer.requests.remove(request)
+                        sleepSafely(50)
                         return@forEach
                     }
                     request.status(IRequestStatuses.valueOf("TRY_RUNNING"))
 
                     val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout(), request.timeUnit())
                     if (now - startTime >= convertedTimeout) {
-                        LowCountdownTimer.requests.remove(request)
                         request.status(IRequestStatuses.valueOf("RUNNING"))
+                        LowCountdownTimer.requests.remove(request)
 
                         threadPoolService.newTask {
                             request.endRun()(request)
                             request.status(IRequestStatuses.valueOf("STOPPED"))
                         }
+
+                        sleepSafely(50)
+                        return@forEach
                     }
 
                     if (now - request.lastEachSecondRun() >= 1000) {

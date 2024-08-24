@@ -7,7 +7,9 @@ import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable;
 import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.AutomaticGenerator;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -25,10 +27,9 @@ public class Game implements PropertyConvertible {
     @JsonProperty(value = "area-id")
     private Long areaId;
 
-    @JsonProperty(value = "enable")
-    private Boolean enable;
-
     private String name;
+
+    private Status status;
 
     @PositiveNumber
     @JsonProperty(value = "min-player")
@@ -45,11 +46,11 @@ public class Game implements PropertyConvertible {
     private Coordinate spectatorSpawnpointCoordinate;
 
     @Undefinable
-    @JsonProperty(value = "secondary-generator")
-    private AutomaticGenerator secondaryGenerator;
+    @JsonProperty(value = "secondary-generators")
+    private List<AutomaticGenerator> secondaryGenerators = new ArrayList<>();
     @Undefinable
-    @JsonProperty(value = "tertiary-generator")
-    private AutomaticGenerator tertiaryGenerator;
+    @JsonProperty(value = "tertiary-generators")
+    private List<AutomaticGenerator> tertiaryGenerators = new ArrayList<>();
 
     @Undefinable
     private List<Team> teams = new ArrayList<>();
@@ -58,6 +59,9 @@ public class Game implements PropertyConvertible {
     public Object convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
             return obj.toString();
+        }
+        if (targetType == Status.class) {
+            return Status.valueOf(obj.toString());
         }
         if (targetType == boolean.class || targetType == Boolean.class) {
             return Boolean.parseBoolean(obj.toString());

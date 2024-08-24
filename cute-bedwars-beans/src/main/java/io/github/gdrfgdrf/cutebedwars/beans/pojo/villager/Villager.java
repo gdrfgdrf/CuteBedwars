@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.beans.pojo.villager;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import lombok.Data;
 

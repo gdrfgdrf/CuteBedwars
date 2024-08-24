@@ -55,7 +55,12 @@ object Requests : IRequests {
 
     override fun auto(high: Boolean, type: IRequestTypes, sender: CommandSender): Pair<Boolean, IRequest> {
         if (playerRequestMap.containsKey(sender)) {
-            return Pair(false, playerRequestMap[sender]?.get(type)!!)
+            val concurrentHashMap = playerRequestMap[sender]!!
+            val request = concurrentHashMap[type]
+
+            if (request != null) {
+                return Pair(false, request)
+            }
         }
 
         val request = Request(eachSecond = {}, endRun = {

@@ -58,13 +58,15 @@ internal object HighCountdownWorker : Runnable {
 
                     val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout(), request.timeUnit())
                     if (now - startTime >= convertedTimeout) {
-                        HighCountdownTimer.requests.remove(request)
                         request.status(IRequestStatuses.valueOf("RUNNING"))
+                        HighCountdownTimer.requests.remove(request)
 
                         threadPoolService.newTask {
                             request.endRun()(request)
                             request.status(IRequestStatuses.valueOf("STOPPED"))
                         }
+
+                        return@forEach
                     }
 
                     if (now - request.lastEachSecondRun() >= 1000) {

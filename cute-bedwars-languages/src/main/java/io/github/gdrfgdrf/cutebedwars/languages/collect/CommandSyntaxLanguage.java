@@ -12,4 +12,6 @@ public class CommandSyntaxLanguage implements LanguageCollect {
     public static LanguageString QUERY_DESCRIPTION;
 
     public static LanguageString CREATE_AREA;
+    public static LanguageString INFO_AREA;
+    public static LanguageString MODIFY_AREA;
 }

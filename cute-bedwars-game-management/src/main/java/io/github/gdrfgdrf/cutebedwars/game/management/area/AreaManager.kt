@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.game.management.area
 import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IAreaManager
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cuteframework.utils.FileUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl

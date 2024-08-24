@@ -20,6 +20,8 @@ enum class Permissions(
 
 
     CREATE_AREA(PermissionGroups.ADMIN, "create.area"),
+    INFO_AREA(PermissionGroups.ADMIN, "info.area"),
+    MODIFY_AREA(PermissionGroups.ADMIN, "modify.area"),
 
 
     RECEIVE_NOTIFICATION(PermissionGroups.USER, "receive_notification"),

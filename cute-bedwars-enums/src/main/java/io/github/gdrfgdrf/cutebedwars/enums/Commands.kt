@@ -11,16 +11,36 @@ enum class Commands(
     val onlyPlayer: Boolean = true,
     val argsRange: IntRange,
     val permissions: Permissions,
-    val params: Array<IParam>? = null
-): ICommands {
+    val params: Array<IParam>? = null,
+) : ICommands {
     ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT),
     HELP("help", false, 0..0, Permissions.HELP),
     RELOAD("reload", false, 0..0, Permissions.RELOAD),
-    QUERY_DESCRIPTION("query-description", false, 1..1, Permissions.QUERY_DESCRIPTION,
-        arrayOf(IParam.get("DESCRIPTION", "NOT_BLANK_STRING"))),
+    QUERY_DESCRIPTION(
+        "query-description", false, 0..1, Permissions.QUERY_DESCRIPTION,
+        arrayOf(IParam.get("DESCRIPTION", "NOT_BLANK_STRING"))
+    ),
 
-    CREATE_AREA("create-area", false, 1..1, Permissions.CREATE_AREA,
-        arrayOf(IParam.get("AREA_NAME", "NOT_BLANK_STRING")))
+    CREATE_AREA(
+        "create-area", false, 1..1, Permissions.CREATE_AREA,
+        arrayOf(IParam.get("AREA_NAME", "NOT_BLANK_STRING"))
+    ),
+    INFO_AREA(
+        "info-area", false, 2..2, Permissions.INFO_AREA,
+        arrayOf(
+            IParam.get("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME"),
+            IParam.get("AREA", "AREAS")
+        )
+    ),
+    MODIFY_AREA(
+        "modify-area", false, 4..4, Permissions.MODIFY_AREA,
+        arrayOf(
+            IParam.get("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME"),
+            IParam.get("AREA", "AREAS"),
+            IParam.get("AREA_PROPERTY", "NOT_BLANK_STRING"),
+            IParam.get("VALUE", "NOT_BLANK_STRING")
+        )
+    )
 
     ;
 
@@ -60,6 +80,7 @@ enum class Commands(
 
     companion object {
         private val map = HashMap<String, Commands>()
+
         init {
             entries.toTypedArray().forEach {
                 map[it.string] = it

@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.beans.pojo.game;
+package io.github.gdrfgdrf.cutebedwars.beans.pojo.team;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable;
 import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.Generator;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.villager.Villager;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Team implements PropertyConvertible {
     @JsonProperty(value = "game-id")
     private Long gameId;
     private String name;
+    private TeamColor color;
 
     @PositiveNumber
     @JsonProperty(value = "min-player")
@@ -36,6 +38,8 @@ public class Team implements PropertyConvertible {
 
     @JsonProperty(value = "region")
     private Region region;
+    @JsonProperty(value = "operable-coordinates")
+    private List<Coordinate> operableCoordinates = new ArrayList<>();
 
     @JsonProperty(value = "spawnpoint-coordinate")
     private Coordinate spawnpointCoordinate;

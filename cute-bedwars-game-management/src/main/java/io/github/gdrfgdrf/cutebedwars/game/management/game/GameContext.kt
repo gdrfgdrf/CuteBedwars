@@ -2,9 +2,11 @@ package io.github.gdrfgdrf.cutebedwars.game.management.game
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Team
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
 import io.github.gdrfgdrf.cutebedwars.game.management.area.AreaContext
 import io.github.gdrfgdrf.cutebedwars.game.management.team.TeamContext
+import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import org.bukkit.command.CommandSender
 
@@ -38,19 +40,19 @@ class GameContext(
             if (sender == null) {
                 INotifications.get().messageAdministrator {
                     arrayOf(
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
                             ),
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
+                        message(AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
                             .format()
                     )
                 }
             } else {
                 localizationScope(sender) {
                     if (withHeader) {
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
@@ -58,7 +60,7 @@ class GameContext(
                             .send()
                     }
 
-                    message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
+                    message(AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
                         .format()
                         .send()
                 }
@@ -75,19 +77,19 @@ class GameContext(
             if (sender == null) {
                 INotifications.get().messageAdministrator {
                     arrayOf(
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
                             ),
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
+                        message(AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
                             .format()
                     )
                 }
             } else {
                 localizationScope(sender) {
                     if (withHeader) {
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
                                 area.name,
                                 game.name
@@ -95,15 +97,44 @@ class GameContext(
                             .send()
                     }
 
-                    message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
+                    message(AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
                         .format()
                         .send()
                 }
             }
         }
 
+        if (game.teams.isNullOrEmpty() || game.teams.size == 1) {
+            if (sender == null) {
+                INotifications.get().messageAdministrator {
+                    arrayOf(
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                            .format(
+                                area.name,
+                                game.name
+                            ),
+                        message(AreaManagementLanguage.GAME_TEAM_COUNT_ERROR)
+                    )
+                }
+            } else {
+                localizationScope(sender) {
+                    if (withHeader) {
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                            .format(
+                                area.name,
+                                game.name
+                            )
+                            .send()
+                    }
+
+                    message(AreaManagementLanguage.GAME_TEAM_COUNT_ERROR)
+                        .send()
+                }
+            }
+        }
+
         if (needDisableGame) {
-            game.enable = false
+            game.status = Status.DISABLED
         }
 
         return !needDisableGame

@@ -17,4 +17,6 @@ class AreaManagementLanguage implements LanguageBlock {
     public static final LanguageString GAME_MAX_PLAYER_ERROR = new LanguageString("&c最大玩家数配置错误，必须 &e<= &a所有队伍的最大玩家数的总和，&c且必须 &e>= &a最小玩家数");
 
     public static final LanguageString GAME_TEAM_NEED_POSITIVE_ERROR = new LanguageString("队伍 &e&l%s &c的参数 &e&l%s &c配置错误，必须为正数");
+    public static final LanguageString GAME_TEAM_COUNT_ERROR = new LanguageString("&c必须拥有 > 1 个队伍");
+    public static final LanguageString GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER = new LanguageString("&c队伍 &e&l%s 的最小人数 > 最大人数");
 }

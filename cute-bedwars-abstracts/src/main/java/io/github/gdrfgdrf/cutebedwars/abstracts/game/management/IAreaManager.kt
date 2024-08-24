@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.game.management
 
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet

@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * @author gdrfgdrf
  */
-public abstract class AbstractGame {
+public abstract class AbstractDatabaseGame {
     public abstract Long getId();
     public abstract void setId(Long id);
 
-    public abstract List<AbstractTeam> getTeams();
+    public abstract List<AbstractDatabaseTeam> getTeams();
 }

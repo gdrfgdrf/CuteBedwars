@@ -14,7 +14,6 @@ public class Coordinate implements PropertyConvertible {
     private float y;
     private float z;
 
-
     @Override
     public Object convert(Class<?> targetType, Object obj) {
         return Float.parseFloat(obj.toString());

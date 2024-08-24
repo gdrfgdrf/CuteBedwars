@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class AutomaticLevel extends GeneratorLevel {
+public class AutomaticGeneratorLevel extends GeneratorLevel {
     @JsonProperty(value = "next-level-cost")
     private long nextLevelCost;
 }

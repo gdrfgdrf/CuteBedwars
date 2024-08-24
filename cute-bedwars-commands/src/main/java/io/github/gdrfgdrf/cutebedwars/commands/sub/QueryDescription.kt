@@ -19,9 +19,21 @@ object QueryDescription : SubCommand(
 
     override fun run(sender: CommandSender, args: Array<String>) {
         localizationScope(sender) {
-            val raw = args[0]
-            val descriptionKey = raw.uppercase().replace("-", "_")
-            var searchResult = IDescriptions.search(descriptionKey)
+            val raw: String
+            var searchResult: List<IDescriptions>?
+
+            if (args.isEmpty()) {
+                raw = ""
+                searchResult = arrayListOf()
+                IDescriptions.values().forEach {
+                    (searchResult as ArrayList).add(it as IDescriptions)
+                }
+            } else {
+                raw = args[0]
+                val descriptionKey = raw.uppercase().replace("-", "_")
+                searchResult = IDescriptions.search(descriptionKey)
+            }
+
             if (searchResult.isNullOrEmpty()) {
                 message(CommonLanguage.NOT_FOUND_DESCRIPTION)
                     .format(raw)

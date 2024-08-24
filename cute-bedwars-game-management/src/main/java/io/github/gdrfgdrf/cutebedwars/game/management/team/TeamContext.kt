@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.game.management.team
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Team
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.UndefinablePropertyException
 import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
@@ -62,6 +62,41 @@ class TeamContext(
                                 .send()
                         }
                     }
+                }
+            }
+        }
+
+        if (team.minPlayer > team.maxPlayer) {
+            if (sender == null) {
+                INotifications.get().messageAdministrator {
+                    arrayOf(
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                            .format(
+                                area.name,
+                                game.name
+                            ),
+                        message(AreaManagementLanguage.GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER)
+                            .format(
+                                team.name,
+                            )
+                    )
+                }
+            } else {
+                localizationScope(sender) {
+                    if (withHeader) {
+                        message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
+                            .format(
+                                area.name,
+                                game.name
+                            )
+                            .send()
+                    }
+
+                    message(AreaManagementLanguage.GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER)
+                        .format(
+                            team.name,
+                        )
+                        .send()
                 }
             }
         }

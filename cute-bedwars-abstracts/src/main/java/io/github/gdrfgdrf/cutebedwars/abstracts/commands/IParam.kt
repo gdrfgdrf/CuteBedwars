@@ -9,6 +9,7 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @Service("param", singleton = false)
 interface IParam {
     fun get(): String?
+    fun tab(args: Array<String>): MutableList<String>
     fun validate(any: Any): Boolean
 
     companion object {
