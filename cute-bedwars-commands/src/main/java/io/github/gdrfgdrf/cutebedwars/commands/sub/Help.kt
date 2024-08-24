@@ -13,7 +13,7 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object Help : SubCommand(
-    command = ICommands.get("HELP"),
+    command = ICommands.valueOf("HELP"),
 ){
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.HELP
     override fun description(): LanguageString? = CommandDescriptionLanguage.HELP

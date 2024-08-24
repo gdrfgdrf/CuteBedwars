@@ -24,7 +24,7 @@ class Request(
                 endRun
             )))
 
-    var status = IRequestStatuses.get("NONE")
+    var status = IRequestStatuses.valueOf("NONE")
     var passedSecond = 0L
 
     internal var lastEachSecondRun = 0L

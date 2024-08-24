@@ -61,4 +61,8 @@ class AreaManager(argumentSet: ArgumentSet): IAreaManager {
         writer.write(string)
         writer.close()
     }
+
+    fun autoSave() {
+
+    }
 }

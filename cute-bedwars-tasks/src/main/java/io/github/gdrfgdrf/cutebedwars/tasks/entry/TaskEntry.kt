@@ -1,38 +1,53 @@
 package io.github.gdrfgdrf.cutebedwars.tasks.entry
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskEntry
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
 import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.util.concurrent.CountDownLatch
 
+@Suppress("UNCHECKED_CAST")
+@ServiceImpl("task_entry", needArgument = true, instanceGetter = "create")
 open class TaskEntry<T> protected constructor(
-    val supplier: () -> T?,
-) {
+    argumentSet: ArgumentSet,
+): ITaskEntry<T> {
+    val supplier: () -> T? = argumentSet.args[0] as (() -> T?)
+
     var customLock: Any? = null
     private var syncLock: CountDownLatch = CountDownLatch(1)
     private var syncLockTimeout: Long = 0
     private var enableSync = false
 
-    constructor(runnable: Runnable): this({
+    protected constructor(runnable: Runnable): this({
         runnable.run()
         null
     })
 
-    open fun syncLockTimeout(syncLockTimeout: Long): TaskEntry<T> {
+    protected constructor(supplier: () -> T?): this(ArgumentSet(arrayOf(supplier)))
+
+    override fun syncLockTimeout(syncLockTimeout: Long): ITaskEntry<T> {
         this.syncLockTimeout = syncLockTimeout
         return this
     }
 
-    open fun sync(sync: Boolean): TaskEntry<T> {
+    override fun sync(sync: Boolean): ITaskEntry<T> {
         this.enableSync = sync
         return this
     }
 
-    open fun customLock(customLock: Any): TaskEntry<T> {
+    override fun customLock(customLock: Any): ITaskEntry<T> {
         this.customLock = customLock
         return this
     }
 
-    open fun run() {
+    override fun notifyMethodFinished() {
+        if (this.enableSync) {
+            syncLock.countDown()
+        }
+    }
+
+    override fun run() {
         TaskManager.add(this)
         if (enableSync) {
             runCatching {
@@ -43,14 +58,12 @@ open class TaskEntry<T> protected constructor(
         }
     }
 
-    open fun notifyMethodFinished() {
-        if (this.enableSync) {
-            syncLock.countDown()
-        }
-    }
+    override fun supplier(): () -> T? = supplier
+    override fun customLock(): Any? = customLock
 
     companion object {
         fun <T> create(runnable: Runnable) = TaskEntry<T>(runnable)
-        fun <T> create(supplier: () -> T) = TaskEntry<T>(supplier)
+        fun <T> create(supplier: () -> T?) = TaskEntry(supplier)
+        fun <T> create(argumentSet: ArgumentSet) = TaskEntry(argumentSet.args[0] as(() -> T?))
     }
 }

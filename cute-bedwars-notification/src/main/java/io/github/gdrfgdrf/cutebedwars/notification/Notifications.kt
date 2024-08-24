@@ -21,16 +21,16 @@ object Notifications {
 
     fun messageAdministrator(messageGetter: ILocalizationContext.() -> Array<ILocalizationMessage>) {
         val notification = MessageNotification(messageGetter)
-        notification.permission = IPermissions.get("RECEIVE_ADMINISTRATION_NOTIFICATION")
+        notification.permission = IPermissions.valueOf("RECEIVE_ADMINISTRATION_NOTIFICATION")
 
         Bukkit.getServer().onlinePlayers.forEach {
-            if (IPermissions.get("RECEIVE_ADMINISTRATION_NOTIFICATION").hasPermission(it)) {
+            if (IPermissions.valueOf("RECEIVE_ADMINISTRATION_NOTIFICATION").hasPermission(it)) {
                 notification.notify(sender = it)
             }
         }
 
         Bukkit.getServer().offlinePlayers.forEach {
-            if (IPermissions.get("RECEIVE_ADMINISTRATION_NOTIFICATION").hasPermission(it.player)) {
+            if (IPermissions.valueOf("RECEIVE_ADMINISTRATION_NOTIFICATION").hasPermission(it.player)) {
                 putOffline(it, notification)
             }
         }

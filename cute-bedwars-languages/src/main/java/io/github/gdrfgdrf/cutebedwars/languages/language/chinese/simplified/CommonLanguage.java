@@ -18,8 +18,9 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString RELOAD_FINISHED = new LanguageString("&a重载插件成功");
 
     public static final LanguageString DESCRIPTION_FORMAT = new LanguageString("&a&l%s&8&l: &r&e%s");
+    public static final LanguageString DESCRIPTION_DIVIDER = new LanguageString("&8&l----------------------------------");
     public static final LanguageString NOT_FOUND_DESCRIPTION = new LanguageString("&c没有找到描述 %s");
-    public static final LanguageString DESCRIPTION_ERROR = new LanguageString("&c该描述加载错误，无法查询");
+    public static final LanguageString DESCRIPTION_ERROR = new LanguageString("&c描述 %s 加载错误，无法查询");
 
     public static final LanguageString DUPLICATE_AREA_NAME_WARNING = new LanguageString("&c已经有了一个与 &e%s &c同名的区域，若继续创建，加入时则需要使用 &earea_id &c加入。请在 &e%s &c秒内再次输入以确定");
     public static final LanguageString CREATING_AREA = new LanguageString("&e正在创建区域 %s");

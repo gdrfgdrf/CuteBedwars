@@ -2,7 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.enums
 
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
-import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
 import org.bukkit.permissions.Permission
 
@@ -17,7 +16,7 @@ interface IPermissions {
     fun hasPermission(sender: CommandSender): Boolean
 
     companion object {
-        fun get(name: String): IPermissions = Mediator.get(IPermissions::class.java, ArgumentSet(arrayOf(name)))!!
-        fun values(): Array<*> = Mediator.get(IPermissions::class.java)!!
+        fun valueOf(name: String): IPermissions = Mediator.valueOf(IPermissions::class.java, name)!!
+        fun values(): Array<*> = Mediator.values(IPermissions::class.java)!!
     }
 }

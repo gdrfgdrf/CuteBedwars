@@ -86,7 +86,7 @@ object Requests : IRequests {
         }
         val request = requestMap[type]
         if (request != null) {
-            request.status(IRequestStatuses.get("STOPPED"))
+            request.status(IRequestStatuses.valueOf("STOPPED"))
             if (high) {
                 HighCountdownTimer.remove(request as Request)
             } else {

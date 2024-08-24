@@ -31,7 +31,7 @@ object LowCountdownTimer {
 
     fun put(request: IRequest) {
         requests[request] = System.currentTimeMillis()
-        request.status(IRequestStatuses.get("READY"))
+        request.status(IRequestStatuses.valueOf("READY"))
     }
 
     fun remove(request: IRequest) {
@@ -51,20 +51,20 @@ internal object LowCountdownWorker : Runnable {
                 val now = System.currentTimeMillis()
 
                 LowCountdownTimer.requests.forEach { (request, startTime) ->
-                    if (request.status() == IRequestStatuses.get("STOPPED") || request.status() == IRequestStatuses.get("RUNNING")) {
+                    if (request.status() == IRequestStatuses.valueOf("STOPPED") || request.status() == IRequestStatuses.valueOf("RUNNING")) {
                         LowCountdownTimer.requests.remove(request)
                         return@forEach
                     }
-                    request.status(IRequestStatuses.get("TRY_RUNNING"))
+                    request.status(IRequestStatuses.valueOf("TRY_RUNNING"))
 
                     val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout(), request.timeUnit())
                     if (now - startTime >= convertedTimeout) {
                         LowCountdownTimer.requests.remove(request)
-                        request.status(IRequestStatuses.get("RUNNING"))
+                        request.status(IRequestStatuses.valueOf("RUNNING"))
 
                         threadPoolService.newTask {
                             request.endRun()(request)
-                            request.status(IRequestStatuses.get("STOPPED"))
+                            request.status(IRequestStatuses.valueOf("STOPPED"))
                         }
                     }
 
@@ -76,8 +76,8 @@ internal object LowCountdownWorker : Runnable {
                         }
                     }
 
-                    if (request.status() != IRequestStatuses.get("RUNNING")) {
-                        request.status(IRequestStatuses.get("WAIT_NEXT_ROUND"))
+                    if (request.status() != IRequestStatuses.valueOf("RUNNING")) {
+                        request.status(IRequestStatuses.valueOf("WAIT_NEXT_ROUND"))
                     }
 
                     sleepSafely(50)

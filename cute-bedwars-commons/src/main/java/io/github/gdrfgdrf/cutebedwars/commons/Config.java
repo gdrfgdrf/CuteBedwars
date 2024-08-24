@@ -39,6 +39,9 @@ public class Config implements IConfig {
     @JsonProperty(value = "request-timeout")
     private Long requestTimeout;
 
+    @JsonProperty(value = "area-auto-save-delay")
+    private Long areaAutoSaveDelay;
+
     public static void reset(Config config) {
         config.language = "chinese_simplified";
         config.workerId = 0;

@@ -11,7 +11,7 @@ object Enabler : IEnabler {
     fun enable() {
         CommandRegistry.get().registerCommands()
 
-        Plugin.state = IPluginState.get("RUNNING")
+        Plugin.state = IPluginState.valueOf("RUNNING")
     }
 
     override fun reloadPhase() {

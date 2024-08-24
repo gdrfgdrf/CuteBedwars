@@ -12,21 +12,20 @@ import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
-import io.github.gdrfgdrf.cutebedwars.languages.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object Reload : SubCommand(
-    command = ICommands.get("RELOAD"),
+    command = ICommands.valueOf("RELOAD"),
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.RELOAD
     override fun description(): LanguageString? = CommandDescriptionLanguage.RELOAD
 
     override fun run(sender: CommandSender, args: Array<String>) {
         localizationScope(sender) {
-            val pair = IRequests.get().auto(type = IRequestTypes.get("RELOAD"), sender = sender)
+            val pair = IRequests.get().auto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
             val new = pair.first
             val request = pair.second
 
@@ -36,9 +35,9 @@ object Reload : SubCommand(
                     .send()
                 return@localizationScope
             }
-            IRequests.get().removeForAuto(type = IRequestTypes.get("RELOAD"), sender = sender)
+            IRequests.get().removeForAuto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
 
-            if (IPlugin.get().state() == IPluginState.get("LOADING")) {
+            if (IPlugin.get().state() == IPluginState.valueOf("LOADING")) {
                 message(CommonLanguage.PHASE_ERROR)
                     .send()
                 return@localizationScope
@@ -47,13 +46,13 @@ object Reload : SubCommand(
             message(CommonLanguage.RELOADING_PLUGIN)
                 .send()
 
-            IPlugin.get().state(IPluginState.get("LOADING"))
+            IPlugin.get().state(IPluginState.valueOf("LOADING"))
 
             IDisabler.get().reloadPhase()
             ILoader.get().reloadPhase()
             IEnabler.get().reloadPhase()
 
-            IPlugin.get().state(IPluginState.get("RUNNING"))
+            IPlugin.get().state(IPluginState.valueOf("RUNNING"))
 
             message(CommonLanguage.RELOAD_FINISHED)
                 .send()

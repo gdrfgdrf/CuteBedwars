@@ -1,10 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.tasks.worker
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
 import io.github.gdrfgdrf.cutebedwars.tasks.entry.FutureTaskEntry
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
-import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
 import java.util.concurrent.LinkedBlockingQueue
 
 object TaskWorker : Runnable {
@@ -16,7 +16,7 @@ object TaskWorker : Runnable {
         while (!TaskManager.isTerminated()) {
             val taskEntry = TaskManager.TASK_ENTRY_QUEUE.poll() ?: continue
 
-            if (taskEntry.customLock == null) {
+            if (taskEntry.customLock() == null) {
                 threadPoolService.newTask {
                     val result = taskEntry.supplier()
 
@@ -27,7 +27,7 @@ object TaskWorker : Runnable {
                     }
                 }
             } else {
-                val taskEntries = TaskManager.SYNCHRONIZED_TASK_ENTRY.computeIfAbsent(taskEntry.customLock!!) {
+                val taskEntries = TaskManager.SYNCHRONIZED_TASK_ENTRY.computeIfAbsent(taskEntry.customLock()!!) {
                     LinkedBlockingQueue()
                 }
 

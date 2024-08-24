@@ -14,7 +14,7 @@ interface IParam {
     companion object {
         fun get(descriptionName: String, typeName: String): IParam = Mediator.get(
             IParam::class.java,
-            ArgumentSet(arrayOf(IDescriptions.get(descriptionName), IParamTypes.get(typeName)))
+            ArgumentSet(arrayOf(IDescriptions.find(descriptionName), IParamTypes.valueOf(typeName)))
         )!!
 
         fun get(description: IDescriptions, type: IParamTypes): IParam =

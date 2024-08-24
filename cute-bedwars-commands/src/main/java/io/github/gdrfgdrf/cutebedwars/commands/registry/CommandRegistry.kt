@@ -14,15 +14,15 @@ import org.bukkit.Bukkit
 @ServiceImpl("command_registry")
 object CommandRegistry : CommandRegistry {
     override fun registerCommands() {
-        "Registering the root command ${ICommands.get("ROOT").string()}".logInfo()
+        "Registering the root command ${ICommands.valueOf("ROOT").string()}".logInfo()
 
-        javaPluginHolder().get().getCommand(ICommands.get("ROOT").string()).executor = RootCommand
+        javaPluginHolder().get().getCommand(ICommands.valueOf("ROOT").string()).executor = RootCommand
         javaPluginHolder().get().getCommand("cutebedwars").executor = RootCommand
 
         SubCommandManager.scanAndRegister()
 
-        val userPermission = IPermissionGroups.get("USER").get()
-        val administratorPermission = IPermissionGroups.get("ADMIN").get()
+        val userPermission = IPermissionGroups.valueOf("USER").get()
+        val administratorPermission = IPermissionGroups.valueOf("ADMIN").get()
 
         IPermissions.values().forEach { permissions ->
             if (permissions !is IPermissions) {

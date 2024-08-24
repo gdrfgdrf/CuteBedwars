@@ -10,6 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
+import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Area
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
@@ -30,7 +31,7 @@ object Loader : ILoader {
     fun load(javaPlugin: JavaPlugin) {
         Registry.register(Loader::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars")
 
-        Plugin.state = IPluginState.get("LOADING")
+        Plugin.state = IPluginState.valueOf("LOADING")
 
         createFolders()
 
@@ -102,6 +103,10 @@ object Loader : ILoader {
 
     private fun loadDatabase() {
         IDatabase.get().initialize()
+    }
+
+    private fun loadTaskManager() {
+        ITaskManager.get().start()
     }
 
     private fun loadAreas() {

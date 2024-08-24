@@ -8,14 +8,13 @@ import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
-import io.github.gdrfgdrf.cutebedwars.languages.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object CreateArea : SubCommand(
-    command = ICommands.get("CREATE_AREA")
+    command = ICommands.valueOf("CREATE_AREA")
 ){
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_AREA
@@ -26,7 +25,7 @@ object CreateArea : SubCommand(
 
             val sameNameArea = IManagers.get().get(areaName)
             if (sameNameArea != null) {
-                val pair = IRequests.get().auto(type = IRequestTypes.get("CREATE_AREA"), sender = sender)
+                val pair = IRequests.get().auto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
                 val new = pair.first
                 val request = pair.second
 
@@ -37,7 +36,7 @@ object CreateArea : SubCommand(
                     return@localizationScope
                 }
             }
-            IRequests.get().removeForAuto(type = IRequestTypes.get("CREATE_AREA"), sender = sender)
+            IRequests.get().removeForAuto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
 
             message(CommonLanguage.CREATING_AREA)
                 .format(areaName)
