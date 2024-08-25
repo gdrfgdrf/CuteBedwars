@@ -111,5 +111,6 @@ class DescriptionLanguage implements LanguageBlock {
 
     public static final LanguageString SEARCH_BY_ID_OR_NAME = new LanguageString("通过 id 或 name 来查找");
     public static final LanguageString VALUE = new LanguageString("值，类型视情况而定");
+    public static final LanguageString PAGE_INDEX = new LanguageString("页码");
 
 }

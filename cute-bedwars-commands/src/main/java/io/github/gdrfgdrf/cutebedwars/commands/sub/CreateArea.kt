@@ -19,7 +19,7 @@ object CreateArea : SubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_AREA
 
-    override fun run(sender: CommandSender, args: Array<String>) {
+    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
         localizationScope(sender) {
             val areaName = args[0]
             val managers = IManagers.get()

@@ -110,7 +110,8 @@ enum class Descriptions(
     TEMPLATE_PROPERTY(DescriptionLanguage::TEMPLATE_PROPERTY, true),
 
     SEARCH_BY_ID_OR_NAME(DescriptionLanguage::SEARCH_BY_ID_OR_NAME),
-    VALUE(DescriptionLanguage::VALUE)
+    VALUE(DescriptionLanguage::VALUE),
+    PAGE_INDEX(DescriptionLanguage::PAGE_INDEX)
 
     ;
 

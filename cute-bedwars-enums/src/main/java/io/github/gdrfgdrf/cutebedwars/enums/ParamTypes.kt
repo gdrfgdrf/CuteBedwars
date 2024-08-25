@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
+import io.github.gdrfgdrf.cutebedwars.utils.extension.isInt
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("param_types_enum")
@@ -11,6 +12,10 @@ enum class ParamTypes : IParamTypes {
             if (any !is String) {
                 return false
             }
+            if (any.isInt()) {
+                return false
+            }
+
             return any.isNotBlank()
         }
     },
@@ -24,6 +29,15 @@ enum class ParamTypes : IParamTypes {
 
         override fun tab(args: Array<String>): MutableList<String> {
             return arrayListOf("by-id", "by-name")
+        }
+    },
+    POSITIVE_NUMBER {
+        override fun validate(any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+            val int = any.toIntOrNull() ?: return false
+            return int > 0
         }
     },
     AREAS {

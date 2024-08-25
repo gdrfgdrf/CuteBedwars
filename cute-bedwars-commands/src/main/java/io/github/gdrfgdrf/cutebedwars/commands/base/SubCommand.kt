@@ -10,7 +10,7 @@ abstract class SubCommand(
     abstract fun syntax(): LanguageString?
     abstract fun description(): LanguageString?
 
-    abstract fun run(sender: CommandSender, args: Array<String>)
+    abstract fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int)
     open fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
         return arrayListOf()
     }

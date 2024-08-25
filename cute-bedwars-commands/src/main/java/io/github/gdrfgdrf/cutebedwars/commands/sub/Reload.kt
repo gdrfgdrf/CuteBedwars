@@ -23,7 +23,7 @@ object Reload : SubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.RELOAD
     override fun description(): LanguageString? = CommandDescriptionLanguage.RELOAD
 
-    override fun run(sender: CommandSender, args: Array<String>) {
+    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
         localizationScope(sender) {
             val pair = IRequests.get().auto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
             val new = pair.first

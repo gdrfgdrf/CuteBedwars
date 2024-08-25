@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParam
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
@@ -11,34 +11,53 @@ enum class Commands(
     val onlyPlayer: Boolean = true,
     val argsRange: IntRange,
     val permissions: Permissions,
-    val params: Array<IParam>? = null,
+    val paramSchemes: Array<IParamScheme>? = null,
 ) : ICommands {
     ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT),
     HELP("help", false, 0..0, Permissions.HELP),
     RELOAD("reload", false, 0..0, Permissions.RELOAD),
     QUERY_DESCRIPTION(
-        "query-description", false, 0..1, Permissions.QUERY_DESCRIPTION,
-        arrayOf(IParam.get("DESCRIPTION", "NOT_BLANK_STRING"))
+        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION,
+        arrayOf(
+            IParamScheme.get {
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            },
+            IParamScheme.get {
+                add("DESCRIPTION", "NOT_BLANK_STRING")
+            },
+            IParamScheme.get {
+                add("DESCRIPTION", "NOT_BLANK_STRING")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            }
+        )
     ),
 
     CREATE_AREA(
         "create-area", false, 1..1, Permissions.CREATE_AREA,
-        arrayOf(IParam.get("AREA_NAME", "NOT_BLANK_STRING"))
+        arrayOf(
+            IParamScheme.get {
+                add("AREA_NAME", "NOT_BLANK_STRING")
+            }
+        )
     ),
     INFO_AREA(
         "info-area", false, 2..2, Permissions.INFO_AREA,
         arrayOf(
-            IParam.get("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME"),
-            IParam.get("AREA", "AREAS")
+            IParamScheme.get {
+                add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+            }
         )
     ),
     MODIFY_AREA(
         "modify-area", false, 4..4, Permissions.MODIFY_AREA,
         arrayOf(
-            IParam.get("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME"),
-            IParam.get("AREA", "AREAS"),
-            IParam.get("AREA_PROPERTY", "NOT_BLANK_STRING"),
-            IParam.get("VALUE", "NOT_BLANK_STRING")
+            IParamScheme.get {
+                add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("AREA_PROPERTY", "NOT_BLANK_STRING")
+                add("VALUE", "NOT_BLANK_STRING")
+            }
         )
     )
 
@@ -49,29 +68,36 @@ enum class Commands(
     override fun onlyPlayer(): Boolean = onlyPlayer
     override fun argsRange(): IntRange = argsRange
     override fun permissions(): IPermissions = permissions
-    override fun params(): Array<IParam>? = params
+    override fun paramsSchemes(): Array<IParamScheme>? = paramSchemes
 
     override fun get(): String {
         if (this == ROOT) {
             return "/cbw"
         }
-        if (params.isNullOrEmpty()) {
+        if (paramSchemes.isNullOrEmpty()) {
             return "${ROOT.get()} $string"
         }
         return "${ROOT.get()} $string ${getWithParams()}"
     }
 
     private fun getWithParams(): String {
-        if (params.isNullOrEmpty()) {
+        if (paramSchemes.isNullOrEmpty()) {
             return get()
         }
         val stringBuilder = StringBuilder()
 
-        params.forEachIndexed { index, it ->
-            if (index != params.size - 1) {
-                stringBuilder.append(it.get()).append(" ")
-            } else {
-                stringBuilder.append(it.get())
+        paramSchemes.forEachIndexed { index, paramScheme ->
+            val list = paramScheme.get()
+            list.forEachIndexed { index2, param ->
+                if (index2 != list.size - 1) {
+                    stringBuilder.append(param.get()).append(" ")
+                } else {
+                    stringBuilder.append(param.get())
+                }
+            }
+
+            if (index != paramSchemes.size - 1) {
+                stringBuilder.append("|")
             }
         }
 

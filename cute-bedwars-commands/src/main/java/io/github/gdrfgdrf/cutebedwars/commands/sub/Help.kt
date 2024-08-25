@@ -18,7 +18,7 @@ object Help : SubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.HELP
     override fun description(): LanguageString? = CommandDescriptionLanguage.HELP
 
-    override fun run(sender: CommandSender, args: Array<String>) {
+    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
         middleWork("", sender) {
             val accessibleUserCommand = arrayListOf<Pair<ICommands, SubCommand>>()
             SubCommandManager.forEachUser { commands, subCommand ->

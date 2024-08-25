@@ -102,6 +102,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>tasks</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>chat-page</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

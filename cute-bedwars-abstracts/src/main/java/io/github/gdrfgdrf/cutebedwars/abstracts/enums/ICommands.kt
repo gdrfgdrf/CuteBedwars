@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.enums
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParam
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
@@ -11,7 +11,7 @@ interface ICommands {
     fun onlyPlayer(): Boolean
     fun argsRange(): IntRange
     fun permissions(): IPermissions
-    fun params(): Array<IParam>?
+    fun paramsSchemes(): Array<IParamScheme>?
     fun get(): String
 
     companion object {

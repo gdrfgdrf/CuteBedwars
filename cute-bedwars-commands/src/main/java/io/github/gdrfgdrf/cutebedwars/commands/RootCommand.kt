@@ -1,6 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.commands
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -8,6 +10,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 import org.bukkit.entity.Player
+import java.util.concurrent.ConcurrentHashMap
 
 object RootCommand : TabExecutor {
     override fun onCommand(
@@ -45,26 +48,55 @@ object RootCommand : TabExecutor {
             if (subCommand.hasPermission(sender)) {
                 if (!subCommand.command.onlyPlayer() || sender is Player) {
                     if (args.isEmpty()) {
-                        subCommand.run(sender, args)
+                        subCommand.run(sender, args, ParamScheme.NO_MATCH)
                         return@localizationScope
                     }
                     val newArray = arrayOfNulls<String>(args.size - 1)
                     System.arraycopy(args, 1, newArray, 0, args.size - 1)
 
-                    if (subCommand.command.argsRange().contains(newArray.size)) {
-                        var validateSuccess = true
-                        newArray.forEachIndexed { index, realParam ->
-                            if ((subCommand.command).params()!!.size <= index || realParam.isNullOrEmpty()) {
-                                return@localizationScope
-                            }
+                    if (newArray.isEmpty()) {
+                        subCommand.run(sender, args, ParamScheme.NO_MATCH)
+                        return@localizationScope
+                    }
 
-                            val param = subCommand.command.params()!![index]
-                            if (!param.validate(realParam)) {
-                                validateSuccess = false
+                    if (subCommand.command.argsRange().contains(newArray.size)) {
+                        var validateResult: Map.Entry<IParamScheme, Int>? = null
+
+                        val providedLength = newArray.size
+                        val paramSchemes = ConcurrentHashMap<IParamScheme, Int>()
+
+                        for ((index, it) in subCommand.command.paramsSchemes()!!.withIndex()) {
+                            val length = it.length()
+                            if (length == providedLength) {
+                                paramSchemes[it] = index
                             }
                         }
-                        if (validateSuccess) {
-                            subCommand.run(sender, newArray as Array<String>)
+
+                        newArray.forEachIndexed { index, realParam ->
+                            realParam ?: return@localizationScope
+
+                            paramSchemes.forEach { (paramScheme, index2) ->
+                                val list = paramScheme.get()
+                                val param = list[index]
+
+                                if (param.validate(realParam)) {
+                                    if (index >= list.size - 1) {
+                                        validateResult = object : Map.Entry<IParamScheme, Int> {
+                                            override val key: IParamScheme
+                                                get() = paramScheme
+                                            override val value: Int
+                                                get() = index2
+                                        }
+                                    }
+                                } else {
+                                    paramSchemes.remove(paramScheme)
+                                }
+
+                            }
+                        }
+
+                        if (validateResult != null) {
+                            subCommand.run(sender, newArray as Array<String>, validateResult!!.value)
                             return@localizationScope
                         }
                     }
@@ -114,13 +146,16 @@ object RootCommand : TabExecutor {
                 System.arraycopy(args, 1, newArray, 0, args.size - 1)
 
                 val subCommand = pair.second
-                val params = subCommand.command.params()
+                val paramSchemes = subCommand.command.paramsSchemes()
 
-                if (!params.isNullOrEmpty()) {
-                    val param = params[newArray.size - 1]
-                    val paramProvideTab = param.tab(newArray as Array<String>)
-                    if (paramProvideTab.isNotEmpty()) {
-                        return paramProvideTab
+                if (!paramSchemes.isNullOrEmpty()) {
+                    paramSchemes.forEach { paramScheme ->
+                        val params = paramScheme.get()
+                        val param = params[newArray.size - 1]
+                        val paramProvideTab = param.tab(newArray as Array<String>)
+                        if (paramProvideTab.isNotEmpty()) {
+                            return paramProvideTab
+                        }
                     }
                 }
 

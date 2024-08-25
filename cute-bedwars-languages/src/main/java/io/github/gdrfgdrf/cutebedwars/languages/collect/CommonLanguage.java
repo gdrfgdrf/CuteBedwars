@@ -18,7 +18,6 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString RELOAD_FINISHED;
 
     public static LanguageString DESCRIPTION_FORMAT;
-    public static LanguageString DESCRIPTION_DIVIDER;
     public static LanguageString NOT_FOUND_DESCRIPTION;
     public static LanguageString DESCRIPTION_ERROR;
 
@@ -26,4 +25,8 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString DUPLICATE_AREA_ID_ERROR;
     public static LanguageString CREATING_AREA;
     public static LanguageString CREATE_AREA_FINISHED;
+
+    public static LanguageString PAGE_TOP;
+    public static LanguageString PAGE_BOTTOM;
+    public static LanguageString PAGE_INDEX_OUT_OF_BOUNDS;
 }

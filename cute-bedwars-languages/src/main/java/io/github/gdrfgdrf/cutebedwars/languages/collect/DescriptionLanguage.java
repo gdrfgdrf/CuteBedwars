@@ -107,4 +107,5 @@ public class DescriptionLanguage implements LanguageCollect {
 
     public static LanguageString SEARCH_BY_ID_OR_NAME;
     public static LanguageString VALUE;
+    public static LanguageString PAGE_INDEX;
 }

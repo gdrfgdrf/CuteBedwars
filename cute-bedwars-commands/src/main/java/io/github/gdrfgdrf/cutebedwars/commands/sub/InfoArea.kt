@@ -13,7 +13,7 @@ object InfoArea : SubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_AREA
 
-    override fun run(sender: CommandSender, args: Array<String>) {
+    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
 
     }
 }
