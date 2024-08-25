@@ -73,28 +73,6 @@ object QueryDescription : SubCommand(
                 }.toList()
             }
             chatPage.send(pageIndex - 1)
-
-//            searchResult.forEachIndexed { index, description ->
-//                val divider = message(CommonLanguage.DESCRIPTION_DIVIDER)
-//                if (index == 0) {
-//                    divider.send()
-//                }
-//
-//                val languageString = description.value()()
-//                if (languageString == null) {
-//                    message(CommonLanguage.DESCRIPTION_ERROR)
-//                        .format(description.name_())
-//                        .send()
-//                    divider.send()
-//
-//                    return@localizationScope
-//                }
-//
-//                message(CommonLanguage.DESCRIPTION_FORMAT)
-//                    .format(description.name_(), languageString.get().string)
-//                    .send()
-//                divider.send()
-//            }
         }
     }
 
