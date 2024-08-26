@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabExecutor
 import org.bukkit.entity.Player
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.CopyOnWriteArrayList
 
 object RootCommand : TabExecutor {
     override fun onCommand(
@@ -139,7 +140,7 @@ object RootCommand : TabExecutor {
         } else {
             if (args.size > 1) {
                 val pair = SubCommandManager.search { _, subCommand ->
-                    return@search subCommand.command.string() == args[0] && subCommand.hasPermission(sender)
+                    return@search subCommand.command.string().equals(args[0], true) && subCommand.hasPermission(sender)
                 } ?: return arrayListOf()
 
                 val newArray = arrayOfNulls<String>(args.size - 1)
@@ -149,7 +150,39 @@ object RootCommand : TabExecutor {
                 val paramSchemes = subCommand.command.paramsSchemes()
 
                 if (!paramSchemes.isNullOrEmpty()) {
-                    paramSchemes.forEach { paramScheme ->
+                    val providedLength = newArray.size
+
+                    val filterResult = CopyOnWriteArrayList<IParamScheme>()
+                    val result2 = arrayListOf<IParamScheme>()
+
+                    paramSchemes.forEach {
+                        val length = it.length()
+                        if (length >= providedLength) {
+                            filterResult.add(it)
+                        }
+                    }
+
+                    newArray.forEachIndexed { index, realParam ->
+                        realParam ?: return@forEachIndexed
+
+                        filterResult.forEach {
+                            if (realParam.isEmpty()) {
+                                result2.add(it)
+                                return@forEach
+                            }
+
+                            val list = it.get()
+                            val param = list[index]
+
+                            if (param.validate(realParam)) {
+                                result2.add(it)
+                            } else {
+                                filterResult.remove(it)
+                            }
+                        }
+                    }
+
+                    result2.forEach { paramScheme ->
                         val params = paramScheme.get()
                         val param = params[newArray.size - 1]
                         val paramProvideTab = param.tab(newArray as Array<String>)
