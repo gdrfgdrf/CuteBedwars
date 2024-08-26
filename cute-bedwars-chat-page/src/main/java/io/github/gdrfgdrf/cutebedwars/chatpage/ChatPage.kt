@@ -22,15 +22,13 @@ class ChatPage(
     private val lines: List<Line>,
 ) : IChatPage {
     private val pages = arrayListOf<Page>()
-        get() {
-            if (field.isEmpty()) {
-                initPages()
-            }
-            return field
-        }
     var lineCountEveryPages = 5
 
     override fun send(index: Int) {
+        if (pages.isEmpty()) {
+            initPages()
+        }
+
         if (index >= pages.size) {
             localizationScope(pageRequest.getSender()) {
                 message(CommonLanguage.PAGE_INDEX_OUT_OF_BOUNDS)
@@ -55,6 +53,9 @@ class ChatPage(
     }
 
     override fun size(): Int {
+        if (pages.isEmpty()) {
+            initPages()
+        }
         return pages.size
     }
 
