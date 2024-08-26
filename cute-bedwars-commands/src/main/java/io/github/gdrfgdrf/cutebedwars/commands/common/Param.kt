@@ -21,7 +21,7 @@ class Param(
         return type.tab(args)
     }
 
-    override fun validate(any: Any): Boolean {
-        return type.validate(any)
+    override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        return type.validate(args, currentIndex, any)
     }
 }

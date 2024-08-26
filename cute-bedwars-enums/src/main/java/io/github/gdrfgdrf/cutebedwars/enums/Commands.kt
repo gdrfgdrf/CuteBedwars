@@ -41,11 +41,16 @@ enum class Commands(
         )
     ),
     INFO_AREA(
-        "info-area", false, 2..2, Permissions.INFO_AREA,
+        "info-area", false, 2..3, Permissions.INFO_AREA,
         arrayOf(
             IParamScheme.get {
                 add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
+            },
+            IParamScheme.get {
+                add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )
     ),

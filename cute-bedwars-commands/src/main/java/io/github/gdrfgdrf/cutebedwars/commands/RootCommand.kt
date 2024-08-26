@@ -80,7 +80,7 @@ object RootCommand : TabExecutor {
                                 val list = paramScheme.get()
                                 val param = list[index]
 
-                                if (param.validate(realParam)) {
+                                if (param.validate(newArray as Array<String>, index, realParam)) {
                                     if (index >= list.size - 1) {
                                         validateResult = object : Map.Entry<IParamScheme, Int> {
                                             override val key: IParamScheme
@@ -174,7 +174,7 @@ object RootCommand : TabExecutor {
                             val list = it.get()
                             val param = list[index]
 
-                            if (param.validate(realParam)) {
+                            if (param.validate(newArray as Array<String>, index, realParam)) {
                                 result2.add(it)
                             } else {
                                 filterResult.remove(it)

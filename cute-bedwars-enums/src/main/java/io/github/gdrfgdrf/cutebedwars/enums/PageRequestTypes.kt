@@ -4,6 +4,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("page_request_types")
-enum class PageRequestTypes : IPageRequestTypes {
-    DESCRIPTIONS
+enum class PageRequestTypes(
+    val cache: Boolean = true
+) : IPageRequestTypes {
+    DESCRIPTIONS,
+    INFO_AREA(false)
+    ;
+
+    override fun cache(): Boolean = cache
 }

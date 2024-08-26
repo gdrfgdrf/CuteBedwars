@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 interface IParam {
     fun get(): String?
     fun tab(args: Array<String>): MutableList<String>
-    fun validate(any: Any): Boolean
+    fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean
 
     companion object {
         fun get(descriptionName: String, typeName: String): IParam = Mediator.get(

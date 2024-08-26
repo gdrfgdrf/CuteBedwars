@@ -13,6 +13,9 @@ import org.bukkit.command.CommandSender
 interface IChatPage {
     fun send(index: Int)
     fun size(): Int
+    fun addPage(loader: () -> List<ILocalizationMessage>)
+    fun lineCountEveryPages(): Int
+    fun lineCountEveryPages(lineCount: Int)
 
     companion object {
         fun get(

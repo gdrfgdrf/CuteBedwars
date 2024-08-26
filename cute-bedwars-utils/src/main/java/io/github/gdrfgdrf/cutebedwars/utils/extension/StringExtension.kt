@@ -2,6 +2,10 @@ package io.github.gdrfgdrf.cutebedwars.utils.extension
 
 import io.github.gdrfgdrf.cutebedwars.utils.logger
 
+fun String.isLong(): Boolean {
+    return isInt()
+}
+
 fun String.isInt(): Boolean {
     for (c in toCharArray()) {
         if (!Character.isDigit(c)) {

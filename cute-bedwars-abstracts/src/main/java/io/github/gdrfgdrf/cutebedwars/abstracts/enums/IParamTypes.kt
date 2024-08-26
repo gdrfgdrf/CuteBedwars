@@ -9,7 +9,7 @@ interface IParamTypes {
     fun tab(args: Array<String>): MutableList<String> {
         return arrayListOf()
     }
-    fun validate(any: Any): Boolean
+    fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean
 
     companion object {
         fun valueOf(name: String): IParamTypes = Mediator.valueOf(IParamTypes::class.java, name)!!

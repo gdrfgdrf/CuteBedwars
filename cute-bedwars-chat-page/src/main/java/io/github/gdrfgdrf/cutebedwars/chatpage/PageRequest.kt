@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.chatpage
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString

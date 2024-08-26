@@ -22,10 +22,13 @@ class ChatPage(
     private val lines: List<Line>,
 ) : IChatPage {
     private val pages = arrayListOf<Page>()
-
-    init {
-        initPages()
-    }
+        get() {
+            if (field.isEmpty()) {
+                initPages()
+            }
+            return field
+        }
+    var lineCountEveryPages = 5
 
     override fun send(index: Int) {
         if (index >= pages.size) {
@@ -45,7 +48,7 @@ class ChatPage(
             val page = pages[index]
             page.send()
 
-            message(CommonLanguage.PAGE_TOP)
+            message(CommonLanguage.PAGE_BOTTOM)
                 .format(index + 1, pages.size)
                 .send("")
         }
@@ -55,8 +58,23 @@ class ChatPage(
         return pages.size
     }
 
+    override fun addPage(loader: () -> List<ILocalizationMessage>) {
+        val lines = loader().stream()
+            .map {
+                return@map Line(it)
+            }
+            .toList()
+        pages.add(Page(lines))
+    }
+
+    override fun lineCountEveryPages(): Int = lineCountEveryPages
+
+    override fun lineCountEveryPages(lineCount: Int) {
+        this.lineCountEveryPages = lineCount
+    }
+
     private fun initPages() {
-        val partition = Lists.partition(lines, 5)
+        val partition = Lists.partition(lines, lineCountEveryPages)
         partition.forEach {
             pages.add(Page(it))
         }
@@ -101,6 +119,9 @@ class ChatPage(
                 "not_a_player"
             }
             val request = PageRequest(uuid, pageRequests, flagContent, loader)
+            if (!pageRequests.cache()) {
+                return load(request)
+            }
 
             return cache.get(request)
         }
