@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.commands.sub
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
@@ -16,8 +16,6 @@ import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
-import java.util.Arrays
-import java.util.Properties
 
 object InfoArea : SubCommand(
     command = ICommands.valueOf("INFO_AREA")

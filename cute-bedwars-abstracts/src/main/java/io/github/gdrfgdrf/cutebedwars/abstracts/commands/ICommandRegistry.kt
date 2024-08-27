@@ -6,10 +6,10 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("command_registry")
 @KotlinSingleton
-interface CommandRegistry {
+interface ICommandRegistry {
     fun registerCommands()
 
     companion object {
-        fun get(): CommandRegistry = Mediator.get(CommandRegistry::class.java)!!
+        fun get(): ICommandRegistry = Mediator.get(ICommandRegistry::class.java)!!
     }
 }

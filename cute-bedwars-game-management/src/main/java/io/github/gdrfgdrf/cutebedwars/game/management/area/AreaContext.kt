@@ -1,21 +1,45 @@
 package io.github.gdrfgdrf.cutebedwars.game.management.area
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
+import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
+import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
 
+@ServiceImpl("area_context", needArgument = true)
 class AreaContext(
-    val manager: AreaManager
-) {
-    private val games = ArrayList<GameContext>()
+    argumentSet: ArgumentSet,
+) : IAreaContext, SetterImpl<Area>() {
+    private val manager: IAreaManager = argumentSet.args[0] as IAreaManager
+    private val games = ArrayList<IGameContext>()
 
-    fun addGame(game: Game) {
+    init {
+        instanceGetter = {
+            manager.area()
+        }
+        convert = { clazz, any ->
+            manager.area().convert(clazz, any)
+        }
+    }
+
+    constructor(areaManager: IAreaManager)
+            : this(ArgumentSet(arrayOf(areaManager)))
+
+    override fun manager(): IAreaManager = manager
+
+    override fun addGame(game: Game) {
         games.add(GameContext(this, game))
     }
 
-    fun validate(sender: CommandSender? = null) {
+    override fun validate(sender: CommandSender?) {
         var success = true
 
         games.forEach {
@@ -28,14 +52,14 @@ class AreaContext(
             if (sender == null) {
                 INotifications.get().messageAdministrator {
                     arrayOf(
-                        message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                            .format(manager.area.name),
+                        message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
+                            .format(manager.area().name),
                     )
                 }
             } else {
                 localizationScope(sender) {
-                    message(io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                        .format(manager.area.name)
+                    message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
+                        .format(manager.area().name)
                 }
             }
         }

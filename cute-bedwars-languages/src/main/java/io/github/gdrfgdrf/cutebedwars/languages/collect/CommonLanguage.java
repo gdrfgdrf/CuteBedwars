@@ -41,6 +41,8 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString AREA_GAMES_FORMAT;
     public static LanguageString AREA_GAMES_EMPTY;
 
+    public static LanguageString DUPLICATE_AREA_NAME_ERROR;
+
     public static LanguageString STATUS_UNKNOWN;
     public static LanguageString STATUS_DISABLED;
     public static LanguageString STATUS_EDITING;

@@ -61,7 +61,7 @@ enum class Commands(
                 add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("AREA_PROPERTY", "NOT_BLANK_STRING")
-                add("VALUE", "NOT_BLANK_STRING")
+                add("VALUE", "VALUE")
             }
         )
     )

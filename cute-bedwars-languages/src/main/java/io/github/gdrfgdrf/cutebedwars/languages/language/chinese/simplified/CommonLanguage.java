@@ -41,6 +41,8 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString AREA_GAMES_FORMAT = new LanguageString(" &8- &l&e%s &8(%s&8)");
     public static final LanguageString AREA_GAMES_EMPTY = new LanguageString(" &8- &l&c无");
 
+    public static final LanguageString DUPLICATE_AREA_NAME_ERROR = new LanguageString("&c存在多个名为 &e%s &c的区域，请使用 &earea_id &c进行索引");
+
     public static final LanguageString STATUS_UNKNOWN = new LanguageString("&f未知");
     public static final LanguageString STATUS_DISABLED = new LanguageString("&c已禁用");
     public static final LanguageString STATUS_EDITING = new LanguageString("&b编辑中");

@@ -1,27 +1,49 @@
 package io.github.gdrfgdrf.cutebedwars.game.management.game
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
-import io.github.gdrfgdrf.cutebedwars.game.management.area.AreaContext
+import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.team.TeamContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
 
+@ServiceImpl("game_context", needArgument = true)
 class GameContext(
-    val areaContext: AreaContext,
-    val game: Game
-) {
-    private val teams = ArrayList<TeamContext>()
+    argumentSet: ArgumentSet,
+) : IGameContext, SetterImpl<Game>() {
+    private val areaContext: IAreaContext = argumentSet.args[0] as IAreaContext
+    private val game: Game = argumentSet.args[1] as Game
+    private val teams = ArrayList<ITeamContext>()
 
-    fun addTeam(team: Team) {
+    init {
+        instanceGetter = {
+            game
+        }
+        convert = { clazz, any ->
+            game.convert(clazz, any)
+        }
+    }
+
+    constructor(areaContext: IAreaContext, game: Game)
+            : this(ArgumentSet(arrayOf(areaContext, game)))
+
+    override fun areaContext(): IAreaContext = areaContext
+    override fun game(): Game = game
+
+    override fun addTeam(team: Team) {
         teams.add(TeamContext(this, team))
     }
 
-    fun validate(sender: CommandSender? = null, withHeader: Boolean = false): Boolean {
-        val area = areaContext.manager.area
+    override fun validate(sender: CommandSender?, withHeader: Boolean): Boolean {
+        val area = areaContext.manager().area()
         var needDisableGame = false
 
         teams.forEach { teamContext ->

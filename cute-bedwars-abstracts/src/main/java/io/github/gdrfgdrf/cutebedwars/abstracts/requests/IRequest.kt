@@ -7,7 +7,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.util.concurrent.TimeUnit
 
-@Service("request")
+@Service("request", singleton = false)
 interface IRequest {
     fun timeout(): Long
     fun timeUnit(): TimeUnit

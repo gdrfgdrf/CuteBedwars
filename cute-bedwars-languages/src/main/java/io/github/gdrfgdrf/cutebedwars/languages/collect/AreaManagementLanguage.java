@@ -19,4 +19,11 @@ public class AreaManagementLanguage implements LanguageCollect {
     public static LanguageString GAME_TEAM_NEED_POSITIVE_ERROR;
     public static LanguageString GAME_TEAM_COUNT_ERROR;
     public static LanguageString GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER;
+
+    public static LanguageString NOT_FOUND_PROPERTY;
+    public static LanguageString PROPERTY_CANNOT_ACCESS;
+    public static LanguageString PROPERTY_IS_UNDEFINABLE;
+    public static LanguageString NOT_POSITIVE_NUMBER;
+    public static LanguageString CONVERT_ERROR;
+    public static LanguageString SET_PROPERTY_SUCCESS;
 }

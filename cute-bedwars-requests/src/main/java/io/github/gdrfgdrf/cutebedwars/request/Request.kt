@@ -11,10 +11,10 @@ import java.util.concurrent.TimeUnit
 class Request(
     argumentSet: ArgumentSet
 ): IRequest {
-    val timeout: Long = argumentSet.args[0] as Long
-    val timeUnit: TimeUnit = argumentSet.args[1] as TimeUnit
-    val eachSecond: IRequest.() -> Unit = argumentSet.args[2] as IRequest.() -> Unit
-    val endRun: IRequest.() -> Unit = argumentSet.args[3] as IRequest.() -> Unit
+    private val timeout: Long = argumentSet.args[0] as Long
+    private val timeUnit: TimeUnit = argumentSet.args[1] as TimeUnit
+    private val eachSecond: IRequest.() -> Unit = argumentSet.args[2] as IRequest.() -> Unit
+    private val endRun: IRequest.() -> Unit = argumentSet.args[3] as IRequest.() -> Unit
 
     constructor(eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit):
             this(ArgumentSet(arrayOf(
@@ -24,18 +24,14 @@ class Request(
                 endRun
             )))
 
-    var status = IRequestStatuses.valueOf("NONE")
-    var passedSecond = 0L
+    private var status = IRequestStatuses.valueOf("NONE")
+    private var passedSecond = 0L
+    private var lastEachSecondRun = 0L
 
-    internal var lastEachSecondRun = 0L
     override fun timeout(): Long = timeout
-
     override fun timeUnit(): TimeUnit = timeUnit
-
     override fun eachSecond(): IRequest.() -> Unit = eachSecond
-
     override fun endRun(): IRequest.() -> Unit = endRun
-
     override fun status(): IRequestStatuses = status
 
     override fun status(requestStatuses: IRequestStatuses) {

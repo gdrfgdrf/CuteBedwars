@@ -20,6 +20,17 @@ enum class ParamTypes : IParamTypes {
             return any.isNotBlank()
         }
     },
+    VALUE {
+        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+            if (any.isBlank()) {
+                return false
+            }
+            return true
+        }
+    },
     SEARCH_BY_ID_OR_NAME {
         override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
@@ -71,6 +82,7 @@ enum class ParamTypes : IParamTypes {
             return int > 0
         }
     },
+
 
 
     ;

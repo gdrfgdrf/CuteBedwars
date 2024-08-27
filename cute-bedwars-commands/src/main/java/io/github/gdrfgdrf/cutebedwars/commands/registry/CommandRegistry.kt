@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.commands.registry
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.CommandRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ICommandRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissionGroups
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
@@ -12,7 +12,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Bukkit
 
 @ServiceImpl("command_registry")
-object CommandRegistry : CommandRegistry {
+object CommandRegistry : ICommandRegistry {
     override fun registerCommands() {
         "Registering the root command ${ICommands.valueOf("ROOT").string()}".logInfo()
 

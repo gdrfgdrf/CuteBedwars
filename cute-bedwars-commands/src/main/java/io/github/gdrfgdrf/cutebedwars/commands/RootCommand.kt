@@ -52,15 +52,11 @@ object RootCommand : TabExecutor {
                         subCommand.run(sender, args, ParamScheme.NO_MATCH)
                         return@localizationScope
                     }
+                    val argsRange = subCommand.command.argsRange()
                     val newArray = arrayOfNulls<String>(args.size - 1)
                     System.arraycopy(args, 1, newArray, 0, args.size - 1)
 
-                    if (newArray.isEmpty()) {
-                        subCommand.run(sender, args, ParamScheme.NO_MATCH)
-                        return@localizationScope
-                    }
-
-                    if (subCommand.command.argsRange().contains(newArray.size)) {
+                    if (argsRange.contains(newArray.size)) {
                         var validateResult: Map.Entry<IParamScheme, Int>? = null
 
                         val providedLength = newArray.size
