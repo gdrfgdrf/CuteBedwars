@@ -34,7 +34,7 @@ class CommonLanguage implements LanguageBlock {
 
     public static final LanguageString COORDINATE_FULL = new LanguageString("&9[&e%d&8, &e%d&8, &e%d&9]");
 
-    public static final LanguageString REGION_ERROR = new LanguageString("错误的范围表达，两点坐标的 X, Y, Z 不能有一个相同，即范围大小至少为 2x2");
+    public static final LanguageString REGION_ERROR = new LanguageString("错误的范围表达，两点坐标的 X, Y, Z 不能有一个相同，即范围大小至少为 2x2x2");
     public static final LanguageString REGION_0 = new LanguageString("     *---------------------*\n" +
             "    /|                    /|\n" +
             "   / |                   / |\n" +
