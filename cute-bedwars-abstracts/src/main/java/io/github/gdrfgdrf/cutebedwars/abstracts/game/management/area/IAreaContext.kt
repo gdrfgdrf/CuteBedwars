@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.ISetter
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -10,7 +11,14 @@ import org.bukkit.command.CommandSender
 @Service("area_context", singleton = false)
 interface IAreaContext : ISetter {
     fun manager(): IAreaManager
+
+    fun createGame(name: String): IGameContext
     fun addGame(game: Game)
+    fun addGame(gameContext: IGameContext)
+
+    fun getGame(id: Long): IGameContext?
+    fun getGame(name: String): List<IGameContext>
+
     fun validate(sender: CommandSender? = null)
 
     companion object {

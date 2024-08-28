@@ -35,6 +35,11 @@ public class AreaManagementLanguage implements LanguageCollect {
     public static LanguageString AREA_GAMES_FORMAT;
     public static LanguageString AREA_GAMES_EMPTY;
 
+    public static LanguageString DUPLICATE_GAME_NAME_WARNING;
+    public static LanguageString DUPLICATE_GAME_ID_ERROR;
+    public static LanguageString CREATING_GAME;
+    public static LanguageString CREATE_GAME_FINISHED;
+
     public static LanguageString NOT_FOUND_PROPERTY;
     public static LanguageString PROPERTY_CANNOT_ACCESS;
     public static LanguageString PROPERTY_IS_UNDEFINABLE;

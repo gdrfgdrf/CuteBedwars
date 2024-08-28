@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.game.management.game
 
+import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
@@ -29,6 +30,13 @@ class GameContext(
         }
         convert = { clazz, any ->
             game.convert(clazz, any)
+        }
+
+        if (game.id == null) {
+            game.id = YitIdHelper.nextId()
+        }
+        if (game.name.isNullOrEmpty()) {
+            game.name = "temp_name_${game.id}"
         }
     }
 

@@ -32,7 +32,6 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
         file = File(folder, area.id.toString() + ".json")
 
         context = AreaContext(this)
-        area.games.forEach(context::addGame)
     }
 
     override fun area(): Area = area

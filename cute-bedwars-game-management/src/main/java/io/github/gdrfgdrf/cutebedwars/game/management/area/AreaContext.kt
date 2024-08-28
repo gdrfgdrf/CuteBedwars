@@ -35,8 +35,35 @@ class AreaContext(
 
     override fun manager(): IAreaManager = manager
 
+    override fun createGame(name: String): IGameContext {
+        val game = Game()
+        game.areaId = this.manager.area().id
+        return GameContext(this, game)
+    }
+
     override fun addGame(game: Game) {
         games.add(GameContext(this, game))
+    }
+
+    override fun addGame(gameContext: IGameContext) {
+        games.add(gameContext)
+    }
+
+    override fun getGame(id: Long): IGameContext? {
+        return games.stream()
+            .filter {
+                it.game().id == id
+            }
+            .findAny()
+            .orElse(null)
+    }
+
+    override fun getGame(name: String): List<IGameContext> {
+        return games.stream()
+            .filter {
+                it.game().name == name
+            }
+            .toList()
     }
 
     override fun validate(sender: CommandSender?) {

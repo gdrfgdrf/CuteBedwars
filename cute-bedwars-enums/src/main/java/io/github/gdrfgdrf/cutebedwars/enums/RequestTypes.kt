@@ -6,7 +6,8 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 @EnumServiceImpl("request_type_enum")
 enum class RequestTypes(val displayName: String): IRequestTypes {
     RELOAD("reload"),
-    CREATE_AREA("create_area")
+    CREATE_AREA("create_area"),
+    CREATE_GAME("create_game")
     ;
 
     override fun name_(): String {

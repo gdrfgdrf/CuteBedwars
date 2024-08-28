@@ -8,7 +8,6 @@ import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
-import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
@@ -26,8 +25,8 @@ object CreateArea : SubCommand(
             val managers = IManagers.get()
             val requests = IRequests.get()
 
-            val sameNameArea = managers.get(areaName)
-            if (sameNameArea != null && sameNameArea.size >= 1) {
+            val sameNameAreas = managers.get(areaName)
+            if (sameNameAreas != null && sameNameAreas.size >= 1) {
                 val pair = requests.auto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
                 val new = pair.first
                 val request = pair.second

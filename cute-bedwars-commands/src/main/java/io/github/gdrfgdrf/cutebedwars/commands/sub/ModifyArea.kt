@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindStrategy
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.commands.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
@@ -26,23 +27,10 @@ object ModifyArea : SubCommand(
             val areaProperty = args[2]
             val value = args[3]
 
-            var areaManager: IAreaManager? = null
-
-            val findResult = IAreaFinder.get().find(
-                sender,
-                IFindType.find(findType),
-                identifier,
-                IFindStrategy.valueOf("ONLY_ONE"),
-                IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT")
-            ) {
-                areaManager = it
-            }
-            if (!findResult.found() || findResult.isStrategyMatched("NOTICE_WHEN_MULTIPLE_RESULT")) {
-                return@localizationScope
-            }
+            val areaManager: IAreaManager = BetterAreaFinder.find(sender, findType, identifier) ?: return@localizationScope
 
             runCatching {
-                areaManager!!.context().set(sender, areaProperty, value)
+                areaManager.context().set(sender, areaProperty, value)
 
                 message(AreaManagementLanguage.SET_PROPERTY_SUCCESS)
                     .format(areaProperty, value)

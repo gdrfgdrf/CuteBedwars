@@ -20,7 +20,7 @@ class AreaManagementLanguage implements LanguageBlock {
     public static final LanguageString GAME_TEAM_COUNT_ERROR = new LanguageString("&c必须拥有 > 1 个队伍");
     public static final LanguageString GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER = new LanguageString("&c队伍 &e&l%s 的最小人数 > 最大人数");
 
-    public static final LanguageString DUPLICATE_AREA_NAME_WARNING = new LanguageString("&c名为 &e%s &c的区域已经存在，若继续创建，加入时则需要使用 &earea_id &c加入。请在 &e%s &c秒内再次输入以确定");
+    public static final LanguageString DUPLICATE_AREA_NAME_WARNING = new LanguageString("&c名为 &e&l%s &r&c的区域已经存在，若继续创建，对其进行操作则需要使用 &earea_id &c加入。请在 &e&l%s &r&c秒内再次输入以确定");
     public static final LanguageString DUPLICATE_AREA_ID_ERROR = new LanguageString("&c无法创建区域，因为程序生成的 &earea_id %s &c和其他区域重复，出现该错误一般为服务器的系统时间被回拨，请检查服务器的系统时间是否为最新");
     public static final LanguageString CREATING_AREA = new LanguageString("&e正在创建区域 %s");
     public static final LanguageString CREATE_AREA_FINISHED = new LanguageString("&a区域 &e&l%s &r&a已创建，&earea_id &a为 &e&l%s");
@@ -34,6 +34,11 @@ class AreaManagementLanguage implements LanguageBlock {
     public static final LanguageString AREA_GAMES_IS = new LanguageString("&a以下为该区域的游戏&8:");
     public static final LanguageString AREA_GAMES_FORMAT = new LanguageString(" &8- &l&e%s &8(%s&8)");
     public static final LanguageString AREA_GAMES_EMPTY = new LanguageString(" &8- &l&c无");
+
+    public static final LanguageString DUPLICATE_GAME_NAME_WARNING = new LanguageString("&c在区域 &e&l%s &r&c下与 &e&l%s &r&c同名的游戏已经存在，若继续创建，对其进行操作时则需要使用 &egame_id &c加入。请在 &el&l%s &r&c内再次输入以确定");
+    public static final LanguageString DUPLICATE_GAME_ID_ERROR = new LanguageString("&c无法创建游戏，因为程序生成的 &egame_id %s &c和该区域下其他游戏重复，出现该错误一般为服务器的系统时间被回拨，请检查服务器的系统时间是否为最新");
+    public static final LanguageString CREATING_GAME = new LanguageString("&e正在区域 &l%s &r&e下创建游戏 &l%s");
+    public static final LanguageString CREATE_GAME_FINISHED = new LanguageString("&a成功在区域 &e&l%s &r&a下创建游戏 &e&l%s");
 
     public static final LanguageString NOT_FOUND_PROPERTY = new LanguageString("&c没有找到名为 &e&l%s &c的属性");
     public static final LanguageString PROPERTY_CANNOT_ACCESS = new LanguageString("&c无法访问名为 &e&l%s &c的属性，该错误不应该出现，请确认插件是否为最新版本");
