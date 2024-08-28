@@ -107,6 +107,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>chat-page</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>finder</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

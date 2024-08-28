@@ -28,6 +28,7 @@
         <module>cute-bedwars-utils</module>
         <module>cute-bedwars-tasks</module>
         <module>cute-bedwars-chat-page</module>
+        <module>cute-bedwars-finder</module>
     </modules>
 
     <repositories>
@@ -144,6 +145,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
                 <artifactId>chat-page</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>finder</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>

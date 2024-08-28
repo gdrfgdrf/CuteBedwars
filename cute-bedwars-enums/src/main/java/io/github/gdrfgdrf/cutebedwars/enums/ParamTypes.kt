@@ -31,7 +31,7 @@ enum class ParamTypes : IParamTypes {
             return true
         }
     },
-    SEARCH_BY_ID_OR_NAME {
+    FIND_BY_ID_OR_NAME {
         override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
@@ -48,12 +48,12 @@ enum class ParamTypes : IParamTypes {
             if (any !is String) {
                 return false
             }
-            val searchType = args[currentIndex - 1]
+            val findType = args[currentIndex - 1]
 
-            if (searchType == "by-id") {
+            if (findType == "by-id") {
                 return any.isLong()
             }
-            if (searchType == "by-name") {
+            if (findType == "by-name") {
                 return true
             }
 

@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.util.concurrent.TimeUnit
 
+@Suppress("UNCHECKED_CAST")
 @ServiceImpl("future_task_entry", needArgument = true, instanceGetter = "create")
 class FutureTaskEntry<T> private constructor(
     argumentSet: ArgumentSet,

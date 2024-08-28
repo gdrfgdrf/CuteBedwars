@@ -12,6 +12,7 @@ interface ICommands {
     fun argsRange(): IntRange
     fun permissions(): IPermissions
     fun paramsSchemes(): Array<IParamScheme>?
+    fun allowEmptyParam(): Boolean
     fun get(): String
 
     companion object {

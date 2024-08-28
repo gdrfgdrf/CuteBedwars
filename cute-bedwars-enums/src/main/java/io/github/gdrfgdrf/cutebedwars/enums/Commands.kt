@@ -11,13 +11,14 @@ enum class Commands(
     val onlyPlayer: Boolean = true,
     val argsRange: IntRange,
     val permissions: Permissions,
+    val allowEmptyParam: Boolean,
     val paramSchemes: Array<IParamScheme>? = null,
 ) : ICommands {
-    ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT),
-    HELP("help", false, 0..0, Permissions.HELP),
-    RELOAD("reload", false, 0..0, Permissions.RELOAD),
+    ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT, true),
+    HELP("help", false, 0..0, Permissions.HELP, true),
+    RELOAD("reload", false, 0..0, Permissions.RELOAD, true),
     QUERY_DESCRIPTION(
-        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION,
+        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true,
         arrayOf(
             IParamScheme.get {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
@@ -33,7 +34,7 @@ enum class Commands(
     ),
 
     CREATE_AREA(
-        "create-area", false, 1..1, Permissions.CREATE_AREA,
+        "create-area", false, 1..1, Permissions.CREATE_AREA, false,
         arrayOf(
             IParamScheme.get {
                 add("AREA_NAME", "NOT_BLANK_STRING")
@@ -41,27 +42,41 @@ enum class Commands(
         )
     ),
     INFO_AREA(
-        "info-area", false, 2..3, Permissions.INFO_AREA,
+        "info-area", false, 0..3, Permissions.INFO_AREA, true,
         arrayOf(
             IParamScheme.get {
-                add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            },
+            IParamScheme.get {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
             },
             IParamScheme.get {
-                add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )
     ),
     MODIFY_AREA(
-        "modify-area", false, 4..4, Permissions.MODIFY_AREA,
+        "modify-area", false, 4..4, Permissions.MODIFY_AREA, false,
         arrayOf(
             IParamScheme.get {
-                add("SEARCH_BY_ID_OR_NAME", "SEARCH_BY_ID_OR_NAME")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("AREA_PROPERTY", "NOT_BLANK_STRING")
                 add("VALUE", "VALUE")
+            }
+        )
+    ),
+
+    CREATE_GAME(
+        "create-game", false, 3..3, Permissions.CREATE_GAME, false,
+        arrayOf(
+            IParamScheme.get {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("GAME_NAME", "NOT_BLANK_STRING")
             }
         )
     )
@@ -73,6 +88,7 @@ enum class Commands(
     override fun onlyPlayer(): Boolean = onlyPlayer
     override fun argsRange(): IntRange = argsRange
     override fun permissions(): IPermissions = permissions
+    override fun allowEmptyParam(): Boolean = allowEmptyParam
     override fun paramsSchemes(): Array<IParamScheme>? = paramSchemes
 
     override fun get(): String {

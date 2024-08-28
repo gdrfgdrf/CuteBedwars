@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
@@ -32,7 +33,7 @@ object CreateArea : SubCommand(
                 val request = pair.second
 
                 if (new) {
-                    message(CommonLanguage.DUPLICATE_AREA_NAME_WARNING)
+                    message(AreaManagementLanguage.DUPLICATE_AREA_NAME_WARNING)
                         .format(areaName, TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
                         .send()
                     return@localizationScope
@@ -40,13 +41,13 @@ object CreateArea : SubCommand(
             }
             requests.removeForAuto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
 
-            message(CommonLanguage.CREATING_AREA)
+            message(AreaManagementLanguage.CREATING_AREA)
                 .format(areaName)
                 .send()
 
             val areaManager = managers.createArea(areaName)
             if (managers.get(areaManager.area().id) != null) {
-                message(CommonLanguage.DUPLICATE_AREA_ID_ERROR)
+                message(AreaManagementLanguage.DUPLICATE_AREA_ID_ERROR)
                     .format(areaManager.area().id)
                     .send()
                 return@localizationScope
@@ -54,7 +55,7 @@ object CreateArea : SubCommand(
 
             managers.register(areaManager)
 
-            message(CommonLanguage.CREATE_AREA_FINISHED)
+            message(AreaManagementLanguage.CREATE_AREA_FINISHED)
                 .format(areaName, areaManager.area().id)
                 .send()
         }
