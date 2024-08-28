@@ -10,6 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
@@ -33,20 +34,38 @@ class AreaContext(
     constructor(areaManager: IAreaManager)
             : this(ArgumentSet(arrayOf(areaManager)))
 
+    override fun initialize() {
+        manager.area().games.forEach {
+            addGame(it, false)
+        }
+    }
+
     override fun manager(): IAreaManager = manager
 
     override fun createGame(name: String): IGameContext {
+        "Creating a game under an area, game's name: $name, area's name: ${manager.area().name}".logInfo()
+
         val game = Game()
         game.areaId = this.manager.area().id
         return GameContext(this, game)
     }
 
-    override fun addGame(game: Game) {
+    override fun addGame(game: Game, addToBean: Boolean) {
+        "Adding a game to an area, game's name: ${game.name}, area's name: ${manager.area().name}".logInfo()
+
         games.add(GameContext(this, game))
+        if (addToBean) {
+            manager.area().games.add(game)
+        }
     }
 
-    override fun addGame(gameContext: IGameContext) {
+    override fun addGame(gameContext: IGameContext, addToBean: Boolean) {
+        "Adding a game to an area, game's name: ${gameContext.game().name}, area's name: ${manager.area().name}".logInfo()
+
         games.add(gameContext)
+        if (addToBean) {
+            manager.area().games.add(gameContext.game())
+        }
     }
 
     override fun getGame(id: Long): IGameContext? {

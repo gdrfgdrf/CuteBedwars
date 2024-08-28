@@ -29,7 +29,7 @@ public class Game implements PropertyConvertible {
 
     private String name;
 
-    private Status status;
+    private Status status = Status.DISABLED;
 
     @PositiveNumber
     @JsonProperty(value = "min-player")

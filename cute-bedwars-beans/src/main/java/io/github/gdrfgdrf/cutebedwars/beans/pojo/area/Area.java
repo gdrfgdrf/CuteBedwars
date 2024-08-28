@@ -25,7 +25,7 @@ public class Area implements PropertyConvertible {
     @Undefinable
     @JsonProperty(value = "default-template-id")
     private Long defaultTemplateId;
-    private Status status;
+    private Status status = Status.DISABLED;
 
     @JsonProperty(value = "world-name")
     private String worldName;

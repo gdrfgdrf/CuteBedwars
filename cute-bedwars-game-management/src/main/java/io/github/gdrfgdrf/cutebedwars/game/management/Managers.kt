@@ -14,7 +14,7 @@ object Managers : IManagers {
 
     override fun register(areaManager: IAreaManager) {
         val area = areaManager.area()
-        "Registering an area id: ${area.id}, name: ${area.name}".logInfo()
+        "Registering an area, id: ${area.id}, name: ${area.name}".logInfo()
 
         val list = nameToAreaManager.computeIfAbsent(area.name) {
             ArrayList()
@@ -25,7 +25,7 @@ object Managers : IManagers {
 
     override fun unregister(areaManager: IAreaManager) {
         val area = areaManager.area()
-        "Unregistering an area id: ${area.id}, name: ${area.name}".logInfo()
+        "Unregistering an area, id: ${area.id}, name: ${area.name}".logInfo()
 
         nameToAreaManager.remove(area.name)
         idToAreaManager.remove(area.id)
@@ -51,7 +51,7 @@ object Managers : IManagers {
     }
 
     override fun createArea(name: String): IAreaManager {
-        "Creating an area name: $name".logInfo()
+        "Creating an area, name: $name".logInfo()
 
         val area = Area()
         area.name = name

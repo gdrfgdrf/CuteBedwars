@@ -53,7 +53,7 @@ object CreateGame : SubCommand(
             requests.removeForAuto(type = IRequestTypes.valueOf("CREATE_GAME"), sender = sender)
 
             message(AreaManagementLanguage.CREATING_GAME)
-                .format(gameName)
+                .format(areaName, gameName)
                 .send()
 
             val gameContext = areaContext.createGame(gameName)
