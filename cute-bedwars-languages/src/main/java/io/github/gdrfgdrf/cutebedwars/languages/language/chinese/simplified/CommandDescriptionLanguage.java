@@ -16,4 +16,5 @@ class CommandDescriptionLanguage implements LanguageBlock {
     public static final LanguageString MODIFY_AREA = new LanguageString("修改区域属性");
 
     public static final LanguageString CREATE_GAME = new LanguageString("在指定区域下创建一个游戏");
+    public static final LanguageString INFO_GAME = new LanguageString("查看游戏属性");
 }

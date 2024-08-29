@@ -107,6 +107,10 @@ class LocalizationMessage(
         return builder
     }
 
+    override fun toString(): String {
+        return replaceFormatSymbol("&", finalString)
+    }
+
     override fun send() {
         val message = LocalizationMessage(sender, CommonLanguage.PREFIX.get().string)
         send(message)

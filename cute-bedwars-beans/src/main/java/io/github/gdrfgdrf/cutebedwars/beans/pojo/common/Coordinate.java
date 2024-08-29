@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coordinate implements PropertyConvertible {
-    private float x;
-    private float y;
-    private float z;
+    private double x;
+    private double y;
+    private double z;
 
     @Override
     public Object convert(Class<?> targetType, Object obj) {
-        return Float.parseFloat(obj.toString());
+        return Double.parseDouble(obj.toString());
     }
 }

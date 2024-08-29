@@ -21,6 +21,8 @@ interface IAreaContext : ISetter {
     fun getGame(id: Long): IGameContext?
     fun getGame(name: String): List<IGameContext>
 
+    fun games(): List<IGameContext>
+
     fun validate(sender: CommandSender? = null)
 
     companion object {

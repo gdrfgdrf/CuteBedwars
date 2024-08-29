@@ -35,7 +35,6 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString COORDINATE_FULL;
 
     public static LanguageString REGION_ERROR;
-    public static LanguageString REGION_0;
     public static LanguageString REGION_1;
     public static LanguageString REGION_2;
     public static LanguageString REGION_3;

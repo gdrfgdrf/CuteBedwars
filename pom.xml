@@ -29,12 +29,19 @@
         <module>cute-bedwars-tasks</module>
         <module>cute-bedwars-chat-page</module>
         <module>cute-bedwars-finder</module>
+        <module>cute-bedwars-game-information</module>
     </modules>
 
     <repositories>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.io/repository/maven-public/</url>
+            <layout>default</layout>
         </repository>
     </repositories>
 
@@ -153,10 +160,23 @@
                 <artifactId>finder</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>game-information</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api-plugin</artifactId>
+            <version>2.13.1</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>io.github.gdrfgdrf.multimodulemediator</groupId>
             <artifactId>multi-module-mediator</artifactId>

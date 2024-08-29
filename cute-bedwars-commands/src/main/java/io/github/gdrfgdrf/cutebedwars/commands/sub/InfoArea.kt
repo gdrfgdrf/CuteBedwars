@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IAreaInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
@@ -73,55 +74,8 @@ object InfoArea : SubCommand(
                 return@get arrayListOf()
             }
             areaManagers.forEach { areaManager ->
-                val area = areaManager.area()
-
                 chatPage.addPage {
-                    val properties = getAeaProperties(area)
-                    val propertyMessages = arrayListOf<ILocalizationMessage>()
-                    val gameMessages = arrayListOf<ILocalizationMessage>()
-
-                    properties.forEach { (key, value) ->
-                        propertyMessages.add(
-                            message(AreaManagementLanguage.AREA_PROPERTY_FORMAT)
-                                .format(key, value)
-                        )
-                    }
-
-                    if (area.games.isNullOrEmpty()) {
-                        gameMessages.add(
-                            message(AreaManagementLanguage.AREA_GAMES_EMPTY)
-                        )
-                    } else {
-                        area.games.forEach {
-                            val statusMessage: LanguageString = when (it.status) {
-                                Status.DISABLED -> CommonLanguage.STATUS_DISABLED
-                                Status.EDITING -> CommonLanguage.STATUS_EDITING
-                                Status.ENABLED -> CommonLanguage.STATUS_ENABLED
-                                Status.INDEPENDENT -> CommonLanguage.STATUS_INDEPENDENT
-                                null -> CommonLanguage.STATUS_UNKNOWN
-                            }
-
-                            gameMessages.add(
-                                message(AreaManagementLanguage.AREA_GAMES_FORMAT)
-                                    .format(it.name, statusMessage.get().string)
-                            )
-                        }
-                    }
-
-                    val result = arrayListOf<ILocalizationMessage>(
-                        message(AreaManagementLanguage.AREA_ID_IS)
-                            .format(area.id),
-                        message(AreaManagementLanguage.AREA_NAME_IS)
-                            .format(area.name),
-                        message(AreaManagementLanguage.AREA_PROPERTY_IS),
-                    )
-                    result.addAll(propertyMessages)
-                    result.add(message(AreaManagementLanguage.AREA_GAMES_IS))
-                    result.addAll(gameMessages)
-
-                    result.add(message(CommonLanguage.DESCRIPTION_TIPS))
-
-                    result
+                    IAreaInformation.get().convert(sender, areaManager)
                 }
             }
             chatPage.send(pageIndex - 1)

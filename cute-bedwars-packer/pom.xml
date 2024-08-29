@@ -112,6 +112,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>finder</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>game-information</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

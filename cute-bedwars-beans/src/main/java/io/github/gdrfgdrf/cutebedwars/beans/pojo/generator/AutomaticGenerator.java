@@ -22,6 +22,8 @@ public class AutomaticGenerator {
     @JsonProperty(value = "operable-coordinates")
     private List<Coordinate> operableCoordinates;
 
+    @JsonProperty(value = "display-name")
+    private String displayName;
     @JsonProperty(value = "generate-coordinate")
     private Coordinate generateCoordinate;
 

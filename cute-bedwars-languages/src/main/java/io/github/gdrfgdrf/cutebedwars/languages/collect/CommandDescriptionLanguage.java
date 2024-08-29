@@ -16,4 +16,5 @@ public class CommandDescriptionLanguage implements LanguageCollect {
     public static LanguageString MODIFY_AREA;
 
     public static LanguageString CREATE_GAME;
+    public static LanguageString INFO_GAME;
 }

@@ -47,6 +47,7 @@ class AreaContext(
 
         val game = Game()
         game.areaId = this.manager.area().id
+        game.name = name
         return GameContext(this, game)
     }
 
@@ -84,6 +85,8 @@ class AreaContext(
             }
             .toList()
     }
+
+    override fun games(): List<IGameContext> = games
 
     override fun validate(sender: CommandSender?) {
         var success = true

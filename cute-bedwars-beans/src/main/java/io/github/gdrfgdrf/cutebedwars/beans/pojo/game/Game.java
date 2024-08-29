@@ -40,6 +40,7 @@ public class Game implements PropertyConvertible {
 
     private Region region;
 
+    @JsonProperty(value = "waiting-room")
     private WaitingRoom waitingRoom;
 
     @JsonProperty(value = "spectator-spawnpoint-coordinate")

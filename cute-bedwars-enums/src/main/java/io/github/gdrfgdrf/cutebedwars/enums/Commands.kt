@@ -79,6 +79,33 @@ enum class Commands(
                 add("GAME_NAME", "NOT_BLANK_STRING")
             }
         )
+    ),
+    INFO_GAME(
+        "info-game", false, 2..5, Permissions.INFO_GAME, false,
+        arrayOf(
+            IParamScheme.get {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+            },
+            IParamScheme.get {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            },
+            IParamScheme.get {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("GAME", "GAMES")
+            },
+            IParamScheme.get {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("GAME", "GAMES")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            }
+        )
     )
 
     ;

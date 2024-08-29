@@ -8,7 +8,8 @@ enum class PageRequestTypes(
     val cache: Boolean = true
 ) : IPageRequestTypes {
     DESCRIPTIONS,
-    INFO_AREA(false)
+    INFO_AREA(false),
+    INFO_GAME(false)
     ;
 
     override fun cache(): Boolean = cache

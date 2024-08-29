@@ -40,6 +40,31 @@ class AreaManagementLanguage implements LanguageBlock {
     public static final LanguageString CREATING_GAME = new LanguageString("&e正在区域 &l%s &r&e下创建游戏 &l%s");
     public static final LanguageString CREATE_GAME_FINISHED = new LanguageString("&a成功在区域 &e&l%s &r&a下创建游戏 &e&l%s");
 
+    public static final LanguageString NOT_FOUND_GAME_BY_ID = new LanguageString("&c无法在区域 &e&l%s &r&c下找到 area_id 为 &e&l%s &r&c的游戏");
+    public static final LanguageString NOT_FOUND_GAME_BY_NAME = new LanguageString("&c无法在区域 &e&l%s &r&c下找到名称为 &e&l%s &r&c的游戏");
+    public static final LanguageString GAME_ID_IS = new LanguageString("&a游戏 id&8: &e&l%s");
+    public static final LanguageString GAME_AREA_ID_IS = new LanguageString("&a对应的区域 id&8: &e&l%s");
+    public static final LanguageString GAME_NAME_IS = new LanguageString("&a游戏名&8: &e&l%s");
+    public static final LanguageString GAME_PROPERTY_IS = new LanguageString("&a以下为该游戏的属性");
+    public static final LanguageString GAME_PROPERTY_FORMAT = new LanguageString("&a&l%s&8&l: &r&e%s");
+    public static final LanguageString GAME_REGION_IS = new LanguageString("&a游戏范围&8: ");
+    public static final LanguageString GAME_WAITING_ROOM_IS = new LanguageString("&a等待室&8: ");
+    public static final LanguageString GAME_SECONDARY_GENERATORS_IS = new LanguageString("&a第二级别生成器&8: ");
+    public static final LanguageString GAME_TERTIARY_GENERATORS_IS = new LanguageString("&a第三级别生成器&8: ");
+    public static final LanguageString GAME_TEAMS_IS = new LanguageString("&a队伍&8: ");
+
+    public static final LanguageString GENERATOR_FORMAT = new LanguageString(" &8- &e&l%s &8(%s&8) &8(%s&8)");
+    public static final LanguageString GENERATOR_LEVEL_FORMAT = new LanguageString("%s -> ");
+    public static final LanguageString GENERATOR_LEVEL_FORMAT_END = new LanguageString("%s");
+
+    public static final LanguageString ITEM_FORMAT = new LanguageString("%s, ");
+    public static final LanguageString ITEM_FORMAT_END = new LanguageString("%s");
+
+    public static final LanguageString TEAM_FORMAT = new LanguageString(" &8- &l%s");
+
+    public static final LanguageString WAITING_ROOM_REGION_IS = new LanguageString(" &a范围&8: ");
+    public static final LanguageString WAITING_ROOM_SPAWNPOINT_COORDINATE = new LanguageString(" &a重生点&8: %s");
+
     public static final LanguageString NOT_FOUND_PROPERTY = new LanguageString("&c没有找到名为 &e&l%s &c的属性");
     public static final LanguageString PROPERTY_CANNOT_ACCESS = new LanguageString("&c无法访问名为 &e&l%s &c的属性，该错误不应该出现，请确认插件是否为最新版本");
     public static final LanguageString PROPERTY_IS_UNDEFINABLE = new LanguageString("&c属性 &e&l%s &c无法通过指令进行定义，需要使用其他手段");
@@ -49,4 +74,5 @@ class AreaManagementLanguage implements LanguageBlock {
 
     public static final LanguageString AREA_IS_EMPTY = new LanguageString("&c当前没有任何一个区域");
     public static final LanguageString DUPLICATE_AREA_NAME_ERROR = new LanguageString("&c存在多个名为 &e%s &c的区域，请使用 &earea_id &c进行索引");
+    public static final LanguageString DUPLICATE_GAME_NAME_ERROR = new LanguageString("&c在 &e&l%s &r&c区域下存在多个与 &e&l%s &r&c同名的区域，请使用 &egame_id &r&c进行索引");
 }

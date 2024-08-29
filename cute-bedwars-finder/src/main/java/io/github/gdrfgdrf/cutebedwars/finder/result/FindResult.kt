@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.finder
+package io.github.gdrfgdrf.cutebedwars.finder.result
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindStrategy
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IFindResult

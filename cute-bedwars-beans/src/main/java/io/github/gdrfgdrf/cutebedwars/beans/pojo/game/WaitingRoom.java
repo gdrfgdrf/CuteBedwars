@@ -14,10 +14,6 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WaitingRoom implements PropertyConvertible {
-    @Undefinable
-    @JsonProperty(value = "game-id")
-    private Long gameId;
-
     private Region region;
     @JsonProperty(value = "spawnpoint-coordinate")
     private Coordinate spawnpointCoordinate;

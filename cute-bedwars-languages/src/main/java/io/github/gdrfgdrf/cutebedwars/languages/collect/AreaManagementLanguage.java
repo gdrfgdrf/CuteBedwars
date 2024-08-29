@@ -40,6 +40,31 @@ public class AreaManagementLanguage implements LanguageCollect {
     public static LanguageString CREATING_GAME;
     public static LanguageString CREATE_GAME_FINISHED;
 
+    public static LanguageString NOT_FOUND_GAME_BY_ID;
+    public static LanguageString NOT_FOUND_GAME_BY_NAME;
+    public static LanguageString GAME_ID_IS;
+    public static LanguageString GAME_AREA_ID_IS;
+    public static LanguageString GAME_NAME_IS;
+    public static LanguageString GAME_PROPERTY_IS;
+    public static LanguageString GAME_PROPERTY_FORMAT;
+    public static LanguageString GAME_REGION_IS;
+    public static LanguageString GAME_WAITING_ROOM_IS;
+    public static LanguageString GAME_SECONDARY_GENERATORS_IS;
+    public static LanguageString GAME_TERTIARY_GENERATORS_IS;
+    public static LanguageString GAME_TEAMS_IS;
+
+    public static LanguageString GENERATOR_FORMAT;
+    public static LanguageString GENERATOR_LEVEL_FORMAT;
+    public static LanguageString GENERATOR_LEVEL_FORMAT_END;
+
+    public static LanguageString ITEM_FORMAT;
+    public static LanguageString ITEM_FORMAT_END;
+
+    public static LanguageString TEAM_FORMAT;
+
+    public static LanguageString WAITING_ROOM_REGION_IS;
+    public static LanguageString WAITING_ROOM_SPAWNPOINT_COORDINATE;
+
     public static LanguageString NOT_FOUND_PROPERTY;
     public static LanguageString PROPERTY_CANNOT_ACCESS;
     public static LanguageString PROPERTY_IS_UNDEFINABLE;
@@ -49,4 +74,5 @@ public class AreaManagementLanguage implements LanguageCollect {
 
     public static LanguageString AREA_IS_EMPTY;
     public static LanguageString DUPLICATE_AREA_NAME_ERROR;
+    public static LanguageString DUPLICATE_GAME_NAME_ERROR;
 }
