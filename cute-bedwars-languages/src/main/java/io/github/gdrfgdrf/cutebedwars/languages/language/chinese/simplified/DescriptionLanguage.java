@@ -16,7 +16,7 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString DATABASE_USERNAME = new LanguageString("访问数据库所需的用户名，默认值为空，若数据库没有用户名则无需填写");
     public static final LanguageString DATABASE_PASSWORD = new LanguageString("访问数据库所需的密码，默认值为空，若数据库没有密码则无需填写");
     public static final LanguageString REQUEST_TIMEOUT = new LanguageString("请求超时时间，有些时候执行某个操作需要二次确认，需要在请求超时时间内进行确认，否则请求失效。默认值为 10000，单位为毫秒");
-    public static final LanguageString AREA_AUTO_SAVE_DELAY = new LanguageString("每个区域自动保存的延迟，该值仅对正在编辑中的区域有效。默认值为 300000，即五分钟，单位为毫秒");
+//    public static final LanguageString AREA_AUTO_SAVE_DELAY = new LanguageString("每个区域自动保存的延迟，该值仅对正在编辑中的区域有效。默认值为 300000，即五分钟，单位为毫秒");
 
     public static final LanguageString AREA = new LanguageString("区域，一个区域下可以有多个游戏，所有游戏都使用同一个地图");
     public static final LanguageString AREA_ID = new LanguageString("区域 ID，不可重复，不可自定义，由程序进行生成，并作为唯一 ID 使用。该值对于玩家的作用和区域名称相同，但若有区域重名，则需使用该值进行索引");
@@ -24,7 +24,8 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString AREA_DEFAULT_TEMPLATE_ID = new LanguageString("区域的默认模板，当区域完成时将自动创建一个模板并应用到该值，也可手动修改该值。模板被成功应用到该值后，以后在该区域创建的游戏都会是模板内的游戏的副本");
     public static final LanguageString AREA_STATUS = new LanguageString("区域的状态。" +
             "当值为 DISABLED (已禁用) 时，玩家不可进入该区域下的任何游戏，即使游戏已的状态为 ENABLED (已启用)，" +
-            "当值为 EDITING (编辑中) 时，表明该区域下有游戏正在被编辑，自动保存将会对该区域启用，玩家可以仅可以进入状态为 ENABLED (已启用) 的游戏，" +
+//            "当值为 EDITING (编辑中) 时，表明该区域下有游戏正在被编辑，自动保存将会对该区域启用，玩家可以仅可以进入状态为 ENABLED (已启用) 的游戏，" +
+            "当值为 EDITING (编辑中) 时，表明该区域下有游戏正在被编辑，玩家可以仅可以进入状态为 ENABLED (已启用) 的游戏，" +
             "当值为 ENABLED (已启用) 时，表明该区域下的游戏可以被进入，并且不可编辑。" +
             "当值不是以上三者时，将会被直接切换到 DISABLED (已禁用)");
     public static final LanguageString AREA_WORLD_NAME = new LanguageString("区域地图名，该区域下的所有游戏都将使用该地图");

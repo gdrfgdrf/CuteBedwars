@@ -117,6 +117,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>game-information</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>game-editing</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -30,6 +30,7 @@
         <module>cute-bedwars-chat-page</module>
         <module>cute-bedwars-finder</module>
         <module>cute-bedwars-game-information</module>
+        <module>cute-bedwars-game-editing</module>
     </modules>
 
     <repositories>
@@ -164,6 +165,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
                 <artifactId>game-information</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>game-editing</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
