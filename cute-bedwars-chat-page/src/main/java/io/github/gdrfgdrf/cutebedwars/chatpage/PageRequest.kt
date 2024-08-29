@@ -18,7 +18,7 @@ class PageRequest(
         if (uuid == "not_a_player") {
             return Bukkit.getConsoleSender()
         }
-        return Bukkit.getPlayer(uuid)
+        return Bukkit.getPlayer(UUID.fromString(uuid))
     }
 
     override fun equals(other: Any?): Boolean {

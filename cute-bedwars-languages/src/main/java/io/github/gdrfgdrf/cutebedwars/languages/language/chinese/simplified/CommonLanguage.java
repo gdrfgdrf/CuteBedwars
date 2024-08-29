@@ -32,10 +32,10 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString STATUS_ENABLED = new LanguageString("&a已启用");
     public static final LanguageString STATUS_INDEPENDENT = new LanguageString("&6独立的");
 
-    public static final LanguageString COORDINATE_FULL = new LanguageString("&9[&e%d&8, &e%d&8, &e%d&9]");
+    public static final LanguageString COORDINATE_FULL = new LanguageString("&9&l[&e&l%s&8&l, &e&l%s&8&l, &e&l%s&9&l]&r");
 
     public static final LanguageString REGION_ERROR = new LanguageString("错误的范围表达，两点坐标的 X, Y, Z 不能有一个相同，即范围大小至少为 2x2x2");
-    public static final LanguageString REGION_1 = new LanguageString("     %s\n" +
+    public static final LanguageString REGION_1 = new LanguageString("\n     %s\n" +
             "     ↑\n" +
             "     *---------------------*\n" +
             "    /|*                   /|\n" +
@@ -55,7 +55,7 @@ class CommonLanguage implements LanguageBlock {
             "*---------------------*\n" +
             "                      ↓\n" +
             "                      %s");
-    public static final LanguageString REGION_2 = new LanguageString("                           %s\n" +
+    public static final LanguageString REGION_2 = new LanguageString("\n                           %s\n" +
             "                           ↑\n" +
             "     *---------------------*\n" +
             "    /|                   */|\n" +
@@ -75,7 +75,7 @@ class CommonLanguage implements LanguageBlock {
             "*---------------------*\n" +
             "↓\n" +
             "%s");
-    public static final LanguageString REGION_3 = new LanguageString("         *---------------------*\n" +
+    public static final LanguageString REGION_3 = new LanguageString("\n         *---------------------*\n" +
             "        /|                    /|\n" +
             "       / |                   / |\n" +
             "      /  |                  /  |\n" +
@@ -91,7 +91,7 @@ class CommonLanguage implements LanguageBlock {
             "    | /                   | /\n" +
             "    |/                    |/\n" +
             "    *---------------------*");
-    public static final LanguageString REGION_4 = new LanguageString("            *---------------------*\n" +
+    public static final LanguageString REGION_4 = new LanguageString("\n            *---------------------*\n" +
             "           /|                    /|\n" +
             "          / |                   / |\n" +
             "         /  |                  /  |\n" +
