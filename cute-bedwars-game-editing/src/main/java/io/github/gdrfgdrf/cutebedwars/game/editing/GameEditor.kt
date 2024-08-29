@@ -14,6 +14,7 @@ class GameEditor(val uuid: String, val gameContext: IGameContext) {
         commits.forEach {
             it.apply(gameContext)
         }
+        commits.clear()
     }
 
     fun exit(apply: Boolean = true) {
