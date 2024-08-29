@@ -8,6 +8,10 @@ import java.util.concurrent.ConcurrentHashMap
 object Editors {
     private val map = ConcurrentHashMap<String, GameEditor>()
 
+    fun get(uuid: String): GameEditor? {
+        return map[uuid]
+    }
+
     fun create(uuid: String, gameContext: IGameContext): GameEditor {
         if (map.containsKey(uuid)) {
             throw AlreadyInEditingModeException()
