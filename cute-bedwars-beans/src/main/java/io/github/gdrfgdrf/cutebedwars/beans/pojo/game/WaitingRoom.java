@@ -18,15 +18,16 @@ public class WaitingRoom implements PropertyConvertible {
     @JsonProperty(value = "spawnpoint-coordinate")
     private Coordinate spawnpointCoordinate;
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
+    public <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == Region.class) {
             Region region = new Region();
-            return region.convert(targetType, obj);
+            return (T) region.convert(targetType, obj);
         }
         if (targetType == Coordinate.class) {
             Coordinate coordinate = new Coordinate();
-            return coordinate.convert(targetType, obj);
+            return (T) coordinate.convert(targetType, obj);
         }
         return null;
     }

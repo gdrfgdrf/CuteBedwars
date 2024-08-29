@@ -56,27 +56,28 @@ public class Game implements PropertyConvertible {
     @Undefinable
     private List<Team> teams = new ArrayList<>();
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
+    public <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
-            return obj.toString();
+            return (T) obj.toString();
         }
         if (targetType == Status.class) {
-            return Status.valueOf(obj.toString());
+            return (T)  Status.valueOf(obj.toString());
         }
         if (targetType == boolean.class || targetType == Boolean.class) {
-            return Boolean.parseBoolean(obj.toString());
+            return (T) Boolean.valueOf(Boolean.parseBoolean(obj.toString()));
         }
         if (targetType == int.class || targetType == Integer.class) {
-            return Integer.parseInt(obj.toString());
+            return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
         }
         if (targetType == Region.class) {
             Region region = new Region();
-            return region.convert(targetType, obj);
+            return (T) region.convert(targetType, obj);
         }
         if (targetType == WaitingRoom.class) {
             WaitingRoom waitingRoom = new WaitingRoom();
-            return waitingRoom.convert(targetType, obj);
+            return (T) waitingRoom.convert(targetType, obj);
         }
         return null;
     }

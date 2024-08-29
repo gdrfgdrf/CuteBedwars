@@ -16,14 +16,14 @@ public class Region implements PropertyConvertible {
     @JsonProperty(value = "second-coordinate")
     private Coordinate secondCoordinate;
 
-
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
+    public <T> T convert(Class<?> targetType, Object obj) {
         String[] split = obj.toString().split(" ");
         Coordinate coordinate = new Coordinate();
         for (String s : split) {
             coordinate.convert(float.class, s);
         }
-        return coordinate;
+        return (T) coordinate;
     }
 }

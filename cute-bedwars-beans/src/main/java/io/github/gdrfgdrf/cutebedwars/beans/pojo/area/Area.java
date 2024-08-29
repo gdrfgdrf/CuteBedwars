@@ -39,13 +39,14 @@ public class Area implements PropertyConvertible {
     @Undefinable
     private List<Game> games = new ArrayList<>();
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
+    public <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
-            return obj.toString();
+            return (T) obj.toString();
         }
         if (targetType == Status.class) {
-            return Status.valueOf(obj.toString());
+            return (T) Status.valueOf(obj.toString());
         }
         if (targetType == Coordinate.class) {
             Coordinate coordinate = new Coordinate();

@@ -12,7 +12,7 @@ object Editors {
         if (map.containsKey(uuid)) {
             throw AlreadyInEditingModeException()
         }
-        return GameEditor(gameContext)
+        return GameEditor(uuid, gameContext)
     }
 
     fun remove(uuid: String) {

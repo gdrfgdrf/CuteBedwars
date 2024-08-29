@@ -14,8 +14,9 @@ public class Coordinate implements PropertyConvertible {
     private double y;
     private double z;
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
-        return Double.parseDouble(obj.toString());
+    public <T> T convert(Class<?> targetType, Object obj) {
+        return (T) Double.valueOf(Double.parseDouble(obj.toString()));
     }
 }

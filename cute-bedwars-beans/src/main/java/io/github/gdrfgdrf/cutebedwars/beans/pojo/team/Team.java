@@ -52,21 +52,22 @@ public class Team implements PropertyConvertible {
     @Undefinable
     private Generator generator;
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
+    public <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
-            return obj.toString();
+            return (T) obj.toString();
         }
         if (targetType == int.class || targetType == Integer.class) {
-            return Integer.parseInt(obj.toString());
+            return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
         }
         if (targetType == Region.class) {
             Region region = new Region();
-            return region.convert(Coordinate.class, obj);
+            return (T) region.convert(Coordinate.class, obj);
         }
         if (targetType == Coordinate.class) {
             Coordinate coordinate = new Coordinate();
-            return coordinate.convert(float.class, obj);
+            return (T) coordinate.convert(float.class, obj);
         }
         return null;
     }
