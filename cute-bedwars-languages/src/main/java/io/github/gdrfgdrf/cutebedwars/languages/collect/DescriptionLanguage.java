@@ -105,6 +105,8 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString TEMPLATE_NAME;
     public static LanguageString TEMPLATE_PROPERTY;
 
+    public static LanguageString APPLY_CHANGES;
+
     public static LanguageString FIND_BY_ID_OR_NAME;
     public static LanguageString BY_ID;
     public static LanguageString BY_NAME;

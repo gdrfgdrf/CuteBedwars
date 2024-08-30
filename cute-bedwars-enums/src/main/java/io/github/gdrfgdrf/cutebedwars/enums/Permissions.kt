@@ -21,10 +21,13 @@ enum class Permissions(
 
     CREATE_AREA(PermissionGroups.ADMIN, "create.area"),
     INFO_AREA(PermissionGroups.ADMIN, "info.area"),
-    MODIFY_AREA(PermissionGroups.ADMIN, "modify.area"),
+    EDIT_AREA(PermissionGroups.ADMIN, "edit.area"),
+//    MODIFY_AREA(PermissionGroups.ADMIN, "modify.area"),
 
     CREATE_GAME(PermissionGroups.ADMIN, "create.game"),
     INFO_GAME(PermissionGroups.ADMIN, "info.game"),
+
+    EDIT_GAME(PermissionGroups.ADMIN, "edit.game"),
 
 
     RECEIVE_NOTIFICATION(PermissionGroups.USER, "receive.notification"),

@@ -1,12 +1,9 @@
-package io.github.gdrfgdrf.cutebedwars.commands.sub
+package io.github.gdrfgdrf.cutebedwars.commands
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindStrategy
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
-import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
-import io.github.gdrfgdrf.cutebedwars.commands.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -17,8 +14,11 @@ import org.bukkit.command.CommandSender
 object ModifyArea : SubCommand(
     command = ICommands.valueOf("MODIFY_AREA")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.MODIFY_AREA
-    override fun description(): LanguageString? = CommandDescriptionLanguage.MODIFY_AREA
+    override fun syntax(): LanguageString? = null
+    override fun description(): LanguageString? = null
+
+//    override fun syntax(): LanguageString? = CommandSyntaxLanguage.MODIFY_AREA
+//    override fun description(): LanguageString? = CommandDescriptionLanguage.MODIFY_AREA
 
     override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
         localizationScope(sender) {

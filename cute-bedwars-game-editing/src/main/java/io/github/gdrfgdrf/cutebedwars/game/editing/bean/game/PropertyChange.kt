@@ -1,21 +1,30 @@
-package io.github.gdrfgdrf.cutebedwars.game.editing.pojo
+package io.github.gdrfgdrf.cutebedwars.game.editing.bean.game
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
-import io.github.gdrfgdrf.cutebedwars.game.editing.base.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 
-class PropertyChange(private val key: String, private val value: Any?, name: String = "change $key to $value") :
-    AbstractChange(name) {
+class PropertyChange(
+    private val key: String,
+    private val value: Any?,
+    name: String = "change $key to $value"
+) : AbstractChange<IGameContext>(name) {
     private var previousValue: Any? = null
 
-    override fun apply(gameContext: IGameContext) {
-        if (key != "status" && key != "min-player" && key != "max-player" && key != "spectator-spawnpoint-coordinate") {
+    override fun apply(t: IGameContext) {
+        if (key != "status" &&
+            key != "min-player" &&
+            key != "max-player" &&
+            key != "spectator-spawnpoint-coordinate") {
             throw ApplyException("property change applies only to keys \"status\", \"min-player\", \"max-player\", \"spectator-spawnpoint-coordinate\"")
         }
 
-        val game = gameContext.game()
+        "Applying $key: $value to game, game's id: ${t.game().id}, area's id: ${t.game().areaId}".logInfo()
+
+        val game = t.game()
         when (key) {
             "status" -> game.status = game.convert(Status::class.java, value)
             "min-player" -> game.minPlayer = game.convert(java.lang.Integer::class.java, value)
@@ -25,7 +34,7 @@ class PropertyChange(private val key: String, private val value: Any?, name: Str
         }
     }
 
-    override fun makeUndo(): AbstractChange {
+    override fun makeUndo(): AbstractChange<IGameContext> {
         val propertyChange = PropertyChange(key, previousValue, "change back $key from $value to $previousValue")
         propertyChange.previousValue = value
         return propertyChange

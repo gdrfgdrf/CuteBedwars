@@ -2,13 +2,11 @@ package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IGameInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
-import io.github.gdrfgdrf.cutebedwars.commands.BetterAreaFinder
-import io.github.gdrfgdrf.cutebedwars.commands.BetterGameFinder
+import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
+import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage

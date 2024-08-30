@@ -58,14 +58,12 @@ enum class Commands(
             }
         )
     ),
-    MODIFY_AREA(
-        "modify-area", false, 4..4, Permissions.MODIFY_AREA, false,
+    EDIT_AREA(
+        "edit-area", false, 0..2, Permissions.EDIT_AREA, false,
         arrayOf(
             IParamScheme.get {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
-                add("AREA_PROPERTY", "NOT_BLANK_STRING")
-                add("VALUE", "VALUE")
             }
         )
     ),

@@ -110,6 +110,8 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString TEMPLATE_NAME = new LanguageString("模板名称，可重复，但不建议重复。若区域要应用模板，可使用该值进行应用，但若该值于其他模板有重复，则需要使用模板 ID 进行应用");
     public static final LanguageString TEMPLATE_PROPERTY = new LanguageString("模板属性");
 
+    public static final LanguageString APPLY_CHANGES = new LanguageString("应用修改，true 则应用，false 则不应用，其他值无效");
+
     public static final LanguageString FIND_BY_ID_OR_NAME = new LanguageString("通过 id 或名称来查找，值为 by-id 或 by-name");
     public static final LanguageString BY_ID = new LanguageString("通过 id 进行查找，值为 by-id");
     public static final LanguageString BY_NAME = new LanguageString("通过名称来查找，值为 by-name");

@@ -1,14 +1,14 @@
-package io.github.gdrfgdrf.cutebedwars.game.editing.pojo
+package io.github.gdrfgdrf.cutebedwars.game.editing.bean
 
 import com.github.yitter.idgen.YitIdHelper
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
-import io.github.gdrfgdrf.cutebedwars.game.editing.bean.Changes
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.OperableChangesException
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.utils.extension.now
 
-class Commit(
-    val changes: Changes
-) {
+class Commit<T>(
+    val changes: Changes<T>
+) : ICommit<T> {
     init {
         if (changes.operable) {
             throw OperableChangesException()
@@ -20,12 +20,14 @@ class Commit(
     var playerUuid: String? = null
     var message: String? = null
 
-    fun apply(gameContext: IGameContext) {
-        changes.apply(gameContext)
+    override fun apply(t: T) {
+        changes.apply(t)
     }
 
-    fun revert(playerUuid: String): Commit {
-        val newChanges = Changes()
+    override fun revert(playerUuid: String): ICommit<T> {
+        "Reverting commit id: $id".logInfo()
+
+        val newChanges = Changes<T>()
         changes.changes.forEach {
             newChanges.add(it.makeUndo())
         }
