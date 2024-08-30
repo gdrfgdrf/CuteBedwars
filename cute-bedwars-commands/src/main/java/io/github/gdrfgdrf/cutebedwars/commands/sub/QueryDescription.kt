@@ -61,16 +61,20 @@ object QueryDescription : SubCommand(
             }
 
             val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("DESCRIPTIONS"), raw) {
-                searchResult.stream().map {
-                    val languageString = it.value()()
-                    if (languageString == null) {
-                        message(CommonLanguage.DESCRIPTION_ERROR)
-                            .format(it.name_())
-                    } else {
-                        message(CommonLanguage.DESCRIPTION_FORMAT)
-                            .format(it.name_(), languageString.get().string)
-                    }
-                }.toList()
+                searchResult.stream()
+                    .filter {
+                        return@filter !(it.administration()
+                                && !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
+                    }.map {
+                        val languageString = it.value()()
+                        if (languageString == null) {
+                            message(CommonLanguage.DESCRIPTION_ERROR)
+                                .format(it.name_())
+                        } else {
+                            message(CommonLanguage.DESCRIPTION_FORMAT)
+                                .format(it.name_(), languageString.get().string)
+                        }
+                    }.toList()
             }
             chatPage.send(pageIndex - 1)
         }
