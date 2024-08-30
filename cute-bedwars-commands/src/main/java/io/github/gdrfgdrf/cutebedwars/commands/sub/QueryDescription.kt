@@ -91,20 +91,4 @@ object QueryDescription : SubCommand(
 
         return result
     }
-
-    override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
-        val result = arrayListOf<String>()
-
-        IDescriptions.values().forEach {
-            if ((it as IDescriptions).administration()) {
-                if (IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender)) {
-                    result.add(it.name_().lowercase())
-                }
-            } else {
-                result.add(it.name_().lowercase())
-            }
-        }
-
-        return result
-    }
 }
