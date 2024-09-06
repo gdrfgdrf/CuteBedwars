@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
@@ -14,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
 
 object RootCommand : TabExecutor {
+    @Suppress("UNCHECKED_CAST")
     override fun onCommand(
         sender: CommandSender,
         command: Command,
@@ -29,10 +31,62 @@ object RootCommand : TabExecutor {
             execute(sender, args, helpCommand)
             return true
         }
+        var subCommand: SubCommand? = null
+        val params = arrayListOf<String>()
 
-        val subCommand = SubCommandManager.get(args[0])
+        if (!args.contains("args")) {
+            val nodeString = if (args.size == 1) {
+                "cbw"
+            } else {
+                args[args.size - 2]
+            }
+            val commandPart = args[args.size - 1]
+
+            val node = ICommandNodes.find(nodeString)
+            if (node != null) {
+                params.add(commandPart)
+                subCommand = SubCommandManager.get(commandPart, node)
+
+                if (subCommand == null) {
+                    subCommand = SubCommandManager.get(commandPart, ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT"))
+                }
+            }
+        } else {
+            val argsSplitIndex = args.indexOf("args")
+            if (argsSplitIndex < args.size - 1) {
+                val nodePart = arrayOfNulls<String>(argsSplitIndex)
+                val paramPart = arrayOfNulls<String>(args.size - argsSplitIndex - 1)
+
+                System.arraycopy(args, 0, nodePart, 0, argsSplitIndex)
+                System.arraycopy(args, argsSplitIndex + 1, paramPart, 0, args.size - argsSplitIndex - 1)
+
+
+                val nodeString = if (nodePart.size == 1) {
+                    "cbw"
+                } else {
+                    nodePart[nodePart.size - 2]!!
+                }
+
+                val node = ICommandNodes.find(nodeString)
+                val commandPart = nodePart[nodePart.size - 1]!!
+
+                if (node != null) {
+                    params.add("args")
+                    params.addAll(paramPart as Array<String>)
+                    subCommand = SubCommandManager.get(commandPart, node)
+
+                    if (subCommand == null) {
+                        subCommand = SubCommandManager.get(commandPart, ICommandNodes.valueOf("ARGS"))
+                    }
+                    if (subCommand == null) {
+                        subCommand = SubCommandManager.get(commandPart, ICommandNodes.valueOf("ALLOW_NO_ARGS"))
+                    }
+                }
+            }
+        }
+
         if (subCommand != null) {
-            execute(sender, args, subCommand)
+            execute(sender, params.toTypedArray(), subCommand)
             return true
         }
 
@@ -52,6 +106,7 @@ object RootCommand : TabExecutor {
                         subCommand.run(sender, args, ParamScheme.NO_MATCH)
                         return@localizationScope
                     }
+
                     val argsRange = subCommand.command.argsRange()
                     val newArray = arrayOfNulls<String>(args.size - 1)
                     System.arraycopy(args, 1, newArray, 0, args.size - 1)

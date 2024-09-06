@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
@@ -8,17 +9,18 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 @EnumServiceImpl("commands_enum")
 enum class Commands(
     val string: String,
-    val onlyPlayer: Boolean = true,
-    val argsRange: IntRange,
-    val permissions: Permissions,
-    val allowEmptyParam: Boolean,
-    val paramSchemes: Array<IParamScheme>? = null,
+    private val onlyPlayer: Boolean = true,
+    private val argsRange: IntRange,
+    private val permissions: Permissions,
+    private val allowEmptyParam: Boolean,
+    private val node: CommandNodes = CommandNodes.ROOT,
+    private val paramSchemes: Array<IParamScheme>? = null,
 ) : ICommands {
     ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT, true),
     HELP("help", false, 0..0, Permissions.HELP, true),
     RELOAD("reload", false, 0..0, Permissions.RELOAD, true),
     QUERY_DESCRIPTION(
-        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true,
+        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true, CommandNodes.ALLOW_NO_ARGS_ON_ROOT,
         arrayOf(
             IParamScheme.get {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
@@ -34,7 +36,7 @@ enum class Commands(
     ),
 
     CREATE_AREA(
-        "create-area", false, 1..1, Permissions.CREATE_AREA, false,
+        "area", false, 1..1, Permissions.CREATE_AREA, false, CommandNodes.CREATE,
         arrayOf(
             IParamScheme.get {
                 add("AREA_NAME", "NOT_BLANK_STRING")
@@ -42,7 +44,7 @@ enum class Commands(
         )
     ),
     INFO_AREA(
-        "info-area", false, 0..3, Permissions.INFO_AREA, true,
+        "area", false, 0..3, Permissions.INFO_AREA, true, CommandNodes.INFO,
         arrayOf(
             IParamScheme.get {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
@@ -59,7 +61,7 @@ enum class Commands(
         )
     ),
     EDIT_AREA(
-        "edit-area", false, 0..2, Permissions.EDIT_AREA, false,
+        "area", false, 0..2, Permissions.EDIT_AREA, false, CommandNodes.EDIT,
         arrayOf(
             IParamScheme.get {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
@@ -69,7 +71,7 @@ enum class Commands(
     ),
 
     CREATE_GAME(
-        "create-game", false, 3..3, Permissions.CREATE_GAME, false,
+        "game", false, 3..3, Permissions.CREATE_GAME, false, CommandNodes.CREATE,
         arrayOf(
             IParamScheme.get {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
@@ -79,7 +81,7 @@ enum class Commands(
         )
     ),
     INFO_GAME(
-        "info-game", false, 2..5, Permissions.INFO_GAME, false,
+        "game", false, 2..5, Permissions.INFO_GAME, false, CommandNodes.INFO,
         arrayOf(
             IParamScheme.get {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
@@ -114,16 +116,19 @@ enum class Commands(
     override fun argsRange(): IntRange = argsRange
     override fun permissions(): IPermissions = permissions
     override fun allowEmptyParam(): Boolean = allowEmptyParam
+    override fun node(): ICommandNodes = node
     override fun paramsSchemes(): Array<IParamScheme>? = paramSchemes
 
     override fun get(): String {
         if (this == ROOT) {
             return "/cbw"
         }
+        val part = node.get(string)
+
         if (paramSchemes.isNullOrEmpty()) {
-            return "${ROOT.get()} $string"
+            return part
         }
-        return "${ROOT.get()} $string ${getWithParams()}"
+        return "$part ${getWithParams()}"
     }
 
     private fun getWithParams(): String {

@@ -11,23 +11,42 @@ interface ICommands {
     fun onlyPlayer(): Boolean
     fun argsRange(): IntRange
     fun permissions(): IPermissions
-    fun paramsSchemes(): Array<IParamScheme>?
     fun allowEmptyParam(): Boolean
+    fun node(): ICommandNodes
+    fun paramsSchemes(): Array<IParamScheme>?
     fun get(): String
 
     companion object {
         fun valueOf(name: String): ICommands = Mediator.valueOf(ICommands::class.java, name)!!
         fun values(): Array<*> = Mediator.values(ICommands::class.java)!!
 
-        private val map = HashMap<String, ICommands>()
+        private val map = HashMap<String, MutableList<ICommands>>()
 
-        fun find(command: String): ICommands? {
+        fun find(string: String, node: ICommandNodes): ICommands? {
             if (map.isEmpty()) {
-                values().forEach {
-                    map[(it as ICommands).string()] = it
+                synchronized(map) {
+                    values().forEach {
+                        val list = map.computeIfAbsent((it as ICommands).string()) {
+                            ArrayList()
+                        }
+                        list.add(it)
+                    }
                 }
             }
-            return map[command]
+            map[string]?.let { list ->
+                val command = list.stream()
+                    .filter { commands ->
+                        commands.node() == node
+                    }
+                    .findAny()
+                    .orElse(null)
+
+                if (command != null) {
+                    return command
+                }
+            }
+
+            return null
         }
     }
 }

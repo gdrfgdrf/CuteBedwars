@@ -12,8 +12,9 @@ import lombok.Data;
 public class Item implements PropertyConvertible {
     private String nbt;
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object convert(Class<?> targetType, Object obj) {
-        return obj.toString();
+    public <T> T convert(Class<?> targetType, Object obj) {
+        return (T) obj.toString();
     }
 }

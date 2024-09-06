@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.manager
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
@@ -34,8 +35,8 @@ object SubCommandManager : ISubCommandManager {
         map[subCommand.command] = subCommand
     }
 
-    fun get(command: String): SubCommand? {
-        val commands = ICommands.find(command) ?: return null
+    fun get(command: String, node: ICommandNodes = ICommandNodes.valueOf("ROOT")): SubCommand? {
+        val commands = ICommands.find(command, node) ?: return null
         return map[commands]
     }
 
