@@ -6,18 +6,21 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 @EnumServiceImpl("command_nodes_enum")
 enum class CommandNodes(
     val string: String,
+    private val displayOnRootTab: Boolean,
     private val parent: CommandNodes? = null
 ) : ICommandNodes {
-    ROOT("cbw"),
-    ALLOW_NO_ARGS_ON_ROOT("", ROOT),
-    ARGS("args", ROOT),
+    ROOT("cbw", false),
+    ALLOW_NO_ARGS_ON_ROOT("", false, ROOT),
+    ARGS("args", false, ROOT),
 
-    CREATE("create", ARGS),
-    INFO("info", ARGS),
-    EDIT("edit", ARGS);
+    CREATE("create", true, ARGS),
+    INFO("info", true, ARGS),
+    EDIT("edit", true, ARGS);
 
     override fun string(): String = string
+    override fun displayOnRootTab(): Boolean = displayOnRootTab
     override fun parent(): ICommandNodes? = parent
+
     override fun get(command: String): String {
         if (this == ROOT) {
             return "/${ROOT.string} $command"

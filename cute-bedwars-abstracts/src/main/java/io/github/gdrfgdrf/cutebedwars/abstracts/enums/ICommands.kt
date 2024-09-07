@@ -22,16 +22,19 @@ interface ICommands {
 
         private val map = HashMap<String, MutableList<ICommands>>()
 
+        @Synchronized
+        private fun initMap() {
+            values().forEach {
+                val list = map.computeIfAbsent((it as ICommands).string()) {
+                    ArrayList()
+                }
+                list.add(it)
+            }
+        }
+
         fun find(string: String, node: ICommandNodes): ICommands? {
             if (map.isEmpty()) {
-                synchronized(map) {
-                    values().forEach {
-                        val list = map.computeIfAbsent((it as ICommands).string()) {
-                            ArrayList()
-                        }
-                        list.add(it)
-                    }
-                }
+                initMap()
             }
             map[string]?.let { list ->
                 val command = list.stream()
@@ -47,6 +50,41 @@ interface ICommands {
             }
 
             return null
+        }
+
+        fun allDisplayOnRootTab(): List<ICommands> {
+            if (map.isEmpty()) {
+                initMap()
+            }
+            return map.keys.stream()
+                .map {
+                    map[it]!!
+                }
+                .flatMap {
+                    it.stream()
+                }
+                .filter {
+                    return@filter it.node() == ICommandNodes.valueOf("ROOT") ||
+                            it.node() == ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT")
+                }
+                .toList()
+        }
+
+        fun getChild(parent: ICommandNodes): List<ICommands> {
+            if (map.isEmpty()) {
+                initMap()
+            }
+            return map.keys.stream()
+                .map {
+                    map[it]!!
+                }
+                .flatMap {
+                    it.stream()
+                }
+                .filter {
+                    return@filter it.node() == parent
+                }
+                .toList()
         }
     }
 }

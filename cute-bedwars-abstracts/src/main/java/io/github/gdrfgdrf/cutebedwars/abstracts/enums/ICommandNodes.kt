@@ -6,6 +6,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 @EnumService("command_nodes_enum")
 interface ICommandNodes {
     fun string(): String
+    fun displayOnRootTab(): Boolean
     fun parent(): ICommandNodes?
     fun get(command: String): String
 
@@ -15,15 +16,46 @@ interface ICommandNodes {
 
         private val map = HashMap<String, ICommandNodes>()
 
+        @Synchronized
+        private fun initMap() {
+            values().forEach {
+                map[(it as ICommandNodes).string()] = it
+            }
+        }
+
         fun find(command: String): ICommandNodes? {
             if (map.isEmpty()) {
-                synchronized(map) {
-                    values().forEach {
-                        map[(it as ICommandNodes).string()] = it
-                    }
-                }
+                initMap()
             }
             return map[command]
+        }
+
+        fun allDisplayOnRootTab(): List<ICommandNodes> {
+            if (map.isEmpty()) {
+                initMap()
+            }
+            return map.keys.stream()
+                .map {
+                    map[it]!!
+                }
+                .filter {
+                    return@filter it.displayOnRootTab()
+                }
+                .toList()
+        }
+
+        fun getChild(parent: ICommandNodes): List<ICommandNodes> {
+            if (map.isEmpty()) {
+                initMap()
+            }
+            return map.keys.stream()
+                .map {
+                    map[it]!!
+                }
+                .filter {
+                    return@filter it.parent() == parent
+                }
+                .toList()
         }
     }
 }
