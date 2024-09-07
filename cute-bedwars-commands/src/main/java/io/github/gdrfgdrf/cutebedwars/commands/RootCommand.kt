@@ -182,62 +182,6 @@ object RootCommand : TabExecutor {
                 }
 
                 return result
-
-
-//                val pair = SubCommandManager.search { _, subCommand ->
-//                    return@search subCommand.command.string().equals(args[0], true) && subCommand.hasPermission(sender)
-//                } ?: return arrayListOf()
-//
-//                val newArray = arrayOfNulls<String>(args.size - 1)
-//                System.arraycopy(args, 1, newArray, 0, args.size - 1)
-//
-//                val subCommand = pair.second
-//                val paramSchemes = subCommand.command.paramsSchemes()
-//
-//                if (!paramSchemes.isNullOrEmpty()) {
-//                    val providedLength = newArray.size
-//
-//                    val filterResult = CopyOnWriteArrayList<IParamScheme>()
-//                    val result2 = arrayListOf<IParamScheme>()
-//
-//                    paramSchemes.forEach {
-//                        val length = it.length()
-//                        if (length >= providedLength) {
-//                            filterResult.add(it)
-//                        }
-//                    }
-//
-//                    newArray.forEachIndexed { index, realParam ->
-//                        realParam ?: return@forEachIndexed
-//
-//                        filterResult.forEach {
-//                            if (realParam.isEmpty()) {
-//                                result2.add(it)
-//                                return@forEach
-//                            }
-//
-//                            val list = it.get()
-//                            val param = list[index]
-//
-//                            if (param.validate(newArray as Array<String>, index, realParam)) {
-//                                result2.add(it)
-//                            } else {
-//                                filterResult.remove(it)
-//                            }
-//                        }
-//                    }
-//
-//                    result2.forEach { paramScheme ->
-//                        val params = paramScheme.get()
-//                        val param = params[newArray.size - 1]
-//                        val paramProvideTab = param.tab(newArray as Array<String>)
-//                        if (paramProvideTab.isNotEmpty()) {
-//                            return paramProvideTab
-//                        }
-//                    }
-//                }
-
-//                return subCommand.tab(sender, newArray as Array<String>)
             }
         }
 
