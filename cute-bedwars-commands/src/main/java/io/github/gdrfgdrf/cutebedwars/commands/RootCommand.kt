@@ -16,7 +16,6 @@ import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
 
 object RootCommand : TabExecutor {
-    @Suppress("UNCHECKED_CAST")
     override fun onCommand(
         sender: CommandSender,
         command: Command,
