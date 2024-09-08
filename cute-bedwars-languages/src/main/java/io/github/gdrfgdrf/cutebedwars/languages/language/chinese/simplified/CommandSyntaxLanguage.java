@@ -8,15 +8,15 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
  * @author gdrfgdrf
  */
 class CommandSyntaxLanguage implements LanguageBlock {
-    public static final LanguageString HELP = new LanguageString(ICommands.Companion.valueOf("HELP").get());
-    public static final LanguageString RELOAD = new LanguageString(ICommands.Companion.valueOf("RELOAD").get());
-    public static final LanguageString QUERY_DESCRIPTION = new LanguageString(ICommands.Companion.valueOf("QUERY_DESCRIPTION").get());
+    public static final LanguageString HELP = new LanguageString(ICommands.Companion.valueOf("HELP").getShort());
+    public static final LanguageString RELOAD = new LanguageString(ICommands.Companion.valueOf("RELOAD").getShort());
+    public static final LanguageString QUERY_DESCRIPTION = new LanguageString(ICommands.Companion.valueOf("QUERY_DESCRIPTION").getShort());
+    public static final LanguageString INFO_COMMANDS = new LanguageString(ICommands.Companion.valueOf("INFO_COMMANDS").getShort());
 
-    public static final LanguageString CREATE_AREA = new LanguageString(ICommands.Companion.valueOf("CREATE_AREA").get());
-    public static final LanguageString INFO_AREA = new LanguageString(ICommands.Companion.valueOf("INFO_AREA").get());
-    public static final LanguageString EDIT_AREA = new LanguageString(ICommands.Companion.valueOf("EDIT_AREA").get());
-//    public static final LanguageString MODIFY_AREA = new LanguageString(ICommands.Companion.valueOf("MODIFY_AREA").get());
+    public static final LanguageString CREATE_AREA = new LanguageString(ICommands.Companion.valueOf("CREATE_AREA").getShort());
+    public static final LanguageString INFO_AREA = new LanguageString(ICommands.Companion.valueOf("INFO_AREA").getShort());
+    public static final LanguageString EDIT_AREA = new LanguageString(ICommands.Companion.valueOf("EDIT_AREA").getShort());
 
-    public static final LanguageString CREATE_GAME = new LanguageString(ICommands.Companion.valueOf("CREATE_GAME").get());
-    public static final LanguageString INFO_GAME = new LanguageString(ICommands.Companion.valueOf("INFO_GAME").get());
+    public static final LanguageString CREATE_GAME = new LanguageString(ICommands.Companion.valueOf("CREATE_GAME").getShort());
+    public static final LanguageString INFO_GAME = new LanguageString(ICommands.Companion.valueOf("INFO_GAME").getShort());
 }

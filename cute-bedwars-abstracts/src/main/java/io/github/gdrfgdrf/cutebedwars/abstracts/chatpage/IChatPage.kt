@@ -16,6 +16,8 @@ interface IChatPage {
     fun addPage(loader: () -> List<ILocalizationMessage>)
     fun lineCountEveryPages(): Int
     fun lineCountEveryPages(lineCount: Int)
+    fun changeable(): Boolean
+    fun changeable(changeable: Boolean)
 
     companion object {
         fun get(

@@ -14,6 +14,8 @@ interface ICommands {
     fun allowEmptyParam(): Boolean
     fun node(): ICommandNodes
     fun paramsSchemes(): Array<IParamScheme>?
+    fun getRaw(): String
+    fun getShort(): String
     fun get(): String
 
     companion object {

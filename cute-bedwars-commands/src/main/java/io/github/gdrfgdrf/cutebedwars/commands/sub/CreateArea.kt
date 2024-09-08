@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
-import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -13,13 +13,13 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
-object CreateArea : SubCommand(
+object CreateArea : ISubCommand(
     command = ICommands.valueOf("CREATE_AREA")
 ){
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_AREA
 
-    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val areaName = args[0]
             val managers = IManagers.get()

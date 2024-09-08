@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
-import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -14,13 +14,13 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
-object CreateGame : SubCommand(
+object CreateGame : ISubCommand(
     command = ICommands.valueOf("CREATE_GAME")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_GAME
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_GAME
 
-    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val findType = args[0]
             val areaIdentifier = args[1]

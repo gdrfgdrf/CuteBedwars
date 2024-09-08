@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.commands
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -9,6 +10,8 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 interface ISubCommandManager {
     fun clear()
     fun scanAndRegister()
+
+    fun get(command: ICommands): ISubCommand?
 
     companion object {
         fun get(): ISubCommandManager = Mediator.get(ISubCommandManager::class.java)!!

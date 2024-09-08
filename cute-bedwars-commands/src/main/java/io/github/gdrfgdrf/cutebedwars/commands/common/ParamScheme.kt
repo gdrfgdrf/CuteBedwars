@@ -14,12 +14,27 @@ class ParamScheme : IParamScheme {
         list.add(param)
     }
 
-    override fun get(): List<IParam> {
+    override fun params(): List<IParam> {
         return list
     }
 
     override fun length(): Int {
         return list.size
+    }
+
+    override fun get(): String {
+        val stringBuilder = StringBuilder()
+
+        val list = params()
+        list.forEachIndexed { index2, param ->
+            if (index2 != list.size - 1) {
+                stringBuilder.append(param.get()).append(" ")
+            } else {
+                stringBuilder.append(param.get())
+            }
+        }
+
+        return stringBuilder.toString()
     }
 
     companion object {

@@ -24,6 +24,8 @@ class ChatPage(
     private val pages = arrayListOf<Page>()
     var lineCountEveryPages = 5
 
+    private var changeable = true
+
     override fun send(index: Int) {
         if (pages.isEmpty()) {
             initPages()
@@ -60,6 +62,9 @@ class ChatPage(
     }
 
     override fun addPage(loader: () -> List<ILocalizationMessage>) {
+        if (!changeable) {
+            throw IllegalStateException("this change page is unchangeable");
+        }
         val lines = loader().stream()
             .map {
                 return@map Line(it)
@@ -72,6 +77,11 @@ class ChatPage(
 
     override fun lineCountEveryPages(lineCount: Int) {
         this.lineCountEveryPages = lineCount
+    }
+
+    override fun changeable(): Boolean = changeable
+    override fun changeable(changeable: Boolean) {
+        this.changeable = changeable
     }
 
     private fun initPages() {

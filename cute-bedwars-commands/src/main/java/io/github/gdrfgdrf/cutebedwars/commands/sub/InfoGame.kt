@@ -7,7 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IGameInformatio
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
-import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -15,18 +15,18 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object InfoGame : SubCommand(
+object InfoGame : ISubCommand(
     command = ICommands.valueOf("INFO_GAME")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_GAME
     override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_GAME
 
-    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val findType = args[0]
             val areaIdentifier = args[1]
-            val pageIndex = if (pageSchemeIndex == 1 || pageSchemeIndex == 3) {
-                if (pageSchemeIndex == 1) {
+            val pageIndex = if (paramSchemeIndex == 1 || paramSchemeIndex == 3) {
+                if (paramSchemeIndex == 1) {
                     args[2].toIntOrDefault(1)
                 } else {
                     args[4].toIntOrDefault(1)
@@ -39,10 +39,10 @@ object InfoGame : SubCommand(
             val areaManager = BetterAreaFinder.find(sender, findType, areaIdentifier) ?: return@localizationScope
             val gameContexts = arrayListOf<IGameContext>()
 
-            if (pageSchemeIndex == 0 || pageSchemeIndex == 1) {
+            if (paramSchemeIndex == 0 || paramSchemeIndex == 1) {
                 gameContexts.addAll(areaManager.context().games())
             }
-            if (pageSchemeIndex == 2 || pageSchemeIndex == 3) {
+            if (paramSchemeIndex == 2 || paramSchemeIndex == 3) {
                 val gameFindType = args[2]
                 gameIdentifier = args[3]
 

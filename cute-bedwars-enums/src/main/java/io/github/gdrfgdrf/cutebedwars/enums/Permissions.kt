@@ -18,6 +18,9 @@ enum class Permissions(
     QUERY_DESCRIPTION(PermissionGroups.USER, "description.query"),
     QUERY_ADMINISTRATION_DESCRIPTION(PermissionGroups.ADMIN, "description.query_administration"),
 
+    INFO_COMMANDS(PermissionGroups.USER, "info.commands"),
+    INFO_ADMINISTRATION_COMMANDS(PermissionGroups.ADMIN, "info.administration_commands"),
+
 
     CREATE_AREA(PermissionGroups.ADMIN, "create.area"),
     INFO_AREA(PermissionGroups.ADMIN, "info.area"),

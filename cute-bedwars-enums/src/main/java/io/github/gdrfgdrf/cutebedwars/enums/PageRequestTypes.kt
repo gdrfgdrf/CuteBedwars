@@ -8,6 +8,7 @@ enum class PageRequestTypes(
     val cache: Boolean = true
 ) : IPageRequestTypes {
     DESCRIPTIONS,
+    INFO_COMMANDS,
     INFO_AREA(false),
     INFO_GAME(false)
     ;

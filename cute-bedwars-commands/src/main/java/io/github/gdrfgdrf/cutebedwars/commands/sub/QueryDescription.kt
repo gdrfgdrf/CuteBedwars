@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
-import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -15,30 +15,30 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object QueryDescription : SubCommand(
+object QueryDescription : ISubCommand(
     command = ICommands.valueOf("QUERY_DESCRIPTION")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.QUERY_DESCRIPTION
     override fun description(): LanguageString? = CommandDescriptionLanguage.QUERY_DESCRIPTION
 
-    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             var raw = ""
             var pageIndex = 1
             val searchResult: List<IDescriptions>?
 
-            if (args.isEmpty() || pageSchemeIndex == ParamScheme.NO_MATCH) {
+            if (args.isEmpty() || paramSchemeIndex == ParamScheme.NO_MATCH) {
                 searchResult = all(sender)
             } else {
-                if (pageSchemeIndex != 0 && pageSchemeIndex != 1 && pageSchemeIndex != 2) {
+                if (paramSchemeIndex != 0 && paramSchemeIndex != 1 && paramSchemeIndex != 2) {
                     return@localizationScope
                 }
 
-                if (pageSchemeIndex == 0) {
+                if (paramSchemeIndex == 0) {
                     pageIndex = args[0].toIntOrDefault(1)
                     searchResult = all(sender)
                 } else {
-                    if (pageSchemeIndex == 1) {
+                    if (paramSchemeIndex == 1) {
                         raw = args[0]
 
                         val descriptionKey = raw.uppercase().replace("-", "_")

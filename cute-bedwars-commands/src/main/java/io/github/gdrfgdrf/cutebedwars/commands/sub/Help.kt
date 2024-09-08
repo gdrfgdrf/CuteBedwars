@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
@@ -12,15 +12,15 @@ import io.github.gdrfgdrf.cutebedwars.locale.extension.middleWork
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object Help : SubCommand(
+object Help : ISubCommand(
     command = ICommands.valueOf("HELP"),
 ){
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.HELP
     override fun description(): LanguageString? = CommandDescriptionLanguage.HELP
 
-    override fun run(sender: CommandSender, args: Array<String>, pageSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         middleWork("", sender) {
-            val accessibleUserCommand = arrayListOf<Pair<ICommands, SubCommand>>()
+            val accessibleUserCommand = arrayListOf<Pair<ICommands, ISubCommand>>()
             SubCommandManager.forEachUser { commands, subCommand ->
                 if (!subCommand.hasPermission(sender)) {
                     return@forEachUser
@@ -37,7 +37,7 @@ object Help : SubCommand(
                 }
             }
 
-            val accessibleAdminCommand = arrayListOf<Pair<ICommands, SubCommand>>()
+            val accessibleAdminCommand = arrayListOf<Pair<ICommands, ISubCommand>>()
             SubCommandManager.forEachAdmin { commands, subCommand ->
                 if (!subCommand.hasPermission(sender)) {
                     return@forEachAdmin
@@ -69,7 +69,7 @@ object Help : SubCommand(
     private fun send(
         localizationContext: LocalizationContext,
         commands: ICommands,
-        subCommand: SubCommand,
+        subCommand: ISubCommand,
     ) {
         if (subCommand.syntax() != null && subCommand.description() != null) {
             localizationContext.message(CommandLanguage.COMMAND_FORMAT)

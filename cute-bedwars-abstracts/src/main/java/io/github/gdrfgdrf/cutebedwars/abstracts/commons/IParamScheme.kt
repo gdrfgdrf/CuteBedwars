@@ -8,8 +8,9 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @Service("param_scheme", singleton = false)
 interface IParamScheme {
     fun add(descriptionName: String, typeName: String)
-    fun get(): List<IParam>
+    fun params(): List<IParam>
     fun length(): Int
+    fun get(): String
 
     companion object {
         fun get(builder: IParamScheme.() -> Unit): IParamScheme = Mediator.get(

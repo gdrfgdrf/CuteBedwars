@@ -60,7 +60,7 @@ object AreaInformation : IAreaInformation {
             result.add(message(AreaManagementLanguage.AREA_GAMES_IS))
             result.addAll(gameMessages)
 
-            result.add(message(CommonLanguage.DESCRIPTION_TIPS))
+            result.add(message(CommonLanguage.DESCRIPTION_TIP))
 
             return@localizationScope result
         }

@@ -34,6 +34,13 @@ enum class Commands(
             }
         )
     ),
+    INFO_COMMANDS("commands", false, 0..1, Permissions.INFO_COMMANDS, true, CommandNodes.INFO,
+        arrayOf(
+            IParamScheme.get {
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            }
+        )
+    ),
 
     CREATE_AREA(
         "area", false, 1..1, Permissions.CREATE_AREA, false, CommandNodes.CREATE,
@@ -119,6 +126,26 @@ enum class Commands(
     override fun node(): ICommandNodes = node
     override fun paramsSchemes(): Array<IParamScheme>? = paramSchemes
 
+    override fun getRaw(): String {
+        if (this == ROOT) {
+            return "/cbw"
+        }
+        val part = node.getRaw(string)
+        return part
+    }
+
+    override fun getShort(): String {
+        if (this == ROOT) {
+            return "/cbw"
+        }
+        val part = node.get(string)
+
+        if (paramSchemes.isNullOrEmpty()) {
+            return part
+        }
+        return "$part ${getFirstParams()}"
+    }
+
     override fun get(): String {
         if (this == ROOT) {
             return "/cbw"
@@ -131,6 +158,13 @@ enum class Commands(
         return "$part ${getWithParams()}"
     }
 
+    private fun getFirstParams(): String {
+        if (paramSchemes.isNullOrEmpty()) {
+            return get()
+        }
+        return paramSchemes[0].get()
+    }
+
     private fun getWithParams(): String {
         if (paramSchemes.isNullOrEmpty()) {
             return get()
@@ -138,14 +172,7 @@ enum class Commands(
         val stringBuilder = StringBuilder()
 
         paramSchemes.forEachIndexed { index, paramScheme ->
-            val list = paramScheme.get()
-            list.forEachIndexed { index2, param ->
-                if (index2 != list.size - 1) {
-                    stringBuilder.append(param.get()).append(" ")
-                } else {
-                    stringBuilder.append(param.get())
-                }
-            }
+            stringBuilder.append(paramScheme.get())
 
             if (index != paramSchemes.size - 1) {
                 stringBuilder.append("|")

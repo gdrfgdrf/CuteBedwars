@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.commands
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.commands.base.SubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
@@ -32,7 +32,7 @@ object RootCommand : TabExecutor {
             return true
         }
         val pair = analyzeArgs(args)
-        val subCommand: SubCommand? = pair.first
+        val subCommand: ISubCommand? = pair.first
         val params = pair.second
 
         if (subCommand != null) {
@@ -100,7 +100,7 @@ object RootCommand : TabExecutor {
                                     return@forEach
                                 }
 
-                                val list = it.get()
+                                val list = it.params()
                                 val param = list[index]
 
                                 if (param.validate(paramList.toTypedArray(), index, realParam)) {
@@ -112,7 +112,7 @@ object RootCommand : TabExecutor {
                         }
 
                         result2.forEach { paramScheme ->
-                            val params = paramScheme.get()
+                            val params = paramScheme.params()
                             val param = params[paramList.size - 1]
                             val paramProvideTab = param.tab(paramList.toTypedArray())
                             if (paramProvideTab.isNotEmpty()) {
@@ -188,7 +188,7 @@ object RootCommand : TabExecutor {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun execute(sender: CommandSender, args: Array<String>, subCommand: SubCommand) {
+    private fun execute(sender: CommandSender, args: Array<String>, subCommand: ISubCommand) {
         localizationScope(sender) {
             if (subCommand.hasPermission(sender)) {
                 if (!subCommand.command.onlyPlayer() || sender is Player) {
@@ -223,7 +223,7 @@ object RootCommand : TabExecutor {
                             realParam ?: return@localizationScope
 
                             paramSchemes.forEach { (paramScheme, index2) ->
-                                val list = paramScheme.get()
+                                val list = paramScheme.params()
                                 val param = list[index]
 
                                 if (param.validate(newArray as Array<String>, index, realParam)) {
@@ -269,8 +269,8 @@ object RootCommand : TabExecutor {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun analyzeArgs(args: Array<String>): Pair<SubCommand?, List<String>> {
-        var subCommand: SubCommand? = null
+    private fun analyzeArgs(args: Array<String>): Pair<ISubCommand?, List<String>> {
+        var subCommand: ISubCommand? = null
         val params = arrayListOf<String>()
 
         if (!args.contains("args")) {
