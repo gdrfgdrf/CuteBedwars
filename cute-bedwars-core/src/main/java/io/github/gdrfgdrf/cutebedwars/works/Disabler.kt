@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.multimodulemediator.Mediator
@@ -25,12 +26,14 @@ object Disabler : IDisabler {
         disableThreadPool()
         disableTaskManager()
         ISubCommandManager.get().clear()
+        disableChangeTypeRegistry()
     }
 
     override fun reloadPhase() {
         disableDatabase()
         disableRequest()
         disableThreadPool()
+        disableChangeTypeRegistry()
     }
 
     private fun disableDatabase() {
@@ -47,6 +50,10 @@ object Disabler : IDisabler {
 
     private fun disableTaskManager() {
         ITaskManager.get().terminate()
+    }
+
+    private fun disableChangeTypeRegistry() {
+        IChangeTypeRegistry.get().clear()
     }
 
 

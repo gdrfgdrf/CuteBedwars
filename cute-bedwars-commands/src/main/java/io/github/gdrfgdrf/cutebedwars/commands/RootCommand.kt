@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.commands
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
@@ -32,7 +32,7 @@ object RootCommand : TabExecutor {
             return true
         }
         val pair = analyzeArgs(args)
-        val subCommand: ISubCommand? = pair.first
+        val subCommand: AbstractSubCommand? = pair.first
         val params = pair.second
 
         if (subCommand != null) {
@@ -188,7 +188,7 @@ object RootCommand : TabExecutor {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun execute(sender: CommandSender, args: Array<String>, subCommand: ISubCommand) {
+    private fun execute(sender: CommandSender, args: Array<String>, subCommand: AbstractSubCommand) {
         localizationScope(sender) {
             if (subCommand.hasPermission(sender)) {
                 if (!subCommand.command.onlyPlayer() || sender is Player) {
@@ -273,8 +273,8 @@ object RootCommand : TabExecutor {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun analyzeArgs(args: Array<String>): Pair<ISubCommand?, List<String>> {
-        var subCommand: ISubCommand? = null
+    private fun analyzeArgs(args: Array<String>): Pair<AbstractSubCommand?, List<String>> {
+        var subCommand: AbstractSubCommand? = null
         val params = arrayListOf<String>()
 
         if (!args.contains("args")) {

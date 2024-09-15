@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
@@ -56,6 +57,7 @@ object Loader : ILoader {
         }
 
         loadAreas()
+        loadChangeTypeRegistry()
     }
 
     override fun reloadPhase() {
@@ -66,6 +68,7 @@ object Loader : ILoader {
         loadDatabase()
         loadTaskManager()
         loadAreas()
+        loadChangeTypeRegistry()
     }
 
     private fun createFolders() {
@@ -133,5 +136,9 @@ object Loader : ILoader {
                 "Unable to load area $it".logError(it)
             }
         }
+    }
+
+    private fun loadChangeTypeRegistry() {
+        IChangeTypeRegistry.get().init()
     }
 }

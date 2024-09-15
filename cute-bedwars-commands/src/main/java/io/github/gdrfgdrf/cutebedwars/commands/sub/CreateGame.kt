@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -14,7 +14,7 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
-object CreateGame : ISubCommand(
+object CreateGame : AbstractSubCommand(
     command = ICommands.valueOf("CREATE_GAME")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_GAME

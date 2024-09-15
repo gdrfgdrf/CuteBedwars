@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IAreaInformatio
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
@@ -19,7 +19,7 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object InfoArea : ISubCommand(
+object InfoArea : AbstractSubCommand(
     command = ICommands.valueOf("INFO_AREA")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_AREA

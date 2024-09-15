@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.commands.manager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -11,13 +11,13 @@ import java.util.*
 
 @ServiceImpl("subcommand_manager")
 object SubCommandManager : ISubCommandManager {
-    private val map = LinkedHashMap<ICommands, ISubCommand>()
+    private val map = LinkedHashMap<ICommands, AbstractSubCommand>()
 
     override fun scanAndRegister() {
         val classes = LinkedHashSet<Class<*>>()
 
         ClassUtils.searchJar(SubCommandManager::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.commands.sub", {
-            return@searchJar it.superclass == ISubCommand::class.java
+            return@searchJar it.superclass == AbstractSubCommand::class.java
         }, classes)
 
         classes.forEach {
@@ -25,22 +25,22 @@ object SubCommandManager : ISubCommandManager {
             field.isAccessible = true
             val subCommand = field.get(null)
 
-            "Registering the sub command ${(subCommand as ISubCommand).command.string()}".logInfo()
+            "Registering the sub command ${(subCommand as AbstractSubCommand).command.string()}".logInfo()
 
             register(subCommand)
         }
     }
 
-    fun register(subCommand: ISubCommand) {
+    fun register(subCommand: AbstractSubCommand) {
         map[subCommand.command] = subCommand
     }
 
-    fun get(command: String, node: ICommandNodes = ICommandNodes.valueOf("ROOT")): ISubCommand? {
+    fun get(command: String, node: ICommandNodes = ICommandNodes.valueOf("ROOT")): AbstractSubCommand? {
         val commands = ICommands.find(command, node) ?: return null
         return map[commands]
     }
 
-    override fun get(command: ICommands): ISubCommand? {
+    override fun get(command: ICommands): AbstractSubCommand? {
         return map[command]
     }
 
@@ -48,7 +48,7 @@ object SubCommandManager : ISubCommandManager {
         map.clear()
     }
 
-    fun search(filter: (ICommands, ISubCommand) -> Boolean): Pair<ICommands, ISubCommand>? {
+    fun search(filter: (ICommands, AbstractSubCommand) -> Boolean): Pair<ICommands, AbstractSubCommand>? {
         for (entry in map) {
             val commands = entry.key
             val subCommand = entry.value
@@ -60,13 +60,13 @@ object SubCommandManager : ISubCommandManager {
         return null
     }
 
-    fun forEach(runnable: (ICommands, ISubCommand) -> Unit) {
+    fun forEach(runnable: (ICommands, AbstractSubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
             runnable(commands, subCommand)
         }
     }
 
-    fun forEachUser(runnable: (ICommands, ISubCommand) -> Unit) {
+    fun forEachUser(runnable: (ICommands, AbstractSubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
             if (commands.permissions().needOps()) {
                 return@forEach
@@ -75,7 +75,7 @@ object SubCommandManager : ISubCommandManager {
         }
     }
 
-    fun forEachAdmin(runnable: (ICommands, ISubCommand) -> Unit) {
+    fun forEachAdmin(runnable: (ICommands, AbstractSubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
             if (!commands.permissions().needOps()) {
                 return@forEach

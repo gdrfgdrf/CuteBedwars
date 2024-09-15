@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-abstract class ISubCommand(
+abstract class AbstractSubCommand(
     val command: ICommands,
 ) {
     abstract fun syntax(): LanguageString?

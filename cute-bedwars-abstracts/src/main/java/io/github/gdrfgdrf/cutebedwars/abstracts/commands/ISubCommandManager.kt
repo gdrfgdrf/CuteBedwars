@@ -11,7 +11,7 @@ interface ISubCommandManager {
     fun clear()
     fun scanAndRegister()
 
-    fun get(command: ICommands): ISubCommand?
+    fun get(command: ICommands): AbstractSubCommand?
 
     companion object {
         fun get(): ISubCommandManager = Mediator.get(ISubCommandManager::class.java)!!

@@ -3,10 +3,13 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.change
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
+import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.LinkedHashSet
 import java.util.concurrent.ConcurrentHashMap
 
+@ServiceImpl("change_type_registry")
 object ChangeTypeRegistry : IChangeTypeRegistry {
     private val map = ConcurrentHashMap<String, Class<AbstractChange<*>>>()
 
@@ -34,6 +37,7 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
     }
 
     override fun register(name: String, abstractChangeClass: Class<AbstractChange<*>>) {
+        "Registering change type, name: $name, class: ${abstractChangeClass.name}".logInfo()
         map[name] = abstractChangeClass
     }
 

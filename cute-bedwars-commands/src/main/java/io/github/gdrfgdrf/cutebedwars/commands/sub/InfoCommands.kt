@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.ICommandInformation
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
@@ -13,7 +13,7 @@ import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object InfoCommands : ISubCommand(
+object InfoCommands : AbstractSubCommand(
     command = ICommands.valueOf("INFO_COMMANDS")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_COMMANDS

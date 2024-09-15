@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IEditors
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -12,11 +12,11 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-object EditorArea : ISubCommand(
+object EditorArea : AbstractSubCommand(
     command = ICommands.valueOf("EDITOR_AREA")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_AREA
-    override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_AREA
+    override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDITOR_AREA
+    override fun description(): LanguageString? = CommandDescriptionLanguage.EDITOR_AREA
 
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {

@@ -7,7 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IGameInformatio
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -15,7 +15,7 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object InfoGame : ISubCommand(
+object InfoGame : AbstractSubCommand(
     command = ICommands.valueOf("INFO_GAME")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_GAME
