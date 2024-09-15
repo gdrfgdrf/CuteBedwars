@@ -17,6 +17,7 @@ enum class Commands(
     private val paramSchemes: Array<IParamScheme>? = null,
 ) : ICommands {
     ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT, true),
+
     HELP("help", false, 0..0, Permissions.HELP, true),
     RELOAD("reload", false, 0..0, Permissions.RELOAD, true),
     QUERY_DESCRIPTION(
@@ -67,8 +68,8 @@ enum class Commands(
             }
         )
     ),
-    EDIT_AREA(
-        "area", false, 0..2, Permissions.EDIT_AREA, false, CommandNodes.EDIT,
+    EDITOR_AREA(
+        "area", false, 0..2, Permissions.EDITOR_AREA, false, CommandNodes.EDITOR,
         arrayOf(
             IParamScheme.get {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
@@ -112,6 +113,15 @@ enum class Commands(
                 add("GAME", "GAMES")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
+        )
+    ),
+
+    EDIT_MAKE(
+        "make", false, 1..Int.MAX_VALUE, Permissions.EDIT_MAKE, false, CommandNodes.EDIT,
+        arrayOf(
+            IParamScheme.get {
+                add("CHANGE_TYPE", "CHANGES")
+            },
         )
     )
 

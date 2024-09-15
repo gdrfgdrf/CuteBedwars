@@ -1,12 +1,14 @@
-package io.github.gdrfgdrf.cutebedwars.game.editing.bean.game
+package io.github.gdrfgdrf.cutebedwars.game.editing.change.impl.game
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 
+@Change("game-property-change")
 class PropertyChange(
     private val key: String,
     private val value: Any?,

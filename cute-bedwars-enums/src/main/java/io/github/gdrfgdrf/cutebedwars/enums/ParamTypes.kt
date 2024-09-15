@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.utils.extension.isInt
@@ -160,6 +161,28 @@ enum class ParamTypes : IParamTypes {
             return arrayListOf()
         }
 
+    },
+    CHANGES {
+        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+
+            val names = arrayListOf<String>()
+            IChangeTypeRegistry.get().forEach { s, _ ->
+                names.add(s)
+            }
+            return names.contains(any)
+        }
+
+        override fun tab(args: Array<String>): MutableList<String> {
+            val names = arrayListOf<String>()
+            IChangeTypeRegistry.get().forEach { s, _ ->
+                names.add(s)
+            }
+
+            return names
+        }
     }
 
 

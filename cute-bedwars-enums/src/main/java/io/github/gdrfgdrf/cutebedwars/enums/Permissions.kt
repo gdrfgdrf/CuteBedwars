@@ -13,6 +13,7 @@ enum class Permissions(
     val string: String
 ): IPermissions {
     ROOT(PermissionGroups.USER, "root"),
+
     HELP(PermissionGroups.USER, "help"),
     RELOAD(PermissionGroups.USER, "reload"),
     QUERY_DESCRIPTION(PermissionGroups.USER, "description.query"),
@@ -24,13 +25,12 @@ enum class Permissions(
 
     CREATE_AREA(PermissionGroups.ADMIN, "create.area"),
     INFO_AREA(PermissionGroups.ADMIN, "info.area"),
-    EDIT_AREA(PermissionGroups.ADMIN, "edit.area"),
-//    MODIFY_AREA(PermissionGroups.ADMIN, "modify.area"),
+    EDITOR_AREA(PermissionGroups.ADMIN, "editor.area"),
 
     CREATE_GAME(PermissionGroups.ADMIN, "create.game"),
     INFO_GAME(PermissionGroups.ADMIN, "info.game"),
 
-    EDIT_GAME(PermissionGroups.ADMIN, "edit.game"),
+    EDIT_MAKE(PermissionGroups.ADMIN, "edit.make"),
 
 
     RECEIVE_NOTIFICATION(PermissionGroups.USER, "receive.notification"),

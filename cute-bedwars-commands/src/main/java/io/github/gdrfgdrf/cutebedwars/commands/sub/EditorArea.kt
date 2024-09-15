@@ -12,8 +12,8 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-object EditArea : ISubCommand(
-    command = ICommands.valueOf("EDIT_AREA")
+object EditorArea : ISubCommand(
+    command = ICommands.valueOf("EDITOR_AREA")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_AREA

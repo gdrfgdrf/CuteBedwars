@@ -207,6 +207,11 @@ object RootCommand : TabExecutor {
                     }
 
                     if (argsRange.contains(newArray.size)) {
+                        if (argsRange.last == Int.MAX_VALUE) {
+                            subCommand.run(sender, newArray as Array<String>, ParamScheme.NO_MATCH)
+                            return@localizationScope
+                        }
+
                         var validateResult: Map.Entry<IParamScheme, Int>? = null
 
                         val providedLength = newArray.size
@@ -238,7 +243,6 @@ object RootCommand : TabExecutor {
                                 } else {
                                     paramSchemes.remove(paramScheme)
                                 }
-
                             }
                         }
 

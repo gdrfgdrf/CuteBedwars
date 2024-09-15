@@ -16,7 +16,6 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString DATABASE_USERNAME;
     public static LanguageString DATABASE_PASSWORD;
     public static LanguageString REQUEST_TIMEOUT;
-//    public static LanguageString AREA_AUTO_SAVE_DELAY;
 
     public static LanguageString AREA;
     public static LanguageString AREA_ID;
@@ -106,6 +105,9 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString TEMPLATE_PROPERTY;
 
     public static LanguageString APPLY_CHANGES;
+    public static LanguageString CHANGE_TYPE;
+    public static LanguageString AREA_PROPERTY_CHANGE;
+    public static LanguageString GAME_PROPERTY_CHANGE;
 
     public static LanguageString FIND_BY_ID_OR_NAME;
     public static LanguageString BY_ID;

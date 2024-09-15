@@ -40,8 +40,8 @@ object SubCommandManager : ISubCommandManager {
         return map[commands]
     }
 
-    override fun get(commands: ICommands): ISubCommand? {
-        return map[commands]
+    override fun get(command: ICommands): ISubCommand? {
+        return map[command]
     }
 
     override fun clear() {

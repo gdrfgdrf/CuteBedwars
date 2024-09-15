@@ -110,6 +110,9 @@ enum class Descriptions(
     TEMPLATE_PROPERTY(DescriptionLanguage::TEMPLATE_PROPERTY, true),
 
     APPLY_CHANGES(DescriptionLanguage::APPLY_CHANGES, true),
+    CHANGE_TYPE(DescriptionLanguage::CHANGE_TYPE, true),
+    AREA_PROPERTY_CHANGE(DescriptionLanguage::AREA_PROPERTY_CHANGE, true),
+    GAME_PROPERTY_CHANGE(DescriptionLanguage::GAME_PROPERTY_CHANGE, true),
 
     FIND_BY_ID_OR_NAME(DescriptionLanguage::FIND_BY_ID_OR_NAME),
     BY_ID(DescriptionLanguage::BY_ID),

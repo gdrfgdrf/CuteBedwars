@@ -16,7 +16,6 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString DATABASE_USERNAME = new LanguageString("访问数据库所需的用户名，默认值为空，若数据库没有用户名则无需填写");
     public static final LanguageString DATABASE_PASSWORD = new LanguageString("访问数据库所需的密码，默认值为空，若数据库没有密码则无需填写");
     public static final LanguageString REQUEST_TIMEOUT = new LanguageString("请求超时时间，有些时候执行某个操作需要二次确认，需要在请求超时时间内进行确认，否则请求失效。默认值为 10000，单位为毫秒");
-//    public static final LanguageString AREA_AUTO_SAVE_DELAY = new LanguageString("每个区域自动保存的延迟，该值仅对正在编辑中的区域有效。默认值为 300000，即五分钟，单位为毫秒");
 
     public static final LanguageString AREA = new LanguageString("区域，一个区域下可以有多个游戏，所有游戏都使用同一个地图");
     public static final LanguageString AREA_ID = new LanguageString("区域 ID，不可重复，不可自定义，由程序进行生成，并作为唯一 ID 使用。该值对于玩家的作用和区域名称相同，但若有区域重名，则需使用该值进行索引");
@@ -111,6 +110,9 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString TEMPLATE_PROPERTY = new LanguageString("模板属性");
 
     public static final LanguageString APPLY_CHANGES = new LanguageString("应用修改，true 则应用，false 则不应用，其他值无效");
+    public static final LanguageString CHANGE_TYPE = new LanguageString("修改类型");
+    public static final LanguageString AREA_PROPERTY_CHANGE = new LanguageString("区域属性修改，可修改的属性为 default-template-id，status，world-name，lobby-world-name，lobby-spawnpoint-coordinate");
+    public static final LanguageString GAME_PROPERTY_CHANGE = new LanguageString("游戏属性修改，可修改的属性为 status、min-player、max-player、spectator-spawnpoint-coordinate");
 
     public static final LanguageString FIND_BY_ID_OR_NAME = new LanguageString("通过 id 或名称来查找，值为 by-id 或 by-name");
     public static final LanguageString BY_ID = new LanguageString("通过 id 进行查找，值为 by-id");

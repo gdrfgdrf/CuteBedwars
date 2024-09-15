@@ -17,7 +17,10 @@ enum class CommandNodes(
 
     INFO("info", true, ARGS),
 
-    EDIT("edit", true, ARGS);
+    EDITOR("editor", true, ARGS),
+    EDIT("edit", true, ARGS)
+
+    ;
 
     override fun string(): String = string
     override fun displayOnRootTab(): Boolean = displayOnRootTab
