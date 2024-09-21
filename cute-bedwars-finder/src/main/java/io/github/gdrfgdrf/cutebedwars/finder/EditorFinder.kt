@@ -28,6 +28,7 @@ object EditorFinder : IEditorFinder {
                     .send()
             }
         } else {
+            findResult.found(true)
             onFound(editor)
         }
 
