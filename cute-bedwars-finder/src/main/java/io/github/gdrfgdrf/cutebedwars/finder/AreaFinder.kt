@@ -15,8 +15,6 @@ import org.bukkit.command.CommandSender
 
 @ServiceImpl("area_finder")
 object AreaFinder : IAreaFinder {
-
-
     override fun find(
         sender: CommandSender,
         findType: IFindType,
@@ -78,5 +76,4 @@ object AreaFinder : IAreaFinder {
 
         return findResult
     }
-
 }
