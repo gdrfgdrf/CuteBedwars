@@ -31,6 +31,19 @@ class Changes<T> : IChanges<T> {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
+    override fun tryAdd(change: AbstractChange<*>): Boolean {
+        check()
+
+        runCatching {
+            changes.add(change as AbstractChange<T>)
+        }.onFailure {
+            return false
+        }
+
+        return true
+    }
+
     override fun add(change: AbstractChange<T>) {
         check()
         changes.add(change)
