@@ -20,5 +20,6 @@ class CommandSyntaxLanguage implements LanguageBlock {
     public static final LanguageString CREATE_GAME = new LanguageString(ICommands.Companion.valueOf("CREATE_GAME").getShort());
     public static final LanguageString INFO_GAME = new LanguageString(ICommands.Companion.valueOf("INFO_GAME").getShort());
 
+    public static final LanguageString EDIT_NEW_CHANGES = new LanguageString(ICommands.Companion.valueOf("EDIT_NEW_CHANGES").getShort());
     public static final LanguageString EDIT_MAKE = new LanguageString(ICommands.Companion.valueOf("EDIT_MAKE").getShort());
 }

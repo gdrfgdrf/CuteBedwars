@@ -30,6 +30,7 @@ enum class Permissions(
     CREATE_GAME(PermissionGroups.ADMIN, "create.game"),
     INFO_GAME(PermissionGroups.ADMIN, "info.game"),
 
+    EDIT_NEW_CHANGES(PermissionGroups.ADMIN, "edit.new_changes"),
     EDIT_MAKE(PermissionGroups.ADMIN, "edit.make"),
 
 
@@ -71,6 +72,6 @@ enum class Permissions(
     }
 
     companion object {
-        val COMMON_PREFIX = "cutebedwars."
+        const val COMMON_PREFIX = "cutebedwars."
     }
 }

@@ -19,5 +19,6 @@ public class CommandSyntaxLanguage implements LanguageCollect {
     public static LanguageString CREATE_GAME;
     public static LanguageString INFO_GAME;
 
+    public static LanguageString EDIT_NEW_CHANGES;
     public static LanguageString EDIT_MAKE;
 }
