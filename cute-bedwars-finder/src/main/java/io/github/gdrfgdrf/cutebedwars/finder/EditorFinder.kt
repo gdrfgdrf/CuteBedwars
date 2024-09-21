@@ -7,9 +7,11 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.finder.result.FindResult
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
+@ServiceImpl("editor_finder")
 object EditorFinder : IEditorFinder {
     override fun find(sender: CommandSender, onFound: (AbstractEditor<*>) -> Unit): IFindResult {
         val findResult = FindResult()
