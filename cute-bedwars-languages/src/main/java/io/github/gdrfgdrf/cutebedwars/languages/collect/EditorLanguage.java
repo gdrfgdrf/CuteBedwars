@@ -12,4 +12,6 @@ public class EditorLanguage implements LanguageCollect {
 
     public static LanguageString ALREADY_IN_EDITING_MODE;
     public static LanguageString NOT_IN_EDITING_MODE;
+
+    public static LanguageString CHANGE_LIST_IS_NULL;
 }
