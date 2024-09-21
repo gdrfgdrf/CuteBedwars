@@ -1,7 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.IChangeClassHolder
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
@@ -11,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 @ServiceImpl("change_type_registry")
 object ChangeTypeRegistry : IChangeTypeRegistry {
-    private val map = ConcurrentHashMap<String, Class<AbstractChange<*>>>()
+    private val map = ConcurrentHashMap<String, IChangeClassHolder<AbstractChange<*>>>()
 
     @Suppress("UNCHECKED_CAST")
     override fun init() {
@@ -38,14 +39,14 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
 
     override fun register(name: String, abstractChangeClass: Class<AbstractChange<*>>) {
         "Registering change type, name: $name, class: ${abstractChangeClass.name}".logInfo()
-        map[name] = abstractChangeClass
+        map[name] = ChangeClassHolder.create(abstractChangeClass)
     }
 
-    override fun get(name: String): Class<AbstractChange<*>>? {
+    override fun get(name: String): IChangeClassHolder<AbstractChange<*>>? {
         return map[name]
     }
 
-    override fun forEach(block: (String, Class<AbstractChange<*>>) -> Unit) {
+    override fun forEach(block: (String, IChangeClassHolder<AbstractChange<*>>) -> Unit) {
         map.forEach { (k, v) ->
             block(k, v)
         }
