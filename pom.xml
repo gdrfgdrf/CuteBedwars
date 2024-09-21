@@ -29,7 +29,7 @@
         <module>cute-bedwars-tasks</module>
         <module>cute-bedwars-chat-page</module>
         <module>cute-bedwars-finder</module>
-        <module>cute-bedwars-game-information</module>
+        <module>cute-bedwars-information</module>
         <module>cute-bedwars-game-editing</module>
     </modules>
 
@@ -164,7 +164,7 @@
 
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-                <artifactId>game-information</artifactId>
+                <artifactId>information</artifactId>
                 <version>0.1.0</version>
             </dependency>
 

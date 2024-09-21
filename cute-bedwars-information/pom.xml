@@ -9,7 +9,7 @@
         <version>0.1.0</version>
     </parent>
 
-    <artifactId>game-information</artifactId>
+    <artifactId>information</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
