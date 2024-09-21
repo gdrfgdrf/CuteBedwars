@@ -29,7 +29,7 @@ object EditListChanges : AbstractSubCommand(
 
         val messages = IChangesInformation.get().convert(sender, changes)
 
-        val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), "") {
+        val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), messages.size()) {
             messages
         }
         chatPage.send(pageIndex - 1)
