@@ -1,13 +1,15 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.bean
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.InoperableChangesException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.RedoException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.UndoException
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.concurrent.LinkedBlockingQueue
 
+@ServiceImpl("changes")
 class Changes<T> : IChanges<T> {
     var operable = true
         private set
