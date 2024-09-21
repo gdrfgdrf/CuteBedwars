@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.game.information
+package io.github.gdrfgdrf.cutebedwars.abstracts.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage

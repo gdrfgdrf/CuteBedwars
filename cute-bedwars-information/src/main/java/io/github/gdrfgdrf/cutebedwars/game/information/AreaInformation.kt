@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.game.information
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IAreaInformation
+import io.github.gdrfgdrf.cutebedwars.abstracts.information.IAreaInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area

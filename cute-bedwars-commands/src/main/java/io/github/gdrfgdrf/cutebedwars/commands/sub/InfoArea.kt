@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IAreaInformation
+import io.github.gdrfgdrf.cutebedwars.abstracts.information.IAreaInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
