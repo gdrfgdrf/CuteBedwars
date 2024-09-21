@@ -117,7 +117,7 @@ enum class Commands(
     ),
 
     EDIT_NEW_CHANGES(
-        "new_changes", false, 0..0, Permissions.EDIT_NEW_CHANGES, true, CommandNodes.EDIT,
+        "new-changes", false, 0..0, Permissions.EDIT_NEW_CHANGES, true, CommandNodes.EDIT,
     ),
     EDIT_MAKE(
         "make", false, 1..Int.MAX_VALUE, Permissions.EDIT_MAKE, false, CommandNodes.EDIT,
@@ -126,7 +126,8 @@ enum class Commands(
                 add("CHANGE_TYPE", "CHANGES")
             },
         )
-    )
+    ),
+
 
     ;
 
