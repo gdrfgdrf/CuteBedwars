@@ -32,6 +32,7 @@ enum class Permissions(
 
     EDIT_NEW_CHANGES(PermissionGroups.ADMIN, "edit.new_changes"),
     EDIT_MAKE(PermissionGroups.ADMIN, "edit.make"),
+    EDIT_LIST_CHANGES(PermissionGroups.ADMIN, "edit.list_changes"),
 
 
     RECEIVE_NOTIFICATION(PermissionGroups.USER, "receive.notification"),

@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.information
 
 import de.tr7zw.nbtapi.NBT
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.information.IGameInformation
+import io.github.gdrfgdrf.cutebedwars.abstracts.information.IGameInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game

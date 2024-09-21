@@ -80,4 +80,8 @@ class Changes<T> : IChanges<T> {
         "Finishing changes".logInfo()
         operable = false
     }
+
+    override fun forEach(block: (AbstractChange<T>) -> Unit) {
+        changes.forEach(block)
+    }
 }

@@ -13,6 +13,8 @@ interface IChanges<T> {
     fun redo()
     fun finish()
 
+    fun forEach(block: (AbstractChange<T>) -> Unit)
+
     companion object {
         fun <T> get(): IChanges<T> = Mediator.get(IChanges::class.java)!!
     }

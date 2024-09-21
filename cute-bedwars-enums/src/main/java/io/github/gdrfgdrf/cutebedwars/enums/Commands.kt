@@ -127,7 +127,14 @@ enum class Commands(
             },
         )
     ),
-
+    EDIT_LIST_CHANGES(
+        "list-changes", false, 0..1, Permissions.EDIT_LIST_CHANGES, true, CommandNodes.EDIT,
+        arrayOf(
+            IParamScheme.get {
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            }
+        )
+    )
 
     ;
 

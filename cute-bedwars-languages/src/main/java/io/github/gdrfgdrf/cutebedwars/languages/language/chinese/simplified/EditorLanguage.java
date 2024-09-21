@@ -21,4 +21,6 @@ class EditorLanguage implements LanguageBlock {
 
     public static final LanguageString ADD_CHANGE_ERROR = new LanguageString("&c无法添加修改");
     public static final LanguageString ADD_CHANGE_SUCCESS = new LanguageString("&a添加修改成功");
+
+    public static final LanguageString CHANGE_NAME_IS = new LanguageString("&a修改名: &e&l%s");
 }
