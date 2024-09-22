@@ -1,7 +1,7 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.game.editing
+package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.IChangeClassHolder
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.IChangeClassHolder
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service

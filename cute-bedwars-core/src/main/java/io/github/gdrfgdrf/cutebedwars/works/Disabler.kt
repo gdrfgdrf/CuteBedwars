@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.multimodulemediator.Mediator

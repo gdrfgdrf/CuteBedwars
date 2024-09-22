@@ -1,8 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.IChangeClassHolder
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.IChangeClassHolder
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils

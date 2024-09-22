@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.game.editing
+package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 

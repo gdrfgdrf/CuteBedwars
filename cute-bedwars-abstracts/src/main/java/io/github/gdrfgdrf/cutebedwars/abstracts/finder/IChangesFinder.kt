@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.finder
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChanges
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service

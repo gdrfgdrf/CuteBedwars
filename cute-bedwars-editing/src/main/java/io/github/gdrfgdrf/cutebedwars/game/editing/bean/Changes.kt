@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.bean
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChanges
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.InoperableChangesException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.RedoException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.UndoException

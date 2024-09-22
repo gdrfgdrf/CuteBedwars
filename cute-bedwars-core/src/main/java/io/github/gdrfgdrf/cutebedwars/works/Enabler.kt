@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ICommandRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IEnabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("enabler")

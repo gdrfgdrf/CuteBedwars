@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IEditors
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage

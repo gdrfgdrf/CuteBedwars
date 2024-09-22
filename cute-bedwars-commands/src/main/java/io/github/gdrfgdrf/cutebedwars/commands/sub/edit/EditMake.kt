@@ -3,11 +3,11 @@ package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IEditorFinder
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChanges
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.ICommit
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IEditors
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterChangesFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage

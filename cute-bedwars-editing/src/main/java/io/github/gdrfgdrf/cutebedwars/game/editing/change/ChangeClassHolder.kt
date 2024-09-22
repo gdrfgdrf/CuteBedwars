@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.AbstractChange
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.change.IChangeClassHolder
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.IChangeClassHolder
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 
 class ChangeClassHolder<T : AbstractChange<*>>(private val clazz: Class<T>) : IChangeClassHolder<T> {

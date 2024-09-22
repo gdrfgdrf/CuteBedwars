@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.utils.extension.isInt

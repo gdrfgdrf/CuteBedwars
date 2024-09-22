@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.finder
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IEditorFinder
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
 import org.bukkit.command.CommandSender
 
 object BetterEditorFinder {

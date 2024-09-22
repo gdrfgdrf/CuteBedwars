@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.information
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChanges
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton

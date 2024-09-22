@@ -1,9 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractAreaEditor
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractEditor
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractGameEditor
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IEditors
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.game.editing.editor.AreaEditor

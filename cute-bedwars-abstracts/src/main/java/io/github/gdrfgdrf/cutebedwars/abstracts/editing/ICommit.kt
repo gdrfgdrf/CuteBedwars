@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.game.editing
+package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 
 interface ICommit<T> {
     fun apply(t: T)

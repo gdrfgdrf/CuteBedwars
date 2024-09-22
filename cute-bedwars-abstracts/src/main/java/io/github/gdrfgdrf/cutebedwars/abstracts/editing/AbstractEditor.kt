@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.game.editing
+package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 
 abstract class AbstractEditor<T>(val uuid: String, val t: T) {
     private val commits = arrayListOf<ICommit<T>>()

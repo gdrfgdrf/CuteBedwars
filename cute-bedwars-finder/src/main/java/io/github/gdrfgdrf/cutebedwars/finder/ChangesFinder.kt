@@ -2,8 +2,8 @@ package io.github.gdrfgdrf.cutebedwars.finder
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IChangesFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IFindResult
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.AbstractEditor
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChanges
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.finder.result.FindResult
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope

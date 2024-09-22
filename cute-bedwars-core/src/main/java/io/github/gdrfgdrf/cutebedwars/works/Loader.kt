@@ -7,7 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
