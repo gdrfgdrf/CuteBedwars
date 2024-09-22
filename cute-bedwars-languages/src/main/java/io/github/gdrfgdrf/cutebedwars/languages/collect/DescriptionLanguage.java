@@ -37,8 +37,7 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString GAME_REGION;
     public static LanguageString GAME_WAITING_ROOM;
     public static LanguageString GAME_SPECTATOR_SPAWNPOINT_COORDINATE;
-    public static LanguageString GAME_SECONDARY_GENERATORS;
-    public static LanguageString GAME_TERTIARY_GENERATORS;
+    public static LanguageString GAME_GENERATOR_GROUPS;
     public static LanguageString GAME_TEAMS;
 
     public static LanguageString TEAM;
@@ -59,6 +58,12 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString WAITING_ROOM_REGION;
     public static LanguageString WAITING_ROOM_SPAWNPOINT_COORDINATE;
 
+    public static LanguageString GENERATOR_GROUP;
+    public static LanguageString GENERATOR_GROUP_DISPLAY_ORDER;
+    public static LanguageString GENERATOR_GROUP_DISPLAY_NAME;
+    public static LanguageString GENERATOR_GROUP_GENERATORS;
+    public static LanguageString GENERATOR_GROUP_LEVELS;
+
     public static LanguageString GENERATOR;
     public static LanguageString GENERATOR_REGION;
     public static LanguageString GENERATOR_OPERABLE_COORDINATES;
@@ -66,7 +71,6 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString GENERATOR_DISPLAY;
     public static LanguageString GENERATOR_DISPLAY_NAME;
     public static LanguageString GENERATOR_PRODUCTS;
-    public static LanguageString GENERATOR_LEVELS;
     public static LanguageString GENERATOR_PROPERTY;
 
     public static LanguageString AUTOMATIC_GENERATOR;

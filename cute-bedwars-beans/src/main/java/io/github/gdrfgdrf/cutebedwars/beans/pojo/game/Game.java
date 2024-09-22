@@ -8,7 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status;
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.AutomaticGenerator;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.GeneratorGroup;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team;
 import lombok.Data;
 
@@ -47,11 +47,8 @@ public class Game implements PropertyConvertible {
     private Coordinate spectatorSpawnpointCoordinate;
 
     @Undefinable
-    @JsonProperty(value = "secondary-generators")
-    private List<AutomaticGenerator> secondaryGenerators = new ArrayList<>();
-    @Undefinable
-    @JsonProperty(value = "tertiary-generators")
-    private List<AutomaticGenerator> tertiaryGenerators = new ArrayList<>();
+    @JsonProperty(value = "generator-groups")
+    private List<GeneratorGroup> generatorGroups = new ArrayList<>();
 
     @Undefinable
     private List<Team> teams = new ArrayList<>();
@@ -73,11 +70,11 @@ public class Game implements PropertyConvertible {
         }
         if (targetType == Region.class) {
             Region region = new Region();
-            return (T) region.convert(targetType, obj);
+            return region.convert(targetType, obj);
         }
         if (targetType == WaitingRoom.class) {
             WaitingRoom waitingRoom = new WaitingRoom();
-            return (T) waitingRoom.convert(targetType, obj);
+            return waitingRoom.convert(targetType, obj);
         }
         return null;
     }

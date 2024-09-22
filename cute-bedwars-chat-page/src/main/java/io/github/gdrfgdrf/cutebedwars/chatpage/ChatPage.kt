@@ -9,7 +9,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender

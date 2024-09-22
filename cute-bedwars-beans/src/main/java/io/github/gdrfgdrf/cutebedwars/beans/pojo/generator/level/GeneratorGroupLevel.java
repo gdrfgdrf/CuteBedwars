@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GeneratorLevel {
+public class GeneratorGroupLevel {
     private int order;
     @JsonProperty(value = "generate-cost")
     private long generateCost;

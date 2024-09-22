@@ -5,7 +5,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.information.IGameInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.AutomaticGenerator
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.Generator
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.TeamColor
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
@@ -13,7 +12,6 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
-import org.bukkit.inventory.ItemStack
 
 @ServiceImpl("game_information")
 object GameInformation : IGameInformation {
@@ -79,89 +77,102 @@ object GameInformation : IGameInformation {
                     }
                 }
 
-                val generatorConvertFunction = { generator: AutomaticGenerator ->
-                    val itemStringBuilder = StringBuilder()
-                    val levelStringBuilder = StringBuilder()
+//                val generatorConvertFunction = { generator: Generator ->
+//                    val itemStringBuilder = StringBuilder()
+//                    val levelStringBuilder = StringBuilder()
+//
+//                    if (!generator.products.isNullOrEmpty()) {
+//                        val products = generator.products
+//
+//                        products.forEachIndexed { index, item ->
+//                            val nbt = NBT.parseNBT(item.nbt)
+//                            val itemStack = NBT.itemStackFromNBT(nbt) ?: return@forEachIndexed
+//                            val itemMeta = itemStack.itemMeta
+//                            val name = if (itemMeta.hasDisplayName()) {
+//                                itemMeta.displayName
+//                            } else {
+//                                if (itemMeta.hasLocalizedName()) {
+//                                    itemMeta.localizedName
+//                                } else {
+//                                    itemStack.data.itemType.name
+//                                }
+//                            }
+//
+//                            if (index >= products.size - 1) {
+//                                val string = message(AreaManagementLanguage.ITEM_FORMAT_END)
+//                                    .format(name)
+//                                    .toString()
+//                                itemStringBuilder.append(string)
+//                                return@forEachIndexed
+//                            }
+//                            val string = message(AreaManagementLanguage.ITEM_FORMAT)
+//                                .format(name)
+//                                .toString()
+//                            itemStringBuilder.append(string)
+//                        }
+//                    } else {
+//                        itemStringBuilder.append(message(CommonLanguage.NONE).toString())
+//                    }
+//
+//                    if (!generator.levels.isNullOrEmpty()) {
+//                        val levels = generator.levels
+//
+//                        levels.forEachIndexed { index, level ->
+//                            if (index >= levels.size - 1) {
+//                                val string = message(AreaManagementLanguage.GENERATOR_LEVEL_FORMAT_END)
+//                                    .format(level.order)
+//                                    .toString()
+//                                levelStringBuilder.append(string)
+//                                return@forEachIndexed
+//                            }
+//                            val string = message(AreaManagementLanguage.GENERATOR_LEVEL_FORMAT)
+//                                .format(level.order)
+//                                .toString()
+//                            levelStringBuilder.append(string)
+//                        }
+//                    } else {
+//                        levelStringBuilder.append(message(CommonLanguage.NONE).toString())
+//                    }
+//
+//                    add(message(AreaManagementLanguage.GENERATOR_FORMAT)
+//                        .format(generator.displayName, itemStringBuilder.toString(), levelStringBuilder.toString()))
+//                }
 
-                    if (!generator.products.isNullOrEmpty()) {
-                        val products = generator.products
-
-                        products.forEachIndexed { index, item ->
-                            val nbt = NBT.parseNBT(item.nbt)
-                            val itemStack = NBT.itemStackFromNBT(nbt) ?: return@forEachIndexed
-                            val itemMeta = itemStack.itemMeta
-                            val name = if (itemMeta.hasDisplayName()) {
-                                itemMeta.displayName
-                            } else {
-                                if (itemMeta.hasLocalizedName()) {
-                                    itemMeta.localizedName
-                                } else {
-                                    itemStack.data.itemType.name
-                                }
-                            }
-
-                            if (index >= products.size - 1) {
-                                val string = message(AreaManagementLanguage.ITEM_FORMAT_END)
-                                    .format(name)
-                                    .toString()
-                                itemStringBuilder.append(string)
-                                return@forEachIndexed
-                            }
-                            val string = message(AreaManagementLanguage.ITEM_FORMAT)
-                                .format(name)
-                                .toString()
-                            itemStringBuilder.append(string)
-                        }
-                    } else {
-                        itemStringBuilder.append(message(CommonLanguage.NONE).toString())
-                    }
-
-                    if (!generator.levels.isNullOrEmpty()) {
-                        val levels = generator.levels
-
-                        levels.forEachIndexed { index, level ->
-                            if (index >= levels.size - 1) {
-                                val string = message(AreaManagementLanguage.GENERATOR_LEVEL_FORMAT_END)
-                                    .format(level.order)
-                                    .toString()
-                                levelStringBuilder.append(string)
-                                return@forEachIndexed
-                            }
-                            val string = message(AreaManagementLanguage.GENERATOR_LEVEL_FORMAT)
-                                .format(level.order)
-                                .toString()
-                            levelStringBuilder.append(string)
-                        }
-                    } else {
-                        levelStringBuilder.append(message(CommonLanguage.NONE).toString())
-                    }
-
-                    add(message(AreaManagementLanguage.GENERATOR_FORMAT)
-                        .format(generator.displayName, itemStringBuilder.toString(), levelStringBuilder.toString()))
-                }
-
-                game.secondaryGenerators?.let {
+                game.generatorGroups?.let {
                     if (it.isEmpty()) {
                         return@let
                     }
 
-                    add(message(AreaManagementLanguage.GAME_SECONDARY_GENERATORS_IS))
+                    add(message(AreaManagementLanguage.GAME_GENERATOR_GROUPS_IS))
 
-                    it.forEach { generator ->
-                        generatorConvertFunction(generator)
+                    it.forEach { generatorGroup ->
+                        add(message(AreaManagementLanguage.GAME_GENERATOR_GROUP_FORMAT)
+                            .format(generatorGroup.displayName))
                     }
                 }
-                game.tertiaryGenerators?.let {
-                    if (it.isEmpty()) {
-                        return@let
-                    }
 
-                    add(message(AreaManagementLanguage.GAME_TERTIARY_GENERATORS_IS))
-
-                    it.forEach { generator ->
-                        generatorConvertFunction(generator)
-                    }
-                }
+//                game.secondaryGenerators?.let {
+//                    if (it.isEmpty()) {
+//                        return@let
+//                    }
+//
+//                    add(message(AreaManagementLanguage.GAME_SECONDARY_GENERATORS_IS))
+//
+//                    it.forEach { generator ->
+//                        generatorConvertFunction(generator)
+//                    }
+//                }
+//                game.tertiaryGenerators?.let {
+//                    if (it.isEmpty()) {
+//                        return@let
+//                    }
+//
+//                    add(message(AreaManagementLanguage.GAME_TERTIARY_GENERATORS_IS))
+//
+//                    it.forEach { generator ->
+//                        generatorConvertFunction(generator)
+//                    }
+//                }
                 game.teams?.let {
                     if (it.isEmpty()) {
                         return@let

@@ -42,8 +42,7 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString GAME_REGION = new LanguageString("游戏的游玩范围，玩家无法在该范围外进行任何操作");
     public static final LanguageString GAME_WAITING_ROOM = new LanguageString("游戏的等待房间，游戏开始时将会被清空");
     public static final LanguageString GAME_SPECTATOR_SPAWNPOINT_COORDINATE = new LanguageString("游戏内玩家死亡后重生为旁观者的重生点");
-    public static final LanguageString GAME_SECONDARY_GENERATORS = new LanguageString("游戏的第二级别生成器，通常会自动升级");
-    public static final LanguageString GAME_TERTIARY_GENERATORS = new LanguageString("游戏的第三级别生成器，也是最高一级的生成器，通常会自动升级");
+    public static final LanguageString GAME_GENERATOR_GROUPS = new LanguageString("游戏的物品生成器组，通常把所有生成同一类型物品的生成器看作为一个生成器组");
     public static final LanguageString GAME_TEAMS = new LanguageString("游戏的队伍");
 
     public static final LanguageString TEAM = new LanguageString("队伍，不可独立存在，只能存在于游戏下");
@@ -64,6 +63,12 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString WAITING_ROOM_REGION = new LanguageString("等待房间的范围，游戏开始后，范围内的所有方块将被清空");
     public static final LanguageString WAITING_ROOM_SPAWNPOINT_COORDINATE = new LanguageString("玩家加入未开启的游戏时的出生点");
 
+    public static final LanguageString GENERATOR_GROUP = new LanguageString("物品生成器组，通常把所有生成同一类型物品的生成器看作为一个生成器组，并且同一个组的所有物品生成器共用一个等级排序");
+    public static final LanguageString GENERATOR_GROUP_DISPLAY_ORDER = new LanguageString("物品生成器组在计分板中的显示顺序，计分板通常会显示该物品生成器组的等级信息");
+    public static final LanguageString GENERATOR_GROUP_DISPLAY_NAME = new LanguageString("物品生成器组的名字");
+    public static final LanguageString GENERATOR_GROUP_GENERATORS = new LanguageString("物品生成器组下所有的物品生成器，这些生成器将共用一个等级排序");
+    public static final LanguageString GENERATOR_GROUP_LEVELS = new LanguageString("物品生成器组的等级排序，该组下所有物品生成器将共用此等级排序，也就是说当触发升级时，该组下所有的物品生成器都将在同时升级");
+
     public static final LanguageString GENERATOR = new LanguageString("物品生成器，这种类型的物品生成器无法自动升级");
     public static final LanguageString GENERATOR_REGION = new LanguageString("物品生成器的范围");
     public static final LanguageString GENERATOR_OPERABLE_COORDINATES = new LanguageString("物品生成器的范围内能够操作的坐标");
@@ -71,7 +76,6 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString GENERATOR_DISPLAY = new LanguageString("物品生成器显示的物品");
     public static final LanguageString GENERATOR_DISPLAY_NAME = new LanguageString("物品生成器的显示名");
     public static final LanguageString GENERATOR_PRODUCTS = new LanguageString("物品生成器能够生成的物品");
-    public static final LanguageString GENERATOR_LEVELS = new LanguageString("物品生成器的等级");
     public static final LanguageString GENERATOR_PROPERTY = new LanguageString("物品生成器属性");
 
     public static final LanguageString AUTOMATIC_GENERATOR = new LanguageString("自动升级的物品生成器，除等级外的所有属性均和 普通物品生成器 相同");

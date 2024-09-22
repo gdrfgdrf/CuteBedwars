@@ -49,9 +49,10 @@ class AreaManagementLanguage implements LanguageBlock {
     public static final LanguageString GAME_PROPERTY_FORMAT = new LanguageString("&a&l%s&8&l: &r&e%s");
     public static final LanguageString GAME_REGION_IS = new LanguageString("&a游戏范围&8: ");
     public static final LanguageString GAME_WAITING_ROOM_IS = new LanguageString("&a等待室&8: ");
-    public static final LanguageString GAME_SECONDARY_GENERATORS_IS = new LanguageString("&a第二级别生成器&8: ");
-    public static final LanguageString GAME_TERTIARY_GENERATORS_IS = new LanguageString("&a第三级别生成器&8: ");
+    public static final LanguageString GAME_GENERATOR_GROUPS_IS = new LanguageString("&a生成器组&8: ");
     public static final LanguageString GAME_TEAMS_IS = new LanguageString("&a队伍&8: ");
+
+    public static final LanguageString GAME_GENERATOR_GROUP_FORMAT = new LanguageString(" &8- &e&l%s");
 
     public static final LanguageString GENERATOR_FORMAT = new LanguageString(" &8- &e&l%s &8(%s&8) &8(%s&8)");
     public static final LanguageString GENERATOR_LEVEL_FORMAT = new LanguageString("%s -> ");

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Item;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.level.GeneratorLevel;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -29,5 +28,4 @@ public class Generator {
 
     private Item display;
     private List<Item> products = new ArrayList<>();
-    private List<GeneratorLevel> levels = new ArrayList<>();
 }

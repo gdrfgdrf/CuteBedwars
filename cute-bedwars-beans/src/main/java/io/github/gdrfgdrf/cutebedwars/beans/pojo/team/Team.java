@@ -9,6 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.Generator;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.GeneratorGroup;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.villager.Villager;
 import lombok.Data;
 
@@ -50,7 +51,8 @@ public class Team implements PropertyConvertible {
     private List<Villager> villagers = new ArrayList<>();
 
     @Undefinable
-    private Generator generator;
+    @JsonProperty(value = "generator-groups")
+    private List<GeneratorGroup> generatorGroups = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     @Override

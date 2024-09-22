@@ -49,9 +49,10 @@ public class AreaManagementLanguage implements LanguageCollect {
     public static LanguageString GAME_PROPERTY_FORMAT;
     public static LanguageString GAME_REGION_IS;
     public static LanguageString GAME_WAITING_ROOM_IS;
-    public static LanguageString GAME_SECONDARY_GENERATORS_IS;
-    public static LanguageString GAME_TERTIARY_GENERATORS_IS;
+    public static LanguageString GAME_GENERATOR_GROUPS_IS;
     public static LanguageString GAME_TEAMS_IS;
+
+    public static LanguageString GAME_GENERATOR_GROUP_FORMAT;
 
     public static LanguageString GENERATOR_FORMAT;
     public static LanguageString GENERATOR_LEVEL_FORMAT;
