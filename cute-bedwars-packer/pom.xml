@@ -120,7 +120,7 @@
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>game-editing</artifactId>
+            <artifactId>editing</artifactId>
         </dependency>
     </dependencies>
 

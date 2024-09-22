@@ -30,7 +30,7 @@
         <module>cute-bedwars-chat-page</module>
         <module>cute-bedwars-finder</module>
         <module>cute-bedwars-information</module>
-        <module>cute-bedwars-game-editing</module>
+        <module>cute-bedwars-editing</module>
     </modules>
 
     <repositories>
@@ -170,7 +170,7 @@
 
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-                <artifactId>game-editing</artifactId>
+                <artifactId>editing</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
