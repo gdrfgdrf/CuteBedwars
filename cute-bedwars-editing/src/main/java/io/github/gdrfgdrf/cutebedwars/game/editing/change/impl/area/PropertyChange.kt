@@ -27,7 +27,7 @@ class PropertyChange(
             key != "status" &&
             key != "world-name" &&
             key != "lobby-world-name") {
-            throw ApplyException("property change applies only to keys \"default-template-id\", \"status\", \"world-name\", \"lobby-world-name\", \"lobby-spawnpoint-coordinate\"")
+            throw ApplyException("property change applies only to keys \"name\", \"default-template-id\", \"status\", \"world-name\", \"lobby-world-name\"")
         }
 
         "Applying $key: $value to area, area's id: ${t.manager().area().id}".logInfo()

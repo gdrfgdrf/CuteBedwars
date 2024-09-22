@@ -26,7 +26,7 @@ class PropertyChange(
             key != "status" &&
             key != "min-player" &&
             key != "max-player") {
-            throw ApplyException("property change applies only to keys \"status\", \"min-player\", \"max-player\", \"spectator-spawnpoint-coordinate\"")
+            throw ApplyException("property change applies only to keys \"name\", \"status\", \"min-player\", \"max-player\"")
         }
 
         "Applying $key: $value to game, game's id: ${t.game().id}, area's id: ${t.game().areaId}".logInfo()
