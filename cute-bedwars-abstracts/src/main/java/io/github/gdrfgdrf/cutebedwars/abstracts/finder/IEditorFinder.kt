@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender
 @Service("editor_finder")
 @KotlinSingleton
 interface IEditorFinder {
-    fun find(sender: CommandSender, onFound: (AbstractEditor<*>) -> Unit): IFindResult
+    fun find(sender: CommandSender, message: Boolean = true, onFound: (AbstractEditor<*>) -> Unit): IFindResult
 
     companion object {
         fun get(): IEditorFinder = Mediator.get(IEditorFinder::class.java)!!

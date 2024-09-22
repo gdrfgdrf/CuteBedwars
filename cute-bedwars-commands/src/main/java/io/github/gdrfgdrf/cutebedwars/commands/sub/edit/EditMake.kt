@@ -26,7 +26,8 @@ object EditMake : AbstractSubCommand(
 
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
-            val changes: IChanges<*> = BetterChangesFinder.find(sender) ?: return@localizationScope
+            val editor = BetterEditorFinder.find(sender) ?: return@localizationScope
+            val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
 
             val changeTypeName = args[0]
             val changeClassHolder = IChangeTypeRegistry.get().get(changeTypeName) ?: return@localizationScope

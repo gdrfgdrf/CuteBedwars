@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
+import org.bukkit.command.CommandSender
 
 @ServiceImpl("param", needArgument = true)
 class Param(
@@ -17,11 +18,11 @@ class Param(
         return "<" + description.name_().lowercase() + ">"
     }
 
-    override fun tab(args: Array<String>): MutableList<String> {
-        return type.tab(args)
+    override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+        return type.tab(sender, args)
     }
 
-    override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
-        return type.validate(args, currentIndex, any)
+    override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        return type.validate(sender, args, currentIndex, any)
     }
 }

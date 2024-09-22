@@ -11,7 +11,7 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 
-@Change("game-property-change")
+@Change("game-property-change", "io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext")
 class PropertyChange(
     private val key: String,
     private val value: Any?,

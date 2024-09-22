@@ -23,4 +23,5 @@ public class EditorLanguage implements LanguageCollect {
     public static LanguageString ADD_CHANGE_SUCCESS;
 
     public static LanguageString CHANGE_NAME_IS;
+
 }

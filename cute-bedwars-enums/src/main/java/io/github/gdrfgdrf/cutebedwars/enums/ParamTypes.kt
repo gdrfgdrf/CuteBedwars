@@ -1,17 +1,20 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IEditorFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.utils.extension.isInt
 import io.github.gdrfgdrf.cutebedwars.utils.extension.isLong
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
+import org.bukkit.command.CommandSender
 
 @EnumServiceImpl("param_types_enum")
 enum class ParamTypes : IParamTypes {
     NOT_BLANK_STRING {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
@@ -23,7 +26,7 @@ enum class ParamTypes : IParamTypes {
         }
     },
     VALUE {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
@@ -34,19 +37,19 @@ enum class ParamTypes : IParamTypes {
         }
     },
     FIND_BY_ID_OR_NAME {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
             return any == "by-id" || any == "by-name"
         }
 
-        override fun tab(args: Array<String>): MutableList<String> {
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
             return arrayListOf("by-id", "by-name")
         }
     },
     POSITIVE_NUMBER {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
@@ -55,7 +58,7 @@ enum class ParamTypes : IParamTypes {
         }
     },
     AREAS {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
@@ -71,7 +74,7 @@ enum class ParamTypes : IParamTypes {
             return false
         }
 
-        override fun tab(args: Array<String>): MutableList<String> {
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
             val list = IManagers.get().list()
             val findType = args[args.size - 2]
 
@@ -93,7 +96,7 @@ enum class ParamTypes : IParamTypes {
         }
     },
     GAMES {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
@@ -109,7 +112,7 @@ enum class ParamTypes : IParamTypes {
             return false
         }
 
-        override fun tab(args: Array<String>): MutableList<String> {
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
             val areaFindType = args[args.size - 4]
             val areaIdentifier = args[args.size - 3]
             if (areaFindType.isBlank()) {
@@ -163,22 +166,40 @@ enum class ParamTypes : IParamTypes {
 
     },
     CHANGES {
-        override fun validate(args: Array<String>, currentIndex: Int, any: Any): Boolean {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {
                 return false
             }
 
+            var editor: AbstractEditor<*>? = null
+            IEditorFinder.get().find(sender, false) {
+                editor = it
+            }
+
             val names = arrayListOf<String>()
-            IChangeTypeRegistry.get().forEach { s, _ ->
-                names.add(s)
+            if (editor != null) {
+                IChangeTypeRegistry.get().forEach { s, changeType ->
+                    if (changeType.type() == editor!!.type()) {
+                        names.add(s)
+                    }
+                }
             }
             return names.contains(any)
         }
 
-        override fun tab(args: Array<String>): MutableList<String> {
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+            var editor: AbstractEditor<*>? = null
+            IEditorFinder.get().find(sender, false) {
+                editor = it
+            }
+
             val names = arrayListOf<String>()
-            IChangeTypeRegistry.get().forEach { s, _ ->
-                names.add(s)
+            if (editor != null) {
+                IChangeTypeRegistry.get().forEach { s, changeType ->
+                    if (changeType.type() == editor!!.type()) {
+                        names.add(s)
+                    }
+                }
             }
 
             return names

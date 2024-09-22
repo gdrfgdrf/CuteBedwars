@@ -103,7 +103,7 @@ object RootCommand : TabExecutor {
                                 val list = it.params()
                                 val param = list[index]
 
-                                if (param.validate(paramList.toTypedArray(), index, realParam)) {
+                                if (param.validate(sender, paramList.toTypedArray(), index, realParam)) {
                                     result2.add(it)
                                 } else {
                                     filterResult.remove(it)
@@ -114,7 +114,7 @@ object RootCommand : TabExecutor {
                         result2.forEach { paramScheme ->
                             val params = paramScheme.params()
                             val param = params[paramList.size - 1]
-                            val paramProvideTab = param.tab(paramList.toTypedArray())
+                            val paramProvideTab = param.tab(sender, paramList.toTypedArray())
                             if (paramProvideTab.isNotEmpty()) {
                                 return paramProvideTab
                             }
@@ -231,7 +231,7 @@ object RootCommand : TabExecutor {
                                 val list = paramScheme.params()
                                 val param = list[index]
 
-                                if (param.validate(newArray as Array<String>, index, realParam)) {
+                                if (param.validate(sender, newArray as Array<String>, index, realParam)) {
                                     if (index >= list.size - 1) {
                                         validateResult = object : Map.Entry<IParamScheme, Int> {
                                             override val key: IParamScheme

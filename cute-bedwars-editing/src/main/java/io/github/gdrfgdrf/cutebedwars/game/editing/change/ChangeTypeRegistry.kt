@@ -29,7 +29,7 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
 
         classes.forEach {
             val changeAnnotation = it.getAnnotation(Change::class.java) ?: return
-            register(changeAnnotation.name, it as Class<AbstractChange<*>>)
+            register(changeAnnotation.name, it as Class<AbstractChange<*>>, changeAnnotation.type)
         }
     }
 
@@ -37,9 +37,9 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
         map.clear()
     }
 
-    override fun register(name: String, abstractChangeClass: Class<AbstractChange<*>>) {
-        "Registering change type, name: $name, class: ${abstractChangeClass.name}".logInfo()
-        map[name] = ChangeClassHolder.create(abstractChangeClass)
+    override fun register(name: String, abstractChangeClass: Class<AbstractChange<*>>, type: String) {
+        "Registering change type, name: $name, class: ${abstractChangeClass.name}, type: $type".logInfo()
+        map[name] = ChangeClassHolder.create(abstractChangeClass, type)
     }
 
     override fun get(name: String): IChangeClassHolder<AbstractChange<*>>? {

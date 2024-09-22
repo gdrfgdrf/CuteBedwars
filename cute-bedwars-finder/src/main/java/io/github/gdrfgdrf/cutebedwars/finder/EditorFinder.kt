@@ -13,7 +13,7 @@ import org.bukkit.entity.Player
 
 @ServiceImpl("editor_finder")
 object EditorFinder : IEditorFinder {
-    override fun find(sender: CommandSender, onFound: (AbstractEditor<*>) -> Unit): IFindResult {
+    override fun find(sender: CommandSender, message: Boolean, onFound: (AbstractEditor<*>) -> Unit): IFindResult {
         val findResult = FindResult()
         val uuid = if (sender is Player) {
             sender.uniqueId.toString()
@@ -23,9 +23,11 @@ object EditorFinder : IEditorFinder {
 
         val editor = IEditors.get().get(uuid)
         if (editor == null) {
-            localizationScope(sender) {
-                message(EditorLanguage.NOT_IN_EDITING_MODE)
-                    .send()
+            if (message) {
+                localizationScope(sender) {
+                    message(EditorLanguage.NOT_IN_EDITING_MODE)
+                        .send()
+                }
             }
         } else {
             findResult.found(true)

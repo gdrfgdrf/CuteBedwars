@@ -29,4 +29,6 @@ abstract class AbstractEditor<T>(val uuid: String, val t: T) {
 
         IEditors.get().remove(uuid)
     }
+
+    fun type(): Class<*> = t!!::class.java
 }
