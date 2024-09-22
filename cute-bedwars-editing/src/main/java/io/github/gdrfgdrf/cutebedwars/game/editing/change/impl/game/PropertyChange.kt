@@ -4,6 +4,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.beans.Convertible
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
@@ -20,22 +22,22 @@ class PropertyChange(
     private var previousValue: Any? = null
 
     override fun apply(t: IGameContext) {
-        if (key != "status" &&
+        if (key != "name" &&
+            key != "status" &&
             key != "min-player" &&
-            key != "max-player" &&
-            key != "spectator-spawnpoint-coordinate") {
+            key != "max-player") {
             throw ApplyException("property change applies only to keys \"status\", \"min-player\", \"max-player\", \"spectator-spawnpoint-coordinate\"")
         }
 
         "Applying $key: $value to game, game's id: ${t.game().id}, area's id: ${t.game().areaId}".logInfo()
 
         val game = t.game()
+        val convertible = Convertible.of(Game::class.java)
         when (key) {
-            "status" -> game.status = game.convert(Status::class.java, value)
-            "min-player" -> game.minPlayer = game.convert(java.lang.Integer::class.java, value)
-            "max-player" -> game.maxPlayer = game.convert(java.lang.Integer::class.java, value)
-            "spectator-spawnpoint-coordinate" -> game.spectatorSpawnpointCoordinate =
-                game.convert(Coordinate::class.java, value)
+            "name" -> game.name = convertible.invoke(java.lang.String::class.java, value)
+            "status" -> game.status = convertible.invoke(Status::class.java, value)
+            "min-player" -> game.minPlayer = convertible.invoke(java.lang.Integer::class.java, value)
+            "max-player" -> game.maxPlayer = convertible.invoke(java.lang.Integer::class.java, value)
         }
     }
 

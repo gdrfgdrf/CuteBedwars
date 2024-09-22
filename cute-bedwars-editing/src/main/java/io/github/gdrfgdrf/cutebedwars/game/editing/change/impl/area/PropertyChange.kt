@@ -4,6 +4,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContex
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.beans.Convertible
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
@@ -20,23 +22,24 @@ class PropertyChange(
     private var previousValue: Any? = null
 
     override fun apply(t: IAreaContext) {
-        if (key != "default-template-id" &&
+        if (key != "name" &&
+            key != "default-template-id" &&
             key != "status" &&
             key != "world-name" &&
-            key != "lobby-world-name" &&
-            key != "lobby-spawnpoint-coordinate") {
+            key != "lobby-world-name") {
             throw ApplyException("property change applies only to keys \"default-template-id\", \"status\", \"world-name\", \"lobby-world-name\", \"lobby-spawnpoint-coordinate\"")
         }
 
         "Applying $key: $value to area, area's id: ${t.manager().area().id}".logInfo()
 
         val area = t.manager().area()
+        val convertible = Convertible.of(Area::class.java)
         when (key) {
-            "default-template-id" -> area.defaultTemplateId = area.convert(java.lang.Long::class.java, value)
-            "status" -> area.status = area.convert(Status::class.java, value)
-            "world-name" -> area.worldName = area.convert(java.lang.String::class.java, value)
-            "lobby-world-name" -> area.lobbyWorldName = area.convert(java.lang.String::class.java, value)
-            "lobby-spawnpoint-coordinate" -> area.lobbySpawnpointCoordinate = area.convert(Coordinate::class.java, value)
+            "name" -> area.name = convertible.invoke(java.lang.String::class.java, value)
+            "default-template-id" -> area.defaultTemplateId = convertible.invoke(java.lang.Long::class.java, value)
+            "status" -> area.status = convertible.invoke(Status::class.java, value)
+            "world-name" -> area.worldName = convertible.invoke(java.lang.String::class.java, value)
+            "lobby-world-name" -> area.lobbyWorldName = convertible.invoke(java.lang.String::class.java, value)
         }
     }
 

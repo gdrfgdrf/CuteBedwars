@@ -11,7 +11,7 @@ class Convertible(clazz: Class<*>) {
         .orElseThrow()
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> invoke(targetType: Class<*>, any: Any): T {
+    fun <T> invoke(targetType: Class<*>, any: Any?): T {
         return method.invoke(null, targetType, any) as T
     }
 

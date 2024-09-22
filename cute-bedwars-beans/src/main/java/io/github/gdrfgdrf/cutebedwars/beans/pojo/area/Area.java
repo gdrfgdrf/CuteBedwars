@@ -22,7 +22,6 @@ public class Area {
     private Long id;
     private String name;
 
-    @UndefinableForPropertyChange
     @JsonProperty(value = "default-template-id")
     private Long defaultTemplateId;
     private Status status = Status.DISABLED;
@@ -48,6 +47,9 @@ public class Area {
         }
         if (targetType == Status.class) {
             return (T) Status.valueOf(obj.toString());
+        }
+        if (targetType == long.class || targetType == Long.class) {
+            return (T) Long.valueOf(Long.parseLong(obj.toString()));
         }
         return null;
     }
