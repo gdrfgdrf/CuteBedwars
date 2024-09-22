@@ -2,8 +2,8 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.area;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable;
-import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.ConvertPropertyFunction;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status;
@@ -17,12 +17,12 @@ import java.util.List;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Area implements PropertyConvertible {
-    @Undefinable
+public class Area {
+    @UndefinableForPropertyChange
     private Long id;
     private String name;
 
-    @Undefinable
+    @UndefinableForPropertyChange
     @JsonProperty(value = "default-template-id")
     private Long defaultTemplateId;
     private Status status = Status.DISABLED;
@@ -34,23 +34,20 @@ public class Area implements PropertyConvertible {
     private String lobbyWorldName;
 
     @JsonProperty(value = "lobby-spawnpoint-coordinate")
+    @UndefinableForPropertyChange
     private Coordinate lobbySpawnpointCoordinate;
 
-    @Undefinable
+    @UndefinableForPropertyChange
     private List<Game> games = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
-    @Override
-    public <T> T convert(Class<?> targetType, Object obj) {
+    @ConvertPropertyFunction
+    public static <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
             return (T) obj.toString();
         }
         if (targetType == Status.class) {
             return (T) Status.valueOf(obj.toString());
-        }
-        if (targetType == Coordinate.class) {
-            Coordinate coordinate = new Coordinate();
-            return coordinate.convert(targetType, obj);
         }
         return null;
     }

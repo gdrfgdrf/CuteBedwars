@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
  * @author gdrfgdrf
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface Undefinable {
+@Target(ElementType.METHOD)
+public @interface ConvertPropertyFunction {
 }

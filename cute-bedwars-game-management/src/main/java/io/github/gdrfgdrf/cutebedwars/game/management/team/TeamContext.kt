@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.game.management.team
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
+import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
 import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
@@ -18,14 +19,14 @@ class TeamContext(
     argumentSet: ArgumentSet,
 ) : ITeamContext, SetterImpl<Team>() {
     private val gameContext: IGameContext = argumentSet.args[0] as IGameContext
-    private val team: Team = argumentSet.args[1] as Team
+    private val team = argumentSet.args[1] as Team
 
     init {
         instanceGetter = {
             team
         }
         convert = { clazz, any ->
-            team.convert(clazz, any)
+            Convertible.of(Team::class.java).invoke(clazz, any)
         }
     }
 

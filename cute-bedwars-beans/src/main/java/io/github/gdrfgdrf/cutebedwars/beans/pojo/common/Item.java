@@ -1,7 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.beans.pojo.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.ConvertPropertyFunction;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import lombok.Data;
 
 /**
@@ -9,12 +10,13 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Item implements PropertyConvertible {
+public class Item {
+    @UndefinableForPropertyChange
     private String nbt;
 
     @SuppressWarnings("unchecked")
-    @Override
-    public <T> T convert(Class<?> targetType, Object obj) {
+    @ConvertPropertyFunction
+    public static  <T> T convert(Class<?> targetType, Object obj) {
         return (T) obj.toString();
     }
 }

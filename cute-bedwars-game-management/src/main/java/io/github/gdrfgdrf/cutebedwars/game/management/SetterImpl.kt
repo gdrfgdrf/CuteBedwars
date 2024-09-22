@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.game.management
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.ISetter
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.ConvertException
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.NotPositiveNumberException
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.UndefinablePropertyException
@@ -23,7 +23,7 @@ open class SetterImpl<T> : ISetter {
 
         var undefinable = false
         var positiveNumber = false
-        if (declaredField.isAnnotationPresent(Undefinable::class.java)) {
+        if (declaredField.isAnnotationPresent(UndefinableForPropertyChange::class.java)) {
             undefinable = true
         }
         if (declaredField.isAnnotationPresent(PositiveNumber::class.java)) {

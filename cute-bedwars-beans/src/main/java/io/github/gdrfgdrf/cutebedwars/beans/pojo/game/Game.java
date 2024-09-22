@@ -2,9 +2,9 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.ConvertPropertyFunction;
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable;
-import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status;
@@ -20,15 +20,14 @@ import java.util.List;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Game implements PropertyConvertible {
-    @Undefinable
+public class Game {
+    @UndefinableForPropertyChange
     private Long id;
-    @Undefinable
+    @UndefinableForPropertyChange
     @JsonProperty(value = "area-id")
     private Long areaId;
 
     private String name;
-
     private Status status = Status.DISABLED;
 
     @PositiveNumber
@@ -38,24 +37,27 @@ public class Game implements PropertyConvertible {
     @JsonProperty(value = "max-player")
     private int maxPlayer;
 
+    @UndefinableForPropertyChange
     private Region region;
 
     @JsonProperty(value = "waiting-room")
+    @UndefinableForPropertyChange
     private WaitingRoom waitingRoom;
 
     @JsonProperty(value = "spectator-spawnpoint-coordinate")
+    @UndefinableForPropertyChange
     private Coordinate spectatorSpawnpointCoordinate;
 
-    @Undefinable
+    @UndefinableForPropertyChange
     @JsonProperty(value = "generator-groups")
     private List<GeneratorGroup> generatorGroups = new ArrayList<>();
 
-    @Undefinable
+    @UndefinableForPropertyChange
     private List<Team> teams = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
-    @Override
-    public <T> T convert(Class<?> targetType, Object obj) {
+    @ConvertPropertyFunction
+    public static  <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
             return (T) obj.toString();
         }
@@ -67,14 +69,6 @@ public class Game implements PropertyConvertible {
         }
         if (targetType == int.class || targetType == Integer.class) {
             return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
-        }
-        if (targetType == Region.class) {
-            Region region = new Region();
-            return region.convert(targetType, obj);
-        }
-        if (targetType == WaitingRoom.class) {
-            WaitingRoom waitingRoom = new WaitingRoom();
-            return waitingRoom.convert(targetType, obj);
         }
         return null;
     }

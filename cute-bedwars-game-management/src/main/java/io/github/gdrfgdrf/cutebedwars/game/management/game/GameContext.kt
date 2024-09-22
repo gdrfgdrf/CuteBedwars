@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
+import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
@@ -21,7 +22,7 @@ class GameContext(
     argumentSet: ArgumentSet,
 ) : IGameContext, SetterImpl<Game>() {
     private val areaContext: IAreaContext = argumentSet.args[0] as IAreaContext
-    private val game: Game = argumentSet.args[1] as Game
+    private val game = argumentSet.args[1] as Game
     private val teams = ArrayList<ITeamContext>()
 
     init {
@@ -29,7 +30,7 @@ class GameContext(
             game
         }
         convert = { clazz, any ->
-            game.convert(clazz, any)
+            Convertible.of(Game::class.java).invoke(clazz, any)
         }
 
         if (game.id == null) {

@@ -2,13 +2,12 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.team;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.ConvertPropertyFunction;
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.Undefinable;
-import io.github.gdrfgdrf.cutebedwars.beans.base.PropertyConvertible;
+import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game;
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.Generator;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.GeneratorGroup;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.villager.Villager;
 import lombok.Data;
@@ -21,10 +20,10 @@ import java.util.List;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Team implements PropertyConvertible {
-    @Undefinable
+public class Team {
+    @UndefinableForPropertyChange
     private Long id;
-    @Undefinable
+    @UndefinableForPropertyChange
     @JsonProperty(value = "game-id")
     private Long gameId;
     private String name;
@@ -37,39 +36,38 @@ public class Team implements PropertyConvertible {
     @JsonProperty(value = "max-player")
     private int maxPlayer;
 
+    @UndefinableForPropertyChange
     @JsonProperty(value = "region")
     private Region region;
+    @UndefinableForPropertyChange
     @JsonProperty(value = "operable-coordinates")
     private List<Coordinate> operableCoordinates = new ArrayList<>();
 
+    @UndefinableForPropertyChange
     @JsonProperty(value = "spawnpoint-coordinate")
     private Coordinate spawnpointCoordinate;
+    @UndefinableForPropertyChange
     @JsonProperty(value = "bed-coordinate")
     private Coordinate bedCoordinate;
 
-    @Undefinable
+    @UndefinableForPropertyChange
     private List<Villager> villagers = new ArrayList<>();
 
-    @Undefinable
+    @UndefinableForPropertyChange
     @JsonProperty(value = "generator-groups")
     private List<GeneratorGroup> generatorGroups = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
-    @Override
-    public <T> T convert(Class<?> targetType, Object obj) {
+    @ConvertPropertyFunction
+    public static  <T> T convert(Class<?> targetType, Object obj) {
         if (targetType == String.class) {
             return (T) obj.toString();
         }
         if (targetType == int.class || targetType == Integer.class) {
             return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
         }
-        if (targetType == Region.class) {
-            Region region = new Region();
-            return (T) region.convert(Coordinate.class, obj);
-        }
-        if (targetType == Coordinate.class) {
-            Coordinate coordinate = new Coordinate();
-            return (T) coordinate.convert(float.class, obj);
+        if (targetType == TeamColor.class) {
+            return (T) TeamColor.valueOf(obj.toString());
         }
         return null;
     }

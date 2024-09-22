@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
+import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
@@ -29,7 +30,7 @@ class AreaContext(
             manager.area()
         }
         convert = { clazz, any ->
-            manager.area().convert(clazz, any)
+            Convertible.of(Area::class.java).invoke(clazz, any)
         }
     }
 
