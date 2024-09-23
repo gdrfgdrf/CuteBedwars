@@ -22,6 +22,8 @@ public class EditorLanguage implements LanguageCollect {
     public static LanguageString ADD_CHANGE_ERROR;
     public static LanguageString ADD_CHANGE_SUCCESS;
 
-    public static LanguageString CHANGE_NAME_IS;
+    public static LanguageString CHANGE_LIST_IS_EMPTY;
+    public static LanguageString CHANGE_FORMAT;
 
+    public static LanguageString ARGUMENT_ERROR;
 }

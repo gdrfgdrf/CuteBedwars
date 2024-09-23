@@ -15,7 +15,10 @@ object ChangesInformation : IChangesInformation {
             val messages = arrayListOf<ILocalizationMessage>()
 
             changes.forEach {
-                messages.add(message(EditorLanguage.CHANGE_NAME_IS).format(it.name))
+                messages.add(
+                    message(EditorLanguage.CHANGE_FORMAT)
+                        .format(it.annotationName(), it.name)
+                )
             }
 
             return@localizationScope messages

@@ -21,7 +21,6 @@ object ChangesFinder : IChangesFinder {
         }
         editor ?: return findResult
 
-
         if (editor!!.currentChanges() == null) {
             localizationScope(sender) {
                 message(EditorLanguage.CHANGE_LIST_IS_NULL)

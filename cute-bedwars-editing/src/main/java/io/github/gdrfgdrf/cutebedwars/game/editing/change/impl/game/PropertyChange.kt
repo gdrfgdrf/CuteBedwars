@@ -11,7 +11,12 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 
-@Change("game-property-change", "io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext")
+@Change(
+    "game-property-change",
+    "io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext",
+    2,
+    2
+)
 class PropertyChange(
     private val key: String,
     private val value: Any?,
@@ -21,12 +26,16 @@ class PropertyChange(
 
     private var previousValue: Any? = null
 
+    override fun validate(): Boolean {
+        return !(key != "name" &&
+                key != "status" &&
+                key != "min-player" &&
+                key != "max-player")
+    }
+
     override fun apply(t: IGameContext) {
-        if (key != "name" &&
-            key != "status" &&
-            key != "min-player" &&
-            key != "max-player") {
-            throw ApplyException("property change applies only to keys \"name\", \"status\", \"min-player\", \"max-player\"")
+        if (!validate()) {
+            throw ApplyException("game property change applies only to keys \"name\", \"status\", \"min-player\", \"max-player\"")
         }
 
         "Applying $key: $value to game, game's id: ${t.game().id}, area's id: ${t.game().areaId}".logInfo()

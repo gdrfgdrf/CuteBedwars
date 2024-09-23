@@ -13,6 +13,7 @@ interface IChanges<T> {
     fun redo()
     fun finish()
 
+    fun size(): Int
     fun forEach(block: (AbstractChange<T>) -> Unit)
 
     companion object {

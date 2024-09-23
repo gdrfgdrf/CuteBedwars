@@ -21,7 +21,7 @@ enum class Commands(
     HELP("help", false, 0..0, Permissions.HELP, true),
     RELOAD("reload", false, 0..0, Permissions.RELOAD, true),
     QUERY_DESCRIPTION(
-        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true, CommandNodes.ALLOW_NO_ARGS_ON_ROOT,
+        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true, CommandNodes.ROOT,
         arrayOf(
             IParamScheme.get {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
@@ -162,6 +162,10 @@ enum class Commands(
         val part = node.get(string)
 
         if (paramSchemes.isNullOrEmpty()) {
+            if (part.endsWith("args")) {
+                return part.substring(0, part.indexOf("args"))
+            }
+
             return part
         }
         return "$part ${getFirstParams()}"

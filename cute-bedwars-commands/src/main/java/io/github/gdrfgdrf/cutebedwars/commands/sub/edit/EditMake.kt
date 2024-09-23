@@ -24,6 +24,7 @@ object EditMake : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_MAKE
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_MAKE
 
+    @Suppress("UNCHECKED_CAST")
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
@@ -31,7 +32,21 @@ object EditMake : AbstractSubCommand(
             val changeTypeName = args[0]
             val changeClassHolder = IChangeTypeRegistry.get().get(changeTypeName) ?: return@localizationScope
 
-            val change: AbstractChange<*> = changeClassHolder.create(*args)
+            val newArgs = arrayOfNulls<String>(args.size - 1)
+            System.arraycopy(args, 1, newArgs, 0, args.size - 1)
+
+            if (!changeClassHolder.validateArgsLength(*(newArgs as Array<out Any>))) {
+                message(EditorLanguage.ARGUMENT_ERROR)
+                    .send()
+                return@localizationScope
+            }
+            val change: AbstractChange<*> = changeClassHolder.create(*(newArgs as Array<out Any>))
+            if (!changeClassHolder.validate(change)) {
+                message(EditorLanguage.ARGUMENT_ERROR)
+                    .send()
+                return@localizationScope
+            }
+
             val addResult = changes.tryAdd(change)
 
             if (!addResult) {

@@ -81,6 +81,10 @@ class Changes<T> : IChanges<T> {
         operable = false
     }
 
+    override fun size(): Int {
+        return changes.size
+    }
+
     override fun forEach(block: (AbstractChange<T>) -> Unit) {
         changes.forEach(block)
     }

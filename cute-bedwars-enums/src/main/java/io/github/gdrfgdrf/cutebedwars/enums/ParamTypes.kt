@@ -179,7 +179,9 @@ enum class ParamTypes : IParamTypes {
             val names = arrayListOf<String>()
             if (editor != null) {
                 IChangeTypeRegistry.get().forEach { s, changeType ->
-                    if (changeType.type() == editor!!.type()) {
+                    if (changeType.type() == editor!!.type() ||
+                        editor!!.t!!::class.java.superclass == changeType.type() ||
+                        editor!!.t!!::class.java.interfaces.contains(changeType.type())) {
                         names.add(s)
                     }
                 }
@@ -196,7 +198,9 @@ enum class ParamTypes : IParamTypes {
             val names = arrayListOf<String>()
             if (editor != null) {
                 IChangeTypeRegistry.get().forEach { s, changeType ->
-                    if (changeType.type() == editor!!.type()) {
+                    if (changeType.type() == editor!!.type() ||
+                        editor!!.t!!::class.java.superclass == changeType.type() ||
+                        editor!!.t!!::class.java.interfaces.contains(changeType.type())) {
                         names.add(s)
                     }
                 }

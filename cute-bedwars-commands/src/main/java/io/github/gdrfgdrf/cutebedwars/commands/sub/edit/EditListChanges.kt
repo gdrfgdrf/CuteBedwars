@@ -9,6 +9,8 @@ import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterChangesFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
+import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
@@ -20,18 +22,26 @@ object EditListChanges : AbstractSubCommand(
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_LIST_CHANGES
 
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
-        val changes = BetterChangesFinder.find(sender) ?: return
-        val pageIndex = if (paramSchemeIndex == ParamScheme.NO_MATCH) {
-            1
-        } else {
-            args[0].toIntOrDefault(1)
-        }
+        localizationScope(sender) {
+            val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
+            val pageIndex = if (paramSchemeIndex == ParamScheme.NO_MATCH) {
+                1
+            } else {
+                args[0].toIntOrDefault(1)
+            }
 
-        val messages = IChangesInformation.get().convert(sender, changes)
+            if (changes.size() <= 0) {
+                message(EditorLanguage.CHANGE_LIST_IS_EMPTY)
+                    .send()
+                return@localizationScope
+            }
 
-        val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), messages.size.toString()) {
-            messages
+            val messages = IChangesInformation.get().convert(sender, changes)
+
+            val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), messages.size.toString()) {
+                messages
+            }
+            chatPage.send(pageIndex - 1)
         }
-        chatPage.send(pageIndex - 1)
     }
 }
