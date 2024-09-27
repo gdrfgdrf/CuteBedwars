@@ -30,7 +30,11 @@ object InfoArea : AbstractSubCommand(
             val findType: String
             val identifier: String
             val pageIndex = if (paramSchemeIndex == 2 || paramSchemeIndex == 0) {
-                args[2].toIntOrDefault(1)
+                if (paramSchemeIndex == 2) {
+                    args[2].toIntOrDefault(1)
+                } else {
+                    args[0].toIntOrDefault(1)
+                }
             } else {
                 1
             }
