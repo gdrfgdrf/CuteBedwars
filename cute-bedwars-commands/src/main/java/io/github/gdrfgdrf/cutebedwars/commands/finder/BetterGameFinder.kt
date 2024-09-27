@@ -33,4 +33,26 @@ object BetterGameFinder {
         }
         return gameContext
     }
+
+    fun multipleResult(
+        sender: CommandSender,
+        findType: String,
+        areaManager: IAreaManager,
+        identifier: String
+    ): List<IGameContext>? {
+        val gameContexts = arrayListOf<IGameContext>()
+
+        val findResult = IGameFinder.get().find(
+            sender,
+            IFindType.find(findType),
+            areaManager,
+            identifier,
+        ) {
+            gameContexts.add(it)
+        }
+        if (!findResult.found() || gameContexts.isEmpty()) {
+            return null
+        }
+        return gameContexts
+    }
 }

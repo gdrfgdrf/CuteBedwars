@@ -46,9 +46,9 @@ object InfoGame : AbstractSubCommand(
                 val gameFindType = args[2]
                 gameIdentifier = args[3]
 
-                val gameContext =
-                    BetterGameFinder.find(sender, gameFindType, areaManager, gameIdentifier) ?: return@localizationScope
-                gameContexts.add(gameContext)
+                val foundGameContexts =
+                    BetterGameFinder.multipleResult(sender, gameFindType, areaManager, gameIdentifier) ?: return@localizationScope
+                gameContexts.addAll(foundGameContexts)
             }
 
             val chatPage = IChatPage.get(
