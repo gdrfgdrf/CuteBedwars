@@ -22,4 +22,5 @@ class CommandDescriptionLanguage implements LanguageBlock {
     public static final LanguageString EDIT_NEW_CHANGES = new LanguageString("新建一个修改列表");
     public static final LanguageString EDIT_MAKE = new LanguageString("向当前修改列表中添加一个修改");
     public static final LanguageString EDIT_LIST_CHANGES = new LanguageString("列出当前修改列表中的所有修改");
+    public static final LanguageString EDIT_EXIT = new LanguageString("退出编辑模式");
 }

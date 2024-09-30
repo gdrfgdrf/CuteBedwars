@@ -16,6 +16,15 @@ fun String.isInt(): Boolean {
     return true
 }
 
+fun String.toBooleanOrNull(): Boolean? {
+    runCatching {
+        return toBoolean()
+    }.onFailure {
+        return null
+    }
+    return null
+}
+
 fun String.toIntOrDefault(defaultValue: Int): Int {
     runCatching {
         return toInt()

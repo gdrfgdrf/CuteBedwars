@@ -8,11 +8,28 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.utils.extension.isInt
 import io.github.gdrfgdrf.cutebedwars.utils.extension.isLong
+import io.github.gdrfgdrf.cutebedwars.utils.extension.toBooleanOrNull
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.command.CommandSender
 
 @EnumServiceImpl("param_types_enum")
 enum class ParamTypes : IParamTypes {
+    BOOLEAN {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+            if (any.isInt()) {
+                return false
+            }
+
+            return any.toBooleanOrNull() != null
+        }
+
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+            return arrayListOf("true", "false")
+        }
+    },
     NOT_BLANK_STRING {
         override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {

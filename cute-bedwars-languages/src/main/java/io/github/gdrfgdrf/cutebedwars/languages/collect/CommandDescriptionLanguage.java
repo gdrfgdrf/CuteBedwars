@@ -22,4 +22,5 @@ public class CommandDescriptionLanguage implements LanguageCollect {
     public static LanguageString EDIT_NEW_CHANGES;
     public static LanguageString EDIT_MAKE;
     public static LanguageString EDIT_LIST_CHANGES;
+    public static LanguageString EDIT_EXIT;
 }

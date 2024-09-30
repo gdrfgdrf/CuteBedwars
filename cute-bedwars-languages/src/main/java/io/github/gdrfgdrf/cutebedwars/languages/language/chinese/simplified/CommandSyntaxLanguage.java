@@ -23,4 +23,5 @@ class CommandSyntaxLanguage implements LanguageBlock {
     public static final LanguageString EDIT_NEW_CHANGES = new LanguageString(ICommands.Companion.valueOf("EDIT_NEW_CHANGES").getShort());
     public static final LanguageString EDIT_MAKE = new LanguageString(ICommands.Companion.valueOf("EDIT_MAKE").getShort());
     public static final LanguageString EDIT_LIST_CHANGES = new LanguageString(ICommands.Companion.valueOf("EDIT_LIST_CHANGES").getShort());
+    public static final LanguageString EDIT_EXIT = new LanguageString(ICommands.Companion.valueOf("EDIT_EXIT").getShort());
 }

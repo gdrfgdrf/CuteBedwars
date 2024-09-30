@@ -134,6 +134,14 @@ enum class Commands(
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )
+    ),
+    EDIT_EXIT(
+        "exit", false, 0..1, Permissions.EDIT_EXIT, true, CommandNodes.EDIT,
+        arrayOf(
+            IParamScheme.get {
+                add("APPLY_CHANGES", "BOOLEAN")
+            }
+        )
     )
 
     ;

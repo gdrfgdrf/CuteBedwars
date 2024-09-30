@@ -25,5 +25,10 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString CHANGE_LIST_IS_EMPTY = new LanguageString("&c当前修改列表为空");
     public static final LanguageString CHANGE_FORMAT = new LanguageString("&a修改类型&8: &e&l%s &r&8- &a修改名&8: &e&l%s");
 
+    public static final LanguageString EXITING_EDITOR = new LanguageString("&e正在退出编辑器");
+    public static final LanguageString EXITING_WITHOUT_APPLYING_WARNING = new LanguageString("&c将会丢弃所有更改，若继续操作，请在 &e&l%s &r&c秒内再次输入以确定");
+    public static final LanguageString APPLYING_CHANGES = new LanguageString("&e正在应用修改");
+    public static final LanguageString EXIT_FINISHED = new LanguageString("&a编辑器已退出");
+
     public static final LanguageString ARGUMENT_ERROR = new LanguageString("&c参数错误，请使用 /cbw query-description 查看具体说明");
 }
