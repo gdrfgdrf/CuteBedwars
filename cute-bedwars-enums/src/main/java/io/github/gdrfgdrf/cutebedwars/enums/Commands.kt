@@ -170,8 +170,8 @@ enum class Commands(
         val part = node.get(string)
 
         if (paramSchemes.isNullOrEmpty()) {
-            if (part.endsWith("args")) {
-                return part.substring(0, part.indexOf("args"))
+            if (part.endsWith(" args")) {
+                return part.substring(0, part.indexOf(" args"))
             }
 
             return part
