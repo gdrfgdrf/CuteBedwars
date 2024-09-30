@@ -31,7 +31,7 @@ object EditExit : AbstractSubCommand(
             }
             val requests = IRequests.get()
 
-            if (applyChange) {
+            if (!applyChange) {
                 val pair = requests.auto(type = IRequestTypes.valueOf("EDIT_EXITING_WITHOUT_APPLYING"), sender = sender)
                 val new = pair.first
                 val request = pair.second
