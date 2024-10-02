@@ -61,9 +61,6 @@ public class Game {
         if (targetType == String.class) {
             return (T) obj.toString();
         }
-        if (targetType == Status.class) {
-            return (T)  Status.valueOf(obj.toString());
-        }
         if (targetType == boolean.class || targetType == Boolean.class) {
             return (T) Boolean.valueOf(Boolean.parseBoolean(obj.toString()));
         }

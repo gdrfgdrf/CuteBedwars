@@ -28,14 +28,13 @@ class PropertyChange(
 
     override fun validate(): Boolean {
         return !(key != "name" &&
-                key != "status" &&
                 key != "min-player" &&
                 key != "max-player")
     }
 
     override fun apply(t: IGameContext) {
         if (!validate()) {
-            throw ApplyException("game property change applies only to keys \"name\", \"status\", \"min-player\", \"max-player\"")
+            throw ApplyException("game property change applies only to keys \"name\", \"min-player\", \"max-player\"")
         }
 
         "Applying $key: $value to game, game's id: ${t.game().id}, area's id: ${t.game().areaId}".logInfo()
@@ -44,7 +43,6 @@ class PropertyChange(
         val convertible = Convertible.of(Game::class.java)
         when (key) {
             "name" -> game.name = convertible.invoke(java.lang.String::class.java, value)
-            "status" -> game.status = convertible.invoke(Status::class.java, value)
             "min-player" -> game.minPlayer = convertible.invoke(java.lang.Integer::class.java, value)
             "max-player" -> game.maxPlayer = convertible.invoke(java.lang.Integer::class.java, value)
         }

@@ -28,14 +28,13 @@ class PropertyChange(
     override fun validate(): Boolean {
         return !(key != "name" &&
                 key != "default-template-id" &&
-                key != "status" &&
                 key != "world-name" &&
                 key != "lobby-world-name")
     }
 
     override fun apply(t: IAreaContext) {
         if (!validate()) {
-            throw ApplyException("area property change applies only to keys \"name\", \"default-template-id\", \"status\", \"world-name\", \"lobby-world-name\"")
+            throw ApplyException("area property change applies only to keys \"name\", \"default-template-id\", \"world-name\", \"lobby-world-name\"")
         }
 
         "Applying $key: $value to area, area's id: ${t.manager().area().id}".logInfo()
@@ -45,7 +44,6 @@ class PropertyChange(
         when (key) {
             "name" -> area.name = convertible.invoke(java.lang.String::class.java, value)
             "default-template-id" -> area.defaultTemplateId = convertible.invoke(java.lang.Long::class.java, value)
-            "status" -> area.status = convertible.invoke(Status::class.java, value)
             "world-name" -> area.worldName = convertible.invoke(java.lang.String::class.java, value)
             "lobby-world-name" -> area.lobbyWorldName = convertible.invoke(java.lang.String::class.java, value)
         }

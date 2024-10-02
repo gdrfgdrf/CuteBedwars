@@ -45,9 +45,6 @@ public class Area {
         if (targetType == String.class) {
             return (T) obj.toString();
         }
-        if (targetType == Status.class) {
-            return (T) Status.valueOf(obj.toString());
-        }
         if (targetType == long.class || targetType == Long.class) {
             return (T) Long.valueOf(Long.parseLong(obj.toString()));
         }
