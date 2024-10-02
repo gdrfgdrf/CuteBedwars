@@ -108,6 +108,7 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString TEMPLATE_NAME;
     public static LanguageString TEMPLATE_PROPERTY;
 
+    public static LanguageString COMMIT_MESSAGE;
     public static LanguageString APPLY_CHANGES;
     public static LanguageString CHANGE_TYPE;
     public static LanguageString AREA_PROPERTY_CHANGE;

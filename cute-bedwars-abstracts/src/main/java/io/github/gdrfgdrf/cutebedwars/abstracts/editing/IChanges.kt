@@ -11,12 +11,12 @@ interface IChanges<T> {
     fun add(change: AbstractChange<T>)
     fun undo()
     fun redo()
-    fun finish()
+    fun finish(): ICommit<T>
 
     fun size(): Int
     fun forEach(block: (AbstractChange<T>) -> Unit)
 
     companion object {
-        fun <T> get(): IChanges<T> = Mediator.get(IChanges::class.java)!!
+        fun <T> new(): IChanges<T> = Mediator.get(IChanges::class.java)!!
     }
 }

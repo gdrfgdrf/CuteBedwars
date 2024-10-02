@@ -7,8 +7,18 @@ abstract class AbstractEditor<T>(val uuid: String, val t: T) {
     fun currentChanges(): IChanges<T>? = currentChanges
 
     fun newChanges(): IChanges<T> {
-        currentChanges = IChanges.get()
+        currentChanges = IChanges.new()
         return currentChanges!!
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun tryAdd(commit: ICommit<*>): Boolean {
+        runCatching {
+            commits.add(commit as ICommit<T>)
+        }.onFailure {
+            return false
+        }
+        return true
     }
 
     fun add(commit: ICommit<T>) {

@@ -113,6 +113,7 @@ enum class Descriptions(
     TEMPLATE_NAME(DescriptionLanguage::TEMPLATE_NAME, true),
     TEMPLATE_PROPERTY(DescriptionLanguage::TEMPLATE_PROPERTY, true),
 
+    COMMIT_MESSAGE(DescriptionLanguage::COMMIT_MESSAGE, true),
     APPLY_CHANGES(DescriptionLanguage::APPLY_CHANGES, true),
     CHANGE_TYPE(DescriptionLanguage::CHANGE_TYPE, true),
     AREA_PROPERTY_CHANGE(DescriptionLanguage::AREA_PROPERTY_CHANGE, true),

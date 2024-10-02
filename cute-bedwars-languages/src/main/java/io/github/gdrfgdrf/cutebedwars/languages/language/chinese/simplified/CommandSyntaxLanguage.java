@@ -8,20 +8,25 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
  * @author gdrfgdrf
  */
 class CommandSyntaxLanguage implements LanguageBlock {
-    public static final LanguageString HELP = new LanguageString(ICommands.Companion.valueOf("HELP").getShort());
-    public static final LanguageString RELOAD = new LanguageString(ICommands.Companion.valueOf("RELOAD").getShort());
-    public static final LanguageString QUERY_DESCRIPTION = new LanguageString(ICommands.Companion.valueOf("QUERY_DESCRIPTION").getShort());
-    public static final LanguageString INFO_COMMANDS = new LanguageString(ICommands.Companion.valueOf("INFO_COMMANDS").getShort());
+    public static final LanguageString HELP = string("HELP");
+    public static final LanguageString RELOAD = string("RELOAD");
+    public static final LanguageString QUERY_DESCRIPTION = string("QUERY_DESCRIPTION");
+    public static final LanguageString INFO_COMMANDS = string("INFO_COMMANDS");
 
-    public static final LanguageString CREATE_AREA = new LanguageString(ICommands.Companion.valueOf("CREATE_AREA").getShort());
-    public static final LanguageString INFO_AREA = new LanguageString(ICommands.Companion.valueOf("INFO_AREA").getShort());
-    public static final LanguageString EDITOR_AREA = new LanguageString(ICommands.Companion.valueOf("EDITOR_AREA").getShort());
+    public static final LanguageString CREATE_AREA = string("CREATE_AREA");
+    public static final LanguageString INFO_AREA = string("INFO_AREA");
+    public static final LanguageString EDITOR_AREA = string("EDITOR_AREA");
 
-    public static final LanguageString CREATE_GAME = new LanguageString(ICommands.Companion.valueOf("CREATE_GAME").getShort());
-    public static final LanguageString INFO_GAME = new LanguageString(ICommands.Companion.valueOf("INFO_GAME").getShort());
+    public static final LanguageString CREATE_GAME = string("CREATE_GAME");
+    public static final LanguageString INFO_GAME = string("INFO_GAME");
 
-    public static final LanguageString EDIT_NEW_CHANGES = new LanguageString(ICommands.Companion.valueOf("EDIT_NEW_CHANGES").getShort());
-    public static final LanguageString EDIT_MAKE = new LanguageString(ICommands.Companion.valueOf("EDIT_MAKE").getShort());
-    public static final LanguageString EDIT_LIST_CHANGES = new LanguageString(ICommands.Companion.valueOf("EDIT_LIST_CHANGES").getShort());
-    public static final LanguageString EDIT_EXIT = new LanguageString(ICommands.Companion.valueOf("EDIT_EXIT").getShort());
+    public static final LanguageString EDIT_NEW_CHANGES = string("EDIT_NEW_CHANGES");
+    public static final LanguageString EDIT_MAKE = string("EDIT_MAKE");
+    public static final LanguageString EDIT_LIST_CHANGES = string("EDIT_LIST_CHANGES");
+    public static final LanguageString EDIT_COMMIT = string("EDIT_COMMIT");
+    public static final LanguageString EDIT_EXIT = string("EDIT_EXIT");
+
+    private static LanguageString string(String name) {
+        return new LanguageString(ICommands.Companion.valueOf(name).get());
+    }
 }

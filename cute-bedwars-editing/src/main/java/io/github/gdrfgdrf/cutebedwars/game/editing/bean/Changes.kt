@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.bean
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.InoperableChangesException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.RedoException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.UndoException
@@ -76,9 +77,10 @@ class Changes<T> : IChanges<T> {
         add(change)
     }
 
-    override fun finish() {
+    override fun finish(): ICommit<T> {
         "Finishing changes".logInfo()
         operable = false
+        return Commit(this)
     }
 
     override fun size(): Int {

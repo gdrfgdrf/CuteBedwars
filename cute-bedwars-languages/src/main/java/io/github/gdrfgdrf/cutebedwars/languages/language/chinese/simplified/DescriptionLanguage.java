@@ -113,6 +113,7 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString TEMPLATE_NAME = new LanguageString("模板名称，可重复，但不建议重复。若区域要应用模板，可使用该值进行应用，但若该值于其他模板有重复，则需要使用模板 ID 进行应用");
     public static final LanguageString TEMPLATE_PROPERTY = new LanguageString("模板属性");
 
+    public static final LanguageString COMMIT_MESSAGE = new LanguageString("提交描述信息");
     public static final LanguageString APPLY_CHANGES = new LanguageString("应用修改，true 则应用，false 则不应用，其他值无效");
     public static final LanguageString CHANGE_TYPE = new LanguageString("修改类型");
     public static final LanguageString AREA_PROPERTY_CHANGE = new LanguageString("区域属性修改，可接受两个参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 default-template-id，status，world-name，lobby-world-name，lobby-spawnpoint-coordinate");

@@ -135,6 +135,14 @@ enum class Commands(
             }
         )
     ),
+    EDIT_COMMIT(
+        "commit", false, 0..1, Permissions.EDIT_COMMIT, true, CommandNodes.EDIT,
+        arrayOf(
+            IParamScheme.get {
+                add("COMMIT_MESSAGE", "NOT_BLANK_STRING")
+            }
+        )
+    ),
     EDIT_EXIT(
         "exit", false, 0..1, Permissions.EDIT_EXIT, true, CommandNodes.EDIT,
         arrayOf(
