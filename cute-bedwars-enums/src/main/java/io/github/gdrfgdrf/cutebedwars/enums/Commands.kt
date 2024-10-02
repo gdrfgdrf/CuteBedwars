@@ -143,6 +143,14 @@ enum class Commands(
             }
         )
     ),
+    EDIT_REVERT_COMMIT(
+        "revert", false, 1..1, Permissions.EDIT_REVERT_COMMIT, false, CommandNodes.EDIT,
+        arrayOf(
+            IParamScheme.new {
+                add("COMMIT_ID", "COMMIT_IDS")
+            }
+        )
+    ),
     EDIT_EXIT(
         "exit", false, 0..0, Permissions.EDIT_EXIT, true, CommandNodes.EDIT,
     ),

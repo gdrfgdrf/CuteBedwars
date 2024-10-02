@@ -1,6 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IEditorFinder
@@ -222,7 +224,8 @@ enum class ParamTypes : IParamTypes {
                 IChangeTypeRegistry.instance().forEach { s, changeType ->
                     if (changeType.type() == editor!!.type() ||
                         editor!!.t!!::class.java.superclass == changeType.type() ||
-                        editor!!.t!!::class.java.interfaces.contains(changeType.type())) {
+                        editor!!.t!!::class.java.interfaces.contains(changeType.type())
+                    ) {
                         names.add(s)
                     }
                 }
@@ -241,13 +244,59 @@ enum class ParamTypes : IParamTypes {
                 IChangeTypeRegistry.instance().forEach { s, changeType ->
                     if (changeType.type() == editor!!.type() ||
                         editor!!.t!!::class.java.superclass == changeType.type() ||
-                        editor!!.t!!::class.java.interfaces.contains(changeType.type())) {
+                        editor!!.t!!::class.java.interfaces.contains(changeType.type())
+                    ) {
                         names.add(s)
                     }
                 }
             }
 
             return names
+        }
+    },
+    COMMIT_IDS {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+
+            val ids = findIds(sender)
+            return ids.contains(any)
+        }
+
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+            return findIds(sender)
+        }
+
+        private fun findIds(sender: CommandSender): MutableList<String> {
+            var editor: AbstractEditor<*>? = null
+            IEditorFinder.instance().find(sender, false) {
+                editor = it
+            }
+
+            val ids = arrayListOf<String>()
+            if (editor != null) {
+                if (editor is AbstractAreaEditor) {
+                    val commitStorage = (editor as AbstractAreaEditor).t.manager().commitStorage()
+                    val commits = commitStorage.get()
+                    commits?.commitsList?.forEach {
+                        ids.add(it.id)
+                    }
+                }
+                if (editor is AbstractGameEditor) {
+                    val gameContext = (editor as AbstractGameEditor).t
+
+                    val commitStorage = gameContext.commitStorage()
+                    val gameCommits = commitStorage.get()
+                    val commitsList = gameCommits?.getMapOrDefault(gameContext.game().id.toString(), null)?.commitsList
+
+                    commitsList?.forEach {
+                        ids.add(it.id)
+                    }
+                }
+            }
+
+            return ids
         }
     }
 

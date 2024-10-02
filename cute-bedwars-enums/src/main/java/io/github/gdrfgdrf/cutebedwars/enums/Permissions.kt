@@ -34,6 +34,7 @@ enum class Permissions(
     EDIT_MAKE(PermissionGroups.ADMIN, "edit.make"),
     EDIT_LIST_CHANGES(PermissionGroups.ADMIN, "edit.list_changes"),
     EDIT_COMMIT(PermissionGroups.ADMIN, "edit.commit"),
+    EDIT_REVERT_COMMIT(PermissionGroups.ADMIN, "edit.revert_commit"),
     EDIT_EXIT(PermissionGroups.ADMIN, "edit.exit"),
 
     EDIT_LIST_AREA_COMMITS(PermissionGroups.ADMIN, "edit.list_area_commits"),

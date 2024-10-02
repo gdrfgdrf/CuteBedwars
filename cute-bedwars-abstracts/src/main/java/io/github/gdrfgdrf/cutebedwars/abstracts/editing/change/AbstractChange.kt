@@ -4,6 +4,7 @@ abstract class AbstractChange<T>(val name: String) {
     abstract fun validate(): Boolean
     abstract fun apply(t: T)
     abstract fun makeUndo(): AbstractChange<T>
+    abstract fun args(): Array<Any?>
 
     @Suppress("UNCHECKED_CAST")
     fun annotationName(): String {

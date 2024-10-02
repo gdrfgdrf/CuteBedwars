@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.tasks.worker
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.tasks.entry.FutureTaskEntry
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo

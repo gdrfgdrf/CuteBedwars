@@ -34,6 +34,10 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString APPLY_ERROR = new LanguageString("&c无法应用修改");
     public static final LanguageString COMMIT_SAVED = new LanguageString("&a提交保存完成");
 
+    public static final LanguageString REVERTING_COMMIT = new LanguageString("&e正在撤回 %s 个提交");
+    public static final LanguageString REVERT_COMMIT_FINISHED = new LanguageString("&a撤回提交完成");
+    public static final LanguageString REVERT_COMMIT_ERROR = new LanguageString("&c撤回提交失败");
+
     public static final LanguageString EXITING_EDITOR = new LanguageString("&e正在退出编辑器");
     public static final LanguageString EXIT_FINISHED = new LanguageString("&a编辑器已退出");
 
@@ -45,4 +49,6 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString COMMIT_MESSAGE_IS = new LanguageString("&a提交信息&8: &e&l%s");
     public static final LanguageString COMMIT_CHANGES_IS = new LanguageString("&a提交的修改&8: ");
     public static final LanguageString COMMIT_CHANGES_FORMAT = new LanguageString("&8- &a修改类型&8: &e&l%s &r&8- &a修改名&8: &e&l%s");
+
+    public static final LanguageString NOT_FOUND_COMMIT = new LanguageString("找不到指定的提交");
 }

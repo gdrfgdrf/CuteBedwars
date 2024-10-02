@@ -24,4 +24,5 @@ message Commit {
 message Change {
     string type = 1;
     string name = 2;
+    repeated string args = 3;
 }

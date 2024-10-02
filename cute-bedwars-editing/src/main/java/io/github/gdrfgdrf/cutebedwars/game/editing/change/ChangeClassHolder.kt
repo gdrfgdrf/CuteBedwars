@@ -11,9 +11,14 @@ class ChangeClassHolder<T : AbstractChange<*>>(
 ) : IChangeClassHolder<T> {
     private val typeClass = Class.forName(type)
 
-    override fun validateArgsLength(vararg any: Any): Boolean {
+    override fun validateArgsLength(protobuf: Boolean, vararg any: Any): Boolean {
         val change = clazz.getAnnotation(Change::class.java)
-        val argsRange = change.minArgs..change.maxArgs
+        val argsRange = if (protobuf) {
+            change.minArgs..change.maxArgsForProtobuf
+        } else {
+            change.minArgs..change.maxArgs
+        }
+
         return argsRange.contains(any.size)
     }
 

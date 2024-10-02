@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 
 abstract class AbstractAreaEditor(uuid: String, private val areaContext: IAreaContext) : AbstractEditor<IAreaContext>(uuid, areaContext) {
+    @Synchronized
     fun save(allFinished: () -> Unit) {
         val commitStorage = areaContext.manager().commitStorage()
 
@@ -10,5 +11,7 @@ abstract class AbstractAreaEditor(uuid: String, private val areaContext: IAreaCo
             commitStorage.save(it) {}
             allFinished()
         }
+
+        clear()
     }
 }

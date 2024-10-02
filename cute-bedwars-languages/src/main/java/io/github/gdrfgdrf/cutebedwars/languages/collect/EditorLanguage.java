@@ -34,6 +34,10 @@ public class EditorLanguage implements LanguageCollect {
     public static LanguageString APPLY_ERROR;
     public static LanguageString COMMIT_SAVED;
 
+    public static LanguageString REVERTING_COMMIT;
+    public static LanguageString REVERT_COMMIT_FINISHED;
+    public static LanguageString REVERT_COMMIT_ERROR;
+
     public static LanguageString EXITING_EDITOR;
     public static LanguageString EXIT_FINISHED;
 
@@ -45,4 +49,6 @@ public class EditorLanguage implements LanguageCollect {
     public static LanguageString COMMIT_MESSAGE_IS;
     public static LanguageString COMMIT_CHANGES_IS;
     public static LanguageString COMMIT_CHANGES_FORMAT;
+
+    public static LanguageString NOT_FOUND_COMMIT;
 }

@@ -15,6 +15,11 @@ object Convertors {
             val changeProtobuf = StorageProto.Change.newBuilder()
                 .setType(change.annotationName())
                 .setName(change.name)
+                .addAllArgs(arrayListOf<String?>().apply {
+                    change.args().forEach {
+                        add(it.toString())
+                    }
+                })
                 .build()
 
             commitBuilder.addChanges(changeProtobuf)

@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IProtobufCommitInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
@@ -28,7 +29,7 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
             )
             messages.add(
                 message(EditorLanguage.COMMIT_MESSAGE_IS)
-                    .format(commit.message)
+                    .format(commit.message.ifBlank { message(CommonLanguage.NONE).toString() })
             )
             messages.add(
                 message(EditorLanguage.COMMIT_CHANGES_IS)

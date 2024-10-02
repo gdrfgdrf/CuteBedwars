@@ -29,7 +29,7 @@ object EditMake : AbstractSubCommand(
             val newArgs = arrayOfNulls<String>(args.size - 1)
             System.arraycopy(args, 1, newArgs, 0, args.size - 1)
 
-            if (!changeClassHolder.validateArgsLength(*(newArgs as Array<out Any>))) {
+            if (!changeClassHolder.validateArgsLength(false, *(newArgs as Array<out Any>))) {
                 message(EditorLanguage.ARGUMENT_ERROR)
                     .send()
                 return@localizationScope

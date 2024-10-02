@@ -14,14 +14,19 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
     "area-property-change",
     "io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext",
     2,
-    2
+    2,
+    3
 )
 class PropertyChange(
     private val key: String,
     private val value: Any?,
     name: String = "change $key to $value"
 ) : AbstractChange<IAreaContext>(name) {
-    constructor(changeData: ChangeData) : this(changeData[0], changeData[1])
+    constructor(changeData: ChangeData) : this(changeData[0], changeData[1]) {
+        if (changeData.length() > 2) {
+            previousValue = changeData[2]
+        }
+    }
 
     private var previousValue: Any? = null
 
@@ -52,10 +57,22 @@ class PropertyChange(
         val area = t.manager().area()
         val convertible = Convertible.of(Area::class.java)
         when (key) {
-            "name" -> area.name = convertible.invoke(java.lang.String::class.java, value)
-            "default-template-id" -> area.defaultTemplateId = convertible.invoke(java.lang.Long::class.java, value)
-            "world-name" -> area.worldName = convertible.invoke(java.lang.String::class.java, value)
-            "lobby-world-name" -> area.lobbyWorldName = convertible.invoke(java.lang.String::class.java, value)
+            "name" -> {
+                previousValue = area.name
+                area.name = convertible.invoke(java.lang.String::class.java, value)
+            }
+            "default-template-id" -> {
+                previousValue = area.defaultTemplateId
+                area.defaultTemplateId = convertible.invoke(java.lang.Long::class.java, value)
+            }
+            "world-name" -> {
+                previousValue = area.worldName
+                area.worldName = convertible.invoke(java.lang.String::class.java, value)
+            }
+            "lobby-world-name" -> {
+                previousValue = area.lobbyWorldName
+                area.lobbyWorldName = convertible.invoke(java.lang.String::class.java, value)
+            }
         }
     }
 
@@ -64,4 +81,6 @@ class PropertyChange(
         propertyChange.previousValue = value
         return propertyChange
     }
+
+    override fun args(): Array<Any?> = arrayOf(key, value, previousValue)
 }

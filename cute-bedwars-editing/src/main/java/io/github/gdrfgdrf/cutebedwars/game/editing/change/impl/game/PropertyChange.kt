@@ -14,14 +14,19 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
     "game-property-change",
     "io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext",
     2,
-    2
+    2,
+    3
 )
 class PropertyChange(
     private val key: String,
     private val value: Any?,
     name: String = "change $key to $value"
 ) : AbstractChange<IGameContext>(name) {
-    constructor(changeData: ChangeData): this(changeData[0], changeData[1])
+    constructor(changeData: ChangeData): this(changeData[0], changeData[1]) {
+        if (changeData.length() > 2) {
+            previousValue = changeData[2]
+        }
+    }
 
     private var previousValue: Any? = null
 
@@ -62,4 +67,6 @@ class PropertyChange(
         propertyChange.previousValue = value
         return propertyChange
     }
+
+    override fun args(): Array<Any?> = arrayOf(key, value, previousValue)
 }
