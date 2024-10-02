@@ -1,10 +1,12 @@
 package io.github.gdrfgdrf.cutebedwars.game.management.game
 
 import com.github.yitter.idgen.YitIdHelper
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
+import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractGameCommitStorage
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
@@ -25,6 +27,8 @@ class GameContext(
     private val game = argumentSet.args[1] as Game
     private val teams = ArrayList<ITeamContext>()
 
+    private val commitStorage: AbstractGameCommitStorage
+
     init {
         instanceGetter = {
             game
@@ -39,6 +43,9 @@ class GameContext(
         if (game.name.isNullOrEmpty()) {
             game.name = "temp_name_${game.id}"
         }
+
+        commitStorage = AbstractGameCommitStorage.new(
+            IConstants.areaFolder() + game.areaId + "/" + "commits" + "/" + "games")
     }
 
     constructor(areaContext: IAreaContext, game: Game)
@@ -46,6 +53,7 @@ class GameContext(
 
     override fun areaContext(): IAreaContext = areaContext
     override fun game(): Game = game
+    override fun commitStorage(): AbstractGameCommitStorage = commitStorage
 
     override fun addTeam(team: Team) {
         teams.add(TeamContext(this, team))

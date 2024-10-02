@@ -49,7 +49,7 @@ object Disabler : IDisabler {
     }
 
     private fun disableTaskManager() {
-        ITaskManager.new().terminate()
+        ITaskManager.instance().terminate()
     }
 
     private fun disableChangeTypeRegistry() {

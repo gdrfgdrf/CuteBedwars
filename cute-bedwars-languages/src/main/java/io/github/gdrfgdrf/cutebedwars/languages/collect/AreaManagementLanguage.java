@@ -76,4 +76,9 @@ public class AreaManagementLanguage implements LanguageCollect {
     public static LanguageString AREA_IS_EMPTY;
     public static LanguageString DUPLICATE_AREA_NAME_ERROR;
     public static LanguageString DUPLICATE_GAME_NAME_ERROR;
+
+    public static LanguageString AREA_COMMITS_IS_NULL;
+    public static LanguageString AREA_COMMITS_IS_EMPTY;
+    public static LanguageString AREA_COMMITS_TOP;
+    public static LanguageString AREA_COMMITS_BOTTOM;
 }

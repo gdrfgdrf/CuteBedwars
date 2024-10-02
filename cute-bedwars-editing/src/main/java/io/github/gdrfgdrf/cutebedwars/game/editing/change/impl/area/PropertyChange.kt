@@ -4,10 +4,10 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
+import io.github.gdrfgdrf.cutebedwars.utils.BooleanConditions
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 
 @Change(
@@ -26,10 +26,20 @@ class PropertyChange(
     private var previousValue: Any? = null
 
     override fun validate(): Boolean {
-        return !(key != "name" &&
-                key != "default-template-id" &&
-                key != "world-name" &&
-                key != "lobby-world-name")
+        if (value == null) {
+            return false
+        }
+        if (key != "name" &&
+            key != "default-template-id" &&
+            key != "world-name" &&
+            key != "lobby-world-name") {
+            return false
+        }
+
+        if (key == "default-template-id") {
+            return BooleanConditions.onlyNumber(value)
+        }
+        return true
     }
 
     override fun apply(t: IAreaContext) {

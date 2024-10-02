@@ -59,6 +59,10 @@ class Protobuf<T : Message> {
             builder: () -> T,
         ): Protobuf<T> {
             if (!storeFile.exists()) {
+                if (!storeFile.parentFile.exists()) {
+                    storeFile.parentFile.mkdirs()
+                }
+
                 storeFile.createNewFile()
                 val protobuf = Protobuf<T>()
                 protobuf.message = builder()

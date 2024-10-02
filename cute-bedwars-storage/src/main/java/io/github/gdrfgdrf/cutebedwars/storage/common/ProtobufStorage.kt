@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.storage
+package io.github.gdrfgdrf.cutebedwars.storage.common
 
 import com.google.protobuf.Message
 import com.google.protobuf.Parser

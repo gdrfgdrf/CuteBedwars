@@ -12,7 +12,6 @@ interface ITaskEntry<T> {
     fun notifyMethodFinished()
     fun run()
 
-
     fun supplier(): () -> T?
     fun customLock(): Any?
 

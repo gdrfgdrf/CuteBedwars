@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 
 interface ICommit<T> {
+    fun tryApply(any: Any): Boolean
     fun apply(t: T)
     fun revert(submitter: String): ICommit<T>
     fun finish(submitter: String, message: String)

@@ -1,13 +1,17 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
+import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterChangesFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.utils.runAsyncTask
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
@@ -21,6 +25,10 @@ object EditCommit : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val editor = BetterEditorFinder.find(sender) ?: return@localizationScope
+            if (editor.t == null) {
+                return@localizationScope
+            }
+
             val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
 
             val submitter = if (sender is Player) {
@@ -45,13 +53,40 @@ object EditCommit : AbstractSubCommand(
 
             val commit = changes.finish()
             commit.finish(submitter, message)
-            editor.newChanges()
 
             val result = editor.tryAdd(commit)
             if (!result) {
                 message(EditorLanguage.COMMIT_ERROR)
                     .send()
                 return@localizationScope
+            }
+
+            message(EditorLanguage.APPLYING_CHANGES)
+                .send()
+
+            val applyResult = commit.tryApply(editor.t!!)
+            if (!applyResult) {
+                message(EditorLanguage.APPLY_ERROR)
+                    .send()
+                return@localizationScope
+            }
+            editor.newChanges()
+
+            if (editor is AbstractAreaEditor) {
+                runAsyncTask {
+                    editor.save {
+                        message(EditorLanguage.COMMIT_SAVED)
+                            .send()
+                    }
+                }
+            }
+            if (editor is AbstractGameEditor) {
+                runAsyncTask {
+                    editor.save {
+                        message(EditorLanguage.COMMIT_SAVED)
+                            .send()
+                    }
+                }
             }
 
             message(EditorLanguage.COMMIT_FINISHED)

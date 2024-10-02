@@ -114,7 +114,6 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString TEMPLATE_PROPERTY = new LanguageString("模板属性");
 
     public static final LanguageString COMMIT_MESSAGE = new LanguageString("提交描述信息");
-    public static final LanguageString APPLY_CHANGES = new LanguageString("应用修改，true 则应用，false 则不应用，其他值无效");
     public static final LanguageString CHANGE_TYPE = new LanguageString("修改类型");
     public static final LanguageString AREA_PROPERTY_CHANGE = new LanguageString("区域属性修改，可接受两个参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 default-template-id，status，world-name，lobby-world-name，lobby-spawnpoint-coordinate");
     public static final LanguageString GAME_PROPERTY_CHANGE = new LanguageString("游戏属性修改，可接受两个二参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 status、min-player、max-player、spectator-spawnpoint-coordinate");

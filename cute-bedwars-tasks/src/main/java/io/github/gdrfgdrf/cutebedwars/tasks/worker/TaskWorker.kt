@@ -5,10 +5,11 @@ import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
 import io.github.gdrfgdrf.cutebedwars.tasks.entry.FutureTaskEntry
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
+import io.github.gdrfgdrf.cutebedwars.utils.thread.ThreadPoolService
 import java.util.concurrent.LinkedBlockingQueue
 
 object TaskWorker : Runnable {
-    private val threadPoolService = IThreadPoolService.instance()
+    private val threadPoolService = ThreadPoolService
 
     override fun run() {
         "Task worker started".logInfo()
@@ -18,7 +19,7 @@ object TaskWorker : Runnable {
 
             if (taskEntry.customLock() == null) {
                 threadPoolService.newTask {
-                    val result = taskEntry.supplier()
+                    val result = taskEntry.supplier()()
 
                     if (taskEntry is FutureTaskEntry) {
                         taskEntry.result(result)

@@ -12,7 +12,8 @@ enum class PageRequestTypes(
     INFO_AREA(false),
     INFO_GAME(false),
 
-    EDIT_LIST_CHANGES(false)
+    EDIT_LIST_CHANGES(false),
+    EDIT_LIST_AREA_COMMITS(false)
     ;
 
     override fun cache(): Boolean = cache

@@ -4,6 +4,7 @@ import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractAreaCommitStorage
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cuteframework.utils.FileUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
@@ -13,9 +14,11 @@ import java.io.File
 
 @ServiceImpl("area_manager", needArgument = true)
 class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
-    private val area: Area = argumentSet.args[0] as Area
+    private val area = argumentSet.args[0] as Area
     private val context: IAreaContext
     private var file: File? = null
+
+    private val commitStorage: AbstractAreaCommitStorage
 
     init {
         if (area.id == null) {
@@ -32,10 +35,15 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
         file = File(folder, area.id.toString() + ".json")
 
         context = AreaContext(this)
+
+        commitStorage = AbstractAreaCommitStorage.new(
+            IConstants.areaFolder() + area.id + "/" + "commits"
+        )
     }
 
     override fun area(): Area = area
     override fun context(): IAreaContext = context
+    override fun commitStorage(): AbstractAreaCommitStorage = commitStorage
 
     override fun save() {
         if (file == null) {

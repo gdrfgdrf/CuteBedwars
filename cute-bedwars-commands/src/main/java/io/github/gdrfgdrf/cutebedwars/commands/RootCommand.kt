@@ -159,19 +159,13 @@ object RootCommand : TabExecutor {
                     var needAddArgs = false
 
                     val deeperNode = ICommandNodes.find(deeperNodeString)?.let { deeperNode ->
-                        if (deeperNode.parent() == ICommandNodes.valueOf("ARGS") ||
-                            deeperNode.parent() == ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT")) {
+                        if (deeperNode.parent() == ICommandNodes.valueOf("ARGS")) {
                             needAddArgs = true
                         }
                     }
                     if (deeperNode == null) {
                         ICommands.find(deeperNodeString, ICommandNodes.valueOf("ARGS"))?.let {
                             needAddArgs = true
-                        }
-                        if (!needAddArgs) {
-                            ICommands.find(deeperNodeString, ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT"))?.let {
-                                needAddArgs = true
-                            }
                         }
                     }
 
@@ -289,10 +283,6 @@ object RootCommand : TabExecutor {
             if (node != null) {
                 params.add(commandPart)
                 subCommand = SubCommandManager.get(commandPart, node)
-
-                if (subCommand == null) {
-                    subCommand = SubCommandManager.get(commandPart, ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT"))
-                }
             }
         } else {
             val argsSplitIndex = args.indexOf("args")
@@ -319,9 +309,6 @@ object RootCommand : TabExecutor {
 
                     if (subCommand == null) {
                         subCommand = SubCommandManager.get(commandPart, ICommandNodes.valueOf("ARGS"))
-                    }
-                    if (subCommand == null) {
-                        subCommand = SubCommandManager.get(commandPart, ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT"))
                     }
                 }
             }

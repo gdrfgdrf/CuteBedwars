@@ -144,10 +144,20 @@ enum class Commands(
         )
     ),
     EDIT_EXIT(
-        "exit", false, 0..1, Permissions.EDIT_EXIT, true, CommandNodes.EDIT,
+        "exit", false, 0..0, Permissions.EDIT_EXIT, true, CommandNodes.EDIT,
+    ),
+
+    EDIT_LIST_AREA_COMMITS(
+        "area", false, 2..3, Permissions.EDIT_LIST_AREA_COMMITS, false, CommandNodes.EDIT_LIST_COMMITS,
         arrayOf(
             IParamScheme.new {
-                add("APPLY_CHANGES", "BOOLEAN")
+                add("BY_ID", "BY_ID")
+                add("AREA", "AREAS")
+            },
+            IParamScheme.new {
+                add("BY_ID", "BY_ID")
+                add("AREA", "AREAS")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )
     )

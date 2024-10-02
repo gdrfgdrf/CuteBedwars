@@ -12,6 +12,6 @@ interface ITaskManager {
     fun <T> add(taskEntry: ITaskEntry<T>)
 
     companion object {
-        fun new(): ITaskManager = Mediator.get(ITaskManager::class.java)!!
+        fun instance(): ITaskManager = Mediator.get(ITaskManager::class.java)!!
     }
 }

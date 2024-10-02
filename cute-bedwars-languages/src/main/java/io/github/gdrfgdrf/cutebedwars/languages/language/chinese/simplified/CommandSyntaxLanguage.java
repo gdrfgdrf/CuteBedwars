@@ -26,6 +26,8 @@ class CommandSyntaxLanguage implements LanguageBlock {
     public static final LanguageString EDIT_COMMIT = string("EDIT_COMMIT");
     public static final LanguageString EDIT_EXIT = string("EDIT_EXIT");
 
+    public static final LanguageString EDIT_LIST_AREA_COMMITS = string("EDIT_LIST_AREA_COMMITS");
+
     private static LanguageString string(String name) {
         return new LanguageString(ICommands.Companion.valueOf(name).getShort());
     }

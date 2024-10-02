@@ -6,9 +6,10 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
 import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
+import io.github.gdrfgdrf.cutebedwars.utils.thread.ThreadPoolService
 
 object SyncTaskWorker : Runnable {
-    private val threadPoolService = IThreadPoolService.instance()
+    private val threadPoolService = ThreadPoolService
 
     override fun run() {
         "Synchronized task worker started".logInfo()
@@ -26,7 +27,7 @@ object SyncTaskWorker : Runnable {
 
                             if (lock is String) {
                                 synchronized(lock.intern()) {
-                                    val result = taskEntry.supplier()
+                                    val result = taskEntry.supplier()()
 
                                     if (taskEntry is FutureTaskEntry) {
                                         taskEntry.result(result)

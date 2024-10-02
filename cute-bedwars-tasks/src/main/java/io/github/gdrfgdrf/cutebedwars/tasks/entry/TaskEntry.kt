@@ -12,9 +12,9 @@ import java.util.concurrent.CountDownLatch
 open class TaskEntry<T> protected constructor(
     argumentSet: ArgumentSet,
 ): ITaskEntry<T> {
-    val supplier: () -> T? = argumentSet.args[0] as (() -> T?)
+    private val supplier: () -> T? = argumentSet.args[0] as (() -> T?)
 
-    var customLock: Any? = null
+    private var customLock: Any? = null
     private var syncLock: CountDownLatch = CountDownLatch(1)
     private var syncLockTimeout: Long = 0
     private var enableSync = false
@@ -64,6 +64,7 @@ open class TaskEntry<T> protected constructor(
     companion object {
         fun <T> create(runnable: Runnable) = TaskEntry<T>(runnable)
         fun <T> create(supplier: () -> T?) = TaskEntry(supplier)
-        fun <T> create(argumentSet: ArgumentSet) = TaskEntry(argumentSet.args[0] as(() -> T?))
+        @JvmStatic
+        fun <T> create(argumentSet: ArgumentSet) = TaskEntry(argumentSet.args[0] as (() -> T?))
     }
 }

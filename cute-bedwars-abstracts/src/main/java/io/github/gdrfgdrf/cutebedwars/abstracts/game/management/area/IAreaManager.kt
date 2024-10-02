@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractAreaCommitStorage
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -10,6 +11,7 @@ interface IAreaManager {
     fun save()
     fun area(): Area
     fun context(): IAreaContext
+    fun commitStorage(): AbstractAreaCommitStorage
 
     companion object {
         fun new(area: Area): IAreaManager = Mediator.get(IAreaManager::class.java, ArgumentSet(arrayOf(area)))!!

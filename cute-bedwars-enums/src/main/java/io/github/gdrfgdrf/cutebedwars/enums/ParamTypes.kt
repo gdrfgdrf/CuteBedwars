@@ -65,6 +65,30 @@ enum class ParamTypes : IParamTypes {
             return arrayListOf("by-id", "by-name")
         }
     },
+    BY_ID {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+            return any == "by-id"
+        }
+
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+            return arrayListOf("by-id")
+        }
+    },
+    BY_NAME {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+            return any == "by-name"
+        }
+
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+            return arrayListOf("by-name")
+        }
+    },
     POSITIVE_NUMBER {
         override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
             if (any !is String) {

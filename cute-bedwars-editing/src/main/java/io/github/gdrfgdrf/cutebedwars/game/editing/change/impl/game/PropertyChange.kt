@@ -1,14 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change.impl.game
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
+import io.github.gdrfgdrf.cutebedwars.utils.BooleanConditions
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 
 @Change(
@@ -27,9 +26,19 @@ class PropertyChange(
     private var previousValue: Any? = null
 
     override fun validate(): Boolean {
-        return !(key != "name" &&
-                key != "min-player" &&
-                key != "max-player")
+        if (value == null) {
+            return false
+        }
+        if (key != "name" &&
+            key != "min-player" &&
+            key != "max-player") {
+            return false
+        }
+
+        if (key == "min-player" || key == "max-player") {
+            return BooleanConditions.onlyNumber(value)
+        }
+        return true
     }
 
     override fun apply(t: IGameContext) {

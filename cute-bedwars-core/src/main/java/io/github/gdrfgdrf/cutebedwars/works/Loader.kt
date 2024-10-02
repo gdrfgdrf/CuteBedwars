@@ -8,18 +8,13 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
-import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.Registry
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.plugin.java.JavaPlugin
@@ -111,7 +106,7 @@ object Loader : ILoader {
     }
 
     private fun loadTaskManager() {
-        ITaskManager.new().start()
+        ITaskManager.instance().start()
     }
 
     private fun loadAreas() {

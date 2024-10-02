@@ -24,4 +24,6 @@ class CommandDescriptionLanguage implements LanguageBlock {
     public static final LanguageString EDIT_LIST_CHANGES = new LanguageString("列出当前修改列表中的所有修改");
     public static final LanguageString EDIT_COMMIT = new LanguageString("提交修改");
     public static final LanguageString EDIT_EXIT = new LanguageString("退出编辑模式");
+
+    public static final LanguageString EDIT_LIST_AREA_COMMITS = new LanguageString("查看区域的提交");
 }

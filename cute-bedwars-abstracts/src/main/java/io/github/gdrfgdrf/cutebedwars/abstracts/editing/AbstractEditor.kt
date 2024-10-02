@@ -25,20 +25,11 @@ abstract class AbstractEditor<T>(val uuid: String, val t: T) {
         commits.add(commit)
     }
 
-    fun apply() {
-        commits.forEach {
-            it.apply(t)
-        }
+    fun exit() {
         commits.clear()
-    }
-
-    fun exit(apply: Boolean = true) {
-        if (apply) {
-            apply()
-        }
-
         IEditors.instance().remove(uuid)
     }
 
+    fun commits(): List<ICommit<T>> = commits
     fun type(): Class<*> = t!!::class.java
 }

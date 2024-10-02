@@ -30,10 +30,19 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString COMMIT_ERROR = new LanguageString("&c无法提交修改");
     public static final LanguageString NEED_ONE_CHANGE_AT_LEAST = new LanguageString("&c至少需要一条修改才能提交");
 
-    public static final LanguageString EXITING_EDITOR = new LanguageString("&e正在退出编辑器");
-    public static final LanguageString EXITING_WITHOUT_APPLYING_WARNING = new LanguageString("&c将会丢弃当前所有的提交，若继续操作，请在 &e&l%s &r&c秒内再次输入以确定");
     public static final LanguageString APPLYING_CHANGES = new LanguageString("&e正在应用修改");
+    public static final LanguageString APPLY_ERROR = new LanguageString("&c无法应用修改");
+    public static final LanguageString COMMIT_SAVED = new LanguageString("&a提交保存完成");
+
+    public static final LanguageString EXITING_EDITOR = new LanguageString("&e正在退出编辑器");
     public static final LanguageString EXIT_FINISHED = new LanguageString("&a编辑器已退出");
 
     public static final LanguageString ARGUMENT_ERROR = new LanguageString("&c参数错误，请使用 /cbw query-description 查看具体说明");
+
+    public static final LanguageString COMMIT_ID_IS = new LanguageString("&a提交 id&8: &e&l%s");
+    public static final LanguageString COMMIT_TIME_IS = new LanguageString("&a提交时间&8: &e&l%s");
+    public static final LanguageString COMMIT_SUBMITTER_IS = new LanguageString("&a提交者&8: &e&l%s");
+    public static final LanguageString COMMIT_MESSAGE_IS = new LanguageString("&a提交信息&8: &e&l%s");
+    public static final LanguageString COMMIT_CHANGES_IS = new LanguageString("&a提交的修改&8: ");
+    public static final LanguageString COMMIT_CHANGES_FORMAT = new LanguageString("&8- &a修改类型&8: &e&l%s &r&8- &a修改名&8: &e&l%s");
 }

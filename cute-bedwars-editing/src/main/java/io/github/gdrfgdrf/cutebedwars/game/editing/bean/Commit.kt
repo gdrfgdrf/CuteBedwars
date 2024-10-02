@@ -21,6 +21,16 @@ class Commit<T>(
     private var submitter: String? = null
     private var message: String? = null
 
+    @Suppress("UNCHECKED_CAST")
+    override fun tryApply(any: Any): Boolean {
+        runCatching {
+            changes.apply(any as T)
+        }.onFailure {
+            return false
+        }
+        return true
+    }
+
     override fun apply(t: T) {
         changes.apply(t)
     }

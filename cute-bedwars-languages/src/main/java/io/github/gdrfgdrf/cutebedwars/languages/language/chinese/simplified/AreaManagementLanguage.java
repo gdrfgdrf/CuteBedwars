@@ -76,4 +76,9 @@ class AreaManagementLanguage implements LanguageBlock {
     public static final LanguageString AREA_IS_EMPTY = new LanguageString("&c当前没有任何一个区域");
     public static final LanguageString DUPLICATE_AREA_NAME_ERROR = new LanguageString("&c存在多个名为 &e%s &c的区域，请使用 &earea_id &c进行索引");
     public static final LanguageString DUPLICATE_GAME_NAME_ERROR = new LanguageString("&c在 &e&l%s &r&c区域下存在多个与 &e&l%s &r&c同名的区域，请使用 &egame_id &r&c进行索引");
+
+    public static final LanguageString AREA_COMMITS_IS_NULL = new LanguageString("&c无法加载该区域的提交记录");
+    public static final LanguageString AREA_COMMITS_IS_EMPTY = new LanguageString("&c该区域没有提交记录");
+    public static final LanguageString AREA_COMMITS_TOP = new LanguageString("&6&l--------------------- &d&l%s 的提交 &r&8(&b&l%d &l&7/ &b&l%d&8) &6&l---------------------");
+    public static final LanguageString AREA_COMMITS_BOTTOM = new LanguageString("&6&l--------------------- &d&l%s 的提交 &r&8(&b&l%d &l&7/ &b&l%d&8) &6&l---------------------");
 }

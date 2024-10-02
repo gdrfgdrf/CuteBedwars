@@ -24,4 +24,6 @@ public class CommandSyntaxLanguage implements LanguageCollect {
     public static LanguageString EDIT_LIST_CHANGES;
     public static LanguageString EDIT_COMMIT;
     public static LanguageString EDIT_EXIT;
+
+    public static LanguageString EDIT_LIST_AREA_COMMITS;
 }

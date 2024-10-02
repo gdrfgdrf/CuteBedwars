@@ -54,6 +54,7 @@ class FutureTaskEntry<T> private constructor(
 
     companion object {
         fun <T> create(supplier: () -> T?) = FutureTaskEntry(supplier)
+        @JvmStatic
         fun <T> create(argumentSet: ArgumentSet) = create(argumentSet.args[0] as (() -> T?))
     }
 }
