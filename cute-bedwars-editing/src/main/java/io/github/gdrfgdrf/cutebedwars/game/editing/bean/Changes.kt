@@ -25,7 +25,6 @@ class Changes<T> : IChanges<T> {
     }
 
     override fun apply(t: T) {
-        check()
         "Applying all changes".logInfo()
         changes.forEach {
             it.apply(t)
