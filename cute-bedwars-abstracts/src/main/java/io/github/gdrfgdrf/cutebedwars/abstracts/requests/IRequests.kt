@@ -17,6 +17,6 @@ interface IRequests {
     fun make(high: Boolean = false, eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest
 
     companion object {
-        fun get(): IRequests = Mediator.get(IRequests::class.java)!!
+        fun instance(): IRequests = Mediator.get(IRequests::class.java)!!
     }
 }

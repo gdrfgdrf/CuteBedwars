@@ -10,7 +10,7 @@ class ParamScheme : IParamScheme {
     private val list = arrayListOf<IParam>()
 
     override fun add(descriptionName: String, typeName: String) {
-        val param = IParam.get(descriptionName, typeName)
+        val param = IParam.new(descriptionName, typeName)
         list.add(param)
     }
 

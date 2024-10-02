@@ -8,7 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
 import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
 
 object SyncTaskWorker : Runnable {
-    private val threadPoolService = IThreadPoolService.get()
+    private val threadPoolService = IThreadPoolService.instance()
 
     override fun run() {
         "Synchronized task worker started".logInfo()

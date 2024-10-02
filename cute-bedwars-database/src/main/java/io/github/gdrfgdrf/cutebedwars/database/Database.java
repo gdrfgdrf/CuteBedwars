@@ -14,7 +14,6 @@ import io.github.gdrfgdrf.cuteframework.utils.StringUtils;
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils;
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl;
 import lombok.Cleanup;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +51,7 @@ public class Database implements IDatabase {
         Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseClass;
 
         try {
-            String databaseImpl = IConfig.Companion.getDatabaseImpl();
+            String databaseImpl = IConfig.Companion.databaseImpl();
             if (StringUtils.isBlank(databaseImpl)) {
                 throw new IllegalArgumentException("No database implementation is specified in the configuration file");
             }

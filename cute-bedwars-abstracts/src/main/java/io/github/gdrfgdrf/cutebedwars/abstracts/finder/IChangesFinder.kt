@@ -12,7 +12,7 @@ interface IChangesFinder {
     fun find(sender: CommandSender, onFound: (IChanges<*>) -> Unit): IFindResult
 
     companion object {
-        fun get(): IChangesFinder = Mediator.get(IChangesFinder::class.java)!!
+        fun instance(): IChangesFinder = Mediator.get(IChangesFinder::class.java)!!
     }
 
 }

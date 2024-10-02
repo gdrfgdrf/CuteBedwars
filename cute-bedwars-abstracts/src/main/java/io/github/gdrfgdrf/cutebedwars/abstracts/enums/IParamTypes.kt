@@ -6,7 +6,6 @@ import org.bukkit.command.CommandSender
 
 @EnumService("param_types_enum")
 interface IParamTypes {
-    fun name_(): String
     fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
         return arrayListOf()
     }

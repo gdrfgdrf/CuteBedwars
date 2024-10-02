@@ -17,7 +17,7 @@ interface ITaskEntry<T> {
     fun customLock(): Any?
 
     companion object {
-        fun <T> get(supplier: () -> T?): ITaskEntry<T> =
+        fun <T> new(supplier: () -> T?): ITaskEntry<T> =
             Mediator.get(ITaskEntry::class.java, ArgumentSet(arrayOf(supplier)))!!
     }
 }

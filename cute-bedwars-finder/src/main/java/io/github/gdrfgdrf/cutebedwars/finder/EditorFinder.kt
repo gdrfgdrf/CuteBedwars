@@ -21,7 +21,7 @@ object EditorFinder : IEditorFinder {
             "not_a_player"
         }
 
-        val editor = IEditors.get().get(uuid)
+        val editor = IEditors.instance().get(uuid)
         if (editor == null) {
             if (message) {
                 localizationScope(sender) {

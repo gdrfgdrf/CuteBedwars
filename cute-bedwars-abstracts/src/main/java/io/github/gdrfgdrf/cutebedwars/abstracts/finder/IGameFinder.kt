@@ -22,6 +22,6 @@ interface IGameFinder {
     ): IFindResult
 
     companion object {
-        fun get(): IGameFinder = Mediator.get(IGameFinder::class.java)!!
+        fun instance(): IGameFinder = Mediator.get(IGameFinder::class.java)!!
     }
 }

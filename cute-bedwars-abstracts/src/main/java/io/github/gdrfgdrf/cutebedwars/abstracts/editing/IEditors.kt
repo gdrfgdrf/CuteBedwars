@@ -16,6 +16,6 @@ interface IEditors {
     fun remove(uuid: String)
 
     companion object {
-        fun get(): IEditors = Mediator.get(IEditors::class.java)!!
+        fun instance(): IEditors = Mediator.get(IEditors::class.java)!!
     }
 }

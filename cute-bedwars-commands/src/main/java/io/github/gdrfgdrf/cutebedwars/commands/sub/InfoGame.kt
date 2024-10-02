@@ -51,16 +51,16 @@ object InfoGame : AbstractSubCommand(
                 gameContexts.addAll(foundGameContexts)
             }
 
-            val chatPage = IChatPage.get(
+            val chatPage = IChatPage.cache(
                 sender,
                 IPageRequestTypes.valueOf("INFO_GAME"),
                 areaIdentifier + "_" + gameIdentifier
             ) {
-                return@get arrayListOf()
+                return@cache arrayListOf()
             }
             gameContexts.forEach { context ->
                 chatPage.addPage {
-                    IGameInformation.get().convert(sender, context)
+                    IGameInformation.instance().convert(sender, context)
                 }
             }
             chatPage.send(pageIndex - 1)

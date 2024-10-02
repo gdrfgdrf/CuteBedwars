@@ -8,7 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
 import java.util.concurrent.LinkedBlockingQueue
 
 object TaskWorker : Runnable {
-    private val threadPoolService = IThreadPoolService.get()
+    private val threadPoolService = IThreadPoolService.instance()
 
     override fun run() {
         "Task worker started".logInfo()

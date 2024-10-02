@@ -17,6 +17,6 @@ interface IGameContext : ISetter {
     fun validate(sender: CommandSender? = null, withHeader: Boolean = false): Boolean
 
     companion object {
-        fun get(game: Game): IGameContext = Mediator.get(IGameContext::class.java, ArgumentSet(arrayOf(game)))!!
+        fun new(game: Game): IGameContext = Mediator.get(IGameContext::class.java, ArgumentSet(arrayOf(game)))!!
     }
 }

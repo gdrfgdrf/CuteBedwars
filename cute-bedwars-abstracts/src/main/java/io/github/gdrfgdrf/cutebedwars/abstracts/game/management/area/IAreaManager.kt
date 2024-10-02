@@ -12,6 +12,6 @@ interface IAreaManager {
     fun context(): IAreaContext
 
     companion object {
-        fun get(area: Area): IAreaManager = Mediator.get(IAreaManager::class.java, ArgumentSet(arrayOf(area)))!!
+        fun new(area: Area): IAreaManager = Mediator.get(IAreaManager::class.java, ArgumentSet(arrayOf(area)))!!
     }
 }

@@ -19,10 +19,10 @@ object Requests : IRequests {
     var GLOBAL_TIMEOUT: Long? = null
         get() {
             if (field == null) {
-                field = if (IConfig.getRequestTimeout() == null) {
+                field = if (IConfig.requestTimeout() == null) {
                     30000
                 } else {
-                    val customDefinition = IConfig.getRequestTimeout()
+                    val customDefinition = IConfig.requestTimeout()
 
                     if (customDefinition!! <= 0) {
                         30000

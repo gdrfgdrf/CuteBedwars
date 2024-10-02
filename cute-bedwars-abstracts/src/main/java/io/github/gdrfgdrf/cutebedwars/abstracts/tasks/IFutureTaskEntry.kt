@@ -12,7 +12,7 @@ interface IFutureTaskEntry<T> : ITaskEntry<T> {
     fun get(timeout: Long, unit: TimeUnit): T?
 
     companion object {
-        fun <T> get(supplier: () -> T?): IFutureTaskEntry<T> = Mediator.get(
+        fun <T> new(supplier: () -> T?): IFutureTaskEntry<T> = Mediator.get(
             IFutureTaskEntry::class.java, ArgumentSet(
                 arrayOf(supplier)
             )

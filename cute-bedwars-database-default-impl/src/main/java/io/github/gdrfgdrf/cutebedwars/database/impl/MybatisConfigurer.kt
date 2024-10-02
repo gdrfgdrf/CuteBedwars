@@ -51,7 +51,7 @@ object MybatisConfigurer {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }
-        if (IConfig.getEnableDatabaseLogging() == true) {
+        if (IConfig.enableDatabaseLogging() == true) {
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
             configuration.logImpl = NoLoggingImpl::class.java
@@ -69,9 +69,9 @@ object MybatisConfigurer {
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
         dataSource.url = "jdbc:sqlite:" + IConstants.DEFAULT_DATABASE_FILE_NAME()
 
-        if (!IConfig.getDatabaseUsername().isNullOrBlank() && !IConfig.getDatabasePassword().isNullOrBlank()) {
-            dataSource.username = IConfig.getDatabaseUsername()
-            dataSource.password = IConfig.getDatabasePassword()
+        if (!IConfig.databaseUsername().isNullOrBlank() && !IConfig.databasePassword().isNullOrBlank()) {
+            dataSource.username = IConfig.databaseUsername()
+            dataSource.password = IConfig.databasePassword()
         }
 
         return dataSource

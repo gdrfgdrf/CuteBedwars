@@ -6,8 +6,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
@@ -119,7 +117,7 @@ class AreaContext(
 
         if (!success) {
             if (sender == null) {
-                INotifications.get().messageAdministrator {
+                INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
                             .format(manager.area().name),

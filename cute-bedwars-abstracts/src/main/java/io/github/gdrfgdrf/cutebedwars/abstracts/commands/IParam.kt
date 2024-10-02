@@ -14,12 +14,12 @@ interface IParam {
     fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean
 
     companion object {
-        fun get(descriptionName: String, typeName: String): IParam = Mediator.get(
+        fun new(descriptionName: String, typeName: String): IParam = Mediator.get(
             IParam::class.java,
             ArgumentSet(arrayOf(IDescriptions.find(descriptionName), IParamTypes.valueOf(typeName)))
         )!!
 
-        fun get(description: IDescriptions, type: IParamTypes): IParam =
+        fun new(description: IDescriptions, type: IParamTypes): IParam =
             Mediator.get(IParam::class.java, ArgumentSet(arrayOf(description, type)))!!
     }
 }

@@ -11,8 +11,4 @@ enum class RequestStatuses : IRequestStatuses {
     WAIT_NEXT_ROUND,
     RUNNING,
     STOPPED;
-
-    override fun name_(): String {
-        return name
-    }
 }

@@ -13,7 +13,7 @@ interface ITeamContext : ISetter {
     fun validate(sender: CommandSender? = null, withHeader: Boolean = false): Boolean
 
     companion object {
-        fun get(gameContext: IGameContext, team: Team): ITeamContext = Mediator.get(
+        fun new(gameContext: IGameContext, team: Team): ITeamContext = Mediator.get(
             ITeamContext::class.java, ArgumentSet(
                 arrayOf(gameContext, team)
             )

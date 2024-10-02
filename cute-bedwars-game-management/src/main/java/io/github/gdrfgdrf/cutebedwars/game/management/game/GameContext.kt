@@ -69,7 +69,7 @@ class GameContext(
             needDisableGame = true
 
             if (sender == null) {
-                INotifications.get().messageAdministrator {
+                INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
@@ -106,7 +106,7 @@ class GameContext(
             needDisableGame = true
 
             if (sender == null) {
-                INotifications.get().messageAdministrator {
+                INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(
@@ -137,7 +137,7 @@ class GameContext(
 
         if (game.teams.isNullOrEmpty() || game.teams.size == 1) {
             if (sender == null) {
-                INotifications.get().messageAdministrator {
+                INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(

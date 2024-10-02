@@ -26,7 +26,7 @@ interface ILocalizationMessage {
     fun send(prefix: ILocalizationMessage? = null)
 
     companion object {
-        fun get(sender: CommandSender, raw: String): ILocalizationMessage = Mediator.get(
+        fun new(sender: CommandSender, raw: String): ILocalizationMessage = Mediator.get(
             ILocalizationMessage::class.java, ArgumentSet(
                 arrayOf(sender, raw)
             )

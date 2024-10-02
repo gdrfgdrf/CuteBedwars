@@ -41,7 +41,7 @@ object LowCountdownTimer {
 }
 
 internal object LowCountdownWorker : Runnable {
-    private val threadPoolService = IThreadPoolService.get()
+    private val threadPoolService = IThreadPoolService.instance()
 
     override fun run() {
         "Low countdown worker is running".logInfo()

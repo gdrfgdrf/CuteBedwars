@@ -5,7 +5,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
-import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
@@ -29,7 +28,7 @@ object EditExit : AbstractSubCommand(
             } else {
                 true
             }
-            val requests = IRequests.get()
+            val requests = IRequests.instance()
 
             if (!applyChange) {
                 val pair = requests.auto(type = IRequestTypes.valueOf("EDIT_EXITING_WITHOUT_APPLYING"), sender = sender)

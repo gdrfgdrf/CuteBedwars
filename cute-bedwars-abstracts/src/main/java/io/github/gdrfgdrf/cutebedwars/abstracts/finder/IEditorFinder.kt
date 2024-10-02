@@ -12,6 +12,6 @@ interface IEditorFinder {
     fun find(sender: CommandSender, message: Boolean = true, onFound: (AbstractEditor<*>) -> Unit): IFindResult
 
     companion object {
-        fun get(): IEditorFinder = Mediator.get(IEditorFinder::class.java)!!
+        fun instance(): IEditorFinder = Mediator.get(IEditorFinder::class.java)!!
     }
 }

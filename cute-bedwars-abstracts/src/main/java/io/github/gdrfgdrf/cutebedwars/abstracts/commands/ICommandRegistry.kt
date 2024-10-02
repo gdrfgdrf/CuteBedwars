@@ -10,6 +10,6 @@ interface ICommandRegistry {
     fun registerCommands()
 
     companion object {
-        fun get(): ICommandRegistry = Mediator.get(ICommandRegistry::class.java)!!
+        fun instance(): ICommandRegistry = Mediator.get(ICommandRegistry::class.java)!!
     }
 }

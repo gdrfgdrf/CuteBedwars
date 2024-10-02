@@ -17,6 +17,6 @@ interface IManagers {
     fun createArea(name: String): IAreaManager
 
     companion object {
-        fun get(): IManagers = Mediator.get(IManagers::class.java)!!
+        fun instance(): IManagers = Mediator.get(IManagers::class.java)!!
     }
 }

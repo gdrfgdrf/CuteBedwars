@@ -7,8 +7,4 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 enum class PluginState : IPluginState {
     LOADING,
     RUNNING;
-
-    override fun name_(): String {
-        return name
-    }
 }

@@ -16,7 +16,7 @@ object BetterGameFinder {
     ): IGameContext? {
         var gameContext: IGameContext? = null
 
-        val findResult = IGameFinder.get().find(
+        val findResult = IGameFinder.instance().find(
             sender,
             IFindType.find(findType),
             areaManager,
@@ -42,7 +42,7 @@ object BetterGameFinder {
     ): List<IGameContext>? {
         val gameContexts = arrayListOf<IGameContext>()
 
-        val findResult = IGameFinder.get().find(
+        val findResult = IGameFinder.instance().find(
             sender,
             IFindType.find(findType),
             areaManager,

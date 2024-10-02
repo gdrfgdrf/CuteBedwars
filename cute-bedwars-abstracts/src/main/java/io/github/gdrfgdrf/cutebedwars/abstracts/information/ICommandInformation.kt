@@ -13,6 +13,6 @@ interface ICommandInformation {
     fun convert(sender: CommandSender, command: ICommands): List<ILocalizationMessage>
 
     companion object {
-        fun get(): ICommandInformation = Mediator.get(ICommandInformation::class.java)!!
+        fun instance(): ICommandInformation = Mediator.get(ICommandInformation::class.java)!!
     }
 }

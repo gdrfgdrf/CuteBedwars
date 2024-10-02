@@ -10,6 +10,6 @@ interface IDisabler {
     fun reloadPhase()
 
     companion object {
-        fun get(): IDisabler = Mediator.get(IDisabler::class.java)!!
+        fun instance(): IDisabler = Mediator.get(IDisabler::class.java)!!
     }
 }

@@ -48,7 +48,7 @@ object InfoArea : AbstractSubCommand(
 
             val areaManagers = arrayListOf<IAreaManager>()
             if (paramSchemeIndex != 0 && paramSchemeIndex != ParamScheme.NO_MATCH) {
-                val findResult = IAreaFinder.get().find(
+                val findResult = IAreaFinder.instance().find(
                     sender,
                     IFindType.find(findType),
                     identifier
@@ -59,7 +59,7 @@ object InfoArea : AbstractSubCommand(
                     return@localizationScope
                 }
             } else {
-                areaManagers.addAll(IManagers.get().list())
+                areaManagers.addAll(IManagers.instance().list())
                 if (areaManagers.isEmpty()) {
                     message(AreaManagementLanguage.AREA_IS_EMPTY)
                         .send()
@@ -67,16 +67,16 @@ object InfoArea : AbstractSubCommand(
                 }
             }
 
-            val chatPage = IChatPage.get(
+            val chatPage = IChatPage.cache(
                 sender,
                 IPageRequestTypes.valueOf("INFO_AREA"),
                 identifier
             ) {
-                return@get arrayListOf()
+                return@cache arrayListOf()
             }
             areaManagers.forEach { areaManager ->
                 chatPage.addPage {
-                    IAreaInformation.get().convert(sender, areaManager)
+                    IAreaInformation.instance().convert(sender, areaManager)
                 }
             }
             chatPage.send(pageIndex - 1)

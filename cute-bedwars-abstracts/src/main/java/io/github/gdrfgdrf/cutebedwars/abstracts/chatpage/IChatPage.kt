@@ -1,9 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.chatpage
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
@@ -20,7 +18,7 @@ interface IChatPage {
     fun changeable(changeable: Boolean)
 
     companion object {
-        fun get(
+        fun cache(
             sender: CommandSender,
             pageRequestTypes: IPageRequestTypes,
             flagContent: String,

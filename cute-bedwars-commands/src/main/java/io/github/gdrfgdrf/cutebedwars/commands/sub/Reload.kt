@@ -25,7 +25,7 @@ object Reload : AbstractSubCommand(
 
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
-            val pair = IRequests.get().auto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
+            val pair = IRequests.instance().auto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
             val new = pair.first
             val request = pair.second
 
@@ -35,9 +35,9 @@ object Reload : AbstractSubCommand(
                     .send()
                 return@localizationScope
             }
-            IRequests.get().removeForAuto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
+            IRequests.instance().removeForAuto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
 
-            if (IPlugin.get().state() == IPluginState.valueOf("LOADING")) {
+            if (IPlugin.instance().state() == IPluginState.valueOf("LOADING")) {
                 message(CommonLanguage.PHASE_ERROR)
                     .send()
                 return@localizationScope
@@ -46,13 +46,13 @@ object Reload : AbstractSubCommand(
             message(CommonLanguage.RELOADING_PLUGIN)
                 .send()
 
-            IPlugin.get().state(IPluginState.valueOf("LOADING"))
+            IPlugin.instance().state(IPluginState.valueOf("LOADING"))
 
-            IDisabler.get().reloadPhase()
-            ILoader.get().reloadPhase()
-            IEnabler.get().reloadPhase()
+            IDisabler.instance().reloadPhase()
+            ILoader.instance().reloadPhase()
+            IEnabler.instance().reloadPhase()
 
-            IPlugin.get().state(IPluginState.valueOf("RUNNING"))
+            IPlugin.instance().state(IPluginState.valueOf("RUNNING"))
 
             message(CommonLanguage.RELOAD_FINISHED)
                 .send()

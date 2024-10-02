@@ -8,7 +8,7 @@ object BetterEditorFinder {
     fun find(sender: CommandSender): AbstractEditor<*>? {
         var editor: AbstractEditor<*>? = null
 
-        IEditorFinder.get().find(sender) {
+        IEditorFinder.instance().find(sender) {
             editor = it
         }
 

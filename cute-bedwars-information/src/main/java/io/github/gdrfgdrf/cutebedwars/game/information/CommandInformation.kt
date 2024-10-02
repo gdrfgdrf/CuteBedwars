@@ -13,7 +13,7 @@ import org.bukkit.command.CommandSender
 object CommandInformation : ICommandInformation {
     override fun convert(sender: CommandSender, command: ICommands): List<ILocalizationMessage> =
         localizationScope(sender) {
-            val subCommand = ISubCommandManager.get().get(command)
+            val subCommand = ISubCommandManager.instance().get(command)
 
             val messages = arrayListOf<ILocalizationMessage>().apply {
                 add(

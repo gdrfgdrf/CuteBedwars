@@ -55,7 +55,7 @@ object Managers : IManagers {
 
         val area = Area()
         area.name = name
-        val manager = IAreaManager.get(area)
+        val manager = IAreaManager.new(area)
         return manager
     }
 }

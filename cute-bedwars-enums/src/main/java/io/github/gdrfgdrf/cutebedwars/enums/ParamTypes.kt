@@ -92,7 +92,7 @@ enum class ParamTypes : IParamTypes {
         }
 
         override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
-            val list = IManagers.get().list()
+            val list = IManagers.instance().list()
             val findType = args[args.size - 2]
 
             if (findType == "by-id") {
@@ -140,7 +140,7 @@ enum class ParamTypes : IParamTypes {
                 return arrayListOf()
             }
 
-            val managers = IManagers.get()
+            val managers = IManagers.instance()
             var areaManager: IAreaManager? = null
 
             if (areaFindType == "by-id") {
@@ -189,13 +189,13 @@ enum class ParamTypes : IParamTypes {
             }
 
             var editor: AbstractEditor<*>? = null
-            IEditorFinder.get().find(sender, false) {
+            IEditorFinder.instance().find(sender, false) {
                 editor = it
             }
 
             val names = arrayListOf<String>()
             if (editor != null) {
-                IChangeTypeRegistry.get().forEach { s, changeType ->
+                IChangeTypeRegistry.instance().forEach { s, changeType ->
                     if (changeType.type() == editor!!.type() ||
                         editor!!.t!!::class.java.superclass == changeType.type() ||
                         editor!!.t!!::class.java.interfaces.contains(changeType.type())) {
@@ -208,13 +208,13 @@ enum class ParamTypes : IParamTypes {
 
         override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
             var editor: AbstractEditor<*>? = null
-            IEditorFinder.get().find(sender, false) {
+            IEditorFinder.instance().find(sender, false) {
                 editor = it
             }
 
             val names = arrayListOf<String>()
             if (editor != null) {
-                IChangeTypeRegistry.get().forEach { s, changeType ->
+                IChangeTypeRegistry.instance().forEach { s, changeType ->
                     if (changeType.type() == editor!!.type() ||
                         editor!!.t!!::class.java.superclass == changeType.type() ||
                         editor!!.t!!::class.java.interfaces.contains(changeType.type())) {
@@ -229,6 +229,4 @@ enum class ParamTypes : IParamTypes {
 
 
     ;
-
-    override fun name_(): String = name
 }

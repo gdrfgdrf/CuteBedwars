@@ -14,6 +14,6 @@ interface ISubCommandManager {
     fun get(command: ICommands): AbstractSubCommand?
 
     companion object {
-        fun get(): ISubCommandManager = Mediator.get(ISubCommandManager::class.java)!!
+        fun instance(): ISubCommandManager = Mediator.get(ISubCommandManager::class.java)!!
     }
 }

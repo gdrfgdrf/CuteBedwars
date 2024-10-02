@@ -12,10 +12,6 @@ enum class RequestTypes(private val displayName: String): IRequestTypes {
     EDIT_EXITING_WITHOUT_APPLYING("edit_exiting_without_applying")
     ;
 
-    override fun name_(): String {
-        return name
-    }
-
     override fun displayName(): String {
         return displayName
     }

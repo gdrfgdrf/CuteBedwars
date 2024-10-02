@@ -46,8 +46,8 @@ object Loader : ILoader {
         loadTaskManager()
 
         if (!idGeneratorInitialized) {
-            val options = if (IConfig.getWorkerId() != null && IConfig.getWorkerId()!! >= 0) {
-                IdGeneratorOptions(IConfig.getWorkerId()!!)
+            val options = if (IConfig.workerId() != null && IConfig.workerId()!! >= 0) {
+                IdGeneratorOptions(IConfig.workerId()!!)
             } else {
                 IdGeneratorOptions()
             }
@@ -98,20 +98,20 @@ object Loader : ILoader {
             "io.github.gdrfgdrf.cutebedwars.languages.collect",
             "io.github.gdrfgdrf.cutebedwars.languages.language",
             IConstants.OWNER(),
-            IConfig.getLanguage(),
+            IConfig.language(),
         )
     }
 
     private fun loadRequest() {
-        IRequests.get().initialize()
+        IRequests.instance().initialize()
     }
 
     private fun loadDatabase() {
-        IDatabase.get().initialize()
+        IDatabase.instance().initialize()
     }
 
     private fun loadTaskManager() {
-        ITaskManager.get().start()
+        ITaskManager.new().start()
     }
 
     private fun loadAreas() {
@@ -129,9 +129,9 @@ object Loader : ILoader {
         files.forEach {
             runCatching {
                 val area = JacksonUtils.readFile<Area>(it, Area::class.java)
-                val areaManager = IAreaManager.get(area)
+                val areaManager = IAreaManager.new(area)
 
-                IManagers.get().register(areaManager)
+                IManagers.instance().register(areaManager)
             }.onFailure {
                 "Unable to load area $it".logError(it)
             }
@@ -139,6 +139,6 @@ object Loader : ILoader {
     }
 
     private fun loadChangeTypeRegistry() {
-        IChangeTypeRegistry.get().init()
+        IChangeTypeRegistry.instance().init()
     }
 }

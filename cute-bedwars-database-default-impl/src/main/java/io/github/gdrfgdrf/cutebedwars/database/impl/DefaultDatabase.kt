@@ -28,7 +28,7 @@ class DefaultDatabase : IDatabase {
         if (!file.exists()) {
             file.createNewFile()
         }
-        if (IConfig.getEnableDatabaseLogging() == false) {
+        if (IConfig.enableDatabaseLogging() == false) {
             LogFactory.useNoLogging()
         } else {
             tryImplementation(LogFactory::useSlf4jLogging)

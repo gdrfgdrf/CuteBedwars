@@ -26,7 +26,7 @@ interface IAreaContext : ISetter {
     fun validate(sender: CommandSender? = null)
 
     companion object {
-        fun get(manager: IAreaManager): IAreaContext =
+        fun new(manager: IAreaManager): IAreaContext =
             Mediator.get(IAreaContext::class.java, ArgumentSet(arrayOf(manager)))!!
     }
 }

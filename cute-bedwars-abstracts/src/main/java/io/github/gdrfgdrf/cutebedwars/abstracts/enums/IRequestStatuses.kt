@@ -5,8 +5,6 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("request_statuses_enum")
 interface IRequestStatuses {
-    fun name_(): String
-
     companion object {
         fun valueOf(name: String): IRequestStatuses = Mediator.valueOf(IRequestStatuses::class.java, name)!!
     }

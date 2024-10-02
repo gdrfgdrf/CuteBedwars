@@ -12,6 +12,6 @@ interface IThreadPoolService {
     fun terminate()
 
     companion object {
-        fun get(): IThreadPoolService = Mediator.get(IThreadPoolService::class.java)!!
+        fun instance(): IThreadPoolService = Mediator.get(IThreadPoolService::class.java)!!
     }
 }

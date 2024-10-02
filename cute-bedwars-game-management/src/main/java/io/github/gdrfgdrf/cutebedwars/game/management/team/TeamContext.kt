@@ -47,7 +47,7 @@ class TeamContext(
                     needDisableGame = true
 
                     if (sender == null) {
-                        INotifications.get().messageAdministrator {
+                        INotifications.instance().messageAdministrator {
                             arrayOf(
                                 message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                                     .format(
@@ -86,7 +86,7 @@ class TeamContext(
 
         if (team.minPlayer > team.maxPlayer) {
             if (sender == null) {
-                INotifications.get().messageAdministrator {
+                INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
                             .format(

@@ -12,6 +12,6 @@ interface IPlugin {
     fun state(state: IPluginState)
 
     companion object {
-        fun get(): IPlugin = Mediator.get(IPlugin::class.java)!!
+        fun instance(): IPlugin = Mediator.get(IPlugin::class.java)!!
     }
 }

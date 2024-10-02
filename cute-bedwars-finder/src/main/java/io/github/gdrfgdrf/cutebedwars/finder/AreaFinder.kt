@@ -30,13 +30,13 @@ object AreaFinder : IAreaFinder {
                 return findResult
             }
 
-            IManagers.get().get(identifier.toLong())?.let {
+            IManagers.instance().get(identifier.toLong())?.let {
                 findResult.found(true)
                 onFound(it)
             }
         }
         if (findType == IFindType.valueOf("BY_NAME")) {
-            IManagers.get().get(identifier)?.forEach {
+            IManagers.instance().get(identifier)?.forEach {
                 if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
                     findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
 

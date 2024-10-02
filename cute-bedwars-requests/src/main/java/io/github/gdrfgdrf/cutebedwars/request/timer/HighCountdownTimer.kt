@@ -40,7 +40,7 @@ object HighCountdownTimer {
 }
 
 internal object HighCountdownWorker : Runnable {
-    private val threadPoolService = IThreadPoolService.get()
+    private val threadPoolService = IThreadPoolService.instance()
 
     override fun run() {
         "High countdown worker is running".logInfo()

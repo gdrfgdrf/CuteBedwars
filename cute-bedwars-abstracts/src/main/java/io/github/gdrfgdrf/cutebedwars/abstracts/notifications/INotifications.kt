@@ -14,6 +14,6 @@ interface INotifications {
     fun notifyOffline(player: Player)
 
     companion object {
-        fun get(): INotifications = Mediator.get(INotifications::class.java)!!
+        fun instance(): INotifications = Mediator.get(INotifications::class.java)!!
     }
 }

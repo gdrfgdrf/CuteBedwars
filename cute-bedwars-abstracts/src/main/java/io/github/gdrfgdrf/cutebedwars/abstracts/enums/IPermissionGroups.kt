@@ -7,7 +7,6 @@ import org.bukkit.permissions.PermissionDefault
 
 @EnumService("permission_groups_enum")
 interface IPermissionGroups {
-    fun name_(): String
     fun prefix(): String
     fun description(): String
     fun permissionDefault(): PermissionDefault

@@ -25,7 +25,7 @@ object TaskManager : ITaskManager {
 
         terminated = false
 
-        val threadPoolService = IThreadPoolService.get()
+        val threadPoolService = IThreadPoolService.instance()
         threadPoolService.newTask(TASK_WORKER)
         threadPoolService.newTask(SYNCHRONIZED_TASK_WORKER)
     }

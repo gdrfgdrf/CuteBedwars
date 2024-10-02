@@ -10,6 +10,6 @@ interface ILoader {
     fun reloadPhase()
 
     companion object {
-        fun get(): ILoader = Mediator.get(ILoader::class.java)!!
+        fun instance(): ILoader = Mediator.get(ILoader::class.java)!!
     }
 }

@@ -10,6 +10,6 @@ interface IEnabler {
     fun reloadPhase()
 
     companion object {
-        fun get(): IEnabler = Mediator.get(IEnabler::class.java)!!
+        fun instance(): IEnabler = Mediator.get(IEnabler::class.java)!!
     }
 }

@@ -6,7 +6,6 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("commands_enum")
 interface ICommands {
-    fun name_(): String
     fun string(): String
     fun onlyPlayer(): Boolean
     fun argsRange(): IntRange

@@ -22,7 +22,7 @@ object EditNewChanges : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val editor = BetterEditorFinder.find(sender) ?: return@localizationScope
-            val requests = IRequests.get()
+            val requests = IRequests.instance()
 
             if (editor.currentChanges() != null) {
                 val pair = requests.auto(type = IRequestTypes.valueOf("EDIT_NEW_CHANGES"), sender = sender)

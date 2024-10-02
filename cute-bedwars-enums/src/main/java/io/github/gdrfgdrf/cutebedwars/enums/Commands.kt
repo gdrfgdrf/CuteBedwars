@@ -23,13 +23,13 @@ enum class Commands(
     QUERY_DESCRIPTION(
         "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true, CommandNodes.ROOT,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("DESCRIPTION", "NOT_BLANK_STRING")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("DESCRIPTION", "NOT_BLANK_STRING")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
@@ -37,7 +37,7 @@ enum class Commands(
     ),
     INFO_COMMANDS("commands", false, 0..1, Permissions.INFO_COMMANDS, true, CommandNodes.INFO,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )
@@ -46,7 +46,7 @@ enum class Commands(
     CREATE_AREA(
         "area", false, 1..1, Permissions.CREATE_AREA, false, CommandNodes.CREATE,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("AREA_NAME", "NOT_BLANK_STRING")
             }
         )
@@ -54,14 +54,14 @@ enum class Commands(
     INFO_AREA(
         "area", false, 0..3, Permissions.INFO_AREA, true, CommandNodes.INFO,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
@@ -71,7 +71,7 @@ enum class Commands(
     EDITOR_AREA(
         "area", false, 0..2, Permissions.EDITOR_AREA, false, CommandNodes.EDITOR,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
             }
@@ -81,7 +81,7 @@ enum class Commands(
     CREATE_GAME(
         "game", false, 3..3, Permissions.CREATE_GAME, false, CommandNodes.CREATE,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("GAME_NAME", "NOT_BLANK_STRING")
@@ -91,22 +91,22 @@ enum class Commands(
     INFO_GAME(
         "game", false, 2..5, Permissions.INFO_GAME, false, CommandNodes.INFO,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("GAME", "GAMES")
             },
-            IParamScheme.get {
+            IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
@@ -122,7 +122,7 @@ enum class Commands(
     EDIT_MAKE(
         "make", false, 1..Int.MAX_VALUE, Permissions.EDIT_MAKE, false, CommandNodes.EDIT,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("CHANGE_TYPE", "CHANGES")
             },
         )
@@ -130,7 +130,7 @@ enum class Commands(
     EDIT_LIST_CHANGES(
         "list-changes", false, 0..1, Permissions.EDIT_LIST_CHANGES, true, CommandNodes.EDIT,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )
@@ -138,7 +138,7 @@ enum class Commands(
     EDIT_COMMIT(
         "commit", false, 0..1, Permissions.EDIT_COMMIT, true, CommandNodes.EDIT,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("COMMIT_MESSAGE", "NOT_BLANK_STRING")
             }
         )
@@ -146,7 +146,7 @@ enum class Commands(
     EDIT_EXIT(
         "exit", false, 0..1, Permissions.EDIT_EXIT, true, CommandNodes.EDIT,
         arrayOf(
-            IParamScheme.get {
+            IParamScheme.new {
                 add("APPLY_CHANGES", "BOOLEAN")
             }
         )
@@ -154,7 +154,6 @@ enum class Commands(
 
     ;
 
-    override fun name_(): String = name
     override fun string(): String = string
     override fun onlyPlayer(): Boolean = onlyPlayer
     override fun argsRange(): IntRange = argsRange

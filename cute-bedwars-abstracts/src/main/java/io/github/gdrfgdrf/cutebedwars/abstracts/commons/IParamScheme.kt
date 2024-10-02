@@ -13,7 +13,7 @@ interface IParamScheme {
     fun get(): String
 
     companion object {
-        fun get(builder: IParamScheme.() -> Unit): IParamScheme = Mediator.get(
+        fun new(builder: IParamScheme.() -> Unit): IParamScheme = Mediator.get(
             IParamScheme::class.java, ArgumentSet(
                 arrayOf(builder)
             )

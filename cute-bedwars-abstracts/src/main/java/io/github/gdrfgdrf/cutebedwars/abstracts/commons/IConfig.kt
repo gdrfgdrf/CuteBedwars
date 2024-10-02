@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.commons
 
-import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("config")
@@ -22,12 +21,12 @@ interface IConfig {
              return instance
         }
 
-        fun getLanguage(): String? = get()?.get("Language")
-        fun getWorkerId(): Short? = get()?.get("WorkerId")
-        fun getDatabaseImpl(): String? = get()?.get("DatabaseImpl")
-        fun getEnableDatabaseLogging(): Boolean? = get()?.get("EnableDatabaseLogging")
-        fun getDatabaseUsername(): String? = get()?.get("DatabaseUsername")
-        fun getDatabasePassword(): String? = get()?.get("DatabasePassword")
-        fun getRequestTimeout(): Long? = get()?.get("RequestTimeout")
+        fun language(): String? = get()?.get("Language")
+        fun workerId(): Short? = get()?.get("WorkerId")
+        fun databaseImpl(): String? = get()?.get("DatabaseImpl")
+        fun enableDatabaseLogging(): Boolean? = get()?.get("EnableDatabaseLogging")
+        fun databaseUsername(): String? = get()?.get("DatabaseUsername")
+        fun databasePassword(): String? = get()?.get("DatabasePassword")
+        fun requestTimeout(): Long? = get()?.get("RequestTimeout")
     }
 }

@@ -13,6 +13,6 @@ interface IGameInformation {
     fun convert(sender: CommandSender, gameContext: IGameContext): List<ILocalizationMessage>
 
     companion object {
-        fun get(): IGameInformation = Mediator.get(IGameInformation::class.java)!!
+        fun instance(): IGameInformation = Mediator.get(IGameInformation::class.java)!!
     }
 }

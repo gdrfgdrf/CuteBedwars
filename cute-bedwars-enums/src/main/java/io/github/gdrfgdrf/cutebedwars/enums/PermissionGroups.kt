@@ -8,8 +8,8 @@ import org.bukkit.permissions.PermissionDefault
 @EnumServiceImpl("permission_groups_enum")
 enum class PermissionGroups(
     val prefix: String,
-    val description: String,
-    val permissionDefault: PermissionDefault
+    private val description: String,
+    private val permissionDefault: PermissionDefault
 ): IPermissionGroups {
     USER(
         "user.",
@@ -23,21 +23,9 @@ enum class PermissionGroups(
     )
     ;
 
-    override fun name_(): String {
-        return name
-    }
-
-    override fun prefix(): String {
-        return prefix
-    }
-
-    override fun description(): String {
-        return description
-    }
-
-    override fun permissionDefault(): PermissionDefault {
-        return permissionDefault
-    }
+    override fun prefix(): String = prefix
+    override fun description(): String = description
+    override fun permissionDefault(): PermissionDefault = permissionDefault
 
     override fun get(): Permission {
         return Permission(

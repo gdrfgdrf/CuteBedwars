@@ -37,7 +37,7 @@ abstract class AbstractEditor<T>(val uuid: String, val t: T) {
             apply()
         }
 
-        IEditors.get().remove(uuid)
+        IEditors.instance().remove(uuid)
     }
 
     fun type(): Class<*> = t!!::class.java

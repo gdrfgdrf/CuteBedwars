@@ -5,7 +5,6 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("request_type_enum")
 interface IRequestTypes {
-    fun name_(): String
     fun displayName(): String
 
     companion object {

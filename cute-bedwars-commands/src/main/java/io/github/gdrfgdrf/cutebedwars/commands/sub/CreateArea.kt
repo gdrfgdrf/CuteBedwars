@@ -22,8 +22,8 @@ object CreateArea : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
         localizationScope(sender) {
             val areaName = args[0]
-            val managers = IManagers.get()
-            val requests = IRequests.get()
+            val managers = IManagers.instance()
+            val requests = IRequests.instance()
 
             val sameNameAreas = managers.get(areaName)
             if (sameNameAreas != null && sameNameAreas.size >= 1) {

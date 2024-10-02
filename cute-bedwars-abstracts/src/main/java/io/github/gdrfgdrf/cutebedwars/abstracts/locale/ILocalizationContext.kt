@@ -12,7 +12,7 @@ interface ILocalizationContext {
     fun message(languageString: LanguageString): ILocalizationMessage
 
     companion object {
-        fun get(sender: CommandSender): ILocalizationContext = Mediator.get(
+        fun new(sender: CommandSender): ILocalizationContext = Mediator.get(
             ILocalizationContext::class.java, ArgumentSet(
                 arrayOf(sender)
             )

@@ -31,7 +31,7 @@ object CreateGame : AbstractSubCommand(
             val areaContext = areaManager.context()
             val areaName = areaManager.area().name
 
-            val requests = IRequests.get()
+            val requests = IRequests.instance()
 
             val sameNameGames = areaContext.getGame(gameName)
             if (sameNameGames.isNotEmpty()) {

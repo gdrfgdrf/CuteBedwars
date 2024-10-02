@@ -20,6 +20,6 @@ interface IAreaFinder {
     ): IFindResult
 
     companion object {
-        fun get(): IAreaFinder = Mediator.get(IAreaFinder::class.java)!!
+        fun instance(): IAreaFinder = Mediator.get(IAreaFinder::class.java)!!
     }
 }

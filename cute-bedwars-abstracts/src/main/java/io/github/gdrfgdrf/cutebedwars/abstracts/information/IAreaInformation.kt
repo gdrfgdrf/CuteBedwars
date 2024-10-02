@@ -13,6 +13,6 @@ interface IAreaInformation {
     fun convert(sender: CommandSender, areaManager: IAreaManager): List<ILocalizationMessage>
 
     companion object {
-        fun get(): IAreaInformation = Mediator.get(IAreaInformation::class.java)!!
+        fun instance(): IAreaInformation = Mediator.get(IAreaInformation::class.java)!!
     }
 }

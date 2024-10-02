@@ -29,7 +29,7 @@ object EditorArea : AbstractSubCommand(
             }
 
             val areaManager = BetterAreaFinder.find(sender, findType, identifier) ?: return@localizationScope
-            val editor = IEditors.get().get(uuid)
+            val editor = IEditors.instance().get(uuid)
             if (editor != null) {
                 message(EditorLanguage.ALREADY_IN_EDITING_MODE)
                     .send()
@@ -39,8 +39,8 @@ object EditorArea : AbstractSubCommand(
             message(EditorLanguage.LOADING_AREA_EDITOR)
                 .send()
 
-            val areaEditor = IEditors.get().createAreaEditor(uuid, areaManager.context())
-            IEditors.get().put(areaEditor)
+            val areaEditor = IEditors.instance().createAreaEditor(uuid, areaManager.context())
+            IEditors.instance().put(areaEditor)
 
             message(EditorLanguage.EDITOR_LOAD_FINISHED)
                 .send()

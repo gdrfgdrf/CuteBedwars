@@ -24,7 +24,7 @@ interface IRequest {
     fun lastEachSecondRun(time: Long)
 
     companion object {
-        fun get(eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest = Mediator.get(IRequest::class.java, ArgumentSet(arrayOf(
+        fun new(eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest = Mediator.get(IRequest::class.java, ArgumentSet(arrayOf(
             IConstants.GLOBAL_TIMEOUT(),
             TimeUnit.MILLISECONDS,
             eachSecond,

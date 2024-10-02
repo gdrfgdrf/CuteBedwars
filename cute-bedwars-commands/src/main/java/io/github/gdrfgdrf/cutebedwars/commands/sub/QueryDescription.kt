@@ -60,7 +60,7 @@ object QueryDescription : AbstractSubCommand(
                 return@localizationScope
             }
 
-            val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("DESCRIPTIONS"), raw) {
+            val chatPage = IChatPage.cache(sender, IPageRequestTypes.valueOf("DESCRIPTIONS"), raw) {
                 searchResult.stream()
                     .filter {
                         return@filter !(it.administration()

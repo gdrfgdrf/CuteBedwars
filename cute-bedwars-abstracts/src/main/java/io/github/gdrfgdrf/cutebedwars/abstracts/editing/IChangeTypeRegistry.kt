@@ -17,7 +17,7 @@ interface IChangeTypeRegistry {
     fun forEach(block: (String, IChangeClassHolder<AbstractChange<*>>) -> Unit)
 
     companion object {
-        fun get(): IChangeTypeRegistry = Mediator.get(IChangeTypeRegistry::class.java)!!
+        fun instance(): IChangeTypeRegistry = Mediator.get(IChangeTypeRegistry::class.java)!!
     }
 
 }

@@ -8,7 +8,7 @@ object BetterChangesFinder {
     fun find(sender: CommandSender): IChanges<*>? {
         var changes: IChanges<*>? = null
 
-        IChangesFinder.get().find(sender) {
+        IChangesFinder.instance().find(sender) {
             changes = it
         }
 

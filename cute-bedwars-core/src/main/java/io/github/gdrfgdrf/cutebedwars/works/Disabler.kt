@@ -25,7 +25,7 @@ object Disabler : IDisabler {
         disableRequest()
         disableThreadPool()
         disableTaskManager()
-        ISubCommandManager.get().clear()
+        ISubCommandManager.instance().clear()
         disableChangeTypeRegistry()
     }
 
@@ -37,11 +37,11 @@ object Disabler : IDisabler {
     }
 
     private fun disableDatabase() {
-        IDatabase.get().close()
+        IDatabase.instance().close()
     }
 
     private fun disableRequest() {
-        IRequests.get().reset()
+        IRequests.instance().reset()
     }
 
     private fun disableThreadPool() {
@@ -49,11 +49,11 @@ object Disabler : IDisabler {
     }
 
     private fun disableTaskManager() {
-        ITaskManager.get().terminate()
+        ITaskManager.new().terminate()
     }
 
     private fun disableChangeTypeRegistry() {
-        IChangeTypeRegistry.get().clear()
+        IChangeTypeRegistry.instance().clear()
     }
 
 

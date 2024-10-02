@@ -43,13 +43,13 @@ object InfoCommands : AbstractSubCommand(
                 return@localizationScope
             }
 
-            val chatPage = IChatPage.get(
+            val chatPage = IChatPage.cache(
                 sender,
                 IPageRequestTypes.valueOf("INFO_COMMANDS"),
                 IPermissions.valueOf("INFO_COMMANDS").hasPermission(sender)
                     .toString() + " | " + IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender)
             ) {
-                return@get arrayListOf()
+                return@cache arrayListOf()
             }
             if (chatPage.changeable()) {
                 array.forEach {
@@ -59,7 +59,7 @@ object InfoCommands : AbstractSubCommand(
                     }
 
                     chatPage.addPage {
-                        ICommandInformation.get().convert(sender, it)
+                        ICommandInformation.instance().convert(sender, it)
                     }
                 }
 

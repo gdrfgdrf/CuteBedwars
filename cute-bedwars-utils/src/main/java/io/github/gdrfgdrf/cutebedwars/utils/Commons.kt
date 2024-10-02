@@ -11,12 +11,12 @@ fun logger(): Logger {
 }
 
 fun runAsyncTask(runnable: () -> Unit) {
-    ITaskEntry.get<Any>(runnable)
+    ITaskEntry.new<Any>(runnable)
         .run()
 }
 
 fun <T> runSyncTask(lock: Any, supplier: () -> T?) {
-    IFutureTaskEntry.get(supplier)
+    IFutureTaskEntry.new(supplier)
         .customLock(lock)
         .run()
 }

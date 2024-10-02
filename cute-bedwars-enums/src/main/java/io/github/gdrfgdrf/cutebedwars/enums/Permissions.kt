@@ -42,17 +42,8 @@ enum class Permissions(
 
     ;
 
-    override fun name_(): String {
-        return name
-    }
-
-    override fun groups(): IPermissionGroups {
-        return groups
-    }
-
-    override fun string(): String {
-        return string
-    }
+    override fun groups(): IPermissionGroups = groups
+    override fun string(): String = string
 
     override fun get(): String {
         return COMMON_PREFIX + groups.prefix + string

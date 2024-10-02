@@ -7,7 +7,6 @@ import org.bukkit.permissions.Permission
 
 @EnumService("permissions_enum")
 interface IPermissions {
-    fun name_(): String
     fun groups(): IPermissionGroups
     fun string(): String
     fun get(): String

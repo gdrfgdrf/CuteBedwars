@@ -10,7 +10,7 @@ object BetterAreaFinder {
     fun find(sender: CommandSender, findType: String, identifier: String): IAreaManager? {
         var areaManager: IAreaManager? = null
 
-        val findResult = IAreaFinder.get().find(
+        val findResult = IAreaFinder.instance().find(
             sender,
             IFindType.find(findType),
             identifier,

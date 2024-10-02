@@ -36,9 +36,9 @@ object EditListChanges : AbstractSubCommand(
                 return@localizationScope
             }
 
-            val messages = IChangesInformation.get().convert(sender, changes)
+            val messages = IChangesInformation.instance().convert(sender, changes)
 
-            val chatPage = IChatPage.get(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), messages.size.toString()) {
+            val chatPage = IChatPage.cache(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), messages.size.toString()) {
                 messages
             }
             chatPage.send(pageIndex - 1)
