@@ -72,7 +72,7 @@ object Loader : ILoader {
     }
 
     private fun createFolders() {
-        val baseFolder = File(IConstants.BASE_FOLDER())
+        val baseFolder = File(IConstants.baseFolder())
         if (!baseFolder.exists()) {
             baseFolder.mkdirs()
         }
@@ -83,8 +83,8 @@ object Loader : ILoader {
 
         IConfig.set(
             ConfigManager.getInstance().load(
-                IConstants.OWNER(),
-                IConstants.CONFIG_FILE_NAME(),
+                IConstants.owner(),
+                IConstants.configFileName(),
                 Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config")
             )
         )
@@ -97,7 +97,7 @@ object Loader : ILoader {
             Loader::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.languages.collect",
             "io.github.gdrfgdrf.cutebedwars.languages.language",
-            IConstants.OWNER(),
+            IConstants.owner(),
             IConfig.language(),
         )
     }
@@ -115,27 +115,27 @@ object Loader : ILoader {
     }
 
     private fun loadAreas() {
-        val folder = File(IConstants.AREA_FOLDER())
-        if (!folder.exists()) {
-            folder.mkdirs()
-        }
-        val files = folder.listFiles { _, filename ->
-            return@listFiles !filename.endsWith(".json")
-        }
-        if (files == null) {
-            return
-        }
-
-        files.forEach {
-            runCatching {
-                val area = JacksonUtils.readFile<Area>(it, Area::class.java)
-                val areaManager = IAreaManager.new(area)
-
-                IManagers.instance().register(areaManager)
-            }.onFailure {
-                "Unable to load area $it".logError(it)
-            }
-        }
+//        val folder = File(IConstants.areaFolder())
+//        if (!folder.exists()) {
+//            folder.mkdirs()
+//        }
+//        val files = folder.listFiles { _, filename ->
+//            return@listFiles !filename.endsWith(".json")
+//        }
+//        if (files == null) {
+//            return
+//        }
+//
+//        files.forEach {
+//            runCatching {
+//                val area = JacksonUtils.readFile<Area>(it, Area::class.java)
+//                val areaManager = IAreaManager.new(area)
+//
+//                IManagers.instance().register(areaManager)
+//            }.onFailure {
+//                "Unable to load area $it".logError(it)
+//            }
+//        }
     }
 
     private fun loadChangeTypeRegistry() {

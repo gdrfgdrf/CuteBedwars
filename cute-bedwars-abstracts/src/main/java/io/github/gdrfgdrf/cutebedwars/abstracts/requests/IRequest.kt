@@ -25,7 +25,7 @@ interface IRequest {
 
     companion object {
         fun new(eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest = Mediator.get(IRequest::class.java, ArgumentSet(arrayOf(
-            IConstants.GLOBAL_TIMEOUT(),
+            IConstants.globalTimeout(),
             TimeUnit.MILLISECONDS,
             eachSecond,
             endRun

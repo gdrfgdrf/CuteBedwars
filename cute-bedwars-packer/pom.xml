@@ -122,6 +122,16 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>editing</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>storage</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>protobuf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

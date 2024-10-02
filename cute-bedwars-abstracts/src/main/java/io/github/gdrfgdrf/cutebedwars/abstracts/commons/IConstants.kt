@@ -12,16 +12,16 @@ interface IConstants {
     companion object {
         fun get(): IConstants = Mediator.get(IConstants::class.java)!!
 
-        fun OWNER(): String = get().get("OWNER")
-        fun BASE_FOLDER(): String = get().get("BASE_FOLDER")
-        fun CONFIG_FILE_NAME(): String = get().get("CONFIG_FILE_NAME")
+        fun owner(): String = get().get("OWNER")
+        fun baseFolder(): String = get().get("BASE_FOLDER")
+        fun configFileName(): String = get().get("CONFIG_FILE_NAME")
 
-        fun DEFAULT_DATABASE_FILE_NAME(): String = get().get("DEFAULT_DATABASE_FILE_NAME")
-        fun DATABASE_IMPL_DESCRIPTION_FILE_NAME(): String = get().get("DATABASE_IMPL_DESCRIPTION_FILE_NAME")
-        fun CUSTOM_DATABASE_IMPL_FOLDER_NAME(): String = get().get("CUSTOM_DATABASE_IMPL_FOLDER_NAME")
+        fun defaultDatabaseFileName(): String = get().get("DEFAULT_DATABASE_FILE_NAME")
+        fun databaseImplDescriptionFileName(): String = get().get("DATABASE_IMPL_DESCRIPTION_FILE_NAME")
+        fun customDatabaseImplFolderName(): String = get().get("CUSTOM_DATABASE_IMPL_FOLDER_NAME")
 
-        fun AREA_FOLDER(): String = get().get("AREA_FOLDER")
+        fun areaFolder(): String = get().get("AREA_FOLDER")
 
-        fun GLOBAL_TIMEOUT(): Long = get().get("GLOBAL_TIMEOUT")
+        fun globalTimeout(): Long = get().get("GLOBAL_TIMEOUT")
     }
 }

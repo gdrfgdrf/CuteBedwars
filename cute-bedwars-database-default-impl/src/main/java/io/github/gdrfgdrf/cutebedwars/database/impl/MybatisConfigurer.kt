@@ -67,7 +67,7 @@ object MybatisConfigurer {
 
         val dataSource = SimpleDriverDataSource()
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
-        dataSource.url = "jdbc:sqlite:" + IConstants.DEFAULT_DATABASE_FILE_NAME()
+        dataSource.url = "jdbc:sqlite:" + IConstants.defaultDatabaseFileName()
 
         if (!IConfig.databaseUsername().isNullOrBlank() && !IConfig.databasePassword().isNullOrBlank()) {
             dataSource.username = IConfig.databaseUsername()

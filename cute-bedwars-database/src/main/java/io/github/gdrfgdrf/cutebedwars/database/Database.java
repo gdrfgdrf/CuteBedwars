@@ -60,13 +60,13 @@ public class Database implements IDatabase {
             if ("default-sqlite".equals(databaseImpl)) {
                 databaseClass = initDefault();
             } else {
-                File customDatabaseImplFolder = new File(IConstants.Companion.CUSTOM_DATABASE_IMPL_FOLDER_NAME());
+                File customDatabaseImplFolder = new File(IConstants.Companion.customDatabaseImplFolderName());
                 if (!customDatabaseImplFolder.exists()) {
                     customDatabaseImplFolder.mkdirs();
                 }
 
                 File customDatabaseImplFile = new File(
-                        IConstants.Companion.CUSTOM_DATABASE_IMPL_FOLDER_NAME() + databaseImpl
+                        IConstants.Companion.customDatabaseImplFolderName() + databaseImpl
                 );
                 StringExtensionKt.logInfo("Custom database: " + customDatabaseImplFile);
 
@@ -101,7 +101,7 @@ public class Database implements IDatabase {
 
         @Cleanup
         JarFile jarFile = new JarFile(implFile);
-        JarEntry descriptionFile = jarFile.getJarEntry(IConstants.Companion.DATABASE_IMPL_DESCRIPTION_FILE_NAME());
+        JarEntry descriptionFile = jarFile.getJarEntry(IConstants.Companion.databaseImplDescriptionFileName());
 
         InputStream inputStream = jarFile.getInputStream(descriptionFile);
         DatabaseImplDescription description = JacksonUtils.readInputStream(

@@ -31,6 +31,8 @@
         <module>cute-bedwars-finder</module>
         <module>cute-bedwars-information</module>
         <module>cute-bedwars-editing</module>
+        <module>cute-bedwars-storage</module>
+        <module>cute-bedwars-protobuf</module>
     </modules>
 
     <repositories>
@@ -173,10 +175,28 @@
                 <artifactId>editing</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>storage</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>protobuf</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>4.29.0-RC1</version>
+        </dependency>
+
         <dependency>
             <groupId>de.tr7zw</groupId>
             <artifactId>item-nbt-api-plugin</artifactId>

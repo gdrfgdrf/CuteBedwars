@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package io.github.gdrfgdrf.cutebedwars.protobuf.storage;
+
+option java_package = "io.github.gdrfgdrf.cutebedwars.protobuf.storage";
+option java_outer_classname = "StorageProto";
+
+message GameCommits {
+    map<string, Commits> map = 1;
+}
+
+message Commits {
+    repeated Commit commits = 1;
+}
+
+message Commit {
+    string id = 1;
+    string time = 2;
+    string submitter = 3;
+    string message = 4;
+    repeated Change changes = 5;
+}
+
+message Change {
+    string type = 1;
+    string name = 2;
+}

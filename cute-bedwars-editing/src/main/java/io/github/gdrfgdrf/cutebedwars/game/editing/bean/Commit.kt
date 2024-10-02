@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.bean
 
 import com.github.yitter.idgen.YitIdHelper
+import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.OperableChangesException
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
@@ -63,4 +64,6 @@ class Commit<T>(
     override fun message(message: String) {
         this.message = message
     }
+
+    override fun changes(): IChanges<T> = changes
 }

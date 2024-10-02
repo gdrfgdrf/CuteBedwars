@@ -13,4 +13,6 @@ interface ICommit<T> {
     fun time(time: String)
     fun submitter(submitter: String)
     fun message(message: String)
+
+    fun changes(): IChanges<T>
 }

@@ -25,7 +25,7 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
             area.name = "temp_name_${area.id}"
         }
 
-        val folder = File(IConstants.AREA_FOLDER())
+        val folder = File(IConstants.areaFolder())
         if (!folder.exists()) {
             folder.mkdirs()
         }
