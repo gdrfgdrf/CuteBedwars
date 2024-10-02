@@ -28,6 +28,7 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString COMMITTING_CHANGES = new LanguageString("&e正在提交修改");
     public static final LanguageString COMMIT_FINISHED = new LanguageString("&a提交完成");
     public static final LanguageString COMMIT_ERROR = new LanguageString("&c无法提交修改");
+    public static final LanguageString NEED_ONE_CHANGE_AT_LEAST = new LanguageString("&c至少需要一条修改才能提交");
 
     public static final LanguageString EXITING_EDITOR = new LanguageString("&e正在退出编辑器");
     public static final LanguageString EXITING_WITHOUT_APPLYING_WARNING = new LanguageString("&c将会丢弃当前所有的提交，若继续操作，请在 &e&l%s &r&c秒内再次输入以确定");

@@ -34,6 +34,12 @@ object EditCommit : AbstractSubCommand(
                 ""
             }
 
+            if (changes.size() <= 0) {
+                message(EditorLanguage.NEED_ONE_CHANGE_AT_LEAST)
+                    .send()
+                return@localizationScope
+            }
+
             message(EditorLanguage.COMMITTING_CHANGES)
                 .send()
 

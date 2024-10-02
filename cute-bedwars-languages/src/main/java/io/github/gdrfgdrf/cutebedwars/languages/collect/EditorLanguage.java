@@ -28,6 +28,7 @@ public class EditorLanguage implements LanguageCollect {
     public static LanguageString COMMITTING_CHANGES;
     public static LanguageString COMMIT_FINISHED;
     public static LanguageString COMMIT_ERROR;
+    public static LanguageString NEED_ONE_CHANGE_AT_LEAST;
 
     public static LanguageString EXITING_EDITOR;
     public static LanguageString EXITING_WITHOUT_APPLYING_WARNING;
