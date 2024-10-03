@@ -37,8 +37,9 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
             )
             commit.changesList.forEach { change ->
                 messages.add(
-                    message(EditorLanguage.COMMIT_CHANGES_FORMAT)
-                        .format0(change.type, change.name)
+                    message(EditorLanguage.COMMIT_CHANGES_FORMAT).apply {
+                        format0(change.type, change.name)
+                    }
                 )
             }
 

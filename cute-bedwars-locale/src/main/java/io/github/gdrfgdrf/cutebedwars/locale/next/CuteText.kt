@@ -1,7 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.locale.next
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ICuteText
-import net.md_5.bungee.api.chat.BaseComponent
 import net.md_5.bungee.api.chat.ClickEvent
 import net.md_5.bungee.api.chat.ClickEvent.Action
 import net.md_5.bungee.api.chat.HoverEvent
@@ -16,7 +15,34 @@ class CuteText private constructor(raw: String) : ICuteText {
     private var hoverAction: HoverEvent.Action? = null
     private var hoverActionValue: Array<out ICuteText>? = null
 
+    private var parts = arrayListOf<String>()
+
+    private val clickActionInPart: Array<Action?>?
+    private var clickActionValueInPart: Array<String?>?
+
+    private var hoverActionInPart: Array<HoverEvent.Action?>?
+    private var hoverActionValueInPart: Array<Array<out ICuteText>?>?
+
     private var cache: TextComponent? = null
+    private val enablePart: Boolean
+
+    init {
+        enablePart = countMatches(finalString, "&|") > 0
+        if (enablePart) {
+            val split = finalString.split("&|")
+            parts.addAll(split)
+
+            clickActionInPart = arrayOfNulls(parts.size)
+            clickActionValueInPart = arrayOfNulls(parts.size)
+            hoverActionInPart = arrayOfNulls(parts.size)
+            hoverActionValueInPart = arrayOfNulls(parts.size)
+        } else {
+            clickActionInPart = null
+            clickActionValueInPart = null
+            hoverActionInPart = null
+            hoverActionValueInPart = null
+        }
+    }
 
     override fun clickAction(action: Action): ICuteText {
         this.clickAction = action
@@ -92,6 +118,93 @@ class CuteText private constructor(raw: String) : ICuteText {
         return this
     }
 
+    private fun partCheck() {
+        if (clickActionInPart == null ||
+            clickActionValueInPart == null ||
+            hoverActionInPart == null ||
+            hoverActionValueInPart == null) {
+            throw IllegalStateException()
+        }
+    }
+
+    override fun clickActionInPart(partIndex: Int, action: Action): ICuteText {
+        partCheck()
+        clickActionInPart?.set(partIndex, action)
+        return this
+    }
+
+    override fun clickActionValueInPart(partIndex: Int, value: String): ICuteText {
+        partCheck()
+        clickActionValueInPart?.set(partIndex, value)
+        return this
+    }
+
+    override fun openUrlInPart(partIndex: Int, value: String): ICuteText {
+        clickActionInPart(partIndex, Action.OPEN_URL)
+        clickActionValueInPart(partIndex, value)
+        return this
+    }
+
+    override fun openFileInPart(partIndex: Int, value: String): ICuteText {
+        clickActionInPart(partIndex, Action.OPEN_FILE)
+        clickActionValueInPart(partIndex, value)
+        return this
+    }
+
+    override fun runCommandInPart(partIndex: Int, value: String): ICuteText {
+        clickActionInPart(partIndex, Action.RUN_COMMAND)
+        clickActionValueInPart(partIndex, value)
+        return this
+    }
+
+    override fun suggestCommandInPart(partIndex: Int, value: String): ICuteText {
+        clickActionInPart(partIndex, Action.SUGGEST_COMMAND)
+        clickActionValueInPart(partIndex, value)
+        return this
+    }
+
+    override fun changePageInPart(partIndex: Int, value: String): ICuteText {
+        clickActionInPart(partIndex, Action.CHANGE_PAGE)
+        clickActionValueInPart(partIndex, value)
+        return this
+    }
+
+    override fun hoverActionInPart(partIndex: Int, action: HoverEvent.Action): ICuteText {
+        partCheck()
+        hoverActionInPart?.set(partIndex, action)
+        return this
+    }
+
+    override fun hoverActionValueInPart(partIndex: Int, vararg cuteText: ICuteText): ICuteText {
+        partCheck()
+        hoverActionValueInPart?.set(partIndex, cuteText)
+        return this
+    }
+
+    override fun showTextInPart(partIndex: Int, vararg cuteText: ICuteText): ICuteText {
+        hoverActionInPart(partIndex, HoverEvent.Action.SHOW_TEXT)
+        hoverActionValueInPart(partIndex, *cuteText)
+        return this
+    }
+
+    override fun showAchievementInPart(partIndex: Int, vararg cuteText: ICuteText): ICuteText {
+        hoverActionInPart(partIndex, HoverEvent.Action.SHOW_ACHIEVEMENT)
+        hoverActionValueInPart(partIndex, *cuteText)
+        return this
+    }
+
+    override fun showItemInPart(partIndex: Int, vararg cuteText: ICuteText): ICuteText {
+        hoverActionInPart(partIndex, HoverEvent.Action.SHOW_ITEM)
+        hoverActionValueInPart(partIndex, *cuteText)
+        return this
+    }
+
+    override fun showEntityInPart(partIndex: Int, vararg cuteText: ICuteText): ICuteText {
+        hoverActionInPart(partIndex, HoverEvent.Action.SHOW_ENTITY)
+        hoverActionValueInPart(partIndex, *cuteText)
+        return this
+    }
+
     override fun format(vararg any: Any): CuteText {
         finalString = finalString.format(*any)
         return this
@@ -99,6 +212,38 @@ class CuteText private constructor(raw: String) : ICuteText {
 
     override fun build(): TextComponent {
         if (cache != null) {
+            return cache!!
+        }
+        if (enablePart &&
+            clickActionInPart != null &&
+            clickActionValueInPart != null &&
+            hoverActionInPart != null &&
+            hoverActionValueInPart != null) {
+
+            cache = TextComponent("")
+            parts.forEachIndexed { index, part ->
+                val replaced = TextComponent(replaceFormatSymbol("&", part))
+
+                val clickAction = clickActionInPart[index]
+                val clickActionValue = clickActionValueInPart!![index]
+                if (clickAction != null && clickActionValue != null) {
+                    replaced.clickEvent = ClickEvent(clickAction, clickActionValue)
+                }
+
+                val hoverAction = hoverActionInPart!![index]
+                val hoverActionValue = hoverActionValueInPart!![index]
+                if (hoverAction != null && hoverActionValue != null) {
+                    val result = arrayListOf<TextComponent>()
+                    hoverActionValue.forEach { cuteText ->
+                        result.add(cuteText.build())
+                    }
+
+                    replaced.hoverEvent = HoverEvent(hoverAction, result.toTypedArray())
+                }
+
+                cache!!.addExtra(replaced)
+            }
+
             return cache!!
         }
 
@@ -123,6 +268,12 @@ class CuteText private constructor(raw: String) : ICuteText {
         }
 
         return cache!!
+    }
+
+    private fun countMatches(string: String, pattern: String): Int {
+        return string.split(pattern)
+            .dropLastWhile { it.isEmpty() }
+            .toTypedArray().size - 1
     }
 
     companion object {
