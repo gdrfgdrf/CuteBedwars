@@ -13,8 +13,8 @@ object Convertors {
 
         commit.changes().forEach { change ->
             val changeProtobuf = StorageProto.Change.newBuilder()
-                .setType(change.annotationName())
-                .setName(change.name)
+                .setIdentifier(change.identifier())
+                .setName(change.name())
                 .addAllArgs(arrayListOf<String?>().apply {
                     change.args().forEach {
                         add(it.toString())

@@ -2,30 +2,21 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.change
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.IChangeClassHolder
-import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
+import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
 
 class ChangeClassHolder<T : AbstractChange<*>>(
     private val clazz: Class<T>,
-    type: String
+    private val metadata: ChangeMetadata
 ) : IChangeClassHolder<T> {
-    private val typeClass = Class.forName(type)
-
     override fun validateArgsLength(protobuf: Boolean, vararg any: Any): Boolean {
-        val change = clazz.getAnnotation(Change::class.java)
         val argsRange = if (protobuf) {
-            change.minArgs..change.maxArgsForProtobuf
+            metadata.argsRange.first..metadata.maxArgsForProtobuf
         } else {
-            change.minArgs..change.maxArgs
+            metadata.argsRange
         }
 
         return argsRange.contains(any.size)
-    }
-
-    override fun validate(any: Any): Boolean {
-        val validateMethod = clazz.getMethod("validate")
-        val result = validateMethod.invoke(any)
-        return result as Boolean
     }
 
     override fun create(vararg any: Any): T {
@@ -37,9 +28,10 @@ class ChangeClassHolder<T : AbstractChange<*>>(
         return instance
     }
 
-    override fun type(): Class<*> = typeClass
+    override fun type(): Class<*> = metadata.type
 
     companion object {
-        fun <T : AbstractChange<*>> create(clazz: Class<T>, type: String) = ChangeClassHolder(clazz, type)
+        fun <T : AbstractChange<*>> create(clazz: Class<T>, metadata: ChangeMetadata) =
+            ChangeClassHolder(clazz, metadata)
     }
 }

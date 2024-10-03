@@ -39,4 +39,5 @@ interface ITranslationTextAgent {
 
     fun format(vararg any: Any): ITranslationTextAgent
     fun build(): TextComponent
+    fun string(): String
 }

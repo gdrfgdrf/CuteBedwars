@@ -16,4 +16,5 @@ interface ICuteTranslation {
     fun replace(index: Int, raw: String): ICuteTranslation
     fun build(): TextComponent
     fun send(commandSender: CommandSender)
+    fun string(): String
 }

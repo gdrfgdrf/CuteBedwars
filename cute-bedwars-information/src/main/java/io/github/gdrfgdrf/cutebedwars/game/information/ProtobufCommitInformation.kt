@@ -1,12 +1,12 @@
 package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IProtobufCommitInformation
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
+import io.github.gdrfgdrf.cutebedwars.utils.toKotlinChange
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 
@@ -30,7 +30,7 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
             )
             messages.add(
                 message(EditorLanguage.COMMIT_MESSAGE_IS)
-                    .format0(commit.message.ifBlank { message(CommonLanguage.NONE).toString() })
+                    .format0(commit.message.ifBlank { text(CommonLanguage.NONE).string() })
             )
             messages.add(
                 message(EditorLanguage.COMMIT_CHANGES_IS)
@@ -38,7 +38,11 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
             commit.changesList.forEach { change ->
                 messages.add(
                     message(EditorLanguage.COMMIT_CHANGES_FORMAT).apply {
-                        format0(change.type, change.name)
+                        val kotlinChange = change.toKotlinChange()
+                        val localizedIdentifier = kotlinChange.localizedIdentifier().get().string
+                        val localizedName = kotlinChange.localizedName()(sender).string()
+
+                        format0(localizedIdentifier, localizedName)
                     }
                 )
             }

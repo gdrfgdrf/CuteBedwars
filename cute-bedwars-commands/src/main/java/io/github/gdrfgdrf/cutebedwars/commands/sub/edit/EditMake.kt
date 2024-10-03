@@ -35,14 +35,13 @@ object EditMake : AbstractSubCommand(
                 return@localizationScope
             }
             val change: AbstractChange<*> = changeClassHolder.create(*(newArgs as Array<out Any>))
-            if (!changeClassHolder.validate(change)) {
+            if (!change.validate()) {
                 message(EditorLanguage.ARGUMENT_ERROR)
                     .send()
                 return@localizationScope
             }
 
             val addResult = changes.tryAdd(change)
-
             if (!addResult) {
                 message(EditorLanguage.ADD_CHANGE_ERROR)
                     .send()

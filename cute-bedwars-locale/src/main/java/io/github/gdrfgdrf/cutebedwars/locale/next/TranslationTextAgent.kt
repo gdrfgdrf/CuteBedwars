@@ -158,6 +158,10 @@ class TranslationTextAgent(
         return cuteText.build()
     }
 
+    override fun string(): String {
+        return cuteText.string()
+    }
+
     companion object {
         fun of(raw: String): TranslationTextAgent {
             return TranslationTextAgent(CuteText.of(raw))

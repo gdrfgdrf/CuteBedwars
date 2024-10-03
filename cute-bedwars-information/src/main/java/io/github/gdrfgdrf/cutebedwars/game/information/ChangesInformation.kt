@@ -2,7 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IChangesInformation
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -15,10 +14,14 @@ object ChangesInformation : IChangesInformation {
         localizationScope(sender) {
             val messages = arrayListOf<ITranslationAgent>()
 
-            changes.forEach {
+            changes.forEach { change ->
                 messages.add(
-                    message(EditorLanguage.CHANGE_FORMAT)
-                        .format0(it.annotationName(), it.name)
+                    message(EditorLanguage.CHANGE_FORMAT).apply {
+                        val localizedIdentifier = change.localizedIdentifier().get().string
+                        val localizedName = change.localizedName()(sender).string()
+
+                        format0(localizedIdentifier, localizedName)
+                    }
                 )
             }
 

@@ -48,7 +48,13 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString COMMIT_SUBMITTER_IS = new LanguageString("&a提交者&8: &e&l%s");
     public static final LanguageString COMMIT_MESSAGE_IS = new LanguageString("&a提交信息&8: &e&l%s");
     public static final LanguageString COMMIT_CHANGES_IS = new LanguageString("&a提交的修改&8: ");
-    public static final LanguageString COMMIT_CHANGES_FORMAT = new LanguageString("&8- &a修改类型&8: &|&e&l%s&| &r&8- &a修改名&8: &|&e&l%s");
+    public static final LanguageString COMMIT_CHANGES_FORMAT = new LanguageString("&8- &a修改类型&8: &e&l%s &r&8- &a修改名&8: &e&l%s");
 
     public static final LanguageString NOT_FOUND_COMMIT = new LanguageString("找不到指定的提交");
+
+    public static final LanguageString AREA_PROPERTY_CHANGE = new LanguageString("区域属性修改");
+    public static final LanguageString AREA_PROPERTY_CHANGE_NAME = new LanguageString("将 %s 从 %s 修改为 %s");
+
+    public static final LanguageString GAME_PROPERTY_CHANGE = new LanguageString("游戏属性修改");
+    public static final LanguageString GAME_PROPERTY_CHANGE_NAME = new LanguageString("将 %s 从 %s 修改为 %s");
 }

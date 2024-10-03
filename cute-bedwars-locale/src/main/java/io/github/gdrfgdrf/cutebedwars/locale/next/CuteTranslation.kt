@@ -75,6 +75,14 @@ class CuteTranslation private constructor() : ICuteTranslation {
         commandSender.spigot().sendMessage(text)
     }
 
+    override fun string(): String {
+        val stringBuilder = StringBuilder()
+        list.forEach { cuteText ->
+            stringBuilder.append(cuteText.string())
+        }
+        return stringBuilder.toString()
+    }
+
     companion object {
         fun of(raw: String): CuteTranslation {
             val cuteText = CuteText.of(raw)

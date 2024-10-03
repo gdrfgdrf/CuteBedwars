@@ -1,20 +1,65 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.editing.change
 
-abstract class AbstractChange<T>(val name: String) {
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cuteframework.locale.LanguageString
+import org.bukkit.command.CommandSender
+
+abstract class AbstractChange<T> {
     abstract fun validate(): Boolean
     abstract fun apply(t: T)
     abstract fun makeUndo(): AbstractChange<T>
     abstract fun args(): Array<Any?>
 
+    abstract fun name(): String
+    abstract fun localizedName(): (CommandSender) -> ITranslationAgent
+
+    private var metadata: Any? = null
+    private var identifier: String? = null
+    private var localizedIdentifier: LanguageString? = null
+
     @Suppress("UNCHECKED_CAST")
-    fun annotationName(): String {
-        val changeAnnotationClass = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change") as Class<Annotation>
+    private fun metadata(): Any {
+        if (metadata != null) {
+            return metadata!!
+        }
 
-        val change = this::class.java.getAnnotation(changeAnnotationClass)
-        val nameField = changeAnnotationClass.getDeclaredMethod("name")
-        val changeName = nameField.invoke(change)
+        val changeMetadataMethodClass = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod")
+        val metadataMethod = this::class.java.methods.toList().stream()
+            .filter {
+                it.isAnnotationPresent(changeMetadataMethodClass as Class<out Annotation>)
+            }
+            .findAny()
+            .orElse(null)
+        if (metadataMethod == null) {
+            throw IllegalStateException("change ${this::class.java} does not have metadata")
+        }
+        metadata = metadataMethod.invoke(null)
+        return metadata!!
+    }
 
-        return changeName as String
+    fun identifier(): String {
+        if (identifier != null) {
+            return identifier!!
+        }
+
+        val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata")
+        val identifierField = changeMetadata.getMethod("identifier")
+        identifier = identifierField.invoke(metadata()) as String
+
+        return identifier!!
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun localizedIdentifier(): LanguageString {
+        if (localizedIdentifier != null) {
+            return localizedIdentifier!!
+        }
+
+        val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata")
+        val localizedIdentifierField = changeMetadata.getMethod("localizedIdentifier")
+        localizedIdentifier = (localizedIdentifierField.invoke(metadata()) as  () -> LanguageString)()
+
+        return localizedIdentifier!!
     }
 
 }

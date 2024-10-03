@@ -53,4 +53,7 @@ class TranslationAgent(
         commandSender.spigot().sendMessage(build())
     }
 
+    override fun string(): String {
+        return cuteTranslation.string()
+    }
 }

@@ -37,4 +37,5 @@ interface ICuteText {
 
     fun format(vararg any: Any): ICuteText
     fun build(): TextComponent
+    fun string(): String
 }

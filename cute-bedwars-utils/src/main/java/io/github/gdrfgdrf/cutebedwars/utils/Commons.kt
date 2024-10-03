@@ -31,8 +31,8 @@ fun <T> runSyncTask(lock: Any, supplier: () -> T?) {
 }
 
 fun Change.toKotlinChange(): AbstractChange<*> {
-    val changeClassHolder = IChangeTypeRegistry.instance().get(type)
-        ?: throw IllegalArgumentException("Cannot find change class holder by type $type")
+    val changeClassHolder = IChangeTypeRegistry.instance().get(identifier)
+        ?: throw IllegalArgumentException("Cannot find change class holder by identifier $identifier")
 
     val args = argsList.toTypedArray()
     if (!changeClassHolder.validateArgsLength(true, *args)) {
@@ -46,7 +46,7 @@ fun Commit.toKotlinCommit(): ICommit<*> {
     val changes = IChanges.new<Any>()
     changesList.forEach {
         if (!changes.tryAdd(it.toKotlinChange())) {
-            throw IllegalArgumentException("Change ${it.type} (${it.name}) cannot be added to the change list")
+            throw IllegalArgumentException("Change ${it.identifier} (${it.name}) cannot be added to the change list")
         }
     }
 

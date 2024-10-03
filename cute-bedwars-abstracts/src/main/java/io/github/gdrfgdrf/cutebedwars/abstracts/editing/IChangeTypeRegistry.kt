@@ -12,8 +12,7 @@ interface IChangeTypeRegistry {
     fun init()
     fun clear()
 
-    fun register(name: String, abstractChangeClass: Class<AbstractChange<*>>, type: String)
-    fun get(name: String): IChangeClassHolder<AbstractChange<*>>?
+    fun get(identifier: String): IChangeClassHolder<AbstractChange<*>>?
     fun forEach(block: (String, IChangeClassHolder<AbstractChange<*>>) -> Unit)
 
     companion object {

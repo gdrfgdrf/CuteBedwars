@@ -10,6 +10,8 @@ import org.bukkit.command.CommandSender
 interface ILocalizationContext {
     fun message(string: String): ITranslationAgent
     fun message(languageString: LanguageString): ITranslationAgent
+    fun text(string: String): ITranslationTextAgent
+    fun text(languageString: LanguageString): ITranslationTextAgent
 
     companion object {
         fun new(sender: CommandSender): ILocalizationContext = Mediator.get(

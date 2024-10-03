@@ -10,4 +10,5 @@ interface ITranslationAgent {
     fun build(): TextComponent
     fun send(customPrefix: String)
     fun send(customPrefix: ITranslationTextAgent? = null)
+    fun string(): String
 }

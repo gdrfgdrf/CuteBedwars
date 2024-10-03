@@ -1,28 +1,25 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change.impl.game
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
-import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.Change
+import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
+import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
+import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
+import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.utils.BooleanConditions
 import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import org.bukkit.command.CommandSender
 
-@Change(
-    "game-property-change",
-    "io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext",
-    2,
-    2,
-    3
-)
 class PropertyChange(
     private val key: String,
     private val value: Any?,
-    name: String = "change $key to $value"
-) : AbstractChange<IGameContext>(name) {
-    constructor(changeData: ChangeData): this(changeData[0], changeData[1]) {
+) : AbstractChange<IGameContext>() {
+    constructor(changeData: ChangeData) : this(changeData[0], changeData[1]) {
         if (changeData.length() > 2) {
             previousValue = changeData[2]
         }
@@ -36,7 +33,8 @@ class PropertyChange(
         }
         if (key != "name" &&
             key != "min-player" &&
-            key != "max-player") {
+            key != "max-player"
+        ) {
             return false
         }
 
@@ -63,10 +61,39 @@ class PropertyChange(
     }
 
     override fun makeUndo(): AbstractChange<IGameContext> {
-        val propertyChange = PropertyChange(key, previousValue, "change back $key from $value to $previousValue")
+        val propertyChange = PropertyChange(key, previousValue)
         propertyChange.previousValue = value
         return propertyChange
     }
 
     override fun args(): Array<Any?> = arrayOf(key, value, previousValue)
+
+    override fun name(): String {
+        // 因为上面的 propertyChange.previousValue = value, 所以这里需要反过来
+        return "change back $key from $previousValue to $value"
+    }
+
+    override fun localizedName(): (CommandSender) -> ITranslationAgent {
+        return { sender ->
+            localizationScope(sender) {
+                message(EditorLanguage.GAME_PROPERTY_CHANGE_NAME)
+                    // 因为上面的 propertyChange.previousValue = value, 所以这里需要反过来
+                    .format0(key, previousValue ?: "null", value ?: "null")
+            }
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        @ChangeMetadataMethod
+        fun metadata(): ChangeMetadata {
+            return ChangeMetadata(
+                "game-property-change",
+                IGameContext::class.java,
+                2..2,
+                3,
+                EditorLanguage::GAME_PROPERTY_CHANGE
+            )
+        }
+    }
 }

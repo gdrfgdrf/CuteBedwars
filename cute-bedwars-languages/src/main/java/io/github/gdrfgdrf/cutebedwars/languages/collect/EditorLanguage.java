@@ -51,4 +51,10 @@ public class EditorLanguage implements LanguageCollect {
     public static LanguageString COMMIT_CHANGES_FORMAT;
 
     public static LanguageString NOT_FOUND_COMMIT;
+
+    public static LanguageString AREA_PROPERTY_CHANGE;
+    public static LanguageString AREA_PROPERTY_CHANGE_NAME;
+
+    public static LanguageString GAME_PROPERTY_CHANGE;
+    public static LanguageString GAME_PROPERTY_CHANGE_NAME;
 }

@@ -56,7 +56,7 @@ class Changes<T> : IChanges<T> {
         }
         val latestChange = changes[changes.size - 1]
 
-        "Undoing change ${latestChange.name}".logInfo()
+        "Undoing change ${latestChange.name()}".logInfo()
 
         changes.removeAt(changes.size - 1)
 
@@ -71,7 +71,7 @@ class Changes<T> : IChanges<T> {
 
         val change = undoQueue.poll()
 
-        "Redoing change ${change.name}".logInfo()
+        "Redoing change ${change.name()}".logInfo()
 
         add(change)
     }

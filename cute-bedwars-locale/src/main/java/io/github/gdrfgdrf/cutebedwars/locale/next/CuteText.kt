@@ -270,6 +270,10 @@ class CuteText private constructor(raw: String) : ICuteText {
         return cache!!
     }
 
+    override fun string(): String {
+        return finalString
+    }
+
     private fun countMatches(string: String, pattern: String): Int {
         return string.split(pattern)
             .dropLastWhile { it.isEmpty() }
