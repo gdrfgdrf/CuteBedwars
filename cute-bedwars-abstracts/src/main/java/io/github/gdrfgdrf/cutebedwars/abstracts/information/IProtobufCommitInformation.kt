@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
@@ -10,7 +11,7 @@ import org.bukkit.command.CommandSender
 @Service("protobuf_commit_information")
 @KotlinSingleton
 interface IProtobufCommitInformation {
-    fun convert(sender: CommandSender, commit: Commit): List<ILocalizationMessage>
+    fun convert(sender: CommandSender, commit: Commit): List<ITranslationAgent>
 
     companion object {
         fun instance(): IProtobufCommitInformation = Mediator.get(IProtobufCommitInformation::class.java)!!

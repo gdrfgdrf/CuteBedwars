@@ -80,19 +80,19 @@ class GameContext(
                 INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             ),
                         message(AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
-                            .format()
+                            .format0()
                     )
                 }
             } else {
                 localizationScope(sender) {
                     if (withHeader) {
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             )
@@ -100,7 +100,7 @@ class GameContext(
                     }
 
                     message(AreaManagementLanguage.GAME_MIN_PLAYER_ERROR)
-                        .format()
+                        .format0()
                         .send()
                 }
             }
@@ -117,19 +117,19 @@ class GameContext(
                 INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             ),
                         message(AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
-                            .format()
+                            .format0()
                     )
                 }
             } else {
                 localizationScope(sender) {
                     if (withHeader) {
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             )
@@ -137,7 +137,7 @@ class GameContext(
                     }
 
                     message(AreaManagementLanguage.GAME_MAX_PLAYER_ERROR)
-                        .format()
+                        .format0()
                         .send()
                 }
             }
@@ -148,7 +148,7 @@ class GameContext(
                 INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             ),
@@ -159,7 +159,7 @@ class GameContext(
                 localizationScope(sender) {
                     if (withHeader) {
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             )

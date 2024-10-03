@@ -31,7 +31,7 @@ object EditNewChanges : AbstractSubCommand(
 
                 if (new) {
                     message(EditorLanguage.REPLACING_CHANGE_LIST_WARNING)
-                        .format(TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
+                        .format0(TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
                         .send()
                     return@localizationScope
                 }

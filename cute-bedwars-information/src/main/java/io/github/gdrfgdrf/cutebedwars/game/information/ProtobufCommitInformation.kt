@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IProtobufCommitInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -11,25 +12,25 @@ import org.bukkit.command.CommandSender
 
 @ServiceImpl("protobuf_commit_information")
 object ProtobufCommitInformation : IProtobufCommitInformation {
-    override fun convert(sender: CommandSender, commit: Commit): List<ILocalizationMessage> =
+    override fun convert(sender: CommandSender, commit: Commit): List<ITranslationAgent> =
         localizationScope(sender) {
-            val messages = arrayListOf<ILocalizationMessage>()
+            val messages = arrayListOf<ITranslationAgent>()
 
             messages.add(
                 message(EditorLanguage.COMMIT_ID_IS)
-                    .format(commit.id.toString())
+                    .format0(commit.id.toString())
             )
             messages.add(
                 message(EditorLanguage.COMMIT_TIME_IS)
-                    .format(commit.time)
+                    .format0(commit.time)
             )
             messages.add(
                 message(EditorLanguage.COMMIT_SUBMITTER_IS)
-                    .format(commit.submitter)
+                    .format0(commit.submitter)
             )
             messages.add(
                 message(EditorLanguage.COMMIT_MESSAGE_IS)
-                    .format(commit.message.ifBlank { message(CommonLanguage.NONE).toString() })
+                    .format0(commit.message.ifBlank { message(CommonLanguage.NONE).toString() })
             )
             messages.add(
                 message(EditorLanguage.COMMIT_CHANGES_IS)
@@ -37,7 +38,7 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
             commit.changesList.forEach { change ->
                 messages.add(
                     message(EditorLanguage.COMMIT_CHANGES_FORMAT)
-                        .format(change.type, change.name)
+                        .format0(change.type, change.name)
                 )
             }
 

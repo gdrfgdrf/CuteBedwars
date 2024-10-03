@@ -47,7 +47,7 @@ object GameFinder : IGameFinder{
 
                         localizationScope(sender) {
                             message(AreaManagementLanguage.DUPLICATE_GAME_NAME_ERROR)
-                                .format(areaManager.area().name, identifier)
+                                .format0(areaManager.area().name, identifier)
                                 .send()
                         }
                     }
@@ -68,10 +68,10 @@ object GameFinder : IGameFinder{
 
                 val message = if (findType == IFindType.valueOf("BY_ID")) {
                     message(AreaManagementLanguage.NOT_FOUND_GAME_BY_ID)
-                        .format(areaName, identifier)
+                        .format0(areaName, identifier)
                 } else {
                     message(AreaManagementLanguage.NOT_FOUND_GAME_BY_NAME)
-                        .format(areaName, identifier)
+                        .format0(areaName, identifier)
                 }
 
                 message.send()

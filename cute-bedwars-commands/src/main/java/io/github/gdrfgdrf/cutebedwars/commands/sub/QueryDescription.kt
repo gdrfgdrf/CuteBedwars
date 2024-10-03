@@ -55,7 +55,7 @@ object QueryDescription : AbstractSubCommand(
 
             if (searchResult.isNullOrEmpty()) {
                 message(CommonLanguage.NOT_FOUND_DESCRIPTION)
-                    .format(raw)
+                    .format0(raw)
                     .send()
                 return@localizationScope
             }
@@ -69,10 +69,10 @@ object QueryDescription : AbstractSubCommand(
                         val languageString = it.value()()
                         if (languageString == null) {
                             message(CommonLanguage.DESCRIPTION_ERROR)
-                                .format(it.name_())
+                                .format0(it.name_())
                         } else {
                             message(CommonLanguage.DESCRIPTION_FORMAT)
-                                .format(it.name_(), languageString.get().string)
+                                .format0(it.name_(), languageString.get().string)
                         }
                     }.toList()
             }

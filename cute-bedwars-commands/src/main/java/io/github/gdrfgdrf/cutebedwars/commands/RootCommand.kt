@@ -248,11 +248,11 @@ object RootCommand : TabExecutor {
 
                     if (subCommand.syntax() != null) {
                         message(CommandLanguage.SYNTAX_ERROR)
-                            .format(subCommand.syntax()!!.get().string)
+                            .format0(subCommand.syntax()!!.get().string)
                             .send()
                     } else {
                         message(CommandLanguage.SYNTAX_ERROR)
-                            .format("null")
+                            .format0("null")
                             .send()
                     }
                 } else {

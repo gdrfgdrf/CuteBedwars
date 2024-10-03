@@ -44,7 +44,7 @@ object EditRevertCommit : AbstractSubCommand(
             }
 
             message(EditorLanguage.REVERTING_COMMIT)
-                .format(linkedCommits.size)
+                .format0(linkedCommits.size)
                 .send()
 
             runCatching {

@@ -82,16 +82,4 @@ object InfoArea : AbstractSubCommand(
             chatPage.send(pageIndex - 1)
         }
     }
-
-    private fun getAeaProperties(area: Area): Map<String, Any> {
-        val result = LinkedHashMap<String, Any>()
-
-        result["default-template-id"] = area.defaultTemplateId
-        result["status"] = area.status
-        result["world-name"] = area.worldName
-        result["lobby-world-name"] = area.lobbyWorldName
-        result["lobby-spawnpoint-coordinate"] = area.lobbySpawnpointCoordinate
-
-        return result
-    }
 }

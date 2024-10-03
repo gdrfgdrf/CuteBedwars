@@ -41,7 +41,7 @@ object CreateGame : AbstractSubCommand(
 
                 if (new) {
                     message(AreaManagementLanguage.DUPLICATE_GAME_NAME_WARNING)
-                        .format(
+                        .format0(
                             areaName,
                             gameName,
                             TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit())
@@ -53,13 +53,13 @@ object CreateGame : AbstractSubCommand(
             requests.removeForAuto(type = IRequestTypes.valueOf("CREATE_GAME"), sender = sender)
 
             message(AreaManagementLanguage.CREATING_GAME)
-                .format(areaName, gameName)
+                .format0(areaName, gameName)
                 .send()
 
             val gameContext = areaContext.createGame(gameName)
             if (areaContext.getGame(gameContext.game().id) != null) {
                 message(AreaManagementLanguage.DUPLICATE_GAME_ID_ERROR)
-                    .format(gameContext.game().id)
+                    .format0(gameContext.game().id)
                     .send()
                 return@localizationScope
             }
@@ -67,7 +67,7 @@ object CreateGame : AbstractSubCommand(
             areaContext.addGame(gameContext)
 
             message(AreaManagementLanguage.CREATE_GAME_FINISHED)
-                .format(areaName, gameName)
+                .format0(areaName, gameName)
                 .send()
         }
     }

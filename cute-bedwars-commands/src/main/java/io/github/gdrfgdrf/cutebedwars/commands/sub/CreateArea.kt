@@ -33,7 +33,7 @@ object CreateArea : AbstractSubCommand(
 
                 if (new) {
                     message(AreaManagementLanguage.DUPLICATE_AREA_NAME_WARNING)
-                        .format(areaName, TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
+                        .format0(areaName, TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
                         .send()
                     return@localizationScope
                 }
@@ -41,13 +41,13 @@ object CreateArea : AbstractSubCommand(
             requests.removeForAuto(type = IRequestTypes.valueOf("CREATE_AREA"), sender = sender)
 
             message(AreaManagementLanguage.CREATING_AREA)
-                .format(areaName)
+                .format0(areaName)
                 .send()
 
             val areaManager = managers.createArea(areaName)
             if (managers.get(areaManager.area().id) != null) {
                 message(AreaManagementLanguage.DUPLICATE_AREA_ID_ERROR)
-                    .format(areaManager.area().id)
+                    .format0(areaManager.area().id)
                     .send()
                 return@localizationScope
             }
@@ -55,7 +55,7 @@ object CreateArea : AbstractSubCommand(
             managers.register(areaManager)
 
             message(AreaManagementLanguage.CREATE_AREA_FINISHED)
-                .format(areaName, areaManager.area().id)
+                .format0(areaName, areaManager.area().id)
                 .send()
         }
     }

@@ -45,7 +45,7 @@ object AreaFinder : IAreaFinder {
 
                         localizationScope(sender) {
                             message(AreaManagementLanguage.DUPLICATE_AREA_NAME_ERROR)
-                                .format(identifier)
+                                .format0(identifier)
                                 .send()
                         }
                     }
@@ -64,10 +64,10 @@ object AreaFinder : IAreaFinder {
             localizationScope(sender) {
                 val message = if (findType == IFindType.valueOf("BY_ID")) {
                     message(AreaManagementLanguage.NOT_FOUND_AREA_BY_ID)
-                        .format(identifier)
+                        .format0(identifier)
                 } else {
                     message(AreaManagementLanguage.NOT_FOUND_AREA_BY_NAME)
-                        .format(identifier)
+                        .format0(identifier)
                 }
 
                 message.send()

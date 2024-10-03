@@ -3,6 +3,8 @@ package io.github.gdrfgdrf.cutebedwars.notification
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.languages.collect.NotificationLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.extension.middleWork
 import io.github.gdrfgdrf.cutebedwars.notification.base.AbstractNotification
@@ -16,10 +18,10 @@ import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
 @ServiceImpl("notifications")
-object Notifications {
+object Notifications : INotifications {
     private val offlineNotifications = ConcurrentHashMap<UUID, MutableList<AbstractNotification>>()
 
-    fun messageAdministrator(messageGetter: ILocalizationContext.() -> Array<ILocalizationMessage>) {
+    override fun messageAdministrator(messageGetter: ILocalizationContext.() -> Array<ITranslationAgent>) {
         val notification = MessageNotification(messageGetter)
         notification.permission = IPermissions.valueOf("RECEIVE_ADMINISTRATION_NOTIFICATION")
 
@@ -45,7 +47,7 @@ object Notifications {
         notifications.add(notification)
     }
 
-    fun notifyOffline(player: Player) {
+    override fun notifyOffline(player: Player) {
         if (!offlineNotifications.containsKey(player.uniqueId)) {
             return
         }

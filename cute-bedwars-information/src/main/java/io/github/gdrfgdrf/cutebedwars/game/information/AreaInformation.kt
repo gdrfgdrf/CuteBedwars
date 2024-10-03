@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IAreaInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
@@ -14,17 +15,17 @@ import org.bukkit.command.CommandSender
 
 @ServiceImpl("area_information")
 object AreaInformation : IAreaInformation {
-    override fun convert(sender: CommandSender, areaManager: IAreaManager): List<ILocalizationMessage> =
+    override fun convert(sender: CommandSender, areaManager: IAreaManager): List<ITranslationAgent> =
         localizationScope(sender) {
             val area = areaManager.area()
             val properties = getAeaProperties(area)
-            val propertyMessages = arrayListOf<ILocalizationMessage>()
-            val gameMessages = arrayListOf<ILocalizationMessage>()
+            val propertyMessages = arrayListOf<ITranslationAgent>()
+            val gameMessages = arrayListOf<ITranslationAgent>()
 
             properties.forEach { (key, value) ->
                 propertyMessages.add(
                     message(AreaManagementLanguage.AREA_PROPERTY_FORMAT)
-                        .format(key, value)
+                        .format0(key, value)
                 )
             }
 
@@ -44,16 +45,16 @@ object AreaInformation : IAreaInformation {
 
                     gameMessages.add(
                         message(AreaManagementLanguage.AREA_GAMES_FORMAT)
-                            .format(it.name, statusMessage.get().string)
+                            .format0(it.name, statusMessage.get().string)
                     )
                 }
             }
 
-            val result = arrayListOf<ILocalizationMessage>(
+            val result = arrayListOf(
                 message(AreaManagementLanguage.AREA_ID_IS)
-                    .format(area.id),
+                    .format0(area.id),
                 message(AreaManagementLanguage.AREA_NAME_IS)
-                    .format(area.name),
+                    .format0(area.name),
                 message(AreaManagementLanguage.AREA_PROPERTY_IS),
             )
             result.addAll(propertyMessages)

@@ -120,13 +120,13 @@ class AreaContext(
                 INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                            .format(manager.area().name),
+                            .format0(manager.area().name),
                     )
                 }
             } else {
                 localizationScope(sender) {
                     message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                        .format(manager.area().name)
+                        .format0(manager.area().name)
                 }
             }
         }

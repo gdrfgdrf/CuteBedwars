@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
@@ -9,7 +10,7 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object RegionInformation {
-    fun convert(sender: CommandSender, region: Region): ILocalizationMessage? =
+    fun convert(sender: CommandSender, region: Region): ITranslationAgent? =
         localizationScope(sender) {
             val result = Type.calculate(region) ?: return@localizationScope null
             val type = result.type
@@ -26,17 +27,17 @@ object RegionInformation {
                 }
 
                 val topMessage = message(CommonLanguage.COORDINATE_FULL)
-                    .format(top.x.toString(), top.y.toString(), top.z.toString())
+                    .format0(top.x.toString(), top.y.toString(), top.z.toString())
                     .toString()
                 val bottomMessage = message(CommonLanguage.COORDINATE_FULL)
-                    .format(bottom.x.toString(), bottom.y.toString(), bottom.z.toString())
+                    .format0(bottom.x.toString(), bottom.y.toString(), bottom.z.toString())
                     .toString()
 
                 when (type) {
                     Type.REGION_1 -> message(message)
-                        .format(topMessage, bottomMessage)
+                        .format0(topMessage, bottomMessage)
                     Type.REGION_2 -> message(message)
-                        .format(topMessage, bottomMessage)
+                        .format0(topMessage, bottomMessage)
                     Type.REGION_3 -> {
                         val length = messageLength("§", topMessage)
 
@@ -44,7 +45,7 @@ object RegionInformation {
                             fillBlank(
                                 message(message).toString(), length, 2
                             )
-                        ).format(topMessage, bottomMessage)
+                        ).format0(topMessage, bottomMessage)
                     }
                     Type.REGION_4 -> {
                         val length = messageLength("§", bottomMessage)
@@ -53,7 +54,7 @@ object RegionInformation {
                             fillBlank(
                                 message(message).toString(), length, 2
                             )
-                        ).format(topMessage, bottomMessage)
+                        ).format0(topMessage, bottomMessage)
                     }
                     else -> null
                 }

@@ -8,8 +8,8 @@ import org.bukkit.command.CommandSender
 
 @Service("localization_context", singleton = false)
 interface ILocalizationContext {
-    fun message(string: String): ILocalizationMessage
-    fun message(languageString: LanguageString): ILocalizationMessage
+    fun message(string: String): ITranslationAgent
+    fun message(languageString: LanguageString): ITranslationAgent
 
     companion object {
         fun new(sender: CommandSender): ILocalizationContext = Mediator.get(

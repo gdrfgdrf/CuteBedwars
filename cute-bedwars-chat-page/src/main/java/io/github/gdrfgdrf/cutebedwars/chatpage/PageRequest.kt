@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.chatpage
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
@@ -12,7 +13,7 @@ class PageRequest(
     val uuid: String,
     val type: IPageRequestTypes,
     val flagContent: String,
-    val loader: () -> List<ILocalizationMessage>
+    val loader: () -> List<ITranslationAgent>
 ) {
     fun getSender(): CommandSender {
         if (uuid == "not_a_player") {

@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.ICommandInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -11,19 +12,19 @@ import org.bukkit.command.CommandSender
 
 @ServiceImpl("command_information")
 object CommandInformation : ICommandInformation {
-    override fun convert(sender: CommandSender, command: ICommands): List<ILocalizationMessage> =
+    override fun convert(sender: CommandSender, command: ICommands): List<ITranslationAgent> =
         localizationScope(sender) {
             val subCommand = ISubCommandManager.instance().get(command)
 
-            val messages = arrayListOf<ILocalizationMessage>().apply {
+            val messages = arrayListOf<ITranslationAgent>().apply {
                 add(
                     message(CommonLanguage.COMMAND_RAW_IS)
-                        .format(command.getRaw())
+                        .format0(command.getRaw())
                 )
                 subCommand?.description()?.let { description ->
                     add(
                         message(CommonLanguage.COMMAND_DESCRIPTION_IS)
-                            .format(
+                            .format0(
                                 message(description)
                                     .toString()
                             )
@@ -36,7 +37,7 @@ object CommandInformation : ICommandInformation {
 
                 add(
                     message(CommonLanguage.COMMAND_IS_ALLOW_EMPTY_PARAM)
-                        .format(if (command.allowEmptyParam()) booleanTrue else booleanFalse)
+                        .format0(if (command.allowEmptyParam()) booleanTrue else booleanFalse)
                 )
 
                 add(
@@ -46,14 +47,14 @@ object CommandInformation : ICommandInformation {
                 if (command.paramsSchemes().isNullOrEmpty()) {
                     add(
                         message(CommonLanguage.PARAM_SCHEME_FORMAT)
-                            .format(none)
+                            .format0(none)
                     )
                 } else {
                     command.paramsSchemes()!!.forEach { paramScheme ->
                         val string = paramScheme.get()
                         add(
                             message(CommonLanguage.PARAM_SCHEME_FORMAT)
-                                .format(string)
+                                .format0(string)
                         )
                     }
 

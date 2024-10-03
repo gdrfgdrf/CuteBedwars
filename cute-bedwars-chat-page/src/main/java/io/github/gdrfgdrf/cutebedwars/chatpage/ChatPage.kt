@@ -7,6 +7,7 @@ import com.google.common.collect.Lists
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -17,11 +18,11 @@ import java.util.concurrent.TimeUnit
 
 @ServiceImpl("chat_page", needArgument = true, instanceGetter = "get")
 class ChatPage(
-    val pageRequest: PageRequest,
+    private val pageRequest: PageRequest,
     private val lines: List<Line>,
 ) : IChatPage {
     private val pages = arrayListOf<Page>()
-    var lineCountEveryPages = 5
+    private var lineCountEveryPages = 5
 
     private var changeable = true
 
@@ -33,7 +34,7 @@ class ChatPage(
         if (index >= pages.size) {
             localizationScope(pageRequest.getSender()) {
                 message(CommonLanguage.PAGE_INDEX_OUT_OF_BOUNDS)
-                    .format(pages.size)
+                    .format0(pages.size)
                     .send()
             }
             return
@@ -41,14 +42,14 @@ class ChatPage(
 
         localizationScope(pageRequest.getSender()) {
             message(CommonLanguage.PAGE_TOP)
-                .format(index + 1, pages.size)
+                .format0(index + 1, pages.size)
                 .send("")
 
             val page = pages[index]
             page.send()
 
             message(CommonLanguage.PAGE_BOTTOM)
-                .format(index + 1, pages.size)
+                .format0(index + 1, pages.size)
                 .send("")
         }
     }
@@ -60,7 +61,7 @@ class ChatPage(
         return pages.size
     }
 
-    override fun addPage(loader: () -> List<ILocalizationMessage>) {
+    override fun addPage(loader: () -> List<ITranslationAgent>) {
         if (!changeable) {
             throw IllegalStateException("this change page is unchangeable");
         }
@@ -113,7 +114,7 @@ class ChatPage(
                 argumentSet.args[0] as CommandSender,
                 argumentSet.args[1] as IPageRequestTypes,
                 argumentSet.args[2] as String,
-                argumentSet.args[3] as () -> List<ILocalizationMessage>
+                argumentSet.args[3] as () -> List<ITranslationAgent>
             )
         }
 
@@ -121,7 +122,7 @@ class ChatPage(
             sender: CommandSender,
             pageRequests: IPageRequestTypes,
             flagContent: String,
-            loader: () -> List<ILocalizationMessage>,
+            loader: () -> List<ITranslationAgent>,
         ): ChatPage {
             val uuid = if (sender is Player) {
                 sender.uniqueId.toString()

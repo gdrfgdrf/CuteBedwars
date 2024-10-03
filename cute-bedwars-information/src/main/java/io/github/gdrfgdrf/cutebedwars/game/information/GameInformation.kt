@@ -4,6 +4,7 @@ import de.tr7zw.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IGameInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.Generator
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.TeamColor
@@ -15,35 +16,35 @@ import org.bukkit.command.CommandSender
 
 @ServiceImpl("game_information")
 object GameInformation : IGameInformation {
-    override fun convert(sender: CommandSender, gameContext: IGameContext): List<ILocalizationMessage> =
+    override fun convert(sender: CommandSender, gameContext: IGameContext): List<ITranslationAgent> =
         localizationScope(sender) {
             val game = gameContext.game()
 
-            val identifierMessages = arrayListOf<ILocalizationMessage>()
+            val identifierMessages = arrayListOf<ITranslationAgent>()
 
             val properties = getGameProperties(game)
-            val propertyMessages = arrayListOf<ILocalizationMessage>()
+            val propertyMessages = arrayListOf<ITranslationAgent>()
 
-            val commonMessages = arrayListOf<ILocalizationMessage>()
+            val commonMessages = arrayListOf<ITranslationAgent>()
 
             identifierMessages.add(
                 message(AreaManagementLanguage.GAME_ID_IS)
-                    .format(game.id)
+                    .format0(game.id)
             )
             identifierMessages.add(
                 message(AreaManagementLanguage.GAME_AREA_ID_IS)
-                    .format(game.areaId)
+                    .format0(game.areaId)
             )
             identifierMessages.add(
                 message(AreaManagementLanguage.GAME_NAME_IS)
-                    .format(game.name)
+                    .format0(game.name)
             )
 
             propertyMessages.add(message(AreaManagementLanguage.GAME_PROPERTY_IS))
             properties.forEach { (key, value) ->
                 propertyMessages.add(
                     message(AreaManagementLanguage.GAME_PROPERTY_FORMAT)
-                        .format(key, value)
+                        .format0(key, value)
                 )
             }
 
@@ -69,11 +70,11 @@ object GameInformation : IGameInformation {
                     }
                     waitingRoom.spawnpointCoordinate?.let { coordinate ->
                         val coordinateMessage = message(CommonLanguage.COORDINATE_FULL)
-                            .format(coordinate.x, coordinate.y, coordinate.z)
+                            .format0(coordinate.x, coordinate.y, coordinate.z)
                             .toString()
 
                         add(message(AreaManagementLanguage.WAITING_ROOM_SPAWNPOINT_COORDINATE)
-                            .format(coordinateMessage))
+                            .format0(coordinateMessage))
                     }
                 }
 
@@ -147,7 +148,7 @@ object GameInformation : IGameInformation {
 
                     it.forEach { generatorGroup ->
                         add(message(AreaManagementLanguage.GAME_GENERATOR_GROUP_FORMAT)
-                            .format(generatorGroup.displayName))
+                            .format0(generatorGroup.displayName))
                     }
                 }
 
@@ -189,12 +190,12 @@ object GameInformation : IGameInformation {
                         val name = team.name
 
                         add(message(AreaManagementLanguage.TEAM_FORMAT)
-                            .format("§${color.code}$name"))
+                            .format0("§${color.code}$name"))
                     }
                 }
             }
 
-            arrayListOf<ILocalizationMessage>().apply {
+            arrayListOf<ITranslationAgent>().apply {
                 addAll(identifierMessages)
                 addAll(propertyMessages)
                 addAll(commonMessages)

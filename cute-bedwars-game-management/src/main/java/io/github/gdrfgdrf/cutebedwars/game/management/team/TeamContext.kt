@@ -50,12 +50,12 @@ class TeamContext(
                         INotifications.instance().messageAdministrator {
                             arrayOf(
                                 message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                                    .format(
+                                    .format0(
                                         area.name,
                                         game.name
                                     ),
                                 message(AreaManagementLanguage.GAME_TEAM_NEED_POSITIVE_ERROR)
-                                    .format(
+                                    .format0(
                                         team.name,
                                         StringUtils.fieldNameToJsonKey(it.name)
                                     )
@@ -65,7 +65,7 @@ class TeamContext(
                         localizationScope(sender) {
                             if (withHeader) {
                                 message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                                    .format(
+                                    .format0(
                                         area.name,
                                         game.name
                                     )
@@ -73,7 +73,7 @@ class TeamContext(
                             }
 
                             message(AreaManagementLanguage.GAME_TEAM_NEED_POSITIVE_ERROR)
-                                .format(
+                                .format0(
                                     team.name,
                                     StringUtils.fieldNameToJsonKey(it.name)
                                 )
@@ -89,12 +89,12 @@ class TeamContext(
                 INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             ),
                         message(AreaManagementLanguage.GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER)
-                            .format(
+                            .format0(
                                 team.name,
                             )
                     )
@@ -103,7 +103,7 @@ class TeamContext(
                 localizationScope(sender) {
                     if (withHeader) {
                         message(AreaManagementLanguage.GAME_VALIDATE_FAILED)
-                            .format(
+                            .format0(
                                 area.name,
                                 game.name
                             )
@@ -111,7 +111,7 @@ class TeamContext(
                     }
 
                     message(AreaManagementLanguage.GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER)
-                        .format(
+                        .format0(
                             team.name,
                         )
                         .send()
@@ -129,14 +129,14 @@ class TeamContext(
         if (team.fixGameMinPlayer(game)) {
             localizationScope(sender) {
                 message(AreaManagementLanguage.GAME_MIN_PLAYER_FIXED)
-                    .format(game.id, game.minPlayer)
+                    .format0(game.id, game.minPlayer)
                     .send()
             }
         }
         if (team.fixGameMaxPlayer(game)) {
             localizationScope(sender) {
                 message(AreaManagementLanguage.GAME_MAX_PLAYER_FIXED)
-                    .format(game.id, game.maxPlayer)
+                    .format0(game.id, game.maxPlayer)
                     .send()
             }
         }
