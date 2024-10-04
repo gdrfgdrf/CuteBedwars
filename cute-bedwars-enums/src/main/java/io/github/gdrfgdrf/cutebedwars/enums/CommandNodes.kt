@@ -12,6 +12,8 @@ enum class CommandNodes(
     ROOT("cbw", false),
     ARGS("args", false, ROOT),
 
+    QUERY("query", true, ROOT),
+
     CREATE("create", true, ARGS),
 
     INFO("info", true, ARGS),

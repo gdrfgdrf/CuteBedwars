@@ -21,7 +21,7 @@ enum class Commands(
     HELP("help", false, 0..0, Permissions.HELP, true),
     RELOAD("reload", false, 0..0, Permissions.RELOAD, true),
     QUERY_DESCRIPTION(
-        "query-description", false, 0..2, Permissions.QUERY_DESCRIPTION, true, CommandNodes.ROOT,
+        "description", false, 0..2, Permissions.QUERY_DESCRIPTION, true, CommandNodes.QUERY,
         arrayOf(
             IParamScheme.new {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
@@ -228,7 +228,7 @@ enum class Commands(
         if (paramSchemes.isNullOrEmpty()) {
             return get()
         }
-        return paramSchemes[0].get()
+        return paramSchemes[0].content()
     }
 
     private fun getWithParams(): String {
@@ -238,7 +238,7 @@ enum class Commands(
         val stringBuilder = StringBuilder()
 
         paramSchemes.forEachIndexed { index, paramScheme ->
-            stringBuilder.append(paramScheme.get())
+            stringBuilder.append(paramScheme.content())
 
             if (index != paramSchemes.size - 1) {
                 stringBuilder.append("|")
