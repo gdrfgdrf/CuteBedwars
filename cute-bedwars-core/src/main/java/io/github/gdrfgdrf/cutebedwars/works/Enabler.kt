@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ICommandRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IEnabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("enabler")
@@ -15,6 +16,7 @@ object Enabler : IEnabler {
     }
 
     override fun reloadPhase() {
+        "Start reload (Enabler)".logInfo()
         ISubCommandManager.instance().scanAndRegister()
     }
 }

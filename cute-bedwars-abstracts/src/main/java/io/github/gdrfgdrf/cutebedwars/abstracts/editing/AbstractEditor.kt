@@ -1,5 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.editing
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+
 abstract class AbstractEditor<T>(val uuid: String, val t: T) {
     private val commits = arrayListOf<ICommit<T>>()
     private var currentChanges: IChanges<T>? = null
@@ -7,12 +9,14 @@ abstract class AbstractEditor<T>(val uuid: String, val t: T) {
     fun currentChanges(): IChanges<T>? = currentChanges
 
     fun newChanges(): IChanges<T> {
+        "New change list (${this.javaClass.simpleName})".logInfo()
         currentChanges = IChanges.new()
         return currentChanges!!
     }
 
     @Suppress("UNCHECKED_CAST")
     fun tryAdd(commit: ICommit<*>): Boolean {
+        "Trying to add a commit (${this.javaClass.simpleName})".logInfo()
         runCatching {
             commits.add(commit as ICommit<T>)
         }.onFailure {

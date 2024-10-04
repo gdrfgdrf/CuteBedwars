@@ -29,6 +29,7 @@ class Commit<T>(
 
     @Suppress("UNCHECKED_CAST")
     override fun tryApply(any: Any): Boolean {
+        "Trying to apply all changes (Commit)".logInfo()
         runCatching {
             changes.apply(any as T)
         }.onFailure {
@@ -38,11 +39,12 @@ class Commit<T>(
     }
 
     override fun apply(t: T) {
+        "Applying all changes (Commit)".logInfo()
         changes.apply(t)
     }
 
     override fun revert(submitter: String): ICommit<T> {
-        "Reverting commit id: $id".logInfo()
+        "Reverting a commit id: $id".logInfo()
 
         val newChanges = Changes<T>()
         changes.changes.reversed().forEach {

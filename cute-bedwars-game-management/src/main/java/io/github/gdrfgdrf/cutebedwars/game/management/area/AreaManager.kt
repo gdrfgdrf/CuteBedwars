@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractAreaCommitStorage
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cuteframework.utils.FileUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
@@ -22,9 +23,12 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
 
     init {
         if (area.id == null) {
-            area.id = YitIdHelper.nextId()
+            val id = YitIdHelper.nextId()
+            "Set an id: $id to an area".logInfo()
+            area.id = id
         }
         if (area.name.isNullOrEmpty()) {
+            "The area (id: ${area.id})'s name is null, setting to \"temp_name_${area.id}\"".logInfo()
             area.name = "temp_name_${area.id}"
         }
 
@@ -36,6 +40,7 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
 
         context = AreaContext(this)
 
+        "Creating the commit storage for an area id: ${area.id}, name: ${area.name}".logInfo()
         commitStorage = AbstractAreaCommitStorage.new(
             IConstants.areaFolder() + area.id + "/" + "commits"
         )

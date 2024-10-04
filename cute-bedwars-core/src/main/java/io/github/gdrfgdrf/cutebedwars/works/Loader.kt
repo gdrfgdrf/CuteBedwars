@@ -40,7 +40,9 @@ object Loader : ILoader {
         loadTaskManager()
 
         if (!idGeneratorInitialized) {
+            "Initializing the id generator".logInfo()
             val options = if (IConfig.workerId() != null && IConfig.workerId()!! >= 0) {
+                "Use the custom worker id: ${IConfig.workerId()}".logInfo()
                 IdGeneratorOptions(IConfig.workerId()!!)
             } else {
                 IdGeneratorOptions()
@@ -55,6 +57,8 @@ object Loader : ILoader {
     }
 
     override fun reloadPhase() {
+        "Start reloading (Loader)".logInfo()
+
         createFolders()
         loadConfig()
         loadLanguage()

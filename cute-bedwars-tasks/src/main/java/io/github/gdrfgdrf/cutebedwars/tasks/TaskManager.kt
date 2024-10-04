@@ -34,10 +34,10 @@ object TaskManager : ITaskManager {
     fun isTerminated(): Boolean = terminated
 
     override fun terminate() {
+        "Terminating the task manager".logInfo()
         terminated = true
         TASK_ENTRY_QUEUE.clear()
         SYNCHRONIZED_TASK_ENTRY.clear()
-        "Task manager terminated".logInfo()
     }
 
     override fun <T> add(taskEntry: ITaskEntry<T>) {

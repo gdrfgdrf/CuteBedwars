@@ -25,13 +25,12 @@ object SubCommandManager : ISubCommandManager {
             field.isAccessible = true
             val subCommand = field.get(null)
 
-            "Registering the sub command ${(subCommand as AbstractSubCommand).command.string()}".logInfo()
-
-            register(subCommand)
+            register(subCommand as AbstractSubCommand)
         }
     }
 
-    fun register(subCommand: AbstractSubCommand) {
+    private fun register(subCommand: AbstractSubCommand) {
+        "Registering the sub command ${subCommand.command.getRaw()}".logInfo()
         map[subCommand.command] = subCommand
     }
 

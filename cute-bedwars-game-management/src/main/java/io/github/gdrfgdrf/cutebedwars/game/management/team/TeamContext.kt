@@ -34,6 +34,8 @@ class TeamContext(
             : this(ArgumentSet(arrayOf(gameContext, team)))
 
     override fun validate(sender: CommandSender?, withHeader: Boolean): Boolean {
+        "Validating a team id: ${team.id}, name: ${team.name}, game's id: ${team.gameId}"
+
         val area = gameContext.areaContext().manager().area()
         val game = gameContext.game()
         var needDisableGame = false

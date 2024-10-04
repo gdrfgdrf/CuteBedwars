@@ -41,9 +41,9 @@ object ThreadPoolService : IThreadPoolService {
     }
 
     override fun terminate() {
+        "Terminating the execute service".logInfo()
         EXECUTOR_SERVICE?.shutdownNow()
         EXECUTOR_SERVICE = null
-        "Execute service terminated".logInfo()
     }
 
 }

@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.database.impl.service.base
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import com.github.dreamyoung.mprelation.ServiceImpl
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.Mappers
 
 open class BetterServiceImpl<M : BaseMapper<T>, T>: ServiceImpl<M, T>() {
@@ -16,5 +17,9 @@ open class BetterServiceImpl<M : BaseMapper<T>, T>: ServiceImpl<M, T>() {
     fun insert(t: T): Int {
         val result = mapper?.insert(t) ?: return -1
         return result
+    }
+
+    init {
+        "Service: ${this::class.java.name} is created".logInfo()
     }
 }

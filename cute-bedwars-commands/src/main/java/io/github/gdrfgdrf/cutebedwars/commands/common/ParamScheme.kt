@@ -44,13 +44,13 @@ class ParamScheme : IParamScheme {
             return create(argumentSet.args[0] as IParamScheme.() -> Unit)
         }
 
-        fun create(builder: IParamScheme.() -> Unit): IParamScheme {
+        private fun create(builder: IParamScheme.() -> Unit): IParamScheme {
             val scheme = ParamScheme()
             builder(scheme)
             return scheme
         }
 
-        val NO_MATCH = -1
+        const val NO_MATCH = -1
     }
 
 }

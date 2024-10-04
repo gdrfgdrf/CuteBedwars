@@ -16,12 +16,13 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
     private val map = ConcurrentHashMap<String, IChangeClassHolder<AbstractChange<*>>>()
 
     private fun register(identifier: String, abstractChangeClass: Class<AbstractChange<*>>, metadata: ChangeMetadata) {
-        "Registering change type, identifier: $identifier, class: $abstractChangeClass, type: ${metadata.type}".logInfo()
+        "Registering change type, identifier: $identifier, class: ${abstractChangeClass.simpleName}, type: ${metadata.type}".logInfo()
         map[identifier] = ChangeClassHolder.create(abstractChangeClass, metadata)
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun init() {
+        "Initializing the change type registry".logInfo()
         val classes = LinkedHashSet<Class<*>>()
 
         ClassUtils.searchJar(ChangeTypeRegistry::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.game.editing.change.impl", {

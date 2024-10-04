@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractGameCommitStorage
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
@@ -38,12 +39,16 @@ class GameContext(
         }
 
         if (game.id == null) {
-            game.id = YitIdHelper.nextId()
+            val id = YitIdHelper.nextId()
+            "Set an id: $id to a game (area's id: ${game.areaId})".logInfo()
+            game.id = id
         }
         if (game.name.isNullOrEmpty()) {
+            "The game (area's id: ${game.areaId}, id: ${game.id})'s name is null, setting to \"temp_name_${game.id}\""
             game.name = "temp_name_${game.id}"
         }
 
+        "Creating the commit storage for a game id: ${game.id}, name: ${game.name}, area's id: ${game.areaId}".logInfo()
         commitStorage = AbstractGameCommitStorage.new(
             IConstants.areaFolder() + game.areaId + "/" + "commits" + "/" + "games")
     }
@@ -56,10 +61,13 @@ class GameContext(
     override fun commitStorage(): AbstractGameCommitStorage = commitStorage
 
     override fun addTeam(team: Team) {
+        "Adding a team to a game id: ${game.id}, name: ${game.name}, area's id: ${game.areaId}".logInfo()
         teams.add(TeamContext(this, team))
     }
 
     override fun validate(sender: CommandSender?, withHeader: Boolean): Boolean {
+        "Validating a game id: ${game.id}, name: ${game.name}, area's id: ${game.areaId}".logInfo()
+
         val area = areaContext.manager().area()
         var needDisableGame = false
 

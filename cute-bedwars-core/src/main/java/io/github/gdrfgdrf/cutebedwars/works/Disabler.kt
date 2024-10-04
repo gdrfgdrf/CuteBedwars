@@ -7,19 +7,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("disabler")
 object Disabler : IDisabler {
-    private var threadPoolService: IThreadPoolService? = null
-        get() {
-            if (field == null) {
-                field = Mediator.get<IThreadPoolService>(IThreadPoolService::class.java)!!
-            }
-            return field
-        }
-
     fun disable() {
         disableDatabase()
         disableRequest()
@@ -30,6 +23,8 @@ object Disabler : IDisabler {
     }
 
     override fun reloadPhase() {
+        "Start reloading (Disabler)".logInfo()
+
         disableDatabase()
         disableRequest()
         disableThreadPool()
@@ -45,7 +40,7 @@ object Disabler : IDisabler {
     }
 
     private fun disableThreadPool() {
-        threadPoolService?.terminate()
+        IThreadPoolService.instance().terminate()
     }
 
     private fun disableTaskManager() {

@@ -31,6 +31,8 @@ object MybatisConfigurer {
     }
 
     private fun createSqlSessionFactory(): SqlSessionFactory {
+        "Creating the sql session factory (singleton)".logInfo()
+
         val dataSource = createDataSource()
         val transactionFactory = JdbcTransactionFactory()
         val environment = Environment(database().displayName, transactionFactory, dataSource)
@@ -63,6 +65,8 @@ object MybatisConfigurer {
 
     @Suppress("UNCHECKED_CAST")
     private fun createDataSource(): DataSource {
+        "Creating the data source".logInfo()
+
         val sqliteDriver = Class.forName("org.sqlite.JDBC")
 
         val dataSource = SimpleDriverDataSource()
@@ -70,8 +74,11 @@ object MybatisConfigurer {
         dataSource.url = "jdbc:sqlite:" + IConstants.defaultDatabaseFileName()
 
         if (!IConfig.databaseUsername().isNullOrBlank() && !IConfig.databasePassword().isNullOrBlank()) {
+            "The authentication of database is enabled".logInfo()
             dataSource.username = IConfig.databaseUsername()
             dataSource.password = IConfig.databasePassword()
+        } else {
+            "The authentication of database is disabled".logInfo()
         }
 
         return dataSource
@@ -93,7 +100,7 @@ object MybatisConfigurer {
                     if (!targetFile.name.endsWith("Mapper.xml")) {
                         continue
                     }
-                    "Add a mapper xml ${targetFile.name}".logInfo()
+                    "Add a mapper xml ${targetFile.name} (1)".logInfo()
 
                     val inputStream = FileInputStream(targetFile)
                     val xmlMapperBuilder = XMLMapperBuilder(inputStream, configuration, targetFile.path, configuration.sqlFragments)
@@ -110,7 +117,7 @@ object MybatisConfigurer {
                     val jarEntry = entries.nextElement()
 
                     if (jarEntry.name.endsWith("Mapper.xml")) {
-                        "Add a mapper xml ${jarEntry.name}".logInfo()
+                        "Add a mapper xml ${jarEntry.name} (2)".logInfo()
 
                         val inputStream = jarFile.getInputStream(jarEntry)
                         val xmlMapperBuilder =

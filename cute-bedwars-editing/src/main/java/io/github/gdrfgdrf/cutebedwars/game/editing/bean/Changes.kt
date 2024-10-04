@@ -25,7 +25,7 @@ class Changes<T> : IChanges<T> {
     }
 
     override fun apply(t: T) {
-        "Applying all changes".logInfo()
+        "Applying all changes (Changes)".logInfo()
         changes.forEach {
             it.apply(t)
         }
@@ -34,6 +34,7 @@ class Changes<T> : IChanges<T> {
     @Suppress("UNCHECKED_CAST")
     override fun tryAdd(change: AbstractChange<*>): Boolean {
         check()
+        "Trying to add a change".logInfo()
 
         runCatching {
             changes.add(change as AbstractChange<T>)
@@ -46,6 +47,7 @@ class Changes<T> : IChanges<T> {
 
     override fun add(change: AbstractChange<T>) {
         check()
+        "Adding a change".logInfo()
         changes.add(change)
     }
 
