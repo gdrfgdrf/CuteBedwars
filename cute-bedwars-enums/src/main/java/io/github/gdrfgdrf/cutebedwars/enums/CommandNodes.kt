@@ -12,7 +12,7 @@ enum class CommandNodes(
     ROOT("cbw", false),
     ARGS("args", false, ROOT),
 
-    QUERY("query", true, ROOT),
+    QUERY("query", true, ARGS),
 
     CREATE("create", true, ARGS),
 
