@@ -103,12 +103,14 @@ class ChatPage(
                 }
             }
             cache = if (IConfig.chatPageCacheBuilderSpecification().isNullOrBlank()) {
+                "Creating chat page's caching with the default specification".logInfo()
                 CacheBuilder.newBuilder()
                     .initialCapacity(100)
                     .maximumSize(1000)
                     .expireAfterAccess(1, TimeUnit.MINUTES)
                     .build(loader)
             } else {
+                "Creating chat page's caching with the custom specification".logInfo()
                 CacheBuilder.from(IConfig.chatPageCacheBuilderSpecification()!!)
                     .build(loader)
             }
