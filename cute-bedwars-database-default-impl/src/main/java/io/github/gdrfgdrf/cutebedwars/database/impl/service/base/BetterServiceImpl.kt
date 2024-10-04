@@ -20,6 +20,6 @@ open class BetterServiceImpl<M : BaseMapper<T>, T>: ServiceImpl<M, T>() {
     }
 
     init {
-        "Service: ${this::class.java.name} is created".logInfo()
+        "Service ${this::class.java.name} is created".logInfo()
     }
 }
