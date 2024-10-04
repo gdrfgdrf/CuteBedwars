@@ -124,6 +124,7 @@ class DescriptionLanguage implements LanguageBlock {
     public static final LanguageString BY_ID = new LanguageString("通过 id 进行查找，值为 by-id");
     public static final LanguageString BY_NAME = new LanguageString("通过名称来查找，值为 by-name");
 
+    public static final LanguageString CHANGE_ID = new LanguageString("修改的 id，玩家将鼠标放在上方即可查看，控制台会直接显示");
     public static final LanguageString VALUE = new LanguageString("值，类型视情况而定");
     public static final LanguageString PAGE_INDEX = new LanguageString("页码");
 

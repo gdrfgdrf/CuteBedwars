@@ -119,6 +119,7 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString BY_ID;
     public static LanguageString BY_NAME;
 
+    public static LanguageString CHANGE_ID;
     public static LanguageString VALUE;
     public static LanguageString PAGE_INDEX;
 }

@@ -127,6 +127,14 @@ enum class Commands(
             },
         )
     ),
+    EDIT_UNMAKE(
+        "unmake", false, 1..Int.MAX_VALUE, Permissions.EDIT_MAKE, false, CommandNodes.EDIT,
+        arrayOf(
+            IParamScheme.new {
+                add("CHANGE_ID", "CHANGE_IDS")
+            }
+        )
+    ),
     EDIT_LIST_CHANGES(
         "list-changes", false, 0..1, Permissions.EDIT_LIST_CHANGES, true, CommandNodes.EDIT,
         arrayOf(

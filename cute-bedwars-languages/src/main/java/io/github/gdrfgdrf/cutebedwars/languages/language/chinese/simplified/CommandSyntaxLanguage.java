@@ -22,6 +22,7 @@ class CommandSyntaxLanguage implements LanguageBlock {
 
     public static final LanguageString EDIT_NEW_CHANGES = string("EDIT_NEW_CHANGES");
     public static final LanguageString EDIT_MAKE = string("EDIT_MAKE");
+    public static final LanguageString EDIT_UNMAKE = string("EDIT_UNMAKE");
     public static final LanguageString EDIT_LIST_CHANGES = string("EDIT_LIST_CHANGES");
     public static final LanguageString EDIT_COMMIT = string("EDIT_COMMIT");
     public static final LanguageString EDIT_REVERT_COMMIT = string("EDIT_REVERT_COMMIT");

@@ -1,10 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.editing.change
 
+import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 abstract class AbstractChange<T> {
+    val id = YitIdHelper.nextId()
+
     abstract fun validate(): Boolean
     abstract fun apply(t: T)
     abstract fun makeUndo(): AbstractChange<T>

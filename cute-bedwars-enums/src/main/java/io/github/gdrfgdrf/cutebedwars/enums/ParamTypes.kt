@@ -298,6 +298,37 @@ enum class ParamTypes : IParamTypes {
 
             return ids
         }
+    },
+    CHANGE_IDS {
+        override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
+            if (any !is String) {
+                return false
+            }
+
+            val ids = findIds(sender)
+            return ids.contains(any)
+        }
+
+        override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
+            return findIds(sender)
+        }
+
+        private fun findIds(sender: CommandSender): MutableList<String> {
+            var editor: AbstractEditor<*>? = null
+            IEditorFinder.instance().find(sender, false) {
+                editor = it
+            }
+
+            val ids = arrayListOf<String>()
+            if (editor != null && editor!!.currentChanges() != null) {
+                val currentChanges = editor!!.currentChanges()
+                currentChanges!!.forEach {
+                    ids.add(it.id.toString())
+                }
+            }
+
+            return ids
+        }
     }
 
 

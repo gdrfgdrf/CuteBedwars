@@ -123,6 +123,7 @@ enum class Descriptions(
     BY_ID(DescriptionLanguage::BY_ID),
     BY_NAME(DescriptionLanguage::BY_NAME),
 
+    CHANGE_ID(DescriptionLanguage::CHANGE_ID),
     VALUE(DescriptionLanguage::VALUE),
     PAGE_INDEX(DescriptionLanguage::PAGE_INDEX)
 

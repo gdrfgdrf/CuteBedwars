@@ -49,6 +49,21 @@ class Changes<T> : IChanges<T> {
         changes.add(change)
     }
 
+    override fun tryUndo(change: AbstractChange<*>) {
+        check()
+        if (changes.isEmpty()) {
+            throw UndoException()
+        }
+        val index = changes.indexOf(change)
+        if (index == -1) {
+            throw UndoException()
+        }
+
+        "Undoing change ${change.name()} with an exactly index".logInfo()
+
+        changes.removeAt(index)
+    }
+
     override fun undo() {
         check()
         if (changes.isEmpty()) {
@@ -56,7 +71,7 @@ class Changes<T> : IChanges<T> {
         }
         val latestChange = changes[changes.size - 1]
 
-        "Undoing change ${latestChange.name()}".logInfo()
+        "Undoing change ${latestChange.name()} and put it into the undo queue".logInfo()
 
         changes.removeAt(changes.size - 1)
 
@@ -88,5 +103,14 @@ class Changes<T> : IChanges<T> {
 
     override fun forEach(block: (AbstractChange<T>) -> Unit) {
         changes.forEach(block)
+    }
+
+    override fun find(id: Long): AbstractChange<T>? {
+        return changes.stream()
+            .filter {
+                it.id == id
+            }
+            .findAny()
+            .orElse(null)
     }
 }
