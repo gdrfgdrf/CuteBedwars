@@ -15,7 +15,7 @@ enum class Permissions(
     ROOT(PermissionGroups.USER, "root"),
 
     HELP(PermissionGroups.USER, "help"),
-    RELOAD(PermissionGroups.USER, "reload"),
+    RELOAD(PermissionGroups.ADMIN, "reload"),
     QUERY_DESCRIPTION(PermissionGroups.USER, "description.query"),
     QUERY_ADMINISTRATION_DESCRIPTION(PermissionGroups.ADMIN, "description.query_administration"),
 
