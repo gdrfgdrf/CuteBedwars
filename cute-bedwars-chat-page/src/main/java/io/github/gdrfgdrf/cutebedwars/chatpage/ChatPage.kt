@@ -5,6 +5,7 @@ import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
 import com.google.common.collect.Lists
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
@@ -101,11 +102,16 @@ class ChatPage(
                     return Companion.load(pageRequest)
                 }
             }
-            cache = CacheBuilder.newBuilder()
-                .initialCapacity(100)
-                .maximumSize(1000)
-                .expireAfterAccess(1, TimeUnit.MINUTES)
-                .build(loader)
+            cache = if (IConfig.chatPageCacheBuilderSpecification().isNullOrBlank()) {
+                CacheBuilder.newBuilder()
+                    .initialCapacity(100)
+                    .maximumSize(1000)
+                    .expireAfterAccess(1, TimeUnit.MINUTES)
+                    .build(loader)
+            } else {
+                CacheBuilder.from(IConfig.chatPageCacheBuilderSpecification()!!)
+                    .build(loader)
+            }
         }
 
         @JvmStatic

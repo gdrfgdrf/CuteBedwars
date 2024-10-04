@@ -39,6 +39,9 @@ public class Config implements IConfig {
     @JsonProperty(value = "request-timeout")
     private Long requestTimeout;
 
+    @JsonProperty(value = "chat-page-cache-builder-specification")
+    private String chatPageCacheBuilderSpecification;
+
 //    @JsonProperty(value = "area-auto-save-delay")
 //    private Long areaAutoSaveDelay;
 
@@ -50,6 +53,7 @@ public class Config implements IConfig {
         config.databasePassword = "";
         config.enableDatabaseLogging = false;
         config.requestTimeout = 10000L;
+        config.chatPageCacheBuilderSpecification = "initialCapacity=100,maximumSize=1000,expireAfterAccess=1m";
     }
 
     @Override

@@ -28,5 +28,6 @@ interface IConfig {
         fun databaseUsername(): String? = get()?.get("DatabaseUsername")
         fun databasePassword(): String? = get()?.get("DatabasePassword")
         fun requestTimeout(): Long? = get()?.get("RequestTimeout")
+        fun chatPageCacheBuilderSpecification(): String? = get()?.get("ChatPageCacheBuilderSpecification")
     }
 }
