@@ -6,12 +6,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toIntOrDefault
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 

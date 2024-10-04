@@ -3,10 +3,10 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.bean
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.InoperableChangesException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.RedoException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.UndoException
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.concurrent.LinkedBlockingQueue
 

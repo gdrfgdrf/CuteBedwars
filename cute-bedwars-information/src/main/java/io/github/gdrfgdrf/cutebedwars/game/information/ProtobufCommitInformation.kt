@@ -2,11 +2,11 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IProtobufCommitInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toKotlinChange
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
-import io.github.gdrfgdrf.cutebedwars.utils.toKotlinChange
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 

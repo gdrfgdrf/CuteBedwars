@@ -3,11 +3,11 @@ package io.github.gdrfgdrf.cutebedwars.database;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants;
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase;
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.CommonsKt;
 import io.github.gdrfgdrf.cutebedwars.database.common.DatabaseImplDescription;
 import io.github.gdrfgdrf.cutebedwars.database.exception.CloseDatabaseException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.InitDatabaseClassException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.LoadDatabaseException;
-import io.github.gdrfgdrf.cutebedwars.utils.extension.StringExtensionKt;
 import io.github.gdrfgdrf.cuteframework.api.loader.JarClassLoader;
 import io.github.gdrfgdrf.cuteframework.bean.BeanManager;
 import io.github.gdrfgdrf.cuteframework.utils.StringUtils;
@@ -46,7 +46,7 @@ public class Database implements IDatabase {
 
     @Override
     public void initialize() {
-        StringExtensionKt.logInfo("Initializing the database");
+        CommonsKt.logInfo("Initializing the database");
 
         Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseClass;
 
@@ -55,7 +55,7 @@ public class Database implements IDatabase {
             if (StringUtils.isBlank(databaseImpl)) {
                 throw new IllegalArgumentException("No database implementation is specified in the configuration file");
             }
-            StringExtensionKt.logInfo("Database: " + databaseImpl);
+            CommonsKt.logInfo("Database: " + databaseImpl);
 
             if ("default-sqlite".equals(databaseImpl)) {
                 databaseClass = initDefault();
@@ -68,7 +68,7 @@ public class Database implements IDatabase {
                 File customDatabaseImplFile = new File(
                         IConstants.Companion.customDatabaseImplFolderName() + databaseImpl
                 );
-                StringExtensionKt.logInfo("Custom database: " + customDatabaseImplFile);
+                CommonsKt.logInfo("Custom database: " + customDatabaseImplFile);
 
                 databaseClass = initCustom(customDatabaseImplFile);
             }
@@ -88,7 +88,7 @@ public class Database implements IDatabase {
 
     @SuppressWarnings("unchecked")
     private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initDefault() throws ClassNotFoundException {
-        StringExtensionKt.logInfo("Initializing the default database");
+        CommonsKt.logInfo("Initializing the default database");
 
         Class<?> defaultDatabaseClass =
                 Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.DefaultDatabase");
@@ -97,7 +97,7 @@ public class Database implements IDatabase {
 
     @SuppressWarnings("all")
     private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initCustom(File implFile) throws IOException, ClassNotFoundException {
-        StringExtensionKt.logInfo("Initializing the custom database");
+        CommonsKt.logInfo("Initializing the custom database");
 
         @Cleanup
         JarFile jarFile = new JarFile(implFile);
@@ -124,7 +124,7 @@ public class Database implements IDatabase {
     }
 
     private void load(Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseImplClass) throws Exception {
-        StringExtensionKt.logInfo("Loading the database class " + databaseImplClass.getName());
+        CommonsKt.logInfo("Loading the database class " + databaseImplClass.getName());
 
         io.github.gdrfgdrf.cutebedwars.database.base.IDatabase instance;
         if ("io.github.gdrfgdrf.cutebedwars.database.impl.DefaultDatabase".equals(databaseImplClass.getPackageName())) {
@@ -139,7 +139,7 @@ public class Database implements IDatabase {
 
     @Override
     public void close() {
-        StringExtensionKt.logInfo("Closing the database " + database.getDisplayName());
+        CommonsKt.logInfo("Closing the database " + database.getDisplayName());
 
         if (database == null) {
             throw new CloseDatabaseException("The database cannot be closed because it is not loaded");

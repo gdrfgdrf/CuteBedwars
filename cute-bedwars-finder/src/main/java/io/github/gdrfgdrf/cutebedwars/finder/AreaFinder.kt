@@ -6,10 +6,10 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IFindResult
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.isLong
 import io.github.gdrfgdrf.cutebedwars.finder.result.FindResult
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.utils.extension.isLong
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 

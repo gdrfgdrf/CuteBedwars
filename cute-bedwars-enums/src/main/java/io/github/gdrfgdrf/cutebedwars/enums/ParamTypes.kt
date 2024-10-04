@@ -8,9 +8,9 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IEditorFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
-import io.github.gdrfgdrf.cutebedwars.utils.extension.isInt
-import io.github.gdrfgdrf.cutebedwars.utils.extension.isLong
-import io.github.gdrfgdrf.cutebedwars.utils.extension.toBooleanOrNull
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.isInt
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.isLong
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toBooleanOrNull
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.command.CommandSender
 

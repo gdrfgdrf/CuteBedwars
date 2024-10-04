@@ -2,12 +2,12 @@ package io.github.gdrfgdrf.cutebedwars.database.impl
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logWarn
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.Mappers
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logWarn
 import io.github.gdrfgdrf.cuteframework.bean.BeanManager
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Component
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Order

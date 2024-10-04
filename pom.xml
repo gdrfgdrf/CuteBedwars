@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>cute-bedwars-core</module>
-        <module>cute-bedwars-holders</module>
         <module>cute-bedwars-beans</module>
         <module>cute-bedwars-database</module>
         <module>cute-bedwars-database-default-impl</module>
@@ -89,12 +88,6 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
                 <artifactId>database-default-impl-beans</artifactId>
-                <version>0.1.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-                <artifactId>holders</artifactId>
                 <version>0.1.0</version>
             </dependency>
 

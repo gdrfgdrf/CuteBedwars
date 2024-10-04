@@ -3,6 +3,8 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.change.impl.area
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IBooleanConditions
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod
@@ -11,8 +13,6 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.utils.BooleanConditions
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import org.bukkit.command.CommandSender
 
 class PropertyChange(
@@ -40,7 +40,7 @@ class PropertyChange(
         }
 
         if (key == "default-template-id") {
-            return BooleanConditions.onlyNumber(value)
+            return IBooleanConditions.instance().onlyNumber(value)
         }
         return true
     }

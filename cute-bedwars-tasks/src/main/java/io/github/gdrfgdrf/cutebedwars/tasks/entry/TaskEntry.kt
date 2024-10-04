@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.tasks.entry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskEntry
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet

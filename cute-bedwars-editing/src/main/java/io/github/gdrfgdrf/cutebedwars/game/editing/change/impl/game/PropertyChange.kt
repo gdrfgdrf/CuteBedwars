@@ -3,6 +3,8 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.change.impl.game
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IBooleanConditions
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod
@@ -11,8 +13,6 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.utils.BooleanConditions
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import org.bukkit.command.CommandSender
 
 class PropertyChange(
@@ -39,7 +39,7 @@ class PropertyChange(
         }
 
         if (key == "min-player" || key == "max-player") {
-            return BooleanConditions.onlyNumber(value)
+            return IBooleanConditions.instance().onlyNumber(value)
         }
         return true
     }

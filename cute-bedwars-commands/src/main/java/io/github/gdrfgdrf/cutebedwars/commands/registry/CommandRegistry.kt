@@ -1,13 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.commands.registry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ICommandRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissionGroups
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.commands.RootCommand
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
-import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Bukkit
 
@@ -16,8 +16,9 @@ object CommandRegistry : ICommandRegistry {
     override fun registerCommands() {
         "Registering the root command ${ICommands.valueOf("ROOT").string()}".logInfo()
 
-        javaPluginHolder().get().getCommand(ICommands.valueOf("ROOT").string()).executor = RootCommand
-        javaPluginHolder().get().getCommand("cutebedwars").executor = RootCommand
+        val javaPlugin = IPlugin.instance().javaPlugin() ?: throw IllegalStateException("java plugin is required")
+        javaPlugin.getCommand(ICommands.valueOf("ROOT").string()).executor = RootCommand
+        javaPlugin.getCommand("cutebedwars").executor = RootCommand
 
         SubCommandManager.scanAndRegister()
 

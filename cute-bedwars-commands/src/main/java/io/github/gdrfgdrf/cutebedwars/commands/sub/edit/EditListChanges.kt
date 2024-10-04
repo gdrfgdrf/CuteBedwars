@@ -5,13 +5,13 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IChangesInformation
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toIntOrDefault
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterChangesFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
-import io.github.gdrfgdrf.cutebedwars.utils.extension.toIntOrDefault
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 

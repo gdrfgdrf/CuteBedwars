@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.*

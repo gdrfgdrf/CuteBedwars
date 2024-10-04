@@ -5,11 +5,11 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestStatuses
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequest
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.languages.collect.RequestLanguage
 import io.github.gdrfgdrf.cutebedwars.request.timer.HighCountdownTimer
 import io.github.gdrfgdrf.cutebedwars.request.timer.LowCountdownTimer
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 import java.util.concurrent.ConcurrentHashMap

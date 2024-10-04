@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.database
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import org.apache.ibatis.builder.xml.XMLMapperBuilder
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl

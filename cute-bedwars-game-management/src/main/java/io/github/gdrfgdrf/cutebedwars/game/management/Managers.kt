@@ -2,8 +2,8 @@ package io.github.gdrfgdrf.cutebedwars.game.management
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.concurrent.ConcurrentHashMap
 

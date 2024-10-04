@@ -25,11 +25,6 @@
 
         <dependency>
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>utils</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>abstracts</artifactId>
         </dependency>
     </dependencies>

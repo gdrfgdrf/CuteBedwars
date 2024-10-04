@@ -17,6 +17,7 @@
 package io.github.gdrfgdrf.cutebedwars.protobuf
 
 import com.google.protobuf.AbstractMessage
+import com.google.protobuf.GeneratedMessage
 import com.google.protobuf.GeneratedMessage.Builder
 import com.google.protobuf.Message
 import com.google.protobuf.Parser
@@ -53,10 +54,11 @@ class Protobuf<T : Message> {
     }
 
     companion object {
+        @Suppress("UNCHECKED_CAST")
         fun <T : Message> prepare(
             storeFile: File,
             parser: Parser<T>,
-            builder: () -> T,
+            builder: Builder<*>,
         ): Protobuf<T> {
             if (!storeFile.exists()) {
                 if (!storeFile.parentFile.exists()) {
@@ -65,7 +67,7 @@ class Protobuf<T : Message> {
 
                 storeFile.createNewFile()
                 val protobuf = Protobuf<T>()
-                protobuf.message = builder()
+                protobuf.message = builder.build() as T?
                 protobuf.storeFile = storeFile
                 protobuf.save()
 

@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.utils.thread
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.ThreadPoolExecutor

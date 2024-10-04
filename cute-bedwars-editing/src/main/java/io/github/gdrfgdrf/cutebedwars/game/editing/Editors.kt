@@ -6,10 +6,10 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.game.editing.editor.AreaEditor
 import io.github.gdrfgdrf.cutebedwars.game.editing.editor.GameEditor
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.AlreadyInEditingModeException
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.concurrent.ConcurrentHashMap
 

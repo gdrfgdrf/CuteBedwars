@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
     <writeAnnotations>
@@ -17,6 +18,7 @@
         <option value="$PROJECT_DIR$/cute-bedwars-core/cute-bedwars-core-command/pom.xml" />
         <option value="$PROJECT_DIR$/cute-bedwars-description/pom.xml" />
         <option value="$PROJECT_DIR$/cute-bedwars-game-beans/pom.xml" />
+        <option value="$PROJECT_DIR$/cute-bedwars-holders/pom.xml" />
         <option value="$PROJECT_DIR$/cute-bedwars-managers/pom.xml" />
       </set>
     </option>

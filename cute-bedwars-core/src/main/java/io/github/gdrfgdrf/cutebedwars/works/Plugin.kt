@@ -3,9 +3,11 @@ package io.github.gdrfgdrf.cutebedwars.works
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import org.bukkit.plugin.java.JavaPlugin
 
 @ServiceImpl("plugin")
 object Plugin : IPlugin {
+    var javaPlugin: JavaPlugin? = null
     var state: IPluginState? = null
 
     override fun state(): IPluginState? {
@@ -14,5 +16,9 @@ object Plugin : IPlugin {
 
     override fun state(state: IPluginState) {
         this.state = state
+    }
+
+    override fun javaPlugin(): JavaPlugin? {
+        return javaPlugin
     }
 }

@@ -10,8 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
-import io.github.gdrfgdrf.cutebedwars.holders.javaPluginHolder
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
@@ -28,11 +27,11 @@ object Loader : ILoader {
         Registry.register(Loader::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars")
 
         Plugin.state = IPluginState.valueOf("LOADING")
+        Plugin.javaPlugin = javaPlugin
 
         createFolders()
 
         CuteFrameworkSupport.load(javaPlugin)
-        javaPluginHolder().set(javaPlugin)
 
         loadConfig()
         loadLanguage()

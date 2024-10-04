@@ -1,12 +1,12 @@
 package io.github.gdrfgdrf.cutebedwars.game.management
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.ISetter
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IConvertors
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.ConvertException
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.NotPositiveNumberException
 import io.github.gdrfgdrf.cutebedwars.game.management.exception.UndefinablePropertyException
-import io.github.gdrfgdrf.cutebedwars.utils.StringUtils
 import org.bukkit.command.CommandSender
 
 open class SetterImpl<T> : ISetter {
@@ -18,7 +18,7 @@ open class SetterImpl<T> : ISetter {
             throw IllegalArgumentException("argument is not initialized")
         }
 
-        val fieldName = StringUtils.jsonKeyToFieldName(jsonKey)
+        val fieldName = IConvertors.instance().jsonKeyToFieldName(jsonKey)
         val declaredField = instanceGetter!!()!!::class.java.getDeclaredField(fieldName)
 
         var undefinable = false

@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.tasks
 
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit

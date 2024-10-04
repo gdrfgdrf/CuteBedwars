@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.storage
 
-import com.google.protobuf.Message
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractGameCommitStorage
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.*
@@ -18,7 +17,7 @@ class GameCommitStorage(folder: String) : AbstractGameCommitStorage() {
 
     private val gameCommitFile = File(folder, "game")
     private val gameProtobuf =
-        protobufStorage.protobuf(gameCommitFile, GameCommits.parser(), GameCommits.newBuilder()::build)
+        protobufStorage.protobuf(gameCommitFile, GameCommits.parser(), GameCommits.newBuilder())
 
     override fun get(): GameCommits? = gameProtobuf.message
 

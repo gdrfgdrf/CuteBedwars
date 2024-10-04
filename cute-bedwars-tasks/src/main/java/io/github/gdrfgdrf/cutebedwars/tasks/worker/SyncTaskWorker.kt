@@ -1,14 +1,14 @@
 package io.github.gdrfgdrf.cutebedwars.tasks.worker
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.sleepSafely
 import io.github.gdrfgdrf.cutebedwars.tasks.entry.FutureTaskEntry
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logError
-import io.github.gdrfgdrf.cutebedwars.utils.extension.logInfo
-import io.github.gdrfgdrf.cutebedwars.utils.extension.sleepSafely
 import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
-import io.github.gdrfgdrf.cutebedwars.utils.thread.ThreadPoolService
 
 object SyncTaskWorker : Runnable {
-    private val threadPoolService = ThreadPoolService
+    private val threadPoolService = IThreadPoolService.instance()
 
     override fun run() {
         "Synchronized task worker started".logInfo()
