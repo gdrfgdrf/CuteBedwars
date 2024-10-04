@@ -8,6 +8,7 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
  */
 public class CommandLanguage implements LanguageCollect {
     public static LanguageString COMMAND_FORMAT;
+    public static LanguageString COMMAND_FORMAT_FOR_CONSOLE;
     public static LanguageString COMMAND_HELP_ADMIN_INFIX;
 
     public static LanguageString NO_PERMISSION;

@@ -7,7 +7,8 @@ import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
  * @author gdrfgdrf
  */
 class CommandLanguage implements LanguageBlock {
-    public static final LanguageString COMMAND_FORMAT = new LanguageString("&e&l%s &l&7- &r&9&l%s");
+    public static final LanguageString COMMAND_FORMAT = new LanguageString("&e&l%s");
+    public static final LanguageString COMMAND_FORMAT_FOR_CONSOLE = new LanguageString("&e&l%s &l&7- &r&9&l%s");
     public static final LanguageString COMMAND_HELP_ADMIN_INFIX = new LanguageString("&7&l----------- &r&e&l管理员指令 &r&7&l-----------");
 
     public static final LanguageString NO_PERMISSION = new LanguageString("&c您没有权限执行该指令");

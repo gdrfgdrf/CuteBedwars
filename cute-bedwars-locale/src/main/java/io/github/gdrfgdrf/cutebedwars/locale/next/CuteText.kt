@@ -1,8 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.locale.next
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ICuteText
+import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.ClickEvent
 import net.md_5.bungee.api.chat.ClickEvent.Action
+import net.md_5.bungee.api.chat.ComponentBuilder
 import net.md_5.bungee.api.chat.HoverEvent
 import net.md_5.bungee.api.chat.TextComponent
 
@@ -15,18 +17,20 @@ class CuteText private constructor(raw: String) : ICuteText {
     private var hoverAction: HoverEvent.Action? = null
     private var hoverActionValue: Array<out ICuteText>? = null
 
-    private var parts = arrayListOf<String>()
+    private val parts = arrayListOf<String>()
 
-    private val clickActionInPart: Array<Action?>?
-    private var clickActionValueInPart: Array<String?>?
+    private var clickActionInPart: Array<Action?>? = null
+    private var clickActionValueInPart: Array<String?>? = null
 
-    private var hoverActionInPart: Array<HoverEvent.Action?>?
-    private var hoverActionValueInPart: Array<Array<out ICuteText>?>?
+    private var hoverActionInPart: Array<HoverEvent.Action?>? = null
+    private var hoverActionValueInPart: Array<Array<out ICuteText>?>? = null
 
     private var cache: TextComponent? = null
-    private val enablePart: Boolean
+    private var enablePart: Boolean = false
 
-    init {
+    private fun buildParts() {
+        parts.clear()
+
         enablePart = countMatches(finalString, "&|") > 0
         if (enablePart) {
             val split = finalString.split("&|")
@@ -42,6 +46,14 @@ class CuteText private constructor(raw: String) : ICuteText {
             hoverActionInPart = null
             hoverActionValueInPart = null
         }
+    }
+
+    override fun rebuildParts() {
+        buildParts()
+    }
+
+    override fun enablePart(): Boolean {
+        return enablePart
     }
 
     override fun clickAction(action: Action): ICuteText {
@@ -220,11 +232,13 @@ class CuteText private constructor(raw: String) : ICuteText {
             hoverActionInPart != null &&
             hoverActionValueInPart != null) {
 
+            var empty = true
             cache = TextComponent("")
             parts.forEachIndexed { index, part ->
-                val replaced = TextComponent(replaceFormatSymbol("&", part))
+                val string = replaceFormatSymbol("&", part)
+                val replaced = TextComponent(string)
 
-                val clickAction = clickActionInPart[index]
+                val clickAction = clickActionInPart!![index]
                 val clickActionValue = clickActionValueInPart!![index]
                 if (clickAction != null && clickActionValue != null) {
                     replaced.clickEvent = ClickEvent(clickAction, clickActionValue)
@@ -239,6 +253,52 @@ class CuteText private constructor(raw: String) : ICuteText {
                     }
 
                     replaced.hoverEvent = HoverEvent(hoverAction, result.toTypedArray())
+                }
+
+                val last = if (cache!!.extra.isNullOrEmpty()) {
+                    cache!!
+                } else {
+                    cache!!.extra[cache!!.extra.size - 1]
+                }
+                if (!empty) {
+                    replaced.copyFormatting(last, ComponentBuilder.FormatRetention.FORMATTING, true)
+                } else {
+                    empty = false
+
+                    var i = 0
+                    while (i in string.indices) {
+                        var c = string[i]
+                        if (c.code == 167) {
+                            i++
+                            if (i >= string.length) {
+                                break
+                            }
+
+                            c = string[i]
+                            if (c in 'A'..'Z') {
+                                c = (c.code + 32).toChar()
+                            }
+
+                            val format = ChatColor.getByChar(c)
+                            if (format != null) {
+                                when (format) {
+                                    ChatColor.BOLD -> replaced.isBold = true
+                                    ChatColor.ITALIC -> replaced.isItalic = true
+                                    ChatColor.UNDERLINE -> replaced.isUnderlined = true
+                                    ChatColor.STRIKETHROUGH -> replaced.isStrikethrough = true
+                                    ChatColor.MAGIC -> replaced.isObfuscated = true
+                                    ChatColor.RESET -> {
+                                        replaced.color = ChatColor.WHITE
+                                    }
+                                    else -> {
+                                        replaced.color = format
+                                    }
+                                }
+                            }
+                        }
+
+                        i++
+                    }
                 }
 
                 cache!!.addExtra(replaced)

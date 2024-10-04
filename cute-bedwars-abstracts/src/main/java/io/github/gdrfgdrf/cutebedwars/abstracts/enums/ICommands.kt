@@ -1,8 +1,12 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
+import org.bukkit.command.CommandSender
 
 @EnumService("commands_enum")
 interface ICommands {

@@ -11,6 +11,8 @@ class TranslationAgent(
     private val commandSender: CommandSender,
     private val cuteTranslation: ICuteTranslation
 ) : ITranslationAgent {
+    override fun cuteTranslation(): ICuteTranslation = cuteTranslation
+
     override fun get0(): ITranslationTextAgent {
         return TranslationTextAgent(cuteTranslation.get(0))
     }
@@ -22,6 +24,11 @@ class TranslationAgent(
 
     override fun append(translationTextAgent: ITranslationTextAgent): ITranslationAgent {
         cuteTranslation.append(translationTextAgent.cuteText())
+        return this
+    }
+
+    override fun append(translationAgent: ITranslationAgent): ITranslationAgent {
+        cuteTranslation.append(translationAgent.cuteTranslation())
         return this
     }
 

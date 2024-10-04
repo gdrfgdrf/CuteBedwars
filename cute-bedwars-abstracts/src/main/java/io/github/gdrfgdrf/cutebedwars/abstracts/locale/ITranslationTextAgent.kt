@@ -4,6 +4,8 @@ import net.md_5.bungee.api.chat.TextComponent
 
 interface ITranslationTextAgent {
     fun cuteText(): ICuteText
+    fun rebuildParts()
+    fun enablePart(): Boolean
 
     fun openUrl(value: String): ITranslationTextAgent
     fun openFile(value: String): ITranslationTextAgent

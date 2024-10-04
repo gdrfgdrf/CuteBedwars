@@ -9,6 +9,10 @@ class CuteTranslation private constructor() : ICuteTranslation {
     private val list = arrayListOf<ICuteText>()
     private var cache: TextComponent? = null
 
+    override fun all(): List<ICuteText> {
+        return list
+    }
+
     override fun size(): Int {
         return list.size
     }
@@ -33,6 +37,20 @@ class CuteTranslation private constructor() : ICuteTranslation {
 
     override fun appendAll(vararg raw: String): CuteTranslation {
         raw.forEach(this::append)
+        return this
+    }
+
+    override fun append(cuteTranslation: ICuteTranslation): ICuteTranslation {
+        cuteTranslation.all().forEach {
+            append(it)
+        }
+        return this
+    }
+
+    override fun appendAll(vararg cuteTranslation: ICuteTranslation): ICuteTranslation {
+        cuteTranslation.forEach {
+            append(it)
+        }
         return this
     }
 

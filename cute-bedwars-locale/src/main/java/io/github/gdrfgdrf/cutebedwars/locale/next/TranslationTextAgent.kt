@@ -18,6 +18,14 @@ class TranslationTextAgent(
 
     override fun cuteText(): ICuteText = cuteText
 
+    override fun rebuildParts() {
+        cuteText.rebuildParts()
+    }
+
+    override fun enablePart(): Boolean {
+        return cuteText.enablePart()
+    }
+
     override fun openUrl(value: String): ITranslationTextAgent {
         return clickAction(ClickEvent.Action.OPEN_URL, value)
     }

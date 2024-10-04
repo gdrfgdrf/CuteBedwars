@@ -45,7 +45,7 @@ class EditorLanguage implements LanguageBlock {
     public static final LanguageString EXITING_EDITOR = new LanguageString("&e正在退出编辑器");
     public static final LanguageString EXIT_FINISHED = new LanguageString("&a编辑器已退出");
 
-    public static final LanguageString ARGUMENT_ERROR = new LanguageString("&c参数错误，请使用 /cbw query-description 查看具体说明");
+    public static final LanguageString ARGUMENT_ERROR = new LanguageString("&c参数错误，请使用 /cbw query description 查看具体说明");
 
     public static final LanguageString COMMIT_ID_IS = new LanguageString("&a提交 id&8: &e&l%s");
     public static final LanguageString COMMIT_TIME_IS = new LanguageString("&a提交时间&8: &e&l%s");

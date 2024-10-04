@@ -16,7 +16,7 @@ object Enabler : IEnabler {
     }
 
     override fun reloadPhase() {
-        "Start reload (Enabler)".logInfo()
+        "Start reloading (Enabler)".logInfo()
         ISubCommandManager.instance().scanAndRegister()
     }
 }

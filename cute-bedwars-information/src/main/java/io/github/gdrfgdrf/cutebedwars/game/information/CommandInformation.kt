@@ -3,7 +3,6 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.ICommandInformation
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -25,15 +24,14 @@ object CommandInformation : ICommandInformation {
                     add(
                         message(CommonLanguage.COMMAND_DESCRIPTION_IS)
                             .format0(
-                                message(description)
-                                    .toString()
+                                message(description).string()
                             )
                     )
                 }
 
-                val booleanTrue = message(CommonLanguage.BOOLEAN_TRUE).toString()
-                val booleanFalse = message(CommonLanguage.BOOLEAN_FALSE).toString()
-                val none = message(CommonLanguage.NONE).toString()
+                val booleanTrue = text(CommonLanguage.BOOLEAN_TRUE).string()
+                val booleanFalse = text(CommonLanguage.BOOLEAN_FALSE).string()
+                val none = text(CommonLanguage.NONE).string()
 
                 add(
                     message(CommonLanguage.COMMAND_IS_ALLOW_EMPTY_PARAM)
@@ -51,10 +49,37 @@ object CommandInformation : ICommandInformation {
                     )
                 } else {
                     command.paramsSchemes()!!.forEach { paramScheme ->
-                        val string = paramScheme.get()
+                        val content = paramScheme.content(true)
                         add(
                             message(CommonLanguage.PARAM_SCHEME_FORMAT)
-                                .format0(string)
+                                .format0(content)
+                                .apply {
+                                    get0().apply {
+                                        rebuildParts()
+
+                                        val length = paramScheme.length()
+
+                                        for (i in 0 until length) {
+                                            val param = paramScheme.params()[i]
+                                            val description = param.description()
+
+                                            val value = description.value()()
+                                            if (value != null) {
+                                                if (enablePart()) {
+                                                    showTextInPart(i, value.get().string)
+                                                } else {
+                                                    showText(value.get().string)
+                                                }
+                                            }
+
+                                            if (enablePart()) {
+                                                runCommandInPart(i, "/cbw query description args ${description.name_().lowercase()}")
+                                            } else {
+                                                runCommand("/cbw query description args ${description.name_().lowercase()}")
+                                            }
+                                        }
+                                    }
+                                }
                         )
                     }
 

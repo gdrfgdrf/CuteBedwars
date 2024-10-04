@@ -22,7 +22,7 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString DESCRIPTION_FORMAT = new LanguageString("&a&l%s&8&l: &r&e%s");
     public static final LanguageString NOT_FOUND_DESCRIPTION = new LanguageString("&c没有找到描述 %s");
     public static final LanguageString DESCRIPTION_ERROR = new LanguageString("&c描述 %s 加载错误，无法查询");
-    public static final LanguageString DESCRIPTION_TIP = new LanguageString("&a若有不清楚的属性可使用 &e&l/cbw query-description args &9&l<属性名> &r&a进行查询");
+    public static final LanguageString DESCRIPTION_TIP = new LanguageString("&a若有不清楚的属性可使用 &e&l/cbw query description args &9&l<属性名> &r&a进行查询");
 
     public static final LanguageString NOT_FOUND_COMMANDS = new LanguageString("&c没有找到任何您可以查询详细信息的指令");
     public static final LanguageString COMMAND_RAW_IS = new LanguageString("&a原指令&8: &e&l%s");
@@ -31,7 +31,7 @@ class CommonLanguage implements LanguageBlock {
     public static final LanguageString COMMAND_PARAM_SCHEME_IS = new LanguageString("&a参数方案&8: ");
     public static final LanguageString COMMAND_INFO_TIP = new LanguageString("&a要使用参数方案，需要先写 &e&l<空格>args<空格> &r&a然后再接上参数方案");
 
-    public static final LanguageString PARAM_SCHEME_FORMAT = new LanguageString(" &8- &l&e%s");
+    public static final LanguageString PARAM_SCHEME_FORMAT = new LanguageString(" &8- &e&l%s");
 
     public static final LanguageString PAGE_TOP = new LanguageString("&6&l--------------------- &b&l%d &l&7/ &b&l%d &6&l---------------------");
     public static final LanguageString PAGE_BOTTOM = new LanguageString("&6&l--------------------- &b&l%d &l&7/ &b&l%d &6&l---------------------");
