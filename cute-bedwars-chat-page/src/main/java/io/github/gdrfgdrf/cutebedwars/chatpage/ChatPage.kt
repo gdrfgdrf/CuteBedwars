@@ -6,8 +6,8 @@ import com.google.common.cache.LoadingCache
 import com.google.common.collect.Lists
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -97,6 +97,7 @@ class ChatPage(
         init {
             val loader = object : CacheLoader<PageRequest, ChatPage>() {
                 override fun load(pageRequest: PageRequest): ChatPage {
+                    "Creating new chat page in the cache, uuid: ${pageRequest.uuid}, type: ${pageRequest.type}, flagContent: ${pageRequest.flagContent}".logInfo()
                     return Companion.load(pageRequest)
                 }
             }
@@ -120,7 +121,7 @@ class ChatPage(
 
         fun get(
             sender: CommandSender,
-            pageRequests: IPageRequestTypes,
+            pageRequestTypes: IPageRequestTypes,
             flagContent: String,
             loader: () -> List<ITranslationAgent>,
         ): ChatPage {
@@ -129,8 +130,9 @@ class ChatPage(
             } else {
                 "not_a_player"
             }
-            val request = PageRequest(uuid, pageRequests, flagContent, loader)
-            if (!pageRequests.cache()) {
+            val request = PageRequest(uuid, pageRequestTypes, flagContent, loader)
+            if (!pageRequestTypes.cache()) {
+                "The caching for $pageRequestTypes is disabled, creating new chat page".logInfo()
                 return load(request)
             }
 

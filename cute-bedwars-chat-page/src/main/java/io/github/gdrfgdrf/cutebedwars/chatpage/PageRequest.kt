@@ -1,10 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.chatpage
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import java.util.UUID

@@ -39,7 +39,6 @@ object MybatisConfigurer {
         val configuration = MybatisConfiguration(environment)
 
         val searchResult = HashSet<Class<*>>()
-
         ClassUtils.searchJar(
             MybatisConfigurer::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.database.impl.mapper",
@@ -54,8 +53,10 @@ object MybatisConfigurer {
             configuration.addMapper(it)
         }
         if (IConfig.enableDatabaseLogging() == true) {
+            "Enable database logging (Jdk14LoggingImpl)".logInfo()
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
+            "Disable database logging (NoLoggingImpl)".logInfo()
             configuration.logImpl = NoLoggingImpl::class.java
         }
         registryMapperXml(configuration)
