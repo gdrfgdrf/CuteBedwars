@@ -29,7 +29,7 @@ class DefaultDatabase : IDatabase {
             file.createNewFile()
         }
         if (IConfig.enableDatabaseLogging() == false) {
-            "No logging for the default database".logInfo()
+            "Use no logging for the default database".logInfo()
             LogFactory.useNoLogging()
         } else {
             "Trying to set up a logger for the default database".logInfo()
