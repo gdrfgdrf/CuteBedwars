@@ -15,8 +15,18 @@ class TranslationAgent(
         return TranslationTextAgent(cuteTranslation.get(0))
     }
 
+    override fun append(string: String): ITranslationAgent {
+        cuteTranslation.append(string)
+        return this
+    }
+
     override fun append(translationTextAgent: ITranslationTextAgent): ITranslationAgent {
         cuteTranslation.append(translationTextAgent.cuteText())
+        return this
+    }
+
+    override fun insert(index: Int, string: String): ITranslationAgent {
+        cuteTranslation.insert(index, string)
         return this
     }
 
