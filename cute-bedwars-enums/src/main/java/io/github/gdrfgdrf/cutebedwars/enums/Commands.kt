@@ -69,7 +69,7 @@ enum class Commands(
         )
     ),
     EDITOR_AREA(
-        "area", false, 0..2, Permissions.EDITOR_AREA, false, CommandNodes.EDITOR,
+        "area", false, 2..2, Permissions.EDITOR_AREA, false, CommandNodes.EDITOR,
         arrayOf(
             IParamScheme.new {
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
@@ -112,6 +112,17 @@ enum class Commands(
                 add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("GAME", "GAMES")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
+            }
+        )
+    ),
+    EDITOR_GAME(
+        "game", false, 4..4, Permissions.EDITOR_GAME, false, CommandNodes.EDITOR,
+        arrayOf(
+            IParamScheme.new {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("GAME", "GAMES")
             }
         )
     ),

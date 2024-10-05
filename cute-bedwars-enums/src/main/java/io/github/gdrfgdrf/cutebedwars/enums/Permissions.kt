@@ -29,6 +29,7 @@ enum class Permissions(
 
     CREATE_GAME(PermissionGroups.ADMIN, "create.game"),
     INFO_GAME(PermissionGroups.ADMIN, "info.game"),
+    EDITOR_GAME(PermissionGroups.ADMIN, "editor.game"),
 
     EDIT_NEW_CHANGES(PermissionGroups.ADMIN, "edit.new_changes"),
     EDIT_MAKE(PermissionGroups.ADMIN, "edit.make"),

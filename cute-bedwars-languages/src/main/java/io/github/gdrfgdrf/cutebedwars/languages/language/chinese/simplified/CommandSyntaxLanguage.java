@@ -19,6 +19,7 @@ class CommandSyntaxLanguage implements LanguageBlock {
 
     public static final LanguageString CREATE_GAME = string("CREATE_GAME");
     public static final LanguageString INFO_GAME = string("INFO_GAME");
+    public static final LanguageString EDITOR_GAME = string("EDITOR_GAME");
 
     public static final LanguageString EDIT_NEW_CHANGES = string("EDIT_NEW_CHANGES");
     public static final LanguageString EDIT_MAKE = string("EDIT_MAKE");

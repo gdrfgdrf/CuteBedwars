@@ -18,6 +18,7 @@ class CommandDescriptionLanguage implements LanguageBlock {
 
     public static final LanguageString CREATE_GAME = new LanguageString("在指定区域下创建一个游戏");
     public static final LanguageString INFO_GAME = new LanguageString("查看游戏属性");
+    public static final LanguageString EDITOR_GAME = new LanguageString("编辑游戏");
 
     public static final LanguageString EDIT_NEW_CHANGES = new LanguageString("新建一个修改列表");
     public static final LanguageString EDIT_MAKE = new LanguageString("向当前修改列表中添加一个修改");
