@@ -1,24 +1,21 @@
-package io.github.gdrfgdrf.cutebedwars.math.formulas.distance
+package io.github.gdrfgdrf.cutebedwars.math.formula.distance
 
-import io.github.gdrfgdrf.cutebedwars.math.Sigma
+import io.github.gdrfgdrf.cutebedwars.math.symbol.Sigma
 import io.github.gdrfgdrf.cutebedwars.math.base.IFormula
 import io.github.gdrfgdrf.cutebedwars.math.common.*
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
+import io.github.gdrfgdrf.cutebedwars.math.generator.SigmaRangeGenerator
 
 object DistanceFormula : IFormula {
     override fun calculate(vararg argument: Argument): MathNumber {
-        val distanceArguments = DistanceArguments(Arguments(*argument))
+        val distanceArguments = DistanceArguments(*argument)
         val space = distanceArguments.space()
-        val dimension = distanceArguments.dimension()
 
         if (space == Spaces.EUCLIDEAN) {
-            val rangeExpression =
-                DistanceSigmaRangeExpression(MathNumber.of(1), MathNumber.of(dimension.int), Precisions.TWO)
             val expression = DistanceExpression()
-
-            val sigma = Sigma(rangeExpression, expression)
+            val sigma = Sigma(expression)
             return sigma.calculate(distanceArguments.allPoints()).sqrt()
         }
 
@@ -27,17 +24,17 @@ object DistanceFormula : IFormula {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val space = Argument(Spaces.EUCLIDEAN)
+        val space = Spaces.EUCLIDEAN
 //        val dimension = Argument(Dimensions.TWO)
-        val dimension = Argument(Dimensions.THREE)
+        val dimension = Dimensions.THREE
 
 //        val firstPoint = Point2D(MathNumber.number(10), MathNumber.number(20))
 //        val secondPoint = Point2D(MathNumber.number(-10), MathNumber.number(-20))
 
-        val firstPoint = Point3D(MathNumber.of(10), MathNumber.of(20), MathNumber.of(30))
-        val secondPoint = Point3D(MathNumber.of(-10), MathNumber.of(-20), MathNumber.of(-30))
+        val firstPoint = Point3D(MathNumber.of(10), MathNumber.of(10), MathNumber.of(10))
+        val secondPoint = Point3D(MathNumber.of(-10), MathNumber.of(-10), MathNumber.of(-10))
 
-        val result = calculate(space, dimension, Argument(firstPoint), Argument(secondPoint))
+        val result = calculate(space, dimension, firstPoint, secondPoint)
         println(result.number)
     }
 }

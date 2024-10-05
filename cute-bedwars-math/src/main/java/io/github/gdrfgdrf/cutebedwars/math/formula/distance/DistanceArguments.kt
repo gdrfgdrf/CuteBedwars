@@ -1,13 +1,13 @@
-package io.github.gdrfgdrf.cutebedwars.math.formulas.distance
+package io.github.gdrfgdrf.cutebedwars.math.formula.distance
 
 import io.github.gdrfgdrf.cutebedwars.math.base.IPoint
-import io.github.gdrfgdrf.cutebedwars.math.common.Argument
-import io.github.gdrfgdrf.cutebedwars.math.common.Arguments
-import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
+import io.github.gdrfgdrf.cutebedwars.math.common.*
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 
 class DistanceArguments(private val arguments: Arguments) {
+    constructor(vararg argument: Argument): this(argsFrom(*argument))
+
     private val pointStep: Int = (arguments[2].value as IPoint).step()
 
     fun space(): Spaces {
@@ -27,7 +27,7 @@ class DistanceArguments(private val arguments: Arguments) {
         copy.removeAt(0)
         copy.removeAt(0)
 
-        val newArguments = Arguments()
+        val newArguments = Arguments.empty()
         val pointGroup = arrayListOf<IPoint>()
         copy.forEach {
             pointGroup.add(it.value as IPoint)
@@ -41,7 +41,7 @@ class DistanceArguments(private val arguments: Arguments) {
         }
 
         all.forEach {
-            newArguments.add(Argument(it))
+            newArguments.add(arg(it))
         }
 
         return newArguments

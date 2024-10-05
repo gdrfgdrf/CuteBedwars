@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 
 import java.util.concurrent.CopyOnWriteArrayList
 
-class Arguments(vararg argument: Argument) {
+class Arguments private constructor(vararg argument: Argument) {
     private val arguments = CopyOnWriteArrayList<Argument>()
     init {
         argument.forEach {
@@ -37,4 +37,20 @@ class Arguments(vararg argument: Argument) {
     }
 
     fun arguments(): List<Argument> = arguments
+
+    companion object {
+        fun empty() = Arguments()
+
+        fun of(vararg any: Any): Arguments {
+            val array = arrayListOf<Argument>()
+            any.forEach {
+                array.add(Argument.of(it))
+            }
+            return Arguments(*array.toTypedArray())
+        }
+
+        fun from(vararg argument: Argument): Arguments {
+            return Arguments(*argument)
+        }
+    }
 }

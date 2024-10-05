@@ -1,16 +1,21 @@
-package io.github.gdrfgdrf.cutebedwars.math.formulas.distance
+package io.github.gdrfgdrf.cutebedwars.math.generator
 
-import io.github.gdrfgdrf.cutebedwars.math.base.AbstractRangeExpression
+import io.github.gdrfgdrf.cutebedwars.math.base.AbstractRangeGenerator
 import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
+import io.github.gdrfgdrf.cutebedwars.math.common.mathNumber
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 
-class DistanceSigmaRangeExpression(private val start: MathNumber, private val end: MathNumber, private val precision: Precisions) : AbstractRangeExpression() {
-    override fun start(): MathNumber = start
-    override fun end(): MathNumber = end
+class SigmaRangeGenerator(
+    private val start: Int,
+    private val end: Int,
+    private val precision: Precisions
+) : AbstractRangeGenerator() {
+    override fun start(): MathNumber = start.mathNumber()
+    override fun end(): MathNumber = end.mathNumber()
 
     override fun forEach(block: (MathNumber) -> Unit) {
-        val realStart = start.cut(precision)
-        val realEnd = end.cut(precision)
+        val realStart = start().cut(precision)
+        val realEnd = end().cut(precision)
 
         val array = arrayListOf<MathNumber>()
         array.add(realStart)
@@ -31,8 +36,8 @@ class DistanceSigmaRangeExpression(private val start: MathNumber, private val en
     }
 
     override fun forEachIndexed(block: (Int, MathNumber) -> Unit) {
-        val realStart = start.cut(precision)
-        val realEnd = end.cut(precision)
+        val realStart = start().cut(precision)
+        val realEnd = end().cut(precision)
 
         val array = arrayListOf<MathNumber>()
         array.add(realStart)

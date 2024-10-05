@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 import java.text.DecimalFormat
 import kotlin.math.pow
 
-class MathNumber(val number: Number) {
+class MathNumber private constructor(val number: Number) {
     operator fun plus(number2: Int): MathNumber {
         if (number is Int) {
             return MathNumber(number + number2)
@@ -212,6 +212,10 @@ class MathNumber(val number: Number) {
         }
 
         return false
+    }
+
+    override fun hashCode(): Int {
+        return number.hashCode()
     }
 
     companion object {

@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.math.formulas.distance
+package io.github.gdrfgdrf.cutebedwars.math.formula.distance
 
 import io.github.gdrfgdrf.cutebedwars.math.common.Arguments
 import io.github.gdrfgdrf.cutebedwars.math.base.IExpression
@@ -20,7 +20,8 @@ class DistanceExpression : IExpression {
                 if (secondNode == null) {
                     secondNode = x
 
-                    result = result?.plus(firstNode.minus(secondNode).pow(2)) ?: firstNode.minus(secondNode).pow(2)
+                    result = result?.plus(firstNode.minus(secondNode).pow(2))
+                        ?: firstNode.minus(secondNode).pow(2)
                     firstNode = null
                     secondNode = null
                 }
