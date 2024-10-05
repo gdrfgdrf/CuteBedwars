@@ -15,7 +15,7 @@ object DistanceFormula : IFormula {
 
         if (space == Spaces.EUCLIDEAN) {
             val rangeExpression =
-                DistanceSigmaRangeExpression(MathNumber.number(1), MathNumber.number(dimension.int), Precisions.TWO)
+                DistanceSigmaRangeExpression(MathNumber.of(1), MathNumber.of(dimension.int), Precisions.TWO)
             val expression = DistanceExpression()
 
             val sigma = Sigma(rangeExpression, expression)
@@ -34,8 +34,8 @@ object DistanceFormula : IFormula {
 //        val firstPoint = Point2D(MathNumber.number(10), MathNumber.number(20))
 //        val secondPoint = Point2D(MathNumber.number(-10), MathNumber.number(-20))
 
-        val firstPoint = Point3D(MathNumber.number(10), MathNumber.number(20), MathNumber.number(30))
-        val secondPoint = Point3D(MathNumber.number(-10), MathNumber.number(-20), MathNumber.number(-30))
+        val firstPoint = Point3D(MathNumber.of(10), MathNumber.of(20), MathNumber.of(30))
+        val secondPoint = Point3D(MathNumber.of(-10), MathNumber.of(-20), MathNumber.of(-30))
 
         val result = calculate(space, dimension, Argument(firstPoint), Argument(secondPoint))
         println(result.number)

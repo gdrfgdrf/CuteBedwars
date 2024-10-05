@@ -163,13 +163,13 @@ class MathNumber(val number: Number) {
     fun cut(precisions: Precisions): MathNumber {
         val decimalFormat = DecimalFormat(precisions.pattern)
         if (number is Int) {
-            return number(decimalFormat.format(number).toDouble())
+            return of(decimalFormat.format(number).toDouble())
         }
         if (number is Double) {
-            return number(decimalFormat.format(number).toDouble())
+            return of(decimalFormat.format(number).toDouble())
         }
         if (number is Float) {
-            return number(decimalFormat.format(number).toDouble())
+            return of(decimalFormat.format(number).toDouble())
         }
 
         throw UnsupportedOperationException()
@@ -215,7 +215,7 @@ class MathNumber(val number: Number) {
     }
 
     companion object {
-        fun number(number: Number) = MathNumber(number)
+        fun of(number: Number) = MathNumber(number)
     }
 
 }
