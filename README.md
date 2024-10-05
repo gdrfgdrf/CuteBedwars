@@ -7,7 +7,7 @@ CuteBedwars
 使用了项目 [multi-module-mediator](https://github.com/gdrfgdrf/multi-module-mediator) 进行解耦  
 编辑模块使用了 Git 的设计
 
-项目进行了高度的抽象，不同模块间的通讯都是用中介进行，包括枚举  
+项目进行了高度的抽象化，不同模块间的通讯都是用中介进行，包括枚举  
 
 数据
 -----------------
