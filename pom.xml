@@ -32,6 +32,7 @@
         <module>cute-bedwars-editing</module>
         <module>cute-bedwars-storage</module>
         <module>cute-bedwars-protobuf</module>
+        <module>cute-bedwars-math</module>
     </modules>
 
     <repositories>
@@ -178,6 +179,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
                 <artifactId>protobuf</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>math</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>

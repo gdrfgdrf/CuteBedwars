@@ -127,6 +127,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>protobuf</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>math</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
