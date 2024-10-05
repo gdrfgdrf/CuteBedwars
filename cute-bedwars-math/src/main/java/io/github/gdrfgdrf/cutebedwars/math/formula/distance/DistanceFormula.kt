@@ -28,11 +28,11 @@ object DistanceFormula : IFormula {
 //        val dimension = Argument(Dimensions.TWO)
         val dimension = Dimensions.THREE
 
-//        val firstPoint = Point2D(MathNumber.number(10), MathNumber.number(20))
-//        val secondPoint = Point2D(MathNumber.number(-10), MathNumber.number(-20))
+//        val firstPoint = Point2D.of(10, 10)
+//        val secondPoint = Point2D.of(-10, -10)
 
-        val firstPoint = Point3D(MathNumber.of(10), MathNumber.of(10), MathNumber.of(10))
-        val secondPoint = Point3D(MathNumber.of(-10), MathNumber.of(-10), MathNumber.of(-10))
+        val firstPoint = Point3D.of(10, 10, 10)
+        val secondPoint = Point3D.of(-10, -10, -10)
 
         val result = calculate(space, dimension, firstPoint, secondPoint)
         println(result.number)

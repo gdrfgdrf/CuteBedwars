@@ -12,4 +12,8 @@ class Point2D(
         return arrayOf(x, y)
     }
 
+    companion object {
+        fun of(x: Number, y: Number) = Point2D(x.mathNumber(), y.mathNumber())
+    }
+
 }

@@ -13,5 +13,7 @@ class Point3D(
         return arrayOf(x, y, z)
     }
 
-
+    companion object {
+        fun of(x: Number, y: Number, z: Number) = Point3D(x.mathNumber(), y.mathNumber(), z.mathNumber())
+    }
 }
