@@ -5,8 +5,7 @@ CuteBedwars
 开发版本为 1.12.2
 
 使用了项目 [multi-module-mediator](https://github.com/gdrfgdrf/multi-module-mediator) 进行解耦  
-编辑模块使用了 Git 的设计
-
+编辑模块使用了 Git 的设计  
 项目进行了高度的抽象化，不同模块间的通讯都是用中介进行，包括枚举  
 
 数据
@@ -32,7 +31,7 @@ CuteBedwars
 顾名思义，是由多个物品生成器组成一个组  
 里面的所有物品生成器共用一些属性，比如说等级信息
 
-等待房间
+等待房间  
 必须依附在一个游戏下，游戏开始后等待房间将会被清空
 
 模板
@@ -103,7 +102,7 @@ CuteBedwars
 | cute-bedwars-enums                       | 所有枚举类                                                |
 | cute-bedwars-utils                       | 工具模块                                                 |
 | cute-bedwars-abstracts                   | 解耦模块，对上面所有的模块进行解耦，包含大量的接口，并且使用中介进行通讯                 |
-| cute-bedwars-packer                      | 打包模块，将上面所有的接口打包为一个 Jar 包                             |
+| cute-bedwars-packer                      | 打包模块，将上面所有的模块打包为一个 Jar 包                             |
 
 
 
