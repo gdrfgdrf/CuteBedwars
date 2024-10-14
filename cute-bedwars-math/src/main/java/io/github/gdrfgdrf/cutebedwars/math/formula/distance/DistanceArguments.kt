@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.math.common.*
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 
-class DistanceArguments(private val arguments: Arguments) {
+class DistanceArguments private constructor(private val arguments: Arguments) {
     constructor(vararg argument: Argument): this(argsFrom(*argument))
 
     private val pointStep: Int = (arguments[2].value as IPoint).step()
@@ -45,5 +45,10 @@ class DistanceArguments(private val arguments: Arguments) {
         }
 
         return newArguments
+    }
+
+    companion object {
+        fun of(arguments: Arguments) = DistanceArguments(arguments)
+        fun of(vararg argument: Argument) = DistanceArguments(*argument)
     }
 }
