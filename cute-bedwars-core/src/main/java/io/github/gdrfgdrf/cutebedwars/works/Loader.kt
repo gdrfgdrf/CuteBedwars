@@ -8,12 +8,17 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
+import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.Registry
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.plugin.java.JavaPlugin
@@ -24,36 +29,47 @@ object Loader : ILoader {
     private var idGeneratorInitialized = false
 
     fun load(javaPlugin: JavaPlugin) {
-        Registry.register(Loader::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars")
+        javaPlugin.logger.info("------------------------ CuteBedwars Loading Phase ------------------------")
 
-        Plugin.state = IPluginState.valueOf("LOADING")
-        Plugin.javaPlugin = javaPlugin
+        runCatching {
+            javaPlugin.logger.info("Loading abstract module")
+            Registry.register(Loader::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars")
 
-        createFolders()
+            Plugin.state = IPluginState.valueOf("LOADING")
+            Plugin.javaPlugin = javaPlugin
 
-        CuteFrameworkSupport.load(javaPlugin)
+            createFolders()
 
-        loadConfig()
-        loadLanguage()
-        loadRequest()
-        loadDatabase()
-        loadTaskManager()
+            CuteFrameworkSupport.load(javaPlugin)
 
-        if (!idGeneratorInitialized) {
-            "Initializing the id generator".logInfo()
-            val options = if (IConfig.workerId() != null && IConfig.workerId()!! >= 0) {
-                "Use the custom worker id: ${IConfig.workerId()}".logInfo()
-                IdGeneratorOptions(IConfig.workerId()!!)
-            } else {
-                IdGeneratorOptions()
+            loadConfig()
+            loadLanguage()
+            loadRequest()
+            loadDatabase()
+            loadTaskManager()
+
+            if (!idGeneratorInitialized) {
+                "Initializing the id generator".logInfo()
+                val options = if (IConfig.workerId() != null && IConfig.workerId()!! >= 0) {
+                    "Use the custom worker id: ${IConfig.workerId()}".logInfo()
+                    IdGeneratorOptions(IConfig.workerId()!!)
+                } else {
+                    "Use the default worker id: ${IConfig.workerId()}".logInfo()
+                    IdGeneratorOptions()
+                }
+
+                YitIdHelper.setIdGenerator(options)
+                idGeneratorInitialized = true
             }
 
-            YitIdHelper.setIdGenerator(options)
-            idGeneratorInitialized = true
+            loadAreas()
+            loadChangeTypeRegistry()
+        }.onFailure {
+            javaPlugin.logger.severe("An error occurred while loading CuteBedwars")
+            it.printStackTrace()
         }
 
-        loadAreas()
-        loadChangeTypeRegistry()
+        javaPlugin.logger.info("------------------------ CuteBedwars Loading Phase ------------------------")
     }
 
     override fun reloadPhase() {
@@ -113,27 +129,37 @@ object Loader : ILoader {
     }
 
     private fun loadAreas() {
-//        val folder = File(IConstants.areaFolder())
-//        if (!folder.exists()) {
-//            folder.mkdirs()
-//        }
-//        val files = folder.listFiles { _, filename ->
-//            return@listFiles !filename.endsWith(".json")
-//        }
-//        if (files == null) {
-//            return
-//        }
-//
-//        files.forEach {
-//            runCatching {
-//                val area = JacksonUtils.readFile<Area>(it, Area::class.java)
-//                val areaManager = IAreaManager.new(area)
-//
-//                IManagers.instance().register(areaManager)
-//            }.onFailure {
-//                "Unable to load area $it".logError(it)
-//            }
-//        }
+        val folder = File(IConstants.areaFolder())
+        if (!folder.exists()) {
+            folder.mkdirs()
+        }
+        val files = folder.listFiles { _, filename ->
+            return@listFiles !filename.endsWith(".json")
+        }
+        if (files.isNullOrEmpty()) {
+            return
+        }
+
+        files.forEach {
+            "-------------- Area Loading --------------".logInfo()
+
+            runCatching {
+                "Reading a area file: $it".logInfo()
+
+                val area = JacksonUtils.readFile<Area>(it, Area::class.java)
+                "The area file is read id: ${area.id}, name: ${area.name}".logInfo()
+
+                "Creating the area manager".logInfo()
+                val areaManager = IAreaManager.new(area)
+
+                "Registering a area manager".logInfo()
+                IManagers.instance().register(areaManager)
+            }.onFailure {
+                "Unable to load area $it".logError(it)
+            }
+
+            "-------------- Area Loading --------------".logInfo()
+        }
     }
 
     private fun loadChangeTypeRegistry() {

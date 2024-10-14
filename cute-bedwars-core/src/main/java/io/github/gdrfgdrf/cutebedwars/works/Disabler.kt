@@ -10,16 +10,26 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import org.bukkit.plugin.java.JavaPlugin
 
 @ServiceImpl("disabler")
 object Disabler : IDisabler {
-    fun disable() {
-        disableDatabase()
-        disableRequest()
-        disableThreadPool()
-        disableTaskManager()
-        ISubCommandManager.instance().clear()
-        disableChangeTypeRegistry()
+    fun disable(javaPlugin: JavaPlugin) {
+        javaPlugin.logger.info("------------------------ CuteBedwars Disable Phase ------------------------")
+
+        runCatching {
+            disableDatabase()
+            disableRequest()
+            disableThreadPool()
+            disableTaskManager()
+            ISubCommandManager.instance().clear()
+            disableChangeTypeRegistry()
+        }.onFailure {
+            javaPlugin.logger.severe("An error occurred while disabling CuteBedwars")
+            it.printStackTrace()
+        }
+
+        javaPlugin.logger.info("------------------------ CuteBedwars Disable Phase ------------------------")
     }
 
     override fun reloadPhase() {

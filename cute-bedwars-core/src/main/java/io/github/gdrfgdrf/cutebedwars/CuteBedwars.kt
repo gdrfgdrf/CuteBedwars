@@ -10,21 +10,15 @@ class CuteBedwars : JavaPlugin() {
     override fun onLoad() {
         super.onLoad()
         Loader.load(this)
-
-        "CuteBedwars is loaded".logInfo()
     }
 
     override fun onEnable() {
         super.onEnable()
-        Enabler.enable()
-
-        "CuteBedwars is enabled".logInfo()
+        Enabler.enable(this)
     }
 
     override fun onDisable() {
         super.onDisable()
-        Disabler.disable()
-
-        "CuteBedwars is disabled".logInfo()
+        Disabler.disable(this)
     }
 }
