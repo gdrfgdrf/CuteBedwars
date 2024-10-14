@@ -38,6 +38,7 @@ object Disabler : IDisabler {
         disableDatabase()
         disableRequest()
         disableThreadPool()
+        disableTaskManager()
         disableChangeTypeRegistry()
     }
 
