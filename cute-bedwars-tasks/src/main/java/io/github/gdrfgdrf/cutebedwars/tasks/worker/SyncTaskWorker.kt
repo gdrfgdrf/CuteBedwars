@@ -56,7 +56,11 @@ object SyncTaskWorker : Runnable {
                 }
             }
 
-            sleepSafely(50)
+            if (!TaskManager.isTerminated()) {
+                sleepSafely(50)
+            } else {
+                break
+            }
         }
 
         "Synchronized task worker terminated".logInfo()

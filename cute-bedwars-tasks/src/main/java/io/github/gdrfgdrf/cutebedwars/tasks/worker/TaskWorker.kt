@@ -34,7 +34,11 @@ object TaskWorker : Runnable {
                 taskEntries.put(taskEntry)
             }
 
-            sleepSafely(100)
+            if (!TaskManager.isTerminated()) {
+                sleepSafely(100)
+            } else {
+                break
+            }
         }
 
         "Task worker terminated".logInfo()
