@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.formula.distance
 
 import io.github.gdrfgdrf.cutebedwars.math.symbol.Sigma
 import io.github.gdrfgdrf.cutebedwars.math.base.IFormula
+import io.github.gdrfgdrf.cutebedwars.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.math.common.*
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
@@ -10,7 +11,7 @@ import io.github.gdrfgdrf.cutebedwars.math.generator.SigmaRangeGenerator
 
 object DistanceFormula : IFormula {
     override fun calculate(vararg argument: Argument): MathNumber {
-        val distanceArguments = DistanceArguments(*argument)
+        val distanceArguments = DistanceArguments.of(*argument)
         val space = distanceArguments.space()
 
         if (space == Spaces.EUCLIDEAN) {
