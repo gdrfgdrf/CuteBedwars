@@ -3,12 +3,12 @@ package io.github.gdrfgdrf.cutebedwars.math
 class Cube(
     var length: Double,
     var width: Double,
-    var heigth: Double
+    var height: Double
 ) {
     fun resize(length: Double, width: Double, height: Double) {
         this.length = length
         this.width = width
-        this.heigth = height
+        this.height = height
     }
 
     fun baseArea(): Double {
@@ -16,10 +16,10 @@ class Cube(
     }
 
     fun volume(): Double {
-        return baseArea() * heigth
+        return baseArea() * height
     }
 
     fun square(): Boolean {
-        return length == width && width == heigth && length == heigth
+        return length == width && width == height && length == height
     }
 }
