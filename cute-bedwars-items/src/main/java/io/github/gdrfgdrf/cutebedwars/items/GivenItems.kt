@@ -12,22 +12,22 @@ object GivenItems {
     }
 
     fun contains(player: Player, itemStack: ItemStack): Boolean {
-        val map = createIfNotExist(player, false) ?: return false
+        val map = getOrCreate(player, false) ?: return false
         return map.containsKey(itemStack)
     }
 
     fun contains(player: Player, givenItem: GivenItem): Boolean {
-        val map = createIfNotExist(player, false) ?: return false
+        val map = getOrCreate(player, false) ?: return false
         return map.containsValue(givenItem)
     }
 
     fun add(player: Player, givenItem: GivenItem) {
-        val map = createIfNotExist(player)
+        val map = getOrCreate(player)
         map!![givenItem.itemStack] = givenItem
     }
 
     fun remove(player: Player, givenItem: GivenItem) {
-        val map = createIfNotExist(player, false) ?: return
+        val map = getOrCreate(player, false) ?: return
         map.remove(givenItem.itemStack)
 
         if (map.isEmpty()) {
@@ -39,7 +39,7 @@ object GivenItems {
         map.remove(player)
     }
 
-    private fun createIfNotExist(player: Player, createMap: Boolean = true): ConcurrentHashMap<ItemStack, GivenItem>? {
+    private fun getOrCreate(player: Player, createMap: Boolean = true): ConcurrentHashMap<ItemStack, GivenItem>? {
         if (!map.containsKey(player)) {
             if (!createMap) {
                 return null
