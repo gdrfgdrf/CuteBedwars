@@ -97,6 +97,8 @@ CuteBedwars
 | cute-bedwars-information                 | 对数据进行翻译，将其翻译为可以查看的版本                                 |
 | cute-bedwars-editing                     | 编辑模块，对数据进行编辑，使用了 Git 的设计                             |
 | cute-bedwars-storage                     | 存储模块，对数据进行实际的存储，该存储不会使用数据库，而是直接存到一个文件                |
+| cute-bedwars-items                       | 物品模块，对游戏中的物品操作进行包装                                   |
+| cute-bedwars-events                      | 事件模块，存储一些事件类和事件监听器                                   |
 | cute-bedwars-protobuf                    | 所有 Protobuf 类                                        |
 | cute-bedwars-math                        | 数学模块，进行各种数学计算                                        |
 | cute-bedwars-enums                       | 所有枚举类                                                |
