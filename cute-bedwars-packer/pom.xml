@@ -132,6 +132,16 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>math</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>items</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>events</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
