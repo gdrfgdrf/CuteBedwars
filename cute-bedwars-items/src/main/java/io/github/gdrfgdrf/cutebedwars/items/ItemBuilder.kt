@@ -1,71 +1,78 @@
 package io.github.gdrfgdrf.cutebedwars.items
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
+import io.github.gdrfgdrf.cuteframework.locale.LanguageString
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Material
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 
-class ItemBuilder {
-    var material: Material? = null
-        private set
+@ServiceImpl("item_builder")
+class ItemBuilder : IItemBuilder {
+    private var material: Material? = null
+    private var name: (() -> LanguageString)? = null
+    private val lores = arrayListOf<String>()
+    private var onClick: ((PlayerInteractEvent) -> Unit)? = null
+    private var onLeftClick: ((PlayerInteractEvent) -> Unit)? = null
+    private var onRightClick: ((PlayerInteractEvent) -> Unit)? = null
 
-    var name: String? = null
-        private set
-    val lores = arrayListOf<String>()
-    var onClick: ((PlayerInteractEvent) -> Unit)? = null
-        private set
-    var onLeftClick: ((PlayerInteractEvent) -> Unit)? = null
-        private set
-    var onRightClick: ((PlayerInteractEvent) -> Unit)? = null
-        private set
+    override fun material(): Material? = material
+    override fun name(): (() -> LanguageString)? = name
+    override fun lores(): MutableList<String> = lores
+    override fun onClick(): ((PlayerInteractEvent) -> Unit)? = onClick
+    override fun onLeftClick(): ((PlayerInteractEvent) -> Unit)? = onLeftClick
+    override fun onRightClick(): ((PlayerInteractEvent) -> Unit)? = onRightClick
 
-    fun material(material: Material): ItemBuilder {
+    override fun material(material: Material): ItemBuilder {
         this.material = material
         return this
     }
 
-    fun name(name: String): ItemBuilder {
-        this.name = name
+    override fun name(string: () -> LanguageString): ItemBuilder {
+        this.name = string
         return this
     }
 
-    fun addLore(string: String): ItemBuilder {
+    override fun addLore(string: String): ItemBuilder {
         lores.add(string)
         return this
     }
 
-    fun removeLore(string: String): ItemBuilder {
+    override fun removeLore(string: String): ItemBuilder {
         lores.remove(string)
         return this
     }
 
-    fun removeLore(index: Int): ItemBuilder {
+    override fun removeLore(index: Int): ItemBuilder {
         lores.removeAt(index)
         return this
     }
 
-    fun onClick(onClick: (PlayerInteractEvent) -> Unit): ItemBuilder {
+    override fun onClick(onClick: (PlayerInteractEvent) -> Unit): ItemBuilder {
         this.onClick = onClick
         return this
     }
 
-    fun onLeftClick(onLeftClick: (PlayerInteractEvent) -> Unit): ItemBuilder {
+    override fun onLeftClick(onLeftClick: (PlayerInteractEvent) -> Unit): ItemBuilder {
         this.onLeftClick = onLeftClick
         return this
     }
 
-    fun onRightClick(onRightClick: (PlayerInteractEvent) -> Unit): ItemBuilder {
+    override fun onRightClick(onRightClick: (PlayerInteractEvent) -> Unit): ItemBuilder {
         this.onRightClick = onRightClick
         return this
     }
 
-    fun build(): Item {
+    override fun build(): Item {
         if (material == null) {
             throw IllegalArgumentException("material is required")
         }
         val itemStack = ItemStack(material)
         val itemMeta = itemStack.itemMeta
 
-        itemMeta.displayName = name
+        name?.let {
+            itemMeta.displayName = it().get().string
+        }
         itemMeta.lore.addAll(lores)
 
         itemStack.itemMeta = itemMeta

@@ -1,9 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
-import org.bukkit.Material
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
 
-enum class Items(material: Material) {
-    SELECTION_TOOL(Material.STICK)
+enum class Items(item: IItem) {
+
 
 
     ;
