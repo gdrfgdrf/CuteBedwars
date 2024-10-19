@@ -7,6 +7,11 @@ import java.util.concurrent.ConcurrentHashMap
 object GivenItems {
     private val map = ConcurrentHashMap<Player, ConcurrentHashMap<ItemStack, GivenItem>>()
 
+    fun find(player: Player, itemStack: ItemStack): GivenItem? {
+        val map = get(player) ?: return null
+        return map[itemStack]
+    }
+
     fun get(player: Player): ConcurrentHashMap<ItemStack, GivenItem>? {
         return map[player]
     }
