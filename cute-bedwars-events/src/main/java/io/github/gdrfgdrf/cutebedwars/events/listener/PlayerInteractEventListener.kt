@@ -11,16 +11,16 @@ import org.bukkit.event.player.PlayerInteractEvent
 class PlayerInteractEventListener : Listener {
     @EventHandler
     fun onInteractEvent(playerInteractEvent: PlayerInteractEvent) {
-        val player = playerInteractEvent.player
-        val itemStack = playerInteractEvent.item
+        val player = playerInteractEvent.player ?: return
+        val itemStack = playerInteractEvent.item ?: return
         val action = playerInteractEvent.action ?: return
 
         val givenItem = IGivenItems.instance().find(player, itemStack) ?: return
         when (action) {
-            Action.LEFT_CLICK_AIR -> givenItem.onLeftClick()
-            Action.LEFT_CLICK_BLOCK -> givenItem.onLeftClick()
-            Action.RIGHT_CLICK_AIR -> givenItem.onRightClick()
-            Action.RIGHT_CLICK_BLOCK -> givenItem.onRightClick()
+            Action.LEFT_CLICK_AIR -> givenItem.onLeftClick()?.invoke(playerInteractEvent)
+            Action.LEFT_CLICK_BLOCK -> givenItem.onLeftClick()?.invoke(playerInteractEvent)
+            Action.RIGHT_CLICK_AIR -> givenItem.onRightClick()?.invoke(playerInteractEvent)
+            Action.RIGHT_CLICK_BLOCK -> givenItem.onRightClick()?.invoke(playerInteractEvent)
             Action.PHYSICAL -> {}
         }
         if (action != Action.PHYSICAL) {

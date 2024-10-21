@@ -73,6 +73,7 @@ class ItemBuilder : IItemBuilder {
         name?.let {
             itemMeta.displayName = it().get().string
         }
+        itemMeta.lore = arrayListOf()
         itemMeta.lore.addAll(lores)
 
         itemStack.itemMeta = itemMeta

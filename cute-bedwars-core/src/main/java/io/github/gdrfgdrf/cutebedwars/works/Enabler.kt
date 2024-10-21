@@ -54,7 +54,7 @@ object Enabler : IEnabler {
 
         val classes = LinkedHashSet<Class<*>>()
         ClassUtils.searchJar(Enabler::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.events.listener", {
-            return@searchJar it.superclass == Listener::class.java
+            return@searchJar it.interfaces.contains(Listener::class.java)
         }, classes)
 
         classes.forEach { listenerClass ->

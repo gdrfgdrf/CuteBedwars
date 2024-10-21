@@ -14,6 +14,8 @@ enum class Permissions(
 ): IPermissions {
     ROOT(PermissionGroups.USER, "root"),
 
+    DEV(PermissionGroups.ADMIN, "dev"),
+
     HELP(PermissionGroups.USER, "help"),
     RELOAD(PermissionGroups.ADMIN, "reload"),
     QUERY_DESCRIPTION(PermissionGroups.USER, "query.description"),

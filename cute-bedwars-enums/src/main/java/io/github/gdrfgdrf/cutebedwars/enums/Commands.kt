@@ -18,6 +18,8 @@ enum class Commands(
 ) : ICommands {
     ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT, true),
 
+    DEV("dev", false, 0..Int.MAX_VALUE, Permissions.DEV, true),
+
     HELP("help", false, 0..0, Permissions.HELP, true),
     RELOAD("reload", false, 0..0, Permissions.RELOAD, true),
     QUERY_DESCRIPTION(
