@@ -2,9 +2,11 @@ package io.github.gdrfgdrf.cutebedwars.works
 
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
@@ -15,14 +17,19 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
+import io.github.gdrfgdrf.cuteframework.bean.BeanManager
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
+import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.Registry
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import org.bukkit.Bukkit
+import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
+import java.util.LinkedHashSet
 
 @ServiceImpl("loader")
 object Loader : ILoader {
