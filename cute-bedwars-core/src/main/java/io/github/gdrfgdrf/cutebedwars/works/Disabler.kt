@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.works
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
@@ -33,13 +34,24 @@ object Disabler : IDisabler {
     }
 
     override fun reloadPhase() {
-        "Start reloading (Disabler)".logInfo()
+        val javaPlugin = IPlugin.instance().javaPlugin()
+        val log: (String) -> Unit = {
+            if (javaPlugin != null) {
+                javaPlugin.logger.info(it)
+            } else {
+                println(it)
+            }
+        }
+
+        log("------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------")
 
         disableDatabase()
         disableRequest()
         disableThreadPool()
         disableTaskManager()
         disableChangeTypeRegistry()
+
+        log("------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------")
     }
 
     private fun disableDatabase() {

@@ -80,7 +80,16 @@ object Loader : ILoader {
     }
 
     override fun reloadPhase() {
-        "Start reloading (Loader)".logInfo()
+        val javaPlugin = IPlugin.instance().javaPlugin()
+        val log: (String) -> Unit = {
+            if (javaPlugin != null) {
+                javaPlugin.logger.info(it)
+            } else {
+                println(it)
+            }
+        }
+
+        log("------------------------ CuteBedwars Reloading Phase (Loader) ------------------------")
 
         createFolders()
         loadConfig()
@@ -90,6 +99,8 @@ object Loader : ILoader {
         loadTaskManager()
         loadAreas()
         loadChangeTypeRegistry()
+
+        log("------------------------ CuteBedwars Reloading Phase (Loader) ------------------------")
     }
 
     private fun createFolders() {

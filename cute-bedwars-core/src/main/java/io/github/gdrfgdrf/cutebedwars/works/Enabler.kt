@@ -32,8 +32,21 @@ object Enabler : IEnabler {
     }
 
     override fun reloadPhase() {
+        val javaPlugin = IPlugin.instance().javaPlugin()
+        val log: (String) -> Unit = {
+            if (javaPlugin != null) {
+                javaPlugin.logger.info(it)
+            } else {
+                println(it)
+            }
+        }
+
+        log("------------------------ CuteBedwars Reloading Phase (Enabler) ------------------------")
+
         "Start reloading (Enabler)".logInfo()
         ISubCommandManager.instance().scanAndRegister()
+
+        log("------------------------ CuteBedwars Reloading Phase (Enabler) ------------------------")
     }
 
     private fun enableEventListeners() {
