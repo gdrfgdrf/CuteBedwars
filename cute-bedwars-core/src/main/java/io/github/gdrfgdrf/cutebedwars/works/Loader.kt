@@ -42,8 +42,8 @@ object Loader : ILoader {
             javaPlugin.logger.info("Loading abstract module")
             Registry.register(Loader::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars")
 
-            Plugin.state = IPluginState.valueOf("LOADING")
-            Plugin.javaPlugin = javaPlugin
+            Plugin.state(IPluginState.valueOf("LOADING"))
+            Plugin.javaPlugin(javaPlugin)
 
             createFolders()
 
