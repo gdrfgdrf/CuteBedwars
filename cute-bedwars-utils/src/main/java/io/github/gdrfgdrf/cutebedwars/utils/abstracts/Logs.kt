@@ -7,15 +7,27 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 @ServiceImpl("logs")
 object Logs : ILogs {
     override fun info(string: String) {
-        logger().info(string)
+        runCatching {
+            logger().info(string)
+        }.onFailure {
+            println("[CuteBedwars] $string")
+        }
     }
 
     override fun warn(string: String) {
-        logger().warning(string)
+        runCatching {
+            logger().warning(string)
+        }.onFailure {
+            println("[CuteBedwars] $string")
+        }
     }
 
     override fun error(string: String, throwable: Throwable) {
-        logger().severe(string)
+        runCatching {
+            logger().severe(string)
+        }.onFailure {
+            println("[CuteBedwars] $string")
+        }
         throwable.printStackTrace()
     }
 }

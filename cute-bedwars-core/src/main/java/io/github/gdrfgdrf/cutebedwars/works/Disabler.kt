@@ -34,16 +34,7 @@ object Disabler : IDisabler {
     }
 
     override fun reloadPhase() {
-        val javaPlugin = IPlugin.instance().javaPlugin()
-        val log: (String) -> Unit = {
-            if (javaPlugin != null) {
-                javaPlugin.logger.info(it)
-            } else {
-                println(it)
-            }
-        }
-
-        log("------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------")
+        "------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------".logInfo()
 
         disableDatabase()
         disableRequest()
@@ -51,7 +42,7 @@ object Disabler : IDisabler {
         disableTaskManager()
         disableChangeTypeRegistry()
 
-        log("------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------")
+        "------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------".logInfo()
     }
 
     private fun disableDatabase() {
