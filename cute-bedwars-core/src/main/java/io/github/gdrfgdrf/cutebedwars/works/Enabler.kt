@@ -21,7 +21,7 @@ object Enabler : IEnabler {
 
         runCatching {
             ICommandRegistry.instance().registerCommands()
-            Plugin.state = IPluginState.valueOf("RUNNING")
+            Plugin.state(IPluginState.valueOf("RUNNING"))
 
             enableEventListeners()
         }.onFailure {
