@@ -121,14 +121,7 @@ object Help : AbstractSubCommand(
                         .send("")
                 } else {
                     message(CommandLanguage.COMMAND_FORMAT_FOR_CONSOLE)
-                        .apply {
-                            val syntax = if (subCommand.syntax() != null) {
-                                subCommand.syntax()!!.get().string
-                            } else {
-                                ""
-                            }
-                            format0(syntax, "null")
-                        }
+                        .format0(subCommand.syntax()!!.get().string, "null")
                         .send("")
                 }
             }
