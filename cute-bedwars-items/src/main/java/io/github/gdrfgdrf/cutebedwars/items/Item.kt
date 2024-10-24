@@ -11,13 +11,17 @@ class Item(
     private val onClick: ((PlayerInteractEvent) -> Unit)? = null,
     private val onLeftClick: ((PlayerInteractEvent) -> Unit)? = null,
     private val onRightClick: ((PlayerInteractEvent) -> Unit)? = null,
+    private val droppable: Boolean
 ) : IItem {
+    override fun onClick(): ((PlayerInteractEvent) -> Unit)? = onClick
+    override fun onLeftClick(): ((PlayerInteractEvent) -> Unit)? = onLeftClick
+    override fun onRightClick(): ((PlayerInteractEvent) -> Unit)? = onRightClick
+    override fun droppable(): Boolean = droppable
+
     override fun give(player: Player): IGivenItem {
         val givenItem = GivenItem(
             itemStack.clone(),
-            onClick,
-            onLeftClick,
-            onRightClick,
+            this,
             player
         )
         givenItem.give()

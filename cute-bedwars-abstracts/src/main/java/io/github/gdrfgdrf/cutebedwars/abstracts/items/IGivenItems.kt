@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
+import java.util.concurrent.ConcurrentHashMap
 
 @Service("given_items")
 @KotlinSingleton

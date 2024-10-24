@@ -6,9 +6,7 @@ import org.bukkit.inventory.ItemStack
 
 interface IGivenItem {
     fun itemStack(): ItemStack
-    fun onClick(): ((PlayerInteractEvent) -> Unit)?
-    fun onLeftClick(): ((PlayerInteractEvent) -> Unit)?
-    fun onRightClick(): ((PlayerInteractEvent) -> Unit)?
+    fun item(): IItem
     fun player(): Player
 
     fun give()
