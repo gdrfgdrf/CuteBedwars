@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.items
 
+import de.tr7zw.nbtapi.iface.ReadWriteItemNBT
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -22,7 +23,7 @@ interface IItemBuilder {
     fun canDestroy(): MutableList<Material>
     fun droppable(): Boolean
 
-    fun build(): IItem
+    fun build(nbtModifier: ((ReadWriteItemNBT) -> Unit)? = null): IItem
     fun material(material: Material): IItemBuilder
     fun name(string: () -> LanguageString): IItemBuilder
     fun lore(string: String): IItemBuilder

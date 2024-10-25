@@ -5,6 +5,7 @@ import de.tr7zw.nbtapi.NBTCompoundList
 import de.tr7zw.nbtapi.NBTItem
 import de.tr7zw.nbtapi.NBTList
 import de.tr7zw.nbtapi.NBTListCompound
+import de.tr7zw.nbtapi.iface.ReadWriteItemNBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
@@ -120,7 +121,7 @@ class ItemBuilder : IItemBuilder {
         return this
     }
 
-    override fun build(): IItem {
+    override fun build(nbtModifier: ((ReadWriteItemNBT) -> Unit)?): IItem {
         if (material == null) {
             throw IllegalArgumentException("material is required")
         }
@@ -148,6 +149,9 @@ class ItemBuilder : IItemBuilder {
             canDestroy.forEach { canDestroyMaterial ->
                 canDestroyList.add("minecraft:${canDestroyMaterial.name.lowercase()}")
             }
+        }
+        if (nbtModifier != null) {
+            NBT.modify(itemStack, nbtModifier)
         }
 
         val item = Item(itemStack, onClick, onLeftClick, onRightClick, droppable)
