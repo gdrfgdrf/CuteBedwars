@@ -1,28 +1,25 @@
 package io.github.gdrfgdrf.cutebedwars.items
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-open class Item(
-    private val itemStack: ItemStack,
-    override val properties: IItemProperties
-) : IItem {
-    init {
-        properties.droppable = true
+class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties) : Item(
+    itemStack,
+    properties.apply {
+        properties.droppable = false
     }
-
+) {
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {
-        val commonItem = CommonItem(
+        val givenItem = GivenItem(
             itemStack.clone(),
             this,
             player,
             amount
         )
-        commonItem.give(slotIndex)
+        givenItem.give(slotIndex)
 
-        return commonItem
+        return givenItem
     }
 }

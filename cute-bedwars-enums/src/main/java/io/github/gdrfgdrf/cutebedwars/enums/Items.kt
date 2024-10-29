@@ -6,51 +6,54 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.Material
-import org.bukkit.inventory.ItemFlag
 
 @EnumServiceImpl("items")
 enum class Items(private val item: IItem) : IItems {
     DEV_TOOL(
-        IItemBuilder.new().material(Material.DIAMOND_PICKAXE)
-            .name {
+        IItemBuilder.new().modify {
+            material = Material.DIAMOND_PICKAXE
+            name = {
                 LanguageString("dev_tool")
             }
-            .lore("test lore 1")
-            .lore("test lore 2")
-            .lore("test lore 3")
-            .unbreakable(true)
-            .canDestroy(Material.STONE)
-            .onClick {
+            lores.add("test lore 1", "test lore 2", "test lore 3")
+            unbreakable = true
+            movable = false
+            canDestroy.add(Material.STONE)
+            onClick = {
                 val player = it.player
                 player.sendMessage("onClick")
-            }.onLeftClick {
+            }
+            onLeftClick = {
                 val player = it.player
                 player.sendMessage("onLeftClick")
-            }.onRightClick {
+            }
+            onRightClick = {
                 val player = it.player
                 player.sendMessage("onRightClick")
-            }.build()
+            }
+        }.build(true)
     ),
     DEV_TOOL_2(
-        IItemBuilder.new().material(Material.DIAMOND_BLOCK)
-            .name {
+        IItemBuilder.new().modify {
+            material = Material.DIAMOND_BLOCK
+            name = {
                 LanguageString("dev_tool_2")
             }
-            .lore("test lore 1 (2)")
-            .lore("test lore 2 (2)")
-            .lore("test lore 3 (2)")
-            .canPlaceOn(Material.STONE)
-            .droppable(true)
-            .onClick {
+            lores.add("test lore 1 (2)", "test lore 2 (2)", "test lore 3 (2)")
+            canPlaceOn.add(Material.STONE)
+            onClick = {
                 val player = it.player
                 player.sendMessage("onClick (2)")
-            }.onLeftClick {
+            }
+            onLeftClick = {
                 val player = it.player
                 player.sendMessage("onLeftClick (2)")
-            }.onRightClick {
+            }
+            onRightClick = {
                 val player = it.player
                 player.sendMessage("onRightClick (2)")
-            }.build()
+            }
+        }.build(true)
     )
 
 

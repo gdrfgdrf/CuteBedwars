@@ -35,11 +35,11 @@ fun String.toIntOrDefault(defaultValue: Int): Int {
     return IConvertors.instance().toIntOrDefault(this, defaultValue)
 }
 
-fun runAsyncTask(runnable: () -> Unit) {
+fun asyncTask(runnable: () -> Unit) {
     ITasks.instance().runAsyncTask(runnable)
 }
 
-fun <T> runSyncTask(lock: Any, supplier: () -> T?) {
+fun <T> syncTask(lock: Any, supplier: () -> T?) {
     ITasks.instance().runSyncTask(lock, supplier)
 }
 
@@ -61,4 +61,8 @@ fun logger(): Logger {
 
 fun now(): String {
     return ITimes.instance().now()
+}
+
+fun <E : Any> customList(): ICustomList<E> {
+    return ICustomList.new()
 }

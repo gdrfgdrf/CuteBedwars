@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.runAsyncTask
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.asyncTask
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterChangesFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
@@ -72,7 +72,7 @@ object EditCommit : AbstractSubCommand(
             editor.newChanges()
 
             if (editor is AbstractAreaEditor) {
-                runAsyncTask {
+                asyncTask {
                     editor.save {
                         message(EditorLanguage.COMMIT_SAVED)
                             .send()
@@ -80,7 +80,7 @@ object EditCommit : AbstractSubCommand(
                 }
             }
             if (editor is AbstractGameEditor) {
-                runAsyncTask {
+                asyncTask {
                     editor.save {
                         message(EditorLanguage.COMMIT_SAVED)
                             .send()

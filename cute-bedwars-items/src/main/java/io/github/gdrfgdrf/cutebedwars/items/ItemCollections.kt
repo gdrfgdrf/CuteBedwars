@@ -1,22 +1,22 @@
 package io.github.gdrfgdrf.cutebedwars.items
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IGivenItem
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IGivenItems
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.concurrent.ConcurrentHashMap
 
-@ServiceImpl("given_items")
-object GivenItems : IGivenItems {
-    private val map = ConcurrentHashMap<Player, ConcurrentHashMap<ItemStack, IGivenItem>>()
+@ServiceImpl("item_collections")
+object ItemCollections : IItemCollections {
+    private val map = ConcurrentHashMap<Player, ConcurrentHashMap<ItemStack, ICommonItem>>()
 
-    override fun find(player: Player, itemStack: ItemStack): IGivenItem? {
+    override fun find(player: Player, itemStack: ItemStack): ICommonItem? {
         val map = get(player) ?: return null
         return map[itemStack]
     }
 
-    override fun get(player: Player): Map<ItemStack, IGivenItem>? {
+    override fun get(player: Player): Map<ItemStack, ICommonItem>? {
         return map[player]
     }
 
@@ -25,19 +25,19 @@ object GivenItems : IGivenItems {
         return map.containsKey(itemStack)
     }
 
-    override fun contains(player: Player, givenItem: IGivenItem): Boolean {
+    override fun contains(player: Player, givenItem: ICommonItem): Boolean {
         val map = getOrCreate(player, false) ?: return false
         return map.containsValue(givenItem)
     }
 
-    override fun add(player: Player, givenItem: IGivenItem) {
+    override fun add(player: Player, givenItem: ICommonItem) {
         val map = getOrCreate(player)
-        map!![givenItem.itemStack()] = givenItem
+        map!![givenItem.itemStack] = givenItem
     }
 
-    override fun remove(player: Player, givenItem: IGivenItem) {
+    override fun remove(player: Player, givenItem: ICommonItem) {
         val map = getOrCreate(player, false) ?: return
-        map.remove(givenItem.itemStack())
+        map.remove(givenItem.itemStack)
 
         if (map.isEmpty()) {
             this.map.remove(player)
@@ -48,12 +48,12 @@ object GivenItems : IGivenItems {
         map.remove(player)
     }
 
-    private fun getOrCreate(player: Player, createMap: Boolean = true): MutableMap<ItemStack, IGivenItem>? {
+    private fun getOrCreate(player: Player, createMap: Boolean = true): MutableMap<ItemStack, ICommonItem>? {
         if (!map.containsKey(player)) {
             if (!createMap) {
                 return null
             }
-            map[player] = ConcurrentHashMap<ItemStack, IGivenItem>()
+            map[player] = ConcurrentHashMap<ItemStack, ICommonItem>()
         }
 
         return map[player]

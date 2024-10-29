@@ -5,20 +5,19 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import java.util.concurrent.ConcurrentHashMap
 
-@Service("given_items")
+@Service("item_collections")
 @KotlinSingleton
-interface IGivenItems {
-    fun find(player: Player, itemStack: ItemStack): IGivenItem?
-    fun get(player: Player): Map<ItemStack, IGivenItem>?
+interface IItemCollections {
+    fun find(player: Player, itemStack: ItemStack): ICommonItem?
+    fun get(player: Player): Map<ItemStack, ICommonItem>?
     fun contains(player: Player, itemStack: ItemStack): Boolean
-    fun contains(player: Player, givenItem: IGivenItem): Boolean
-    fun add(player: Player, givenItem: IGivenItem)
-    fun remove(player: Player, givenItem: IGivenItem)
+    fun contains(player: Player, givenItem: ICommonItem): Boolean
+    fun add(player: Player, givenItem: ICommonItem)
+    fun remove(player: Player, givenItem: ICommonItem)
     fun removeAll(player: Player)
 
     companion object {
-        fun instance(): IGivenItems = Mediator.get(IGivenItems::class.java)!!
+        fun instance(): IItemCollections = Mediator.get(IItemCollections::class.java)!!
     }
 }

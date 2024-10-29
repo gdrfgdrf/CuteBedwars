@@ -1,8 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.events.listener
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IGivenItems
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.cuteframework.bean.annotation.Component
-import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
@@ -16,17 +15,17 @@ class PlayerInteractEventListener : Listener {
         val itemStack = playerInteractEvent.item ?: return
         val action = playerInteractEvent.action ?: return
 
-        val givenItem = IGivenItems.instance().find(player, itemStack) ?: return
-        val item = givenItem.item()
+        val commonItem = IItemCollections.instance().find(player, itemStack) ?: return
+        val properties = commonItem.properties
 
         if (action != Action.PHYSICAL) {
-            item.onClick()?.invoke(playerInteractEvent)
+            properties.onClick?.invoke(playerInteractEvent)
         }
         when (action) {
-            Action.LEFT_CLICK_AIR -> item.onLeftClick()?.invoke(playerInteractEvent)
-            Action.LEFT_CLICK_BLOCK -> item.onLeftClick()?.invoke(playerInteractEvent)
-            Action.RIGHT_CLICK_AIR -> item.onRightClick()?.invoke(playerInteractEvent)
-            Action.RIGHT_CLICK_BLOCK -> item.onRightClick()?.invoke(playerInteractEvent)
+            Action.LEFT_CLICK_AIR -> properties.onLeftClick?.invoke(playerInteractEvent)
+            Action.LEFT_CLICK_BLOCK -> properties.onLeftClick?.invoke(playerInteractEvent)
+            Action.RIGHT_CLICK_AIR -> properties.onRightClick?.invoke(playerInteractEvent)
+            Action.RIGHT_CLICK_BLOCK -> properties.onRightClick?.invoke(playerInteractEvent)
             Action.PHYSICAL -> {}
         }
     }
