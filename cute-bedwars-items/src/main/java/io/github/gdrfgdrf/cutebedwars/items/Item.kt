@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.items
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
+import io.github.gdrfgdrf.cutebedwars.items.item.CommonItem
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 

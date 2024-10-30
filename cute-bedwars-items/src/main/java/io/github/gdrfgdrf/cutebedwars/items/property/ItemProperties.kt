@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.items
+package io.github.gdrfgdrf.cutebedwars.items.property
 
 import com.github.yitter.idgen.YitIdHelper
 import de.tr7zw.nbtapi.NBT

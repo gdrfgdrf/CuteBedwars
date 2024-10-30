@@ -1,8 +1,9 @@
-package io.github.gdrfgdrf.cutebedwars.items
+package io.github.gdrfgdrf.cutebedwars.items.item
 
 import de.tr7zw.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
+import io.github.gdrfgdrf.cutebedwars.items.ItemCollections
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack

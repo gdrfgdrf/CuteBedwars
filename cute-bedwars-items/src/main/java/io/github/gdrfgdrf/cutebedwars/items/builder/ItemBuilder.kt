@@ -1,10 +1,12 @@
-package io.github.gdrfgdrf.cutebedwars.items
+package io.github.gdrfgdrf.cutebedwars.items.builder
 
 import de.tr7zw.nbtapi.NBT
 import de.tr7zw.nbtapi.iface.ReadWriteItemNBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
+import io.github.gdrfgdrf.cutebedwars.items.Item
+import io.github.gdrfgdrf.cutebedwars.items.item.SpecialItem
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.inventory.ItemStack
 

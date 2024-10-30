@@ -1,5 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.items
 
+import io.github.gdrfgdrf.cutebedwars.items.item.CommonItem
+import io.github.gdrfgdrf.cutebedwars.items.item.SpecialItem
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
