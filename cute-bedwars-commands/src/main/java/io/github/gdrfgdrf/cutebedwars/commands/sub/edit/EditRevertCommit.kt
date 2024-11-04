@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
@@ -22,10 +23,10 @@ object EditRevertCommit : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_REVERT_COMMIT
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_REVERT_COMMIT
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val editor = BetterEditorFinder.find(sender) ?: return@localizationScope
-            val commitId = args[0]
+            val commitId = paramCombination.notNullString("COMMIT_ID")
 
             val testCommit = CommitFinder.find(editor, commitId)
             if (testCommit == null) {

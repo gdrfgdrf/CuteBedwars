@@ -1,10 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.commands
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
-import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
+import io.github.gdrfgdrf.cutebedwars.commands.common.ParamCombination
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -187,7 +187,7 @@ object RootCommand : TabExecutor {
             if (subCommand.hasPermission(sender)) {
                 if (!subCommand.command.onlyPlayer() || sender is Player) {
                     if (args.isEmpty()) {
-                        subCommand.run(sender, args, ParamScheme.NO_MATCH)
+                        subCommand.run(sender, args, ParamCombination.empty(args))
                         return@localizationScope
                     }
 
@@ -196,13 +196,13 @@ object RootCommand : TabExecutor {
                     System.arraycopy(args, 1, newArray, 0, args.size - 1)
 
                     if (newArray.isEmpty() && subCommand.command.allowEmptyParam()) {
-                        subCommand.run(sender, args, ParamScheme.NO_MATCH)
+                        subCommand.run(sender, args, ParamCombination.empty(args))
                         return@localizationScope
                     }
 
                     if (argsRange.contains(newArray.size)) {
                         if (argsRange.last == Int.MAX_VALUE) {
-                            subCommand.run(sender, newArray as Array<String>, ParamScheme.NO_MATCH)
+                            subCommand.run(sender, newArray as Array<String>, ParamCombination.empty(args))
                             return@localizationScope
                         }
 
@@ -241,7 +241,11 @@ object RootCommand : TabExecutor {
                         }
 
                         if (validateResult != null) {
-                            subCommand.run(sender, newArray as Array<String>, validateResult!!.value)
+                            subCommand.run(
+                                sender,
+                                newArray as Array<String>,
+                                ParamCombination.create(args, validateResult!!.value, validateResult!!.key)
+                            )
                             return@localizationScope
                         }
                     }

@@ -8,17 +8,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 import org.bukkit.command.CommandSender
 
 object BetterGameFinder {
-    fun find(
-        sender: CommandSender,
-        findType: String,
-        areaManager: IAreaManager,
-        identifier: String,
-    ): IGameContext? {
+    fun find(sender: CommandSender, findType: IFindType, areaManager: IAreaManager, identifier: String): IGameContext? {
         var gameContext: IGameContext? = null
 
         val findResult = IGameFinder.instance().find(
             sender,
-            IFindType.find(findType),
+            findType,
             areaManager,
             identifier,
             IFindStrategy.valueOf("ONLY_ONE"),
@@ -36,7 +31,7 @@ object BetterGameFinder {
 
     fun multipleResult(
         sender: CommandSender,
-        findType: String,
+        findType: IFindType,
         areaManager: IAreaManager,
         identifier: String
     ): List<IGameContext>? {
@@ -44,7 +39,7 @@ object BetterGameFinder {
 
         val findResult = IGameFinder.instance().find(
             sender,
-            IFindType.find(findType),
+            findType,
             areaManager,
             identifier,
         ) {

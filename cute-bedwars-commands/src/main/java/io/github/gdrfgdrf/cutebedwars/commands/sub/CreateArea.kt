@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -19,9 +20,9 @@ object CreateArea : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_AREA
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
-            val areaName = args[0]
+            val areaName = paramCombination.notNullString("AREA_NAME")
             val managers = IManagers.instance()
             val requests = IRequests.instance()
 

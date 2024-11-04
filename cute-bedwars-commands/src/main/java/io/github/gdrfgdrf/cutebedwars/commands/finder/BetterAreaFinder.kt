@@ -7,12 +7,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManage
 import org.bukkit.command.CommandSender
 
 object BetterAreaFinder {
-    fun find(sender: CommandSender, findType: String, identifier: String): IAreaManager? {
+    fun find(sender: CommandSender, findType: IFindType, identifier: String): IAreaManager? {
         var areaManager: IAreaManager? = null
 
         val findResult = IAreaFinder.instance().find(
             sender,
-            IFindType.find(findType),
+            findType,
             identifier,
             IFindStrategy.valueOf("ONLY_ONE"),
             IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT")

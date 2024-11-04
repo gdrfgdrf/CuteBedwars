@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
@@ -19,7 +20,7 @@ object EditNewChanges : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_NEW_CHANGES
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_NEW_CHANGES
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val editor = BetterEditorFinder.find(sender) ?: return@localizationScope
             val requests = IRequests.instance()

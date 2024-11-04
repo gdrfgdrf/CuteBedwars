@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
@@ -21,7 +22,7 @@ object EditCommit : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_COMMIT
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_COMMIT
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val editor = BetterEditorFinder.find(sender) ?: return@localizationScope
             if (editor.t == null) {
@@ -35,11 +36,7 @@ object EditCommit : AbstractSubCommand(
             } else {
                 "not_a_player"
             }
-            val message = if (paramSchemeIndex == 0) {
-                args[0]
-            } else {
-                ""
-            }
+            val message = paramCombination.notNullString("COMMIT_MESSAGE")
 
             if (changes.size() <= 0) {
                 message(EditorLanguage.NEED_ONE_CHANGE_AT_LEAST)

@@ -9,6 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
@@ -23,7 +24,7 @@ object Reload : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.RELOAD
     override fun description(): LanguageString? = CommandDescriptionLanguage.RELOAD
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val pair = IRequests.instance().auto(type = IRequestTypes.valueOf("RELOAD"), sender = sender)
             val new = pair.first

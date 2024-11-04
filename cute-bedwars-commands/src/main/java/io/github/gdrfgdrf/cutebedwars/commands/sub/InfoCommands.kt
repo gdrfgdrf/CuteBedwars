@@ -6,6 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.ICommandInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
@@ -19,11 +20,8 @@ object InfoCommands : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_COMMANDS
     override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_COMMANDS
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
-        var pageIndex = 1
-        if (paramSchemeIndex == 0) {
-            pageIndex = args[0].toInt()
-        }
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
+        val pageIndex = paramCombination.pageIndex()
 
         val array = ICommands.values().toList().stream()
             .filter {

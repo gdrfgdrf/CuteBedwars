@@ -1,14 +1,14 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
-import io.github.gdrfgdrf.cutebedwars.abstracts.information.IGameInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.information.IGameInformation
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toIntOrDefault
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -21,33 +21,25 @@ object InfoGame : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_GAME
     override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_GAME
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
-            val findType = args[0]
-            val areaIdentifier = args[1]
-            val pageIndex = if (paramSchemeIndex == 1 || paramSchemeIndex == 3) {
-                if (paramSchemeIndex == 1) {
-                    args[2].toIntOrDefault(1)
-                } else {
-                    args[4].toIntOrDefault(1)
-                }
-            } else {
-                1
-            }
-            var gameIdentifier = ""
+            val findType = paramCombination.findType()
+            val areaIdentifier = paramCombination.notNullString("AREA")
+            val pageIndex = paramCombination.pageIndex()
+            val gameIdentifier = paramCombination.notNullString("GAME")
 
-            val areaManager = BetterAreaFinder.find(sender, findType, areaIdentifier) ?: return@localizationScope
+            val areaManager = BetterAreaFinder.find(sender, findType!!, areaIdentifier) ?: return@localizationScope
             val gameContexts = arrayListOf<IGameContext>()
 
-            if (paramSchemeIndex == 0 || paramSchemeIndex == 1) {
+            if (paramCombination.paramSchemeIndex == 0 || paramCombination.paramSchemeIndex == 1) {
                 gameContexts.addAll(areaManager.context().games())
             }
-            if (paramSchemeIndex == 2 || paramSchemeIndex == 3) {
-                val gameFindType = args[2]
-                gameIdentifier = args[3]
+            if (paramCombination.paramSchemeIndex == 2 || paramCombination.paramSchemeIndex == 3) {
+                val gameFindType = paramCombination.findType(1)
 
                 val foundGameContexts =
-                    BetterGameFinder.multipleResult(sender, gameFindType, areaManager, gameIdentifier) ?: return@localizationScope
+                    BetterGameFinder.multipleResult(sender, gameFindType!!, areaManager, gameIdentifier)
+                        ?: return@localizationScope
                 gameContexts.addAll(foundGameContexts)
             }
 

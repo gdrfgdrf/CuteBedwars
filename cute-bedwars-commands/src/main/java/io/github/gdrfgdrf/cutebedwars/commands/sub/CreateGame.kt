@@ -6,6 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManage
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -20,14 +21,14 @@ object CreateGame : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_GAME
     override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_GAME
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
-            val findType = args[0]
-            val areaIdentifier = args[1]
-            val gameName = args[2]
+            val findType = paramCombination.findType()
+            val areaIdentifier = paramCombination.notNullString("AREA")
+            val gameName = paramCombination.notNullString("GAME_NAME", 1)
 
             val areaManager: IAreaManager =
-                BetterAreaFinder.find(sender, findType, areaIdentifier) ?: return@localizationScope
+                BetterAreaFinder.find(sender, findType!!, areaIdentifier) ?: return@localizationScope
             val areaContext = areaManager.context()
             val areaName = areaManager.area().name
 

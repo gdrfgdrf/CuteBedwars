@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
@@ -19,11 +20,11 @@ object EditMake : AbstractSubCommand(
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_MAKE
 
     @Suppress("UNCHECKED_CAST")
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
 
-            val changeTypeName = args[0]
+            val changeTypeName = paramCombination.notNullString("CHANGE_TYPE")
             val changeClassHolder = IChangeTypeRegistry.instance().get(changeTypeName) ?: return@localizationScope
 
             val newArgs = arrayOfNulls<String>(args.size - 1)

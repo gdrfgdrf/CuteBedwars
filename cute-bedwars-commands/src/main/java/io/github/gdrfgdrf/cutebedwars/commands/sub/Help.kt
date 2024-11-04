@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
@@ -20,7 +21,7 @@ object Help : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.HELP
     override fun description(): LanguageString? = CommandDescriptionLanguage.HELP
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         middleWork("", sender) {
             val accessibleUserCommand = arrayListOf<Pair<ICommands, AbstractSubCommand>>()
             SubCommandManager.forEachUser { commands, subCommand ->

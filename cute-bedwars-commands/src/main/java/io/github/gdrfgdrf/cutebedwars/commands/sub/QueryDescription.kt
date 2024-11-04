@@ -6,7 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toIntOrDefault
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -21,46 +21,27 @@ object QueryDescription : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.QUERY_DESCRIPTION
     override fun description(): LanguageString? = CommandDescriptionLanguage.QUERY_DESCRIPTION
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
-            var raw = ""
-            var pageIndex = 1
+            val rawDescriptionName = paramCombination.notNullString("DESCRIPTION")
+            val pageIndex = paramCombination.pageIndex()
             val searchResult: List<IDescriptions>?
 
-            if (args.isEmpty() || paramSchemeIndex == ParamScheme.NO_MATCH) {
+            if (args.isEmpty() || rawDescriptionName.isBlank() || paramCombination.paramSchemeIndex == ParamScheme.NO_MATCH) {
                 searchResult = all(sender)
             } else {
-                if (paramSchemeIndex != 0 && paramSchemeIndex != 1 && paramSchemeIndex != 2) {
-                    return@localizationScope
-                }
-
-                if (paramSchemeIndex == 0) {
-                    pageIndex = args[0].toIntOrDefault(1)
-                    searchResult = all(sender)
-                } else {
-                    if (paramSchemeIndex == 1) {
-                        raw = args[0]
-
-                        val descriptionKey = raw.uppercase().replace("-", "_")
-                        searchResult = IDescriptions.search(descriptionKey)
-                    } else {
-                        raw = args[0]
-                        pageIndex = args[1].toIntOrDefault(1)
-
-                        val descriptionKey = raw.uppercase().replace("-", "_")
-                        searchResult = IDescriptions.search(descriptionKey)
-                    }
-                }
+                val descriptionKey = rawDescriptionName.uppercase().replace("-", "_")
+                searchResult = IDescriptions.search(descriptionKey)
             }
 
             if (searchResult.isNullOrEmpty()) {
                 message(CommonLanguage.NOT_FOUND_DESCRIPTION)
-                    .format0(raw)
+                    .format0(rawDescriptionName)
                     .send()
                 return@localizationScope
             }
 
-            val chatPage = IChatPage.cache(sender, IPageRequestTypes.valueOf("DESCRIPTIONS"), raw) {
+            val chatPage = IChatPage.cache(sender, IPageRequestTypes.valueOf("DESCRIPTIONS"), rawDescriptionName) {
                 searchResult.stream()
                     .filter {
                         return@filter !(it.administration()

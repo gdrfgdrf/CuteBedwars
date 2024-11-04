@@ -2,15 +2,13 @@ package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IAreaInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toIntOrDefault
-import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -24,32 +22,17 @@ object InfoArea : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_AREA
     override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_AREA
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
-            val findType: String
-            val identifier: String
-            val pageIndex = if (paramSchemeIndex == 2 || paramSchemeIndex == 0) {
-                if (paramSchemeIndex == 2) {
-                    args[2].toIntOrDefault(1)
-                } else {
-                    args[0].toIntOrDefault(1)
-                }
-            } else {
-                1
-            }
-            if (paramSchemeIndex != 0 && paramSchemeIndex != ParamScheme.NO_MATCH) {
-                findType = args[0]
-                identifier = args[1]
-            } else {
-                findType = ""
-                identifier = ""
-            }
+            val findType = paramCombination.findType()
+            val identifier = paramCombination.notNullString("AREA")
+            val pageIndex = paramCombination.pageIndex()
 
             val areaManagers = arrayListOf<IAreaManager>()
-            if (paramSchemeIndex != 0 && paramSchemeIndex != ParamScheme.NO_MATCH) {
+            if (findType != null) {
                 val findResult = IAreaFinder.instance().find(
                     sender,
-                    IFindType.find(findType),
+                    findType,
                     identifier
                 ) {
                     areaManagers.add(it)

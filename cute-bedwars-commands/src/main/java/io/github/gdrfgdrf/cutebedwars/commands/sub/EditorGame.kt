@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
@@ -19,21 +20,21 @@ object EditorGame : AbstractSubCommand(
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDITOR_GAME
     override fun description(): LanguageString? = CommandDescriptionLanguage.EDITOR_GAME
 
-    override fun run(sender: CommandSender, args: Array<String>, paramSchemeIndex: Int) {
+    override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
-            val areaFindType = args[0]
-            val areaIdentifier = args[1]
-            val gameFindType = args[2]
-            val gameIdentifier = args[3]
+            val areaFindType = paramCombination.findType()
+            val areaIdentifier = paramCombination.notNullString("AREA")
+            val gameFindType = paramCombination.findType(1)
+            val gameIdentifier = paramCombination.notNullString("GAME", 1)
             val uuid = if (sender is Player) {
                 sender.uniqueId.toString()
             } else {
                 "not_a_player"
             }
 
-            val areaManager = BetterAreaFinder.find(sender, areaFindType, areaIdentifier) ?: return@localizationScope
+            val areaManager = BetterAreaFinder.find(sender, areaFindType!!, areaIdentifier) ?: return@localizationScope
             val gameContext =
-                BetterGameFinder.find(sender, gameFindType, areaManager, gameIdentifier) ?: return@localizationScope
+                BetterGameFinder.find(sender, gameFindType!!, areaManager, gameIdentifier) ?: return@localizationScope
             val editor = IEditors.instance().get(uuid)
             if (editor != null) {
                 message(EditorLanguage.ALREADY_IN_EDITING_MODE)
