@@ -13,7 +13,7 @@ import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
-object InfoCommands : AbstractSubCommand(
+object Info : AbstractSubCommand(
     command = ICommands.valueOf("INFO_COMMANDS")
 ) {
     override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_COMMANDS
