@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
+import org.bukkit.command.CommandSender
 
 @Service("convertors")
 @KotlinSingleton
@@ -20,6 +21,7 @@ interface IConvertors {
     fun toIntOrDefault(string: String, defaultValue: Int): Int
     fun toKotlinChange(change: Change): AbstractChange<*>
     fun toKotlinCommit(commit: Commit): ICommit<*>
+    fun uuid(sender: CommandSender): String
 
     companion object {
         fun instance(): IConvertors = Mediator.get(IConvertors::class.java)!!

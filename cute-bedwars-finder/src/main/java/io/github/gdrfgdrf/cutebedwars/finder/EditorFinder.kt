@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IEditorFinder
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IFindResult
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.cutebedwars.finder.result.FindResult
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
@@ -15,11 +16,7 @@ import org.bukkit.entity.Player
 object EditorFinder : IEditorFinder {
     override fun find(sender: CommandSender, message: Boolean, onFound: (AbstractEditor<*>) -> Unit): IFindResult {
         val findResult = FindResult()
-        val uuid = if (sender is Player) {
-            sender.uniqueId.toString()
-        } else {
-            "not_a_player"
-        }
+        val uuid = sender.uuid()
 
         val editor = IEditors.instance().get(uuid)
         if (editor == null) {

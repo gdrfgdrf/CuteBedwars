@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
@@ -23,11 +24,7 @@ object EditorArea : AbstractSubCommand(
         localizationScope(sender) {
             val findType = paramCombination.findType()
             val identifier = paramCombination.areaIdentifier()
-            val uuid = if (sender is Player) {
-                sender.uniqueId.toString()
-            } else {
-                "not_a_player"
-            }
+            val uuid = sender.uuid()
 
             val areaManager = BetterAreaFinder.find(sender, findType!!, identifier) ?: return@localizationScope
             val editor = IEditors.instance().get(uuid)

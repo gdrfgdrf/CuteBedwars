@@ -8,6 +8,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IConvertors
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Change
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 import java.util.*
 
 @ServiceImpl("convertors")
@@ -119,5 +121,12 @@ object Convertors : IConvertors {
         kotlinCommit.message(commit.message)
 
         return kotlinCommit
+    }
+
+    override fun uuid(sender: CommandSender): String {
+        if (sender !is Player) {
+            return "Console"
+        }
+        return sender.uniqueId.toString()
     }
 }

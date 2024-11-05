@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Change
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
+import org.bukkit.command.CommandSender
 import java.util.logging.Logger
 
 fun String.logInfo() {
@@ -53,6 +54,10 @@ fun Change.toKotlinChange(): AbstractChange<*> {
 
 fun Commit.toKotlinCommit(): ICommit<*> {
     return IConvertors.instance().toKotlinCommit(this)
+}
+
+fun CommandSender.uuid(): String {
+    return IConvertors.instance().uuid(this)
 }
 
 fun logger(): Logger {

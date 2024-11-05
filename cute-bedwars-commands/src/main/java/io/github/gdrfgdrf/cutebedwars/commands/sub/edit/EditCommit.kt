@@ -34,7 +34,7 @@ object EditCommit : AbstractSubCommand(
             val submitter = if (sender is Player) {
                 "${sender.name} (${sender.uniqueId})"
             } else {
-                "not_a_player"
+                "Console"
             }
             val message = paramCombination.notNullString("COMMIT_MESSAGE")
 

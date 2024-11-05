@@ -9,6 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -139,11 +140,7 @@ class ChatPage(
             flagContent: String,
             loader: () -> List<ITranslationAgent>,
         ): ChatPage {
-            val uuid = if (sender is Player) {
-                sender.uniqueId.toString()
-            } else {
-                "not_a_player"
-            }
+            val uuid = sender.uuid()
             val request = PageRequest(uuid, pageRequestTypes, flagContent, loader)
             if (!pageRequestTypes.cache()) {
                 "The caching for $pageRequestTypes is disabled, creating new chat page".logInfo()
