@@ -68,7 +68,7 @@ object CreateGame : AbstractSubCommand(
             areaContext.addGame(gameContext)
 
             message(AreaManagementLanguage.CREATE_GAME_FINISHED)
-                .format0(areaName, gameName)
+                .format0(areaName, gameContext.game().name)
                 .send()
         }
     }
