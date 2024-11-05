@@ -12,6 +12,7 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
+import java.util.regex.Pattern
 
 @ServiceImpl("game_finder")
 object GameFinder : IGameFinder{
@@ -31,35 +32,49 @@ object GameFinder : IGameFinder{
             if (!identifier.isLong()) {
                 return findResult
             }
-
-            context.getGame(identifier.toLong())?.let {
-                findResult.found(true)
-                onFound(it)
-            }
         }
-        if (findType == IFindType.valueOf("BY_NAME")) {
-            context.getGame(identifier).forEach {
-                if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
-                    findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
 
-                    if (!noticeWhenMultipleResult) {
-                        noticeWhenMultipleResult = true
+        val pattern = Pattern.compile(identifier, Pattern.CASE_INSENSITIVE)
+        val list = context.games().stream()
+            .filter {
+                val matcher = if (findType == IFindType.valueOf("BY_ID")) {
+                    pattern.matcher(it.game().id.toString())
+                } else {
+                    pattern.matcher(it.game().name)
+                }
+                return@filter matcher.find()
+            }
+            .toList()
 
+        list?.forEach {
+            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
+                findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
+
+                if (!noticeWhenMultipleResult) {
+                    noticeWhenMultipleResult = true
+
+                    if (findType == IFindType.valueOf("BY_ID")) {
                         localizationScope(sender) {
-                            message(AreaManagementLanguage.DUPLICATE_GAME_NAME_ERROR)
+                            message(AreaManagementLanguage.DUPLICATE_GAME_NAME_ERROR_FIND_BY_ID)
+                                .format0(areaManager.area().name, identifier)
+                                .send()
+                        }
+                    } else {
+                        localizationScope(sender) {
+                            message(AreaManagementLanguage.DUPLICATE_GAME_NAME_ERROR_FIND_BY_NAME)
                                 .format0(areaManager.area().name, identifier)
                                 .send()
                         }
                     }
                 }
-                if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
-                    findResult.addMatchedStrategy("ONLY_ONE")
-                    return@forEach
-                }
-
-                findResult.found(true)
-                onFound(it)
             }
+            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
+                findResult.addMatchedStrategy("ONLY_ONE")
+                return@forEach
+            }
+
+            findResult.found(true)
+            onFound(it)
         }
 
         if (!findResult.found()) {

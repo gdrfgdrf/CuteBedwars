@@ -12,6 +12,7 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
+import java.util.regex.Pattern
 
 @ServiceImpl("area_finder")
 object AreaFinder : IAreaFinder {
@@ -29,35 +30,49 @@ object AreaFinder : IAreaFinder {
             if (!identifier.isLong()) {
                 return findResult
             }
-
-            IManagers.instance().get(identifier.toLong())?.let {
-                findResult.found(true)
-                onFound(it)
-            }
         }
-        if (findType == IFindType.valueOf("BY_NAME")) {
-            IManagers.instance().get(identifier)?.forEach {
-                if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
-                    findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
 
-                    if (!noticeWhenMultipleResult) {
-                        noticeWhenMultipleResult = true
+        val pattern = Pattern.compile(identifier, Pattern.CASE_INSENSITIVE)
+        val list = IManagers.instance().list().stream()
+            .filter {
+                val matcher = if (findType == IFindType.valueOf("BY_ID")) {
+                    pattern.matcher(it.area().id.toString())
+                } else {
+                    pattern.matcher(it.area().name)
+                }
+                return@filter matcher.find()
+            }
+            .toList()
 
+        list?.forEach {
+            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
+                findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
+
+                if (!noticeWhenMultipleResult) {
+                    noticeWhenMultipleResult = true
+
+                    if (findType == IFindType.valueOf("BY_ID")) {
                         localizationScope(sender) {
-                            message(AreaManagementLanguage.DUPLICATE_AREA_NAME_ERROR)
+                            message(AreaManagementLanguage.DUPLICATE_AREA_NAME_ERROR_FIND_BY_ID)
+                                .format0(identifier)
+                                .send()
+                        }
+                    } else {
+                        localizationScope(sender) {
+                            message(AreaManagementLanguage.DUPLICATE_AREA_NAME_ERROR_FIND_BY_NAME)
                                 .format0(identifier)
                                 .send()
                         }
                     }
                 }
-                if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
-                    findResult.addMatchedStrategy("ONLY_ONE")
-                    return@forEach
-                }
-
-                findResult.found(true)
-                onFound(it)
             }
+            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
+                findResult.addMatchedStrategy("ONLY_ONE")
+                return@forEach
+            }
+
+            findResult.found(true)
+            onFound(it)
         }
 
         if (!findResult.found()) {
