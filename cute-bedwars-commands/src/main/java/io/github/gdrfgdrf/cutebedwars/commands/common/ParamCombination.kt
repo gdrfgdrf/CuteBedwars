@@ -75,7 +75,17 @@ class ParamCombination(
         if (paramSchemeIndex == ParamScheme.NO_MATCH) {
             return null
         }
-        val findType = find("FIND_BY_ID_OR_NAME", providedIndex) ?: return null
+        var findType = find("FIND_BY_ID_OR_NAME", providedIndex)
+        if (findType == null) {
+            findType = find("BY_ID", providedIndex)
+            if (findType == null) {
+                findType = find("BY_NAME", providedIndex)
+                if (findType == null) {
+                    findType = ""
+                }
+            }
+        }
+
         return IFindType.find(findType)
     }
 
