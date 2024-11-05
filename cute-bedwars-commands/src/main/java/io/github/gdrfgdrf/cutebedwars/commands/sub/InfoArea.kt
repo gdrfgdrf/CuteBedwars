@@ -25,7 +25,7 @@ object InfoArea : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val findType = paramCombination.findType()
-            val identifier = paramCombination.notNullString("AREA")
+            val identifier = paramCombination.areaIdentifier()
             val pageIndex = paramCombination.pageIndex()
 
             val areaManagers = arrayListOf<IAreaManager>()

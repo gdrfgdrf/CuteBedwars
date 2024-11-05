@@ -28,4 +28,9 @@ interface IParamCombination {
     fun notNullString(descriptionName: String, providedIndex: Int): String
     fun notNullString(description: IDescriptions): String
     fun notNullString(descriptionName: String): String
+
+    fun areaIdentifier(providedIndex: Int): String
+    fun areaIdentifier(): String
+    fun gameIdentifier(providedIndex: Int): String
+    fun gameIdentifier(): String
 }

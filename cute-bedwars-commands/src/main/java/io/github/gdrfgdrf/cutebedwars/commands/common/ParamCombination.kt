@@ -131,6 +131,22 @@ class ParamCombination(
         return string(IDescriptions.valueOf(descriptionName), 0) ?: return ""
     }
 
+    override fun areaIdentifier(providedIndex: Int): String {
+        return notNullString("AREA", providedIndex)
+    }
+
+    override fun areaIdentifier(): String {
+        return areaIdentifier(0)
+    }
+
+    override fun gameIdentifier(providedIndex: Int): String {
+        return notNullString("GAME", providedIndex)
+    }
+
+    override fun gameIdentifier(): String {
+        return gameIdentifier(0)
+    }
+
     companion object {
         fun empty(array: Array<String>) = ParamCombination(array, ParamScheme.NO_MATCH)
         fun create(array: Array<String>, paramSchemeIndex: Int, paramScheme: IParamScheme) =

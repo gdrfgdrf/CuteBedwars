@@ -24,7 +24,7 @@ object CreateGame : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val findType = paramCombination.findType()
-            val areaIdentifier = paramCombination.notNullString("AREA")
+            val areaIdentifier = paramCombination.areaIdentifier()
             val gameName = paramCombination.notNullString("GAME_NAME")
 
             val areaManager: IAreaManager =

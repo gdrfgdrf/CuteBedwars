@@ -24,9 +24,9 @@ object InfoGame : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val findType = paramCombination.findType()
-            val areaIdentifier = paramCombination.notNullString("AREA")
+            val areaIdentifier = paramCombination.areaIdentifier()
             val pageIndex = paramCombination.pageIndex()
-            val gameIdentifier = paramCombination.notNullString("GAME")
+            val gameIdentifier = paramCombination.gameIdentifier()
 
             val areaManager = BetterAreaFinder.find(sender, findType!!, areaIdentifier) ?: return@localizationScope
             val gameContexts = arrayListOf<IGameContext>()

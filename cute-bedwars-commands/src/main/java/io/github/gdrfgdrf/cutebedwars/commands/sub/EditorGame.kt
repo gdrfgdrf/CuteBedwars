@@ -23,9 +23,9 @@ object EditorGame : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val areaFindType = paramCombination.findType()
-            val areaIdentifier = paramCombination.notNullString("AREA")
+            val areaIdentifier = paramCombination.areaIdentifier()
             val gameFindType = paramCombination.findType(1)
-            val gameIdentifier = paramCombination.notNullString("GAME", 1)
+            val gameIdentifier = paramCombination.gameIdentifier()
             val uuid = if (sender is Player) {
                 sender.uniqueId.toString()
             } else {
