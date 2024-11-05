@@ -33,7 +33,18 @@ class ParamCombination(
 
         var count = 0
         array.forEachIndexed { index, s ->
-            val param = params[index]
+            // skip the first argument "args" in the argument array
+            if (index == 0) {
+                return@forEachIndexed
+            }
+
+            // fixed the index after skipping "args"
+            val fixedIndex = index - 1
+            if (fixedIndex >= params.size) {
+                return null
+            }
+
+            val param = params[fixedIndex]
             if (param.description() != description) {
                 return@forEachIndexed
             }
