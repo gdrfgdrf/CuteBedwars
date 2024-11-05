@@ -24,7 +24,8 @@ object EditMake : AbstractSubCommand(
         localizationScope(sender) {
             val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
 
-            val changeTypeName = paramCombination.notNullString("CHANGE_TYPE")
+            // when this command is used, paramSchemeIndex may be -1, so args is used here
+            val changeTypeName = args[0]
             val changeClassHolder = IChangeTypeRegistry.instance().get(changeTypeName) ?: return@localizationScope
 
             val newArgs = arrayOfNulls<String>(args.size - 1)
