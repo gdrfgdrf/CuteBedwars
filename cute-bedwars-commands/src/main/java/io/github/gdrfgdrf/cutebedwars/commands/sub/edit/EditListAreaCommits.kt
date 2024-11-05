@@ -6,6 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IProtobufCommitInformation
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
@@ -23,10 +24,10 @@ object EditListAreaCommits : AbstractSubCommand(
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
             val findType = paramCombination.findType()
-            val areaIdentifier = paramCombination.string("AREA")
+            val areaIdentifier = paramCombination.notNullString("AREA")
             val pageIndex = paramCombination.pageIndex()
 
-            val areaManager = BetterAreaFinder.find(sender, findType!!, areaIdentifier!!) ?: return@localizationScope
+            val areaManager = BetterAreaFinder.find(sender, findType!!, areaIdentifier) ?: return@localizationScope
             val message = areaManager.commitStorage().get()
             if (message == null) {
                 message(AreaManagementLanguage.AREA_COMMITS_IS_NULL)
@@ -47,9 +48,23 @@ object EditListAreaCommits : AbstractSubCommand(
             ) {
                 return@cache arrayListOf()
             }
+            chatPage.enableDefaultTopAndBottom = false
+
             commitsList.forEach { commit ->
-                chatPage.addPage {
-                    IProtobufCommitInformation.instance().convert(sender, commit)
+                chatPage.addPage { pageIndex ->
+                    arrayListOf<ITranslationAgent>().apply {
+                        add(
+                            message(AreaManagementLanguage.AREA_COMMITS_TOP)
+                                .format0(commit.submitter, pageIndex, commitsList.size)
+                        )
+                        addAll(
+                            IProtobufCommitInformation.instance().convert(sender, commit)
+                        )
+                        add(
+                            message(AreaManagementLanguage.AREA_COMMITS_BOTTOM)
+                                .format0(commit.submitter, pageIndex, commitsList.size)
+                        )
+                    }
                 }
             }
             chatPage.send(pageIndex - 1)

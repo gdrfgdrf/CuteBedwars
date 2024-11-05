@@ -52,14 +52,9 @@ object InfoCommands : AbstractSubCommand(
                 return@cache arrayListOf()
             }
             if (chatPage.changeable()) {
-                array.forEach {
-                    it ?: return@forEach
-                    if (it !is ICommands) {
-                        return@forEach
-                    }
-
+                array.forEach { command ->
                     chatPage.addPage {
-                        ICommandInformation.instance().convert(sender, it)
+                        ICommandInformation.instance().convert(sender, command)
                     }
                 }
 

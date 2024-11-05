@@ -22,6 +22,8 @@ class ChatPage(
     private val pageRequest: PageRequest,
     private val lines: List<Line>,
 ) : IChatPage {
+    override var enableDefaultTopAndBottom: Boolean = true
+
     private val pages = arrayListOf<Page>()
     private var lineCountEveryPages = 5
 
@@ -42,16 +44,20 @@ class ChatPage(
         }
 
         localizationScope(pageRequest.getSender()) {
-            message(CommonLanguage.PAGE_TOP)
-                .format0(index + 1, pages.size)
-                .send("")
+            if (enableDefaultTopAndBottom) {
+                message(CommonLanguage.PAGE_TOP)
+                    .format0(index + 1, pages.size)
+                    .send("")
+            }
 
             val page = pages[index]
             page.send()
 
-            message(CommonLanguage.PAGE_BOTTOM)
-                .format0(index + 1, pages.size)
-                .send("")
+            if (enableDefaultTopAndBottom) {
+                message(CommonLanguage.PAGE_BOTTOM)
+                    .format0(index + 1, pages.size)
+                    .send("")
+            }
         }
     }
 
@@ -62,11 +68,11 @@ class ChatPage(
         return pages.size
     }
 
-    override fun addPage(loader: () -> List<ITranslationAgent>) {
+    override fun addPage(loader: (Int) -> List<ITranslationAgent>) {
         if (!changeable) {
             throw IllegalStateException("this change page is unchangeable");
         }
-        val lines = loader().stream()
+        val lines = loader(pages.size + 1).stream()
             .map {
                 return@map Line(it)
             }
