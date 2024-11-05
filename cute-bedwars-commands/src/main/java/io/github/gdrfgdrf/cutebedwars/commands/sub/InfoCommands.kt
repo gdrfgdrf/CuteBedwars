@@ -31,8 +31,10 @@ object InfoCommands : AbstractSubCommand(
                 return@filter !((it as ICommands).permissions().needOps() &&
                         !IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender))
             }
+            .map {
+                it as ICommands
+            }
             .toList()
-            .toTypedArray()
 
         localizationScope(sender) {
             if (array.isEmpty()) {
