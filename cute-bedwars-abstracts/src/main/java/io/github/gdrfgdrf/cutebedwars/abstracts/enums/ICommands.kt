@@ -69,8 +69,7 @@ interface ICommands {
                     it.stream()
                 }
                 .filter {
-                    return@filter it.node() == ICommandNodes.valueOf("ROOT") ||
-                            it.node() == ICommandNodes.valueOf("ALLOW_NO_ARGS_ON_ROOT")
+                    return@filter it.node() == ICommandNodes.valueOf("ROOT")
                 }
                 .toList()
         }
