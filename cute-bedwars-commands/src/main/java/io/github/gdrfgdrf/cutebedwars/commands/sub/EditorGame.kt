@@ -29,9 +29,18 @@ object EditorGame : AbstractSubCommand(
             val gameIdentifier = paramCombination.gameIdentifier()
             val uuid = sender.uuid()
 
-            val areaManager = BetterAreaFinder.find(sender, areaFindType!!, areaIdentifier) ?: return@localizationScope
-            val gameContext =
-                BetterGameFinder.find(sender, gameFindType!!, areaManager, gameIdentifier) ?: return@localizationScope
+            val areaManager = BetterAreaFinder.find(
+                sender,
+                areaFindType!!,
+                areaIdentifier
+            ) ?: return@localizationScope
+            val gameContext = BetterGameFinder.find(
+                sender,
+                gameFindType!!,
+                areaManager,
+                gameIdentifier
+            ) ?: return@localizationScope
+
             val editor = IEditors.instance().get(uuid)
             if (editor != null) {
                 message(EditorLanguage.ALREADY_IN_EDITING_MODE)

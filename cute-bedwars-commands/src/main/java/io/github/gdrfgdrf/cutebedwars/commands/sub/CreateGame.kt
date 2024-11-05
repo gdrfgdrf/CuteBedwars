@@ -27,8 +27,11 @@ object CreateGame : AbstractSubCommand(
             val areaIdentifier = paramCombination.areaIdentifier()
             val gameName = paramCombination.notNullString("GAME_NAME")
 
-            val areaManager: IAreaManager =
-                BetterAreaFinder.find(sender, findType!!, areaIdentifier) ?: return@localizationScope
+            val areaManager: IAreaManager = BetterAreaFinder.find(
+                sender,
+                findType!!,
+                areaIdentifier
+            ) ?: return@localizationScope
             val areaContext = areaManager.context()
             val areaName = areaManager.area().name
 

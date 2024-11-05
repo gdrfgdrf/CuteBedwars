@@ -37,9 +37,12 @@ object InfoGame : AbstractSubCommand(
             if (paramCombination.paramSchemeIndex == 2 || paramCombination.paramSchemeIndex == 3) {
                 val gameFindType = paramCombination.findType(1)
 
-                val foundGameContexts =
-                    BetterGameFinder.multipleResult(sender, gameFindType!!, areaManager, gameIdentifier)
-                        ?: return@localizationScope
+                val foundGameContexts = BetterGameFinder.multipleResult(
+                    sender,
+                    gameFindType!!,
+                    areaManager,
+                    gameIdentifier
+                ) ?: return@localizationScope
                 gameContexts.addAll(foundGameContexts)
             }
 
