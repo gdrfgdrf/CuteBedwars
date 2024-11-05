@@ -15,7 +15,7 @@ open class CommonItem(
     override var amount: Int
 ) : ICommonItem {
     override val properties = item.properties.copy()
-    override val id: Long = getId()
+    override val id: Long = getIdFromNbt()
 
     init {
         itemStack.amount = amount
@@ -75,7 +75,7 @@ open class CommonItem(
         return -1
     }
 
-    private fun getId(): Long {
+    private fun getIdFromNbt(): Long {
         val nbt = NBT.readNbt(itemStack)
         val id = nbt.getLong("cute-bedwars-item")
             ?: throw IllegalArgumentException("this item stack's nbt does not have cute-bedwars-item")
