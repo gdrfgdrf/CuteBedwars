@@ -35,6 +35,7 @@
         <module>cute-bedwars-math</module>
         <module>cute-bedwars-items</module>
         <module>cute-bedwars-events</module>
+        <module>cute-bedwars-selection</module>
     </modules>
 
     <repositories>
