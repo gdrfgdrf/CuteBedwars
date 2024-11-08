@@ -202,6 +202,12 @@
                 <artifactId>events</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.bingrewardsbot</groupId>
+                <artifactId>selection</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
