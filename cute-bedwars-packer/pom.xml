@@ -142,6 +142,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>events</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.bingrewardsbot</groupId>
+            <artifactId>selection</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
