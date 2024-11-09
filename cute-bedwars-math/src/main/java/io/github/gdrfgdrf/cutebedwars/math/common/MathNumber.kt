@@ -1,11 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.math.common
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.IPrecisions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 import java.text.DecimalFormat
 import kotlin.math.pow
 
-class MathNumber private constructor(val number: Number) {
-    operator fun plus(number2: Int): MathNumber {
+class MathNumber private constructor(override val number: Number) : IMathNumber {
+    override operator fun plus(number2: Int): IMathNumber {
         if (number is Int) {
             return MathNumber(number + number2)
         }
@@ -18,7 +20,7 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    operator fun plus(number2: Double): MathNumber {
+    override operator fun plus(number2: Double): IMathNumber {
         if (number is Int) {
             return MathNumber(number + number2)
         }
@@ -31,7 +33,7 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    operator fun plus(number2: Float): MathNumber {
+    override operator fun plus(number2: Float): IMathNumber {
         if (number is Int) {
             return MathNumber(number + number2)
         }
@@ -44,45 +46,45 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    operator fun plus(mathNumber: MathNumber): MathNumber {
+    override operator fun plus(mathNumber: IMathNumber): IMathNumber {
         if (mathNumber.number is Int) {
-            return plus(mathNumber.number)
+            return plus(mathNumber.number as Int)
         }
         if (mathNumber.number is Double) {
-            return plus(mathNumber.number)
+            return plus(mathNumber.number as Double)
         }
         if (mathNumber.number is Float) {
-            return plus(mathNumber.number)
+            return plus(mathNumber.number as Float)
         }
         throw UnsupportedOperationException()
     }
 
-    operator fun minus(number2: Int): MathNumber {
+    override operator fun minus(number2: Int): IMathNumber {
         return plus(-number2)
     }
 
-    operator fun minus(number2: Double): MathNumber {
+    override operator fun minus(number2: Double): IMathNumber {
         return plus(-number2)
     }
 
-    operator fun minus(number2: Float): MathNumber {
+    override operator fun minus(number2: Float): IMathNumber {
         return plus(-number2)
     }
 
-    operator fun minus(mathNumber: MathNumber): MathNumber {
+    override operator fun minus(mathNumber: IMathNumber): IMathNumber {
         if (mathNumber.number is Int) {
-            return plus(-mathNumber.number)
+            return plus(-(mathNumber.number as Int))
         }
         if (mathNumber.number is Double) {
-            return plus(-mathNumber.number)
+            return plus(-(mathNumber.number as Double))
         }
         if (mathNumber.number is Float) {
-            return plus(-mathNumber.number)
+            return plus(-(mathNumber.number as Float))
         }
         throw UnsupportedOperationException()
     }
 
-    operator fun times(number2: Int): MathNumber {
+    override operator fun times(number2: Int): IMathNumber {
         if (number is Int) {
             return MathNumber(number * number2)
         }
@@ -95,7 +97,7 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    operator fun times(number2: Double): MathNumber {
+    override operator fun times(number2: Double): IMathNumber {
         if (number is Int) {
             return MathNumber(number * number2)
         }
@@ -108,7 +110,7 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    operator fun times(number2: Float): MathNumber {
+    override operator fun times(number2: Float): IMathNumber {
         if (number is Int) {
             return MathNumber(number * number2)
         }
@@ -121,20 +123,72 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    operator fun times(mathNumber: MathNumber): MathNumber {
+    override operator fun times(mathNumber: IMathNumber): IMathNumber {
         if (mathNumber.number is Int) {
-            return times(-mathNumber.number)
+            return times(mathNumber.number as Int)
         }
         if (mathNumber.number is Double) {
-            return times(-mathNumber.number)
+            return times(mathNumber.number as Double)
         }
         if (mathNumber.number is Float) {
-            return times(-mathNumber.number)
+            return times(mathNumber.number as Float)
         }
         throw UnsupportedOperationException()
     }
 
-    fun pow(number2: Int): MathNumber {
+    override fun div(number2: Int): IMathNumber {
+        if (number is Int) {
+            return MathNumber(number / number2)
+        }
+        if (number is Double) {
+            return MathNumber(number / number2)
+        }
+        if (number is Float) {
+            return MathNumber(number / number2)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun div(number2: Double): IMathNumber {
+        if (number is Int) {
+            return MathNumber(number * number2)
+        }
+        if (number is Double) {
+            return MathNumber(number * number2)
+        }
+        if (number is Float) {
+            return MathNumber(number * number2)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun div(number2: Float): IMathNumber {
+        if (number is Int) {
+            return MathNumber(number * number2)
+        }
+        if (number is Double) {
+            return MathNumber(number * number2)
+        }
+        if (number is Float) {
+            return MathNumber(number * number2)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun div(mathNumber: IMathNumber): IMathNumber {
+        if (mathNumber.number is Int) {
+            return div(mathNumber.number as Int)
+        }
+        if (mathNumber.number is Double) {
+            return times(mathNumber.number as Double)
+        }
+        if (mathNumber.number is Float) {
+            return times(mathNumber.number as Float)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun pow(number2: Int): IMathNumber {
         if (number is Int) {
             return MathNumber(number.toDouble().pow(number2))
         }
@@ -147,7 +201,7 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    fun sqrt(): MathNumber {
+    override fun sqrt(): IMathNumber {
         if (number is Int) {
             return MathNumber(kotlin.math.sqrt(number.toDouble()))
         }
@@ -160,7 +214,7 @@ class MathNumber private constructor(val number: Number) {
         throw UnsupportedOperationException()
     }
 
-    fun cut(precisions: Precisions): MathNumber {
+    override fun cut(precisions: IPrecisions): IMathNumber {
         val decimalFormat = DecimalFormat(precisions.pattern)
         if (number is Int) {
             return of(decimalFormat.format(number).toDouble())

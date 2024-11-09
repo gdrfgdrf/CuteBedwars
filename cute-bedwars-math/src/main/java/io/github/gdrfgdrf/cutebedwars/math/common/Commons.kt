@@ -1,6 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.math.common
 
-fun Number.mathNumber(): MathNumber {
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+
+fun Number.mathNumber(): IMathNumber {
     return MathNumber.of(this)
 }
 

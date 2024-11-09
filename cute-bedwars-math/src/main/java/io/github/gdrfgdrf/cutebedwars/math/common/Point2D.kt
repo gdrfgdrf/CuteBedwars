@@ -1,19 +1,16 @@
 package io.github.gdrfgdrf.cutebedwars.math.common
 
-import io.github.gdrfgdrf.cutebedwars.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 
 class Point2D(
-    private val x: MathNumber,
-    private val y: MathNumber
+    private val x: IMathNumber,
+    private val y: IMathNumber
 ) : IPoint {
-    override fun step(): Int = 2
-
-    override fun all(): Array<MathNumber> {
-        return arrayOf(x, y)
-    }
+    override val step: Int = 2
+    override val all: Array<IMathNumber> = arrayOf(x, y)
 
     companion object {
         fun of(x: Number, y: Number) = Point2D(x.mathNumber(), y.mathNumber())
     }
-
 }

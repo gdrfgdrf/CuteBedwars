@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.math.generator
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.math.base.AbstractRangeGenerator
 import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
 import io.github.gdrfgdrf.cutebedwars.math.common.mathNumber
@@ -10,14 +11,14 @@ class SigmaRangeGenerator(
     private val end: Int,
     private val precision: Precisions
 ) : AbstractRangeGenerator() {
-    override fun start(): MathNumber = start.mathNumber()
-    override fun end(): MathNumber = end.mathNumber()
+    override fun start(): IMathNumber = start.mathNumber()
+    override fun end(): IMathNumber = end.mathNumber()
 
-    override fun forEach(block: (MathNumber) -> Unit) {
+    override fun forEach(block: (IMathNumber) -> Unit) {
         val realStart = start().cut(precision)
         val realEnd = end().cut(precision)
 
-        val array = arrayListOf<MathNumber>()
+        val array = arrayListOf<IMathNumber>()
         array.add(realStart)
         array.add(realStart)
 
@@ -35,11 +36,11 @@ class SigmaRangeGenerator(
         array.forEach(block)
     }
 
-    override fun forEachIndexed(block: (Int, MathNumber) -> Unit) {
+    override fun forEachIndexed(block: (Int, IMathNumber) -> Unit) {
         val realStart = start().cut(precision)
         val realEnd = end().cut(precision)
 
-        val array = arrayListOf<MathNumber>()
+        val array = arrayListOf<IMathNumber>()
         array.add(realStart)
 
         while (true) {
