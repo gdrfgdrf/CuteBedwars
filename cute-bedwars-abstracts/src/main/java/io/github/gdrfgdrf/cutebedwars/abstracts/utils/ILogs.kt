@@ -10,6 +10,7 @@ interface ILogs {
     fun info(string: String)
     fun warn(string: String)
     fun error(string: String, throwable: Throwable)
+    fun debug(string: String)
 
     companion object {
         fun instance(): ILogs = Mediator.get(ILogs::class.java)!!

@@ -7,9 +7,9 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @ServiceImpl("point_3d", instanceGetter = "new")
 class Point3D(
-    private val x: IMathNumber,
-    private val y: IMathNumber,
-    private val z: IMathNumber
+    override val x: IMathNumber,
+    override val y: IMathNumber,
+    override val z: IMathNumber
 ) : IPoint3D {
     override val step: Int = 3
     override val all: Array<IMathNumber> = arrayOf(x, y, z)
@@ -24,6 +24,7 @@ class Point3D(
             )
         }
 
+        fun of(x: IMathNumber, y: IMathNumber, z:  IMathNumber) = Point3D(x, y , z)
         fun of(x: Number, y: Number, z: Number) = Point3D(x.mathNumber(), y.mathNumber(), z.mathNumber())
     }
 }

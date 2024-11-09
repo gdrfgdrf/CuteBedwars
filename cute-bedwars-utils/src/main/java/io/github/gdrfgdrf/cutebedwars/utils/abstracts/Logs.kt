@@ -30,4 +30,12 @@ object Logs : ILogs {
         }
         throwable.printStackTrace()
     }
+
+    override fun debug(string: String) {
+        runCatching {
+            logger().finest(string)
+        }.onFailure {
+            println("[CuteBedwars DEBUG] $string")
+        }
+    }
 }

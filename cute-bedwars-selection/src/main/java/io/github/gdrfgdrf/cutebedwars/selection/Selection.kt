@@ -1,8 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
-import kotlin.math.ln
 
 class Selection(
     val pos1: Coordinate,
@@ -17,7 +16,7 @@ class Selection(
 
         lines.apply {
             run {
-                "Calculating the top of the selection".logInfo()
+                "Calculating the top of the selection".logDebug()
 
                 run {
                     val coordinate = Coordinate()
@@ -28,7 +27,7 @@ class Selection(
                     val line = Line(blockCoordinate1, coordinate)
                     add(line)
 
-                    "(x, y, z)(pos1) -> (x2, y, z) is $line".logInfo()
+                    "(x, y, z)(pos1) -> (x2, y, z) is $line".logDebug()
                 }
                 run {
                     val coordinate = Coordinate()
@@ -39,7 +38,7 @@ class Selection(
                     val line = Line(blockCoordinate1, coordinate)
                     add(line)
 
-                    "(x, y, z)(pos1) -> (x, y, z2) is $line".logInfo()
+                    "(x, y, z)(pos1) -> (x, y, z2) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[0].end
@@ -51,7 +50,7 @@ class Selection(
                     val line = Line(coordinate1, coordinate2)
                     add(line)
 
-                    "(x2, y, z) -> (x2, y, z2) is $line".logInfo()
+                    "(x2, y, z) -> (x2, y, z2) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[1].end
@@ -60,12 +59,12 @@ class Selection(
                     val line = Line(coordinate1, coordinate2)
                     add(line)
 
-                    "(x, y, z2) -> (x2, y, z2) is $line".logInfo()
+                    "(x, y, z2) -> (x2, y, z2) is $line".logDebug()
                 }
             }
 
             run {
-                "Calculating the bottom of the selection".logInfo()
+                "Calculating the bottom of the selection".logDebug()
 
                 run {
                     val coordinate1 = Coordinate()
@@ -81,7 +80,7 @@ class Selection(
                     val line = Line(coordinate1, coordinate2)
                     add(line)
 
-                    "(x, y2, z) -> (x2, y2, z) is $line".logInfo()
+                    "(x, y2, z) -> (x2, y2, z) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[4].start
@@ -93,33 +92,33 @@ class Selection(
                     val line = Line(coordinate1, coordinate2)
                     add(line)
 
-                    "(x, y2, z) -> (x, y2, z2) is $line".logInfo()
+                    "(x, y2, z) -> (x, y2, z2) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[4].end
                     val line = Line(coordinate1, blockCoordinate2)
                     add(line)
 
-                    "(x2, y2, z) -> (x2, y2, z2)(pos2) is $line".logInfo()
+                    "(x2, y2, z) -> (x2, y2, z2)(pos2) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[5].end
                     val line = Line(coordinate1, blockCoordinate2)
                     add(line)
 
-                    "(x, y2, z2) -> (x2, y2, z2)(pos2) is $line".logInfo()
+                    "(x, y2, z2) -> (x2, y2, z2)(pos2) is $line".logDebug()
                 }
             }
 
             run {
-                "Calculating the middle of the selection".logInfo()
+                "Calculating the middle of the selection".logDebug()
 
                 run {
                     val coordinate2 = lines[4].start
                     val line = Line(blockCoordinate1, coordinate2)
                     add(line)
 
-                    "(x, y, z) -> (x, y2, z) is $line".logInfo()
+                    "(x, y, z) -> (x, y2, z) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[0].end
@@ -127,7 +126,7 @@ class Selection(
                     val line = Line(coordinate1, coordinate2)
                     add(line)
 
-                    "(x2, y, z) -> (x2, y2, z) is $line".logInfo()
+                    "(x2, y, z) -> (x2, y2, z) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[1].end
@@ -135,14 +134,14 @@ class Selection(
                     val line = Line(coordinate1, coordinate2)
                     add(line)
 
-                    "(x, y, z2) is (x, y2, z2) is $line".logInfo()
+                    "(x, y, z2) is (x, y2, z2) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[2].end
                     val line = Line(coordinate1, blockCoordinate2)
                     add(line)
 
-                    "(x2, y, z2) -> (x2, y2, z2) is $line".logInfo()
+                    "(x2, y, z2) -> (x2, y2, z2) is $line".logDebug()
                 }
             }
         }

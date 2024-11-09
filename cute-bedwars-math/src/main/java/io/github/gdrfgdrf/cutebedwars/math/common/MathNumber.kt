@@ -3,10 +3,15 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.IPrecisions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.text.DecimalFormat
 import kotlin.math.pow
 
+@ServiceImpl("math_number", needArgument = true)
 class MathNumber private constructor(override val number: Number) : IMathNumber {
+    constructor(argumentSet: ArgumentSet): this(argumentSet.args[0] as Number)
+
     override operator fun plus(number2: Int): IMathNumber {
         if (number is Int) {
             return MathNumber(number + number2)
@@ -59,6 +64,19 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
         throw UnsupportedOperationException()
     }
 
+    override fun unaryPlus(): IMathNumber {
+        if (number is Int) {
+            return MathNumber(+number)
+        }
+        if (number is Double) {
+            return MathNumber(+number)
+        }
+        if (number is Float) {
+            return MathNumber(+number)
+        }
+        throw UnsupportedOperationException()
+    }
+
     override operator fun minus(number2: Int): IMathNumber {
         return plus(-number2)
     }
@@ -80,6 +98,19 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
         }
         if (mathNumber.number is Float) {
             return plus(-(mathNumber.number as Float))
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun unaryMinus(): IMathNumber {
+        if (number is Int) {
+            return MathNumber(-number)
+        }
+        if (number is Double) {
+            return MathNumber(-number)
+        }
+        if (number is Float) {
+            return MathNumber(-number)
         }
         throw UnsupportedOperationException()
     }
@@ -184,6 +215,58 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
         }
         if (mathNumber.number is Float) {
             return div(mathNumber.number as Float)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun compareTo(number2: Int): Int {
+        if (number is Int) {
+            return number.compareTo(number2)
+        }
+        if (number is Double) {
+            return number.compareTo(number2)
+        }
+        if (number is Float) {
+            return number.compareTo(number2)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun compareTo(number2: Double): Int {
+        if (number is Int) {
+            return number.compareTo(number2)
+        }
+        if (number is Double) {
+            return number.compareTo(number2)
+        }
+        if (number is Float) {
+            return number.compareTo(number2)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun compareTo(number2: Float): Int {
+        if (number is Int) {
+            return number.compareTo(number2)
+        }
+        if (number is Double) {
+            return number.compareTo(number2)
+        }
+        if (number is Float) {
+            return number.compareTo(number2)
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun compareTo(mathNumber: IMathNumber): Int {
+        if (mathNumber.number is Int) {
+            return compareTo(mathNumber.number as Int)
+        }
+        if (mathNumber.number is Double) {
+            return compareTo(mathNumber.number as Double)
+        }
+        if (mathNumber.number is Float) {
+            return compareTo(mathNumber.number as Float)
         }
         throw UnsupportedOperationException()
     }

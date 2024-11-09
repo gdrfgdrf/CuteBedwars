@@ -20,6 +20,10 @@ fun String.logError(e: Throwable) {
     ILogs.instance().error(this, e)
 }
 
+fun String.logDebug() {
+    ILogs.instance().debug(this)
+}
+
 fun String.isLong(): Boolean {
     return IConvertors.instance().isLong(this)
 }
