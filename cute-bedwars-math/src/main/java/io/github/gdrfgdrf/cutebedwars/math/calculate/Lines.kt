@@ -18,7 +18,7 @@ object Lines : ILines {
         val eY = (B.y - A.y) / lineVector
         val eZ = (B.z - A.z) / lineVector
 
-        val a = (eX.pow(2) + eY.pow(2) + eZ.pow(2))
+        val a = eX.pow(2) + eY.pow(2) + eZ.pow(2)
         val b = -2 * (eX * B.x + eY * B.y + eZ * B.z)
         val c = B.x.pow(2) + B.y.pow(2) + B.z.pow(2) - D.pow(2)
         val pair = Equations.quadraticOneVariable(a, b, c)
