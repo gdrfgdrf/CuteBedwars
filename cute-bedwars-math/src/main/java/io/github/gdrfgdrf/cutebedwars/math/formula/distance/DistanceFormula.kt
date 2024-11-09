@@ -34,7 +34,7 @@ object DistanceFormula : IFormula, IDistanceFormula {
 //        val secondPoint = Point2D.of(-10, -10)
 
         val firstPoint = Point3D.of(10, 10, 10)
-        val secondPoint = Point3D.of(-10, -10, -10)
+        val secondPoint = Point3D.of(20, 20, 20)
 
         val result = calculate(space, dimension, firstPoint, secondPoint)
         println(result.number)

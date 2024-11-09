@@ -106,5 +106,34 @@ CuteBedwars
 | cute-bedwars-abstracts                   | 解耦模块，对上面所有的模块进行解耦，包含大量的接口，并且使用中介进行通讯                 |
 | cute-bedwars-packer                      | 打包模块，将上面所有的模块打包为一个 Jar 包                             |
 
+----
+对于 findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD 的推导过程  
 
-
+$$\begin{eqnarray}
+&&给定点 A(x_1, y_1, z_1) 和 B(x_2, y_2, z_2) ，以及距离 D，需要在线段 AB 上找到一个点 C(x, y, z) ，使得 BC 的距离为 D。\\
+&&点 C 的坐标可以表示为 A 和 B 坐标的线性组合，其中 t 是参数，且 0 \leq t \leq 1 ：\\
+&& \qquad C(x, y, z)  =  (x_1, y_1, z_1) + t((x_2, y_2, z_2) - (x_1, y_1, z_1))\\
+&& \qquad \qquad \qquad  = (x_1 + t(x_2 - x_1), y_1 + t(y_2 - y_1), z_1 + t(z_2 - z_1)) \\
+&&我们需要找到 t 的值，使得 BC 的距离为 D。使用距离公式：\\
+&& \qquad BC = \sqrt{(x_2 - x)^2 + (y_2 - y)^2 + (z_2 - z)^2}\\
+&&代入 C 的坐标：\\
+&& \qquad D = \sqrt{(x_2 - (x_1 + t(x_2 - x_1)))^2 + (y_2 - (y_1 + t(y_2 - y_1)))^2 + (z_2 - (z_1 + t(z_2 - z_1)))^2}\\
+&&简化得：\\
+&& \qquad  D = \sqrt{(1 - t)^2 (x_2 - x_1)^2 + (1 - t)^2 (y_2 - y_1)^2 + (1 - t)^2 (z_2 - z_1)^2}\\
+&& \qquad  D = |1 - t| \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}\\
+&&设 d 为线段 AB 的长度，即：\\
+&& \qquad  d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}\\
+&&则：\\
+&& \qquad D = |1 - t| d\\
+&&解得：\\
+&& \qquad |1 - t| = \frac{D}{d}\\
+&&由于 t 必须在0和1之间，我们有两种情况：\\
+&& \qquad 1.\quad1 - t = \frac{D}{d} ，得到 t = 1 - \frac{D}{d} \\
+&& \qquad 2.\quad1 - t = -\frac{D}{d} ，得到 t = 1 + \frac{D}{d} ，但这个解超出了[0, 1]的范围，所以我们舍去。\\
+&&因此，有效的 t 值为：\\
+&& \qquad t = 1 - \frac{D}{d}\\
+&&将 t 的值代入点 C 的坐标中，得到：\\
+&& \qquad C(x, y, z) = (x_1 + (1 - \frac{D}{d})(x_2 - x_1), y_1 + (1 - \frac{D}{d})(y_2 - y_1), z_1 + (1 - \frac{D}{d})(z_2 - z_1))\\
+&&因此，点 C 的坐标为：\\
+&& \qquad \boxed{(x_1 + (1 - \frac{D}{d})(x_2 - x_1), y_1 + (1 - \frac{D}{d})(y_2 - y_1), z_1 + (1 - \frac{D}{d})(z_2 - z_1))}\\
+\end{eqnarray}$$

@@ -6,6 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.text.DecimalFormat
+import kotlin.math.absoluteValue
 import kotlin.math.pow
 
 @ServiceImpl("math_number", needArgument = true)
@@ -91,13 +92,13 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override operator fun minus(mathNumber: IMathNumber): IMathNumber {
         if (mathNumber.number is Int) {
-            return plus(-(mathNumber.number as Int))
+            return plus(-mathNumber)
         }
         if (mathNumber.number is Double) {
-            return plus(-(mathNumber.number as Double))
+            return plus(-mathNumber)
         }
         if (mathNumber.number is Float) {
-            return plus(-(mathNumber.number as Float))
+            return plus(-mathNumber)
         }
         throw UnsupportedOperationException()
     }
@@ -182,26 +183,26 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun div(number2: Double): IMathNumber {
         if (number is Int) {
-            return MathNumber(number * number2)
+            return MathNumber(number / number2)
         }
         if (number is Double) {
-            return MathNumber(number * number2)
+            return MathNumber(number / number2)
         }
         if (number is Float) {
-            return MathNumber(number * number2)
+            return MathNumber(number / number2)
         }
         throw UnsupportedOperationException()
     }
 
     override fun div(number2: Float): IMathNumber {
         if (number is Int) {
-            return MathNumber(number * number2)
+            return MathNumber(number / number2)
         }
         if (number is Double) {
-            return MathNumber(number * number2)
+            return MathNumber(number / number2)
         }
         if (number is Float) {
-            return MathNumber(number * number2)
+            return MathNumber(number / number2)
         }
         throw UnsupportedOperationException()
     }
@@ -271,6 +272,19 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
         throw UnsupportedOperationException()
     }
 
+    override fun abs(): IMathNumber {
+        if (number is Int) {
+            return MathNumber(number.absoluteValue)
+        }
+        if (number is Double) {
+            return MathNumber(number.absoluteValue)
+        }
+        if (number is Float) {
+            return MathNumber(number.absoluteValue)
+        }
+        throw UnsupportedOperationException()
+    }
+
     override fun pow(number2: Int): IMathNumber {
         if (number is Int) {
             return MathNumber(number.toDouble().pow(number2))
@@ -310,6 +324,10 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
         }
 
         throw UnsupportedOperationException()
+    }
+
+    override fun reciprocal(): IMathNumber {
+        return 1 / this
     }
 
     override fun equals(other: Any?): Boolean {
@@ -353,6 +371,10 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun hashCode(): Int {
         return number.hashCode()
+    }
+
+    override fun toString(): String {
+        return number.toString()
     }
 
     companion object {

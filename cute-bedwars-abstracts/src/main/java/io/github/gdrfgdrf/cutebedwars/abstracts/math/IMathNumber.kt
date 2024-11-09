@@ -35,9 +35,11 @@ interface IMathNumber {
     operator fun compareTo(number2: Float): Int
     operator fun compareTo(mathNumber: IMathNumber): Int
 
+    fun abs(): IMathNumber
     fun pow(number2: Int): IMathNumber
     fun sqrt(): IMathNumber
     fun cut(precisions: IPrecisions): IMathNumber
+    fun reciprocal(): IMathNumber
 
     companion object {
         fun new(number: Number): IMathNumber = Mediator.get(IMathNumber::class.java, ArgumentSet(arrayOf(number)))!!

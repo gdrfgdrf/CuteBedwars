@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.IVector3i
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
@@ -13,6 +14,14 @@ class Point3D(
 ) : IPoint3D {
     override val step: Int = 3
     override val all: Array<IMathNumber> = arrayOf(x, y, z)
+
+    override fun vector3i(other: IPoint3D): IVector3i {
+        return Vector3i.of(other.x - x, other.y - y, other.z - z)
+    }
+
+    override fun toString(): String {
+        return "($x, $y, $z)"
+    }
 
     companion object {
         @JvmStatic

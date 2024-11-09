@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 @KotlinSingleton
 interface ILines {
     /**
-     * 在三维空间中的一条直线 AB 上寻找一个点 C，使得 BC 的距离为一个定值 D，
+     * 在三维空间中的一条直线 AB 上寻找一个点 C，使得 BC 的距离为一个定值 D
      * 返回值为点 C
      */
     fun findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(A: IPoint3D, B: IPoint3D, D: IMathNumber): IPoint3D
