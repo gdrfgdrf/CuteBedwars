@@ -180,10 +180,10 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
             return div(mathNumber.number as Int)
         }
         if (mathNumber.number is Double) {
-            return times(mathNumber.number as Double)
+            return div(mathNumber.number as Double)
         }
         if (mathNumber.number is Float) {
-            return times(mathNumber.number as Float)
+            return div(mathNumber.number as Float)
         }
         throw UnsupportedOperationException()
     }
