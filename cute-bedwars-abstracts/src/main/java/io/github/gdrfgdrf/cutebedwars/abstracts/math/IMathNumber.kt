@@ -8,31 +8,21 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @Service("math_number", singleton = false)
 interface IMathNumber {
     val number: Number
-    operator fun plus(number2: Int): IMathNumber
-    operator fun plus(number2: Double): IMathNumber
-    operator fun plus(number2: Float): IMathNumber
+    operator fun plus(number2: Number): IMathNumber
     operator fun plus(mathNumber: IMathNumber): IMathNumber
     operator fun unaryPlus(): IMathNumber
 
-    operator fun minus(number2: Int): IMathNumber
-    operator fun minus(number2: Double): IMathNumber
-    operator fun minus(number2: Float): IMathNumber
+    operator fun minus(number2: Number): IMathNumber
     operator fun minus(mathNumber: IMathNumber): IMathNumber
     operator fun unaryMinus(): IMathNumber
 
-    operator fun times(number2: Int): IMathNumber
-    operator fun times(number2: Double): IMathNumber
-    operator fun times(number2: Float): IMathNumber
+    operator fun times(number2: Number): IMathNumber
     operator fun times(mathNumber: IMathNumber): IMathNumber
 
-    operator fun div(number2: Int): IMathNumber
-    operator fun div(number2: Double): IMathNumber
-    operator fun div(number2: Float): IMathNumber
+    operator fun div(number2: Number): IMathNumber
     operator fun div(mathNumber: IMathNumber): IMathNumber
 
-    operator fun compareTo(number2: Int): Int
-    operator fun compareTo(number2: Double): Int
-    operator fun compareTo(number2: Float): Int
+    operator fun compareTo(number2: Number): Int
     operator fun compareTo(mathNumber: IMathNumber): Int
 
     fun abs(): IMathNumber
