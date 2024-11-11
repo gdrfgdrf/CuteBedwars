@@ -128,6 +128,10 @@ class Functions<T> {
 
     fun pow(number: Number, n: Number): Number {
         val t = number as T
+        if (t !is Double && t !is Float) {
+            throw IllegalArgumentException("pow methods can only be used with Double and Float")
+        }
+
         return when (type(n)) {
             Type.DOUBLE -> powDouble!!(t, n as Double)
             Type.FLOAT -> powFloat!!(t, n as Float)
