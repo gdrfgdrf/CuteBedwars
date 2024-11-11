@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 
 class Functions<T> {
     var plusByte: (T.(Byte) -> Number)? = null
-    var plusDouble: (T.(Double) -> Double)? = null
+    var plusDouble: (T.(Double) -> Number)? = null
     var plusFloat: (T.(Float) -> Number)? = null
     var plusInt: (T.(Int) -> Number)? = null
     var plusLong: (T.(Long) -> Number)? = null
