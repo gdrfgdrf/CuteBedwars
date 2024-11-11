@@ -278,14 +278,6 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
         }
 
         fun of(number: Number) = MathNumber(number)
-
-        @JvmStatic
-        fun main(args: Array<String>) {
-            println(of(1).div(1))
-            println(of(1).div(1.0))
-            println(of(1.0).div(1))
-            println(of(1.0).div(1.0))
-        }
     }
 
 }

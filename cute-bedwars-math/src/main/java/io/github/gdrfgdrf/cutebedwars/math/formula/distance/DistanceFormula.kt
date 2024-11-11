@@ -24,40 +24,4 @@ object DistanceFormula : IFormula, IDistanceFormula {
 
         throw IllegalArgumentException()
     }
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        val space = Spaces.EUCLIDEAN
-//        val dimension = Argument(Dimensions.TWO)
-        val dimension = Dimensions.THREE
-
-//        val firstPoint = Point2D.of(10, 10)
-//        val secondPoint = Point2D.of(-10, -10)
-
-        val random = Random()
-        val startTime = System.currentTimeMillis()
-
-        for (i in 0 until 1000000000) {
-            val pos1 = Point3D.of(
-                random.nextDouble(100000.0),
-                random.nextDouble(100000.0),
-                random.nextDouble(100000.0)
-            )
-            val pos2 = Point3D.of(
-                random.nextDouble(200000.0),
-                random.nextDouble(200000.0),
-                random.nextDouble(200000.0)
-            )
-
-            calculate(space, dimension, pos1, pos2)
-        }
-
-        println(System.currentTimeMillis() - startTime)
-
-        val firstPoint = Point3D.of(10, 10, 10)
-        val secondPoint = Point3D.of(20, 20, 20)
-
-        val result = calculate(space, dimension, firstPoint, secondPoint)
-        println(result.number)
-    }
 }
