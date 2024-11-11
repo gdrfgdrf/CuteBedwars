@@ -85,7 +85,7 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
     }
 
     override fun pow(number2: Int): IMathNumber {
-        val functions = map[number::class.java] ?: throw UnsupportedOperationException()
+        val functions = map[number2::class.java] ?: throw UnsupportedOperationException()
         val result = functions.pow(number, number2)
         return MathNumber(result)
     }
