@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.sleepSafely
 import io.github.gdrfgdrf.cutebedwars.tasks.entry.FutureTaskEntry
-import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
+import io.github.gdrfgdrf.cutebedwars.tasks.Tasks
 
 object SyncTaskWorker : Runnable {
     private val threadPoolService = IThreadPoolService.instance()
@@ -13,9 +13,9 @@ object SyncTaskWorker : Runnable {
     override fun run() {
         "Synchronized task worker started".logInfo()
 
-        while (!TaskManager.isTerminated()) {
-            TaskManager.SYNCHRONIZED_TASK_ENTRY.forEach { (lock, taskEntries) ->
-                TaskManager.SYNCHRONIZED_TASK_ENTRY.remove(lock)
+        while (!Tasks.isTerminated()) {
+            Tasks.SYNCHRONIZED_TASK_ENTRY.forEach { (lock, taskEntries) ->
+                Tasks.SYNCHRONIZED_TASK_ENTRY.remove(lock)
 
                 threadPoolService.newTask {
                     var nextRound = true
@@ -56,7 +56,7 @@ object SyncTaskWorker : Runnable {
                 }
             }
 
-            if (!TaskManager.isTerminated()) {
+            if (!Tasks.isTerminated()) {
                 sleepSafely(50)
             } else {
                 break

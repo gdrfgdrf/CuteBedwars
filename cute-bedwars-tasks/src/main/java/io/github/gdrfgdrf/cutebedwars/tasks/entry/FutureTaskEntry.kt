@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.tasks.entry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.IFutureTaskEntry
 import io.github.gdrfgdrf.cutebedwars.tasks.SyncFuture
-import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
+import io.github.gdrfgdrf.cutebedwars.tasks.Tasks
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.util.concurrent.TimeUnit
@@ -49,7 +49,7 @@ class FutureTaskEntry<T> private constructor(
     }
 
     override fun run() {
-        TaskManager.add(this)
+        Tasks.add(this)
     }
 
     companion object {

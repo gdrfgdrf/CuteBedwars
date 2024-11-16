@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.tasks.entry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskEntry
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
-import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
+import io.github.gdrfgdrf.cutebedwars.tasks.Tasks
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.util.concurrent.CountDownLatch
@@ -48,7 +48,7 @@ open class TaskEntry<T> protected constructor(
     }
 
     override fun run() {
-        TaskManager.add(this)
+        Tasks.add(this)
         if (enableSync) {
             runCatching {
                 syncLock.await()
