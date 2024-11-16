@@ -28,7 +28,7 @@ class DefaultDatabase : IDatabase {
         if (!file.exists()) {
             file.createNewFile()
         }
-        if (IConfig.enableDatabaseLogging() == false) {
+        if (IConfig["EnableDatabaseLogging"]) {
             "Use no logging for the default database".logInfo()
             LogFactory.useNoLogging()
         } else {

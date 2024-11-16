@@ -109,7 +109,7 @@ class ChatPage(
                     return Companion.load(pageRequest)
                 }
             }
-            cache = if (IConfig.chatPageCacheBuilderSpecification().isNullOrBlank()) {
+            cache = if (IConfig.get<String>("ChatPageCacheBuilderSpecification").isBlank()) {
                 "Creating chat page's caching with the default specification".logInfo()
                 CacheBuilder.newBuilder()
                     .initialCapacity(100)
@@ -118,7 +118,7 @@ class ChatPage(
                     .build(loader)
             } else {
                 "Creating chat page's caching with the custom specification".logInfo()
-                CacheBuilder.from(IConfig.chatPageCacheBuilderSpecification()!!)
+                CacheBuilder.from(IConfig.get<String>("ChatPageCacheBuilderSpecification"))
                     .build(loader)
             }
         }

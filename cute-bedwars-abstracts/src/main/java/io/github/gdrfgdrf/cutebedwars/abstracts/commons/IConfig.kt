@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("config")
 interface IConfig {
+    fun fulfill()
     fun <T> get(key: String): T
 
     companion object {
@@ -17,17 +18,14 @@ interface IConfig {
             instance = config
         }
         @JvmStatic
-        fun get(): IConfig? {
+        fun instance(): IConfig? {
              return instance
         }
-
-        fun language(): String? = get()?.get("Language")
-        fun workerId(): Short? = get()?.get("WorkerId")
-        fun databaseImpl(): String? = get()?.get("DatabaseImpl")
-        fun enableDatabaseLogging(): Boolean? = get()?.get("EnableDatabaseLogging")
-        fun databaseUsername(): String? = get()?.get("DatabaseUsername")
-        fun databasePassword(): String? = get()?.get("DatabasePassword")
-        fun requestTimeout(): Long? = get()?.get("RequestTimeout")
-        fun chatPageCacheBuilderSpecification(): String? = get()?.get("ChatPageCacheBuilderSpecification")
+        operator fun <T> get(key: String): T {
+            if (instance == null) {
+                throw IllegalStateException("the config is null")
+            }
+            return instance!!.get<T>(key)
+        }
     }
 }

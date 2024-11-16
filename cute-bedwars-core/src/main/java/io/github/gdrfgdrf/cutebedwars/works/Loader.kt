@@ -2,11 +2,9 @@ package io.github.gdrfgdrf.cutebedwars.works
 
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
@@ -17,19 +15,14 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cuteframework.bean.BeanManager
 import io.github.gdrfgdrf.cuteframework.config.ConfigManager
 import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
 import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
-import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.Registry
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
-import org.bukkit.Bukkit
-import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
-import java.util.LinkedHashSet
 
 @ServiceImpl("loader")
 object Loader : ILoader {
@@ -57,11 +50,12 @@ object Loader : ILoader {
 
             if (!idGeneratorInitialized) {
                 "Initializing the id generator".logInfo()
-                val options = if (IConfig.workerId() != null && IConfig.workerId()!! >= 0) {
-                    "Use the custom worker id: ${IConfig.workerId()}".logInfo()
-                    IdGeneratorOptions(IConfig.workerId()!!)
+                val workerId = IConfig.get<Short>("WorkerId")
+                val options = if (workerId >= 0) {
+                    "Use the custom worker id: $workerId".logInfo()
+                    IdGeneratorOptions(IConfig["WorkerId"])
                 } else {
-                    "Use the default worker id: ${IConfig.workerId()}".logInfo()
+                    "Use the default worker id: $workerId".logInfo()
                     IdGeneratorOptions()
                 }
 
@@ -111,6 +105,8 @@ object Loader : ILoader {
                 Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config")
             )
         )
+
+        IConfig.instance()?.fulfill()
     }
 
     private fun loadLanguage() {
@@ -121,7 +117,7 @@ object Loader : ILoader {
             "io.github.gdrfgdrf.cutebedwars.languages.collect",
             "io.github.gdrfgdrf.cutebedwars.languages.language",
             IConstants.owner(),
-            IConfig.language(),
+            IConfig["Language"],
         )
     }
 
