@@ -16,7 +16,7 @@ object Tasks : ITasks {
             .run()
     }
 
-    override fun <T> runSyncTask(lock: Any, supplier: () -> T?) {
+    override fun <T> syncTask(lock: Any, supplier: () -> T?) {
         IFutureTaskEntry.new(supplier)
             .customLock(lock)
             .run()

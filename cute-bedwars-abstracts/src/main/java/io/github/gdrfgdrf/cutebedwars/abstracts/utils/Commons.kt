@@ -47,7 +47,7 @@ fun asyncTask(runnable: () -> Unit) {
 }
 
 fun <T> syncTask(lock: Any, supplier: () -> T?) {
-    ITasks.instance().runSyncTask(lock, supplier)
+    ITasks.instance().syncTask(lock, supplier)
 }
 
 fun frequencyTask(frequency: Long, runnable: (IFrequencyTask) -> Unit) {

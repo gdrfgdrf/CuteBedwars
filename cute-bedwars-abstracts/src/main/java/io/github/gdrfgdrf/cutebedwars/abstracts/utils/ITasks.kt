@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 @KotlinSingleton
 interface ITasks {
     fun asyncTask(runnable:() -> Unit)
-    fun <T> runSyncTask(lock: Any, supplier: () -> T?)
+    fun <T> syncTask(lock: Any, supplier: () -> T?)
 
     fun frequencyTask(frequency: Long, function: (IFrequencyTask) -> Unit)
     fun frequencyTask(frequency: Long, timeUnit: TimeUnit, function: (IFrequencyTask) -> Unit)
