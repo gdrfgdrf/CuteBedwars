@@ -12,6 +12,9 @@ class Line(
     val start: Coordinate,
     val end: Coordinate
 ) {
+    /**
+     * 将一条线平均分成若干个等份，并保证每个等份的长度为同一个定值
+     */
     fun dividePoint(step: Double): List<Coordinate> {
         val space = ISpaces.valueOf("EUCLIDEAN")
         val dimension = IDimensions.valueOf("THREE")
