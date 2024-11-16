@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 @ServiceImpl("tasks")
 @KotlinSingleton
 object Tasks : ITasks {
-    override fun runAsyncTask(runnable: () -> Unit) {
+    override fun asyncTask(runnable: () -> Unit) {
         ITaskEntry.new<Any>(runnable)
             .run()
     }

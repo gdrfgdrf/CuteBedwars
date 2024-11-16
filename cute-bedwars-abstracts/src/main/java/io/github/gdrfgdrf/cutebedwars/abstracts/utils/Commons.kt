@@ -43,7 +43,7 @@ fun String.toIntOrDefault(defaultValue: Int): Int {
 }
 
 fun asyncTask(runnable: () -> Unit) {
-    ITasks.instance().runAsyncTask(runnable)
+    ITasks.instance().asyncTask(runnable)
 }
 
 fun <T> syncTask(lock: Any, supplier: () -> T?) {
