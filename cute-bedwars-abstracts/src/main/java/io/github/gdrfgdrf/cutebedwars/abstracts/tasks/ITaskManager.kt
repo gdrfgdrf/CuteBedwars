@@ -4,14 +4,14 @@ import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
-@Service("tasks")
+@Service("task_manager")
 @KotlinSingleton
-interface ITasks {
+interface ITaskManager {
     fun start()
     fun terminate()
     fun <T> add(taskEntry: ITaskEntry<T>)
 
     companion object {
-        fun instance(): ITasks = Mediator.get(ITasks::class.java)!!
+        fun instance(): ITaskManager = Mediator.get(ITaskManager::class.java)!!
     }
 }

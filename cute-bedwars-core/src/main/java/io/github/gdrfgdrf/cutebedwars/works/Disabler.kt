@@ -3,11 +3,13 @@ package io.github.gdrfgdrf.cutebedwars.works
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
-import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITasks
+import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -56,7 +58,7 @@ object Disabler : IDisabler {
     }
 
     private fun disableTaskManager() {
-        ITasks.instance().terminate()
+        ITaskManager.instance().terminate()
     }
 
     private fun disableChangeTypeRegistry() {

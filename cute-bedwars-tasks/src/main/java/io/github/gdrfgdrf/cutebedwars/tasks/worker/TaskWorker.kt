@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.tasks.worker
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.sleepSafely
-import io.github.gdrfgdrf.cutebedwars.tasks.Tasks
+import io.github.gdrfgdrf.cutebedwars.tasks.TaskManager
 import io.github.gdrfgdrf.cutebedwars.tasks.entry.FutureTaskEntry
 import java.util.concurrent.LinkedBlockingQueue
 
@@ -13,8 +13,8 @@ object TaskWorker : Runnable {
     override fun run() {
         "Task worker started".logInfo()
 
-        while (!Tasks.isTerminated()) {
-            val taskEntry = Tasks.TASK_ENTRY_QUEUE.poll() ?: continue
+        while (!TaskManager.isTerminated()) {
+            val taskEntry = TaskManager.TASK_ENTRY_QUEUE.poll() ?: continue
 
             if (taskEntry.customLock() == null) {
                 threadPoolService.newTask {
@@ -27,14 +27,14 @@ object TaskWorker : Runnable {
                     }
                 }
             } else {
-                val taskEntries = Tasks.SYNCHRONIZED_TASK_ENTRY.computeIfAbsent(taskEntry.customLock()!!) {
+                val taskEntries = TaskManager.SYNCHRONIZED_TASK_ENTRY.computeIfAbsent(taskEntry.customLock()!!) {
                     LinkedBlockingQueue()
                 }
 
                 taskEntries.put(taskEntry)
             }
 
-            if (!Tasks.isTerminated()) {
+            if (!TaskManager.isTerminated()) {
                 sleepSafely(100)
             } else {
                 break
