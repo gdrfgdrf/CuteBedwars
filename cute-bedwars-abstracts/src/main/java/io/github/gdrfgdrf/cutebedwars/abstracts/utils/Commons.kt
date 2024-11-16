@@ -3,9 +3,11 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.utils
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
+import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTask
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Change
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
 import org.bukkit.command.CommandSender
+import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
 
 fun String.logInfo() {
@@ -46,6 +48,14 @@ fun asyncTask(runnable: () -> Unit) {
 
 fun <T> syncTask(lock: Any, supplier: () -> T?) {
     ITasks.instance().runSyncTask(lock, supplier)
+}
+
+fun frequencyTask(frequency: Long, runnable: (IFrequencyTask) -> Unit) {
+    ITasks.instance().frequencyTask(frequency, runnable)
+}
+
+fun frequencyTask(frequency: Long, timeUnit: TimeUnit, runnable: (IFrequencyTask) -> Unit) {
+    ITasks.instance().frequencyTask(frequency, timeUnit, runnable)
 }
 
 fun sleepSafely(millis: Long) {
