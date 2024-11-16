@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParticleStatuses
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IManagedParticle
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.frequencyTask
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import org.bukkit.World
 
@@ -74,6 +75,12 @@ class ParticleGroup private constructor(
             it.forEach { particleInfo ->
                 list.remove(particleInfo)
             }
+        }
+    }
+
+    override fun spawn(world: World, frequency: Long) {
+        frequencyTask(frequency) {
+            spawn(world)
         }
     }
 

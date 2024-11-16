@@ -15,6 +15,7 @@ interface IParticleGroup {
     fun removeAt(index: Int)
     fun removeAt(x: Double, y: Double, z: Double)
 
+    fun spawn(world: World, frequency: Long)
     fun spawn(world: World): List<Any>
 
     fun dismiss()
