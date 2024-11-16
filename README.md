@@ -102,6 +102,7 @@ CuteBedwars
 | cute-bedwars-protobuf                    | 所有 Protobuf 类                                        |
 | cute-bedwars-selection                   | 选区模块                                                 |
 | cute-bedwars-particles                   | 粒子效果模块，对粒子效果进行一定程度的抽象                                |
+| cute-bedwars-frequency-tasks             | 频率任务，安装一定的频率执行某个任务                                   |
 | cute-bedwars-math                        | 数学模块，进行各种数学计算                                        |
 | cute-bedwars-enums                       | 所有枚举类                                                |
 | cute-bedwars-utils                       | 工具模块                                                 |
