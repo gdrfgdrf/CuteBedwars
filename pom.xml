@@ -36,6 +36,7 @@
         <module>cute-bedwars-items</module>
         <module>cute-bedwars-events</module>
         <module>cute-bedwars-selection</module>
+        <module>cute-bedwars-particles</module>
     </modules>
 
     <repositories>
@@ -206,6 +207,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.bingrewardsbot</groupId>
                 <artifactId>selection</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>particles</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
