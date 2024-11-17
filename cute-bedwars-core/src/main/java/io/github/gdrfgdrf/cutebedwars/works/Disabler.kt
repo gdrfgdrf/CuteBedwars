@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
@@ -24,6 +25,7 @@ object Disabler : IDisabler {
             disableRequest()
             disableThreadPool()
             disableTaskManager()
+            disableFrequencyTaskManager()
             disableChatPages()
             ISubCommandManager.instance().clear()
             disableChangeTypeRegistry()
@@ -42,6 +44,7 @@ object Disabler : IDisabler {
         disableRequest()
         disableThreadPool()
         disableTaskManager()
+        disableFrequencyTaskManager()
         disableChatPages()
         disableChangeTypeRegistry()
 
@@ -62,6 +65,10 @@ object Disabler : IDisabler {
 
     private fun disableTaskManager() {
         ITaskManager.instance().terminate()
+    }
+
+    private fun disableFrequencyTaskManager() {
+        IFrequencyTaskManager.instance().terminate()
     }
 
     private fun disableChatPages() {
