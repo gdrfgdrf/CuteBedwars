@@ -152,6 +152,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>particles</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>frequency-tasks</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -170,6 +175,7 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
+                    <outputDirectory>H:\Spigot-Dev-Server\plugins</outputDirectory>
                     <finalName>${packer.finalName}</finalName>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
