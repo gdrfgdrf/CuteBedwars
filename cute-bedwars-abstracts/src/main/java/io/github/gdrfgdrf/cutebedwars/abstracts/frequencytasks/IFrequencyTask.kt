@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
@@ -18,7 +19,7 @@ interface IFrequencyTask {
     fun run()
     fun canRun(): Boolean
 
-    fun add()
+    fun add(): IStopSignal
 
     companion object {
         fun new(

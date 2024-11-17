@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.utils.abstracts
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.IFutureTaskEntry
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskEntry
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ITasks
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -22,13 +23,13 @@ object Tasks : ITasks {
             .run()
     }
 
-    override fun frequencyTask(frequency: Long, function: (IFrequencyTask) -> Unit) {
-        IFrequencyTask.new(frequency, TimeUnit.MILLISECONDS, function)
+    override fun frequencyTask(frequency: Long, function: (IFrequencyTask) -> Unit): IStopSignal {
+        return IFrequencyTask.new(frequency, TimeUnit.MILLISECONDS, function)
             .add()
     }
 
-    override fun frequencyTask(frequency: Long, timeUnit: TimeUnit, function: (IFrequencyTask) -> Unit) {
-        IFrequencyTask.new(frequency, timeUnit, function)
+    override fun frequencyTask(frequency: Long, timeUnit: TimeUnit, function: (IFrequencyTask) -> Unit): IStopSignal {
+        return IFrequencyTask.new(frequency, timeUnit, function)
             .add()
    }
 }

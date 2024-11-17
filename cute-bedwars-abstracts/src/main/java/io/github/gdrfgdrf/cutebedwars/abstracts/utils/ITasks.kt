@@ -12,8 +12,8 @@ interface ITasks {
     fun asyncTask(runnable:() -> Unit)
     fun <T> syncTask(lock: Any, supplier: () -> T?)
 
-    fun frequencyTask(frequency: Long, function: (IFrequencyTask) -> Unit)
-    fun frequencyTask(frequency: Long, timeUnit: TimeUnit, function: (IFrequencyTask) -> Unit)
+    fun frequencyTask(frequency: Long, function: (IFrequencyTask) -> Unit): IStopSignal
+    fun frequencyTask(frequency: Long, timeUnit: TimeUnit, function: (IFrequencyTask) -> Unit): IStopSignal
 
     companion object {
         fun instance(): ITasks = Mediator.get(ITasks::class.java)!!

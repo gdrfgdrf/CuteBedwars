@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.frequencytasks
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTask
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.util.concurrent.TimeUnit
@@ -61,7 +62,7 @@ class FrequencyTask(
         return currentTime - lastRun >= convertedFrequency
     }
 
-    override fun add() {
-        FrequencyTaskManager.add(this)
+    override fun add(): IStopSignal {
+        return FrequencyTaskManager.add(this)
     }
 }

@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.frequencytasks
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTaskManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.asyncTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.sleepSafely
@@ -11,7 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList
 
 @ServiceImpl("frequency_task_manager")
 object FrequencyTaskManager : IFrequencyTaskManager {
-    private val list = CopyOnWriteArrayList<IFrequencyTask>()
+    private val list = CopyOnWriteArrayList<InternalTaskEntry>()
     private var terminated = false
 
     override fun start() {
@@ -33,23 +34,45 @@ object FrequencyTaskManager : IFrequencyTaskManager {
 
     private fun run() {
         list.forEach { frequencyTask ->
-            if (frequencyTask.canceled) {
+            if (frequencyTask.task.canceled) {
                 list.remove(frequencyTask)
                 return@forEach
             }
-            if (frequencyTask.canRun()) {
+            if (frequencyTask.task.canRun()) {
                 IThreadPoolService.instance().newTask {
-                    frequencyTask.run()
+                    frequencyTask.task.run()
                 }
             }
         }
     }
 
-    override fun add(frequencyTask: IFrequencyTask) {
-        this.list.add(frequencyTask)
+    override fun add(frequencyTask: IFrequencyTask): IStopSignal {
+        val taskEntry = InternalTaskEntry.create(frequencyTask)
+        this.list.add(taskEntry)
+        return taskEntry.stopSignal
     }
 
     override fun remove(frequencyTask: IFrequencyTask) {
-        list.remove(frequencyTask)
+        list.stream()
+            .filter {
+                return@filter it.task == frequencyTask
+            }.forEach {
+                list.remove(it)
+            }
+    }
+
+    class InternalTaskEntry private constructor(
+        val task: IFrequencyTask,
+        val stopSignal: IStopSignal
+    ) {
+        companion object {
+            fun create(frequencyTask: IFrequencyTask, stopSignal: IStopSignal) =
+                InternalTaskEntry(frequencyTask, stopSignal)
+
+            fun create(frequencyTask: IFrequencyTask): InternalTaskEntry {
+                val stopSignal = IStopSignal.new()
+                return create(frequencyTask, stopSignal)
+            }
+        }
     }
 }
