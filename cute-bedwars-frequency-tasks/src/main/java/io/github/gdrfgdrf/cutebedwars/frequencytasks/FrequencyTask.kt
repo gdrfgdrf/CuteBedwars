@@ -31,19 +31,18 @@ class FrequencyTask(
             throw IllegalStateException("this frequency task is canceled")
         }
         if (lastRun == 0L) {
+            lastRun = System.currentTimeMillis()
             function(this)
             count++
-            lastRun = System.currentTimeMillis()
-
             return
         }
 
         val currentTime = System.currentTimeMillis()
         val convertedFrequency = frequencyUnit.convert(frequency, TimeUnit.MILLISECONDS)
         if (currentTime - lastRun >= convertedFrequency) {
+            lastRun = currentTime
             function(this)
             count++
-            lastRun = currentTime
         } else {
             throw IllegalStateException("the required frequency is not met")
         }
