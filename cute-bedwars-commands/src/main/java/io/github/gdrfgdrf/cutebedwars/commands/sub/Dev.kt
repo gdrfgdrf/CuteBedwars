@@ -22,7 +22,6 @@ object Dev : AbstractSubCommand(
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         val selection = ISelection.new(10.0, 10.0, 10.0, 20.0, 20.0, 20.0)
-        selection.initialize()
 
         val overworld = Bukkit.getServer().getWorld("world")
         val stopSignal = selection.spawnParticle(Particle.REDSTONE, overworld, 1000)
