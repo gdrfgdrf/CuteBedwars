@@ -33,14 +33,18 @@ object FrequencyTaskManager : IFrequencyTaskManager {
     }
 
     private fun run() {
-        list.forEach { frequencyTask ->
-            if (frequencyTask.task.canceled) {
-                list.remove(frequencyTask)
+        list.forEach { taskEntry ->
+            if (taskEntry.stopSignal.stopped) {
+                list.remove(taskEntry)
                 return@forEach
             }
-            if (frequencyTask.task.canRun()) {
+            if (taskEntry.task.canceled) {
+                list.remove(taskEntry)
+                return@forEach
+            }
+            if (taskEntry.task.canRun()) {
                 IThreadPoolService.instance().newTask {
-                    frequencyTask.task.run()
+                    taskEntry.task.run()
                 }
             }
         }
