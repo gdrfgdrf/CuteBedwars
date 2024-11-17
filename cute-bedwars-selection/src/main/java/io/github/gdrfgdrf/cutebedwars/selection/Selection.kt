@@ -48,7 +48,7 @@ class Selection(
         return particleGroup.spawn(world, frequency)
     }
 
-    override fun initialize() {
+    init {
         val blockCoordinate1 = pos1.blockCoordinate()
         val blockCoordinate2 = pos2.blockCoordinate()
 
