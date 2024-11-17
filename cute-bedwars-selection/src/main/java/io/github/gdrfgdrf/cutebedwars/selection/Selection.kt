@@ -3,17 +3,27 @@ package io.github.gdrfgdrf.cutebedwars.selection
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
+import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelection
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.frequencyTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
+import io.github.gdrfgdrf.multimodulemediator.annotation.Service
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.Particle
 import org.bukkit.World
 
+@ServiceImpl("selection", needArgument = true)
 class Selection(
-    val pos1: Coordinate,
-    val pos2: Coordinate
-) {
+    override val pos1: Coordinate,
+    override val pos2: Coordinate
+) : ISelection {
+    constructor(argumentSet: ArgumentSet): this(
+        argumentSet.args[0] as Coordinate,
+        argumentSet.args[1] as Coordinate
+    )
+
     private val lines = arrayListOf<ILine3D>()
     private var initialized = false
 
@@ -23,7 +33,7 @@ class Selection(
         }
     }
 
-    fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal {
+    override fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal {
         check()
         val managedParticle = IParticles.instance().getOrCreate(particle)
         val particleGroup = managedParticle.create("selection-particle")
@@ -40,7 +50,7 @@ class Selection(
         return particleGroup.spawn(world, frequency)
     }
 
-    fun initialize() {
+    override fun initialize() {
         val blockCoordinate1 = pos1.blockCoordinate()
         val blockCoordinate2 = pos2.blockCoordinate()
 
