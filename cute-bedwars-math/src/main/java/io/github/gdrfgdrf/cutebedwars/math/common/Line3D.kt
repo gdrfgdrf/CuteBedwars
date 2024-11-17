@@ -14,6 +14,7 @@ import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 import io.github.gdrfgdrf.cutebedwars.math.formula.distance.DistanceFormula
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
+import org.bukkit.Bukkit
 
 @ServiceImpl("line_3d", needArgument = true)
 class Line3D(
@@ -32,19 +33,20 @@ class Line3D(
         val pos1 = Point3D.of(start.x, start.y, start.z)
         val pos2 = Point3D.of(end.x, end.y, end.z)
 
-        var current: IMathNumber = MathNumber.of(0.0)
+        var current = step
         val result = arrayListOf<IPoint3D>()
         while (true) {
-            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(pos1, pos2, step)
-            val distance = DistanceFormula.calculate(space, dimension, C, pos2)
+            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(pos1, pos2, current)
+            val distance = DistanceFormula.calculate(space, dimension, C, pos1)
             if (distance < 0) {
                 throw IllegalArgumentException("distance cannot be negative")
             }
+            result.add(C)
+
             // 无法继续往下分
-            if (distance >= step) {
+            if (distance <= step) {
                 break
             }
-            result.add(C)
 
             current += step
         }
