@@ -17,7 +17,14 @@ class Selection(
     private val lines = arrayListOf<ILine3D>()
     private var initialized = false
 
+    private fun check() {
+        if (!initialized) {
+            throw IllegalStateException("this selection is not initialized")
+        }
+    }
+
     fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal {
+        check()
         val managedParticle = IParticles.instance().getOrCreate(particle)
         val particleGroup = managedParticle.create("selection-particle")
 
