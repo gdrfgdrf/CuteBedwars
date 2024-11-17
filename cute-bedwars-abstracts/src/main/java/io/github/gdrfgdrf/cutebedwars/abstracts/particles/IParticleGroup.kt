@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.particles
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParticleStatuses
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import org.bukkit.World
 
 interface IParticleGroup {
@@ -15,7 +16,7 @@ interface IParticleGroup {
     fun removeAt(index: Int)
     fun removeAt(x: Double, y: Double, z: Double)
 
-    fun spawn(world: World, frequency: Long)
+    fun spawn(world: World, frequency: Long): IStopSignal
     fun spawn(world: World): List<Any>
 
     fun dismiss()
