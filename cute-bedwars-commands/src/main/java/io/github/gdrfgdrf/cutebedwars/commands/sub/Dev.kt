@@ -24,8 +24,8 @@ object Dev : AbstractSubCommand(
         val selection = ISelection.new(10.0, 10.0, 10.0, 20.0, 20.0, 20.0)
         selection.initialize()
 
-        val overworld = Bukkit.getServer().getWorld("overworld")
-        val stopSignal = selection.spawnParticle(Particle.REDSTONE, overworld, 100)
+        val overworld = Bukkit.getServer().getWorld("world")
+        val stopSignal = selection.spawnParticle(Particle.REDSTONE, overworld, 1000)
 
         asyncTask {
             sleepSafely(10000)
