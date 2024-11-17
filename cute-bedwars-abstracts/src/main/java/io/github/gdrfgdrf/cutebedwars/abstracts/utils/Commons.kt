@@ -50,12 +50,12 @@ fun <T> syncTask(lock: Any, supplier: () -> T?) {
     ITasks.instance().syncTask(lock, supplier)
 }
 
-fun frequencyTask(frequency: Long, runnable: (IFrequencyTask) -> Unit) {
-    ITasks.instance().frequencyTask(frequency, runnable)
+fun frequencyTask(frequency: Long, runnable: (IFrequencyTask) -> Unit): IStopSignal {
+    return ITasks.instance().frequencyTask(frequency, runnable)
 }
 
-fun frequencyTask(frequency: Long, timeUnit: TimeUnit, runnable: (IFrequencyTask) -> Unit) {
-    ITasks.instance().frequencyTask(frequency, timeUnit, runnable)
+fun frequencyTask(frequency: Long, timeUnit: TimeUnit, runnable: (IFrequencyTask) -> Unit): IStopSignal {
+    return ITasks.instance().frequencyTask(frequency, timeUnit, runnable)
 }
 
 fun sleepSafely(millis: Long) {
