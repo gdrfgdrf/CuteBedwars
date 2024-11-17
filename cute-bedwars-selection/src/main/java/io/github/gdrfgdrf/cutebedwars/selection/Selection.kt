@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.selection
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.frequencyTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
@@ -16,7 +17,7 @@ class Selection(
     private val lines = arrayListOf<ILine3D>()
     private var initialized = false
 
-    fun spawnParticle(particle: Particle, world: World, frequency: Long) {
+    fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal {
         val managedParticle = IParticles.instance().getOrCreate(particle)
         val particleGroup = managedParticle.create("selection-particle")
 
@@ -25,13 +26,11 @@ class Selection(
                 val x = point3d.x
                 val y = point3d.y
                 val z = point3d.z
-
                 particleGroup.add(x.toDouble(), y.toDouble(), z.toDouble())
             }
-
         }
 
-        particleGroup.spawn(world, frequency)
+        return particleGroup.spawn(world, frequency)
     }
 
     fun initialize() {
