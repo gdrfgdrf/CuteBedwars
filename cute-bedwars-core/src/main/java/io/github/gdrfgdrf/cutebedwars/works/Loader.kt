@@ -10,6 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
+import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
@@ -49,6 +50,7 @@ object Loader : ILoader {
             loadRequest()
             loadDatabase()
             loadTaskManager()
+            loadFrequencyTaskManager()
             loadChatPages()
 
             if (!idGeneratorInitialized) {
@@ -85,6 +87,7 @@ object Loader : ILoader {
         loadRequest()
         loadDatabase()
         loadTaskManager()
+        loadFrequencyTaskManager()
         loadChatPages()
         loadAreas()
         loadChangeTypeRegistry()
@@ -135,6 +138,10 @@ object Loader : ILoader {
 
     private fun loadTaskManager() {
         ITaskManager.instance().start()
+    }
+
+    private fun loadFrequencyTaskManager() {
+        IFrequencyTaskManager.instance().start()
     }
 
     private fun loadChatPages() {
