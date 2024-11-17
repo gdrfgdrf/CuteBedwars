@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
@@ -33,7 +34,11 @@ object EditListChanges : AbstractSubCommand(
 
             val messages = IChangesInformation.instance().convert(sender, changes)
 
-            val chatPage = IChatPage.cache(sender, IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"), messages.size.toString()) {
+            val chatPage = IChatPages.instance().cache(
+                sender,
+                IPageRequestTypes.valueOf("EDIT_LIST_CHANGES"),
+                messages.size.toString()
+            ) {
                 messages
             }
             chatPage.send(pageIndex - 1)

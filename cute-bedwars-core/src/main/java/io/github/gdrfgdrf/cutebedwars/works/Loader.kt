@@ -2,6 +2,8 @@ package io.github.gdrfgdrf.cutebedwars.works
 
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
@@ -47,6 +49,7 @@ object Loader : ILoader {
             loadRequest()
             loadDatabase()
             loadTaskManager()
+            loadChatPages()
 
             if (!idGeneratorInitialized) {
                 "Initializing the id generator".logInfo()
@@ -82,6 +85,7 @@ object Loader : ILoader {
         loadRequest()
         loadDatabase()
         loadTaskManager()
+        loadChatPages()
         loadAreas()
         loadChangeTypeRegistry()
 
@@ -131,6 +135,10 @@ object Loader : ILoader {
 
     private fun loadTaskManager() {
         ITaskManager.instance().start()
+    }
+
+    private fun loadChatPages() {
+        IChatPages.instance().initialize()
     }
 
     private fun loadAreas() {

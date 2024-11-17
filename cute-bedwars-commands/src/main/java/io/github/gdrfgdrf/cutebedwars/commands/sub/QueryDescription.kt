@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
@@ -41,11 +42,15 @@ object QueryDescription : AbstractSubCommand(
                 return@localizationScope
             }
 
-            val chatPage = IChatPage.cache(sender, IPageRequestTypes.valueOf("DESCRIPTIONS"), rawDescriptionName) {
+            val chatPage = IChatPages.instance().cache(
+                sender,
+                IPageRequestTypes.valueOf("DESCRIPTIONS"),
+                rawDescriptionName
+            ) {
                 searchResult.stream()
                     .filter {
-                        return@filter !(it.administration()
-                                && !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
+                        return@filter !(it.administration() &&
+                                !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
                     }.map {
                         val languageString = it.value()()
                         if (languageString == null) {

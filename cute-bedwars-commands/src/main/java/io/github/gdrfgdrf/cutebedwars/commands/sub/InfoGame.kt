@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
@@ -46,7 +47,7 @@ object InfoGame : AbstractSubCommand(
                 gameContexts.addAll(foundGameContexts)
             }
 
-            val chatPage = IChatPage.cache(
+            val chatPage = IChatPages.instance().cache(
                 sender,
                 IPageRequestTypes.valueOf("INFO_GAME"),
                 areaIdentifier + "_" + gameIdentifier

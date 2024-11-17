@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.finder.IAreaFinder
@@ -49,7 +50,7 @@ object InfoArea : AbstractSubCommand(
                 }
             }
 
-            val chatPage = IChatPage.cache(
+            val chatPage = IChatPages.instance().cache(
                 sender,
                 IPageRequestTypes.valueOf("INFO_AREA"),
                 identifier

@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
@@ -41,7 +42,7 @@ object EditListAreaCommits : AbstractSubCommand(
                 return@localizationScope
             }
 
-            val chatPage = IChatPage.cache(
+            val chatPage = IChatPages.instance().cache(
                 sender,
                 IPageRequestTypes.valueOf("EDIT_LIST_AREA_COMMITS"),
                 areaIdentifier

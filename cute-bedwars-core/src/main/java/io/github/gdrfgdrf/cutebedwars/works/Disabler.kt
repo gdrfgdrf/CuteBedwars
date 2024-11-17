@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.works
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
@@ -23,6 +24,7 @@ object Disabler : IDisabler {
             disableRequest()
             disableThreadPool()
             disableTaskManager()
+            disableChatPages()
             ISubCommandManager.instance().clear()
             disableChangeTypeRegistry()
         }.onFailure {
@@ -40,6 +42,7 @@ object Disabler : IDisabler {
         disableRequest()
         disableThreadPool()
         disableTaskManager()
+        disableChatPages()
         disableChangeTypeRegistry()
 
         "------------------------ CuteBedwars Reloading Phase (Disabler) ------------------------".logInfo()
@@ -59,6 +62,10 @@ object Disabler : IDisabler {
 
     private fun disableTaskManager() {
         ITaskManager.instance().terminate()
+    }
+
+    private fun disableChatPages() {
+        IChatPages.instance().disable()
     }
 
     private fun disableChangeTypeRegistry() {
