@@ -10,7 +10,7 @@ interface IParticleGroup {
     fun status(): IParticleStatuses
 
     fun add(particleInfo: IParticleInfo)
-    fun add(x: Double, y: Double, z: Double, count: Int)
+    fun add(x: Double, y: Double, z: Double, count: Int = 1)
     fun remove(particleInfo: IParticleInfo)
     fun removeAt(index: Int)
     fun removeAt(x: Double, y: Double, z: Double)
