@@ -3,12 +3,21 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.IVector3i
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
+@ServiceImpl("vector_3i", needArgument = true)
 class Vector3i private constructor(
     override val x: IMathNumber,
     override val y: IMathNumber,
     override val z: IMathNumber
 ) : IVector3i {
+    constructor(argumentSet: ArgumentSet): this(
+        argumentSet.args[0] as IMathNumber,
+        argumentSet.args[1] as IMathNumber,
+        argumentSet.args[2] as IMathNumber
+    )
+
     override fun norm(): IMathNumber {
         return (x.pow(2) + y.pow(2) + z.pow(2)).sqrt()
     }
