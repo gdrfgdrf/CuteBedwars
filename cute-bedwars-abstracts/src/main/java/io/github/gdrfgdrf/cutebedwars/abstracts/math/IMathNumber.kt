@@ -41,6 +41,10 @@ interface IMathNumber {
     fun cut(precisions: IPrecisions): IMathNumber
     fun reciprocal(): IMathNumber
 
+    fun toInt(): Int
+    fun toDouble(): Double
+    fun toFloat(): Float
+
     companion object {
         fun new(number: Number): IMathNumber = Mediator.get(IMathNumber::class.java, ArgumentSet(arrayOf(number)))!!
     }

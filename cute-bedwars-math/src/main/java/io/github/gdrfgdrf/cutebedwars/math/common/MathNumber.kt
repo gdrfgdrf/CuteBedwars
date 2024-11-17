@@ -3,7 +3,6 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.div
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.IPrecisions
-import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.text.DecimalFormat
@@ -329,6 +328,18 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun reciprocal(): IMathNumber {
         return 1 / this
+    }
+
+    override fun toInt(): Int {
+        return number.toString().toInt()
+    }
+
+    override fun toDouble(): Double {
+        return number.toString().toDouble()
+    }
+
+    override fun toFloat(): Float {
+        return number.toString().toFloat()
     }
 
     override fun equals(other: Any?): Boolean {
