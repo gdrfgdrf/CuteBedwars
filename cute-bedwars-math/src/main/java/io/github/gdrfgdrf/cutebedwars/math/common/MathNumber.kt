@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.math.common
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.div
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.IPrecisions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl

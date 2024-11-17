@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.common
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 
 class Point2D(
     private val x: IMathNumber,

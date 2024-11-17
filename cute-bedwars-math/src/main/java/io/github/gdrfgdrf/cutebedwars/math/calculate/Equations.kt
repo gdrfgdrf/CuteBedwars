@@ -1,9 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.math.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
-import io.github.gdrfgdrf.cutebedwars.math.common.times
-import kotlin.math.sqrt
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.times
 
 object Equations {
     /**

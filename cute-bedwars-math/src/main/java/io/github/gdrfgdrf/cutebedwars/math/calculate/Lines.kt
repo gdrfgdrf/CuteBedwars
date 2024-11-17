@@ -3,10 +3,8 @@ package io.github.gdrfgdrf.cutebedwars.math.calculate
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ILines
-import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.minus
 import io.github.gdrfgdrf.cutebedwars.math.common.Point3D
-import io.github.gdrfgdrf.cutebedwars.math.common.minus
-import io.github.gdrfgdrf.cutebedwars.math.common.times
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 import io.github.gdrfgdrf.cutebedwars.math.formula.distance.DistanceFormula

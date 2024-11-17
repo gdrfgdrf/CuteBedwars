@@ -1,9 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.math.generator
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.math.base.AbstractRangeGenerator
-import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
-import io.github.gdrfgdrf.cutebedwars.math.common.mathNumber
 import io.github.gdrfgdrf.cutebedwars.math.enums.Precisions
 
 class SigmaRangeGenerator(
