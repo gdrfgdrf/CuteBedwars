@@ -29,7 +29,7 @@ interface IItemProperties {
 
     fun check()
     fun copy(): IItemProperties
-    fun applyTo(itemStack: ItemStack)
+    fun applyTo(itemStack: ItemStack, withName: Boolean = true)
 
     companion object {
         fun create(func: IItemProperties.() -> Unit): IItemProperties {

@@ -14,6 +14,11 @@ class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties)
     }
 ) {
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {
+        if (appliedName) {
+            properties.applyTo(itemStack)
+            appliedName = true
+        }
+
         val givenItem = GivenItem(
             itemStack.clone(),
             this,

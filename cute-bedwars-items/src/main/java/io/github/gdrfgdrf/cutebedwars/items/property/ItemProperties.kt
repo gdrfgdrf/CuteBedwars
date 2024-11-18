@@ -55,15 +55,17 @@ class ItemProperties : IItemProperties {
         return properties
     }
 
-    override fun applyTo(itemStack: ItemStack) {
+    override fun applyTo(itemStack: ItemStack, withName: Boolean) {
         check()
 
         val itemMeta = itemStack.itemMeta
 
-        if (name != null) {
-            itemMeta.displayName = name!!().get().string
-        } else {
-            itemMeta.displayName = ""
+        if (withName) {
+            if (name != null || name!!().get() != null) {
+                itemMeta.displayName = name!!().get().string
+            } else {
+                itemMeta.displayName = ""
+            }
         }
 
         itemMeta.lore = arrayListOf()

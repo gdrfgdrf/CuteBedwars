@@ -23,7 +23,7 @@ class ItemBuilder : IItemBuilder {
         properties.check()
 
         val itemStack = ItemStack(properties.material)
-        properties.applyTo(itemStack)
+        properties.applyTo(itemStack, false)
 
         if (nbtModifier != null) {
             NBT.modify(itemStack, nbtModifier)
