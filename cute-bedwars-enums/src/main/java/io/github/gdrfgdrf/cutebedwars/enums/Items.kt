@@ -9,6 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.ItemLanguage
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.Material
+import org.bukkit.Particle
 
 @EnumServiceImpl("items")
 enum class Items(private val item: IItem) : IItems {
@@ -38,6 +39,10 @@ enum class Items(private val item: IItem) : IItems {
               val selections = ISelections.instance()
               val select = selections.get(player)
               select?.pos1(coordinate)
+              select?.trySpawnParticle(Particle.REDSTONE, 50)
+              select?.let { _ ->
+                  it.isCancelled = true
+              }
           }
           onRightClick = onRightClick@ {
               // pos2
@@ -55,7 +60,11 @@ enum class Items(private val item: IItem) : IItems {
 
               val selections = ISelections.instance()
               val select = selections.get(player)
-              select?.pos1(coordinate)
+              select?.pos2(coordinate)
+              select?.trySpawnParticle(Particle.REDSTONE, 10)
+              select?.let { _ ->
+                  it.isCancelled = true
+              }
           }
       }.build(true)
     ),
