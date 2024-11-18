@@ -10,6 +10,7 @@ import org.bukkit.entity.Player
 interface ISelections {
     fun get(player: Player): ISelect?
     fun create(player: Player): ISelect
+    fun remove(player: Player)
 
     companion object {
         fun instance(): ISelections = Mediator.get(ISelection::class.java)!!
