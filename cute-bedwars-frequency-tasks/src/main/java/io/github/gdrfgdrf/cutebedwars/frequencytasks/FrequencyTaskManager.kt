@@ -44,7 +44,11 @@ object FrequencyTaskManager : IFrequencyTaskManager {
             }
             if (taskEntry.task.canRun()) {
                 IThreadPoolService.instance().newTask {
-                    taskEntry.task.run()
+                    runCatching {
+                        taskEntry.task.run()
+                    }.onFailure {
+
+                    }
                 }
             }
         }
