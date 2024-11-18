@@ -13,6 +13,6 @@ interface ISelections {
     fun remove(player: Player)
 
     companion object {
-        fun instance(): ISelections = Mediator.get(ISelection::class.java)!!
+        fun instance(): ISelections = Mediator.get(ISelections::class.java)!!
     }
 }
