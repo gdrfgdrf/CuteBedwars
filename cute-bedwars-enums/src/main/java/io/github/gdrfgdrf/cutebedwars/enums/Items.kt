@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IItems
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.asyncTask
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.languages.collect.ItemLanguage
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
@@ -38,10 +39,14 @@ enum class Items(private val item: IItem) : IItems {
 
               val selections = ISelections.instance()
               val select = selections.get(player)
-              select?.pos1(coordinate)
-              select?.trySpawnParticle(Particle.REDSTONE, 50)
+
               select?.let { _ ->
+                  select.pos1(coordinate)
                   it.isCancelled = true
+                  asyncTask {
+                      select.trySpawnParticle(Particle.REDSTONE, 50)
+                  }
+
               }
           }
           onRightClick = onRightClick@ {
@@ -60,10 +65,12 @@ enum class Items(private val item: IItem) : IItems {
 
               val selections = ISelections.instance()
               val select = selections.get(player)
-              select?.pos2(coordinate)
-              select?.trySpawnParticle(Particle.REDSTONE, 10)
               select?.let { _ ->
+                  select.pos2(coordinate)
                   it.isCancelled = true
+                  asyncTask {
+                      select.trySpawnParticle(Particle.REDSTONE, 10)
+                  }
               }
           }
       }.build(true)
