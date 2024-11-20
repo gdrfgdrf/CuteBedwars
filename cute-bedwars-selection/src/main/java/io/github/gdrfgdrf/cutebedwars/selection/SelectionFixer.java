@@ -2,10 +2,10 @@ package io.github.gdrfgdrf.cutebedwars.selection;
 
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 
-public class SelectUtils {
+public class SelectionFixer {
     private final Coordinate centerPoint;
 
-    public SelectUtils(Coordinate centerPoint) {
+    public SelectionFixer(Coordinate centerPoint) {
         this.centerPoint = centerPoint;
     }
 

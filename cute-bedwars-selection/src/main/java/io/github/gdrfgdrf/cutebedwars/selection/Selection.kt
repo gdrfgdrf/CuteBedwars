@@ -54,10 +54,10 @@ class Selection(
         centerPoint.y = (pos1.y + pos2.y) / 2
         centerPoint.z = (pos1.z + pos2.z) / 2
 
-        val selectUtils = SelectUtils(centerPoint)
+        val selectionFixer = SelectionFixer(centerPoint)
 
-        val blockCoordinate1 = selectUtils.fixPoint(pos1)
-        val blockCoordinate2 = selectUtils.fixPoint(pos2)
+        val blockCoordinate1 = selectionFixer.fixPoint(pos1)
+        val blockCoordinate2 = selectionFixer.fixPoint(pos2)
 
         lines.apply {
             run {
