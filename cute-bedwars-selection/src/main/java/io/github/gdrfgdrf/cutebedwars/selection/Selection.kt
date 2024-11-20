@@ -17,7 +17,7 @@ class Selection(
     override val pos1: Coordinate,
     override val pos2: Coordinate
 ) : ISelection {
-    constructor(argumentSet: ArgumentSet): this(
+    constructor(argumentSet: ArgumentSet) : this(
         argumentSet.args[0] as Coordinate,
         argumentSet.args[1] as Coordinate
     )
@@ -49,8 +49,15 @@ class Selection(
     }
 
     init {
-        val blockCoordinate1 = pos1.blockCoordinate()
-        val blockCoordinate2 = pos2.blockCoordinate()
+        val centerPoint = Coordinate()
+        centerPoint.x = (pos1.x + pos2.x) / 2
+        centerPoint.y = (pos1.y + pos2.y) / 2
+        centerPoint.z = (pos1.z + pos2.z) / 2
+
+        val selectUtils = SelectUtils(centerPoint)
+
+        val blockCoordinate1 = selectUtils.fixPoint(pos1)
+        val blockCoordinate2 = selectUtils.fixPoint(pos2)
 
         lines.apply {
             run {
@@ -85,7 +92,8 @@ class Selection(
                     coordinate2.y = blockCoordinate1.y
                     coordinate2.z = blockCoordinate2.z
 
-                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
+                    val line =
+                        ILine3D.new(coordinate1.coordinate(), coordinate2)
                     add(line)
 
                     "(x2, y, z) -> (x2, y, z2) is $line".logDebug()
