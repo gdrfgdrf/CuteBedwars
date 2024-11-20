@@ -16,7 +16,7 @@ interface IFrequencyTask {
     fun count(): Int
     fun lastRun(): Long
 
-    fun run()
+    fun run(): Boolean
     fun canRun(): Boolean
 
     fun add(): IStopSignal

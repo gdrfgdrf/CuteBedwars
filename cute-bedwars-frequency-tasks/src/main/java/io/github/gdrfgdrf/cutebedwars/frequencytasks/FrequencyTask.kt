@@ -26,15 +26,15 @@ class FrequencyTask(
     override fun count(): Int = count
     override fun lastRun(): Long = lastRun
 
-    override fun run() {
+    override fun run(): Boolean {
         if (canceled) {
-            throw IllegalStateException("this frequency task is canceled")
+            return false
         }
         if (lastRun == 0L) {
             lastRun = System.currentTimeMillis()
             function(this)
             count++
-            return
+            return true
         }
 
         val currentTime = System.currentTimeMillis()
@@ -43,9 +43,9 @@ class FrequencyTask(
             lastRun = currentTime
             function(this)
             count++
-        } else {
-            throw IllegalStateException("the required frequency is not met")
+            return true
         }
+        return false
     }
 
     override fun canRun(): Boolean {
