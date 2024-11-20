@@ -35,6 +35,8 @@ class Line3D(
 
         var current = step
         val result = arrayListOf<IPoint3D>()
+        result.add(start)
+
         while (true) {
             val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(pos1, pos2, current)
             val distance = DistanceFormula.calculate(space, dimension, C, pos1)
@@ -50,6 +52,8 @@ class Line3D(
 
             current += step
         }
+
+        result.add(end)
 
         return result
     }
