@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.selection
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelection
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
@@ -23,7 +24,10 @@ class Selection(
     )
 
     private val lines = arrayListOf<ILine3D>()
+    private var cachedParticleGroup: IParticleGroup? = null
+
     private var initialized = false
+    private var destroyed = false
 
     private fun check() {
         if (!initialized) {
@@ -31,8 +35,19 @@ class Selection(
         }
     }
 
+    private fun check2() {
+        if (destroyed) {
+            throw IllegalStateException("this selection is destroyed")
+        }
+    }
+
     override fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal {
         check()
+        check2()
+        if (cachedParticleGroup != null) {
+            return cachedParticleGroup!!.spawn(world, frequency)
+        }
+
         val managedParticle = IParticles.instance().getOrCreate(particle)
         val particleGroup = managedParticle.create("selection-particle")
 
@@ -45,7 +60,16 @@ class Selection(
             }
         }
 
-        return particleGroup.spawn(world, frequency)
+        cachedParticleGroup = particleGroup
+        return cachedParticleGroup!!.spawn(world, frequency)
+    }
+
+    override fun destroy() {
+        lines.clear()
+        cachedParticleGroup = null
+        initialized = false
+        destroyed = true
+        System.gc()
     }
 
     init {
@@ -54,10 +78,8 @@ class Selection(
         centerPoint.y = (pos1.y + pos2.y) / 2
         centerPoint.z = (pos1.z + pos2.z) / 2
 
-        val selectionFixer = SelectionFixer(centerPoint)
-
-        val blockCoordinate1 = selectionFixer.fixPoint(pos1)
-        val blockCoordinate2 = selectionFixer.fixPoint(pos2)
+        val blockCoordinate1 = fix(centerPoint, pos1)
+        val blockCoordinate2 = fix(centerPoint, pos2)
 
         lines.apply {
             run {
@@ -193,4 +215,15 @@ class Selection(
         }
         initialized = true
     }
+
+    companion object {
+        fun fix(centerPoint: Coordinate, point: Coordinate): Coordinate {
+            val coordinate = Coordinate()
+            coordinate.x = if (point.x > centerPoint.x) point.x + 1 else point.x
+            coordinate.y = if (point.y > centerPoint.y) point.y + 1 else point.y
+            coordinate.z = if (point.z > centerPoint.z) point.z + 1 else point.z
+            return coordinate
+        }
+    }
+
 }
