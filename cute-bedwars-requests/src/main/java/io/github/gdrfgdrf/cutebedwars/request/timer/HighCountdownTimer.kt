@@ -80,10 +80,10 @@ internal object HighCountdownWorker : Runnable {
                     if (request.status() != IRequestStatuses.valueOf("RUNNING")) {
                         request.status(IRequestStatuses.valueOf("WAIT_NEXT_ROUND"))
                     }
+                }
 
-                    if (HighCountdownTimer.requests.isEmpty()) {
-                        sleepSafely(50)
-                    }
+                if (HighCountdownTimer.requests.isEmpty()) {
+                    sleepSafely(50)
                 }
             }.onFailure {
                 "An error occurred for the high countdown worker".logError(it)
