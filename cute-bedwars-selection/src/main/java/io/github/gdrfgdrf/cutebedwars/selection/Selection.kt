@@ -114,8 +114,7 @@ class Selection(
                     coordinate2.y = blockCoordinate1.y
                     coordinate2.z = blockCoordinate2.z
 
-                    val line =
-                        ILine3D.new(coordinate1.coordinate(), coordinate2)
+                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
                     add(line)
 
                     "(x2, y, z) -> (x2, y, z2) is $line".logDebug()
