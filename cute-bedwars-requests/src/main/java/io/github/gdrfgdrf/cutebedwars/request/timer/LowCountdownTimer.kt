@@ -84,9 +84,9 @@ internal object LowCountdownWorker : Runnable {
                         request.status(IRequestStatuses.valueOf("WAIT_NEXT_ROUND"))
                     }
 
-                    sleepSafely(50)
                 }
 
+                sleepSafely(50)
             }.onFailure {
                 "An error occurred for the low countdown worker".logError(it)
             }
