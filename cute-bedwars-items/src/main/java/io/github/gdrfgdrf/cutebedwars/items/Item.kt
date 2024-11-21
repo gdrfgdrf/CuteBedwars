@@ -18,7 +18,7 @@ open class Item(
     }
 
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {
-        if (appliedName) {
+        if (!appliedName) {
             properties.applyTo(itemStack)
             appliedName = true
         }

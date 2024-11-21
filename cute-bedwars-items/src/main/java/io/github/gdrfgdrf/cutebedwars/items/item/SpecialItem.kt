@@ -14,7 +14,7 @@ class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties)
     }
 ) {
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {
-        if (appliedName) {
+        if (!appliedName) {
             properties.applyTo(itemStack)
             appliedName = true
         }
