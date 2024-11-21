@@ -9,45 +9,43 @@ import java.text.DecimalFormat
 import kotlin.math.absoluteValue
 import kotlin.math.pow
 
-@ServiceImpl("math_number", needArgument = true)
-class MathNumber private constructor(override val number: Number) : IMathNumber {
-    constructor(argumentSet: ArgumentSet): this(argumentSet.args[0] as Number)
-
+@ServiceImpl("math_number", needArgument = true, instanceGetter = "of")
+class MathNumber private constructor(override val number: Number) : IMathNumber, Number() {
     override operator fun plus(number2: Int): IMathNumber {
         if (number is Int) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         if (number is Double) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         if (number is Float) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         throw UnsupportedOperationException()
     }
 
     override operator fun plus(number2: Double): IMathNumber {
         if (number is Int) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         if (number is Double) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         if (number is Float) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         throw UnsupportedOperationException()
     }
 
     override operator fun plus(number2: Float): IMathNumber {
         if (number is Int) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         if (number is Double) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         if (number is Float) {
-            return MathNumber(number + number2)
+            return of(number + number2)
         }
         throw UnsupportedOperationException()
     }
@@ -67,13 +65,13 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun unaryPlus(): IMathNumber {
         if (number is Int) {
-            return MathNumber(+number)
+            return of(+number)
         }
         if (number is Double) {
-            return MathNumber(+number)
+            return of(+number)
         }
         if (number is Float) {
-            return MathNumber(+number)
+            return of(+number)
         }
         throw UnsupportedOperationException()
     }
@@ -105,52 +103,52 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun unaryMinus(): IMathNumber {
         if (number is Int) {
-            return MathNumber(-number)
+            return of(-number)
         }
         if (number is Double) {
-            return MathNumber(-number)
+            return of(-number)
         }
         if (number is Float) {
-            return MathNumber(-number)
+            return of(-number)
         }
         throw UnsupportedOperationException()
     }
 
     override operator fun times(number2: Int): IMathNumber {
         if (number is Int) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         if (number is Double) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         if (number is Float) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         throw UnsupportedOperationException()
     }
 
     override operator fun times(number2: Double): IMathNumber {
         if (number is Int) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         if (number is Double) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         if (number is Float) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         throw UnsupportedOperationException()
     }
 
     override operator fun times(number2: Float): IMathNumber {
         if (number is Int) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         if (number is Double) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         if (number is Float) {
-            return MathNumber(number * number2)
+            return of(number * number2)
         }
         throw UnsupportedOperationException()
     }
@@ -170,39 +168,39 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun div(number2: Int): IMathNumber {
         if (number is Int) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         if (number is Double) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         if (number is Float) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         throw UnsupportedOperationException()
     }
 
     override fun div(number2: Double): IMathNumber {
         if (number is Int) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         if (number is Double) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         if (number is Float) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         throw UnsupportedOperationException()
     }
 
     override fun div(number2: Float): IMathNumber {
         if (number is Int) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         if (number is Double) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         if (number is Float) {
-            return MathNumber(number / number2)
+            return of(number / number2)
         }
         throw UnsupportedOperationException()
     }
@@ -274,39 +272,39 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
 
     override fun abs(): IMathNumber {
         if (number is Int) {
-            return MathNumber(number.absoluteValue)
+            return of(number.absoluteValue)
         }
         if (number is Double) {
-            return MathNumber(number.absoluteValue)
+            return of(number.absoluteValue)
         }
         if (number is Float) {
-            return MathNumber(number.absoluteValue)
+            return of(number.absoluteValue)
         }
         throw UnsupportedOperationException()
     }
 
     override fun pow(number2: Int): IMathNumber {
         if (number is Int) {
-            return MathNumber(number.toDouble().pow(number2))
+            return of(number.toDouble().pow(number2))
         }
         if (number is Double) {
-            return MathNumber(number.pow(number2))
+            return of(number.pow(number2))
         }
         if (number is Float) {
-            return MathNumber(number.pow(number2))
+            return of(number.pow(number2))
         }
         throw UnsupportedOperationException()
     }
 
     override fun sqrt(): IMathNumber {
         if (number is Int) {
-            return MathNumber(kotlin.math.sqrt(number.toDouble()))
+            return of(kotlin.math.sqrt(number.toDouble()))
         }
         if (number is Double) {
-            return MathNumber(kotlin.math.sqrt(number))
+            return of(kotlin.math.sqrt(number))
         }
         if (number is Float) {
-            return MathNumber(kotlin.math.sqrt(number))
+            return of(kotlin.math.sqrt(number))
         }
         throw UnsupportedOperationException()
     }
@@ -331,15 +329,27 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
     }
 
     override fun toInt(): Int {
-        return number.toString().toInt()
+        return number.toInt()
+    }
+
+    override fun toLong(): Long {
+        return number.toLong()
+    }
+
+    override fun toShort(): Short {
+        return number.toShort()
     }
 
     override fun toDouble(): Double {
-        return number.toString().toDouble()
+        return number.toDouble()
     }
 
     override fun toFloat(): Float {
-        return number.toString().toFloat()
+        return number.toFloat()
+    }
+
+    override fun toByte(): Byte {
+        return number.toByte()
     }
 
     override fun equals(other: Any?): Boolean {
@@ -390,7 +400,14 @@ class MathNumber private constructor(override val number: Number) : IMathNumber 
     }
 
     companion object {
-        fun of(number: Number) = MathNumber(number)
+        fun of(number: Number): IMathNumber {
+            return MathNumber(number)
+        }
+
+        @JvmStatic
+        fun of(argumentSet: ArgumentSet): IMathNumber {
+            return of(argumentSet.args[0] as Number)
+        }
     }
 
 }
