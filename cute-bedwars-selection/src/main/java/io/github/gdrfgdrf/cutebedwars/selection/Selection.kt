@@ -64,14 +64,6 @@ class Selection(
         return cachedParticleGroup!!.spawn(world, frequency)
     }
 
-    override fun destroy() {
-        lines.clear()
-        cachedParticleGroup = null
-        initialized = false
-        destroyed = true
-        System.gc()
-    }
-
     init {
         val centerPoint = Coordinate()
         centerPoint.x = (pos1.x + pos2.x) / 2
