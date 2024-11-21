@@ -23,7 +23,7 @@ enum class Descriptions(
     DATABASE_USERNAME(DescriptionLanguage::DATABASE_USERNAME, true),
     DATABASE_PASSWORD(DescriptionLanguage::DATABASE_PASSWORD, true),
     REQUEST_TIMEOUT(DescriptionLanguage::REQUEST_TIMEOUT, true),
-//    AREA_AUTO_SAVE_DELAY(DescriptionLanguage::AREA_AUTO_SAVE_DELAY, true),
+    THREAD_POOL_SERVICE_IMPL(DescriptionLanguage::THREAD_POOL_SERVICE_IMPL, true),
 
     AREA(DescriptionLanguage::AREA),
     AREA_ID(DescriptionLanguage::AREA_ID),

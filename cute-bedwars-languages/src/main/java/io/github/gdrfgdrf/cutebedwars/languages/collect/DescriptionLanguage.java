@@ -16,6 +16,7 @@ public class DescriptionLanguage implements LanguageCollect {
     public static LanguageString DATABASE_USERNAME;
     public static LanguageString DATABASE_PASSWORD;
     public static LanguageString REQUEST_TIMEOUT;
+    public static LanguageString THREAD_POOL_SERVICE_IMPL;
 
     public static LanguageString AREA;
     public static LanguageString AREA_ID;
