@@ -13,6 +13,8 @@ class Select(
 ) : ISelect {
     private val pos1 = Point(player)
     private val pos2 = Point(player)
+    private var cachedSelection: ISelection? = null
+
     override var stopSignal: IStopSignal? = null
 
     override fun pos1(): Coordinate? = pos1.coordinate
@@ -73,7 +75,13 @@ class Select(
         if (pos1.coordinate == null || pos2.coordinate == null) {
             throw IllegalArgumentException("pos1 and pos2 is required")
         }
-        return Selection(pos1.coordinate!!, pos2.coordinate!!)
+        if (cachedSelection != null &&
+            cachedSelection!!.pos1 == pos1.coordinate &&
+            cachedSelection!!.pos2 == pos2.coordinate) {
+            return cachedSelection!!
+        }
+        cachedSelection = Selection(pos1.coordinate!!, pos2.coordinate!!)
+        return cachedSelection!!
     }
 
     override fun destroy() {
