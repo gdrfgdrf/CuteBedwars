@@ -5,6 +5,7 @@ import de.tr7zw.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ICustomList
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.customList
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.replaceToColorSymbol
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Material
@@ -61,8 +62,8 @@ class ItemProperties : IItemProperties {
         val itemMeta = itemStack.itemMeta
 
         if (withName) {
-            if (name != null || name!!().get() != null) {
-                itemMeta.displayName = name!!().get().string
+            if (name != null && name!!().get() != null) {
+                itemMeta.displayName = name!!().get().string.replaceToColorSymbol()
             } else {
                 itemMeta.displayName = ""
             }
