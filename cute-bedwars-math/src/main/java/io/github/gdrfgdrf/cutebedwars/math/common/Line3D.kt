@@ -39,13 +39,18 @@ class Line3D(
 
         while (true) {
             val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(pos1, pos2, current)
+            // 计算错误时 break
+            if (C.x.toDouble().isNaN() || C.y.toDouble().isNaN() || C.z.toDouble().isNaN()) {
+                break
+            }
+
             val distance = DistanceFormula.calculate(space, dimension, C, pos1)
             if (distance < 0) {
                 throw IllegalArgumentException("distance cannot be negative")
             }
             result.add(C)
 
-            // 无法继续往下分
+            // 无法继续往下分时 break
             if (distance <= step) {
                 break
             }
