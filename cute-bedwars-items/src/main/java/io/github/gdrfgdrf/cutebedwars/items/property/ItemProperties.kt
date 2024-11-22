@@ -79,8 +79,7 @@ class ItemProperties : IItemProperties {
             }
         }
 
-        itemMeta.lore = arrayListOf()
-        itemMeta.lore.addAll(lores.list)
+        itemMeta.lore = lores.list
         itemMeta.itemFlags.clear()
         itemMeta.itemFlags.addAll(flags.list)
 

@@ -31,8 +31,13 @@ open class CommonItem(
 
         val slot = slot()
         itemStack = player.inventory.getItem(slot)
-        properties.applyTo(itemStack)
-        player.inventory.setItem(slot, itemStack)
+
+        val newItemStack = properties.generate()
+        ItemCollections.replaceKey(player, itemStack, newItemStack)
+
+        itemStack = newItemStack
+
+        player.inventory.setItem(slot, newItemStack)
     }
 
     override fun give(slotIndex: Int) {
