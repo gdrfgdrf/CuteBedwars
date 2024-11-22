@@ -19,9 +19,9 @@ interface IItemProperties {
     val flags: ICustomList<ItemFlag>
 
     var onGiven: ((Player, ICommonItem) -> Unit)?
-    var onClick: ((PlayerInteractEvent) -> Unit)?
-    var onLeftClick: ((PlayerInteractEvent) -> Unit)?
-    var onRightClick: ((PlayerInteractEvent) -> Unit)?
+    var onClick: ((PlayerInteractEvent, ICommonItem) -> Unit)?
+    var onLeftClick: ((PlayerInteractEvent, ICommonItem) -> Unit)?
+    var onRightClick: ((PlayerInteractEvent, ICommonItem) -> Unit)?
 
     var unbreakable: Boolean
     var droppable: Boolean

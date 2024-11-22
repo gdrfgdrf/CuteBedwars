@@ -25,12 +25,12 @@ enum class Items(private val item: IItem) : IItems {
           droppable = false
           onLeftClick = onLeftClick@ {
               // pos1
-              if (!it.hasBlock()) {
+              if (!event.hasBlock()) {
                   return@onLeftClick
               }
 
-              val player = it.player
-              val clickedBlock = it.clickedBlock
+              val player = event.player
+              val clickedBlock = event.clickedBlock
 
               val coordinate = Coordinate()
               coordinate.x = clickedBlock.x.toDouble()
@@ -42,21 +42,21 @@ enum class Items(private val item: IItem) : IItems {
 
               select?.let { _ ->
                   select.pos1(coordinate)
-                  it.isCancelled = true
+                  event.isCancelled = true
                   asyncTask {
                       select.trySpawnParticle(Particle.REDSTONE, 50)
                   }
 
               }
           }
-          onRightClick = onRightClick@ {
+          onRightClick = onRightClick@ { event, commonItem ->
               // pos2
-              if (!it.hasBlock()) {
+              if (!event.hasBlock()) {
                   return@onRightClick
               }
 
-              val player = it.player
-              val clickedBlock = it.clickedBlock
+              val player = event.player
+              val clickedBlock = event.clickedBlock
 
               val coordinate = Coordinate()
               coordinate.x = clickedBlock.x.toDouble()
@@ -67,7 +67,7 @@ enum class Items(private val item: IItem) : IItems {
               val select = selections.get(player)
               select?.let { _ ->
                   select.pos2(coordinate)
-                  it.isCancelled = true
+                  event.isCancelled = true
                   asyncTask {
                       select.trySpawnParticle(Particle.REDSTONE, 10)
                   }

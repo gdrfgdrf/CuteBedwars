@@ -24,9 +24,9 @@ class ItemProperties : IItemProperties {
     override val flags: ICustomList<ItemFlag> = customList()
 
     override var onGiven: ((Player, ICommonItem) -> Unit)? = null
-    override var onClick: ((PlayerInteractEvent) -> Unit)? = null
-    override var onLeftClick: ((PlayerInteractEvent) -> Unit)? = null
-    override var onRightClick: ((PlayerInteractEvent) -> Unit)? = null
+    override var onClick: ((PlayerInteractEvent, ICommonItem) -> Unit)? = null
+    override var onLeftClick: ((PlayerInteractEvent, ICommonItem) -> Unit)? = null
+    override var onRightClick: ((PlayerInteractEvent, ICommonItem) -> Unit)? = null
 
     override var unbreakable: Boolean = false
     override var droppable: Boolean = true
