@@ -28,9 +28,6 @@ open class CommonItem(
         if (properties.droppable) {
             throw IllegalArgumentException("only the undroppable item can be updated")
         }
-        if (Bukkit.getServer().isPrimaryThread) {
-            throw IllegalStateException("update method cannot be run in the main thread")
-        }
 
         val slot = slot()
         itemStack = player.inventory.getItem(slot)
