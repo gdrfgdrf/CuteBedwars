@@ -48,6 +48,7 @@ class ItemProperties : IItemProperties {
         properties.lores.add(*this.lores.list.toTypedArray())
         properties.flags.add(*this.flags.list.toTypedArray())
 
+        properties.onGiven = this.onGiven
         properties.onClick = this.onClick
         properties.onLeftClick = this.onLeftClick
         properties.onRightClick = this.onRightClick
