@@ -8,6 +8,7 @@ interface ICustomList<E> {
     val list: MutableList<E>
 
     fun add(vararg e: E)
+    operator fun set(index: Int, e: E)
     fun remove(e: E)
     fun removeAt(index: Int)
     fun removeAll(vararg e: E)

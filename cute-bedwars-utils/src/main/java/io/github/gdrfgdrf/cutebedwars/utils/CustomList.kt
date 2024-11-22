@@ -11,6 +11,10 @@ class CustomList<E> : ICustomList<E> {
         list.addAll(e.toSet())
     }
 
+    override operator fun set(index: Int, e: E) {
+        list[index] = e
+    }
+
     override fun remove(e: E) {
         list.remove(e)
     }
