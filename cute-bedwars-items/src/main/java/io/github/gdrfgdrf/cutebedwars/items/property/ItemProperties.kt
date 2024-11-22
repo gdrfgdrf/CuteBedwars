@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.items.property
 
 import com.github.yitter.idgen.YitIdHelper
 import de.tr7zw.nbtapi.NBT
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ICustomList
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.customList
@@ -22,7 +23,7 @@ class ItemProperties : IItemProperties {
     override val lores: ICustomList<String> = customList()
     override val flags: ICustomList<ItemFlag> = customList()
 
-    override var onGiven: ((Player) -> Unit)? = null
+    override var onGiven: ((Player, ICommonItem) -> Unit)? = null
     override var onClick: ((PlayerInteractEvent) -> Unit)? = null
     override var onLeftClick: ((PlayerInteractEvent) -> Unit)? = null
     override var onRightClick: ((PlayerInteractEvent) -> Unit)? = null

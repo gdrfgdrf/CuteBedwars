@@ -18,7 +18,7 @@ interface IItemProperties {
     val lores: ICustomList<String>
     val flags: ICustomList<ItemFlag>
 
-    var onGiven: ((Player) -> Unit)?
+    var onGiven: ((Player, ICommonItem) -> Unit)?
     var onClick: ((PlayerInteractEvent) -> Unit)?
     var onLeftClick: ((PlayerInteractEvent) -> Unit)?
     var onRightClick: ((PlayerInteractEvent) -> Unit)?
