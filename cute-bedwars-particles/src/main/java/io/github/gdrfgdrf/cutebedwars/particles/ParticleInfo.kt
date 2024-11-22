@@ -12,7 +12,7 @@ class ParticleInfo(
     override val coordinate: Coordinate,
     override val count: Int
 ): IParticleInfo {
-    override var extra: Double? = null
+    override var extra: Double? = 0.0
     override var data: Any? = null
 
     constructor(argumentSet: ArgumentSet): this(
