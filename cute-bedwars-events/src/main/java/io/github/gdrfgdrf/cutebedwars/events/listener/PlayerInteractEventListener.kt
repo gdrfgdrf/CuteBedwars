@@ -19,13 +19,13 @@ class PlayerInteractEventListener : Listener {
         val properties = commonItem.properties
 
         if (action != Action.PHYSICAL) {
-            properties.onClick?.invoke(playerInteractEvent)
+            properties.onClick?.invoke(playerInteractEvent, commonItem)
         }
         when (action) {
-            Action.LEFT_CLICK_AIR -> properties.onLeftClick?.invoke(playerInteractEvent)
-            Action.LEFT_CLICK_BLOCK -> properties.onLeftClick?.invoke(playerInteractEvent)
-            Action.RIGHT_CLICK_AIR -> properties.onRightClick?.invoke(playerInteractEvent)
-            Action.RIGHT_CLICK_BLOCK -> properties.onRightClick?.invoke(playerInteractEvent)
+            Action.LEFT_CLICK_AIR -> properties.onLeftClick?.invoke(playerInteractEvent, commonItem)
+            Action.LEFT_CLICK_BLOCK -> properties.onLeftClick?.invoke(playerInteractEvent, commonItem)
+            Action.RIGHT_CLICK_AIR -> properties.onRightClick?.invoke(playerInteractEvent, commonItem)
+            Action.RIGHT_CLICK_BLOCK -> properties.onRightClick?.invoke(playerInteractEvent, commonItem)
             Action.PHYSICAL -> {}
         }
     }
