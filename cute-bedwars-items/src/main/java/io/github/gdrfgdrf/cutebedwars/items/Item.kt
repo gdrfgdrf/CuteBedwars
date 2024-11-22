@@ -30,6 +30,7 @@ open class Item(
             amount
         )
         commonItem.give(slotIndex)
+        properties.onGiven?.invoke()
 
         return commonItem
     }

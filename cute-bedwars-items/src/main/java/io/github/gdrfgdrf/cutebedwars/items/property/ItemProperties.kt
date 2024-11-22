@@ -21,6 +21,7 @@ class ItemProperties : IItemProperties {
     override val lores: ICustomList<String> = customList()
     override val flags: ICustomList<ItemFlag> = customList()
 
+    override var onGiven: (() -> Unit)? = null
     override var onClick: ((PlayerInteractEvent) -> Unit)? = null
     override var onLeftClick: ((PlayerInteractEvent) -> Unit)? = null
     override var onRightClick: ((PlayerInteractEvent) -> Unit)? = null
