@@ -23,29 +23,7 @@ enum class Items(private val item: IItem) : IItems {
           unbreakable = true
           movable = true
           droppable = false
-          onGiven = onGiven@ { player, commonItem ->
-              val selections = ISelections.instance()
-              val select = selections.get(player)
-              select?.let {
-                  val properties = commonItem.properties
-                  val pos1 = it.pos1()
-                  val pos2 = it.pos2()
-                  var update = false
-
-                  if (pos1 != null) {
-                      properties.lores[0] = ItemLanguage.SELECTION_TOOL_LORE_ONE.get().format(pos1).string
-                      update = true
-                  }
-                  if (pos2 != null) {
-                      properties.lores[1] = ItemLanguage.SELECTION_TOOL_LORE_TWO.get().format(pos2).string
-                      update = true
-                  }
-                  if (update) {
-                      commonItem.update()
-                  }
-              }
-          }
-          onLeftClick = onLeftClick@ { event, commonItem ->
+          onLeftClick = onLeftClick@ {
               // pos1
               if (!event.hasBlock()) {
                   return@onLeftClick
@@ -69,8 +47,6 @@ enum class Items(private val item: IItem) : IItems {
                       select.trySpawnParticle(Particle.REDSTONE, 50)
                   }
 
-                  val properties = commonItem.properties
-                  properties.lores[0] = ItemLanguage.SELECTION_TOOL_LORE_ONE.get().format(coordinate).string
               }
           }
           onRightClick = onRightClick@ { event, commonItem ->
