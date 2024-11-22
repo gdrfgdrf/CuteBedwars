@@ -12,7 +12,13 @@ class CustomList<E> : ICustomList<E> {
     }
 
     override operator fun set(index: Int, e: E) {
-        list[index] = e
+        if (list.size > index) {
+            list[index] = e
+        } else {
+            if (list.size == index) {
+                list.add(e)
+            }
+        }
     }
 
     override fun remove(e: E) {
