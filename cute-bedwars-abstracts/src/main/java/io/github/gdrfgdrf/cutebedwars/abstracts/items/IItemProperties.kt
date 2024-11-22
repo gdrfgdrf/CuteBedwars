@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -17,7 +18,7 @@ interface IItemProperties {
     val lores: ICustomList<String>
     val flags: ICustomList<ItemFlag>
 
-    var onGiven: (() -> Unit)?
+    var onGiven: ((Player) -> Unit)?
     var onClick: ((PlayerInteractEvent) -> Unit)?
     var onLeftClick: ((PlayerInteractEvent) -> Unit)?
     var onRightClick: ((PlayerInteractEvent) -> Unit)?

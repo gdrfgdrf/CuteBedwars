@@ -26,7 +26,7 @@ class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties)
             amount
         )
         givenItem.give(slotIndex)
-        properties.onGiven?.invoke()
+        properties.onGiven?.invoke(player)
 
         return givenItem
     }
