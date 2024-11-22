@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.items
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -9,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 @ServiceImpl("item_collections")
 object ItemCollections : IItemCollections {
-    private val map = ConcurrentHashMap<Player, ConcurrentHashMap<ItemStack, ICommonItem>>()
+    private val map = ConcurrentHashMap<String, ConcurrentHashMap<ItemStack, ICommonItem>>()
 
     override fun find(player: Player, itemStack: ItemStack): ICommonItem? {
         val map = get(player) ?: return null
@@ -17,7 +18,7 @@ object ItemCollections : IItemCollections {
     }
 
     override fun get(player: Player): Map<ItemStack, ICommonItem>? {
-        return map[player]
+        return map[player.uuid()]
     }
 
     override fun contains(player: Player, itemStack: ItemStack): Boolean {
@@ -40,22 +41,24 @@ object ItemCollections : IItemCollections {
         map.remove(givenItem.itemStack)
 
         if (map.isEmpty()) {
-            this.map.remove(player)
+            this.map.remove(player.uuid())
         }
     }
 
     override fun removeAll(player: Player) {
-        map.remove(player)
+        map.remove(player.uuid())
     }
 
     private fun getOrCreate(player: Player, createMap: Boolean = true): MutableMap<ItemStack, ICommonItem>? {
-        if (!map.containsKey(player)) {
+        val uuid = player.uuid()
+
+        if (!map.containsKey(uuid)) {
             if (!createMap) {
                 return null
             }
-            map[player] = ConcurrentHashMap<ItemStack, ICommonItem>()
+            map[uuid] = ConcurrentHashMap<ItemStack, ICommonItem>()
         }
 
-        return map[player]
+        return map[uuid]
     }
 }
