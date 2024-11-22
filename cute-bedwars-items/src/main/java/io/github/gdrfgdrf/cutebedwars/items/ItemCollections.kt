@@ -12,6 +12,13 @@ import java.util.concurrent.ConcurrentHashMap
 object ItemCollections : IItemCollections {
     private val map = ConcurrentHashMap<String, ConcurrentHashMap<ItemStack, ICommonItem>>()
 
+    override fun replaceKey(player: Player, oldItemStack: ItemStack, newItemStack: ItemStack) {
+        val map = get(player) ?: return
+        val commonItem = find(player, oldItemStack) ?: return
+        map.remove(oldItemStack)
+        map[newItemStack] = commonItem
+    }
+
     override fun find(player: Player, providedItemStack: ItemStack): ICommonItem? {
         val map = get(player) ?: return null
         map.forEach { (itemStack, commonItem) ->
@@ -22,7 +29,7 @@ object ItemCollections : IItemCollections {
         return null
     }
 
-    override fun get(player: Player): Map<ItemStack, ICommonItem>? {
+    override fun get(player: Player): MutableMap<ItemStack, ICommonItem>? {
         return map[player.uuid()]
     }
 
