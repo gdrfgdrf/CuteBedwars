@@ -9,10 +9,12 @@ import org.bukkit.inventory.ItemStack
 
 class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties) : Item(
     itemStack,
-    properties.apply {
+    properties
+) {
+    init {
         properties.droppable = false
     }
-) {
+
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {
         if (!appliedName) {
             properties.applyTo(itemStack)
