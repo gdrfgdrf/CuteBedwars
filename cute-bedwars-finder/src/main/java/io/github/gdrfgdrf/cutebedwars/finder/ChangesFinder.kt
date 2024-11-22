@@ -6,7 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChanges
 import io.github.gdrfgdrf.cutebedwars.finder.result.FindResult
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 

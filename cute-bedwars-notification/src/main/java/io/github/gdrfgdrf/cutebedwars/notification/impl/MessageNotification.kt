@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.notification.base.AbstractNotification
 import io.github.gdrfgdrf.cutebedwars.notification.base.PermissibleNotification
 import org.bukkit.command.CommandSender

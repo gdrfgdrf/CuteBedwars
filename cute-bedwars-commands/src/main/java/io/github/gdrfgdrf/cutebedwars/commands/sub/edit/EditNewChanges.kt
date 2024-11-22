@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit

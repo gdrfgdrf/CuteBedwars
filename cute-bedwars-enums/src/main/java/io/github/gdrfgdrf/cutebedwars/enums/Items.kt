@@ -83,6 +83,8 @@ enum class Items(private val item: IItem) : IItems {
                   }
 
                   updateLores(select, commonItem)
+
+
               }
           }
           onRightClick = onRightClick@ { event, commonItem ->

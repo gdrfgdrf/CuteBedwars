@@ -6,7 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParamTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender

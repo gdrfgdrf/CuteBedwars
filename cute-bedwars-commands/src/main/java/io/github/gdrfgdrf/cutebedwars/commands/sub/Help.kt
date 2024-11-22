@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.extension.middleWork
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

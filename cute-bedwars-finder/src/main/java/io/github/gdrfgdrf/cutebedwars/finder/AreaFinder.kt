@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManage
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.isLong
 import io.github.gdrfgdrf.cutebedwars.finder.result.FindResult
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 import java.util.regex.Pattern

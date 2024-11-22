@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.Generator
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.TeamColor
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 

@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 

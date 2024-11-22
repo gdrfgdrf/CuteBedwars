@@ -43,6 +43,9 @@ public class CommonLanguage implements LanguageCollect {
     public static LanguageString STATUS_ENABLED;
     public static LanguageString STATUS_INDEPENDENT;
 
+    public static LanguageString SELECTED_POS_1;
+    public static LanguageString SELECTED_POS_2;
+
     public static LanguageString COORDINATE_FULL;
 
     public static LanguageString REGION_ERROR;

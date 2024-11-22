@@ -12,7 +12,7 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.ApplyException
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import org.bukkit.command.CommandSender
 
 class PropertyChange(

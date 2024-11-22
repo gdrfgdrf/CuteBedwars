@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.information.IChangesInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

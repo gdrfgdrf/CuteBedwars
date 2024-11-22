@@ -1,11 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.locale.extension
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.LocalizationContext
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import org.bukkit.command.CommandSender
 
-fun middleWork(prefix: String? = null, commandSender: CommandSender, work: LocalizationContext.() -> Unit) {
+fun middleWork(prefix: String? = null, commandSender: CommandSender, work: ILocalizationContext.() -> Unit) {
     localizationScope(commandSender) {
         if (prefix != null) {
             message(CommonLanguage.COMMON_TOP)

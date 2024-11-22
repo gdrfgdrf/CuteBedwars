@@ -11,7 +11,7 @@ import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender

@@ -12,7 +12,7 @@ import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
-import io.github.gdrfgdrf.cutebedwars.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
