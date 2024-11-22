@@ -9,6 +9,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.replaceToColorSymbol
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -21,7 +22,7 @@ class ItemProperties : IItemProperties {
     override val lores: ICustomList<String> = customList()
     override val flags: ICustomList<ItemFlag> = customList()
 
-    override var onGiven: (() -> Unit)? = null
+    override var onGiven: ((Player) -> Unit)? = null
     override var onClick: ((PlayerInteractEvent) -> Unit)? = null
     override var onLeftClick: ((PlayerInteractEvent) -> Unit)? = null
     override var onRightClick: ((PlayerInteractEvent) -> Unit)? = null
