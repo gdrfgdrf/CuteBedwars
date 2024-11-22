@@ -22,6 +22,11 @@ public class Coordinate {
         return coordinate;
     }
 
+    @Override
+    public String toString() {
+        return "(%s, %s, %s)".formatted(x, y, z);
+    }
+
     @SuppressWarnings("unchecked")
     @ConvertPropertyFunction
     public static <T> T convert(Class<?> targetType, Object obj) {
