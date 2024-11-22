@@ -60,6 +60,12 @@ class ItemProperties : IItemProperties {
         return properties
     }
 
+    override fun generate(withName: Boolean): ItemStack {
+        val itemStack = ItemStack(material)
+        applyTo(itemStack, withName)
+        return itemStack
+    }
+
     override fun applyTo(itemStack: ItemStack, withName: Boolean) {
         check()
 

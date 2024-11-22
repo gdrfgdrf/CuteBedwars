@@ -31,6 +31,7 @@ interface IItemProperties {
 
     fun check()
     fun copy(): IItemProperties
+    fun generate(withName: Boolean = true): ItemStack
     fun applyTo(itemStack: ItemStack, withName: Boolean = true)
 
     companion object {
