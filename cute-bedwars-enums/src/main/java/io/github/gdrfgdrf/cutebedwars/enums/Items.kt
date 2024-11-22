@@ -4,11 +4,13 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IItems
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelect
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.asyncTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.replaceToColorSymbol
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.ItemLanguage
 import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
@@ -84,7 +86,11 @@ enum class Items(private val item: IItem) : IItems {
 
                   updateLores(select, commonItem)
 
-
+                  localizationScope(player) {
+                      message(CommonLanguage.SELECTED_POS_1)
+                          .format0(coordinate)
+                          .send()
+                  }
               }
           }
           onRightClick = onRightClick@ { event, commonItem ->
@@ -111,6 +117,12 @@ enum class Items(private val item: IItem) : IItems {
                   }
 
                   updateLores(select, commonItem)
+
+                  localizationScope(player) {
+                      message(CommonLanguage.SELECTED_POS_2)
+                          .format0(coordinate)
+                          .send()
+                  }
               }
           }
       }.build(true)

@@ -11,12 +11,9 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
 
-@ServiceImpl("localization_context")
-class LocalizationContext(argumentSet: ArgumentSet) : ILocalizationContext {
-    private val sender: CommandSender = argumentSet.args[0] as CommandSender
-
-    constructor(sender: CommandSender) :
-            this(ArgumentSet(arrayOf(sender)))
+@ServiceImpl("localization_context", needArgument = true)
+class LocalizationContext(val sender: CommandSender) : ILocalizationContext {
+    constructor(argumentSet: ArgumentSet): this(argumentSet.args[0] as CommandSender)
 
     override fun message(string: String): ITranslationAgent {
         return TranslationAgent(sender, CuteTranslation.of(string))
