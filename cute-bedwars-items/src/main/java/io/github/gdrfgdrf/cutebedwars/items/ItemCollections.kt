@@ -12,9 +12,14 @@ import java.util.concurrent.ConcurrentHashMap
 object ItemCollections : IItemCollections {
     private val map = ConcurrentHashMap<String, ConcurrentHashMap<ItemStack, ICommonItem>>()
 
-    override fun find(player: Player, itemStack: ItemStack): ICommonItem? {
+    override fun find(player: Player, providedItemStack: ItemStack): ICommonItem? {
         val map = get(player) ?: return null
-        return map[itemStack]
+        map.forEach { (itemStack, commonItem) ->
+            if (itemStack == providedItemStack) {
+                return commonItem
+            }
+        }
+        return null
     }
 
     override fun get(player: Player): Map<ItemStack, ICommonItem>? {

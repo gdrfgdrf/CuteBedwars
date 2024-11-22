@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack
 @Service("item_collections")
 @KotlinSingleton
 interface IItemCollections {
-    fun find(player: Player, itemStack: ItemStack): ICommonItem?
+    fun find(player: Player, providedItemStack: ItemStack): ICommonItem?
     fun get(player: Player): Map<ItemStack, ICommonItem>?
     fun contains(player: Player, itemStack: ItemStack): Boolean
     fun contains(player: Player, givenItem: ICommonItem): Boolean
