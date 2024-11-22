@@ -113,7 +113,7 @@ enum class Items(private val item: IItem) : IItems {
                   select.pos2(coordinate)
                   event.isCancelled = true
                   asyncTask {
-                      select.trySpawnParticle(Particle.END_ROD, 10)
+                      select.trySpawnParticle(Particle.END_ROD, 50)
                   }
 
                   updateLores(select, commonItem)
