@@ -52,7 +52,7 @@ class Selection(
         val particleGroup = managedParticle.create("selection-particle")
 
         lines.forEach { line3d ->
-            line3d.divide(1.mathNumber()).forEach { point3d ->
+            line3d.divide(0.5.mathNumber()).forEach { point3d ->
                 val x = point3d.x
                 val y = point3d.y
                 val z = point3d.z
