@@ -12,6 +12,7 @@ interface ILine3D {
     val start: IPoint3D
     val end: IPoint3D
 
+    fun length(): IMathNumber
     fun half(): ILine3D
 
     /**

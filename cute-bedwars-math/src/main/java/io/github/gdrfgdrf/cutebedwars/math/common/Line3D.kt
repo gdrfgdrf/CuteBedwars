@@ -26,6 +26,17 @@ class Line3D(
         argumentSet.args[1] as IPoint3D
     )
 
+    private var length: IMathNumber? = null
+
+    override fun length(): IMathNumber {
+        if (length != null) {
+            return length!!
+        }
+
+        length = DistanceFormula.calculate(Spaces.EUCLIDEAN, Dimensions.THREE, start, end)
+        return length!!
+    }
+
     override fun half(): ILine3D {
         val x = (start.x + end.x) / 2
         val y = (start.y + end.y) / 2
