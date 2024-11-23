@@ -26,6 +26,7 @@ class Selection(
     )
 
     private val lines = arrayListOf<ILine3D>()
+    private val otherPoints = arrayListOf<IPoint3D>()
     private var cachedParticleGroup: IParticleGroup? = null
 
     private var initialized = false
@@ -61,6 +62,12 @@ class Selection(
                 particleGroup.add(x.toDouble(), y.toDouble(), z.toDouble())
             }
         }
+        otherPoints.forEach { point3d ->
+            val x = point3d.x
+            val y = point3d.y
+            val z = point3d.z
+            particleGroup.add(x.toDouble(), y.toDouble(), z.toDouble())
+        }
 
         cachedParticleGroup = particleGroup
         return cachedParticleGroup!!.spawn(playerCollection, frequency)
@@ -69,6 +76,7 @@ class Selection(
     override fun destroy() {
         destroyed = true
         lines.clear()
+        otherPoints.clear()
         cachedParticleGroup?.clear()
     }
 
