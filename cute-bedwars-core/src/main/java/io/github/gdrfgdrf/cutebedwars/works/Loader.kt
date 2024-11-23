@@ -17,6 +17,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManage
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
@@ -73,6 +74,10 @@ object Loader : ILoader {
 
             loadAreas()
             loadChangeTypeRegistry()
+
+            if (IConfig["EnableDebugLogging"]) {
+                "Debug logging is enabled".logDebug()
+            }
         }.onFailure {
             javaPlugin.logger.severe("An error occurred while loading CuteBedwars")
             it.printStackTrace()
