@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
@@ -12,6 +13,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.Particle
 import org.bukkit.entity.Player
+import kotlin.math.absoluteValue
 
 @ServiceImpl("selection", needArgument = true)
 class Selection(
@@ -248,6 +250,8 @@ class Selection(
                 }
             }
 
+            val oneThreeY = (blockCoordinate1.y - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
+
             run {
                 "Calculating the bottom cross of the selection".logDebug()
 
@@ -255,19 +259,25 @@ class Selection(
                     val coordinate1 = lines[6].half().end
                     val coordinate2 = lines[5].half().end
 
-                    val line = ILine3D.new(coordinate1, coordinate2)
+                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThreeY, coordinate1.z)
+                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThreeY, coordinate2.z)
+
+                    val line = ILine3D.new(coordinate1Result, coordinate2Result)
                     add(line)
 
-                    "(x2, y2, z) -> (x2, y2, z2)(pos2) / 2 -> (x, y2, z) -> (x, y2, z2) / 2 is $line".logDebug()
+                    "(x2, y2, z) -> (x2, y2, z2)(pos2) / 2 ( 1 / 3 y2 ) -> (x, y2, z) -> (x, y2, z2) / 2 ( 1 / 3 y2 ) is $line".logDebug()
                 }
                 run {
                     val coordinate1 = lines[4].half().end
                     val coordinate2 = lines[7].half().end
 
-                    val line = ILine3D.new(coordinate1, coordinate2)
+                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThreeY, coordinate1.z)
+                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThreeY, coordinate2.z)
+
+                    val line = ILine3D.new(coordinate1Result, coordinate2Result)
                     add(line)
 
-                    ("(x, y2, z) -> (x2, y2, z) / 2 -> (x, y2, z2) -> (x2, y2, z2)(pos2) / 2 is $line").logDebug()
+                    ("(x, y2, z) -> (x2, y2, z) / 2 ( 1 / 3 y2 ) -> (x, y2, z2) -> (x2, y2, z2)(pos2) / 2 ( 1 / 3 y2 ) is $line").logDebug()
                 }
             }
         }
