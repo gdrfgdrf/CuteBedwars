@@ -80,6 +80,9 @@ class Select(
             cachedSelection!!.pos2 == pos2.coordinate) {
             return cachedSelection!!
         }
+        if (cachedSelection != null) {
+            cachedSelection!!.destroy()
+        }
         cachedSelection = Selection(pos1.coordinate!!, pos2.coordinate!!)
         return cachedSelection!!
     }
