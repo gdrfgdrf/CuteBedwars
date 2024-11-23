@@ -35,7 +35,7 @@ object Logs : ILogs {
     override fun debug(string: String) {
         if (IConfig["EnableDebugLogging"]) {
             runCatching {
-                logger().finest(string)
+                logger().info("Debugging: $string")
             }.onFailure {
                 println("[CuteBedwars DEBUG] $string")
             }
