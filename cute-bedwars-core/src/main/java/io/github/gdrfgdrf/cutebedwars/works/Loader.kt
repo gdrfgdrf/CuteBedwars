@@ -60,7 +60,7 @@ object Loader : ILoader {
             if (!idGeneratorInitialized) {
                 "Initializing the id generator".logInfo()
                 val workerId = IConfig.get<Short>("WorkerId")
-                val options = if (workerId >= 0) {
+                val options = if (workerId.toInt() != 0) {
                     "Use the custom worker id: $workerId".logInfo()
                     IdGeneratorOptions(IConfig["WorkerId"])
                 } else {
