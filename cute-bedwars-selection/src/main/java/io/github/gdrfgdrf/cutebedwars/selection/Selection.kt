@@ -3,7 +3,6 @@ package io.github.gdrfgdrf.cutebedwars.selection
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ILines
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
@@ -287,7 +286,7 @@ class Selection(
                 }
             }
 
-            val oneThreeY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
+            val oneThirdY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
 
             run {
                 "Calculating the 1 / 3 y cross of the selection".logDebug()
@@ -295,12 +294,12 @@ class Selection(
                 run {
                     val coordinate1 = Coordinate()
                     coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = oneThreeY.toDouble()
+                    coordinate1.y = oneThirdY.toDouble()
                     coordinate1.z = blockCoordinate1.z
 
                     val coordinate2 = Coordinate()
                     coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = oneThreeY.toDouble()
+                    coordinate2.y = oneThirdY.toDouble()
                     coordinate2.z = blockCoordinate1.z
 
                     val line = ILine3D.new(coordinate1, coordinate2)
@@ -311,12 +310,12 @@ class Selection(
                 run {
                     val coordinate1 = Coordinate()
                     coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = oneThreeY.toDouble()
+                    coordinate1.y = oneThirdY.toDouble()
                     coordinate1.z = blockCoordinate1.z
 
                     val coordinate2 = Coordinate()
                     coordinate2.x = blockCoordinate1.x
-                    coordinate2.y = oneThreeY.toDouble()
+                    coordinate2.y = oneThirdY.toDouble()
                     coordinate2.z = blockCoordinate2.z
 
                     val line = ILine3D.new(coordinate1, coordinate2)
@@ -328,7 +327,7 @@ class Selection(
                     val coordinate1 = lines[16].end
                     val coordinate2 = Coordinate()
                     coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = oneThreeY.toDouble()
+                    coordinate2.y = oneThirdY.toDouble()
                     coordinate2.z = blockCoordinate2.z
 
                     val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
@@ -349,8 +348,8 @@ class Selection(
                     val coordinate1 = lines[6].half().end
                     val coordinate2 = lines[5].half().end
 
-                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThreeY, coordinate1.z)
-                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThreeY, coordinate2.z)
+                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThirdY, coordinate1.z)
+                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThirdY, coordinate2.z)
 
                     val line = ILine3D.new(coordinate1Result, coordinate2Result)
                     add(line)
@@ -361,8 +360,8 @@ class Selection(
                     val coordinate1 = lines[4].half().end
                     val coordinate2 = lines[7].half().end
 
-                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThreeY, coordinate1.z)
-                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThreeY, coordinate2.z)
+                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThirdY, coordinate1.z)
+                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThirdY, coordinate2.z)
 
                     val line = ILine3D.new(coordinate1Result, coordinate2Result)
                     add(line)
@@ -384,9 +383,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThreeY, 90.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 90.mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), oneThreeY, (-90).mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -401,9 +400,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThreeY, (-90).mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), oneThreeY, 90.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 90.mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -418,9 +417,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), y = oneThreeY)
+                        circle2d.divide(1.mathNumber(), y = oneThirdY)
                     } else {
-                        circle2d.divide(1.mathNumber(), oneThreeY, 180.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 180.mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -435,9 +434,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThreeY, 180.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 180.mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), y = oneThreeY)
+                        circle2d.divide(1.mathNumber(), y = oneThirdY)
                     }
 
                     otherPoints.addAll(result)
@@ -472,9 +471,69 @@ class Selection(
                 }
 
                 val circle = ICircle2D.new(center2d, R)
-                val result = circle.divide(1.mathNumber(), y = oneThreeY)
+                val result = circle.divide(1.mathNumber(), y = oneThirdY)
 
                 otherPoints.addAll(result)
+            }
+
+            val twoThirdsY = (biggerY - ( 2 * (blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
+
+            run {
+                "Calculating the 2 / 3 y cross of the selection".logDebug()
+
+                run {
+                    val coordinate1 = Coordinate()
+                    coordinate1.x = blockCoordinate1.x
+                    coordinate1.y = twoThirdsY.toDouble()
+                    coordinate1.z = blockCoordinate1.z
+
+                    val coordinate2 = Coordinate()
+                    coordinate2.x = blockCoordinate2.x
+                    coordinate2.y = twoThirdsY.toDouble()
+                    coordinate2.z = blockCoordinate1.z
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z)(pos1)( 2 / 3 y ) -> (x2, y, z)( 2 / 3 y ) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = Coordinate()
+                    coordinate1.x = blockCoordinate1.x
+                    coordinate1.y = twoThirdsY.toDouble()
+                    coordinate1.z = blockCoordinate1.z
+
+                    val coordinate2 = Coordinate()
+                    coordinate2.x = blockCoordinate1.x
+                    coordinate2.y = twoThirdsY.toDouble()
+                    coordinate2.z = blockCoordinate2.z
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z)(pos1)( 2 / 3 y ) -> (x, y, z2)( 2 / 3 y ) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[22].end
+                    val coordinate2 = Coordinate()
+                    coordinate2.x = blockCoordinate2.x
+                    coordinate2.y = twoThirdsY.toDouble()
+                    coordinate2.z = blockCoordinate2.z
+
+                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
+                    add(line)
+
+                    "(x2, y, z)( 2 / 3 y ) -> (x2, y, z2)( 2 / 3 y ) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[23].end
+                    val coordinate2 = lines[24].end
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z2)( 2 / 3 y ) -> (x2, y, z2)( 2 / 3 y ) is $line".logDebug()
+                }
             }
         }
 
