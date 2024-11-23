@@ -258,7 +258,12 @@ class Selection(
                 }
             }
 
-            val oneThreeY = (blockCoordinate1.y - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
+            val biggerY = if (blockCoordinate1.y >= blockCoordinate2.y) {
+                blockCoordinate1.y
+            } else {
+                blockCoordinate2.y
+            }
+            val oneThreeY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
 
             run {
                 "Calculating the 1 / 3 y cross of the selection".logDebug()
