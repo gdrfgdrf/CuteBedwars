@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.math.common
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
@@ -14,14 +15,14 @@ interface ICircle2D {
     val half: Boolean
 
     /**
-     * 按照一定的角度进行步进获取圆上的点
+     * 按照一定的角度进行步进获取圆上的点，若要进行旋转则需要 offset，方向为顺时针
      */
-    fun divide(step: IMathNumber): List<IPoint2D>
+    fun divide(step: IMathNumber, offset: IMathNumber = 0.mathNumber()): List<IPoint2D>
 
     /**
-     * 按照一定的角度进行步进获取圆上的点，返回的点集的 y 轴将始终为给定的参数 y
+     * 按照一定的角度进行步进获取圆上的点，返回的点集的 y 轴将始终为给定的参数 y，若要进行旋转则需要 offset，方向为顺时针
      */
-    fun divide(step: IMathNumber, y: IMathNumber): List<IPoint3D>
+    fun divide(step: IMathNumber, y: IMathNumber, offset: IMathNumber = 0.mathNumber()): List<IPoint3D>
 
     companion object {
         fun new(

@@ -26,12 +26,18 @@ class Circle2D(
         }
     }
 
-    override fun divide(step: IMathNumber): List<IPoint2D> {
+    override fun divide(step: IMathNumber, offset: IMathNumber): List<IPoint2D> {
         var current = MathNumber.of(0)
         val result = arrayListOf<IPoint2D>()
 
         while (true) {
-            val point = Circles.getAPointOnTheCircleFromTheAngle(center.x, center.y, R, current)
+            val point = Circles.getAPointOnTheCircleFromTheAngle(
+                center.x,
+                center.y,
+                R,
+                current,
+                offset
+            )
             if (point.x.toDouble().isNaN() || point.y.toDouble().isNaN()) {
                 break
             }
@@ -53,12 +59,18 @@ class Circle2D(
         return result
     }
 
-    override fun divide(step: IMathNumber, y: IMathNumber): List<IPoint3D> {
+    override fun divide(step: IMathNumber, y: IMathNumber, offset: IMathNumber): List<IPoint3D> {
         var current = MathNumber.of(0)
         val result = arrayListOf<IPoint3D>()
 
         while (true) {
-            val point = Circles.getAPointOnTheCircleFromTheAngle(center.x, center.y, R, current)
+            val point = Circles.getAPointOnTheCircleFromTheAngle(
+                center.x,
+                center.y,
+                R,
+                current,
+                offset
+            )
             if (point.x.toDouble().isNaN() || point.y.toDouble().isNaN()) {
                 break
             }
@@ -66,11 +78,11 @@ class Circle2D(
             result.add(point3d)
 
             if (!half) {
-                if (-current + 360 <= step) {
+                if (-current + 360 < step) {
                     break
                 }
             } else {
-                if (-current + 180 <= step) {
+                if (-current + 180 < step) {
                     break
                 }
             }
