@@ -389,6 +389,8 @@ class Selection(
                     }
 
                     otherPoints.addAll(result)
+
+                    "center x: $center2dX, center y: ${line.start.y}, center z: $center2dY, r: $R".logDebug()
                 }
                 run {
                     val line = lines[20]
@@ -406,6 +408,8 @@ class Selection(
                     }
 
                     otherPoints.addAll(result)
+
+                    "center x: $center2dX, center y: ${line.end.y}, center z: $center2dY, r: $R".logDebug()
                 }
                 run {
                     val line = lines[21]
@@ -423,6 +427,8 @@ class Selection(
                     }
 
                     otherPoints.addAll(result)
+
+                    "center x: $center2dX, center y: ${line.start.y}, center z: $center2dY, r: $R".logDebug()
                 }
                 run {
                     val line = lines[21]
@@ -440,6 +446,8 @@ class Selection(
                     }
 
                     otherPoints.addAll(result)
+
+                    "center x: $center2dX, center y: ${line.end.y}, center z: $center2dY, r: $R".logDebug()
                 }
             }
 
@@ -474,6 +482,8 @@ class Selection(
                 val result = circle.divide(1.mathNumber(), y = oneThirdY)
 
                 otherPoints.addAll(result)
+
+                "center x: ${center.x}, center y: ${center.y}, center z: ${center.z}, r: $R".logDebug()
             }
 
             val twoThirdsY = (biggerY - ( 2 * (blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
