@@ -6,8 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.IPrecisions
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.text.DecimalFormat
-import kotlin.math.absoluteValue
-import kotlin.math.pow
+import kotlin.math.*
 
 @ServiceImpl("math_number", needArgument = true, instanceGetter = "of")
 class MathNumber private constructor(override val number: Number) : IMathNumber, Number() {
@@ -326,6 +325,45 @@ class MathNumber private constructor(override val number: Number) : IMathNumber,
 
     override fun reciprocal(): IMathNumber {
         return 1 / this
+    }
+
+    override fun cos(): IMathNumber {
+        if (number is Int) {
+            return of(cos(toDouble()))
+        }
+        if (number is Double) {
+            return of(cos(number))
+        }
+        if (number is Float) {
+            return of(cos(number))
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun sin(): IMathNumber {
+        if (number is Int) {
+            return of(sin(toDouble()))
+        }
+        if (number is Double) {
+            return of(sin(number))
+        }
+        if (number is Float) {
+            return of(sin(number))
+        }
+        throw UnsupportedOperationException()
+    }
+
+    override fun tan(): IMathNumber {
+        if (number is Int) {
+            return of(tan(toDouble()))
+        }
+        if (number is Double) {
+            return of(tan(number))
+        }
+        if (number is Float) {
+            return of(tan(number))
+        }
+        throw UnsupportedOperationException()
     }
 
     override fun toInt(): Int {

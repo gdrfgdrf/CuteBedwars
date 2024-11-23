@@ -41,6 +41,10 @@ interface IMathNumber {
     fun cut(precisions: IPrecisions): IMathNumber
     fun reciprocal(): IMathNumber
 
+    fun cos(): IMathNumber
+    fun sin(): IMathNumber
+    fun tan(): IMathNumber
+
     fun toInt(): Int
     fun toDouble(): Double
     fun toFloat(): Float
