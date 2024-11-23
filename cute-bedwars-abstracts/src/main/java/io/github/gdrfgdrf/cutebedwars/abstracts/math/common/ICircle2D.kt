@@ -21,7 +21,7 @@ interface ICircle2D {
     /**
      * 按照一定的角度进行步进获取圆上的点，返回的点集的 y 轴将始终为给定的参数 y
      */
-    fun divide3d(step: IMathNumber, y: IMathNumber): List<IPoint3D>
+    fun divide(step: IMathNumber, y: IMathNumber): List<IPoint3D>
 
     companion object {
         fun new(

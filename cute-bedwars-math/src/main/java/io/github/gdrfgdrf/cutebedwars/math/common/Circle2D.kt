@@ -53,7 +53,7 @@ class Circle2D(
         return result
     }
 
-    override fun divide3d(step: IMathNumber, y: IMathNumber): List<IPoint3D> {
+    override fun divide(step: IMathNumber, y: IMathNumber): List<IPoint3D> {
         var current = MathNumber.of(0)
         val result = arrayListOf<IPoint3D>()
 
