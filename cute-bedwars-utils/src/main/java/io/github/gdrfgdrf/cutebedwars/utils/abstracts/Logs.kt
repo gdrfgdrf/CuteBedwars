@@ -33,7 +33,7 @@ object Logs : ILogs {
     }
 
     override fun debug(string: String) {
-        if (IConfig["ENABLE_DEBUG_LOGGING"]) {
+        if (IConfig["EnableDebugLogging"]) {
             runCatching {
                 logger().finest(string)
             }.onFailure {
