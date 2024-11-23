@@ -1,17 +1,20 @@
 package io.github.gdrfgdrf.cutebedwars.works
 
+import com.github.fierioziy.particlenativeapi.core.ParticleNativeCore
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
+import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
@@ -51,6 +54,7 @@ object Loader : ILoader {
             loadTaskManager()
             loadFrequencyTaskManager()
             loadChatPages()
+            loadParticles()
 
             if (!idGeneratorInitialized) {
                 "Initializing the id generator".logInfo()
@@ -145,6 +149,10 @@ object Loader : ILoader {
 
     private fun loadChatPages() {
         IChatPages.instance().initialize()
+    }
+
+    private fun loadParticles() {
+        IParticles.instance().initialize()
     }
 
     private fun loadAreas() {

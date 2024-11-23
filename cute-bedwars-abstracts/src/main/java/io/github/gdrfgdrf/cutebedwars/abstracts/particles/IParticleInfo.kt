@@ -12,7 +12,6 @@ interface IParticleInfo {
     val coordinate: Coordinate
     val count: Int
     var extra: Double?
-    var data: Any?
 
     companion object {
         fun create(

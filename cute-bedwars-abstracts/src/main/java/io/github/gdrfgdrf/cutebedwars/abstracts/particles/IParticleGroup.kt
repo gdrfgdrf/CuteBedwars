@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.particles
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParticleStatuses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import org.bukkit.World
+import org.bukkit.entity.Player
 
 interface IParticleGroup {
     val name: String
@@ -17,8 +18,14 @@ interface IParticleGroup {
     fun removeAt(x: Double, y: Double, z: Double)
     fun clear()
 
-    fun spawn(world: World, frequency: Long): IStopSignal
-    fun spawn(world: World): List<Any>
+    fun spawn(player: Player, far: Boolean = true) {
+        spawn(arrayListOf(player), far)
+    }
+    fun spawn(player: Player, frequency: Long, far: Boolean = true): IStopSignal {
+        return spawn(arrayListOf(player), frequency, far)
+    }
+    fun spawn(playerCollection: Collection<Player>, frequency: Long, far: Boolean = true): IStopSignal
+    fun spawn(playerCollection: Collection<Player>, far: Boolean = true)
 
     fun dismiss()
 }

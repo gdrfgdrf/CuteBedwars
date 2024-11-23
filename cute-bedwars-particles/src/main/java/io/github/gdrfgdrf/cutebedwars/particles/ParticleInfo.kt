@@ -13,7 +13,6 @@ class ParticleInfo(
     override val count: Int
 ): IParticleInfo {
     override var extra: Double? = 0.0
-    override var data: Any? = null
 
     constructor(argumentSet: ArgumentSet): this(
         argumentSet.args[0] as Particle,
@@ -31,7 +30,6 @@ class ParticleInfo(
         data: Any?
     ) : this(particle, coordinate, count) {
         this.extra = extra
-        this.data = data
     }
 
     override fun equals(other: Any?): Boolean {
@@ -45,8 +43,7 @@ class ParticleInfo(
         if (particle == other.particle &&
             coordinate == other.coordinate &&
             count == other.count &&
-            extra == other.extra &&
-            data == other.data
+            extra == other.extra
         ) {
             return true
         }
@@ -58,7 +55,6 @@ class ParticleInfo(
         result = 31 * result + coordinate.hashCode()
         result = 31 * result + count
         result = 31 * result + (extra?.hashCode() ?: 0)
-        result = 31 * result + (data?.hashCode() ?: 0)
         return result
     }
 }

@@ -1,11 +1,16 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.utils
 
+import com.github.fierioziy.particlenativeapi.api.ParticleNativeAPI
+import com.github.fierioziy.particlenativeapi.api.particle.ParticleList_1_8
+import com.github.fierioziy.particlenativeapi.api.particle.type.ParticleType
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.ICommit
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTask
+import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Change
 import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
+import org.bukkit.Particle
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 import java.util.logging.Logger
@@ -111,4 +116,15 @@ fun String.replaceToColorSymbol(formatSymbol: String = "&"): String {
         .replace(formatSymbol + "o", "§o")
         .replace(formatSymbol + "r", "§r")
         .replace(formatSymbol + formatSymbol, formatSymbol)
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <T : ParticleType> particle(particle: Particle): T {
+    val api = IParticles.instance().api() ?: throw IllegalStateException("particle api is not got")
+    val name = particle.name.uppercase()
+    val particleList18 = api.LIST_1_8
+    val particleList18class = ParticleList_1_8::class.java
+
+    val declaredField = particleList18class.getDeclaredField(name)
+    return declaredField.get(particleList18) as T
 }

@@ -67,7 +67,7 @@ class Select(
             this.stopSignal!!.stop()
         }
 
-        this.stopSignal = selection.spawnParticle(particle, currentWorld, frequency)
+        this.stopSignal = selection.spawnParticle(particle, player, frequency)
         return this.stopSignal!!
     }
 

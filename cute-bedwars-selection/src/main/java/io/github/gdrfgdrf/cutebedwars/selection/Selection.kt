@@ -12,6 +12,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.Particle
 import org.bukkit.World
+import org.bukkit.entity.Player
 
 @ServiceImpl("selection", needArgument = true)
 class Selection(
@@ -41,11 +42,11 @@ class Selection(
         }
     }
 
-    override fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal {
+    override fun spawnParticle(particle: Particle, playerCollection: Collection<Player>, frequency: Long): IStopSignal {
         check()
         check2()
         if (cachedParticleGroup != null) {
-            return cachedParticleGroup!!.spawn(world, frequency)
+            return cachedParticleGroup!!.spawn(playerCollection, frequency)
         }
 
         val managedParticle = IParticles.instance().getOrCreate(particle)
@@ -61,7 +62,7 @@ class Selection(
         }
 
         cachedParticleGroup = particleGroup
-        return cachedParticleGroup!!.spawn(world, frequency)
+        return cachedParticleGroup!!.spawn(playerCollection, frequency)
     }
 
     override fun destroy() {

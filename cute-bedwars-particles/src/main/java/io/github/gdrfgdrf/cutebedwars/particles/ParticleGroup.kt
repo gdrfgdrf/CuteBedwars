@@ -1,13 +1,17 @@
 package io.github.gdrfgdrf.cutebedwars.particles
 
+import com.github.fierioziy.particlenativeapi.api.particle.type.ParticleType
+import com.github.fierioziy.particlenativeapi.api.particle.type.ParticleTypeMotion
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IParticleStatuses
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IManagedParticle
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.frequencyTask
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.particle
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import org.bukkit.World
+import org.bukkit.entity.Player
 
 class ParticleGroup private constructor(
     override val name: String,
@@ -83,57 +87,34 @@ class ParticleGroup private constructor(
         list.clear()
     }
 
-    override fun spawn(world: World, frequency: Long): IStopSignal {
+    override fun spawn(playerCollection: Collection<Player>, frequency: Long, far: Boolean): IStopSignal {
         return frequencyTask(frequency) {
-            spawn(world)
+            spawn(playerCollection, far)
         }
     }
 
-    override fun spawn(world: World): List<Any> {
+    override fun spawn(playerCollection: Collection<Player>, far: Boolean) {
         check()
         status = IParticleStatuses.valueOf("ACTIVATED")
 
-        val results = arrayListOf<Any>()
         list.forEach { particleInfo ->
             val particle = parent.particle
             val coordinate = particleInfo.coordinate
             val count = particleInfo.count
             val extra = particleInfo.extra
-            val data = particleInfo.data
 
             if (extra == null) {
-                val result = world.spawnParticle(
-                    particle,
-                    coordinate.x,
-                    coordinate.y,
-                    coordinate.z,
-                    count,
-                    0.0,
-                    0.0,
-                    0.0,
-                    data
-                )
-                results.add(result)
+                particle<ParticleType>(particle)
+                    .packet(far, coordinate.x, coordinate.y, coordinate.z, 0.0, 0.0, 0.0, count)
+                    .sendTo(playerCollection)
             } else {
-                val result = world.spawnParticle(
-                    particle,
-                    coordinate.x,
-                    coordinate.y,
-                    coordinate.z,
-                    count,
-                    0.0,
-                    0.0,
-                    0.0,
-                    extra,
-                    data
-                )
-                results.add(result)
+                particle<ParticleType>(particle)
+                    .packet(far, coordinate.x, coordinate.y, coordinate.z, 0.0, 0.0, 0.0, extra, count)
+                    .sendTo(playerCollection)
             }
         }
 
         status = IParticleStatuses.valueOf("DEFAULT")
-
-        return results
     }
 
     override fun dismiss() {

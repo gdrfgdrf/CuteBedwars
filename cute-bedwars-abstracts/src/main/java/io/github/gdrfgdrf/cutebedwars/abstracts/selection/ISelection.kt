@@ -7,13 +7,17 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.Particle
 import org.bukkit.World
+import org.bukkit.entity.Player
 
 @Service("selection", singleton = false)
 interface ISelection {
     val pos1: Coordinate
     val pos2: Coordinate
 
-    fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal
+    fun spawnParticle(particle: Particle, player: Player, frequency: Long): IStopSignal {
+        return spawnParticle(particle, arrayListOf(player), frequency)
+    }
+    fun spawnParticle(particle: Particle, playerCollection: Collection<Player>, frequency: Long): IStopSignal
     fun destroy()
 
     companion object {
