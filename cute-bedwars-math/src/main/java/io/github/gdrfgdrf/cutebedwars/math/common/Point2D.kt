@@ -21,6 +21,10 @@ class Point2D private constructor(
     override val step: Int = 2
     override val all: Array<IMathNumber> = arrayOf(x, y)
 
+    override fun toString(): String {
+        return "($x, $y)"
+    }
+
     companion object {
         fun of(x: Number, y: Number) = of(x.mathNumber(), y.mathNumber())
         fun of(x: IMathNumber, y: IMathNumber) = Point2D(x, y)
