@@ -11,7 +11,6 @@ import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.Particle
-import org.bukkit.World
 import org.bukkit.entity.Player
 
 @ServiceImpl("selection", needArgument = true)
@@ -246,6 +245,29 @@ class Selection(
                     add(line)
 
                     "(x, y, z2) -> (x2, y2, z) is $line".logDebug()
+                }
+            }
+
+            run {
+                "Calculating the bottom cross of the selection".logDebug()
+
+                run {
+                    val coordinate1 = lines[6].half().end
+                    val coordinate2 = lines[5].half().end
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x2, y2, z) -> (x2, y2, z2)(pos2) / 2 -> (x, y2, z) -> (x, y2, z2) / 2 is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[4].half().end
+                    val coordinate2 = lines[7].half().end
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    ("(x, y2, z) -> (x2, y2, z) / 2 -> (x, y2, z2) -> (x2, y2, z2)(pos2) / 2 is $line").logDebug()
                 }
             }
         }

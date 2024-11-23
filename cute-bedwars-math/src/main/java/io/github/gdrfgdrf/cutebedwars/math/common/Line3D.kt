@@ -26,6 +26,13 @@ class Line3D(
         argumentSet.args[1] as IPoint3D
     )
 
+    override fun half(): ILine3D {
+        val x = (start.x + end.x) / 2
+        val y = (start.y + end.y) / 2
+        val z = (start.z + end.z) / 2
+        return Line3D(start, IPoint3D.new(x, y, z))
+    }
+
     override fun divide(step: IMathNumber): List<IPoint3D> {
         val space = Spaces.EUCLIDEAN
         val dimension = Dimensions.THREE
