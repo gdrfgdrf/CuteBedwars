@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.utils.abstracts
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ILogs
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logger
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -32,10 +33,12 @@ object Logs : ILogs {
     }
 
     override fun debug(string: String) {
-        runCatching {
-            logger().finest(string)
-        }.onFailure {
-            println("[CuteBedwars DEBUG] $string")
+        if (IConfig["ENABLE_DEBUG_LOGGING"]) {
+            runCatching {
+                logger().finest(string)
+            }.onFailure {
+                println("[CuteBedwars DEBUG] $string")
+            }
         }
     }
 }

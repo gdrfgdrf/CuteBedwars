@@ -19,6 +19,9 @@ import java.lang.reflect.Method;
 public class Config implements IConfig {
     public static IConfig INSTANCE;
 
+    @JsonProperty(defaultValue = "enable-debug-logging")
+    private Boolean enableDebugLogging;
+
     @JsonProperty(defaultValue = "chinese_simplified")
     private String language;
 
@@ -47,6 +50,7 @@ public class Config implements IConfig {
     private ThreadPoolServiceImpl threadPoolServiceImpl;
 
     public static void reset(Config config) {
+        config.enableDebugLogging = null;
         config.language = null;
         config.workerId = null;
         config.databaseImpl = null;
@@ -61,6 +65,9 @@ public class Config implements IConfig {
 
     @Override
     public void fulfill() {
+        if (enableDebugLogging == null) {
+            enableDebugLogging = false;
+        }
         if (language == null) {
             language = "chinese_simplified";
         }
