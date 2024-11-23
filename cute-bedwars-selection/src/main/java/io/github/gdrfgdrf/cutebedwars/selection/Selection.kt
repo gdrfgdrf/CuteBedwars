@@ -37,7 +37,7 @@ class Selection(
 
     private fun check2() {
         if (destroyed) {
-            throw IllegalStateException("this selection is destroyed")
+            throw IllegalStateException("this selection has been destroyed")
         }
     }
 
@@ -62,6 +62,12 @@ class Selection(
 
         cachedParticleGroup = particleGroup
         return cachedParticleGroup!!.spawn(world, frequency)
+    }
+
+    override fun destroy() {
+        destroyed = true
+        lines.clear()
+        cachedParticleGroup?.clear()
     }
 
     init {

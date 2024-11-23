@@ -14,6 +14,7 @@ interface ISelection {
     val pos2: Coordinate
 
     fun spawnParticle(particle: Particle, world: World, frequency: Long): IStopSignal
+    fun destroy()
 
     companion object {
         fun new(pos1: Coordinate, pos2: Coordinate): ISelection = Mediator.get(
