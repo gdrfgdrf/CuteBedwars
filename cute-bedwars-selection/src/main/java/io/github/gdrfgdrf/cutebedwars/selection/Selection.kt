@@ -1,6 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ILines
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
@@ -263,6 +267,26 @@ class Selection(
             } else {
                 blockCoordinate2.y
             }
+            var revers = false
+            if (biggerY == blockCoordinate2.y) {
+                revers = !revers
+                if (blockCoordinate1.x + (-blockCoordinate2.x) < 0) {
+                    revers = !revers
+                } else {
+                    if (blockCoordinate1.z + (-blockCoordinate2.z) < 0) {
+                        revers = !revers
+                    }
+                }
+            } else {
+                if (blockCoordinate1.x + (-blockCoordinate2.x) >= 0) {
+                    revers = !revers
+                } else {
+                    if (blockCoordinate1.z + (-blockCoordinate2.z) >= 0) {
+                        revers = !revers
+                    }
+                }
+            }
+
             val oneThreeY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
 
             run {
@@ -345,6 +369,112 @@ class Selection(
 
                     ("(x, y2, z) -> (x2, y2, z) / 2 ( 1 / 3 y2 ) -> (x, y2, z2) -> (x2, y2, z2)(pos2) / 2 ( 1 / 3 y2 ) is $line").logDebug()
                 }
+            }
+
+            run {
+                "Calculating the 1 / 3 y semicircle of the selection".logDebug()
+
+                run {
+                    val line = lines[20]
+                    val line2 = lines[16]
+
+                    val center2dX = line.start.x
+                    val center2dY = line.start.z
+                    val R = line2.length() / 4
+
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
+                    val result = if (!revers) {
+                        circle2d.divide(1.mathNumber(), oneThreeY, 90.mathNumber())
+                    } else {
+                        circle2d.divide(1.mathNumber(), oneThreeY, (-90).mathNumber())
+                    }
+
+                    otherPoints.addAll(result)
+                }
+                run {
+                    val line = lines[20]
+                    val line2 = lines[16]
+
+                    val center2dX = line.end.x
+                    val center2dY = line.end.z
+                    val R = line2.length() / 4
+
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
+                    val result = if (!revers) {
+                        circle2d.divide(1.mathNumber(), oneThreeY, (-90).mathNumber())
+                    } else {
+                        circle2d.divide(1.mathNumber(), oneThreeY, 90.mathNumber())
+                    }
+
+                    otherPoints.addAll(result)
+                }
+                run {
+                    val line = lines[21]
+                    val line2 = lines[17]
+
+                    val center2dX = line.start.x
+                    val center2dY = line.start.z
+                    val R = line2.length() / 4
+
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
+                    val result = if (!revers) {
+                        circle2d.divide(1.mathNumber(), y = oneThreeY)
+                    } else {
+                        circle2d.divide(1.mathNumber(), oneThreeY, 180.mathNumber())
+                    }
+
+                    otherPoints.addAll(result)
+                }
+                run {
+                    val line = lines[21]
+                    val line2 = lines[17]
+
+                    val center2dX = line.end.x
+                    val center2dY = line.end.z
+                    val R = line2.length() / 4
+
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
+                    val result = if (!revers) {
+                        circle2d.divide(1.mathNumber(), oneThreeY, 180.mathNumber())
+                    } else {
+                        circle2d.divide(1.mathNumber(), y = oneThreeY)
+                    }
+
+                    otherPoints.addAll(result)
+                }
+            }
+
+            run {
+                "Calculating the 1 / 3 central circle of the selection".logDebug()
+
+                val blockPoint3d1 = IPoint3D.new(
+                    blockCoordinate1.x,
+                    blockCoordinate1.y,
+                    blockCoordinate1.z
+                )
+                val blockPoint3d2 = IPoint3D.new(
+                    blockCoordinate2.x,
+                    blockCoordinate2.y,
+                    blockCoordinate2.z
+                )
+                val line1 = lines[20]
+                val line2 = lines[21]
+
+                val center = ICuboids.instance().geometricCenter(blockPoint3d1, blockPoint3d2)
+                val center2d = IPoint2D.new(center.x, center.z)
+
+                val R1 = (line1.length() / 2) - (lines[16].length() / 4)
+                val R2 = (line2.length() / 2) - (lines[17].length() / 4)
+                val R = if (R1 >= R2) {
+                    R2
+                } else {
+                    R1
+                }
+
+                val circle = ICircle2D.new(center2d, R)
+                val result = circle.divide(1.mathNumber(), y = oneThreeY)
+
+                otherPoints.addAll(result)
             }
         }
 
