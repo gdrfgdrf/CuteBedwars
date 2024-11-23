@@ -5,12 +5,21 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.math.calculate.Circles
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
+@ServiceImpl("circle_2d", needArgument = true)
 class Circle2D(
     override val center: IPoint2D,
     override val R: IMathNumber,
     override val half: Boolean = false
 ) : ICircle2D {
+    constructor(argumentSet: ArgumentSet): this(
+        argumentSet.args[0] as IPoint2D,
+        argumentSet.args[1] as IMathNumber,
+        argumentSet.args[2] as Boolean
+    )
+
     init {
         if (R <= 0) {
             throw IllegalArgumentException("the radius of a circle cannot less or equal than zero")
