@@ -253,8 +253,61 @@ class Selection(
             val oneThreeY = (blockCoordinate1.y - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
 
             run {
-                "Calculating the bottom cross of the selection".logDebug()
+                "Calculating the 1 / 3 y cross of the selection".logDebug()
 
+                run {
+                    val coordinate1 = Coordinate()
+                    coordinate1.x = blockCoordinate1.x
+                    coordinate1.y = oneThreeY.toDouble()
+                    coordinate1.z = blockCoordinate1.z
+
+                    val coordinate2 = Coordinate()
+                    coordinate2.x = blockCoordinate2.x
+                    coordinate2.y = oneThreeY.toDouble()
+                    coordinate2.z = blockCoordinate1.z
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z)(pos1)( 1 / 3 y ) -> (x2, y, z)( 1 / 3 y ) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = Coordinate()
+                    coordinate1.x = blockCoordinate1.x
+                    coordinate1.y = oneThreeY.toDouble()
+                    coordinate1.z = blockCoordinate1.z
+
+                    val coordinate2 = Coordinate()
+                    coordinate2.x = blockCoordinate1.x
+                    coordinate2.y = oneThreeY.toDouble()
+                    coordinate2.z = blockCoordinate2.z
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z)(pos1)( 1 / 3 y ) -> (x, y, z2)( 1 / 3 y ) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[16].end
+                    val coordinate2 = Coordinate()
+                    coordinate2.x = blockCoordinate2.x
+                    coordinate2.y = oneThreeY.toDouble()
+                    coordinate2.z = blockCoordinate2.z
+
+                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
+                    add(line)
+
+                    "(x2, y, z)( 1 / 3 y ) -> (x2, y, z2)( 1 / 3 y ) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[17].end
+                    val coordinate2 = lines[18].end
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z2)( 1 / 3 y ) -> (x2, y, z2)( 1 / 3 y ) is $line".logDebug()
+                }
                 run {
                     val coordinate1 = lines[6].half().end
                     val coordinate2 = lines[5].half().end
