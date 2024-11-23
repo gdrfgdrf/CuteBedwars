@@ -210,7 +210,46 @@ class Selection(
                     "(x2, y, z2) -> (x2, y2, z2) is $line".logDebug()
                 }
             }
+
+            run {
+                "Calculating the diagonal line of the selection".logDebug()
+
+                run {
+                    val line = ILine3D.new(blockCoordinate1, blockCoordinate2)
+                    add(line)
+
+                    "(x, y, z)(pos1) -> (x2, y2, z2)(pos2) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[2].end
+                    val coordinate2 = lines[4].start
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x2, y, z2) -> (x, y2, z) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[0].end
+                    val coordinate2 = lines[5].end
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x2, y, z) -> (x, y2, z2) is $line".logDebug()
+                }
+                run {
+                    val coordinate1 = lines[1].end
+                    val coordinate2 = lines[4].end
+
+                    val line = ILine3D.new(coordinate1, coordinate2)
+                    add(line)
+
+                    "(x, y, z2) -> (x2, y2, z) is $line".logDebug()
+                }
+            }
         }
+
         initialized = true
     }
 
