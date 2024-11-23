@@ -319,12 +319,24 @@ class MathNumber private constructor(override val number: Number) : IMathNumber,
         if (number is Float) {
             return of(decimalFormat.format(number).toDouble())
         }
-
         throw UnsupportedOperationException()
     }
 
     override fun reciprocal(): IMathNumber {
         return 1 / this
+    }
+
+    override fun toRadians(): IMathNumber {
+        if (number is Int) {
+            return of(Math.toRadians(toDouble()))
+        }
+        if (number is Double) {
+            return of(Math.toRadians(number))
+        }
+        if (number is Float) {
+            return of(Math.toRadians(toDouble()))
+        }
+        throw UnsupportedOperationException()
     }
 
     override fun cos(): IMathNumber {
