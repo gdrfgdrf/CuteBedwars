@@ -79,6 +79,10 @@ class ParticleGroup private constructor(
         }
     }
 
+    override fun clear() {
+        list.clear()
+    }
+
     override fun spawn(world: World, frequency: Long): IStopSignal {
         return frequencyTask(frequency) {
             spawn(world)
