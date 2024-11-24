@@ -374,7 +374,7 @@ class Selection(
                 "Calculating the 1 / 3 y semicircle of the selection".logDebug()
 
                 run {
-                    val line = lines[20]
+                    val line = lines[21]
                     val line2 = lines[16]
 
                     val center2dX = line.start.x
@@ -383,9 +383,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 90.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 0.mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, (-180).mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -393,7 +393,7 @@ class Selection(
                     "center x: $center2dX, center y: ${line.start.y}, center z: $center2dY, r: $R".logDebug()
                 }
                 run {
-                    val line = lines[20]
+                    val line = lines[21]
                     val line2 = lines[16]
 
                     val center2dX = line.end.x
@@ -402,9 +402,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 180.mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 90.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, 0.mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -412,7 +412,7 @@ class Selection(
                     "center x: $center2dX, center y: ${line.end.y}, center z: $center2dY, r: $R".logDebug()
                 }
                 run {
-                    val line = lines[21]
+                    val line = lines[20]
                     val line2 = lines[17]
 
                     val center2dX = line.start.x
@@ -421,9 +421,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), y = oneThirdY)
+                        circle2d.divide(1.mathNumber(), y = oneThirdY, 90.mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 180.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -431,7 +431,7 @@ class Selection(
                     "center x: $center2dX, center y: ${line.start.y}, center z: $center2dY, r: $R".logDebug()
                 }
                 run {
-                    val line = lines[21]
+                    val line = lines[20]
                     val line2 = lines[17]
 
                     val center2dX = line.end.x
@@ -440,9 +440,9 @@ class Selection(
 
                     val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
                     val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 180.mathNumber())
+                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
                     } else {
-                        circle2d.divide(1.mathNumber(), y = oneThirdY)
+                        circle2d.divide(1.mathNumber(), y = oneThirdY, 90.mathNumber())
                     }
 
                     otherPoints.addAll(result)
@@ -470,12 +470,12 @@ class Selection(
                 val center = ICuboids.instance().geometricCenter(blockPoint3d1, blockPoint3d2)
                 val center2d = IPoint2D.new(center.x, center.z)
 
-                val R1 = (line1.length() / 2) - (lines[16].length() / 4)
-                val R2 = (line2.length() / 2) - (lines[17].length() / 4)
+                val R1 = (line1.length() / 2) - (lines[17].length() / 4)
+                val R2 = (line2.length() / 2) - (lines[16].length() / 4)
                 val R = if (R1 >= R2) {
-                    R2
+                    R2.abs()
                 } else {
-                    R1
+                    R1.abs()
                 }
 
                 val circle = ICircle2D.new(center2d, R)
