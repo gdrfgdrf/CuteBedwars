@@ -100,7 +100,7 @@ CuteBedwars
 | cute-bedwars-items                       | 物品模块，对游戏中的物品操作进行包装                                   |
 | cute-bedwars-events                      | 事件模块，存储一些事件类和事件监听器                                   |
 | cute-bedwars-protobuf                    | 所有 Protobuf 类                                        |
-| cute-bedwars-selection                   | 选区模块                                                 |
+| cute-bedwars-selection                   | 选区模块，会通过粒子效果显示出来，并且会通过计算来添加辅助线，以便检查每个位置              |
 | cute-bedwars-particles                   | 粒子效果模块，对粒子效果进行一定程度的抽象                                |
 | cute-bedwars-frequency-tasks             | 频率任务，按照一定的频率执行某个任务                                   |
 | cute-bedwars-math                        | 数学模块，进行各种数学计算                                        |
