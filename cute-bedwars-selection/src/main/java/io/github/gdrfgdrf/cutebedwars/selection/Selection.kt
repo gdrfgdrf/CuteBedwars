@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
@@ -373,6 +374,8 @@ class Selection(
             run {
                 "Calculating the 1 / 3 y semicircle of the selection".logDebug()
 
+                val box = IBox.new(blockCoordinate1, blockCoordinate2)
+
                 run {
                     val line = lines[21]
                     val line2 = lines[16]
@@ -381,12 +384,13 @@ class Selection(
                     val center2dY = line.start.z
                     val R = line2.length() / 4
 
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
-                    val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 0.mathNumber())
-                    } else {
-                        circle2d.divide(1.mathNumber(), oneThirdY, (-180).mathNumber())
-                    }
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
+                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
+                    result = result.stream()
+                        .filter {
+                            return@filter box.contains(it)
+                        }
+                        .toList()
 
                     otherPoints.addAll(result)
 
@@ -400,12 +404,13 @@ class Selection(
                     val center2dY = line.end.z
                     val R = line2.length() / 4
 
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
-                    val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 180.mathNumber())
-                    } else {
-                        circle2d.divide(1.mathNumber(), oneThirdY, 0.mathNumber())
-                    }
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
+                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
+                    result = result.stream()
+                        .filter {
+                            return@filter box.contains(it)
+                        }
+                        .toList()
 
                     otherPoints.addAll(result)
 
@@ -419,12 +424,13 @@ class Selection(
                     val center2dY = line.start.z
                     val R = line2.length() / 4
 
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
-                    val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), y = oneThirdY, 90.mathNumber())
-                    } else {
-                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
-                    }
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
+                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
+                    result = result.stream()
+                        .filter {
+                            return@filter box.contains(it)
+                        }
+                        .toList()
 
                     otherPoints.addAll(result)
 
@@ -438,12 +444,13 @@ class Selection(
                     val center2dY = line.end.z
                     val R = line2.length() / 4
 
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R, true)
-                    val result = if (!revers) {
-                        circle2d.divide(1.mathNumber(), oneThirdY, (-90).mathNumber())
-                    } else {
-                        circle2d.divide(1.mathNumber(), y = oneThirdY, 90.mathNumber())
-                    }
+                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
+                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
+                    result = result.stream()
+                        .filter {
+                            return@filter box.contains(it)
+                        }
+                        .toList()
 
                     otherPoints.addAll(result)
 
