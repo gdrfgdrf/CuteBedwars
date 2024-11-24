@@ -48,6 +48,22 @@ operator fun Float.div(mathNumber: IMathNumber): IMathNumber {
     return this.mathNumber() / mathNumber
 }
 
+fun minOf(a: IMathNumber, b: IMathNumber): IMathNumber {
+    return if (a <= b) {
+        a
+    } else {
+        b
+    }
+}
+
+fun maxOf(a: IMathNumber, b: IMathNumber): IMathNumber {
+    return if (a >= b) {
+        a
+    } else {
+        b
+    }
+}
+
 fun Number.mathNumber(): IMathNumber {
     return IMathNumber.new(this)
 }
