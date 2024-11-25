@@ -55,6 +55,8 @@ class ItemProperties : IItemProperties {
 
         properties.unbreakable = this.unbreakable
         properties.droppable = this.droppable
+        properties.movable = this.movable
+
         properties.canPlaceOn.add(*this.canPlaceOn.list.toTypedArray())
         properties.canDestroy.add(*this.canDestroy.list.toTypedArray())
         return properties
