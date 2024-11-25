@@ -267,25 +267,6 @@ class Selection(
             } else {
                 blockCoordinate2.y
             }
-            var revers = false
-            if (biggerY == blockCoordinate2.y) {
-                revers = !revers
-                if (blockCoordinate1.x + (-blockCoordinate2.x) < 0) {
-                    revers = !revers
-                } else {
-                    if (blockCoordinate1.z + (-blockCoordinate2.z) < 0) {
-                        revers = !revers
-                    }
-                }
-            } else {
-                if (blockCoordinate1.x + (-blockCoordinate2.x) >= 0) {
-                    revers = !revers
-                } else {
-                    if (blockCoordinate1.z + (-blockCoordinate2.z) >= 0) {
-                        revers = !revers
-                    }
-                }
-            }
 
             val oneThirdY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
 
