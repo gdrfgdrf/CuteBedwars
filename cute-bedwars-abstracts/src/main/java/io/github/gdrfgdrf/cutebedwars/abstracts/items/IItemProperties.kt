@@ -26,6 +26,8 @@ interface IItemProperties {
     var unbreakable: Boolean
     var droppable: Boolean
     var movable: Boolean
+    var stackable: Boolean
+
     val canPlaceOn: ICustomList<Material>
     val canDestroy: ICustomList<Material>
 

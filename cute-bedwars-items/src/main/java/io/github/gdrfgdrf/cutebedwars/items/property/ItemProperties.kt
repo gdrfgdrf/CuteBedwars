@@ -31,6 +31,8 @@ class ItemProperties : IItemProperties {
     override var unbreakable: Boolean = false
     override var droppable: Boolean = true
     override var movable: Boolean = true
+    override var stackable: Boolean = true
+
     override val canPlaceOn: ICustomList<Material> = customList()
     override val canDestroy: ICustomList<Material> = customList()
 
@@ -56,6 +58,7 @@ class ItemProperties : IItemProperties {
         properties.unbreakable = this.unbreakable
         properties.droppable = this.droppable
         properties.movable = this.movable
+        properties.stackable = this.stackable
 
         properties.canPlaceOn.add(*this.canPlaceOn.list.toTypedArray())
         properties.canDestroy.add(*this.canDestroy.list.toTypedArray())
@@ -90,7 +93,9 @@ class ItemProperties : IItemProperties {
         itemStack.itemMeta = itemMeta
 
         NBT.modify(itemStack) { operableNbt ->
-            operableNbt.setLong("cube-bedwars-item", YitIdHelper.nextId())
+            if (!stackable) {
+                operableNbt.setLong("cube-bedwars-item", YitIdHelper.nextId())
+            }
 
             val canPlaceOnList = operableNbt.getStringList("CanPlaceOn")
             canPlaceOnList.clear()
