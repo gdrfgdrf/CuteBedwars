@@ -13,7 +13,7 @@ class PageRequest(
     val loader: () -> List<ITranslationAgent>
 ) {
     fun getSender(): CommandSender {
-        if (uuid == "") {
+        if (uuid == "Console") {
             return Bukkit.getConsoleSender()
         }
         return Bukkit.getPlayer(UUID.fromString(uuid))
