@@ -1,32 +1,32 @@
 package io.github.gdrfgdrf.cutebedwars.languages.collect;
 
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString;
-import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString;
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageCollect;
 
 /**
  * @author gdrfgdrf
  */
-public class CommandSyntaxLanguage implements LanguageCollect {
-    public static LanguageString HELP;
-    public static LanguageString RELOAD;
-    public static LanguageString QUERY_DESCRIPTION;
-    public static LanguageString INFO_COMMANDS;
+public class CommandSyntaxLanguage implements IILanguageCollect {
+    public static ILanguageString HELP;
+    public static ILanguageString RELOAD;
+    public static ILanguageString QUERY_DESCRIPTION;
+    public static ILanguageString INFO_COMMANDS;
 
-    public static LanguageString CREATE_AREA;
-    public static LanguageString INFO_AREA;
-    public static LanguageString EDITOR_AREA;
+    public static ILanguageString CREATE_AREA;
+    public static ILanguageString INFO_AREA;
+    public static ILanguageString EDITOR_AREA;
 
-    public static LanguageString CREATE_GAME;
-    public static LanguageString INFO_GAME;
-    public static LanguageString EDITOR_GAME;
+    public static ILanguageString CREATE_GAME;
+    public static ILanguageString INFO_GAME;
+    public static ILanguageString EDITOR_GAME;
 
-    public static LanguageString EDIT_NEW_CHANGES;
-    public static LanguageString EDIT_MAKE;
-    public static LanguageString EDIT_UNMAKE;
-    public static LanguageString EDIT_LIST_CHANGES;
-    public static LanguageString EDIT_COMMIT;
-    public static LanguageString EDIT_REVERT_COMMIT;
-    public static LanguageString EDIT_EXIT;
+    public static ILanguageString EDIT_NEW_CHANGES;
+    public static ILanguageString EDIT_MAKE;
+    public static ILanguageString EDIT_UNMAKE;
+    public static ILanguageString EDIT_LIST_CHANGES;
+    public static ILanguageString EDIT_COMMIT;
+    public static ILanguageString EDIT_REVERT_COMMIT;
+    public static ILanguageString EDIT_EXIT;
 
-    public static LanguageString EDIT_LIST_AREA_COMMITS;
+    public static ILanguageString EDIT_LIST_AREA_COMMITS;
 }

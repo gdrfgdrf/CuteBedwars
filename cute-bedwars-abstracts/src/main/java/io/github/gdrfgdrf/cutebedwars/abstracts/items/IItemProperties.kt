@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.items
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ICustomList
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import org.bukkit.Material
@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack
 @Service("item_properties", singleton = false)
 interface IItemProperties {
     var material: Material?
-    var name: (() -> LanguageString)?
+    var name: (() -> ILanguageString)?
 
     val lores: ICustomList<String>
     val flags: ICustomList<ItemFlag>

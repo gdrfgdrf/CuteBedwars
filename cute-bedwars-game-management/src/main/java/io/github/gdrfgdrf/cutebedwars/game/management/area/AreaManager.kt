@@ -5,10 +5,10 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractAreaCommitStorage
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IFiles
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IJsons
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cuteframework.utils.FileUtils
-import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import java.io.File
@@ -65,8 +65,8 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
             throw IllegalStateException("Cannot create new file $file")
         }
 
-        val string = JacksonUtils.writeJsonString(area)
-        val writer = FileUtils.getWriter(file)
+        val string = IJsons.instance().write(area)
+        val writer = IFiles.instance().writer(file!!)
         writer.write(string)
         writer.close()
     }

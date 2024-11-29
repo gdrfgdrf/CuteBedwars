@@ -12,7 +12,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.replaceToColorSymbol
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.ItemLanguage
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.Material
 import org.bukkit.Particle
@@ -36,13 +35,13 @@ enum class Items(private val item: IItem) : IItems {
               var update = false
 
               if (pos1 != null) {
-                  properties.lores[0] = ItemLanguage.SELECTION_TOOL_LORE_ONE.get().string
+                  properties.lores[0] = ItemLanguage.SELECTION_TOOL_LORE_ONE.operate().string
                       .format(pos1)
                       .replaceToColorSymbol()
                   update = true
               }
               if (pos2 != null) {
-                  properties.lores[1] = ItemLanguage.SELECTION_TOOL_LORE_TWO.get().string
+                  properties.lores[1] = ItemLanguage.SELECTION_TOOL_LORE_TWO.operate().string
                       .format(pos2)
                       .replaceToColorSymbol()
                   update = true

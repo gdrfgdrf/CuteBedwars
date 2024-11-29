@@ -5,14 +5,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IEnabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cuteframework.bean.BeanManager
-import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
-import java.util.LinkedHashSet
 
 @ServiceImpl("enabler")
 object Enabler : IEnabler {
@@ -44,13 +42,17 @@ object Enabler : IEnabler {
         val javaPlugin = IPlugin.instance().javaPlugin() ?: throw IllegalStateException("java plugin is required")
 
         val classes = LinkedHashSet<Class<*>>()
-        ClassUtils.searchJar(Enabler::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.events.listener", {
-            return@searchJar it.interfaces.contains(Listener::class.java)
-        }, classes)
+        IClasses.instance().search(
+            Enabler::class.java.classLoader,
+            "io.github.gdrfgdrf.cutebedwars.events.listener",
+            classes
+        ) {
+            return@search it.interfaces.contains(Listener::class.java)
+        }
 
         classes.forEach { listenerClass ->
             "Registering a event listener: $listenerClass".logInfo()
-            val listener = BeanManager.getInstance().getBean(listenerClass.simpleName)
+            val listener = listenerClass.getDeclaredConstructor().newInstance()
 
             Bukkit.getServer().pluginManager.registerEvents(listener as Listener, javaPlugin)
         }

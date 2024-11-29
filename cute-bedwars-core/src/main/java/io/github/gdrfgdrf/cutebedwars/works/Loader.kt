@@ -1,13 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.works
 
-import com.github.fierioziy.particlenativeapi.core.ParticleNativeCore
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
-import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
@@ -17,14 +15,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManage
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.*
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cuteframework.config.ConfigManager
-import io.github.gdrfgdrf.cuteframework.locale.LanguageLoader
-import io.github.gdrfgdrf.cuteframework.minecraftplugin.CuteFrameworkSupport
-import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils
 import io.github.gdrfgdrf.multimodulemediator.Registry
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.plugin.java.JavaPlugin
@@ -45,8 +37,6 @@ object Loader : ILoader {
             Plugin.javaPlugin(javaPlugin)
 
             createFolders()
-
-            CuteFrameworkSupport.load(javaPlugin)
 
             loadConfig()
             loadLanguage()
@@ -110,16 +100,15 @@ object Loader : ILoader {
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun loadConfig() {
         "Loading the configuration file".logInfo()
 
-        IConfig.set(
-            ConfigManager.getInstance().load(
-                IConstants.owner(),
-                IConstants.configFileName(),
-                Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config")
-            )
+        val config = IConfigs.instance().load(
+            IConstants.configFileName(),
+            Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config") as Class<IConfig>
         )
+        IConfig.set(config)
 
         IConfig.instance()?.fulfill()
     }
@@ -127,11 +116,10 @@ object Loader : ILoader {
     private fun loadLanguage() {
         "Loading the language".logInfo()
 
-        LanguageLoader.getInstance().load(
+        ILocales.instance().load(
             Loader::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.languages.collect",
             "io.github.gdrfgdrf.cutebedwars.languages.language",
-            IConstants.owner(),
             IConfig["Language"],
         )
     }
@@ -178,7 +166,7 @@ object Loader : ILoader {
             runCatching {
                 "Reading a area file: $it".logInfo()
 
-                val area = JacksonUtils.readFile<Area>(it, Area::class.java)
+                val area = IJsons.instance().read<Area>(it, Area::class.java)
                 "The area file is read id: ${area.id}, name: ${area.name}".logInfo()
 
                 "Creating the area manager".logInfo()

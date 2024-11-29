@@ -4,16 +4,15 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants;
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase;
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.CommonsKt;
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IJarClassLoader;
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IJsons;
 import io.github.gdrfgdrf.cutebedwars.database.common.DatabaseImplDescription;
 import io.github.gdrfgdrf.cutebedwars.database.exception.CloseDatabaseException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.InitDatabaseClassException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.LoadDatabaseException;
-import io.github.gdrfgdrf.cuteframework.api.loader.JarClassLoader;
-import io.github.gdrfgdrf.cuteframework.bean.BeanManager;
-import io.github.gdrfgdrf.cuteframework.utils.StringUtils;
-import io.github.gdrfgdrf.cuteframework.utils.jackson.JacksonUtils;
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl;
 import lombok.Cleanup;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,7 +103,7 @@ public class Database implements IDatabase {
         JarEntry descriptionFile = jarFile.getJarEntry(IConstants.Companion.databaseImplDescriptionFileName());
 
         InputStream inputStream = jarFile.getInputStream(descriptionFile);
-        DatabaseImplDescription description = JacksonUtils.readInputStream(
+        DatabaseImplDescription description = IJsons.Companion.instance().read(
                 inputStream,
                 DatabaseImplDescription.class
         );
@@ -118,7 +117,7 @@ public class Database implements IDatabase {
             );
         }
 
-        JarClassLoader jarClassLoader = new JarClassLoader(implFile);
+        IJarClassLoader jarClassLoader = IJarClassLoader.Companion.create(implFile);
         Class<?> databaseClass = jarClassLoader.loadClass(databaseImplClass);
         return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) databaseClass;
     }
@@ -126,15 +125,8 @@ public class Database implements IDatabase {
     private void load(Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseImplClass) throws Exception {
         CommonsKt.logInfo("Loading the database class " + databaseImplClass.getName());
 
-        io.github.gdrfgdrf.cutebedwars.database.base.IDatabase instance;
-        if ("io.github.gdrfgdrf.cutebedwars.database.impl.DefaultDatabase".equals(databaseImplClass.getPackageName())) {
-            instance = (io.github.gdrfgdrf.cutebedwars.database.base.IDatabase) BeanManager.getInstance().getBean("DefaultDatabase");
-        } else {
-            instance = databaseImplClass.getConstructor().newInstance();
-        }
-        database = instance;
-
-        instance.load();
+        database = databaseImplClass.getConstructor().newInstance();;
+        database.load();
     }
 
     @Override

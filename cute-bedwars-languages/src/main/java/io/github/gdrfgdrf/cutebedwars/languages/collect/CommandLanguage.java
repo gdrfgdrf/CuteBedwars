@@ -1,18 +1,18 @@
 package io.github.gdrfgdrf.cutebedwars.languages.collect;
 
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString;
-import io.github.gdrfgdrf.cuteframework.locale.base.LanguageCollect;
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString;
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageCollect;
 
 /**
  * @author gdrfgdrf
  */
-public class CommandLanguage implements LanguageCollect {
-    public static LanguageString COMMAND_FORMAT;
-    public static LanguageString COMMAND_FORMAT_FOR_CONSOLE;
-    public static LanguageString COMMAND_HELP_ADMIN_INFIX;
+public class CommandLanguage implements IILanguageCollect {
+    public static ILanguageString COMMAND_FORMAT;
+    public static ILanguageString COMMAND_FORMAT_FOR_CONSOLE;
+    public static ILanguageString COMMAND_HELP_ADMIN_INFIX;
 
-    public static LanguageString NO_PERMISSION;
-    public static LanguageString SYNTAX_ERROR;
-    public static LanguageString ONLY_PLAYER;
-    public static LanguageString NOT_FOUND;
+    public static ILanguageString NO_PERMISSION;
+    public static ILanguageString SYNTAX_ERROR;
+    public static ILanguageString ONLY_PLAYER;
+    public static ILanguageString NOT_FOUND;
 }

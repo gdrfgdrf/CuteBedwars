@@ -1,8 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.enums
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 import org.bukkit.command.CommandSender
@@ -10,7 +10,7 @@ import org.bukkit.command.CommandSender
 @EnumService("descriptions_enum")
 interface IDescriptions {
     fun name_(): String
-    fun value(): () -> LanguageString?
+    fun value(): () -> ILanguageString?
     fun administration(): Boolean
     fun convenient(sender: CommandSender, localizationContext: ILocalizationContext): ITranslationTextAgent
     fun convenient(translationTextAgent: ITranslationTextAgent)

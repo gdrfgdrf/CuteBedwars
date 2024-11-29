@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
@@ -8,18 +7,18 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.ICommandInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object InfoCommands : AbstractSubCommand(
     command = ICommands.valueOf("INFO_COMMANDS")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_COMMANDS
-    override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_COMMANDS
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.INFO_COMMANDS
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.INFO_COMMANDS
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         val pageIndex = paramCombination.pageIndex()

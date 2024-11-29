@@ -1,13 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.events.listener
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
-import io.github.gdrfgdrf.cuteframework.bean.annotation.Component
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 
-@Component
 class PlayerInteractEventListener : Listener {
     @EventHandler
     fun onInteractEvent(playerInteractEvent: PlayerInteractEvent) {

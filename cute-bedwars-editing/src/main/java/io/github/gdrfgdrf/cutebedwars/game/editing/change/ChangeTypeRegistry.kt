@@ -3,10 +3,10 @@ package io.github.gdrfgdrf.cutebedwars.game.editing.change
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.IChangeClassHolder
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
-import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.LinkedHashSet
 import java.util.concurrent.ConcurrentHashMap
@@ -25,9 +25,13 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
         "Initializing the change type registry".logInfo()
         val classes = LinkedHashSet<Class<*>>()
 
-        ClassUtils.searchJar(ChangeTypeRegistry::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.game.editing.change.impl", {
-            return@searchJar it.superclass == AbstractChange::class.java
-        }, classes)
+        IClasses.instance().search(
+            ChangeTypeRegistry::class.java.classLoader,
+            "io.github.gdrfgdrf.cutebedwars.game.editing.change.impl",
+            classes
+        ) {
+            return@search it.superclass == AbstractChange::class.java
+        }
 
         classes.forEach { clazz ->
             val metadataMethod = clazz.methods.toList().stream()

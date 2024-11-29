@@ -1,14 +1,14 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change.data
 
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 
 class ChangeMetadata(
     val identifier: String,
     val type: Class<*>,
     val argsRange: IntRange,
     val maxArgsForProtobuf: Int,
-    private val localizedIdentifier: () -> LanguageString,
+    private val localizedIdentifier: () -> ILanguageString,
 ) {
     fun identifier(): String = identifier
-    fun localizedIdentifier(): () -> LanguageString = localizedIdentifier
+    fun localizedIdentifier(): () -> ILanguageString = localizedIdentifier
 }

@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
@@ -8,19 +7,19 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamScheme
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object QueryDescription : AbstractSubCommand(
     command = ICommands.valueOf("QUERY_DESCRIPTION")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.QUERY_DESCRIPTION
-    override fun description(): LanguageString? = CommandDescriptionLanguage.QUERY_DESCRIPTION
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.QUERY_DESCRIPTION
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.QUERY_DESCRIPTION
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
@@ -58,7 +57,7 @@ object QueryDescription : AbstractSubCommand(
                                 .format0(it.name_())
                         } else {
                             message(CommonLanguage.DESCRIPTION_FORMAT)
-                                .format0(it.name_(), languageString.get().string)
+                                .format0(it.name_(), languageString.operate().string)
                         }
                     }.toList()
             }

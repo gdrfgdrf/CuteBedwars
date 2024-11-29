@@ -19,7 +19,7 @@ object ChangesInformation : IChangesInformation {
             changes.forEach { change ->
                 messages.add(
                     message(EditorLanguage.CHANGE_FORMAT).apply {
-                        val localizedIdentifier = change.localizedIdentifier().get().string
+                        val localizedIdentifier = change.localizedIdentifier().operate().string
                         val localizedName = change.localizedName()(sender).string()
 
                         format0(localizedIdentifier, localizedName)

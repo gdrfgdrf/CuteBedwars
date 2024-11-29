@@ -1,8 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.editing.change
 
 import com.github.yitter.idgen.YitIdHelper
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 abstract class AbstractChange<T> {
@@ -18,7 +18,7 @@ abstract class AbstractChange<T> {
 
     private var metadata: Any? = null
     private var identifier: String? = null
-    private var localizedIdentifier: LanguageString? = null
+    private var localizedIdentifier: ILanguageString? = null
 
     @Suppress("UNCHECKED_CAST")
     private fun metadata(): Any {
@@ -53,14 +53,14 @@ abstract class AbstractChange<T> {
     }
 
     @Suppress("UNCHECKED_CAST")
-    fun localizedIdentifier(): LanguageString {
+    fun localizedIdentifier(): ILanguageString {
         if (localizedIdentifier != null) {
             return localizedIdentifier!!
         }
 
         val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata")
         val localizedIdentifierField = changeMetadata.getMethod("localizedIdentifier")
-        localizedIdentifier = (localizedIdentifierField.invoke(metadata()) as  () -> LanguageString)()
+        localizedIdentifier = (localizedIdentifierField.invoke(metadata()) as  () -> ILanguageString)()
 
         return localizedIdentifier!!
     }

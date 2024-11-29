@@ -6,7 +6,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequest
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.sleepSafely
-import io.github.gdrfgdrf.cuteframework.utils.thread.ThreadPoolService
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.TimeUnit
 
@@ -19,7 +18,7 @@ object HighCountdownTimer {
         "Starting high countdown timer".logInfo()
 
         stop = false
-        ThreadPoolService.newTask(HighCountdownWorker)
+        IThreadPoolService.instance().newTask(HighCountdownWorker)
     }
 
     fun reset() {

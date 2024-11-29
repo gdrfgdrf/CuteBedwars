@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.asyncTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toKotlinCommit
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
@@ -13,15 +14,14 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLangua
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 object EditRevertCommit : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_REVERT_COMMIT")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_REVERT_COMMIT
-    override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_REVERT_COMMIT
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_REVERT_COMMIT
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_REVERT_COMMIT
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

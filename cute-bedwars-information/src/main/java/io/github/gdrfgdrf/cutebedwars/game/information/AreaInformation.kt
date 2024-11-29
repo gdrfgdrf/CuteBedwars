@@ -9,7 +9,6 @@ import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.command.CommandSender
 
@@ -35,7 +34,7 @@ object AreaInformation : IAreaInformation {
                 )
             } else {
                 area.games.forEach {
-                    val statusMessage: LanguageString = when (it.status) {
+                    val statusMessage = when (it.status) {
                         Status.DISABLED -> CommonLanguage.STATUS_DISABLED
                         Status.EDITING -> CommonLanguage.STATUS_EDITING
                         Status.ENABLED -> CommonLanguage.STATUS_ENABLED
@@ -45,7 +44,7 @@ object AreaInformation : IAreaInformation {
 
                     gameMessages.add(
                         message(AreaManagementLanguage.AREA_GAMES_FORMAT)
-                            .format0(it.name, statusMessage.get().string)
+                            .format0(it.name, statusMessage.operate().string)
                     )
                 }
             }

@@ -10,19 +10,19 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object Reload : AbstractSubCommand(
     command = ICommands.valueOf("RELOAD"),
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.RELOAD
-    override fun description(): LanguageString? = CommandDescriptionLanguage.RELOAD
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.RELOAD
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.RELOAD
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

@@ -1,17 +1,17 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.DescriptionLanguage
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.command.CommandSender
 import java.util.regex.Pattern
 
 @EnumServiceImpl("descriptions_enum", searcher = "search")
 enum class Descriptions(
-    val value: () -> LanguageString?,
+    val value: () -> ILanguageString?,
     val administration: Boolean = false
 ): IDescriptions {
     DESCRIPTION(DescriptionLanguage::DESCRIPTION),
@@ -133,7 +133,7 @@ enum class Descriptions(
     ;
 
     override fun name_(): String = name
-    override fun value(): () -> LanguageString? = value
+    override fun value(): () -> ILanguageString? = value
     override fun administration(): Boolean = administration
     override fun convenient(sender: CommandSender, localizationContext: ILocalizationContext): ITranslationTextAgent {
         return localizationContext.text(name_().lowercase()).apply {
@@ -144,7 +144,7 @@ enum class Descriptions(
         translationTextAgent.apply {
             val value = value()()
             if (value != null) {
-                showText(value.get().string)
+                showText(value.operate().string)
             }
 
             runCommand("/cbw query description args ${name_().lowercase()}")

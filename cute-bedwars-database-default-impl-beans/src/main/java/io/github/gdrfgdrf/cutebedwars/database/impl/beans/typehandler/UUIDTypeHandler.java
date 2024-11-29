@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl.beans.typehandler;
 
-import io.github.gdrfgdrf.cuteframework.utils.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;

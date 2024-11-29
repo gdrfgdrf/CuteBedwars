@@ -10,18 +10,18 @@ interface IConstants {
     fun <T> get(key: String): T
 
     companion object {
-        fun get(): IConstants = Mediator.get(IConstants::class.java)!!
+        fun instance(): IConstants = Mediator.get(IConstants::class.java)!!
+        operator fun get(key: String): String = instance().get(key)
 
-        fun owner(): String = get().get("OWNER")
-        fun baseFolder(): String = get().get("BASE_FOLDER")
-        fun configFileName(): String = get().get("CONFIG_FILE_NAME")
+        fun baseFolder(): String = instance().get("BASE_FOLDER")
+        fun configFileName(): String = instance().get("CONFIG_FILE_NAME")
 
-        fun defaultDatabaseFileName(): String = get().get("DEFAULT_DATABASE_FILE_NAME")
-        fun databaseImplDescriptionFileName(): String = get().get("DATABASE_IMPL_DESCRIPTION_FILE_NAME")
-        fun customDatabaseImplFolderName(): String = get().get("CUSTOM_DATABASE_IMPL_FOLDER_NAME")
+        fun defaultDatabaseFileName(): String = instance().get("DEFAULT_DATABASE_FILE_NAME")
+        fun databaseImplDescriptionFileName(): String = instance().get("DATABASE_IMPL_DESCRIPTION_FILE_NAME")
+        fun customDatabaseImplFolderName(): String = instance().get("CUSTOM_DATABASE_IMPL_FOLDER_NAME")
 
-        fun areaFolder(): String = get().get("AREA_FOLDER")
+        fun areaFolder(): String = instance().get("AREA_FOLDER")
 
-        fun globalTimeout(): Long = get().get("GLOBAL_TIMEOUT")
+        fun globalTimeout(): Long = instance().get("GLOBAL_TIMEOUT")
     }
 }

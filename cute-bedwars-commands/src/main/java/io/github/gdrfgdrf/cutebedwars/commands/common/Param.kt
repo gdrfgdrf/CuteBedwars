@@ -57,7 +57,7 @@ class Param(
             if (searchResult != null) {
                 val value = searchResult.value()()
                 if (value != null) {
-                    argumentText.showText(value.get().string)
+                    argumentText.showText(value.operate().string)
                 }
             }
 

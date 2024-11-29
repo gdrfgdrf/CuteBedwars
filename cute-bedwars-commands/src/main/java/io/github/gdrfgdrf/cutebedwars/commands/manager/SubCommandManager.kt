@@ -4,8 +4,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cuteframework.utils.ClassUtils
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.util.*
 
@@ -16,9 +16,13 @@ object SubCommandManager : ISubCommandManager {
     override fun scanAndRegister() {
         val classes = LinkedHashSet<Class<*>>()
 
-        ClassUtils.searchJar(SubCommandManager::class.java.classLoader, "io.github.gdrfgdrf.cutebedwars.commands.sub", {
-            return@searchJar it.superclass == AbstractSubCommand::class.java
-        }, classes)
+        IClasses.instance().search(
+            SubCommandManager::class.java.classLoader,
+            "io.github.gdrfgdrf.cutebedwars.commands.sub",
+            classes
+        ) {
+            return@search it.superclass == AbstractSubCommand::class.java
+        }
 
         classes.forEach {
             val field = it.getDeclaredField("INSTANCE")

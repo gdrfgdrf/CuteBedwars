@@ -66,9 +66,9 @@ object CommandInformation : ICommandInformation {
                                             val value = description.value()()
                                             if (value != null) {
                                                 if (enablePart()) {
-                                                    showTextInPart(i, value.get().string)
+                                                    showTextInPart(i, value.operate().string)
                                                 } else {
-                                                    showText(value.get().string)
+                                                    showText(value.operate().string)
                                                 }
                                             }
 

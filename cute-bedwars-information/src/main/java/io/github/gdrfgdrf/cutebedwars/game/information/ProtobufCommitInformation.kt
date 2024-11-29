@@ -39,7 +39,7 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
                 messages.add(
                     message(EditorLanguage.COMMIT_CHANGES_FORMAT).apply {
                         val kotlinChange = change.toKotlinChange()
-                        val localizedIdentifier = kotlinChange.localizedIdentifier().get().string
+                        val localizedIdentifier = kotlinChange.localizedIdentifier().operate().string
                         val localizedName = kotlinChange.localizedName()(sender).string()
 
                         format0(localizedIdentifier, localizedName)

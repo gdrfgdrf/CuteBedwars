@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
@@ -10,18 +9,18 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object InfoArea : AbstractSubCommand(
     command = ICommands.valueOf("INFO_AREA")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.INFO_AREA
-    override fun description(): LanguageString? = CommandDescriptionLanguage.INFO_AREA
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.INFO_AREA
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.INFO_AREA
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

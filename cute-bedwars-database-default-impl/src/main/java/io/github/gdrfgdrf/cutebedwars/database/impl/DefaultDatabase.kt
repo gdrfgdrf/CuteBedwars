@@ -8,16 +8,13 @@ import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.Mappers
-import io.github.gdrfgdrf.cuteframework.bean.BeanManager
-import io.github.gdrfgdrf.cuteframework.bean.annotation.Component
-import io.github.gdrfgdrf.cuteframework.bean.annotation.Order
 import org.apache.ibatis.logging.LogFactory
 import java.io.File
+import java.util.concurrent.ConcurrentHashMap
 
-@Order(1)
-@Component
 class DefaultDatabase : IDatabase {
     private var setupLogger = false
+    private val services = ConcurrentHashMap<Class<*>, Any>()
 
     override fun getDisplayName(): String {
         return "DefaultDatabase-SQLite"
@@ -59,8 +56,20 @@ class DefaultDatabase : IDatabase {
         if (MybatisConfigurer.sqlSessionFactory == null) {
             throw DatabaseException("The service could not be gotten because MyBatis has not been loaded")
         }
-        return BeanManager.getInstance().getBean(serviceClass.simpleName) as T
+        return getOrCreateService(serviceClass)
     }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun <T> getOrCreateService(serviceClass: Class<out IService>): T {
+        if (services.containsKey(serviceClass)) {
+            return services[serviceClass]!! as T
+        }
+        val instance = serviceClass.getConstructor().newInstance()
+        services[serviceClass] = instance
+
+        return instance as T
+    }
+
 
     private fun tryImplementation(runnable: () -> Unit) {
         runCatching {

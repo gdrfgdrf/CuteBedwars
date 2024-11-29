@@ -4,21 +4,21 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterEditorFinder
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object EditNewChanges : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_NEW_CHANGES")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDIT_NEW_CHANGES
-    override fun description(): LanguageString? = CommandDescriptionLanguage.EDIT_NEW_CHANGES
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_NEW_CHANGES
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_NEW_CHANGES
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

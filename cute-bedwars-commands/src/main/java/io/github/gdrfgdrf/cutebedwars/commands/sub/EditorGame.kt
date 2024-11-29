@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IEditors
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
@@ -11,15 +12,13 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLangua
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 object EditorGame : AbstractSubCommand(
     command = ICommands.valueOf("EDITOR_GAME")
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.EDITOR_GAME
-    override fun description(): LanguageString? = CommandDescriptionLanguage.EDITOR_GAME
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDITOR_GAME
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDITOR_GAME
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

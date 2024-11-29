@@ -1,12 +1,12 @@
 package io.github.gdrfgdrf.cutebedwars.game.information
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 
 object RegionInformation {
@@ -129,7 +129,7 @@ object RegionInformation {
     }
 
 
-    enum class Type(val message: () -> LanguageString, val test: (Region) -> CalculateResult) {
+    enum class Type(val message: () -> ILanguageString, val test: (Region) -> CalculateResult) {
         REGION_VALIDATION(CommonLanguage::REGION_ERROR, { region ->
             val first = region.firstCoordinate
             val second = region.secondCoordinate

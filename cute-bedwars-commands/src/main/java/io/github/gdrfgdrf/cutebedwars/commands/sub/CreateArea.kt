@@ -6,19 +6,19 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import java.util.concurrent.TimeUnit
 
 object CreateArea : AbstractSubCommand(
     command = ICommands.valueOf("CREATE_AREA")
 ){
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.CREATE_AREA
-    override fun description(): LanguageString? = CommandDescriptionLanguage.CREATE_AREA
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.CREATE_AREA
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.CREATE_AREA
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

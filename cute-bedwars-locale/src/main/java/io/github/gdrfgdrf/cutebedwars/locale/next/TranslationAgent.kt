@@ -64,7 +64,7 @@ class TranslationAgent(
             commandSender.spigot().sendMessage(build())
             return
         }
-        val translationTextAgent = TranslationTextAgent.of(CommonLanguage.PREFIX.get().string)
+        val translationTextAgent = TranslationTextAgent.of(CommonLanguage.PREFIX.operate().string)
         insert(0, translationTextAgent)
 
         commandSender.spigot().sendMessage(build())

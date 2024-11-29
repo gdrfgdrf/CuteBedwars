@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.commands.manager.SubCommandManager
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandLanguage
@@ -11,15 +12,14 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.locale.extension.middleWork
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 object Help : AbstractSubCommand(
     command = ICommands.valueOf("HELP"),
 ) {
-    override fun syntax(): LanguageString? = CommandSyntaxLanguage.HELP
-    override fun description(): LanguageString? = CommandDescriptionLanguage.HELP
+    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.HELP
+    override fun description(): ILanguageString? = CommandDescriptionLanguage.HELP
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         middleWork("", sender) {
@@ -94,9 +94,9 @@ object Help : AbstractSubCommand(
             localizationScope(sender) {
                 if (sender is Player) {
                     message(CommandLanguage.COMMAND_FORMAT)
-                        .format0(subCommand.syntax()!!.get().string)
+                        .format0(subCommand.syntax()!!.operate().string)
                         .apply {
-                            get0().showText(subCommand.description()!!.get().string)
+                            get0().showText(subCommand.description()!!.operate().string)
 
                             if (indexOf!! >= 0) {
                                 get0().runCommand("/cbw info commands args ${indexOf + 1}")
@@ -105,7 +105,10 @@ object Help : AbstractSubCommand(
                         .send("")
                 } else {
                     message(CommandLanguage.COMMAND_FORMAT_FOR_CONSOLE)
-                        .format0(subCommand.syntax()!!.get().string, subCommand.description()!!.get().string)
+                        .format0(
+                            subCommand.syntax()!!.operate().string,
+                            subCommand.description()!!.operate().string
+                        )
                         .send("")
                 }
             }
@@ -124,7 +127,7 @@ object Help : AbstractSubCommand(
                     message(CommandLanguage.COMMAND_FORMAT_FOR_CONSOLE)
                         .apply {
                             val syntax = if (subCommand.syntax() != null) {
-                                subCommand.syntax()!!.get().string
+                                subCommand.syntax()!!.operate().string
                             } else {
                                 "null"
                             }

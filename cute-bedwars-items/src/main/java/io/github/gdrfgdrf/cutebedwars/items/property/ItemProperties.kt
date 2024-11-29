@@ -4,10 +4,10 @@ import com.github.yitter.idgen.YitIdHelper
 import de.tr7zw.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ICustomList
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.customList
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.replaceToColorSymbol
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack
 @ServiceImpl("item_properties")
 class ItemProperties : IItemProperties {
     override var material: Material? = null
-    override var name: (() -> LanguageString)? = null
+    override var name: (() -> ILanguageString)? = null
 
     override val lores: ICustomList<String> = customList()
     override val flags: ICustomList<ItemFlag> = customList()
@@ -77,8 +77,8 @@ class ItemProperties : IItemProperties {
         val itemMeta = itemStack.itemMeta
 
         if (withName) {
-            if (name != null && name!!().get() != null) {
-                itemMeta.displayName = name!!().get().string.replaceToColorSymbol()
+            if (name != null) {
+                itemMeta.displayName = name!!().operate().string.replaceToColorSymbol()
             } else {
                 itemMeta.displayName = ""
             }

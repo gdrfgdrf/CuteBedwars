@@ -112,7 +112,7 @@ class LocalizationMessage(
     }
 
     override fun send() {
-        val message = LocalizationMessage(sender, CommonLanguage.PREFIX.get().string)
+        val message = LocalizationMessage(sender, CommonLanguage.PREFIX.operate().string)
         send(message)
     }
 

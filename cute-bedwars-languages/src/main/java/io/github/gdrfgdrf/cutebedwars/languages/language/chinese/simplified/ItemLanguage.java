@@ -1,13 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.languages.language.chinese.simplified;
 
-import io.github.gdrfgdrf.cuteframework.locale.LanguageString;
-import io.github.gdrfgdrf.cuteframework.locale.base.LanguageBlock;
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString;
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageBlock;
 
 /**
  * @author gdrfgdrf
  */
-class ItemLanguage implements LanguageBlock {
-    private static final LanguageString SELECTION_TOOL_NAME = new LanguageString("&e&l选区工具");
-    private static final LanguageString SELECTION_TOOL_LORE_ONE = new LanguageString("&9点一: %s");
-    private static final LanguageString SELECTION_TOOL_LORE_TWO = new LanguageString("&9点二: %s");
+class ItemLanguage implements IILanguageBlock {
+    private static final ILanguageString SELECTION_TOOL_NAME = ILanguageString.Companion.create("&e&l选区工具");
+    private static final ILanguageString SELECTION_TOOL_LORE_ONE = ILanguageString.Companion.create("&9点一: %s");
+    private static final ILanguageString SELECTION_TOOL_LORE_TWO = ILanguageString.Companion.create("&9点二: %s");
 }
