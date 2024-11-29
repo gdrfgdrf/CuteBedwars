@@ -59,13 +59,13 @@ public class Database implements IDatabase {
             if ("default-sqlite".equals(databaseImpl)) {
                 databaseClass = initDefault();
             } else {
-                File customDatabaseImplFolder = new File(IConstants.Companion.customDatabaseImplFolderName());
+                File customDatabaseImplFolder = new File(IConstants.Companion.get("CUSTOM_DATABASE_IMPL_FOLDER_NAME"));
                 if (!customDatabaseImplFolder.exists()) {
                     customDatabaseImplFolder.mkdirs();
                 }
 
                 File customDatabaseImplFile = new File(
-                        IConstants.Companion.customDatabaseImplFolderName() + databaseImpl
+                        IConstants.Companion.get("CUSTOM_DATABASE_IMPL_FOLDER_NAME") + databaseImpl
                 );
                 CommonsKt.logInfo("Custom database: " + customDatabaseImplFile);
 
@@ -100,7 +100,7 @@ public class Database implements IDatabase {
 
         @Cleanup
         JarFile jarFile = new JarFile(implFile);
-        JarEntry descriptionFile = jarFile.getJarEntry(IConstants.Companion.databaseImplDescriptionFileName());
+        JarEntry descriptionFile = jarFile.getJarEntry(IConstants.Companion.get("DATABASE_IMPL_DESCRIPTION_FILE_NAME"));
 
         InputStream inputStream = jarFile.getInputStream(descriptionFile);
         DatabaseImplDescription description = IJsons.Companion.instance().read(

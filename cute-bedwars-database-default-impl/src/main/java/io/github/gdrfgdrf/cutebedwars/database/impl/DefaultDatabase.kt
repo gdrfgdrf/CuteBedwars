@@ -23,7 +23,7 @@ class DefaultDatabase : IDatabase {
     override fun load() {
         "The default database implementation is only applicable when the number of players is small, and it is recommended to replace another database implementation if resources are available".logWarn()
 
-        val file = File(IConstants.defaultDatabaseFileName())
+        val file = File(IConstants["DEFAULT_DATABASE_FILE_NAME"])
         if (!file.exists()) {
             file.createNewFile()
         }

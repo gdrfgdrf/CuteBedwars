@@ -32,7 +32,7 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
             area.name = "temp_name_${area.id}"
         }
 
-        val folder = File(IConstants.areaFolder())
+        val folder = File(IConstants["AREA_FOLDER"])
         if (!folder.exists()) {
             folder.mkdirs()
         }
@@ -42,7 +42,7 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
 
         "Creating the commit storage for an area id: ${area.id}, name: ${area.name}".logInfo()
         commitStorage = AbstractAreaCommitStorage.new(
-            IConstants.areaFolder() + area.id + "/" + "commits"
+            IConstants["AREA_FOLDER"] + area.id + "/" + "commits"
         )
     }
 

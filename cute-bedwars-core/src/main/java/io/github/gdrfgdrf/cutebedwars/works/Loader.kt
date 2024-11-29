@@ -94,7 +94,7 @@ object Loader : ILoader {
     }
 
     private fun createFolders() {
-        val baseFolder = File(IConstants.baseFolder())
+        val baseFolder = File(IConstants["BASE_FOLDER"])
         if (!baseFolder.exists()) {
             baseFolder.mkdirs()
         }
@@ -105,7 +105,7 @@ object Loader : ILoader {
         "Loading the configuration file".logInfo()
 
         val config = IConfigs.instance().load(
-            IConstants.configFileName(),
+            IConstants["CONFIG_FILE_NAME"],
             Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config") as Class<IConfig>
         )
         IConfig.set(config)
@@ -149,7 +149,7 @@ object Loader : ILoader {
     }
 
     private fun loadAreas() {
-        val folder = File(IConstants.areaFolder())
+        val folder = File(IConstants["AREA_FOLDER"])
         if (!folder.exists()) {
             folder.mkdirs()
         }

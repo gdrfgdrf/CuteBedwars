@@ -71,7 +71,7 @@ object MybatisConfigurer {
 
         val dataSource = SimpleDriverDataSource()
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
-        dataSource.url = "jdbc:sqlite:" + IConstants.defaultDatabaseFileName()
+        dataSource.url = "jdbc:sqlite:" + IConstants["DEFAULT_DATABASE_FILE_NAME"]
 
         if (IConfig.get<String>("DatabaseUsername").isNotBlank() && IConfig.get<String>("DatabasePassword").isNotBlank()) {
             "The authentication of database is enabled".logInfo()

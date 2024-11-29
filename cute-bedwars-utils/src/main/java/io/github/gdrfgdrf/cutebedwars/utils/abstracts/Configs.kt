@@ -8,7 +8,7 @@ import java.io.File
 @ServiceImpl("configs")
 object Configs : IConfigs {
     override fun <T : Any> load(fileName: String, clazz: Class<T>): T {
-        val file = File(IConstants.baseFolder(), fileName)
+        val file = File(IConstants["BASE_FOLDER"], fileName)
         if (!file.exists()) {
             file.createNewFile()
 
@@ -26,7 +26,7 @@ object Configs : IConfigs {
     }
 
     override fun save(fileName: String, any: Any) {
-        val folder = File(IConstants.baseFolder())
+        val folder = File(IConstants["BASE_FOLDER"])
         if (!folder.exists()) {
             folder.mkdirs()
         }
