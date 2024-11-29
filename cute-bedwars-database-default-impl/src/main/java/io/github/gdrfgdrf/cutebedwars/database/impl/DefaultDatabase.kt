@@ -17,6 +17,8 @@ import java.io.File
 @Order(1)
 @Component
 class DefaultDatabase : IDatabase {
+    private var setupLogger = false
+
     override fun getDisplayName(): String {
         return "DefaultDatabase-SQLite"
     }
@@ -62,7 +64,12 @@ class DefaultDatabase : IDatabase {
 
     private fun tryImplementation(runnable: () -> Unit) {
         runCatching {
+            if (setupLogger) {
+                return
+            }
+
             runnable()
+            setupLogger = true
         }.onFailure {
 
         }
