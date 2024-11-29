@@ -23,6 +23,14 @@ object Logs : ILogs {
         }
     }
 
+    override fun error(string: String) {
+        runCatching {
+            logger().severe(string)
+        }.onFailure {
+            println("[CuteBedwars] $string")
+        }
+    }
+
     override fun error(string: String, throwable: Throwable) {
         runCatching {
             logger().severe(string)

@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.items.property
 
 import com.github.yitter.idgen.YitIdHelper
-import de.tr7zw.nbtapi.NBT
+import de.tr7zw.changeme.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString

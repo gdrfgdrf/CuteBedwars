@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.items.builder
 
-import de.tr7zw.nbtapi.NBT
-import de.tr7zw.nbtapi.iface.ReadWriteItemNBT
+import de.tr7zw.changeme.nbtapi.NBT
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteItemNBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties

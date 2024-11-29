@@ -2,8 +2,6 @@ name: CuteBedwars
 main: io.github.gdrfgdrf.cutebedwars.CuteBedwars
 api-version: 1.12.2
 version: 0.1.0
-depend:
-  - NBTAPI
 
 commands:
   cutebedwars:

@@ -23,6 +23,10 @@ fun String.logWarn() {
     ILogs.instance().warn(this)
 }
 
+fun String.logError() {
+    ILogs.instance().error(this)
+}
+
 fun String.logError(e: Throwable) {
     ILogs.instance().error(this, e)
 }

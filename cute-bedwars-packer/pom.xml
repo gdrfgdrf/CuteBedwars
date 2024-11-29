@@ -188,6 +188,10 @@
                                     <pattern>com.github.fierioziy.particlenativeapi</pattern>
                                     <shadedPattern>io.github.gdrfgdrf.cutebedwars.relocated.particleapi</shadedPattern>
                                 </relocation>
+                                <relocation>
+                                    <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                                    <shadedPattern>io.github.gdrfgdrf.cutebedwars.relocated.nbtapi</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
