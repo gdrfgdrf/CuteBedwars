@@ -41,30 +41,9 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.6.0</version>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
         <configuration>
-          <outputDirectory>H:\Spigot-Dev-Server\plugins</outputDirectory>
-          <finalName>${packer.finalName}</finalName>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-            </manifest>
-          </archive>
+          <outputDirectory>${output}</outputDirectory>
+          <finalName>cute-bedwars-${parent.version}-with-dependencies.jar</finalName>
         </configuration>
       </plugin>
     </plugins>
@@ -90,6 +69,7 @@
     </dependency>
   </dependencies>
   <properties>
+    <output>output</output>
     <maven.compiler.target>17</maven.compiler.target>
     <maven.compiler.source>17</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
