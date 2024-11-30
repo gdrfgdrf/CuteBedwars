@@ -7,8 +7,8 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @Service("param_scheme", singleton = false)
 interface IParamScheme {
     val params: List<IParam>
-    val length: Int
 
+    fun length(): Int
     fun add(descriptionName: String, typeName: String)
     fun content(partDivider: Boolean = false): String
 

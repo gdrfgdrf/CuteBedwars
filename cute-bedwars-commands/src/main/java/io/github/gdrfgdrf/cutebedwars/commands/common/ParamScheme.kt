@@ -8,7 +8,10 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @ServiceImpl("param_scheme", needArgument = true, instanceGetter = "create")
 class ParamScheme : IParamScheme {
     override val params = arrayListOf<IParam>()
-    override val length = params.size
+
+    override fun length(): Int {
+        return params.size
+    }
 
     override fun add(descriptionName: String, typeName: String) {
         val param = IParam.new(descriptionName, typeName)

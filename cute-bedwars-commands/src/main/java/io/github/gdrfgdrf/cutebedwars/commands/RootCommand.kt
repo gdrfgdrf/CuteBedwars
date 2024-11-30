@@ -87,7 +87,7 @@ object RootCommand : TabExecutor {
                         val result2 = arrayListOf<IParamScheme>()
 
                         paramSchemes.forEach {
-                            val length = it.length
+                            val length = it.length()
                             if (length >= providedLength) {
                                 filterResult.add(it)
                             }
@@ -212,7 +212,7 @@ object RootCommand : TabExecutor {
                         val paramSchemes = ConcurrentHashMap<IParamScheme, Int>()
 
                         for ((index, it) in subCommand.command.paramSchemes!!.withIndex()) {
-                            val length = it.length
+                            val length = it.length()
                             if (length == providedLength) {
                                 paramSchemes[it] = index
                             }
