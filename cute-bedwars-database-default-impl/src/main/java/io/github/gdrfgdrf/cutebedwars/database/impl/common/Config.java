@@ -14,9 +14,7 @@ import org.jetbrains.annotations.NotNull;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Config implements IConfig {
-    @Getter
-    @Setter
-    private static Config instance = null;
+    public static Config instance = null;
 
     @JsonProperty(value = "enable-database-logging")
     private Boolean enableDatabaseLogging;
@@ -46,6 +44,6 @@ public class Config implements IConfig {
     }
 
     public static <T> T value(String key) {
-        return getInstance().get(key);
+        return instance.get(key);
     }
 }

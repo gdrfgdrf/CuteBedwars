@@ -65,7 +65,7 @@ class DefaultDatabase : IDatabase {
             "default-database-config.json",
             Config::class.java
         )
-        Config.setInstance(config)
+        Config.instance = config
     }
 
     override fun close() {
