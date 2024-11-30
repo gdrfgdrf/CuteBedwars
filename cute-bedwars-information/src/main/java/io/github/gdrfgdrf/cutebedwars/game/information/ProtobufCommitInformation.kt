@@ -30,7 +30,7 @@ object ProtobufCommitInformation : IProtobufCommitInformation {
             )
             messages.add(
                 message(EditorLanguage.COMMIT_MESSAGE_IS)
-                    .format0(commit.message.ifBlank { text(CommonLanguage.NONE).string() })
+                    .format0(commit.message.ifBlank { text(CommonLanguage.NONE).string })
             )
             messages.add(
                 message(EditorLanguage.COMMIT_CHANGES_IS)

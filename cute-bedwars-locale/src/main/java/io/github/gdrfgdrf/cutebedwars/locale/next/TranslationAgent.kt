@@ -23,7 +23,7 @@ class TranslationAgent(
     }
 
     override fun append(translationTextAgent: ITranslationTextAgent): ITranslationAgent {
-        cuteTranslation.append(translationTextAgent.cuteText())
+        cuteTranslation.append(translationTextAgent.cuteText)
         return this
     }
 
@@ -38,7 +38,7 @@ class TranslationAgent(
     }
 
     override fun insert(index: Int, translationTextAgent: ITranslationTextAgent): ITranslationAgent {
-        cuteTranslation.insert(index, translationTextAgent.cuteText())
+        cuteTranslation.insert(index, translationTextAgent.cuteText)
         return this
     }
 

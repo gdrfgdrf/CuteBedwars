@@ -8,22 +8,19 @@ import net.md_5.bungee.api.chat.TextComponent
 import kotlin.streams.toList
 
 class TranslationTextAgent(
-    private var cuteText: ICuteText
+    override var cuteText: ICuteText
 ) : ITranslationTextAgent {
+    override val enablePart: Boolean = cuteText.enablePart
+    override val string: String = cuteText.string
+
     private fun clickAction(action: ClickEvent.Action, value: String): ITranslationTextAgent {
         cuteText.clickAction = action
         cuteText.clickActionValue = value
         return this
     }
 
-    override fun cuteText(): ICuteText = cuteText
-
     override fun rebuildParts() {
         cuteText.rebuildParts()
-    }
-
-    override fun enablePart(): Boolean {
-        return cuteText.enablePart
     }
 
     override fun openUrl(value: String): ITranslationTextAgent {
@@ -164,10 +161,6 @@ class TranslationTextAgent(
 
     override fun build(): TextComponent {
         return cuteText.build()
-    }
-
-    override fun string(): String {
-        return cuteText.string
     }
 
     companion object {

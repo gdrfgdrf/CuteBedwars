@@ -3,9 +3,11 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.locale
 import net.md_5.bungee.api.chat.TextComponent
 
 interface ITranslationTextAgent {
-    fun cuteText(): ICuteText
+    val cuteText: ICuteText
+    val enablePart: Boolean
+    val string: String
+
     fun rebuildParts()
-    fun enablePart(): Boolean
 
     fun openUrl(value: String): ITranslationTextAgent
     fun openFile(value: String): ITranslationTextAgent
@@ -41,5 +43,4 @@ interface ITranslationTextAgent {
 
     fun format(vararg any: Any): ITranslationTextAgent
     fun build(): TextComponent
-    fun string(): String
 }

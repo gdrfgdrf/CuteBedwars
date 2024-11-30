@@ -29,9 +29,9 @@ object CommandInformation : ICommandInformation {
                     )
                 }
 
-                val booleanTrue = text(CommonLanguage.BOOLEAN_TRUE).string()
-                val booleanFalse = text(CommonLanguage.BOOLEAN_FALSE).string()
-                val none = text(CommonLanguage.NONE).string()
+                val booleanTrue = text(CommonLanguage.BOOLEAN_TRUE).string
+                val booleanFalse = text(CommonLanguage.BOOLEAN_FALSE).string
+                val none = text(CommonLanguage.NONE).string
 
                 add(
                     message(CommonLanguage.COMMAND_IS_ALLOW_EMPTY_PARAM)
@@ -65,14 +65,14 @@ object CommandInformation : ICommandInformation {
 
                                             val value = description.value()
                                             if (value != null) {
-                                                if (enablePart()) {
+                                                if (enablePart) {
                                                     showTextInPart(i, value.operate().string)
                                                 } else {
                                                     showText(value.operate().string)
                                                 }
                                             }
 
-                                            if (enablePart()) {
+                                            if (enablePart) {
                                                 runCommandInPart(i, "/cbw query description args ${description.name.lowercase()}")
                                             } else {
                                                 runCommand("/cbw query description args ${description.name.lowercase()}")
