@@ -109,6 +109,17 @@ CuteBedwars
 | cute-bedwars-abstracts                   | 解耦模块，对上面所有的模块进行解耦，包含大量的接口，并且使用中介进行通讯                 |
 | cute-bedwars-packer                      | 打包模块，将上面所有的模块打包为一个 Jar 包                             |
 
+开发
+-----------------
+将本项目 clone 下来，然后运行 dependency 下的 install-to-maven.bat，  
+或在 dependency 目录下手动运行以下内容
+```text
+mvn install:install-file -Dfile=multi-module-mediator-0.1.0.jar -DgroupId=io.github.gdrfgdrf.multimodulemediator -DartifactId=multi-module-mediator -Dversion=0.1.0 -Dpackaging=jar
+```
+这个脚本会把 dependency/multi-module-mediator-0.1.0.jar 安装到本地 maven 仓库  
+安装之后项目将会 sync 成功  
+所有依赖均已包括在编译成功后的 Jar 中，运行时无需添加依赖
+
 ----
 对于 findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD 的推导过程  
 
