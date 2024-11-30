@@ -80,7 +80,7 @@ object Help : AbstractSubCommand(
                     return@filter IPermissions.valueOf("INFO_COMMANDS").hasPermission(sender)
                 }
                 .filter {
-                    return@filter !((it as ICommands).permissions().needOps() &&
+                    return@filter !((it as ICommands).permissions.needOps() &&
                             !IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender))
                 }
                 .toList()

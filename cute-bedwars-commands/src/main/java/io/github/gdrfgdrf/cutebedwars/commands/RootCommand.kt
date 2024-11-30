@@ -61,8 +61,8 @@ object RootCommand : TabExecutor {
                     add(it.string)
                 }
                 ICommands.allDisplayOnRootTab().forEach {
-                    if (!contains(it.string())) {
-                        add(it.string())
+                    if (!contains(it.string)) {
+                        add(it.string)
                     }
                 }
             }
@@ -78,7 +78,7 @@ object RootCommand : TabExecutor {
                         removeAt(0)
                     }
 
-                    val paramSchemes = subCommand!!.command.paramsSchemes()
+                    val paramSchemes = subCommand!!.command.paramSchemes
 
                     if (!paramSchemes.isNullOrEmpty()) {
                         val providedLength = paramList.size
@@ -142,8 +142,8 @@ object RootCommand : TabExecutor {
                         add(it.string)
                     }
                     ICommands.getChild(node).forEach {
-                        if (!contains(it.string())) {
-                            add(it.string())
+                        if (!contains(it.string)) {
+                            add(it.string)
                         }
                     }
                 }
@@ -185,17 +185,17 @@ object RootCommand : TabExecutor {
     private fun execute(sender: CommandSender, args: Array<String>, subCommand: AbstractSubCommand) {
         localizationScope(sender) {
             if (subCommand.hasPermission(sender)) {
-                if (!subCommand.command.onlyPlayer() || sender is Player) {
+                if (!subCommand.command.onlyPlayer || sender is Player) {
                     if (args.isEmpty()) {
                         subCommand.run(sender, args, ParamCombination.empty(args))
                         return@localizationScope
                     }
 
-                    val argsRange = subCommand.command.argsRange()
+                    val argsRange = subCommand.command.argsRange
                     val newArray = arrayOfNulls<String>(args.size - 1)
                     System.arraycopy(args, 1, newArray, 0, args.size - 1)
 
-                    if (newArray.isEmpty() && subCommand.command.allowEmptyParam()) {
+                    if (newArray.isEmpty() && subCommand.command.allowEmptyParam) {
                         subCommand.run(sender, args, ParamCombination.empty(args))
                         return@localizationScope
                     }
@@ -211,7 +211,7 @@ object RootCommand : TabExecutor {
                         val providedLength = newArray.size
                         val paramSchemes = ConcurrentHashMap<IParamScheme, Int>()
 
-                        for ((index, it) in subCommand.command.paramsSchemes()!!.withIndex()) {
+                        for ((index, it) in subCommand.command.paramSchemes!!.withIndex()) {
                             val length = it.length()
                             if (length == providedLength) {
                                 paramSchemes[it] = index

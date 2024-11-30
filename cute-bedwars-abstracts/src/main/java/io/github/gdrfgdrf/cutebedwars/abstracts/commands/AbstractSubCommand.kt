@@ -16,6 +16,6 @@ abstract class AbstractSubCommand(
     }
 
     fun hasPermission(sender: CommandSender): Boolean {
-        return command.permissions().hasPermission(sender)
+        return command.permissions.hasPermission(sender)
     }
 }

@@ -35,20 +35,20 @@ object CommandInformation : ICommandInformation {
 
                 add(
                     message(CommonLanguage.COMMAND_IS_ALLOW_EMPTY_PARAM)
-                        .format0(if (command.allowEmptyParam()) booleanTrue else booleanFalse)
+                        .format0(if (command.allowEmptyParam) booleanTrue else booleanFalse)
                 )
 
                 add(
                     message(CommonLanguage.COMMAND_PARAM_SCHEME_IS)
                 )
 
-                if (command.paramsSchemes().isNullOrEmpty()) {
+                if (command.paramSchemes.isNullOrEmpty()) {
                     add(
                         message(CommonLanguage.PARAM_SCHEME_FORMAT)
                             .format0(none)
                     )
                 } else {
-                    command.paramsSchemes()!!.forEach { paramScheme ->
+                    command.paramSchemes!!.forEach { paramScheme ->
                         val content = paramScheme.content(true)
                         add(
                             message(CommonLanguage.PARAM_SCHEME_FORMAT)

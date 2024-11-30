@@ -8,13 +8,13 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("commands_enum")
 enum class Commands(
-    val string: String,
-    private val onlyPlayer: Boolean = true,
-    private val argsRange: IntRange,
-    private val permissions: Permissions,
-    private val allowEmptyParam: Boolean,
-    private val node: CommandNodes = CommandNodes.ROOT,
-    private val paramSchemes: Array<IParamScheme>? = null,
+    override val string: String,
+    override val onlyPlayer: Boolean = true,
+    override val argsRange: IntRange,
+    override val permissions: Permissions,
+    override val allowEmptyParam: Boolean,
+    override val node: CommandNodes = CommandNodes.ROOT,
+    override val paramSchemes: Array<IParamScheme>? = null,
 ) : ICommands {
     ROOT("cbw", false, 0..Int.MAX_VALUE, Permissions.ROOT, true),
 
@@ -193,14 +193,6 @@ enum class Commands(
 
     ;
 
-    override fun string(): String = string
-    override fun onlyPlayer(): Boolean = onlyPlayer
-    override fun argsRange(): IntRange = argsRange
-    override fun permissions(): IPermissions = permissions
-    override fun allowEmptyParam(): Boolean = allowEmptyParam
-    override fun node(): ICommandNodes = node
-    override fun paramsSchemes(): Array<IParamScheme>? = paramSchemes
-
     override fun getRaw(): String {
         if (this == ROOT) {
             return "/cbw"
@@ -241,7 +233,7 @@ enum class Commands(
         if (paramSchemes.isNullOrEmpty()) {
             return get()
         }
-        return paramSchemes[0].content()
+        return paramSchemes!![0].content()
     }
 
     private fun getWithParams(): String {
@@ -250,10 +242,10 @@ enum class Commands(
         }
         val stringBuilder = StringBuilder()
 
-        paramSchemes.forEachIndexed { index, paramScheme ->
+        paramSchemes!!.forEachIndexed { index, paramScheme ->
             stringBuilder.append(paramScheme.content())
 
-            if (index != paramSchemes.size - 1) {
+            if (index != paramSchemes!!.size - 1) {
                 stringBuilder.append("|")
             }
         }
