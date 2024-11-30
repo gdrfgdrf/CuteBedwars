@@ -13,6 +13,10 @@ object Configs : IConfigs {
         } else {
             File(IConstants["ANOTHER_CONFIG_PATH"], fileName)
         }
+        if (!file.parentFile.exists()) {
+            file.parentFile.mkdirs()
+        }
+
         if (!file.exists()) {
             file.createNewFile()
 
