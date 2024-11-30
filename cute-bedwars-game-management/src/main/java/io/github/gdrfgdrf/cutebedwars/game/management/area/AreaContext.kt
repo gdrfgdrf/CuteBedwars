@@ -20,8 +20,8 @@ import org.bukkit.command.CommandSender
 class AreaContext(
     argumentSet: ArgumentSet,
 ) : IAreaContext, SetterImpl<Area>() {
-    private val manager: IAreaManager = argumentSet.args[0] as IAreaManager
-    private val games = ArrayList<IGameContext>()
+    override val manager = argumentSet.args[0] as IAreaManager
+    override val games = ArrayList<IGameContext>()
 
     init {
         instanceGetter = {
@@ -40,8 +40,6 @@ class AreaContext(
             addGame(it, false)
         }
     }
-
-    override fun manager(): IAreaManager = manager
 
     override fun createGame(name: String): IGameContext {
         "Creating a game under an area, game's name: $name, area's name: ${manager.area.name}".logInfo()
@@ -103,8 +101,6 @@ class AreaContext(
             }
             .toList()
     }
-
-    override fun games(): List<IGameContext> = games
 
     override fun validate(sender: CommandSender?) {
         var success = true

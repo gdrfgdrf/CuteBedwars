@@ -64,7 +64,7 @@ class GameContext(
     override fun validate(sender: CommandSender?, withHeader: Boolean): Boolean {
         "Validating a game id: ${game.id}, name: ${game.name}, area's id: ${game.areaId}".logInfo()
 
-        val area = areaContext.manager().area
+        val area = areaContext.manager.area
         var needDisableGame = false
 
         teams.forEach { teamContext ->

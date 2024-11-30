@@ -10,9 +10,10 @@ import org.bukkit.command.CommandSender
 
 @Service("area_context", singleton = false)
 interface IAreaContext : ISetter {
-    fun initialize()
+    val manager: IAreaManager
+    val games: List<IGameContext>
 
-    fun manager(): IAreaManager
+    fun initialize()
 
     fun createGame(name: String): IGameContext
     fun addGame(game: Game, addToBean: Boolean = true)
@@ -20,8 +21,6 @@ interface IAreaContext : ISetter {
 
     fun getGame(id: Long): IGameContext?
     fun getGame(name: String): List<IGameContext>
-
-    fun games(): List<IGameContext>
 
     fun validate(sender: CommandSender? = null)
 

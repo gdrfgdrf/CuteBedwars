@@ -7,7 +7,7 @@ abstract class AbstractAreaEditor(uuid: String, private val areaContext: IAreaCo
     @Synchronized
     fun save(allFinished: () -> Unit) {
         "Saving commits of an area editor".logInfo()
-        val commitStorage = areaContext.manager().commitStorage ?: return
+        val commitStorage = areaContext.manager.commitStorage ?: return
 
         commits().forEach {
             commitStorage.save(it) {}
