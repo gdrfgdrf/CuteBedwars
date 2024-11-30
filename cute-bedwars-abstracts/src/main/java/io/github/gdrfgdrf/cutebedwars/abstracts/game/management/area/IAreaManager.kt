@@ -8,10 +8,12 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("area_manager", singleton = false)
 interface IAreaManager {
+    val area: Area
+    val context: IAreaContext?
+    val commitStorage: AbstractAreaCommitStorage?
+    val initialized: Boolean
+
     fun save()
-    fun area(): Area
-    fun context(): IAreaContext
-    fun commitStorage(): AbstractAreaCommitStorage
 
     companion object {
         fun new(area: Area): IAreaManager = Mediator.get(IAreaManager::class.java, ArgumentSet(arrayOf(area)))!!

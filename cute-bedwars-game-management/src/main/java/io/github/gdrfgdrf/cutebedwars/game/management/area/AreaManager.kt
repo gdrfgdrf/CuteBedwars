@@ -15,13 +15,19 @@ import java.io.File
 
 @ServiceImpl("area_manager", needArgument = true)
 class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
-    private val area = argumentSet.args[0] as Area
-    private val context: IAreaContext
+    override val area = argumentSet.args[0] as Area
+    override var context: IAreaContext? = null
+    override var commitStorage: AbstractAreaCommitStorage? = null
+    override var initialized = false
+
     private var file: File? = null
 
-    private val commitStorage: AbstractAreaCommitStorage
+    fun init() {
+        if (initialized) {
+            throw IllegalStateException("this area manager is initialized")
+        }
+        initialized = true
 
-    init {
         if (area.id == null) {
             val id = YitIdHelper.nextId()
             "Set an id: $id to an area".logInfo()
@@ -45,10 +51,6 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
             IConstants["AREA_FOLDER"] + area.id + "/" + "commits"
         )
     }
-
-    override fun area(): Area = area
-    override fun context(): IAreaContext = context
-    override fun commitStorage(): AbstractAreaCommitStorage = commitStorage
 
     override fun save() {
         if (file == null) {
