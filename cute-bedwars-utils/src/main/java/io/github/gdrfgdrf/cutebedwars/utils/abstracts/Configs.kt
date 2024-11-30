@@ -37,7 +37,7 @@ object Configs : IConfigs {
         val folder = if (any::class.java.name == "io.github.gdrfgdrf.cutebedwars.commons.Config") {
             File(IConstants["BASE_FOLDER"])
         } else {
-            File(IConstants["ANOTHER_CONFIG_PATH"], fileName)
+            File(IConstants["ANOTHER_CONFIG_PATH"])
         }
         if (!folder.exists()) {
             folder.mkdirs()
