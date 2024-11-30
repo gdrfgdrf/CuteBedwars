@@ -7,11 +7,12 @@ import org.bukkit.permissions.Permission
 
 @EnumService("permissions_enum")
 interface IPermissions {
-    fun groups(): IPermissionGroups
-    fun string(): String
+    val groups: IPermissionGroups
+    val string: String
+    val needOps: Boolean
+
     fun get(): String
     fun putToGroup(permissions: Permission)
-    fun needOps(): Boolean
     fun hasPermission(sender: CommandSender): Boolean
 
     companion object {

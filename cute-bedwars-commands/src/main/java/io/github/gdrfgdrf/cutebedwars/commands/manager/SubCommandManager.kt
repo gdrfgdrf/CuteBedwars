@@ -71,7 +71,7 @@ object SubCommandManager : ISubCommandManager {
 
     fun forEachUser(runnable: (ICommands, AbstractSubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
-            if (commands.permissions.needOps()) {
+            if (commands.permissions.needOps) {
                 return@forEach
             }
             runnable(commands, subCommand)
@@ -80,7 +80,7 @@ object SubCommandManager : ISubCommandManager {
 
     fun forEachAdmin(runnable: (ICommands, AbstractSubCommand) -> Unit) {
         map.forEach { (commands, subCommand) ->
-            if (!commands.permissions.needOps()) {
+            if (!commands.permissions.needOps) {
                 return@forEach
             }
             runnable(commands, subCommand)

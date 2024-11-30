@@ -30,7 +30,7 @@ object CommandRegistry : ICommandRegistry {
                 return
             }
 
-            if (permissions.needOps()) {
+            if (permissions.needOps) {
                 permissions.putToGroup(administratorPermission)
                 return@forEach
             }

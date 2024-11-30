@@ -6,11 +6,13 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 import org.bukkit.command.CommandSender
 import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.permissions.Permission
+import org.bukkit.permissions.PermissionDefault
 
 @EnumServiceImpl("permissions_enum")
 enum class Permissions(
-    val groups: PermissionGroups,
-    val string: String
+    override val groups: PermissionGroups,
+    override val string: String,
+    override val needOps: Boolean = groups == PermissionGroups.ADMIN
 ): IPermissions {
     ROOT(PermissionGroups.USER, "root"),
 
@@ -48,9 +50,6 @@ enum class Permissions(
 
     ;
 
-    override fun groups(): IPermissionGroups = groups
-    override fun string(): String = string
-
     override fun get(): String {
         return COMMON_PREFIX + groups.prefix + string
     }
@@ -58,10 +57,6 @@ enum class Permissions(
     override fun putToGroup(permissions: Permission) {
         val full = get()
         permissions.children[full] = true
-    }
-
-    override fun needOps(): Boolean {
-        return groups == PermissionGroups.ADMIN
     }
 
     override fun hasPermission(sender: CommandSender): Boolean {
