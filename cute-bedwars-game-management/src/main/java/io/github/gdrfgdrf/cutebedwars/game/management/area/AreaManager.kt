@@ -22,7 +22,7 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
 
     private var file: File? = null
 
-    fun init() {
+    override fun init() {
         if (initialized) {
             throw IllegalStateException("this area manager is initialized")
         }

@@ -13,6 +13,7 @@ interface IAreaManager {
     val commitStorage: AbstractAreaCommitStorage?
     val initialized: Boolean
 
+    fun init()
     fun save()
 
     companion object {
