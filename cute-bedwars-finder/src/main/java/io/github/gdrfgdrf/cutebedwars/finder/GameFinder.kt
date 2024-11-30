@@ -38,9 +38,9 @@ object GameFinder : IGameFinder{
         val list = context.games().stream()
             .filter {
                 val matcher = if (findType == IFindType.valueOf("BY_ID")) {
-                    pattern.matcher(it.game().id.toString())
+                    pattern.matcher(it.game.id.toString())
                 } else {
-                    pattern.matcher(it.game().name)
+                    pattern.matcher(it.game.name)
                 }
                 return@filter matcher.find()
             }

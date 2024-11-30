@@ -16,7 +16,7 @@ import org.bukkit.command.CommandSender
 object GameInformation : IGameInformation {
     override fun convert(sender: CommandSender, gameContext: IGameContext): List<ITranslationAgent> =
         localizationScope(sender) {
-            val game = gameContext.game()
+            val game = gameContext.game
 
             val identifierMessages = arrayListOf<ITranslationAgent>()
 

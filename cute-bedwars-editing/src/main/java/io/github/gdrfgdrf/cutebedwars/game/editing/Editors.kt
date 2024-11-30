@@ -27,7 +27,7 @@ object Editors : IEditors {
     }
 
     override fun createGameEditor(uuid: String, gameContext: IGameContext): AbstractGameEditor {
-        "Creating game editor, uuid: $uuid, game's id: ${gameContext.game().id}, area's id: ${gameContext.game().areaId}".logInfo()
+        "Creating game editor, uuid: $uuid, game's id: ${gameContext.game.id}, area's id: ${gameContext.game.areaId}".logInfo()
         return GameEditor(uuid, gameContext)
     }
 

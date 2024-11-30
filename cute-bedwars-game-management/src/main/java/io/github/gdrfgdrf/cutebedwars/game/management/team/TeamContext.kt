@@ -36,8 +36,8 @@ class TeamContext(
     override fun validate(sender: CommandSender?, withHeader: Boolean): Boolean {
         "Validating a team id: ${team.id}, name: ${team.name}, game's id: ${team.gameId}"
 
-        val area = gameContext.areaContext().manager().area
-        val game = gameContext.game()
+        val area = gameContext.areaContext.manager().area
+        val game = gameContext.game
         var needDisableGame = false
 
         val declaredFields = Team::class.java.declaredFields
@@ -127,7 +127,7 @@ class TeamContext(
     override fun set(sender: CommandSender, jsonKey: String, any: Any) {
         super.set(sender, jsonKey, any)
 
-        val game = gameContext.game()
+        val game = gameContext.game
         if (team.fixGameMinPlayer(game)) {
             localizationScope(sender) {
                 message(AreaManagementLanguage.GAME_MIN_PLAYER_FIXED)

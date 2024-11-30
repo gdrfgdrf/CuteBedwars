@@ -49,9 +49,9 @@ class PropertyChange(
             throw ApplyException("game property change applies only to keys \"name\", \"min-player\", \"max-player\"")
         }
 
-        "Applying $key: $value to game, game's id: ${t.game().id}, area's id: ${t.game().areaId}".logInfo()
+        "Applying $key: $value to game, game's id: ${t.game.id}, area's id: ${t.game.areaId}".logInfo()
 
-        val game = t.game()
+        val game = t.game
         val convertible = Convertible.of(Game::class.java)
         when (key) {
             "name" -> game.name = convertible.invoke(java.lang.String::class.java, value)

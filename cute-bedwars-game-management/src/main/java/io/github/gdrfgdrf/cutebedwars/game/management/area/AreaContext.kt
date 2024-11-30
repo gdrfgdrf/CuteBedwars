@@ -79,18 +79,18 @@ class AreaContext(
     }
 
     override fun addGame(gameContext: IGameContext, addToBean: Boolean) {
-        "Adding a game to an area, game's name: ${gameContext.game().name}, area's name: ${manager.area.name}".logInfo()
+        "Adding a game to an area, game's name: ${gameContext.game.name}, area's name: ${manager.area.name}".logInfo()
 
         games.add(gameContext)
         if (addToBean) {
-            manager.area.games.add(gameContext.game())
+            manager.area.games.add(gameContext.game)
         }
     }
 
     override fun getGame(id: Long): IGameContext? {
         return games.stream()
             .filter {
-                it.game().id == id
+                it.game.id == id
             }
             .findAny()
             .orElse(null)
@@ -99,7 +99,7 @@ class AreaContext(
     override fun getGame(name: String): List<IGameContext> {
         return games.stream()
             .filter {
-                it.game().name == name
+                it.game.name == name
             }
             .toList()
     }

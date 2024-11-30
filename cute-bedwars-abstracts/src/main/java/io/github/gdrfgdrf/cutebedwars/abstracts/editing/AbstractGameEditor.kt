@@ -5,10 +5,10 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 abstract class AbstractGameEditor(uuid: String, val gameContext: IGameContext) : AbstractEditor<IGameContext>(uuid, gameContext) {
     @Synchronized
     fun save(allFinished: () -> Unit) {
-        val commitStorage = gameContext.commitStorage()
+        val commitStorage = gameContext.commitStorage
 
         commits().forEach {
-            commitStorage.save(gameContext.game().id, it) {}
+            commitStorage.save(gameContext.game.id, it) {}
             allFinished()
         }
 

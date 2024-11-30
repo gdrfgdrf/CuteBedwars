@@ -192,7 +192,7 @@ enum class ParamTypes : IParamTypes {
                     .games()
                     .stream()
                     .map {
-                        it.game().id.toString()
+                        it.game.id.toString()
                     }
                     .toList()
             }
@@ -201,7 +201,7 @@ enum class ParamTypes : IParamTypes {
                     .games()
                     .stream()
                     .map {
-                        it.game().name
+                        it.game.name
                     }
                     .toList()
             }
@@ -287,9 +287,9 @@ enum class ParamTypes : IParamTypes {
                 if (editor is AbstractGameEditor) {
                     val gameContext = (editor as AbstractGameEditor).t
 
-                    val commitStorage = gameContext.commitStorage()
+                    val commitStorage = gameContext.commitStorage
                     val gameCommits = commitStorage.get()
-                    val commitsList = gameCommits?.getMapOrDefault(gameContext.game().id.toString(), null)?.commitsList
+                    val commitsList = gameCommits?.getMapOrDefault(gameContext.game.id.toString(), null)?.commitsList
 
                     commitsList?.forEach {
                         ids.add(it.id)

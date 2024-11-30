@@ -61,9 +61,9 @@ object CreateGame : AbstractSubCommand(
                 .send()
 
             val gameContext = areaContext.createGame(gameName)
-            if (areaContext.getGame(gameContext.game().id) != null) {
+            if (areaContext.getGame(gameContext.game.id) != null) {
                 message(AreaManagementLanguage.DUPLICATE_GAME_ID_ERROR)
-                    .format0(gameContext.game().id)
+                    .format0(gameContext.game.id)
                     .send()
                 return@localizationScope
             }
@@ -71,7 +71,7 @@ object CreateGame : AbstractSubCommand(
             areaContext.addGame(gameContext)
 
             message(AreaManagementLanguage.CREATE_GAME_FINISHED)
-                .format0(areaName, gameContext.game().name)
+                .format0(areaName, gameContext.game.name)
                 .send()
         }
     }

@@ -24,11 +24,11 @@ import org.bukkit.command.CommandSender
 class GameContext(
     argumentSet: ArgumentSet,
 ) : IGameContext, SetterImpl<Game>() {
-    private val areaContext: IAreaContext = argumentSet.args[0] as IAreaContext
-    private val game = argumentSet.args[1] as Game
-    private val teams = ArrayList<ITeamContext>()
+    override val areaContext: IAreaContext = argumentSet.args[0] as IAreaContext
+    override val game = argumentSet.args[1] as Game
+    override val teams = ArrayList<ITeamContext>()
 
-    private val commitStorage: AbstractGameCommitStorage
+    override val commitStorage: AbstractGameCommitStorage
 
     init {
         instanceGetter = {
@@ -55,10 +55,6 @@ class GameContext(
 
     constructor(areaContext: IAreaContext, game: Game)
             : this(ArgumentSet(arrayOf(areaContext, game)))
-
-    override fun areaContext(): IAreaContext = areaContext
-    override fun game(): Game = game
-    override fun commitStorage(): AbstractGameCommitStorage = commitStorage
 
     override fun addTeam(team: Team) {
         "Adding a team to a game id: ${game.id}, name: ${game.name}, area's id: ${game.areaId}".logInfo()
