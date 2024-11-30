@@ -31,15 +31,6 @@ public class Config implements IIConfig {
     @JsonProperty(value = "default-sqlite")
     private String databaseImpl;
 
-    @JsonProperty(value = "enable-database-logging")
-    private Boolean enableDatabaseLogging;
-
-    @JsonProperty(value = "database-username")
-    private String databaseUsername;
-
-    @JsonProperty(value = "database-password")
-    private String databasePassword;
-
     @JsonProperty(value = "request-timeout")
     private Long requestTimeout;
 
@@ -54,9 +45,6 @@ public class Config implements IIConfig {
         config.language = null;
         config.workerId = null;
         config.databaseImpl = null;
-        config.databaseUsername = null;
-        config.databasePassword = null;
-        config.enableDatabaseLogging = null;
         config.requestTimeout = null;
         config.chatPageCacheBuilderSpecification = null;
         config.threadPoolServiceImpl = null;
@@ -76,15 +64,6 @@ public class Config implements IIConfig {
         }
         if (databaseImpl == null) {
             databaseImpl = "default-sqlite";
-        }
-        if (databaseUsername == null) {
-            databaseUsername = "";
-        }
-        if (databasePassword == null) {
-            databasePassword = "";
-        }
-        if (enableDatabaseLogging == null) {
-            enableDatabaseLogging = false;
         }
         if (requestTimeout == null) {
             requestTimeout = 10000L;

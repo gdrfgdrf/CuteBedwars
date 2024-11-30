@@ -3,10 +3,10 @@ package io.github.gdrfgdrf.cutebedwars.database.impl
 import com.baomidou.mybatisplus.core.MybatisConfiguration
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
+import io.github.gdrfgdrf.cutebedwars.database.impl.common.Config
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.database
 import org.apache.ibatis.builder.xml.XMLMapperBuilder
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl
@@ -51,7 +51,7 @@ object MybatisConfigurer {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }
-        if (IIConfig["EnableDatabaseLogging"]) {
+        if (Config.value("EnableDatabaseLogging")) {
             "Enable database logging (Jdk14LoggingImpl)".logInfo()
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
@@ -73,10 +73,13 @@ object MybatisConfigurer {
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
         dataSource.url = "jdbc:sqlite:" + IConstants["DEFAULT_DATABASE_FILE_NAME"]
 
-        if (IIConfig.get<String>("DatabaseUsername").isNotBlank() && IIConfig.get<String>("DatabasePassword").isNotBlank()) {
+        val username = Config.value<String>("DatabaseUsername")
+        val password = Config.value<String>("DatabasePassword")
+
+        if (username.isNotBlank() && password.isNotBlank()) {
             "The authentication of database is enabled".logInfo()
-            dataSource.username = IIConfig["DatabaseUsername"]
-            dataSource.password = IIConfig["DatabasePassword"]
+            dataSource.username = username
+            dataSource.password = password
         } else {
             "The authentication of database is disabled".logInfo()
         }
