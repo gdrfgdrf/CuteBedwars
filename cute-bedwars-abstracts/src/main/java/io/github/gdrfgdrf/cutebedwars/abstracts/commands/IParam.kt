@@ -17,7 +17,6 @@ interface IParam {
 
     fun tab(sender: CommandSender, args: Array<String>): MutableList<String>
     fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean
-    fun convenient(sender: CommandSender): ITranslationTextAgent?
 
     companion object {
         fun new(descriptionName: String, typeName: String): IParam = Mediator.get(

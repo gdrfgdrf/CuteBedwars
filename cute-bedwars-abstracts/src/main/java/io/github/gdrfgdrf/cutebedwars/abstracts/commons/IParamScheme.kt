@@ -13,7 +13,6 @@ interface IParamScheme {
     fun params(): List<IParam>
     fun length(): Int
     fun content(partDivider: Boolean = false): String
-    fun convenient(sender: CommandSender): ITranslationAgent
 
     companion object {
         fun new(builder: IParamScheme.() -> Unit): IParamScheme = Mediator.get(

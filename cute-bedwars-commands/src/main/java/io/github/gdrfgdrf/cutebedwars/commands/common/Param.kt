@@ -27,36 +27,4 @@ class Param(
     override fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean {
         return type.validate(sender, args, currentIndex, any)
     }
-
-    override fun convenient(sender: CommandSender): ITranslationTextAgent? {
-        if (!content.contains("args")) {
-            return null
-        }
-        if (!content.startsWith("<") || !content.endsWith(">")) {
-            return null
-        }
-
-        return localizationScope(sender) {
-            val onlyArgument = content.substring(1, content.indexOf(">"))
-            val searchResult = IDescriptions.search(onlyArgument)?.stream()
-                ?.filter { description ->
-                    return@filter !(description.administration
-                            && !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
-                }
-                ?.findAny()
-                ?.orElse(null)
-
-            val argumentText = text(content)
-                .runCommand("/cbw query description args $onlyArgument")
-
-            if (searchResult != null) {
-                val value = searchResult.value()
-                if (value != null) {
-                    argumentText.showText(value.operate().string)
-                }
-            }
-
-            return@localizationScope argumentText
-        }
-    }
 }

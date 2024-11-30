@@ -57,31 +57,6 @@ class ParamScheme : IParamScheme {
         return stringBuilder.toString()
     }
 
-    override fun convenient(sender: CommandSender): ITranslationAgent {
-        return localizationScope(sender) {
-            val result = message("")
-
-            params().forEachIndexed { index, param ->
-                val paramConvenient = param.convenient(sender)
-                if (index >= list.size - 1) {
-                    if (paramConvenient != null) {
-                        result.append(paramConvenient)
-                    } else {
-                        result.append(param.content)
-                    }
-                } else {
-                    if (paramConvenient != null) {
-                        result.append(paramConvenient).append(" ")
-                    } else {
-                        result.append(param.content).append(" ")
-                    }
-                }
-            }
-
-            return@localizationScope result
-        }
-    }
-
     companion object {
         @JvmStatic
         @Suppress("UNCHECKED_CAST")
