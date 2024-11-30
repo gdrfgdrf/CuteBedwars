@@ -22,7 +22,7 @@ object Dev : AbstractSubCommand(
         if (args[0] == "0") {
             ISelections.instance().create(sender as Player)
             val selectionTool = IItems.valueOf("SELECTION_TOOL")
-            selectionTool.item().give(sender)
+            selectionTool.item.give(sender)
             return
         }
         if (args[0] == "1") {

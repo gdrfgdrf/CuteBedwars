@@ -17,7 +17,7 @@ import org.bukkit.Material
 import org.bukkit.Particle
 
 @EnumServiceImpl("items")
-enum class Items(private val item: IItem) : IItems {
+enum class Items(override val item: IItem) : IItems {
     SELECTION_TOOL(
       IItemBuilder.new().modify {
           material = Material.STICK
@@ -128,6 +128,4 @@ enum class Items(private val item: IItem) : IItems {
     ),
 
     ;
-
-    override fun item(): IItem = item
 }

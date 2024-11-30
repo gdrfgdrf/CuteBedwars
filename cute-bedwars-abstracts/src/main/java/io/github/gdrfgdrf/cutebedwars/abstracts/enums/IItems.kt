@@ -6,7 +6,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("items")
 interface IItems {
-    fun item(): IItem
+    val item: IItem
 
     companion object {
         fun valueOf(name: String): IItems = Mediator.valueOf(IItems::class.java, name)!!
