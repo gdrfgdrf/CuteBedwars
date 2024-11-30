@@ -50,7 +50,8 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
         if (!folder.exists()) {
             folder.mkdirs()
         }
-        file = File(folder, area.id.toString() + ".json")
+        val areaFolder = File(folder, area.id.toString())
+        file = File(areaFolder, "area.json")
 
         context = AreaContext(this)
 

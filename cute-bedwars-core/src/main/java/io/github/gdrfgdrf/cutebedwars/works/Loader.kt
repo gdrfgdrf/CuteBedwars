@@ -153,20 +153,21 @@ object Loader : ILoader {
         if (!folder.exists()) {
             folder.mkdirs()
         }
-        val files = folder.listFiles { _, filename ->
-            return@listFiles filename.endsWith(".json")
+        val folders = folder.listFiles { _, filename ->
+            return@listFiles !filename.endsWith(".json")
         }
-        if (files.isNullOrEmpty()) {
+        if (folders.isNullOrEmpty()) {
             return
         }
 
-        files.forEach {
+        folders.forEach { areaFolder ->
             "-------------- Area Loading --------------".logInfo()
 
             runCatching {
-                "Reading a area file: $it".logInfo()
+                val file = File(areaFolder, "area.json")
+                "Reading a area file: $file".logInfo()
 
-                val area = IJsons.instance().read<Area>(it, Area::class.java)
+                val area = IJsons.instance().read<Area>(file, Area::class.java)
                 "The area file is read id: ${area.id}, name: ${area.name}".logInfo()
 
                 "Creating the area manager".logInfo()
