@@ -22,6 +22,12 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
 
     private var file: File? = null
 
+    private fun check() {
+        if (!initialized) {
+            throw IllegalStateException("this area manager is not initialized")
+        }
+    }
+
     override fun init() {
         if (initialized) {
             throw IllegalStateException("this area manager is initialized")
@@ -53,6 +59,7 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
     }
 
     override fun save() {
+        check()
         if (file == null) {
             throw IllegalArgumentException("file is required")
         }
