@@ -3,10 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.commons
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("config")
-interface IIConfig {
-    fun fulfill()
-    fun <T> get(key: String): T
-
+interface IIConfig : IConfig {
     companion object {
         private var instance: IIConfig? = null
 
@@ -25,7 +22,7 @@ interface IIConfig {
             if (instance == null) {
                 throw IllegalStateException("the config is null")
             }
-            return instance!!.get<T>(key)
+            return instance!!.get(key)
         }
     }
 }
