@@ -25,7 +25,7 @@ object EditListChanges : AbstractSubCommand(
             val changes = BetterChangesFinder.find(sender) ?: return@localizationScope
             val pageIndex = paramCombination.pageIndex()
 
-            if (changes.size <= 0) {
+            if (changes.size() <= 0) {
                 message(EditorLanguage.CHANGE_LIST_IS_EMPTY)
                     .send()
                 return@localizationScope

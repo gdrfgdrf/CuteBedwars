@@ -18,7 +18,9 @@ class Changes<T> : IChanges<T> {
     val changes = arrayListOf<AbstractChange<T>>()
     private val undoQueue = LinkedBlockingQueue<AbstractChange<T>>()
 
-    override val size: Int = changes.size
+    override fun size(): Int {
+        return changes.size
+    }
 
     private fun check() {
         if (!operable) {

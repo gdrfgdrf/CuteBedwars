@@ -6,8 +6,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("changes", singleton = false)
 interface IChanges<T> {
-    val size: Int
-
+    fun size(): Int
     fun apply(t: T)
     fun tryAdd(change: AbstractChange<*>): Boolean
     fun add(change: AbstractChange<T>)

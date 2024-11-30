@@ -38,7 +38,7 @@ object EditCommit : AbstractSubCommand(
             }
             val message = paramCombination.notNullString("COMMIT_MESSAGE")
 
-            if (changes.size <= 0) {
+            if (changes.size() <= 0) {
                 message(EditorLanguage.NEED_ONE_CHANGE_AT_LEAST)
                     .send()
                 return@localizationScope
