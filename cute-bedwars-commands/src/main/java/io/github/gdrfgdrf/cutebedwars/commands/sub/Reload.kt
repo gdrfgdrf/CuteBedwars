@@ -32,7 +32,7 @@ object Reload : AbstractSubCommand(
 
             if (new) {
                 message(CommonLanguage.RELOAD_WARRING)
-                    .format0(TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
+                    .format0(TimeUnit.SECONDS.convert(request.timeout, request.timeUnit))
                     .send()
                 return@localizationScope
             }

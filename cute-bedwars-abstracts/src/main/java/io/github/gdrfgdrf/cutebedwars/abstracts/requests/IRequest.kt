@@ -9,19 +9,14 @@ import java.util.concurrent.TimeUnit
 
 @Service("request", singleton = false)
 interface IRequest {
-    fun timeout(): Long
-    fun timeUnit(): TimeUnit
-    fun eachSecond(): IRequest.() -> Unit
-    fun endRun(): IRequest.() -> Unit
+    val timeout: Long
+    val timeUnit: TimeUnit
+    val eachSecond: IRequest.() -> Unit
+    val endRun: IRequest.() -> Unit
 
-    fun status(): IRequestStatuses
-    fun status(requestStatuses: IRequestStatuses)
-
-    fun passedSecond(): Long
-    fun passedSecond(passed: Long)
-
-    fun lastEachSecondRun(): Long
-    fun lastEachSecondRun(time: Long)
+    var status: IRequestStatuses
+    var passedSecond: Long
+    var lastEachSecondRun: Long
 
     companion object {
         fun new(eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest = Mediator.get(IRequest::class.java, ArgumentSet(arrayOf(

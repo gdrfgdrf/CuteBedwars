@@ -48,7 +48,7 @@ object CreateGame : AbstractSubCommand(
                         .format0(
                             areaName,
                             gameName,
-                            TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit())
+                            TimeUnit.SECONDS.convert(request.timeout, request.timeUnit)
                         )
                         .send()
                     return@localizationScope

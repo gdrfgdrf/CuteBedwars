@@ -34,7 +34,7 @@ object CreateArea : AbstractSubCommand(
 
                 if (new) {
                     message(AreaManagementLanguage.DUPLICATE_AREA_NAME_WARNING)
-                        .format0(areaName, TimeUnit.SECONDS.convert(request.timeout(), request.timeUnit()))
+                        .format0(areaName, TimeUnit.SECONDS.convert(request.timeout, request.timeUnit))
                         .send()
                     return@localizationScope
                 }

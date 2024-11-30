@@ -86,7 +86,7 @@ object Requests : IRequests {
         }
         val request = requestMap[type]
         if (request != null) {
-            request.status(IRequestStatuses.valueOf("STOPPED"))
+            request.status = IRequestStatuses.valueOf("STOPPED")
             if (high) {
                 HighCountdownTimer.remove(request as Request)
             } else {
@@ -114,7 +114,7 @@ object Requests : IRequests {
     }
 
     override fun make(high: Boolean, eachSecond: IRequest.() -> Unit, endRun: IRequest.() -> Unit): IRequest {
-        val request = Request(eachSecond = eachSecond, endRun = endRun)
+        val request = Request(eachSecond, endRun)
 
         if (high) {
             HighCountdownTimer.put(request)

@@ -30,7 +30,7 @@ object HighCountdownTimer {
 
     fun put(request: IRequest) {
         requests[request] = System.currentTimeMillis()
-        request.status(IRequestStatuses.valueOf("READY"))
+        request.status = IRequestStatuses.valueOf("READY")
     }
 
     fun remove(request: IRequest) {
@@ -49,35 +49,35 @@ internal object HighCountdownWorker : Runnable {
                 val now = System.currentTimeMillis()
 
                 HighCountdownTimer.requests.forEach { (request, startTime) ->
-                    if (request.status() == IRequestStatuses.valueOf("STOPPED") || request.status() == IRequestStatuses.valueOf("RUNNING")) {
+                    if (request.status == IRequestStatuses.valueOf("STOPPED") || request.status == IRequestStatuses.valueOf("RUNNING")) {
                         HighCountdownTimer.requests.remove(request)
                         return@forEach
                     }
-                    request.status(IRequestStatuses.valueOf("TRY_RUNNING"))
+                    request.status = IRequestStatuses.valueOf("TRY_RUNNING")
 
-                    val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout(), request.timeUnit())
+                    val convertedTimeout = TimeUnit.MILLISECONDS.convert(request.timeout, request.timeUnit)
                     if (now - startTime >= convertedTimeout) {
-                        request.status(IRequestStatuses.valueOf("RUNNING"))
+                        request.status = IRequestStatuses.valueOf("RUNNING")
                         HighCountdownTimer.requests.remove(request)
 
                         threadPoolService.newTask {
-                            request.endRun()(request)
-                            request.status(IRequestStatuses.valueOf("STOPPED"))
+                            request.endRun(request)
+                            request.status = IRequestStatuses.valueOf("STOPPED")
                         }
 
                         return@forEach
                     }
 
-                    if (now - request.lastEachSecondRun() >= 1000) {
+                    if (now - request.lastEachSecondRun >= 1000) {
                         threadPoolService.newTask {
-                            request.passedSecond(request.passedSecond() + 1)
-                            request.eachSecond()(request)
-                            request.lastEachSecondRun(System.currentTimeMillis())
+                            request.passedSecond += 1
+                            request.eachSecond(request)
+                            request.lastEachSecondRun = System.currentTimeMillis()
                         }
                     }
 
-                    if (request.status() != IRequestStatuses.valueOf("RUNNING")) {
-                        request.status(IRequestStatuses.valueOf("WAIT_NEXT_ROUND"))
+                    if (request.status != IRequestStatuses.valueOf("RUNNING")) {
+                        request.status = IRequestStatuses.valueOf("WAIT_NEXT_ROUND")
                     }
                 }
 
