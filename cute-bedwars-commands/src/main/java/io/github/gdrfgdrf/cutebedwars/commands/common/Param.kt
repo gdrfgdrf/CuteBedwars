@@ -15,14 +15,10 @@ import org.bukkit.command.CommandSender
 class Param(
     argumentSet: ArgumentSet
 ): IParam {
-    private val description: IDescriptions = argumentSet.args[0] as IDescriptions
+    override val description: IDescriptions = argumentSet.args[0] as IDescriptions
+    override val content = "<" + description.name.lowercase() + ">"
+
     private val type: IParamTypes = argumentSet.args[1] as IParamTypes
-
-    override fun description(): IDescriptions = description
-
-    override fun content(): String {
-        return "<" + description.name.lowercase() + ">"
-    }
 
     override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
         return type.tab(sender, args)
@@ -33,7 +29,6 @@ class Param(
     }
 
     override fun convenient(sender: CommandSender): ITranslationTextAgent? {
-        val content = content()
         if (!content.contains("args")) {
             return null
         }

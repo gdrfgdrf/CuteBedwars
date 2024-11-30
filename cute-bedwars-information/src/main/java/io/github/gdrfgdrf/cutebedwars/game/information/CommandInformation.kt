@@ -61,7 +61,7 @@ object CommandInformation : ICommandInformation {
 
                                         for (i in 0 until length) {
                                             val param = paramScheme.params()[i]
-                                            val description = param.description()
+                                            val description = param.description
 
                                             val value = description.value()
                                             if (value != null) {

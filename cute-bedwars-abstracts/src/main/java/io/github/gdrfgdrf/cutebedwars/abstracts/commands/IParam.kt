@@ -12,8 +12,9 @@ import org.bukkit.command.CommandSender
 
 @Service("param", singleton = false)
 interface IParam {
-    fun description(): IDescriptions
-    fun content(): String
+    val description: IDescriptions
+    val content: String
+
     fun tab(sender: CommandSender, args: Array<String>): MutableList<String>
     fun validate(sender: CommandSender, args: Array<String>, currentIndex: Int, any: Any): Boolean
     fun convenient(sender: CommandSender): ITranslationTextAgent?

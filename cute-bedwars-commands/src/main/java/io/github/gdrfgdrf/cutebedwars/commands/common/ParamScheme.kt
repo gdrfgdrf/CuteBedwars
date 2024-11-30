@@ -34,22 +34,22 @@ class ParamScheme : IParamScheme {
             if (index >= list.size - 1) {
                 if (partDivider) {
                     if (index <= 0) {
-                        stringBuilder.append(param.content())
+                        stringBuilder.append(param.content)
                     } else {
-                        stringBuilder.append("&|").append(param.content())
+                        stringBuilder.append("&|").append(param.content)
                     }
                 } else {
-                    stringBuilder.append(param.content())
+                    stringBuilder.append(param.content)
                 }
             } else {
                 if (partDivider) {
                     if (index <= 0) {
-                        stringBuilder.append(param.content()).append(" ")
+                        stringBuilder.append(param.content).append(" ")
                     } else {
-                        stringBuilder.append("&|").append(param.content()).append(" ")
+                        stringBuilder.append("&|").append(param.content).append(" ")
                     }
                 } else {
-                    stringBuilder.append(param.content()).append(" ")
+                    stringBuilder.append(param.content).append(" ")
                 }
             }
         }
@@ -67,13 +67,13 @@ class ParamScheme : IParamScheme {
                     if (paramConvenient != null) {
                         result.append(paramConvenient)
                     } else {
-                        result.append(param.content())
+                        result.append(param.content)
                     }
                 } else {
                     if (paramConvenient != null) {
                         result.append(paramConvenient).append(" ")
                     } else {
-                        result.append(param.content()).append(" ")
+                        result.append(param.content).append(" ")
                     }
                 }
             }

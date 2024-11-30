@@ -45,7 +45,7 @@ class ParamCombination(
             }
 
             val param = params[fixedIndex]
-            if (param.description() != description) {
+            if (param.description != description) {
                 return@forEachIndexed
             }
             if (count == providedIndex) {
