@@ -11,17 +11,14 @@ import net.md_5.bungee.api.chat.TextComponent
 class CuteText private constructor(raw: String) : ICuteText {
     override var string = raw
 
-    private var clickAction: Action? = null
-    private var clickActionValue: String? = null
-
-    private var hoverAction: HoverEvent.Action? = null
-    private var hoverActionValue: Array<out ICuteText>? = null
+    override var clickAction: Action? = null
+    override var clickActionValue: String? = null
+    override var hoverAction: HoverEvent.Action? = null
+    override var hoverActionValue: Array<out ICuteText>? = null
 
     private val parts = arrayListOf<String>()
-
     private var clickActionInPart: Array<Action?>? = null
     private var clickActionValueInPart: Array<String?>? = null
-
     private var hoverActionInPart: Array<HoverEvent.Action?>? = null
     private var hoverActionValueInPart: Array<Array<out ICuteText>?>? = null
 
@@ -53,48 +50,33 @@ class CuteText private constructor(raw: String) : ICuteText {
         buildParts()
     }
 
-    override fun clickAction(action: Action): ICuteText {
-        this.clickAction = action
-        return this
-    }
-
-    override fun clickActionValue(value: String): ICuteText {
-        this.clickActionValue = value
-        return this
-    }
-
     override fun openUrl(value: String): ICuteText {
-        clickAction(Action.OPEN_URL)
-        clickActionValue(value)
+        clickAction = Action.OPEN_URL
+        clickActionValue = value
         return this
     }
 
     override fun openFile(value: String): ICuteText {
-        clickAction(Action.OPEN_FILE)
-        clickActionValue(value)
+        clickAction = Action.OPEN_FILE
+        clickActionValue = value
         return this
     }
 
     override fun runCommand(value: String): ICuteText {
-        clickAction(Action.RUN_COMMAND)
-        clickActionValue(value)
+        clickAction = Action.RUN_COMMAND
+        clickActionValue = value
         return this
     }
 
     override fun suggestCommand(value: String): ICuteText {
-        clickAction(Action.SUGGEST_COMMAND)
-        clickActionValue(value)
+        clickAction = Action.SUGGEST_COMMAND
+        clickActionValue = value
         return this
     }
 
     override fun changePage(value: String): ICuteText {
-        clickAction(Action.CHANGE_PAGE)
-        clickActionValue(value)
-        return this
-    }
-
-    override fun hoverAction(action: HoverEvent.Action): ICuteText {
-        this.hoverAction = action
+        clickAction = Action.CHANGE_PAGE
+        clickActionValue = value
         return this
     }
 
@@ -104,26 +86,26 @@ class CuteText private constructor(raw: String) : ICuteText {
     }
 
     override fun showText(vararg cuteText: ICuteText): ICuteText {
-        hoverAction(HoverEvent.Action.SHOW_TEXT)
-        hoverActionValue(*cuteText)
+        hoverAction = HoverEvent.Action.SHOW_TEXT
+        hoverActionValue = cuteText
         return this
     }
 
     override fun showAchievement(vararg cuteText: ICuteText): ICuteText {
-        hoverAction(HoverEvent.Action.SHOW_ACHIEVEMENT)
-        hoverActionValue(*cuteText)
+        hoverAction = HoverEvent.Action.SHOW_ACHIEVEMENT
+        hoverActionValue = cuteText
         return this
     }
 
     override fun showItem(vararg cuteText: ICuteText): ICuteText {
-        hoverAction(HoverEvent.Action.SHOW_ITEM)
-        hoverActionValue(*cuteText)
+        hoverAction = HoverEvent.Action.SHOW_ITEM
+        hoverActionValue = cuteText
         return this
     }
 
     override fun showEntity(vararg cuteText: ICuteText): ICuteText {
-        hoverAction(HoverEvent.Action.SHOW_ENTITY)
-        hoverActionValue(*cuteText)
+        hoverAction = HoverEvent.Action.SHOW_ENTITY
+        hoverActionValue = cuteText
         return this
     }
 

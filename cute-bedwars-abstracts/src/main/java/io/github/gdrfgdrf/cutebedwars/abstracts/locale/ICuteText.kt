@@ -7,18 +7,19 @@ import net.md_5.bungee.api.chat.TextComponent
 interface ICuteText {
     val string: String
     val enablePart: Boolean
+    var clickAction: Action?
+    var clickActionValue: String?
+    var hoverAction: HoverEvent.Action?
+    var hoverActionValue: Array<out ICuteText>?
 
     fun rebuildParts()
 
-    fun clickAction(action: Action): ICuteText
-    fun clickActionValue(value: String): ICuteText
     fun openUrl(value: String): ICuteText
     fun openFile(value: String): ICuteText
     fun runCommand(value: String): ICuteText
     fun suggestCommand(value: String): ICuteText
     fun changePage(value: String): ICuteText
 
-    fun hoverAction(action: HoverEvent.Action): ICuteText
     fun hoverActionValue(vararg cuteText: ICuteText): ICuteText
     fun showText(vararg cuteText: ICuteText): ICuteText
     fun showAchievement(vararg cuteText: ICuteText): ICuteText

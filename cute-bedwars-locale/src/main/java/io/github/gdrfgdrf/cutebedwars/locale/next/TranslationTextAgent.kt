@@ -11,8 +11,8 @@ class TranslationTextAgent(
     private var cuteText: ICuteText
 ) : ITranslationTextAgent {
     private fun clickAction(action: ClickEvent.Action, value: String): ITranslationTextAgent {
-        cuteText.clickAction(action)
-        cuteText.clickActionValue(value)
+        cuteText.clickAction = action
+        cuteText.clickActionValue = value
         return this
     }
 
@@ -47,8 +47,8 @@ class TranslationTextAgent(
     }
 
     private fun hoverAction(action: Action, vararg cuteText: ICuteText): ITranslationTextAgent {
-        this.cuteText.hoverAction(action)
-        this.cuteText.hoverActionValue(*cuteText)
+        this.cuteText.hoverAction = action
+        this.cuteText.hoverActionValue = cuteText
         return this
     }
 
