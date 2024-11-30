@@ -6,6 +6,8 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("changes", singleton = false)
 interface IChanges<T> {
+    val size: Int
+
     fun apply(t: T)
     fun tryAdd(change: AbstractChange<*>): Boolean
     fun add(change: AbstractChange<T>)
@@ -14,7 +16,6 @@ interface IChanges<T> {
     fun redo()
     fun finish(): ICommit<T>
 
-    fun size(): Int
     fun forEach(block: (AbstractChange<T>) -> Unit)
     fun find(id: Long): AbstractChange<T>?
 
