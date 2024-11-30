@@ -51,16 +51,6 @@ class DefaultDatabase : IDatabase {
     private fun prepareConfig() {
         "Loading the configuration of the default database".logInfo()
 
-        val anotherConfigPath = File(IConstants["ANOTHER_CONFIG_PATH"])
-        if (!anotherConfigPath.exists()) {
-            anotherConfigPath.mkdirs()
-        }
-
-        val file = File(anotherConfigPath, "default-database-config.json")
-        if (!file.exists()) {
-            file.createNewFile()
-        }
-
         val config = IConfigs.instance().load(
             "default-database-config.json",
             Config::class.java
