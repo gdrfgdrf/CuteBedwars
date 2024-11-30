@@ -6,12 +6,12 @@ import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto
 object Convertors {
     fun protobufCommit(commit: ICommit<*>): StorageProto.Commit {
         val commitBuilder = StorageProto.Commit.newBuilder()
-            .setId(commit.id().toString())
-            .setTime(commit.time())
-            .setSubmitter(commit.submitter())
-            .setMessage(commit.message())
+            .setId(commit.id.toString())
+            .setTime(commit.time)
+            .setSubmitter(commit.submitter)
+            .setMessage(commit.message)
 
-        commit.changes().forEach { change ->
+        commit.changes.forEach { change ->
             val changeProtobuf = StorageProto.Change.newBuilder()
                 .setIdentifier(change.identifier())
                 .setName(change.name())

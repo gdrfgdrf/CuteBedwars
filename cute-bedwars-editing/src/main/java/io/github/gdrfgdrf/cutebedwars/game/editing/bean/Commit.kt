@@ -12,7 +12,7 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @Suppress("UNCHECKED_CAST")
 @ServiceImpl("commit", needArgument = true)
 class Commit<T>(
-    private val changes: Changes<T>
+    override val changes: Changes<T>
 ) : ICommit<T> {
     constructor(argumentSet: ArgumentSet): this(argumentSet.args[0] as Changes<T>)
 
@@ -22,10 +22,10 @@ class Commit<T>(
         }
     }
 
-    private var id: Long = YitIdHelper.nextId()
-    private var time: String? = null
-    private var submitter: String? = null
-    private var message: String? = null
+    override var id: Long = YitIdHelper.nextId()
+    override var time: String? = null
+    override var submitter: String? = null
+    override var message: String? = null
 
     @Suppress("UNCHECKED_CAST")
     override fun tryApply(any: Any): Boolean {
@@ -52,9 +52,9 @@ class Commit<T>(
         }
 
         val revertCommit = newChanges.finish()
-        revertCommit.time(now())
-        revertCommit.submitter(submitter)
-        revertCommit.message("revert: $id")
+        revertCommit.time = now()
+        revertCommit.submitter = submitter
+        revertCommit.message = "revert: $id"
 
         return revertCommit
     }
@@ -64,26 +64,4 @@ class Commit<T>(
         this.submitter = submitter
         this.message = message
     }
-
-    override fun id(): Long = id
-    override fun id(id: Long) {
-        this.id = id
-    }
-
-    override fun time(): String? = time
-    override fun time(time: String) {
-        this.time = time
-    }
-
-    override fun submitter(): String? = submitter
-    override fun submitter(submitter: String) {
-        this.submitter = submitter
-    }
-
-    override fun message(): String? = message
-    override fun message(message: String) {
-        this.message = message
-    }
-
-    override fun changes(): IChanges<T> = changes
 }

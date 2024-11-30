@@ -115,10 +115,10 @@ object Convertors : IConvertors {
         }
 
         val kotlinCommit = changes.finish()
-        kotlinCommit.id(commit.id.toLongOrNull() ?: throw IllegalArgumentException("id is not a long"))
-        kotlinCommit.time(commit.time)
-        kotlinCommit.submitter(commit.submitter)
-        kotlinCommit.message(commit.message)
+        kotlinCommit.id = commit.id.toLongOrNull() ?: throw IllegalArgumentException("id is not a long")
+        kotlinCommit.time = commit.time
+        kotlinCommit.submitter = commit.submitter
+        kotlinCommit.message = commit.message
 
         return kotlinCommit
     }
