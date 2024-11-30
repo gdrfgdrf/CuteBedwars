@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.utils.thread
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.config.ThreadPoolServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl

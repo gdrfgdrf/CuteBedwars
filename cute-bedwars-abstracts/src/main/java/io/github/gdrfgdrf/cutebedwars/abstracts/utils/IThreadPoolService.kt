@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.commons
+package io.github.gdrfgdrf.cutebedwars.abstracts.utils
 
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton

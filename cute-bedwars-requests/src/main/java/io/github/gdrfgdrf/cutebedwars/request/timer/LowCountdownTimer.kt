@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.request.timer
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestStatuses
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequest
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError

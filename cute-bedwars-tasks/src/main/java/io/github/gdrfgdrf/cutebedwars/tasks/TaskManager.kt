@@ -1,10 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.tasks
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskEntry
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.tasks.entry.TaskEntry
 import io.github.gdrfgdrf.cutebedwars.tasks.worker.SyncTaskWorker
 import io.github.gdrfgdrf.cutebedwars.tasks.worker.TaskWorker
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl

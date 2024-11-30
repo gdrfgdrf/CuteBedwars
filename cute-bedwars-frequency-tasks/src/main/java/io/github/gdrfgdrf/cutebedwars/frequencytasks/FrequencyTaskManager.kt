@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.frequencytasks
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IThreadPoolService
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTask
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
