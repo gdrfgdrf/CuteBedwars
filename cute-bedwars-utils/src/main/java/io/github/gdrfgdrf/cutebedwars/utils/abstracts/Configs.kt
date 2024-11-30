@@ -8,7 +8,11 @@ import java.io.File
 @ServiceImpl("configs")
 object Configs : IConfigs {
     override fun <T : Any> load(fileName: String, clazz: Class<T>): T {
-        val file = File(IConstants["BASE_FOLDER"], fileName)
+        val file = if (clazz.name == "io.github.gdrfgdrf.cutebedwars.commons.Config") {
+            File(IConstants["BASE_FOLDER"], fileName)
+        } else {
+            File(IConstants["ANOTHER_CONFIG_PATH"], fileName)
+        }
         if (!file.exists()) {
             file.createNewFile()
 
