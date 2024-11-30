@@ -9,9 +9,10 @@ import org.bukkit.command.CommandSender
 
 @EnumService("descriptions_enum")
 interface IDescriptions {
-    fun name_(): String
-    fun value(): () -> ILanguageString?
-    fun administration(): Boolean
+    val name: String
+    val value: () -> ILanguageString?
+    val administration: Boolean
+
     fun convenient(sender: CommandSender, localizationContext: ILocalizationContext): ITranslationTextAgent
     fun convenient(translationTextAgent: ITranslationTextAgent)
 

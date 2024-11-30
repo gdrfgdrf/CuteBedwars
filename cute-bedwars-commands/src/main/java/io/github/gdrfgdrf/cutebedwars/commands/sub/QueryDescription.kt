@@ -48,16 +48,16 @@ object QueryDescription : AbstractSubCommand(
             ) {
                 searchResult.stream()
                     .filter {
-                        return@filter !(it.administration() &&
+                        return@filter !(it.administration &&
                                 !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
                     }.map {
-                        val languageString = it.value()()
+                        val languageString = it.value()
                         if (languageString == null) {
                             message(CommonLanguage.DESCRIPTION_ERROR)
-                                .format0(it.name_())
+                                .format0(it.name)
                         } else {
                             message(CommonLanguage.DESCRIPTION_FORMAT)
-                                .format0(it.name_(), languageString.operate().string)
+                                .format0(it.name, languageString.operate().string)
                         }
                     }.toList()
             }
@@ -74,7 +74,7 @@ object QueryDescription : AbstractSubCommand(
         }
 
         result = result.stream().filter {
-            return@filter !(it.administration()
+            return@filter !(it.administration
                     && !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
         }.toList()
 

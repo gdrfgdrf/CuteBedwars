@@ -11,8 +11,8 @@ import java.util.regex.Pattern
 
 @EnumServiceImpl("descriptions_enum", searcher = "search")
 enum class Descriptions(
-    val value: () -> ILanguageString?,
-    val administration: Boolean = false
+    override val value: () -> ILanguageString?,
+    override val administration: Boolean = false
 ): IDescriptions {
     DESCRIPTION(DescriptionLanguage::DESCRIPTION),
 
@@ -132,22 +132,19 @@ enum class Descriptions(
 
     ;
 
-    override fun name_(): String = name
-    override fun value(): () -> ILanguageString? = value
-    override fun administration(): Boolean = administration
     override fun convenient(sender: CommandSender, localizationContext: ILocalizationContext): ITranslationTextAgent {
-        return localizationContext.text(name_().lowercase()).apply {
+        return localizationContext.text(name.lowercase()).apply {
             convenient(this)
         }
     }
     override fun convenient(translationTextAgent: ITranslationTextAgent) {
         translationTextAgent.apply {
-            val value = value()()
+            val value = value()
             if (value != null) {
                 showText(value.operate().string)
             }
 
-            runCommand("/cbw query description args ${name_().lowercase()}")
+            runCommand("/cbw query description args ${name.lowercase()}")
         }
     }
 
@@ -162,7 +159,7 @@ enum class Descriptions(
 
             val pattern = Pattern.compile(name, Pattern.CASE_INSENSITIVE)
             entries.forEach {
-                val matcher = pattern.matcher(it.name_())
+                val matcher = pattern.matcher(it.name)
                 if (matcher.find()) {
                     result.add(it)
                 }

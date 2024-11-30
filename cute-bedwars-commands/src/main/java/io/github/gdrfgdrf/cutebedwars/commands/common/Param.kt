@@ -21,7 +21,7 @@ class Param(
     override fun description(): IDescriptions = description
 
     override fun content(): String {
-        return "<" + description.name_().lowercase() + ">"
+        return "<" + description.name.lowercase() + ">"
     }
 
     override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
@@ -45,7 +45,7 @@ class Param(
             val onlyArgument = content.substring(1, content.indexOf(">"))
             val searchResult = IDescriptions.search(onlyArgument)?.stream()
                 ?.filter { description ->
-                    return@filter !(description.administration()
+                    return@filter !(description.administration
                             && !IPermissions.valueOf("QUERY_ADMINISTRATION_DESCRIPTION").hasPermission(sender))
                 }
                 ?.findAny()
@@ -55,7 +55,7 @@ class Param(
                 .runCommand("/cbw query description args $onlyArgument")
 
             if (searchResult != null) {
-                val value = searchResult.value()()
+                val value = searchResult.value()
                 if (value != null) {
                     argumentText.showText(value.operate().string)
                 }

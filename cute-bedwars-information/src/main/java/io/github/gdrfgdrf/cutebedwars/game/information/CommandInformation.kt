@@ -63,7 +63,7 @@ object CommandInformation : ICommandInformation {
                                             val param = paramScheme.params()[i]
                                             val description = param.description()
 
-                                            val value = description.value()()
+                                            val value = description.value()
                                             if (value != null) {
                                                 if (enablePart()) {
                                                     showTextInPart(i, value.operate().string)
@@ -73,9 +73,9 @@ object CommandInformation : ICommandInformation {
                                             }
 
                                             if (enablePart()) {
-                                                runCommandInPart(i, "/cbw query description args ${description.name_().lowercase()}")
+                                                runCommandInPart(i, "/cbw query description args ${description.name.lowercase()}")
                                             } else {
-                                                runCommand("/cbw query description args ${description.name_().lowercase()}")
+                                                runCommand("/cbw query description args ${description.name.lowercase()}")
                                             }
                                         }
                                     }
