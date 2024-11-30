@@ -9,6 +9,8 @@ class ChangeClassHolder<T : AbstractChange<*>>(
     private val clazz: Class<T>,
     private val metadata: ChangeMetadata
 ) : IChangeClassHolder<T> {
+    override val type: Class<*> = metadata.type
+
     override fun validateArgsLength(protobuf: Boolean, vararg any: Any): Boolean {
         val argsRange = if (protobuf) {
             metadata.argsRange.first..metadata.maxArgsForProtobuf
@@ -27,8 +29,6 @@ class ChangeClassHolder<T : AbstractChange<*>>(
 
         return instance
     }
-
-    override fun type(): Class<*> = metadata.type
 
     companion object {
         fun <T : AbstractChange<*>> create(clazz: Class<T>, metadata: ChangeMetadata) =
