@@ -158,6 +158,11 @@
             <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
             <artifactId>frequency-tasks</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cute-bedwars</groupId>
+            <artifactId>geometry</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

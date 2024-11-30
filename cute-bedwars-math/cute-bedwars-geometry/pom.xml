@@ -5,27 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-        <artifactId>root</artifactId>
+        <artifactId>math</artifactId>
         <version>0.1.0</version>
     </parent>
 
-    <artifactId>math</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>cute-bedwars-geometry</module>
-    </modules>
+    <groupId>io.github.gdrfgdrf.cute-bedwars</groupId>
+    <artifactId>geometry</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>abstracts</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>
