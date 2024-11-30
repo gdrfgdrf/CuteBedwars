@@ -9,7 +9,7 @@ import org.bukkit.Particle
 @Service("particles")
 @KotlinSingleton
 interface IParticles {
-    fun api(): ParticleNativeAPI?
+    val api: ParticleNativeAPI?
 
     fun initialize()
     fun getOrCreate(particle: Particle): IManagedParticle

@@ -124,7 +124,7 @@ fun String.replaceToColorSymbol(formatSymbol: String = "&"): String {
 
 @Suppress("UNCHECKED_CAST")
 fun <T : ParticleType> particle(particle: Particle): T {
-    val api = IParticles.instance().api() ?: throw IllegalStateException("particle api is not got")
+    val api = IParticles.instance().api ?: throw IllegalStateException("particle api is not got")
     val name = particle.name.uppercase()
     val particleList18 = api.LIST_1_8
     val particleList18class = ParticleList_1_8::class.java

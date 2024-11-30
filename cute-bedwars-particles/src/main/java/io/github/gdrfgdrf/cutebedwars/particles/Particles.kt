@@ -13,13 +13,11 @@ import java.util.concurrent.ConcurrentHashMap
 @ServiceImpl("particles")
 object Particles : IParticles {
     private val map = ConcurrentHashMap<Particle, IManagedParticle>()
-    private var particleApi: ParticleNativeAPI? = null
-
-    override fun api(): ParticleNativeAPI? = particleApi
+    override var api: ParticleNativeAPI? = null
 
     override fun initialize() {
         "Initializing particle native api".logInfo()
-        particleApi = ParticleNativeCore.loadAPI(IPlugin.instance().javaPlugin)
+        api = ParticleNativeCore.loadAPI(IPlugin.instance().javaPlugin)
     }
 
     override fun getOrCreate(particle: Particle): IManagedParticle {
