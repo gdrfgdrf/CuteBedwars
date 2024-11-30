@@ -56,6 +56,8 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
         commitStorage = AbstractAreaCommitStorage.new(
             IConstants["AREA_FOLDER"] + area.id + "/" + "commits"
         )
+
+        save()
     }
 
     override fun save() {
