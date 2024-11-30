@@ -96,7 +96,7 @@ class CuteTranslation private constructor() : ICuteTranslation {
     override fun string(): String {
         val stringBuilder = StringBuilder()
         list.forEach { cuteText ->
-            stringBuilder.append(cuteText.string())
+            stringBuilder.append(cuteText.string)
         }
         return stringBuilder.toString()
     }

@@ -5,8 +5,10 @@ import net.md_5.bungee.api.chat.HoverEvent
 import net.md_5.bungee.api.chat.TextComponent
 
 interface ICuteText {
+    val string: String
+    val enablePart: Boolean
+
     fun rebuildParts()
-    fun enablePart(): Boolean
 
     fun clickAction(action: Action): ICuteText
     fun clickActionValue(value: String): ICuteText
@@ -40,5 +42,4 @@ interface ICuteText {
 
     fun format(vararg any: Any): ICuteText
     fun build(): TextComponent
-    fun string(): String
 }

@@ -23,7 +23,7 @@ class TranslationTextAgent(
     }
 
     override fun enablePart(): Boolean {
-        return cuteText.enablePart()
+        return cuteText.enablePart
     }
 
     override fun openUrl(value: String): ITranslationTextAgent {
@@ -167,7 +167,7 @@ class TranslationTextAgent(
     }
 
     override fun string(): String {
-        return cuteText.string()
+        return cuteText.string
     }
 
     companion object {

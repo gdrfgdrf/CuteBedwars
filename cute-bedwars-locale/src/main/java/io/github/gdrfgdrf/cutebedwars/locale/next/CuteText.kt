@@ -9,7 +9,7 @@ import net.md_5.bungee.api.chat.HoverEvent
 import net.md_5.bungee.api.chat.TextComponent
 
 class CuteText private constructor(raw: String) : ICuteText {
-    private var finalString = raw
+    override var string = raw
 
     private var clickAction: Action? = null
     private var clickActionValue: String? = null
@@ -26,14 +26,15 @@ class CuteText private constructor(raw: String) : ICuteText {
     private var hoverActionValueInPart: Array<Array<out ICuteText>?>? = null
 
     private var cache: TextComponent? = null
-    private var enablePart: Boolean = false
+
+    override var enablePart: Boolean = false
 
     private fun buildParts() {
         parts.clear()
 
-        enablePart = countMatches(finalString, "&|") > 0
+        enablePart = countMatches(string, "&|") > 0
         if (enablePart) {
-            val split = finalString.split("&|")
+            val split = string.split("&|")
             parts.addAll(split)
 
             clickActionInPart = arrayOfNulls(parts.size)
@@ -50,10 +51,6 @@ class CuteText private constructor(raw: String) : ICuteText {
 
     override fun rebuildParts() {
         buildParts()
-    }
-
-    override fun enablePart(): Boolean {
-        return enablePart
     }
 
     override fun clickAction(action: Action): ICuteText {
@@ -218,7 +215,7 @@ class CuteText private constructor(raw: String) : ICuteText {
     }
 
     override fun format(vararg any: Any): CuteText {
-        finalString = finalString.format(*any)
+        string = string.format(*any)
         return this
     }
 
@@ -307,8 +304,8 @@ class CuteText private constructor(raw: String) : ICuteText {
             return cache!!
         }
 
-        finalString = replaceFormatSymbol("&", finalString)
-        cache = TextComponent(finalString)
+        string = replaceFormatSymbol("&", string)
+        cache = TextComponent(string)
 
         cache!!.clickEvent = if (clickAction != null && clickActionValue != null) {
             ClickEvent(clickAction, clickActionValue)
@@ -328,10 +325,6 @@ class CuteText private constructor(raw: String) : ICuteText {
         }
 
         return cache!!
-    }
-
-    override fun string(): String {
-        return finalString
     }
 
     private fun countMatches(string: String, pattern: String): Int {
