@@ -132,22 +132,6 @@ enum class Descriptions(
 
     ;
 
-    override fun convenient(sender: CommandSender, localizationContext: ILocalizationContext): ITranslationTextAgent {
-        return localizationContext.text(name.lowercase()).apply {
-            convenient(this)
-        }
-    }
-    override fun convenient(translationTextAgent: ITranslationTextAgent) {
-        translationTextAgent.apply {
-            val value = value()
-            if (value != null) {
-                showText(value.operate().string)
-            }
-
-            runCommand("/cbw query description args ${name.lowercase()}")
-        }
-    }
-
     companion object {
         @JvmStatic
         fun search(name: String): List<Descriptions> {

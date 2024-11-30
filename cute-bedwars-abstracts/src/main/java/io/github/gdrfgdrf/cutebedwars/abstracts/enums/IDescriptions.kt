@@ -13,9 +13,6 @@ interface IDescriptions {
     val value: () -> ILanguageString?
     val administration: Boolean
 
-    fun convenient(sender: CommandSender, localizationContext: ILocalizationContext): ITranslationTextAgent
-    fun convenient(translationTextAgent: ITranslationTextAgent)
-
     companion object {
         fun valueOf(name: String): IDescriptions = Mediator.valueOf(IDescriptions::class.java, name)!!
         fun find(name: String): IDescriptions? {
