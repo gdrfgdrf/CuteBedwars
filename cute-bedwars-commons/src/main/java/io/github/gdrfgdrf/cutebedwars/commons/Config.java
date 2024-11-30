@@ -98,14 +98,7 @@ public class Config implements IIConfig {
     }
 
     @Override
-    @SuppressWarnings("ALL")
     public <T> T get(@NotNull String key) {
-        try {
-            Method method = Config.class.getMethod("get" + key);
-            return (T) method.invoke(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return IIConfig.super.get(key);
     }
 }
