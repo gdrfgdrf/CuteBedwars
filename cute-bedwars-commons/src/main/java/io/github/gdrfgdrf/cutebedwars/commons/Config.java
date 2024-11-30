@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.commons;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.config.ThreadPoolServiceImpl;
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl;
 import lombok.Data;
@@ -16,8 +16,8 @@ import java.lang.reflect.Method;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ServiceImpl("config")
-public class Config implements IConfig {
-    public static IConfig INSTANCE;
+public class Config implements IIConfig {
+    public static IIConfig INSTANCE;
 
     @JsonProperty(value = "enable-debug-logging")
     private Boolean enableDebugLogging;

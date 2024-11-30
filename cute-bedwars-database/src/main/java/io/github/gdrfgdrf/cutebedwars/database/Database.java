@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.database;
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants;
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase;
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.CommonsKt;
@@ -50,7 +50,7 @@ public class Database implements IDatabase {
         Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> databaseClass;
 
         try {
-            String databaseImpl = IConfig.Companion.get("DatabaseImpl");
+            String databaseImpl = IIConfig.Companion.get("DatabaseImpl");
             if (StringUtils.isBlank(databaseImpl)) {
                 throw new IllegalArgumentException("No database implementation is specified in the configuration file");
             }

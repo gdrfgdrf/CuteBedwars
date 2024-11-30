@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logWarn
@@ -27,7 +27,7 @@ class DefaultDatabase : IDatabase {
         if (!file.exists()) {
             file.createNewFile()
         }
-        if (IConfig["EnableDatabaseLogging"]) {
+        if (IIConfig["EnableDatabaseLogging"]) {
             "Use no logging for the default database".logInfo()
             LogFactory.useNoLogging()
         } else {

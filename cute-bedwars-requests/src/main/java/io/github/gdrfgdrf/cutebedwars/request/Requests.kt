@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.request
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestStatuses
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequest
@@ -19,7 +19,7 @@ object Requests : IRequests {
     var GLOBAL_TIMEOUT: Long? = null
         get() {
             if (field == null) {
-                val customDefinition = IConfig.get<Long>("RequestTimeout")
+                val customDefinition = IIConfig.get<Long>("RequestTimeout")
                 field = if (customDefinition <= 0) {
                     30000
                 } else {

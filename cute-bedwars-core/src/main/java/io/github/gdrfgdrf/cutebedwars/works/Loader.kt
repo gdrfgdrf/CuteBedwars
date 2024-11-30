@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.works
 import com.github.yitter.contract.IdGeneratorOptions
 import com.github.yitter.idgen.YitIdHelper
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.ILoader
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
@@ -49,10 +49,10 @@ object Loader : ILoader {
 
             if (!idGeneratorInitialized) {
                 "Initializing the id generator".logInfo()
-                val workerId = IConfig.get<Short>("WorkerId")
+                val workerId = IIConfig.get<Short>("WorkerId")
                 val options = if (workerId.toInt() != 0) {
                     "Use the custom worker id: $workerId".logInfo()
-                    IdGeneratorOptions(IConfig["WorkerId"])
+                    IdGeneratorOptions(IIConfig["WorkerId"])
                 } else {
                     "Use the default worker id: $workerId".logInfo()
                     IdGeneratorOptions()
@@ -65,7 +65,7 @@ object Loader : ILoader {
             loadAreas()
             loadChangeTypeRegistry()
 
-            if (IConfig["EnableDebugLogging"]) {
+            if (IIConfig["EnableDebugLogging"]) {
                 "Debug logging is enabled".logDebug()
             }
         }.onFailure {
@@ -106,11 +106,11 @@ object Loader : ILoader {
 
         val config = IConfigs.instance().load(
             IConstants["CONFIG_FILE_NAME"],
-            Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config") as Class<IConfig>
+            Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config") as Class<IIConfig>
         )
-        IConfig.set(config)
+        IIConfig.set(config)
 
-        IConfig.instance()?.fulfill()
+        IIConfig.instance()?.fulfill()
     }
 
     private fun loadLanguage() {
@@ -120,7 +120,7 @@ object Loader : ILoader {
             Loader::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.languages.collect",
             "io.github.gdrfgdrf.cutebedwars.languages.language",
-            IConfig["Language"],
+            IIConfig["Language"],
         )
     }
 

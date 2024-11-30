@@ -3,14 +3,14 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.commons
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("config")
-interface IConfig {
+interface IIConfig {
     fun fulfill()
     fun <T> get(key: String): T
 
     companion object {
-        private var instance: IConfig? = null
+        private var instance: IIConfig? = null
 
-        fun set(config: IConfig) {
+        fun set(config: IIConfig) {
             val clazz = Class.forName("io.github.gdrfgdrf.cutebedwars.commons.Config")
             val field = clazz.getField("INSTANCE")
 
@@ -18,7 +18,7 @@ interface IConfig {
             instance = config
         }
         @JvmStatic
-        fun instance(): IConfig? {
+        fun instance(): IIConfig? {
              return instance
         }
         operator fun <T> get(key: String): T {

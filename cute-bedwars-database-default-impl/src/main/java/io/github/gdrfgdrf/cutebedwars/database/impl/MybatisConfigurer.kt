@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.database.impl
 import com.baomidou.mybatisplus.core.MybatisConfiguration
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
@@ -51,7 +51,7 @@ object MybatisConfigurer {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }
-        if (IConfig["EnableDatabaseLogging"]) {
+        if (IIConfig["EnableDatabaseLogging"]) {
             "Enable database logging (Jdk14LoggingImpl)".logInfo()
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
@@ -73,10 +73,10 @@ object MybatisConfigurer {
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
         dataSource.url = "jdbc:sqlite:" + IConstants["DEFAULT_DATABASE_FILE_NAME"]
 
-        if (IConfig.get<String>("DatabaseUsername").isNotBlank() && IConfig.get<String>("DatabasePassword").isNotBlank()) {
+        if (IIConfig.get<String>("DatabaseUsername").isNotBlank() && IIConfig.get<String>("DatabasePassword").isNotBlank()) {
             "The authentication of database is enabled".logInfo()
-            dataSource.username = IConfig["DatabaseUsername"]
-            dataSource.password = IConfig["DatabasePassword"]
+            dataSource.username = IIConfig["DatabaseUsername"]
+            dataSource.password = IIConfig["DatabasePassword"]
         } else {
             "The authentication of database is disabled".logInfo()
         }

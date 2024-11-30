@@ -1,22 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.chatpage
 
-import com.google.common.cache.CacheBuilder
-import com.google.common.cache.CacheLoader
-import com.google.common.cache.LoadingCache
 import com.google.common.collect.Lists
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
-import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
-import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
-import java.util.concurrent.TimeUnit
 
 @ServiceImpl("chat_page", needArgument = true, instanceGetter = "get")
 class ChatPage(

@@ -5,7 +5,7 @@ import com.google.common.cache.CacheLoader
 import com.google.common.cache.LoadingCache
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPage
 import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
@@ -35,7 +35,7 @@ object ChatPages : IChatPages {
                 return this@ChatPages.load(pageRequest)
             }
         }
-        cache = if (IConfig.get<String>("ChatPageCacheBuilderSpecification").isBlank()) {
+        cache = if (IIConfig.get<String>("ChatPageCacheBuilderSpecification").isBlank()) {
             "Creating chat page's caching with the default specification".logInfo()
             CacheBuilder.newBuilder()
                 .initialCapacity(100)
@@ -44,7 +44,7 @@ object ChatPages : IChatPages {
                 .build(loader)
         } else {
             "Creating chat page's caching with the custom specification".logInfo()
-            CacheBuilder.from(IConfig.get<String>("ChatPageCacheBuilderSpecification"))
+            CacheBuilder.from(IIConfig.get<String>("ChatPageCacheBuilderSpecification"))
                 .build(loader)
         }
 

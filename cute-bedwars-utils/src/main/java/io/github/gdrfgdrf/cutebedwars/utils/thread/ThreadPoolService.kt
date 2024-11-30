@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.utils.thread
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
+import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IThreadPoolService
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.config.ThreadPoolServiceImpl
@@ -19,7 +19,7 @@ object ThreadPoolService : IThreadPoolService {
     private var EXECUTOR_SERVICE: ThreadPoolExecutor? = null
 
     private fun prepare() {
-        if (ThreadPoolServiceImpl.JAVA_THREAD == IConfig["ThreadPoolServiceImpl"]) {
+        if (ThreadPoolServiceImpl.JAVA_THREAD == IIConfig["ThreadPoolServiceImpl"]) {
             "Preparing execute service".logInfo()
 
             EXECUTOR_SERVICE = ThreadPoolExecutor(
@@ -36,7 +36,7 @@ object ThreadPoolService : IThreadPoolService {
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun newTask(runnable: () -> Unit) {
-        if (ThreadPoolServiceImpl.JAVA_THREAD == IConfig["ThreadPoolServiceImpl"]) {
+        if (ThreadPoolServiceImpl.JAVA_THREAD == IIConfig["ThreadPoolServiceImpl"]) {
             if (EXECUTOR_SERVICE == null) {
                 prepare()
             }
