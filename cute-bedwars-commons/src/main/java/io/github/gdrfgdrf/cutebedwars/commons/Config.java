@@ -28,7 +28,7 @@ public class Config implements IIConfig {
     @JsonProperty(value = "worker-id")
     private Short workerId;
 
-    @JsonProperty(value = "default-sqlite")
+    @JsonProperty(value = "database-impl")
     private String databaseImpl;
 
     @JsonProperty(value = "request-timeout")
