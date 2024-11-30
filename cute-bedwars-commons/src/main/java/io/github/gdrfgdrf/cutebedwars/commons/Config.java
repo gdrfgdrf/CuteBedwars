@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-@ServiceImpl(("config"))
+@ServiceImpl("config")
 public class Config implements IConfig {
     public static IConfig INSTANCE;
 
