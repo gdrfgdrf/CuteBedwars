@@ -21,14 +21,14 @@ import java.util.concurrent.TimeUnit
 @ServiceImpl("chat_page", needArgument = true, instanceGetter = "get")
 class ChatPage(
     private val pageRequest: PageRequest,
-    private val lines: List<Line>,
+    private val lines: List<Line>
 ) : IChatPage {
-    override var enableDefaultTopAndBottom: Boolean = true
-
     private val pages = arrayListOf<Page>()
     private var lineCountEveryPages = 5
 
-    private var changeable = true
+    override var enableDefaultTopAndBottom: Boolean = true
+    override var changeable = true
+    override val size: Int = pages.size
 
     override fun send(index: Int) {
         if (pages.isEmpty()) {
@@ -62,13 +62,6 @@ class ChatPage(
         }
     }
 
-    override fun size(): Int {
-        if (pages.isEmpty()) {
-            initPages()
-        }
-        return pages.size
-    }
-
     override fun addPage(loader: (Int) -> List<ITranslationAgent>) {
         if (!changeable) {
             throw IllegalStateException("this change page is unchangeable");
@@ -85,11 +78,6 @@ class ChatPage(
 
     override fun lineCountEveryPages(lineCount: Int) {
         this.lineCountEveryPages = lineCount
-    }
-
-    override fun changeable(): Boolean = changeable
-    override fun changeable(changeable: Boolean) {
-        this.changeable = changeable
     }
 
     private fun initPages() {
