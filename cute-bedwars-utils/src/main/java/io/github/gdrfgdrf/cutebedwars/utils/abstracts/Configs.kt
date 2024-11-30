@@ -30,7 +30,11 @@ object Configs : IConfigs {
     }
 
     override fun save(fileName: String, any: Any) {
-        val folder = File(IConstants["BASE_FOLDER"])
+        val folder = if (any::class.java.name == "io.github.gdrfgdrf.cutebedwars.commons.Config") {
+            File(IConstants["BASE_FOLDER"])
+        } else {
+            File(IConstants["ANOTHER_CONFIG_PATH"], fileName)
+        }
         if (!folder.exists()) {
             folder.mkdirs()
         }
