@@ -124,14 +124,14 @@ enum class ParamTypes : IParamTypes {
             if (findType == "by-id") {
                 return list.stream()
                     .map {
-                        it.area().id.toString()
+                        it.area.id.toString()
                     }
                     .toList()
             }
             if (findType == "by-name") {
                 return list.stream()
                     .map {
-                        it.area().name
+                        it.area.name
                     }
                     .toList()
             }
@@ -182,12 +182,13 @@ enum class ParamTypes : IParamTypes {
                     areaManager = areaManagers[0]
                 }
             }
-            if (areaManager == null) {
+            if (areaManager?.context == null) {
                 return arrayListOf()
             }
 
             if (gameFindType == "by-id") {
-                return areaManager.context()
+
+                return areaManager.context!!
                     .games()
                     .stream()
                     .map {
@@ -196,7 +197,7 @@ enum class ParamTypes : IParamTypes {
                     .toList()
             }
             if (gameFindType == "by-name") {
-                return areaManager.context()
+                return areaManager.context!!
                     .games()
                     .stream()
                     .map {
@@ -277,7 +278,7 @@ enum class ParamTypes : IParamTypes {
             val ids = arrayListOf<String>()
             if (editor != null) {
                 if (editor is AbstractAreaEditor) {
-                    val commitStorage = (editor as AbstractAreaEditor).t.manager().commitStorage()
+                    val commitStorage = (editor as AbstractAreaEditor).t.manager().commitStorage ?: return arrayListOf()
                     val commits = commitStorage.get()
                     commits?.commitsList?.forEach {
                         ids.add(it.id)

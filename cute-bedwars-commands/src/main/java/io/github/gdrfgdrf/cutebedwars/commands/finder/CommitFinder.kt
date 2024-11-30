@@ -8,7 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.protobuf.storage.StorageProto.Commit
 object CommitFinder {
     fun linkFind(editor: AbstractEditor<*>, commitId: String): MutableList<Commit>? {
         if (editor is AbstractAreaEditor) {
-            val commitStorage = editor.t.manager().commitStorage()
+            val commitStorage = editor.t.manager().commitStorage ?: return null
             val commitsList = commitStorage.get()?.commitsList ?: return null
 
             val targetCommit = commitsList.stream()
@@ -61,7 +61,7 @@ object CommitFinder {
 
     fun find(editor: AbstractEditor<*>, commitId: String): Commit? {
         if (editor is AbstractAreaEditor) {
-            return editor.t.manager().commitStorage().get()?.commitsList?.stream()
+            return editor.t.manager().commitStorage?.get()?.commitsList?.stream()
                 ?.filter {
                     it.id == commitId
                 }

@@ -24,8 +24,8 @@ object GameFinder : IGameFinder{
         vararg findStrategy: IFindStrategy,
         onFound: (IGameContext) -> Unit
     ): IFindResult {
-        val context = areaManager.context()
         val findResult = FindResult()
+        val context = areaManager.context ?: return findResult
         var noticeWhenMultipleResult = false
 
         if (findType == IFindType.valueOf("BY_ID")) {
@@ -56,13 +56,13 @@ object GameFinder : IGameFinder{
                     if (findType == IFindType.valueOf("BY_ID")) {
                         localizationScope(sender) {
                             message(AreaManagementLanguage.DUPLICATE_GAME_NAME_ERROR_FIND_BY_ID)
-                                .format0(areaManager.area().name, identifier)
+                                .format0(areaManager.area.name, identifier)
                                 .send()
                         }
                     } else {
                         localizationScope(sender) {
                             message(AreaManagementLanguage.DUPLICATE_GAME_NAME_ERROR_FIND_BY_NAME)
-                                .format0(areaManager.area().name, identifier)
+                                .format0(areaManager.area.name, identifier)
                                 .send()
                         }
                     }
@@ -79,7 +79,7 @@ object GameFinder : IGameFinder{
 
         if (!findResult.found()) {
             localizationScope(sender) {
-                val areaName = areaManager.area().name
+                val areaName = areaManager.area.name
 
                 val message = if (findType == IFindType.valueOf("BY_ID")) {
                     message(AreaManagementLanguage.NOT_FOUND_GAME_BY_ID)

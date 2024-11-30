@@ -25,7 +25,7 @@ class AreaContext(
 
     init {
         instanceGetter = {
-            manager.area()
+            manager.area
         }
         convert = { clazz, any ->
             Convertible.of(Area::class.java).invoke(clazz, any)
@@ -36,7 +36,7 @@ class AreaContext(
             : this(ArgumentSet(arrayOf(areaManager)))
 
     override fun initialize() {
-        manager.area().games.forEach {
+        manager.area.games.forEach {
             addGame(it, false)
         }
     }
@@ -44,10 +44,10 @@ class AreaContext(
     override fun manager(): IAreaManager = manager
 
     override fun createGame(name: String): IGameContext {
-        "Creating a game under an area, game's name: $name, area's name: ${manager.area().name}".logInfo()
+        "Creating a game under an area, game's name: $name, area's name: ${manager.area.name}".logInfo()
 
         val game = Game()
-        game.areaId = this.manager.area().id
+        game.areaId = this.manager.area.id
         game.name = name
 
 //        val fakeCoordinate1 = Coordinate()
@@ -70,20 +70,20 @@ class AreaContext(
     }
 
     override fun addGame(game: Game, addToBean: Boolean) {
-        "Adding a game to an area, game's name: ${game.name}, area's name: ${manager.area().name}".logInfo()
+        "Adding a game to an area, game's name: ${game.name}, area's name: ${manager.area.name}".logInfo()
 
         games.add(GameContext(this, game))
         if (addToBean) {
-            manager.area().games.add(game)
+            manager.area.games.add(game)
         }
     }
 
     override fun addGame(gameContext: IGameContext, addToBean: Boolean) {
-        "Adding a game to an area, game's name: ${gameContext.game().name}, area's name: ${manager.area().name}".logInfo()
+        "Adding a game to an area, game's name: ${gameContext.game().name}, area's name: ${manager.area.name}".logInfo()
 
         games.add(gameContext)
         if (addToBean) {
-            manager.area().games.add(gameContext.game())
+            manager.area.games.add(gameContext.game())
         }
     }
 
@@ -120,13 +120,13 @@ class AreaContext(
                 INotifications.instance().messageAdministrator {
                     arrayOf(
                         message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                            .format0(manager.area().name),
+                            .format0(manager.area.name),
                     )
                 }
             } else {
                 localizationScope(sender) {
                     message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                        .format0(manager.area().name)
+                        .format0(manager.area.name)
                 }
             }
         }

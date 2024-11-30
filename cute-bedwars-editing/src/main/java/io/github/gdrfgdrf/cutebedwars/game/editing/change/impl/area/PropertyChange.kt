@@ -50,9 +50,9 @@ class PropertyChange(
             throw ApplyException("area property change applies only to keys \"name\", \"default-template-id\", \"world-name\", \"lobby-world-name\"")
         }
 
-        "Applying $key: $value to area, area's id: ${t.manager().area().id}".logInfo()
+        "Applying $key: $value to area, area's id: ${t.manager().area.id}".logInfo()
 
-        val area = t.manager().area()
+        val area = t.manager().area
         val convertible = Convertible.of(Area::class.java)
         when (key) {
             "name" -> {

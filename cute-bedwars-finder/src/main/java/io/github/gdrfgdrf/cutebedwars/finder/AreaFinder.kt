@@ -36,9 +36,9 @@ object AreaFinder : IAreaFinder {
         val list = IManagers.instance().list().stream()
             .filter {
                 val matcher = if (findType == IFindType.valueOf("BY_ID")) {
-                    pattern.matcher(it.area().id.toString())
+                    pattern.matcher(it.area.id.toString())
                 } else {
-                    pattern.matcher(it.area().name)
+                    pattern.matcher(it.area.name)
                 }
                 return@filter matcher.find()
             }

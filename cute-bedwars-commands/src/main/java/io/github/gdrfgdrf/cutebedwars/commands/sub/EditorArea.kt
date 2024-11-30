@@ -37,7 +37,8 @@ object EditorArea : AbstractSubCommand(
                 .send()
 
             runCatching {
-                val areaEditor = IEditors.instance().createAreaEditor(uuid, areaManager.context())
+                val context = areaManager.context ?: return@localizationScope
+                val areaEditor = IEditors.instance().createAreaEditor(uuid, context)
                 IEditors.instance().put(areaEditor)
 
                 message(EditorLanguage.EDITOR_LOAD_FINISHED)

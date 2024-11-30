@@ -22,7 +22,7 @@ object Editors : IEditors {
     }
 
     override fun createAreaEditor(uuid: String, areaContext: IAreaContext): AbstractAreaEditor {
-        "Creating area editor, uuid: $uuid, area's id: ${areaContext.manager().area().id}".logInfo()
+        "Creating area editor, uuid: $uuid, area's id: ${areaContext.manager().area.id}".logInfo()
         return AreaEditor(uuid, areaContext)
     }
 

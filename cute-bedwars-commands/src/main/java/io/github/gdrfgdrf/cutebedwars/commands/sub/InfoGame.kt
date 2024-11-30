@@ -32,7 +32,8 @@ object InfoGame : AbstractSubCommand(
             val gameContexts = arrayListOf<IGameContext>()
 
             if (paramCombination.paramSchemeIndex == 0 || paramCombination.paramSchemeIndex == 1) {
-                gameContexts.addAll(areaManager.context().games())
+                val context = areaManager.context ?: return@localizationScope
+                gameContexts.addAll(context.games())
             }
             if (paramCombination.paramSchemeIndex == 2 || paramCombination.paramSchemeIndex == 3) {
                 val gameFindType = paramCombination.findType(1)

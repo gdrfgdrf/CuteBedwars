@@ -16,7 +16,7 @@ import org.bukkit.command.CommandSender
 object AreaInformation : IAreaInformation {
     override fun convert(sender: CommandSender, areaManager: IAreaManager): List<ITranslationAgent> =
         localizationScope(sender) {
-            val area = areaManager.area()
+            val area = areaManager.area
             val properties = getAeaProperties(area)
             val propertyMessages = arrayListOf<ITranslationAgent>()
             val gameMessages = arrayListOf<ITranslationAgent>()
