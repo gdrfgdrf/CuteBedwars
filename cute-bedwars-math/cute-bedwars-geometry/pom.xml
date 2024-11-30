@@ -18,4 +18,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+            <artifactId>math</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
