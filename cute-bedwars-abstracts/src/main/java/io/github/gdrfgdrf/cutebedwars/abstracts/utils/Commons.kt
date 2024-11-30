@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.utils
 
-import com.github.fierioziy.particlenativeapi.api.ParticleNativeAPI
 import com.github.fierioziy.particlenativeapi.api.particle.ParticleList_1_8
 import com.github.fierioziy.particlenativeapi.api.particle.type.ParticleType
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
