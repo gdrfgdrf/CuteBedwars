@@ -12,9 +12,9 @@ class DescriptionLanguage implements IILanguageBlock {
     public static final ILanguageString LANGUAGE = ILanguageString.Companion.create("语言设置，默认为 chinese_simplified，即简体中文");
     public static final ILanguageString WORKER_ID = ILanguageString.Companion.create("机器 id，雪花算法生成 id 需要使用的参数，默认值为 0。若有条件可以生成一个自己的机器 id，为了生成出来的 id 不重复，该值必须唯一，并且始终唯一，若该值在中途发生变化则可能生成重复 id");
     public static final ILanguageString DATABASE_IMPL = ILanguageString.Companion.create("数据库实现，插件默认使用 sqlite 作为数据库。当该值为 default-sqlite 时使用默认 sqlite 实现，若有其他数据库实现，需填写其 jar 包的绝对路径");
-    public static final ILanguageString ENABLE_DATABASE_LOGGING = ILanguageString.Companion.create("启用数据库的日志输出，输出日志内包含玩家数据等重要数据，默认为 false，即关闭日志输出。默认 sqlite 实现会遵守该值，其他数据库实现不一定");
-    public static final ILanguageString DATABASE_USERNAME = ILanguageString.Companion.create("访问数据库所需的用户名，默认值为空，若数据库没有用户名则无需填写");
-    public static final ILanguageString DATABASE_PASSWORD = ILanguageString.Companion.create("访问数据库所需的密码，默认值为空，若数据库没有密码则无需填写");
+    public static final ILanguageString ENABLE_DATABASE_LOGGING = ILanguageString.Companion.create("启用默认数据库的日志输出，输出日志内包含玩家数据等重要数据，默认为 false，即关闭日志输出。该值仅存在于默认数据库的配置文件中");
+    public static final ILanguageString DATABASE_USERNAME = ILanguageString.Companion.create("访问数据库所需的用户名，默认值为空，若数据库没有用户名则无需填写。该值仅存在于默认数据库的配置文件中");
+    public static final ILanguageString DATABASE_PASSWORD = ILanguageString.Companion.create("访问数据库所需的密码，默认值为空，若数据库没有密码则无需填写。该值仅存在于默认数据库的配置文件中");
     public static final ILanguageString REQUEST_TIMEOUT = ILanguageString.Companion.create("请求超时时间，有些时候执行某个操作需要二次确认，需要在请求超时时间内进行确认，否则请求失效。默认值为 10000，单位为毫秒");
     public static final ILanguageString THREAD_POOL_SERVICE_IMPL = ILanguageString.Companion.create("线程池的实现，默认值为 KOTLIN_COROUTINE，即 Kotlin 协程，可以修改为 JAVA_THREAD 以使用 Java 原版的线程");
 
