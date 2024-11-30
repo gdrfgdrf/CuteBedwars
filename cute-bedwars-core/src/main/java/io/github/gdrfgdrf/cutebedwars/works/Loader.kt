@@ -153,14 +153,14 @@ object Loader : ILoader {
         if (!folder.exists()) {
             folder.mkdirs()
         }
-        val folders = folder.listFiles { _, filename ->
-            return@listFiles !filename.endsWith(".json")
+        val areaFolders = folder.listFiles { dir, _ ->
+            return@listFiles dir.isDirectory
         }
-        if (folders.isNullOrEmpty()) {
+        if (areaFolders.isNullOrEmpty()) {
             return
         }
 
-        folders.forEach { areaFolder ->
+        areaFolders.forEach { areaFolder ->
             "-------------- Area Loading --------------".logInfo()
 
             runCatching {
