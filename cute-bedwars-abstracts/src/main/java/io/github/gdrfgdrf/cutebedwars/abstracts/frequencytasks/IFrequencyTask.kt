@@ -12,9 +12,8 @@ interface IFrequencyTask {
     var frequencyUnit: TimeUnit
     var canceled: Boolean
     val function: (IFrequencyTask) -> Unit
-
-    fun count(): Int
-    fun lastRun(): Long
+    val count: Int
+    val lastRun: Long
 
     fun run(): Boolean
     fun canRun(): Boolean

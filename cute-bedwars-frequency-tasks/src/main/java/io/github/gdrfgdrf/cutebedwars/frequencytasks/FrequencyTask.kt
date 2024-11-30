@@ -20,11 +20,8 @@ class FrequencyTask(
     )
 
     override var canceled: Boolean = false
-    private var count: Int = 0
-    private var lastRun: Long = 0
-
-    override fun count(): Int = count
-    override fun lastRun(): Long = lastRun
+    override var count: Int = 0
+    override var lastRun: Long = 0
 
     override fun run(): Boolean {
         if (canceled) {
