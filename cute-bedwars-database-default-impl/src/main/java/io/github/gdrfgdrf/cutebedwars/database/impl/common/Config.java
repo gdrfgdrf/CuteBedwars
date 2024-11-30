@@ -23,9 +23,10 @@ public class Config implements IConfig {
     private String databasePassword;
 
     public static void reset(Config config) {
-        config.enableDatabaseLogging = false;
+        config.enableDatabaseLogging = null;
         config.databaseUsername = null;
         config.databasePassword = null;
+        config.fulfill();
     }
 
     @Override
