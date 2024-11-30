@@ -65,6 +65,10 @@ object EditCommit : AbstractSubCommand(
                 message(EditorLanguage.APPLY_ERROR)
                     .send()
                 return@localizationScope
+            } else {
+                if (editor is AbstractAreaEditor) {
+                    editor.t.manager.save()
+                }
             }
             editor.newChanges()
 
