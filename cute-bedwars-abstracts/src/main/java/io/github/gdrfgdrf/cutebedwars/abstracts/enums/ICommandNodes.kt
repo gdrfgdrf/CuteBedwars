@@ -5,9 +5,10 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("command_nodes_enum")
 interface ICommandNodes {
-    fun string(): String
-    fun displayOnRootTab(): Boolean
-    fun parent(): ICommandNodes?
+    val string: String
+    val displayOnRootTab: Boolean
+    val parent: ICommandNodes?
+
     fun get(command: String): String
 
     companion object {
@@ -19,7 +20,7 @@ interface ICommandNodes {
         @Synchronized
         private fun initMap() {
             values().forEach {
-                map[(it as ICommandNodes).string()] = it
+                map[(it as ICommandNodes).string] = it
             }
         }
 
@@ -39,7 +40,7 @@ interface ICommandNodes {
                     map[it]!!
                 }
                 .filter {
-                    return@filter it.displayOnRootTab()
+                    return@filter it.displayOnRootTab
                 }
                 .toList()
         }
@@ -53,7 +54,7 @@ interface ICommandNodes {
                     map[it]!!
                 }
                 .filter {
-                    return@filter it.parent() == parent
+                    return@filter it.parent == parent
                 }
                 .toList()
         }

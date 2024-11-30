@@ -5,9 +5,9 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("command_nodes_enum")
 enum class CommandNodes(
-    private val string: String,
-    private val displayOnRootTab: Boolean,
-    private val parent: CommandNodes? = null
+    override val string: String,
+    override val displayOnRootTab: Boolean,
+    override val parent: CommandNodes? = null
 ) : ICommandNodes {
     ROOT("cbw", false),
     ARGS("args", false, ROOT),
@@ -24,10 +24,6 @@ enum class CommandNodes(
 
     ;
 
-    override fun string(): String = string
-    override fun displayOnRootTab(): Boolean = displayOnRootTab
-    override fun parent(): ICommandNodes? = parent
-
     fun getRaw(command: String): String {
         val nodes = arrayListOf<CommandNodes>()
         nodes.add(this)
@@ -35,7 +31,7 @@ enum class CommandNodes(
         while (true) {
             val lastParent = nodes[nodes.size - 1]
             if (lastParent.parent != null) {
-                nodes.add(lastParent.parent)
+                nodes.add(lastParent.parent!!)
             } else {
                 break
             }
@@ -68,7 +64,7 @@ enum class CommandNodes(
         while (true) {
             val lastParent = nodes[nodes.size - 1]
             if (lastParent.parent != null) {
-                nodes.add(lastParent.parent)
+                nodes.add(lastParent.parent!!)
             } else {
                 break
             }

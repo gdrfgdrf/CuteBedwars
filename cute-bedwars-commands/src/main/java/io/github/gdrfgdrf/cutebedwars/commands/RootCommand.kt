@@ -58,7 +58,7 @@ object RootCommand : TabExecutor {
         if (args.size == 1) {
             val commandNodes = arrayListOf<String>().apply {
                 ICommandNodes.allDisplayOnRootTab().forEach {
-                    add(it.string())
+                    add(it.string)
                 }
                 ICommands.allDisplayOnRootTab().forEach {
                     if (!contains(it.string())) {
@@ -139,7 +139,7 @@ object RootCommand : TabExecutor {
                     node ?: return@apply
 
                     ICommandNodes.getChild(node).forEach {
-                        add(it.string())
+                        add(it.string)
                     }
                     ICommands.getChild(node).forEach {
                         if (!contains(it.string())) {
@@ -159,7 +159,7 @@ object RootCommand : TabExecutor {
                     var needAddArgs = false
 
                     val deeperNode = ICommandNodes.find(deeperNodeString)?.let { deeperNode ->
-                        if (deeperNode.parent() == ICommandNodes.valueOf("ARGS")) {
+                        if (deeperNode.parent == ICommandNodes.valueOf("ARGS")) {
                             needAddArgs = true
                         }
                     }
