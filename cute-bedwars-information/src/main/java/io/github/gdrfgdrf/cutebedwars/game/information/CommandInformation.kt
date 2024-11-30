@@ -24,7 +24,7 @@ object CommandInformation : ICommandInformation {
                     add(
                         message(CommonLanguage.COMMAND_DESCRIPTION_IS)
                             .format0(
-                                message(description).string()
+                                message(description).string
                             )
                     )
                 }

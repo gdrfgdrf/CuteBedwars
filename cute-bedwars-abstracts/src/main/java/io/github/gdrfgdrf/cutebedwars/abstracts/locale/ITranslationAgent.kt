@@ -3,7 +3,8 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.locale
 import net.md_5.bungee.api.chat.TextComponent
 
 interface ITranslationAgent {
-    fun cuteTranslation(): ICuteTranslation
+    val cuteTranslation: ICuteTranslation
+    val string: String
 
     fun get0(): ITranslationTextAgent
     fun append(string: String): ITranslationAgent
@@ -15,5 +16,4 @@ interface ITranslationAgent {
     fun build(): TextComponent
     fun send(customPrefix: String)
     fun send(customPrefix: ITranslationTextAgent? = null)
-    fun string(): String
 }

@@ -9,9 +9,9 @@ import org.bukkit.command.CommandSender
 
 class TranslationAgent(
     private val commandSender: CommandSender,
-    private val cuteTranslation: ICuteTranslation
+    override val cuteTranslation: ICuteTranslation
 ) : ITranslationAgent {
-    override fun cuteTranslation(): ICuteTranslation = cuteTranslation
+    override val string: String = cuteTranslation.buildString()
 
     override fun get0(): ITranslationTextAgent {
         return TranslationTextAgent(cuteTranslation.get(0))
@@ -28,7 +28,7 @@ class TranslationAgent(
     }
 
     override fun append(translationAgent: ITranslationAgent): ITranslationAgent {
-        cuteTranslation.append(translationAgent.cuteTranslation())
+        cuteTranslation.append(translationAgent.cuteTranslation)
         return this
     }
 
@@ -68,9 +68,5 @@ class TranslationAgent(
         insert(0, translationTextAgent)
 
         commandSender.spigot().sendMessage(build())
-    }
-
-    override fun string(): String {
-        return cuteTranslation.buildString()
     }
 }
