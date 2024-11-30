@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
 public class Config implements IConfig {
     public static IConfig INSTANCE;
 
-    @JsonProperty(defaultValue = "enable-debug-logging")
+    @JsonProperty(value = "enable-debug-logging")
     private Boolean enableDebugLogging;
 
     @JsonProperty(defaultValue = "chinese_simplified")
