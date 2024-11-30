@@ -20,8 +20,8 @@ import org.bukkit.entity.Player
 object EditRevertCommit : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_REVERT_COMMIT")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_REVERT_COMMIT
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_REVERT_COMMIT
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_REVERT_COMMIT
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_REVERT_COMMIT
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

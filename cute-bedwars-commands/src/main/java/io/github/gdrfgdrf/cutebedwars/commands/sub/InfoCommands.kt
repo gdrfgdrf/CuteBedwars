@@ -17,8 +17,8 @@ import org.bukkit.command.CommandSender
 object InfoCommands : AbstractSubCommand(
     command = ICommands.valueOf("INFO_COMMANDS")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.INFO_COMMANDS
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.INFO_COMMANDS
+    override val syntax: ILanguageString = CommandSyntaxLanguage.INFO_COMMANDS
+    override val description: ILanguageString = CommandDescriptionLanguage.INFO_COMMANDS
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         val pageIndex = paramCombination.pageIndex()

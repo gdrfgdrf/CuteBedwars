@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender
 abstract class AbstractSubCommand(
     val command: ICommands,
 ) {
-    abstract fun syntax(): ILanguageString?
-    abstract fun description(): ILanguageString?
+    abstract val syntax: ILanguageString?
+    abstract val description: ILanguageString?
 
     abstract fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination)
     open fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {

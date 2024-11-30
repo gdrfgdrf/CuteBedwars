@@ -18,8 +18,8 @@ import org.bukkit.entity.Player
 object Help : AbstractSubCommand(
     command = ICommands.valueOf("HELP"),
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.HELP
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.HELP
+    override val syntax: ILanguageString = CommandSyntaxLanguage.HELP
+    override val description: ILanguageString = CommandDescriptionLanguage.HELP
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         middleWork("", sender) {
@@ -90,13 +90,13 @@ object Help : AbstractSubCommand(
         }
         val indexOf = array?.indexOf(subCommand.command)
 
-        if (subCommand.syntax() != null && subCommand.description() != null) {
+        if (subCommand.syntax != null && subCommand.description != null) {
             localizationScope(sender) {
                 if (sender is Player) {
                     message(CommandLanguage.COMMAND_FORMAT)
-                        .format0(subCommand.syntax()!!.operate().string)
+                        .format0(subCommand.syntax!!.operate().string)
                         .apply {
-                            get0().showText(subCommand.description()!!.operate().string)
+                            get0().showText(subCommand.description!!.operate().string)
 
                             if (indexOf!! >= 0) {
                                 get0().runCommand("/cbw info commands args ${indexOf + 1}")
@@ -106,8 +106,8 @@ object Help : AbstractSubCommand(
                 } else {
                     message(CommandLanguage.COMMAND_FORMAT_FOR_CONSOLE)
                         .format0(
-                            subCommand.syntax()!!.operate().string,
-                            subCommand.description()!!.operate().string
+                            subCommand.syntax!!.operate().string,
+                            subCommand.description!!.operate().string
                         )
                         .send("")
                 }
@@ -126,8 +126,8 @@ object Help : AbstractSubCommand(
                 } else {
                     message(CommandLanguage.COMMAND_FORMAT_FOR_CONSOLE)
                         .apply {
-                            val syntax = if (subCommand.syntax() != null) {
-                                subCommand.syntax()!!.operate().string
+                            val syntax = if (subCommand.syntax != null) {
+                                subCommand.syntax!!.operate().string
                             } else {
                                 "null"
                             }

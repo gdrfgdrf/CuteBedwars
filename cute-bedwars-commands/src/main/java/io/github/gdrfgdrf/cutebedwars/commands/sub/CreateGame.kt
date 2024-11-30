@@ -18,8 +18,8 @@ import java.util.concurrent.TimeUnit
 object CreateGame : AbstractSubCommand(
     command = ICommands.valueOf("CREATE_GAME")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.CREATE_GAME
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.CREATE_GAME
+    override val syntax: ILanguageString = CommandSyntaxLanguage.CREATE_GAME
+    override val description: ILanguageString = CommandDescriptionLanguage.CREATE_GAME
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

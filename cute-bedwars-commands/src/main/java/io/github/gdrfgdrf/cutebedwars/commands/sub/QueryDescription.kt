@@ -18,8 +18,8 @@ import org.bukkit.command.CommandSender
 object QueryDescription : AbstractSubCommand(
     command = ICommands.valueOf("QUERY_DESCRIPTION")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.QUERY_DESCRIPTION
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.QUERY_DESCRIPTION
+    override val syntax: ILanguageString = CommandSyntaxLanguage.QUERY_DESCRIPTION
+    override val description: ILanguageString = CommandDescriptionLanguage.QUERY_DESCRIPTION
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

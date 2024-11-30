@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit
 object CreateArea : AbstractSubCommand(
     command = ICommands.valueOf("CREATE_AREA")
 ){
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.CREATE_AREA
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.CREATE_AREA
+    override val syntax: ILanguageString = CommandSyntaxLanguage.CREATE_AREA
+    override val description: ILanguageString = CommandDescriptionLanguage.CREATE_AREA
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

@@ -18,8 +18,8 @@ import org.bukkit.command.CommandSender
 object EditListAreaCommits : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_LIST_AREA_COMMITS")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_LIST_AREA_COMMITS
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_LIST_AREA_COMMITS
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_LIST_AREA_COMMITS
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_LIST_AREA_COMMITS
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

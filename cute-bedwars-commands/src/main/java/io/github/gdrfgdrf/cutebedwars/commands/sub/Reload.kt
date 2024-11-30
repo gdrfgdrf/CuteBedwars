@@ -21,8 +21,8 @@ import java.util.concurrent.TimeUnit
 object Reload : AbstractSubCommand(
     command = ICommands.valueOf("RELOAD"),
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.RELOAD
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.RELOAD
+    override val syntax: ILanguageString = CommandSyntaxLanguage.RELOAD
+    override val description: ILanguageString = CommandDescriptionLanguage.RELOAD
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

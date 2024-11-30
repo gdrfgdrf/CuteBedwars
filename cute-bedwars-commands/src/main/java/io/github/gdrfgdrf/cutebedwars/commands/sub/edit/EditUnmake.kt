@@ -15,8 +15,8 @@ import org.bukkit.command.CommandSender
 object EditUnmake : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_UNMAKE")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_UNMAKE
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_UNMAKE
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_UNMAKE
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_UNMAKE
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

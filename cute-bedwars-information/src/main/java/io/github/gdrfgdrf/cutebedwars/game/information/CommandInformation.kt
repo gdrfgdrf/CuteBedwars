@@ -20,7 +20,7 @@ object CommandInformation : ICommandInformation {
                     message(CommonLanguage.COMMAND_RAW_IS)
                         .format0(command.getRaw())
                 )
-                subCommand?.description()?.let { description ->
+                subCommand?.description?.let { description ->
                     add(
                         message(CommonLanguage.COMMAND_DESCRIPTION_IS)
                             .format0(

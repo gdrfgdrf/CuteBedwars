@@ -18,8 +18,8 @@ import org.bukkit.command.CommandSender
 object InfoGame : AbstractSubCommand(
     command = ICommands.valueOf("INFO_GAME")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.INFO_GAME
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.INFO_GAME
+    override val syntax: ILanguageString = CommandSyntaxLanguage.INFO_GAME
+    override val description: ILanguageString = CommandDescriptionLanguage.INFO_GAME
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

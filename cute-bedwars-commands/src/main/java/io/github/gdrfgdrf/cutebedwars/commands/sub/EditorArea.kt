@@ -16,8 +16,8 @@ import org.bukkit.command.CommandSender
 object EditorArea : AbstractSubCommand(
     command = ICommands.valueOf("EDITOR_AREA")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDITOR_AREA
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDITOR_AREA
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDITOR_AREA
+    override val description: ILanguageString = CommandDescriptionLanguage.EDITOR_AREA
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

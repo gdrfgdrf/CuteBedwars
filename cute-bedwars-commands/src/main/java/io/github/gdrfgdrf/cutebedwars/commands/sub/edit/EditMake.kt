@@ -16,8 +16,8 @@ import org.bukkit.command.CommandSender
 object EditMake : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_MAKE")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_MAKE
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_MAKE
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_MAKE
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_MAKE
 
     @Suppress("UNCHECKED_CAST")
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {

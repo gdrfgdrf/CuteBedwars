@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit
 object EditNewChanges : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_NEW_CHANGES")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_NEW_CHANGES
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_NEW_CHANGES
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_NEW_CHANGES
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_NEW_CHANGES
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

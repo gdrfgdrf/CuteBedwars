@@ -14,8 +14,8 @@ import org.bukkit.command.CommandSender
 object EditExit : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_EXIT")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_EXIT
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_EXIT
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_EXIT
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_EXIT
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {

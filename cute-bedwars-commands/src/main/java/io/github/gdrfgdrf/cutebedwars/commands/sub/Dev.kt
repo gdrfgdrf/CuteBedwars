@@ -9,14 +9,16 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
+import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 object Dev : AbstractSubCommand(
     command = ICommands.valueOf("DEV")
 ) {
-    override fun syntax(): ILanguageString? = null
-    override fun description(): ILanguageString? = null
+    override val syntax: ILanguageString? = null
+    override val description: ILanguageString? = null
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         if (args[0] == "0") {

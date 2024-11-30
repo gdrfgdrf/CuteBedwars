@@ -19,8 +19,8 @@ import org.bukkit.entity.Player
 object EditCommit : AbstractSubCommand(
     command = ICommands.valueOf("EDIT_COMMIT")
 ) {
-    override fun syntax(): ILanguageString? = CommandSyntaxLanguage.EDIT_COMMIT
-    override fun description(): ILanguageString? = CommandDescriptionLanguage.EDIT_COMMIT
+    override val syntax: ILanguageString = CommandSyntaxLanguage.EDIT_COMMIT
+    override val description: ILanguageString = CommandDescriptionLanguage.EDIT_COMMIT
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
         localizationScope(sender) {
