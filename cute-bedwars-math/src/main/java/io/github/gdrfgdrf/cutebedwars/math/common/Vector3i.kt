@@ -28,7 +28,7 @@ class Vector3i private constructor(
     }
 
     override fun point3D(): IPoint3D {
-        return Point3D.of(x, y, z)
+        return IPoint3D.new(x, y, z)
     }
 
     override fun plus(x2: IMathNumber, y2: IMathNumber, z2: IMathNumber): IVector3i {

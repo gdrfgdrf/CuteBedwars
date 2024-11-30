@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math.common
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
@@ -8,18 +8,12 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("line_3d", singleton = false)
-interface ILine3D {
+interface ILine3D : IShape {
     val start: IPoint3D
     val end: IPoint3D
 
     fun length(): IMathNumber
     fun half(): ILine3D
-
-    /**
-     * 将一条线平均分成若干个等份，并保证每个等份的长度为同一个定值
-     * 返回值为所有的切割点
-     */
-    fun divide(step: IMathNumber): List<IPoint3D>
 
     companion object {
         fun new(start: IPoint3D, end: IPoint3D): ILine3D =

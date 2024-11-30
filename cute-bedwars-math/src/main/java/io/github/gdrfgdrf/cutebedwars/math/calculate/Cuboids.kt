@@ -2,7 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.math.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
-import io.github.gdrfgdrf.cutebedwars.math.common.Point3D
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("cuboids")
@@ -20,6 +19,6 @@ object Cuboids : ICuboids {
         val resultY = (y1 + y2) / 2
         val resultZ = (z1 + z2) / 2
 
-        return Point3D.of(resultX, resultY, resultZ)
+        return IPoint3D.new(resultX, resultY, resultZ)
     }
 }

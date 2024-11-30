@@ -1,10 +1,13 @@
-package io.github.gdrfgdrf.cutebedwars.math.common
+package io.github.gdrfgdrf.cutebedwars.math.geometry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ICircle2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.math.calculate.Circles
+import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
@@ -24,6 +27,10 @@ class Circle2D(
         if (R <= 0) {
             throw IllegalArgumentException("the radius of a circle cannot less or equal than zero")
         }
+    }
+
+    override fun divide(step: IMathNumber): List<IPoint> {
+        return divide(step, 0.mathNumber(), 0.mathNumber())
     }
 
     override fun divide(step: IMathNumber, offset: IMathNumber): List<IPoint2D> {

@@ -1,9 +1,7 @@
-package io.github.gdrfgdrf.cutebedwars.math.common
+package io.github.gdrfgdrf.cutebedwars.math.geometry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet

@@ -4,7 +4,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ILines
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.minus
-import io.github.gdrfgdrf.cutebedwars.math.common.Point3D
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 import io.github.gdrfgdrf.cutebedwars.math.formula.distance.DistanceFormula
@@ -27,6 +26,6 @@ object Lines : ILines {
         val y = y1 + ((1 - (D / norm)) * (y2 - y1))
         val z = z1 + ((1 - (D / norm)) * (z2 - z1))
 
-        return Point3D.of(x, y, z)
+        return IPoint3D.new(x, y, z)
     }
 }

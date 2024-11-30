@@ -6,11 +6,9 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IItems
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
-import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandDescriptionLanguage
-import io.github.gdrfgdrf.cutebedwars.languages.collect.CommandSyntaxLanguage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 

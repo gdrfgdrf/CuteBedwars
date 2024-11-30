@@ -3,8 +3,6 @@ package io.github.gdrfgdrf.cutebedwars.math.calculate
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICircles
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
-import io.github.gdrfgdrf.cutebedwars.math.common.Point2D
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("circles")
@@ -19,6 +17,6 @@ object Circles : ICircles {
         val resultX = x0 + R * (a + offset).toRadians().cos()
         val resultY = y0 + R * (a + offset).toRadians().sin()
 
-        return Point2D.of(resultX, resultY)
+        return IPoint2D.new(resultX, resultY)
     }
 }

@@ -1,11 +1,12 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.IBox
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ICircle2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ICircle2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
@@ -59,7 +60,9 @@ class Selection(
         val particleGroup = managedParticle.create("selection-particle")
 
         lines.forEach { line3d ->
-            line3d.divide(0.5.mathNumber()).forEach { point3d ->
+            line3d.divide(0.5.mathNumber()).forEach { point: IPoint ->
+                val point3d = point as IPoint3D
+
                 val x = point3d.x
                 val y = point3d.y
                 val z = point3d.z
@@ -355,7 +358,7 @@ class Selection(
             run {
                 "Calculating the 1 / 3 y semicircle of the selection".logDebug()
 
-                val box = IBox.new(blockCoordinate1, blockCoordinate2)
+                val box = IOutlineBox.new(blockCoordinate1, blockCoordinate2)
 
                 run {
                     val line = lines[21]

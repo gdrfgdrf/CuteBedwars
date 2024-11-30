@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math.common
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("circle_2d", singleton = false)
-interface ICircle2D {
+interface ICircle2D : IShape {
     val center: IPoint2D
     val R: IMathNumber
     val half: Boolean

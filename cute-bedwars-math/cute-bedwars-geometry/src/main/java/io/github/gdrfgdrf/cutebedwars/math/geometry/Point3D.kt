@@ -1,10 +1,11 @@
-package io.github.gdrfgdrf.cutebedwars.math.common
+package io.github.gdrfgdrf.cutebedwars.math.geometry
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.IVector3i
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
+import io.github.gdrfgdrf.cutebedwars.math.common.Vector3i
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 

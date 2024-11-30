@@ -1,20 +1,15 @@
-package io.github.gdrfgdrf.cutebedwars.math.common
+package io.github.gdrfgdrf.cutebedwars.math.geometry
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.IDistanceFormula
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ILines
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.ILine3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.IDimensions
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.ISpaces
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ILine3D
 import io.github.gdrfgdrf.cutebedwars.math.calculate.Lines
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 import io.github.gdrfgdrf.cutebedwars.math.formula.distance.DistanceFormula
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
-import org.bukkit.Bukkit
 
 @ServiceImpl("line_3d", needArgument = true)
 class Line3D(
@@ -44,7 +39,7 @@ class Line3D(
         return Line3D(start, IPoint3D.new(x, y, z))
     }
 
-    override fun divide(step: IMathNumber): List<IPoint3D> {
+    override fun divide(step: IMathNumber): List<IPoint> {
         val space = Spaces.EUCLIDEAN
         val dimension = Dimensions.THREE
 
@@ -52,7 +47,7 @@ class Line3D(
         val pos2 = Point3D.of(end.x, end.y, end.z)
 
         var current = step
-        val result = arrayListOf<IPoint3D>()
+        val result = arrayListOf<IPoint>()
         result.add(start)
 
         while (true) {
