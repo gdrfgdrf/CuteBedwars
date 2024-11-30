@@ -11,25 +11,18 @@ import org.bukkit.command.CommandSender
 
 @ServiceImpl("param_scheme", needArgument = true, instanceGetter = "create")
 class ParamScheme : IParamScheme {
-    private val list = arrayListOf<IParam>()
+    override val params = arrayListOf<IParam>()
+    override val length = params.size
 
     override fun add(descriptionName: String, typeName: String) {
         val param = IParam.new(descriptionName, typeName)
-        list.add(param)
-    }
-
-    override fun params(): List<IParam> {
-        return list
-    }
-
-    override fun length(): Int {
-        return list.size
+        params.add(param)
     }
 
     override fun content(partDivider: Boolean): String {
         val stringBuilder = StringBuilder()
 
-        val list = params()
+        val list = params
         list.forEachIndexed { index, param ->
             if (index >= list.size - 1) {
                 if (partDivider) {

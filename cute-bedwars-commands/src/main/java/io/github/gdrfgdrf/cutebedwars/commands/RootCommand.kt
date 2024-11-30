@@ -87,7 +87,7 @@ object RootCommand : TabExecutor {
                         val result2 = arrayListOf<IParamScheme>()
 
                         paramSchemes.forEach {
-                            val length = it.length()
+                            val length = it.length
                             if (length >= providedLength) {
                                 filterResult.add(it)
                             }
@@ -100,7 +100,7 @@ object RootCommand : TabExecutor {
                                     return@forEach
                                 }
 
-                                val list = it.params()
+                                val list = it.params
                                 val param = list[index]
 
                                 if (param.validate(sender, paramList.toTypedArray(), index, realParam)) {
@@ -112,7 +112,7 @@ object RootCommand : TabExecutor {
                         }
 
                         result2.forEach { paramScheme ->
-                            val params = paramScheme.params()
+                            val params = paramScheme.params
                             val param = params[paramList.size - 1]
                             val paramProvideTab = param.tab(sender, paramList.toTypedArray())
                             if (paramProvideTab.isNotEmpty()) {
@@ -212,7 +212,7 @@ object RootCommand : TabExecutor {
                         val paramSchemes = ConcurrentHashMap<IParamScheme, Int>()
 
                         for ((index, it) in subCommand.command.paramSchemes!!.withIndex()) {
-                            val length = it.length()
+                            val length = it.length
                             if (length == providedLength) {
                                 paramSchemes[it] = index
                             }
@@ -222,7 +222,7 @@ object RootCommand : TabExecutor {
                             realParam ?: return@localizationScope
 
                             paramSchemes.forEach { (paramScheme, index2) ->
-                                val list = paramScheme.params()
+                                val list = paramScheme.params
                                 val param = list[index]
 
                                 if (param.validate(sender, newArray as Array<String>, index, realParam)) {

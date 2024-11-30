@@ -9,9 +9,10 @@ import org.bukkit.command.CommandSender
 
 @Service("param_scheme", singleton = false)
 interface IParamScheme {
+    val params: List<IParam>
+    val length: Int
+
     fun add(descriptionName: String, typeName: String)
-    fun params(): List<IParam>
-    fun length(): Int
     fun content(partDivider: Boolean = false): String
 
     companion object {

@@ -20,7 +20,7 @@ class ParamCombination(
 
     override fun param(index: Int): IParam {
         check()
-        return paramScheme!!.params()[index]
+        return paramScheme!!.params[index]
     }
 
     override fun find(descriptionName: String, providedIndex: Int): String? {
@@ -29,7 +29,7 @@ class ParamCombination(
 
     override fun find(description: IDescriptions, providedIndex: Int): String? {
         check()
-        val params = paramScheme!!.params()
+        val params = paramScheme!!.params
 
         var count = 0
         array.forEachIndexed { index, s ->

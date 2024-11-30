@@ -57,10 +57,10 @@ object CommandInformation : ICommandInformation {
                                     get0().apply {
                                         rebuildParts()
 
-                                        val length = paramScheme.length()
+                                        val length = paramScheme.length
 
                                         for (i in 0 until length) {
-                                            val param = paramScheme.params()[i]
+                                            val param = paramScheme.params[i]
                                             val description = param.description
 
                                             val value = description.value()
