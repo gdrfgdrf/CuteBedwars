@@ -33,7 +33,7 @@ object AreaFinder : IAreaFinder {
         }
 
         val pattern = Pattern.compile(identifier, Pattern.CASE_INSENSITIVE)
-        val list = IManagers.instance().list().stream()
+        val list = IManagers.instance().merge().stream()
             .filter {
                 val matcher = if (findType == IFindType.valueOf("BY_ID")) {
                     pattern.matcher(it.area.id.toString())

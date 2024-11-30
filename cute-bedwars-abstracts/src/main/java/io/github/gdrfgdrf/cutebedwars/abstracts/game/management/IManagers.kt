@@ -12,7 +12,7 @@ interface IManagers {
     fun unregister(areaManager: IAreaManager)
     fun get(id: Long): IAreaManager?
     fun get(name: String): MutableList<IAreaManager>?
-    fun list(): List<IAreaManager>
+    fun merge(): List<IAreaManager>
 
     fun createArea(name: String): IAreaManager
 

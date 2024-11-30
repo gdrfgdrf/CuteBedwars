@@ -41,7 +41,7 @@ object InfoArea : AbstractSubCommand(
                     return@localizationScope
                 }
             } else {
-                areaManagers.addAll(IManagers.instance().list())
+                areaManagers.addAll(IManagers.instance().merge())
                 if (areaManagers.isEmpty()) {
                     message(AreaManagementLanguage.AREA_IS_EMPTY)
                         .send()

@@ -118,7 +118,7 @@ enum class ParamTypes : IParamTypes {
         }
 
         override fun tab(sender: CommandSender, args: Array<String>): MutableList<String> {
-            val list = IManagers.instance().list()
+            val list = IManagers.instance().merge()
             val findType = args[args.size - 2]
 
             if (findType == "by-id") {

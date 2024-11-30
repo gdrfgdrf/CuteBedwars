@@ -40,7 +40,7 @@ object Managers : IManagers {
         return nameToAreaManager[name]
     }
 
-    override fun list(): List<IAreaManager> {
+    override fun merge(): List<IAreaManager> {
         if (nameToAreaManager.isEmpty() || idToAreaManager.isEmpty()) {
             return arrayListOf()
         }
