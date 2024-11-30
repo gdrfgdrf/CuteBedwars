@@ -19,7 +19,7 @@ object Particles : IParticles {
 
     override fun initialize() {
         "Initializing particle native api".logInfo()
-        particleApi = ParticleNativeCore.loadAPI(IPlugin.instance().javaPlugin())
+        particleApi = ParticleNativeCore.loadAPI(IPlugin.instance().javaPlugin)
     }
 
     override fun getOrCreate(particle: Particle): IManagedParticle {

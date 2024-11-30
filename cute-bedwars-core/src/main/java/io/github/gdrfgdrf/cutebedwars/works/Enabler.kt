@@ -21,7 +21,7 @@ object Enabler : IEnabler {
 
         runCatching {
             ICommandRegistry.instance().registerCommands()
-            Plugin.state(IPluginState.valueOf("RUNNING"))
+            Plugin.state = IPluginState.valueOf("RUNNING")
 
             enableNbtApi()
             enableEventListeners()
@@ -48,7 +48,7 @@ object Enabler : IEnabler {
     }
 
     private fun enableEventListeners() {
-        val javaPlugin = IPlugin.instance().javaPlugin() ?: throw IllegalStateException("java plugin is required")
+        val javaPlugin = IPlugin.instance().javaPlugin ?: throw IllegalStateException("java plugin is required")
 
         val classes = LinkedHashSet<Class<*>>()
         IClasses.instance().search(

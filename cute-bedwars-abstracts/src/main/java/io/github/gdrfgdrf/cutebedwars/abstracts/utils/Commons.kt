@@ -84,7 +84,7 @@ fun CommandSender.uuid(): String {
 }
 
 fun logger(): Logger {
-    return IPlugin.instance().javaPlugin()?.logger ?: throw IllegalStateException("java plugin is null")
+    return IPlugin.instance().javaPlugin?.logger ?: throw IllegalStateException("java plugin is null")
 }
 
 fun now(): String {

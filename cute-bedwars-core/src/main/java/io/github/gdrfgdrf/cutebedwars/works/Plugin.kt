@@ -9,27 +9,14 @@ import org.bukkit.plugin.java.JavaPlugin
 
 @ServiceImpl("plugin")
 object Plugin : IPlugin {
-    private var javaPlugin: JavaPlugin? = null
-    private var state: IPluginState? = null
+    override var javaPlugin: JavaPlugin? = null
+    override var state: IPluginState? = null
+        set(value) {
+            "Plugin state is changed from $field to $value".logInfo()
+            field = value
+        }
 
     private var namespacedKey: NamespacedKey? = null
-
-    override fun state(): IPluginState? {
-        return state
-    }
-
-    override fun state(state: IPluginState) {
-        "Plugin state is changed from ${this.state} to $state".logInfo()
-        this.state = state
-    }
-
-    override fun javaPlugin(): JavaPlugin? {
-        return javaPlugin
-    }
-
-    override fun javaPlugin(javaPlugin: JavaPlugin) {
-        this.javaPlugin = javaPlugin
-    }
 
     override fun namespacedKey(): NamespacedKey {
         if (namespacedKey == null) {

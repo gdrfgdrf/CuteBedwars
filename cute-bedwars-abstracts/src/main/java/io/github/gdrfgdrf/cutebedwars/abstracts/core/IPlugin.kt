@@ -10,10 +10,9 @@ import org.bukkit.plugin.java.JavaPlugin
 @Service("plugin")
 @KotlinSingleton
 interface IPlugin {
-    fun state(): IPluginState?
-    fun state(state: IPluginState)
-    fun javaPlugin(): JavaPlugin?
-    fun javaPlugin(javaPlugin: JavaPlugin)
+    var state: IPluginState?
+    var javaPlugin: JavaPlugin?
+
     fun namespacedKey(): NamespacedKey
 
     companion object {

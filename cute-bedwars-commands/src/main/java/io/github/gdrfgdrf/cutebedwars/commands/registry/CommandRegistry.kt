@@ -16,7 +16,7 @@ object CommandRegistry : ICommandRegistry {
     override fun registerCommands() {
         "Registering the root command ${ICommands.valueOf("ROOT").string}".logInfo()
 
-        val javaPlugin = IPlugin.instance().javaPlugin() ?: throw IllegalStateException("java plugin is required")
+        val javaPlugin = IPlugin.instance().javaPlugin ?: throw IllegalStateException("java plugin is required")
         javaPlugin.getCommand(ICommands.valueOf("ROOT").string).executor = RootCommand
         javaPlugin.getCommand("cutebedwars").executor = RootCommand
 
