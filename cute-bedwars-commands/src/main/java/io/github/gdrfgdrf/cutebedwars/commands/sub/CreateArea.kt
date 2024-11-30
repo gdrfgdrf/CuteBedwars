@@ -46,9 +46,9 @@ object CreateArea : AbstractSubCommand(
                 .send()
 
             val areaManager = managers.createArea(areaName)
-            if (managers.get(areaManager.area().id) != null) {
+            if (managers.get(areaManager.area.id) != null) {
                 message(AreaManagementLanguage.DUPLICATE_AREA_ID_ERROR)
-                    .format0(areaManager.area().id)
+                    .format0(areaManager.area.id)
                     .send()
                 return@localizationScope
             }
@@ -56,7 +56,7 @@ object CreateArea : AbstractSubCommand(
             managers.register(areaManager)
 
             message(AreaManagementLanguage.CREATE_AREA_FINISHED)
-                .format0(areaName, areaManager.area().id)
+                .format0(areaName, areaManager.area.id)
                 .send()
         }
     }

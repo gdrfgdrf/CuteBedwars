@@ -13,8 +13,9 @@ object Managers : IManagers {
     private val idToAreaManager = ConcurrentHashMap<Long, IAreaManager>()
 
     override fun register(areaManager: IAreaManager) {
-        val area = areaManager.area()
+        val area = areaManager.area
         "Registering an area, id: ${area.id}, name: ${area.name}".logInfo()
+        areaManager.init()
 
         val list = nameToAreaManager.computeIfAbsent(area.name) {
             ArrayList()
@@ -24,7 +25,7 @@ object Managers : IManagers {
     }
 
     override fun unregister(areaManager: IAreaManager) {
-        val area = areaManager.area()
+        val area = areaManager.area
         "Unregistering an area, id: ${area.id}, name: ${area.name}".logInfo()
 
         nameToAreaManager.remove(area.name)
