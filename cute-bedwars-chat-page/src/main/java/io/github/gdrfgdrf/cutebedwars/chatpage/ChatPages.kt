@@ -8,6 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.uuid
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -30,7 +31,7 @@ object ChatPages : IChatPages {
 
         val loader = object : CacheLoader<PageRequest, IChatPage>() {
             override fun load(pageRequest: PageRequest): IChatPage {
-                "Creating new chat page in the cache, uuid: ${pageRequest.uuid}, type: ${pageRequest.type}, flagContent: ${pageRequest.flagContent}".logInfo()
+                "Creating new chat page in the cache, uuid: ${pageRequest.uuid}, type: ${pageRequest.type}, flagContent: ${pageRequest.flagContent}".logDebug()
                 return this@ChatPages.load(pageRequest)
             }
         }
@@ -65,7 +66,7 @@ object ChatPages : IChatPages {
         val uuid = sender.uuid()
         val request = PageRequest(uuid, pageRequestTypes, flagContent, loader)
         if (!pageRequestTypes.cache()) {
-            "The caching for $pageRequestTypes is disabled, creating new chat page".logInfo()
+            "The caching for $pageRequestTypes is disabled, creating new chat page".logDebug()
             return load(request)
         }
 
