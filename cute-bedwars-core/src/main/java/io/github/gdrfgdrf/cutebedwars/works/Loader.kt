@@ -154,7 +154,7 @@ object Loader : ILoader {
             folder.mkdirs()
         }
         val files = folder.listFiles { _, filename ->
-            return@listFiles !filename.endsWith(".json")
+            return@listFiles filename.endsWith(".json")
         }
         if (files.isNullOrEmpty()) {
             return
