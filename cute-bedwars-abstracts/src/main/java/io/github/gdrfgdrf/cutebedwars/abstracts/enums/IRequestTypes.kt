@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("request_type_enum")
 interface IRequestTypes {
-    fun displayName(): String
+    val displayName: String
 
     companion object {
         fun valueOf(name: String): IRequestTypes = Mediator.valueOf(IRequestTypes::class.java, name)!!

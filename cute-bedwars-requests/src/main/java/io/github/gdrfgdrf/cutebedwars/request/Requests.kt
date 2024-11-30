@@ -61,7 +61,7 @@ object Requests : IRequests {
         val request = Request(eachSecond = {}, endRun = {
             localizationScope(sender) {
                 message(RequestLanguage.TIMEOUT)
-                    .format0(type.displayName())
+                    .format0(type.displayName)
                     .send()
             }
             removeForAuto(high, type, sender)
