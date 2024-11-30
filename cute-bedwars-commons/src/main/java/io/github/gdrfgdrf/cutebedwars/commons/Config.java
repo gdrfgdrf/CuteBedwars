@@ -75,9 +75,4 @@ public class Config implements IIConfig {
             threadPoolServiceImpl = ThreadPoolServiceImpl.KOTLIN_COROUTINE;
         }
     }
-
-    @Override
-    public <T> T get(@NotNull String key) {
-        return IIConfig.super.get(key);
-    }
 }
