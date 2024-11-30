@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.commands
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 

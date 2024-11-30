@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.commands
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
 import io.github.gdrfgdrf.cutebedwars.commands.common.ParamCombination

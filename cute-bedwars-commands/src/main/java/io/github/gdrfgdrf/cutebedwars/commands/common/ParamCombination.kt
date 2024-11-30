@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.commands.common
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParam
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IFindType
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.toIntOrDefault

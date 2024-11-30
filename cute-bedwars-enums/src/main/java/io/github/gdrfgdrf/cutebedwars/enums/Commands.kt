@@ -1,9 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommandNodes
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamScheme
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
-import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPermissions
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("commands_enum")

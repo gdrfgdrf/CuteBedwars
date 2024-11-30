@@ -1,13 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.commands.common
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParam
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamScheme
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
-import org.bukkit.command.CommandSender
 
 @ServiceImpl("param_scheme", needArgument = true, instanceGetter = "create")
 class ParamScheme : IParamScheme {

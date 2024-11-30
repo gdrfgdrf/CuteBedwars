@@ -1,11 +1,8 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.commons
+package io.github.gdrfgdrf.cutebedwars.abstracts.commands
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParam
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
-import org.bukkit.command.CommandSender
 
 @Service("param_scheme", singleton = false)
 interface IParamScheme {

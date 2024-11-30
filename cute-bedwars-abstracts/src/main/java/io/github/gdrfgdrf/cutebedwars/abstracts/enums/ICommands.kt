@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.enums
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IParamScheme
+import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamScheme
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
