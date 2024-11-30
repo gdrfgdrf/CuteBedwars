@@ -65,7 +65,7 @@ object ChatPages : IChatPages {
         check()
         val uuid = sender.uuid()
         val request = PageRequest(uuid, pageRequestTypes, flagContent, loader)
-        if (!pageRequestTypes.cache()) {
+        if (!pageRequestTypes.cache) {
             "The caching for $pageRequestTypes is disabled, creating new chat page".logDebug()
             return load(request)
         }

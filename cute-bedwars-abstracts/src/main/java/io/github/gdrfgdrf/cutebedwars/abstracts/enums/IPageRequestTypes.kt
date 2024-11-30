@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 
 @EnumService("page_request_types")
 interface IPageRequestTypes {
-    fun cache(): Boolean
+    val cache: Boolean
 
     companion object {
         fun valueOf(name: String): IPageRequestTypes = Mediator.valueOf(IPageRequestTypes::class.java, name)!!
