@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConfig;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author gdrfgdrf
@@ -36,11 +33,6 @@ public class Config implements IConfig {
         enableDatabaseLogging = false;
         databaseUsername = "";
         databasePassword = "";
-    }
-
-    @Override
-    public <T> T get(@NotNull String key) {
-        return IConfig.super.get(key);
     }
 
     public static <T> T value(String key) {
