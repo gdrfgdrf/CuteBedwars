@@ -6,28 +6,22 @@ import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.command.CommandSender
 
 class CuteTranslation private constructor() : ICuteTranslation {
-    private val list = arrayListOf<ICuteText>()
+    override val texts = arrayListOf<ICuteText>()
+    override val size = texts.size
+
     private var cache: TextComponent? = null
 
-    override fun all(): List<ICuteText> {
-        return list
-    }
-
-    override fun size(): Int {
-        return list.size
-    }
-
     override fun get(index: Int): ICuteText {
-        return list[index]
+        return texts[index]
     }
 
     override fun append(cuteText: ICuteText): CuteTranslation {
-        list.add(cuteText)
+        texts.add(cuteText)
         return this
     }
 
     override fun appendAll(vararg cuteText: ICuteText): CuteTranslation {
-        list.addAll(cuteText)
+        texts.addAll(cuteText)
         return this
     }
 
@@ -41,7 +35,7 @@ class CuteTranslation private constructor() : ICuteTranslation {
     }
 
     override fun append(cuteTranslation: ICuteTranslation): ICuteTranslation {
-        cuteTranslation.all().forEach {
+        cuteTranslation.texts.forEach {
             append(it)
         }
         return this
@@ -55,7 +49,7 @@ class CuteTranslation private constructor() : ICuteTranslation {
     }
 
     override fun insert(index: Int, cuteText: ICuteText): CuteTranslation {
-        list.add(index, cuteText)
+        texts.add(index, cuteText)
         return this
     }
 
@@ -64,7 +58,7 @@ class CuteTranslation private constructor() : ICuteTranslation {
     }
 
     override fun replace(index: Int, cuteText: ICuteText): CuteTranslation {
-        list[index] = cuteText
+        texts[index] = cuteText
         return this
     }
 
@@ -78,11 +72,11 @@ class CuteTranslation private constructor() : ICuteTranslation {
         }
 
         cache = TextComponent("")
-        if (list.isEmpty()) {
+        if (texts.isEmpty()) {
             return cache!!
         }
 
-        list.forEach { cuteText ->
+        texts.forEach { cuteText ->
             cache!!.addExtra(cuteText.build())
         }
         return cache!!
@@ -93,9 +87,9 @@ class CuteTranslation private constructor() : ICuteTranslation {
         commandSender.spigot().sendMessage(text)
     }
 
-    override fun string(): String {
+    override fun buildString(): String {
         val stringBuilder = StringBuilder()
-        list.forEach { cuteText ->
+        texts.forEach { cuteText ->
             stringBuilder.append(cuteText.string)
         }
         return stringBuilder.toString()

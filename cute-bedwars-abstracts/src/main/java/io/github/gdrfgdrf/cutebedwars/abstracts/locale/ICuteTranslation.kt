@@ -4,8 +4,9 @@ import net.md_5.bungee.api.chat.TextComponent
 import org.bukkit.command.CommandSender
 
 interface ICuteTranslation {
-    fun all(): List<ICuteText>
-    fun size(): Int
+    val texts: List<ICuteText>
+    val size: Int
+
     fun get(index: Int): ICuteText
     fun append(cuteText: ICuteText): ICuteTranslation
     fun appendAll(vararg cuteText: ICuteText): ICuteTranslation
@@ -19,5 +20,5 @@ interface ICuteTranslation {
     fun replace(index: Int, raw: String): ICuteTranslation
     fun build(): TextComponent
     fun send(commandSender: CommandSender)
-    fun string(): String
+    fun buildString(): String
 }

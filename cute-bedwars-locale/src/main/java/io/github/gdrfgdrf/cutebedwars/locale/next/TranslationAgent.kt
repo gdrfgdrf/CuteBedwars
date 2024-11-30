@@ -71,6 +71,6 @@ class TranslationAgent(
     }
 
     override fun string(): String {
-        return cuteTranslation.string()
+        return cuteTranslation.buildString()
     }
 }
