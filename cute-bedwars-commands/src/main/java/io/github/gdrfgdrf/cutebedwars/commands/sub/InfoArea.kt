@@ -37,7 +37,7 @@ object InfoArea : AbstractSubCommand(
                 ) {
                     areaManagers.add(it)
                 }
-                if (!findResult.found()) {
+                if (!findResult.found) {
                     return@localizationScope
                 }
             } else {

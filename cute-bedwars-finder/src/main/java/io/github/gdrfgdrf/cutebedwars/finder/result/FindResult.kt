@@ -6,14 +6,8 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("find_result")
 class FindResult : IFindResult {
-    private var found: Boolean = false
+    override var found: Boolean = false
     private val matchedStrategy = mutableSetOf<IFindStrategy>()
-
-    override fun found(): Boolean = found
-
-    override fun found(found: Boolean) {
-        this.found = found
-    }
 
     override fun addMatchedStrategy(findStrategy: IFindStrategy) {
         this.matchedStrategy.add(findStrategy)

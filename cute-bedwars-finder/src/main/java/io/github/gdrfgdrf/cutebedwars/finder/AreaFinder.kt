@@ -45,7 +45,7 @@ object AreaFinder : IAreaFinder {
             .toList()
 
         list?.forEach {
-            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
+            if (findResult.found && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
                 findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
 
                 if (!noticeWhenMultipleResult) {
@@ -66,16 +66,16 @@ object AreaFinder : IAreaFinder {
                     }
                 }
             }
-            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
+            if (findResult.found && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
                 findResult.addMatchedStrategy("ONLY_ONE")
                 return@forEach
             }
 
-            findResult.found(true)
+            findResult.found = true
             onFound(it)
         }
 
-        if (!findResult.found()) {
+        if (!findResult.found) {
             localizationScope(sender) {
                 val message = if (findType == IFindType.valueOf("BY_ID")) {
                     message(AreaManagementLanguage.NOT_FOUND_AREA_BY_ID)

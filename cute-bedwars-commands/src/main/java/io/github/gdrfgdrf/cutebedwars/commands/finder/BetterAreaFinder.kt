@@ -19,7 +19,7 @@ object BetterAreaFinder {
         ) {
             areaManager = it
         }
-        if (!findResult.found() ||
+        if (!findResult.found ||
             findResult.isStrategyMatched("NOTICE_WHEN_MULTIPLE_RESULT") ||
             areaManager == null) {
             return null

@@ -27,7 +27,7 @@ object ChangesFinder : IChangesFinder {
                     .send()
             }
         } else {
-            findResult.found(true)
+            findResult.found = true
             onFound(editor!!.currentChanges()!!)
         }
 

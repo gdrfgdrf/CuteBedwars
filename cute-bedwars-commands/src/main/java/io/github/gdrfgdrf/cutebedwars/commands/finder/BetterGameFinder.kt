@@ -21,7 +21,7 @@ object BetterGameFinder {
         ) {
             gameContext = it
         }
-        if (!findResult.found() ||
+        if (!findResult.found ||
             findResult.isStrategyMatched("NOTICE_WHEN_MULTIPLE_RESULT") ||
             gameContext == null) {
             return null
@@ -45,7 +45,7 @@ object BetterGameFinder {
         ) {
             gameContexts.add(it)
         }
-        if (!findResult.found() || gameContexts.isEmpty()) {
+        if (!findResult.found || gameContexts.isEmpty()) {
             return null
         }
         return gameContexts

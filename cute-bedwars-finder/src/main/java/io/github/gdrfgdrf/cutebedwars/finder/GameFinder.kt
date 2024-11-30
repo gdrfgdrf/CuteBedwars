@@ -47,7 +47,7 @@ object GameFinder : IGameFinder{
             .toList()
 
         list?.forEach {
-            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
+            if (findResult.found && findStrategy.contains(IFindStrategy.valueOf("NOTICE_WHEN_MULTIPLE_RESULT"))) {
                 findResult.addMatchedStrategy("NOTICE_WHEN_MULTIPLE_RESULT")
 
                 if (!noticeWhenMultipleResult) {
@@ -68,16 +68,16 @@ object GameFinder : IGameFinder{
                     }
                 }
             }
-            if (findResult.found() && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
+            if (findResult.found && findStrategy.contains(IFindStrategy.valueOf("ONLY_ONE"))) {
                 findResult.addMatchedStrategy("ONLY_ONE")
                 return@forEach
             }
 
-            findResult.found(true)
+            findResult.found = true
             onFound(it)
         }
 
-        if (!findResult.found()) {
+        if (!findResult.found) {
             localizationScope(sender) {
                 val areaName = areaManager.area.name
 

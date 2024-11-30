@@ -5,8 +5,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("find_result")
 interface IFindResult {
-    fun found(): Boolean
-    fun found(found: Boolean)
+    var found: Boolean
 
     fun addMatchedStrategy(findStrategy: IFindStrategy)
     fun addMatchedStrategy(name: String)
