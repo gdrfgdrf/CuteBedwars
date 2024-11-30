@@ -4,7 +4,6 @@ import net.md_5.bungee.api.chat.TextComponent
 
 interface ITranslationAgent {
     val cuteTranslation: ICuteTranslation
-    val string: String
 
     fun get0(): ITranslationTextAgent
     fun append(string: String): ITranslationAgent
@@ -16,4 +15,5 @@ interface ITranslationAgent {
     fun build(): TextComponent
     fun send(customPrefix: String)
     fun send(customPrefix: ITranslationTextAgent? = null)
+    fun buildString(): String
 }

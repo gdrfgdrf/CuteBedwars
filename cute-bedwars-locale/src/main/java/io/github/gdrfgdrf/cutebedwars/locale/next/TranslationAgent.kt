@@ -11,8 +11,6 @@ class TranslationAgent(
     private val commandSender: CommandSender,
     override val cuteTranslation: ICuteTranslation
 ) : ITranslationAgent {
-    override val string: String = cuteTranslation.buildString()
-
     override fun get0(): ITranslationTextAgent {
         return TranslationTextAgent(cuteTranslation.get(0))
     }
@@ -68,5 +66,9 @@ class TranslationAgent(
         insert(0, translationTextAgent)
 
         commandSender.spigot().sendMessage(build())
+    }
+
+    override fun buildString(): String {
+        return cuteTranslation.buildString()
     }
 }
