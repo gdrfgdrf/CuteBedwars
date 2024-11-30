@@ -22,6 +22,18 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
 
     private var file: File? = null
 
+    init {
+        if (area.id == null) {
+            val id = YitIdHelper.nextId()
+            "Set an id: $id to an area".logInfo()
+            area.id = id
+        }
+        if (area.name.isNullOrEmpty()) {
+            "The area (id: ${area.id})'s name is null, setting to \"temp_name_${area.id}\"".logInfo()
+            area.name = "temp_name_${area.id}"
+        }
+    }
+
     private fun check() {
         if (!initialized) {
             throw IllegalStateException("this area manager is not initialized")
@@ -33,16 +45,6 @@ class AreaManager(argumentSet: ArgumentSet) : IAreaManager {
             throw IllegalStateException("this area manager is initialized")
         }
         initialized = true
-
-        if (area.id == null) {
-            val id = YitIdHelper.nextId()
-            "Set an id: $id to an area".logInfo()
-            area.id = id
-        }
-        if (area.name.isNullOrEmpty()) {
-            "The area (id: ${area.id})'s name is null, setting to \"temp_name_${area.id}\"".logInfo()
-            area.name = "temp_name_${area.id}"
-        }
 
         val folder = File(IConstants["AREA_FOLDER"])
         if (!folder.exists()) {
