@@ -86,7 +86,6 @@ class PropertyChange(
     override fun args(): Array<Any?> = arrayOf(key, value, previousValue)
 
     override fun name(): String {
-        // 因为上面的 propertyChange.previousValue = value, 所以这里需要反过来
         return "change $key from $previousValue to $value"
     }
 
@@ -94,7 +93,6 @@ class PropertyChange(
         return { sender ->
             localizationScope(sender) {
                 message(EditorLanguage.AREA_PROPERTY_CHANGE_NAME)
-                    // 因为上面的 propertyChange.previousValue = value, 所以这里需要反过来
                     .format0(key, previousValue ?: "null", value ?: "null")
             }
         }
