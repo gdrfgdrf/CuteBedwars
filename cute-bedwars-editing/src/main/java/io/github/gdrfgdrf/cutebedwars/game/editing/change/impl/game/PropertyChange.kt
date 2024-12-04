@@ -70,7 +70,7 @@ class PropertyChange(
 
     override fun name(): String {
         // 因为上面的 propertyChange.previousValue = value, 所以这里需要反过来
-        return "change back $key from $previousValue to $value"
+        return "change $key from $previousValue to $value"
     }
 
     override fun localizedName(): (CommandSender) -> ITranslationAgent {
