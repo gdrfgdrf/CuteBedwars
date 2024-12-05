@@ -22,13 +22,14 @@ class RegionChange(val pos1: String?, val pos2: String?) : AbstractChange<IGameC
         }
     }
 
-    override fun preload(sender: CommandSender) {
+    override fun preload(sender: CommandSender): Boolean {
         if (sender !is Player) {
             throw IllegalArgumentException("only player can do this")
         }
 
         val item = IItems.valueOf("SELECTION_TOOL").item
-        item.tryGive(sender)
+        val giveResult = item.tryGive(sender)
+        return !giveResult.first
     }
 
     override fun validate(): Boolean {
