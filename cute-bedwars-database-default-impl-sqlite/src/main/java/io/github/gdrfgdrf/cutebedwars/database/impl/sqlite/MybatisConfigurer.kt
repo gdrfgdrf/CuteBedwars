@@ -41,7 +41,7 @@ object MybatisConfigurer {
         val searchResult = HashSet<Class<*>>()
         IClasses.instance().search(
             MybatisConfigurer::class.java.classLoader,
-            "io.github.gdrfgdrf.cutebedwars.database.impl.mapper",
+            "io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.mapper",
             searchResult
         ) { clazz ->
             return@search clazz.superclass == BaseMapper::class.java
