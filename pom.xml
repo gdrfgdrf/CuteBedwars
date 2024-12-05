@@ -12,7 +12,7 @@
         <module>cute-bedwars-core</module>
         <module>cute-bedwars-beans</module>
         <module>cute-bedwars-database</module>
-        <module>cute-bedwars-database-default-impl</module>
+        <module>cute-bedwars-database-default-impl-sqlite</module>
         <module>cute-bedwars-commons</module>
         <module>cute-bedwars-packer</module>
         <module>cute-bedwars-locale</module>
@@ -88,7 +88,7 @@
 
             <dependency>
                 <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-                <artifactId>database-default-impl</artifactId>
+                <artifactId>database-default-impl-sqlite</artifactId>
                 <version>0.1.0</version>
             </dependency>
 
