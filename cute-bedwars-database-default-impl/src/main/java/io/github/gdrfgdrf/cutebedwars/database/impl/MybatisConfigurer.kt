@@ -77,11 +77,17 @@ object MybatisConfigurer {
         val password = DefaultDatabaseConfig.value<String>("DatabasePassword")
 
         if (!username.isNullOrBlank() && !password.isNullOrBlank()) {
-            "The authentication of database is enabled".logInfo()
+            "The authentication of default database is enabled".logInfo()
             dataSource.username = username
             dataSource.password = password
         } else {
-            "The authentication of database is disabled".logInfo()
+            if (username.isNullOrBlank() && !password.isNullOrBlank()) {
+                "The authentication of default database is disabled because the username is blank".logInfo()
+            } else {
+                if (!username.isNullOrBlank() && password.isNullOrBlank()) {
+                    "The authentication of default database is disabled because the password is blank".logInfo()
+                }
+            }
         }
 
         return dataSource
