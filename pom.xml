@@ -38,6 +38,7 @@
         <module>cute-bedwars-selection</module>
         <module>cute-bedwars-particles</module>
         <module>cute-bedwars-frequency-tasks</module>
+        <module>cute-bedwars-database-default-impl-mysql</module>
     </modules>
 
     <repositories>
@@ -226,6 +227,12 @@
             <dependency>
                 <groupId>io.github.gdrfgdrf.cute-bedwars</groupId>
                 <artifactId>geometry</artifactId>
+                <version>0.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cute-bedwars</groupId>
+                <artifactId>database-default-impl-mysql</artifactId>
                 <version>0.1.0</version>
             </dependency>
         </dependencies>
