@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.game.editing.change.impl.game
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IItems
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
@@ -12,13 +12,23 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata
 import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
 class RegionChange(val pos1: String?, val pos2: String?) : AbstractChange<IGameContext>() {
-    constructor(changeData: ChangeData): this(changeData[0], changeData[1]) {
+    constructor(changeData: ChangeData) : this(changeData[0], changeData[1]) {
         if (changeData.length() == 4) {
             previousValuePos1 = changeData[2]
             previousValuePos2 = changeData[3]
         }
+    }
+
+    override fun preload(sender: CommandSender) {
+        if (sender !is Player) {
+            throw IllegalArgumentException("only player can do this")
+        }
+
+        val item = IItems.valueOf("SELECTION_TOOL").item
+        item.tryGive(sender)
     }
 
     override fun validate(): Boolean {
@@ -74,6 +84,7 @@ class RegionChange(val pos1: String?, val pos2: String?) : AbstractChange<IGameC
         region.secondCoordinate = Coordinate.parse(pos2)
         game.region = region
     }
+
     companion object {
         @JvmStatic
         @ChangeMetadataMethod
