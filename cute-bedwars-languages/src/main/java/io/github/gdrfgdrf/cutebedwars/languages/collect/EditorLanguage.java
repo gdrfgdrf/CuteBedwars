@@ -67,4 +67,6 @@ public class EditorLanguage implements IILanguageCollect {
 
     public static ILanguageString GAME_REGION_CHANGE;
     public static ILanguageString GAME_REGION_CHANGE_NAME;
+
+    public static ILanguageString CANNOT_PRELOAD_CHANGE;
 }

@@ -67,4 +67,6 @@ class EditorLanguage implements IILanguageBlock {
 
     public static final ILanguageString GAME_REGION_CHANGE = ILanguageString.Companion.create("游戏区域修改");
     public static final ILanguageString GAME_REGION_CHANGE_NAME = ILanguageString.Companion.create("将 %s -> %s 修改为 %s -> %s");
+    public static final ILanguageString CANNOT_PRELOAD_CHANGE = ILanguageString.Companion.create("无法加载修改");
+
 }

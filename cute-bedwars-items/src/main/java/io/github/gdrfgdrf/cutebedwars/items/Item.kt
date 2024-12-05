@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.items
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.items.item.CommonItem
 import org.bukkit.entity.Player
@@ -15,6 +16,16 @@ open class Item(
 
     init {
         properties.droppable = true
+    }
+
+    override fun tryGive(player: Player, amount: Int, slotIndex: Int): ICommonItem {
+        if (!appliedName) {
+            properties.applyTo(itemStack)
+            appliedName = true
+        }
+
+        val commonItem = IItemCollections.instance().find(player, itemStack) ?: return give(player, amount, slotIndex)
+        return commonItem
     }
 
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {

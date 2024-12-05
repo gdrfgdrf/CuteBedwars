@@ -43,6 +43,13 @@ object EditMake : AbstractSubCommand(
                 return@localizationScope
             }
 
+            runCatching {
+                change.preload(sender)
+            }.onFailure {
+                message(EditorLanguage.CANNOT_PRELOAD_CHANGE)
+                    .send()
+                return@localizationScope
+            }
             val addResult = changes.tryAdd(change)
             if (!addResult) {
                 message(EditorLanguage.ADD_CHANGE_ERROR)
