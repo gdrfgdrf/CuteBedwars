@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IConfigs
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
@@ -8,7 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logWarn
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
-import io.github.gdrfgdrf.cutebedwars.database.impl.common.Config
+import io.github.gdrfgdrf.cutebedwars.database.impl.common.DefaultDatabaseConfig
 import io.github.gdrfgdrf.cutebedwars.database.impl.common.Mappers
 import org.apache.ibatis.logging.LogFactory
 import java.io.File
@@ -31,7 +30,7 @@ class DefaultDatabase : IDatabase {
         if (!file.exists()) {
             file.createNewFile()
         }
-        if (Config.value("EnableDatabaseLogging")) {
+        if (DefaultDatabaseConfig.value("EnableDatabaseLogging")) {
             "Use no logging for the default database".logInfo()
             LogFactory.useNoLogging()
         } else {
@@ -53,9 +52,9 @@ class DefaultDatabase : IDatabase {
 
         val config = IConfigs.instance().load(
             "default-database-config.json",
-            Config::class.java
+            DefaultDatabaseConfig::class.java
         )
-        Config.instance = config
+        DefaultDatabaseConfig.instance = config
     }
 
     override fun close() {

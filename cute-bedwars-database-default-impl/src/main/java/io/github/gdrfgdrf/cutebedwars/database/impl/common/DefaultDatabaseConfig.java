@@ -10,8 +10,8 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Config implements IConfig {
-    public static Config instance = null;
+public class DefaultDatabaseConfig implements IConfig {
+    public static DefaultDatabaseConfig instance = null;
 
     @JsonProperty(value = "enable-database-logging")
     private Boolean enableDatabaseLogging;
@@ -22,7 +22,7 @@ public class Config implements IConfig {
     @JsonProperty(value = "database-password")
     private String databasePassword;
 
-    public static void reset(Config config) {
+    public static void reset(DefaultDatabaseConfig config) {
         config.enableDatabaseLogging = null;
         config.databaseUsername = null;
         config.databasePassword = null;
