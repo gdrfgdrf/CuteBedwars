@@ -18,14 +18,14 @@ open class Item(
         properties.droppable = true
     }
 
-    override fun tryGive(player: Player, amount: Int, slotIndex: Int): ICommonItem {
+    override fun tryGive(player: Player, amount: Int, slotIndex: Int): Pair<Boolean, ICommonItem> {
         if (!appliedName) {
             properties.applyTo(itemStack)
             appliedName = true
         }
 
-        val commonItem = IItemCollections.instance().find(player, itemStack) ?: return give(player, amount, slotIndex)
-        return commonItem
+        val commonItem = IItemCollections.instance().find(player, itemStack) ?: return true to give(player, amount, slotIndex)
+        return false to commonItem
     }
 
     override fun give(player: Player, amount: Int, slotIndex: Int): ICommonItem {

@@ -44,7 +44,9 @@ object EditMake : AbstractSubCommand(
             }
 
             runCatching {
-                change.preload(sender)
+                if (!change.preload(sender)) {
+                    return@localizationScope
+                }
             }.onFailure {
                 message(EditorLanguage.CANNOT_PRELOAD_CHANGE)
                     .send()

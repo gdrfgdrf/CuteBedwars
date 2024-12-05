@@ -8,8 +8,9 @@ import org.bukkit.command.CommandSender
 abstract class AbstractChange<T> {
     val id = YitIdHelper.nextId()
 
-    open fun preload(sender: CommandSender) {
+    open fun preload(sender: CommandSender): Boolean {
         // empty implementation by default
+        return true
     }
 
     abstract fun validate(): Boolean
