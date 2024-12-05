@@ -42,7 +42,7 @@ class DefaultDatabase : IDatabase {
             tryImplementation(LogFactory::useNoLogging)
         }
 
-        MybatisConfigurer.initialize()
+        SqliteMybatisConfigurer.initialize()
 
         "$displayName is loaded".logInfo()
     }
@@ -58,7 +58,7 @@ class DefaultDatabase : IDatabase {
     }
 
     override fun close() {
-        MybatisConfigurer.sqlSessionFactory = null
+        SqliteMybatisConfigurer.sqlSessionFactory = null
         Mappers.clear()
 
         "$displayName is closed".logInfo()
@@ -66,7 +66,7 @@ class DefaultDatabase : IDatabase {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any?> getService(serviceClass: Class<out IService>): T {
-        if (MybatisConfigurer.sqlSessionFactory == null) {
+        if (SqliteMybatisConfigurer.sqlSessionFactory == null) {
             throw DatabaseException("The service could not be gotten because MyBatis has not been loaded")
         }
         return getOrCreateService(serviceClass)

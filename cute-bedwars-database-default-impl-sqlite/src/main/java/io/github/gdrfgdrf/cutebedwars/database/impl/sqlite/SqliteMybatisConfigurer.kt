@@ -21,7 +21,7 @@ import java.net.JarURLConnection
 import java.sql.Driver
 import javax.sql.DataSource
 
-object MybatisConfigurer {
+object SqliteMybatisConfigurer {
     var sqlSessionFactory: SqlSessionFactory? = null
 
     fun initialize() {
@@ -40,7 +40,7 @@ object MybatisConfigurer {
 
         val searchResult = HashSet<Class<*>>()
         IClasses.instance().search(
-            MybatisConfigurer::class.java.classLoader,
+            SqliteMybatisConfigurer::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.mapper",
             searchResult
         ) { clazz ->
@@ -94,7 +94,7 @@ object MybatisConfigurer {
     }
 
     private fun registryMapperXml(configuration: MybatisConfiguration) {
-        val classLoader = MybatisConfigurer::class.java.classLoader
+        val classLoader = SqliteMybatisConfigurer::class.java.classLoader
         val mapper = classLoader.getResources("mappers")
 
         while (mapper.hasMoreElements()) {
