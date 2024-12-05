@@ -7,7 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logWarn
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
-import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.DefaultDatabaseConfig
+import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.DefaultSqliteDatabaseConfig
 import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.Mappers
 import org.apache.ibatis.logging.LogFactory
 import java.io.File
@@ -26,11 +26,11 @@ class DefaultSqliteDatabase : IDatabase {
 
         prepareConfig()
 
-        val file = File(IConstants["DEFAULT_DATABASE_FILE_NAME"])
+        val file = File(DefaultSqliteDatabaseConfig.value<String>("FileName"))
         if (!file.exists()) {
             file.createNewFile()
         }
-        if (DefaultDatabaseConfig.value("EnableDatabaseLogging")) {
+        if (DefaultSqliteDatabaseConfig.value("EnableDatabaseLogging")) {
             "Use no logging for the default database".logInfo()
             LogFactory.useNoLogging()
         } else {
@@ -52,9 +52,9 @@ class DefaultSqliteDatabase : IDatabase {
 
         val config = IConfigs.instance().load(
             "default-database-config.json",
-            DefaultDatabaseConfig::class.java
+            DefaultSqliteDatabaseConfig::class.java
         )
-        DefaultDatabaseConfig.instance = config
+        DefaultSqliteDatabaseConfig.instance = config
     }
 
     override fun close() {

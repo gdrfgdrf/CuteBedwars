@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.DefaultDatabaseConfig
+import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.DefaultSqliteDatabaseConfig
 import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.database
 import org.apache.ibatis.builder.xml.XMLMapperBuilder
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl
@@ -51,7 +51,7 @@ object SqliteMybatisConfigurer {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }
-        if (DefaultDatabaseConfig.value("EnableDatabaseLogging")) {
+        if (DefaultSqliteDatabaseConfig.value("EnableDatabaseLogging")) {
             "Enable database logging (Jdk14LoggingImpl)".logInfo()
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
@@ -73,8 +73,8 @@ object SqliteMybatisConfigurer {
         dataSource.setDriverClass(sqliteDriver as Class<Driver>)
         dataSource.url = "jdbc:sqlite:" + IConstants["DEFAULT_DATABASE_FILE_NAME"]
 
-        val username = DefaultDatabaseConfig.value<String>("DatabaseUsername")
-        val password = DefaultDatabaseConfig.value<String>("DatabasePassword")
+        val username = DefaultSqliteDatabaseConfig.value<String>("DatabaseUsername")
+        val password = DefaultSqliteDatabaseConfig.value<String>("DatabasePassword")
 
         if (!username.isNullOrBlank() && !password.isNullOrBlank()) {
             "The authentication of default database is enabled".logInfo()
