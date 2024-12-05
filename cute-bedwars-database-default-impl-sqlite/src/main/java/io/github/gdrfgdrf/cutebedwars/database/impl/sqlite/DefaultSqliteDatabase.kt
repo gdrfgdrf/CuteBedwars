@@ -13,7 +13,7 @@ import org.apache.ibatis.logging.LogFactory
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
-class DefaultDatabase : IDatabase {
+class DefaultSqliteDatabase : IDatabase {
     private var setupLogger = false
     private val services = ConcurrentHashMap<Class<*>, Any>()
 

@@ -1,8 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common
 
 import io.github.gdrfgdrf.cutebedwars.database.Database
-import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultDatabase
+import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultSqliteDatabase
 
-fun database(): DefaultDatabase {
-    return Database.get() as DefaultDatabase
+fun database(): DefaultSqliteDatabase {
+    return Database.get() as DefaultSqliteDatabase
 }
