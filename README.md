@@ -104,6 +104,7 @@ CuteBedwars
 | cute-bedwars-particles                   | 粒子效果模块，对粒子效果进行一定程度的抽象                                |
 | cute-bedwars-frequency-tasks             | 频率任务，按照一定的频率执行某个任务                                   |
 | cute-bedwars-math                        | 数学模块，进行各种数学计算                                        |
+| cute-bedwars-geometry                    | 几何模块，位于数学模块下                                         |
 | cute-bedwars-enums                       | 所有枚举类                                                |
 | cute-bedwars-utils                       | 工具模块                                                 |
 | cute-bedwars-abstracts                   | 解耦模块，对上面所有的模块进行解耦，包含大量的接口，并且使用中介进行通讯                 |
