@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("player_data")
+@TableName("users")
 public class PlayerData extends AbstractPlayerData implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;

@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
-import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.SqliteMybatisConfigurer
+import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.SQLiteMybatisConfigurer
 import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.mapper.CreatableMapper
 import java.util.concurrent.ConcurrentHashMap
 
@@ -12,7 +12,7 @@ object Mappers {
 
     @Suppress("UNCHECKED_CAST")
     fun <T> getOrCreateMapper(clazz: Class<out BaseMapper<*>>): T {
-        if (SqliteMybatisConfigurer.sqlSessionFactory == null) {
+        if (SQLiteMybatisConfigurer.sqlSessionFactory == null) {
             throw DatabaseException("The database implementation has not been initialized")
         }
         if (map.contains(clazz)) {
@@ -20,7 +20,7 @@ object Mappers {
         }
 
         "Creating the mapper: $clazz".logInfo()
-        val session = SqliteMybatisConfigurer.sqlSessionFactory!!.openSession(true)
+        val session = SQLiteMybatisConfigurer.sqlSessionFactory!!.openSession(true)
         val mapper = session.getMapper(clazz)
         if (mapper is CreatableMapper) {
             mapper.createTable()

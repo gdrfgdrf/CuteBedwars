@@ -10,6 +10,7 @@ import java.lang.reflect.Method
 @Service("classes")
 @KotlinSingleton
 interface IClasses {
+    fun getClassParameter(any: Any, index: Int): Class<*>
     fun isImplement(clazz: Class<*>, target: Class<*>): Boolean
     fun formatPackageName(string: String): String
     fun safetyInvoke(any: Any, method: Method, vararg arguments: Any): Any?

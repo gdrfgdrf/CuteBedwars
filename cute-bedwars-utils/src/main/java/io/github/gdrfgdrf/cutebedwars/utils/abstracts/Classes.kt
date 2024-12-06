@@ -5,11 +5,41 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import java.io.File
 import java.lang.reflect.Field
 import java.lang.reflect.Method
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
 import java.net.JarURLConnection
 import java.util.*
 
+
 @ServiceImpl("classes")
 object Classes : IClasses {
+    override fun getClassParameter(any: Any, index: Int): Class<*> {
+        val type = any::class.java.getGenericSuperclass()
+        if (type is ParameterizedType) {
+            val actualType = type!!.actualTypeArguments[index]
+            return checkType(actualType, index)
+        } else {
+            val className = if (type == null) {
+                "null"
+            } else {
+                type::class.java.getName()
+            }
+            throw IllegalArgumentException("expected a Class, ParameterizedType, but <$type> is of type $className")
+        }
+    }
+
+    private fun checkType(type: Type?, index: Int): Class<*> {
+        if (type is Class<*>) {
+            return type
+        } else if (type is ParameterizedType) {
+            val t = type.actualTypeArguments[index]
+            return checkType(t, index)
+        } else {
+            val className = if (type == null) "null" else type::class.java.getName()
+            throw java.lang.IllegalArgumentException("Expected a Class, ParameterizedType, but <$type> is of type $className")
+        }
+    }
+
     override fun isImplement(clazz: Class<*>, target: Class<*>): Boolean {
         val interfaces = clazz.interfaces
         for (anInterface in interfaces) {

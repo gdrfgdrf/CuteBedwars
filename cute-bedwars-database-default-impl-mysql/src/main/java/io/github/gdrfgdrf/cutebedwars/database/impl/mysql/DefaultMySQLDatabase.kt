@@ -1,41 +1,35 @@
-package io.github.gdrfgdrf.cutebedwars.database.impl.sqlite
+package io.github.gdrfgdrf.cutebedwars.database.impl.mysql
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.*
 import io.github.gdrfgdrf.cutebedwars.database.base.IDatabase
 import io.github.gdrfgdrf.cutebedwars.database.base.IService
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
-import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.DefaultSQLiteDatabaseConfig
-import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common.Mappers
+import io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common.DefaultMySQLDatabaseConfig
+import io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common.Mappers
 import org.apache.ibatis.logging.LogFactory
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
-class DefaultSQLiteDatabase : IDatabase {
+class DefaultMySQLDatabase : IDatabase {
     private var setupLogger = false
     private val services = ConcurrentHashMap<Class<*>, Any>()
     private val serviceClassToImplClass = HashMap<Class<out IService>, Class<*>>()
 
     override fun getDisplayName(): String {
-        return "DefaultDatabase-SQLite"
+        return "DefaultDatabase-MySQL"
     }
 
     override fun load() {
-        "The default sqlite database implementation is only applicable when the number of players is small, and it is recommended to replace another database implementation if resources are available".logWarn()
-
         prepareConfig()
         prepareDataSourceProperties()
         prepareServiceMap()
 
-        val file = File(DefaultSQLiteDatabaseConfig.value<String>("FileName"))
-        if (!file.exists()) {
-            file.createNewFile()
-        }
-        if (DefaultSQLiteDatabaseConfig.value("EnableDatabaseLogging")) {
-            "Use no logging for the default sqlite database".logInfo()
+        if (DefaultMySQLDatabaseConfig.value("EnableDatabaseLogging")) {
+            "Use no logging for the default mysql database".logInfo()
             LogFactory.useNoLogging()
         } else {
-            "Trying to set up a logger for the default sqlite database".logInfo()
+            "Trying to set up a logger for the default mysql database".logInfo()
             tryImplementation(LogFactory::useSlf4jLogging)
             tryImplementation(LogFactory::useCommonsLogging)
             tryImplementation(LogFactory::useLog4J2Logging)
@@ -43,36 +37,36 @@ class DefaultSQLiteDatabase : IDatabase {
             tryImplementation(LogFactory::useNoLogging)
         }
 
-        SQLiteMybatisConfigurer.initialize()
+        MySQLMybatisConfigurer.initialize()
 
         "$displayName is loaded".logInfo()
     }
 
     private fun prepareConfig() {
-        "Loading the configuration of the default sqlite database".logInfo()
+        "Loading the configuration of the default mysql database".logInfo()
 
         val config = IConfigs.instance().load(
-            "default-sqlite-database-config.json",
-            DefaultSQLiteDatabaseConfig::class.java
+            "default-mysql-database-config.json",
+            DefaultMySQLDatabaseConfig::class.java
         )
-        DefaultSQLiteDatabaseConfig.instance = config
+        DefaultMySQLDatabaseConfig.instance = config
     }
 
     private fun prepareDataSourceProperties() {
-        val fileName = DefaultSQLiteDatabaseConfig.value<String>("DataSourcePropertiesFileName")
+        val fileName = DefaultMySQLDatabaseConfig.value<String>("DataSourcePropertiesFileName")
         val file = File(fileName)
         if (file.exists()) {
             return
         }
-        if (!fileName.endsWith("default-sqlite-datasource.properties")) {
+        if (!fileName.endsWith("default-default-mysql-datasource.properties")) {
             return
         }
 
-        val resourceInputStream = IPlugin.instance().javaPlugin?.getResource("default-sqlite-datasource.properties")
-            ?: throw NullPointerException("not found default-sqlite-datasource.properties in jar")
+        val resourceInputStream = IPlugin.instance().javaPlugin?.getResource("default-default-mysql-datasource.properties")
+            ?: throw NullPointerException("not found default-default-mysql-datasource.properties in jar")
         IFiles.instance().save(resourceInputStream, file)
 
-        "default-sqlite-datasource.properties is saved".logInfo()
+        "default-default-mysql-datasource.properties is saved".logInfo()
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -81,7 +75,7 @@ class DefaultSQLiteDatabase : IDatabase {
         val serviceImplClasses = HashSet<Class<*>>()
 
         IClasses.instance().search(
-            DefaultSQLiteDatabase::class.java.classLoader,
+            DefaultMySQLDatabase::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.database.service",
             serviceClasses
         ) {
@@ -92,15 +86,15 @@ class DefaultSQLiteDatabase : IDatabase {
         }
 
         IClasses.instance().search(
-            DefaultSQLiteDatabase::class.java.classLoader,
-            "io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.service.impl",
+            DefaultMySQLDatabase::class.java.classLoader,
+            "io.github.gdrfgdrf.cutebedwars.database.impl.mysql.service.impl",
             serviceImplClasses
         ) { implClass ->
             serviceClasses.forEach { serviceClass ->
                 if (serviceClass.isAssignableFrom(implClass)) {
                     serviceClassToImplClass[serviceClass as Class<out IService>] = implClass
 
-                    "Service mapping: $serviceClass -> $implClass".logInfo()
+                    "Service mapping: $serviceClass -> $implClass".logDebug()
 
                     return@search true
                 }
@@ -110,14 +104,14 @@ class DefaultSQLiteDatabase : IDatabase {
     }
 
     override fun close() {
-        SQLiteMybatisConfigurer.sqlSessionFactory = null
+        MySQLMybatisConfigurer.sqlSessionFactory = null
         Mappers.clear()
 
         "$displayName is closed".logInfo()
     }
 
     override fun <T : Any?> getService(serviceClass: Class<out IService>): T {
-        if (SQLiteMybatisConfigurer.sqlSessionFactory == null) {
+        if (MySQLMybatisConfigurer.sqlSessionFactory == null) {
             throw DatabaseException("The service could not be gotten because MyBatis has not been loaded")
         }
         return getOrCreateService(serviceClass)

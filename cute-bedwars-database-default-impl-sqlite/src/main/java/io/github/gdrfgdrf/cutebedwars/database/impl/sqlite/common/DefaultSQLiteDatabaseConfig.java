@@ -11,35 +11,30 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DefaultSqliteDatabaseConfig implements IConfig {
-    public static DefaultSqliteDatabaseConfig instance = null;
+public class DefaultSQLiteDatabaseConfig implements IConfig {
+    public static DefaultSQLiteDatabaseConfig instance = null;
 
     @JsonProperty(value = "filename")
     private String fileName;
 
+    @JsonProperty(value = "datasource-properties-filename")
+    private String dataSourcePropertiesFileName;
+
     @JsonProperty(value = "enable-database-logging")
     private Boolean enableDatabaseLogging;
 
-    @JsonProperty(value = "database-username")
-    private String databaseUsername;
-
-    @JsonProperty(value = "database-password")
-    private String databasePassword;
-
-    public static void reset(DefaultSqliteDatabaseConfig config) {
+    public static void reset(DefaultSQLiteDatabaseConfig config) {
         config.fileName = null;
+        config.dataSourcePropertiesFileName = null;
         config.enableDatabaseLogging = null;
-        config.databaseUsername = null;
-        config.databasePassword = null;
         config.fulfill();
     }
 
     @Override
     public void fulfill() {
-        fileName = IConstants.Companion.get("BASE_FOLDER") + "default-database-sqlite.db";
+        fileName = IConstants.Companion.get("BASE_FOLDER") + "default-sqlite-database.db";
+        dataSourcePropertiesFileName = IConstants.Companion.get("ANOTHER_CONFIG_PATH") + "default-default-sqlite-datasource.properties";
         enableDatabaseLogging = false;
-        databaseUsername = "";
-        databasePassword = "";
     }
 
     public static <T> T value(String key) {

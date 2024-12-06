@@ -4,5 +4,5 @@ import io.github.gdrfgdrf.cutebedwars.database.Database
 import io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultSQLiteDatabase
 
 fun database(): DefaultSQLiteDatabase {
-    return Database.get() as DefaultSQLiteDatabase
+    return Database.instance() as DefaultSQLiteDatabase
 }

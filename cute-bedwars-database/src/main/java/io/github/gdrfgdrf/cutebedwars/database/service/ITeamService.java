@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.database.base.IService;
 public interface ITeamService extends IService {
     int insert(AbstractDatabaseTeam team);
 
-    static ITeamService get() {
-        return Database.get().getService(ITeamService.class);
+    static ITeamService instance() {
+        return Database.instance().getService(ITeamService.class);
     }
 }

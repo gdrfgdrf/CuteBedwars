@@ -2,18 +2,20 @@ package io.github.gdrfgdrf.cutebedwars.utils.abstracts
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IFiles
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
-import java.io.BufferedReader
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
-import java.io.Reader
-import java.io.Writer
+import java.io.*
 
 @ServiceImpl("files")
 object Files : IFiles {
+    override fun save(inputStream: InputStream, target: File) {
+        val out = FileOutputStream(target)
+        val buf = ByteArray(1024)
+        var len: Int
+        while ((inputStream.read(buf).also { len = it }) > 0) {
+            out.write(buf, 0, len)
+        }
+        out.close()
+        inputStream.close()
+    }
 
     override fun reader(file: File): Reader {
         return BufferedReader(InputStreamReader(FileInputStream(file), Charsets.UTF_8))

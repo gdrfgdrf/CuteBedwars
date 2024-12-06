@@ -10,7 +10,7 @@ import io.github.gdrfgdrf.cutebedwars.database.base.IService;
 public interface IGamePlayerService extends IService {
     int insert(AbstractDatabasePlayer gamePlayer);
 
-    static IGamePlayerService get() {
-        return Database.get().getService(IGamePlayerService.class);
+    static IGamePlayerService instance() {
+        return Database.instance().getService(IGamePlayerService.class);
     }
 }

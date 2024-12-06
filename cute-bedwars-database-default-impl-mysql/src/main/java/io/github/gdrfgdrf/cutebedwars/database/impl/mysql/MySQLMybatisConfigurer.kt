@@ -3,10 +3,11 @@ package io.github.gdrfgdrf.cutebedwars.database.impl.mysql
 import com.baomidou.mybatisplus.core.MybatisConfiguration
 import com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common.DefaultMysqlDatabaseConfig
+import io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common.DefaultMySQLDatabaseConfig
 import io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common.database
 import org.apache.ibatis.builder.xml.XMLMapperBuilder
 import org.apache.ibatis.logging.jdk14.Jdk14LoggingImpl
@@ -14,14 +15,12 @@ import org.apache.ibatis.logging.nologging.NoLoggingImpl
 import org.apache.ibatis.mapping.Environment
 import org.apache.ibatis.session.SqlSessionFactory
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory
-import org.springframework.jdbc.datasource.SimpleDriverDataSource
 import java.io.File
 import java.io.FileInputStream
 import java.net.JarURLConnection
-import java.sql.Driver
 import javax.sql.DataSource
 
-object MysqlMybatisConfigurer {
+object MySQLMybatisConfigurer {
     var sqlSessionFactory: SqlSessionFactory? = null
 
     fun initialize() {
@@ -40,18 +39,18 @@ object MysqlMybatisConfigurer {
 
         val searchResult = HashSet<Class<*>>()
         IClasses.instance().search(
-            MysqlMybatisConfigurer::class.java.classLoader,
+            MySQLMybatisConfigurer::class.java.classLoader,
             "io.github.gdrfgdrf.cutebedwars.database.impl.mysql.mapper",
             searchResult
         ) { clazz ->
-            return@search clazz.superclass == BaseMapper::class.java
+            return@search clazz.interfaces.contains(BaseMapper::class.java)
         }
 
         searchResult.forEach {
             "Add a mapper ${it.name}".logInfo()
             configuration.addMapper(it)
         }
-        if (DefaultMysqlDatabaseConfig.value("EnableDatabaseLogging")) {
+        if (DefaultMySQLDatabaseConfig.value("EnableDatabaseLogging")) {
             "Enable database logging (Jdk14LoggingImpl)".logInfo()
             configuration.logImpl = Jdk14LoggingImpl::class.java
         } else {
@@ -64,38 +63,17 @@ object MysqlMybatisConfigurer {
 
     }
 
-    @Suppress("UNCHECKED_CAST")
     private fun createDataSource(): DataSource {
         "Creating the data source".logInfo()
 
-        val mysqlDriver = Class.forName(DefaultMysqlDatabaseConfig.value("Driver"))
-
-        val dataSource = SimpleDriverDataSource()
-        dataSource.setDriverClass(mysqlDriver as Class<Driver>)
-        dataSource.url = DefaultMysqlDatabaseConfig.value("Url")
-
-        val username = DefaultMysqlDatabaseConfig.value<String>("DatabaseUsername")
-        val password = DefaultMysqlDatabaseConfig.value<String>("DatabasePassword")
-
-        if (!username.isNullOrBlank() && !password.isNullOrBlank()) {
-            "The authentication of default database is enabled".logInfo()
-            dataSource.username = username
-            dataSource.password = password
-        } else {
-            if (username.isNullOrBlank() && !password.isNullOrBlank()) {
-                "The authentication of default database is disabled because the username is blank".logInfo()
-            } else {
-                if (!username.isNullOrBlank() && password.isNullOrBlank()) {
-                    "The authentication of default database is disabled because the password is blank".logInfo()
-                }
-            }
-        }
+        val hikariConfig = HikariConfig(DefaultMySQLDatabaseConfig.value<String>("DataSourcePropertiesFileName"))
+        val dataSource = HikariDataSource(hikariConfig)
 
         return dataSource
     }
 
     private fun registryMapperXml(configuration: MybatisConfiguration) {
-        val classLoader = MysqlMybatisConfigurer::class.java.classLoader
+        val classLoader = MySQLMybatisConfigurer::class.java.classLoader
         val mapper = classLoader.getResources("mappers")
 
         while (mapper.hasMoreElements()) {

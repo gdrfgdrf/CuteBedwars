@@ -11,10 +11,11 @@ import java.util.UUID;
  */
 public interface IPlayerService extends IService {
     int insert(AbstractPlayerData playerData);
+    int insert(Long id, UUID uuid);
     boolean exist(UUID uuid);
     AbstractPlayerData selectByUuid(UUID uuid);
 
-    static IPlayerService get() {
-        return Database.get().getService(IPlayerService.class);
+    static IPlayerService instance() {
+        return Database.instance().getService(IPlayerService.class);
     }
 }

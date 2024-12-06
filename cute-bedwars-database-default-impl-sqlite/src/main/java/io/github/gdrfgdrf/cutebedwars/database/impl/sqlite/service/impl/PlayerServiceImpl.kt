@@ -12,11 +12,18 @@ class PlayerServiceImpl : BetterServiceImpl<PlayerDataMapper, PlayerData>(), IIP
         return super.insert(playerData as PlayerData)
     }
 
+    override fun insert(id: Long, uuid: UUID): Int {
+        val playerData = PlayerData()
+        playerData.id = id
+        playerData.uuid = uuid
+        return insert(playerData)
+    }
+
     override fun exist(uuid: UUID): Boolean {
-        return mapper?.selectByUuid(uuid) != null
+        return mapper().selectByUuid(uuid) != null
     }
 
     override fun selectByUuid(uuid: UUID): PlayerData? {
-        return mapper?.selectByUuid(uuid)
+        return mapper().selectByUuid(uuid)
     }
 }

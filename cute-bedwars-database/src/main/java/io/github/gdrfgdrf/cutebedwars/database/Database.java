@@ -1,15 +1,19 @@
 package io.github.gdrfgdrf.cutebedwars.database;
 
+import com.github.yitter.idgen.YitIdHelper;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IIConfig;
 import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants;
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase;
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.CommonsKt;
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IJarClassLoader;
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IJsons;
+import io.github.gdrfgdrf.cutebedwars.beans.AbstractPlayerData;
 import io.github.gdrfgdrf.cutebedwars.database.common.DatabaseImplDescription;
 import io.github.gdrfgdrf.cutebedwars.database.exception.CloseDatabaseException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.InitDatabaseClassException;
 import io.github.gdrfgdrf.cutebedwars.database.exception.LoadDatabaseException;
+import io.github.gdrfgdrf.cutebedwars.database.service.IGamePlayerService;
+import io.github.gdrfgdrf.cutebedwars.database.service.IPlayerService;
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl;
 import lombok.Cleanup;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -39,7 +44,7 @@ public class Database implements IDatabase {
         return INSTANCE;
     }
 
-    public static io.github.gdrfgdrf.cutebedwars.database.base.IDatabase get() {
+    public static io.github.gdrfgdrf.cutebedwars.database.base.IDatabase instance() {
         return INSTANCE.database;
     }
 
@@ -103,7 +108,7 @@ public class Database implements IDatabase {
         CommonsKt.logInfo("Initializing the default mysql database");
 
         Class<?> defaultMysqlDatabaseClass =
-                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.mysql.DefaultMysqlDatabase");
+                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.mysql.DefaultMySQLDatabase");
         return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultMysqlDatabaseClass;
     }
 
