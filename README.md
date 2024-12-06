@@ -119,4 +119,6 @@ mvn install:install-file -Dfile=multi-module-mediator-0.1.0.jar -DgroupId=io.git
 ```
 这个脚本会把 dependency/multi-module-mediator-0.1.0.jar 安装到本地 maven 仓库  
 安装之后项目将会 sync 成功  
-所有依赖均已包括在编译成功后的 Jar 中，运行时无需添加依赖
+所有依赖均已包括在编译成功后的 Jar 中，运行时无需添加依赖  
+
+可能需要使用 Intellij IDEA 工具栏的 Build -> Rebuild Project 一次过后才能正常的使用 maven 进行打包
