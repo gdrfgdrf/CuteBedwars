@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.common;
+package io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,8 +10,14 @@ import lombok.Data;
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class DefaultDatabaseConfig implements IConfig {
-    public static DefaultDatabaseConfig instance = null;
+public class DefaultMysqlDatabaseConfig implements IConfig {
+    public static DefaultMysqlDatabaseConfig instance = null;
+
+    @JsonProperty(value = "driver")
+    private String driver;
+
+    @JsonProperty(value = "url")
+    private String url;
 
     @JsonProperty(value = "enable-database-logging")
     private Boolean enableDatabaseLogging;
@@ -22,7 +28,9 @@ public class DefaultDatabaseConfig implements IConfig {
     @JsonProperty(value = "database-password")
     private String databasePassword;
 
-    public static void reset(DefaultDatabaseConfig config) {
+    public static void reset(DefaultMysqlDatabaseConfig config) {
+        config.driver = null;
+        config.url = null;
         config.enableDatabaseLogging = null;
         config.databaseUsername = null;
         config.databasePassword = null;
@@ -31,6 +39,8 @@ public class DefaultDatabaseConfig implements IConfig {
 
     @Override
     public void fulfill() {
+        driver = "com.mysql.cj.jdbc.Driver";
+        url = "";
         enableDatabaseLogging = false;
         databaseUsername = "";
         databasePassword = "";
