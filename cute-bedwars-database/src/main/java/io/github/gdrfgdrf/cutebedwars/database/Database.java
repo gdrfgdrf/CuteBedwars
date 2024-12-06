@@ -90,7 +90,7 @@ public class Database implements IDatabase {
         CommonsKt.logInfo("Initializing the default database");
 
         Class<?> defaultDatabaseClass =
-                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.DefaultDatabase");
+                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultSQLiteDatabase");
         return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultDatabaseClass;
     }
 
