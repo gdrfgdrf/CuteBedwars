@@ -46,12 +46,6 @@
             <artifactId>spring-jdbc</artifactId>
             <version>6.1.14</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>9.1.0</version>
-        </dependency>
     </dependencies>
 
 </project>

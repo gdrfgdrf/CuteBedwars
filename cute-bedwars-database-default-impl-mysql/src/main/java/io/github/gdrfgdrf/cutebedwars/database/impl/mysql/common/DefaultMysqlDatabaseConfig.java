@@ -39,7 +39,7 @@ public class DefaultMysqlDatabaseConfig implements IConfig {
 
     @Override
     public void fulfill() {
-        driver = "com.mysql.cj.jdbc.Driver";
+        driver = "com.mysql.jdbc.Driver";
         url = "";
         enableDatabaseLogging = false;
         databaseUsername = "";

@@ -37,6 +37,10 @@
                   <pattern>de.tr7zw.changeme.nbtapi</pattern>
                   <shadedPattern>io.github.gdrfgdrf.cutebedwars.relocated.nbtapi</shadedPattern>
                 </relocation>
+                <relocation>
+                  <pattern>com.mysql</pattern>
+                  <shadedPattern>io.github.gdrfgdrf.cutebedwars.relocated.mysql</shadedPattern>
+                </relocation>
               </relocations>
             </configuration>
           </execution>
