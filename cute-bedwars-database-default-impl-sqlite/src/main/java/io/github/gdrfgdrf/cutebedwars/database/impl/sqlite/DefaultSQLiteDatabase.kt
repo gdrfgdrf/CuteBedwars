@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl.sqlite
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.commons.IConstants
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IConfigs
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logWarn
@@ -13,7 +12,7 @@ import org.apache.ibatis.logging.LogFactory
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
-class DefaultSqliteDatabase : IDatabase {
+class DefaultSQLiteDatabase : IDatabase {
     private var setupLogger = false
     private val services = ConcurrentHashMap<Class<*>, Any>()
 
