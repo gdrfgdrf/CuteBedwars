@@ -51,7 +51,7 @@ class DefaultSqliteDatabase : IDatabase {
         "Loading the configuration of the default database".logInfo()
 
         val config = IConfigs.instance().load(
-            "default-database-config.json",
+            "default-sqlite-database-config.json",
             DefaultSqliteDatabaseConfig::class.java
         )
         DefaultSqliteDatabaseConfig.instance = config
