@@ -103,7 +103,7 @@ public class Database implements IDatabase {
         CommonsKt.logInfo("Initializing the default mysql database");
 
         Class<?> defaultMysqlDatabaseClass =
-                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultMysqlDatabase");
+                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.mysql.DefaultMysqlDatabase");
         return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultMysqlDatabaseClass;
     }
 
