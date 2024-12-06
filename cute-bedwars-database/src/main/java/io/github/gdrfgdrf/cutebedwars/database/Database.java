@@ -57,19 +57,23 @@ public class Database implements IDatabase {
             CommonsKt.logInfo("Database: " + databaseImpl);
 
             if ("default-sqlite".equals(databaseImpl)) {
-                databaseClass = initDefault();
+                databaseClass = initDefaultSqlite();
             } else {
-                File customDatabaseImplFolder = new File(IConstants.Companion.get("CUSTOM_DATABASE_IMPL_FOLDER_NAME"));
-                if (!customDatabaseImplFolder.exists()) {
-                    customDatabaseImplFolder.mkdirs();
+                if ("default-mysql".equals(databaseImpl)) {
+                    databaseClass = initDefaultMysql();
+                } else {
+                    File customDatabaseImplFolder = new File(IConstants.Companion.get("CUSTOM_DATABASE_IMPL_FOLDER_NAME"));
+                    if (!customDatabaseImplFolder.exists()) {
+                        customDatabaseImplFolder.mkdirs();
+                    }
+
+                    File customDatabaseImplFile = new File(
+                            IConstants.Companion.get("CUSTOM_DATABASE_IMPL_FOLDER_NAME") + databaseImpl
+                    );
+                    CommonsKt.logInfo("Custom database: " + customDatabaseImplFile);
+
+                    databaseClass = initCustom(customDatabaseImplFile);
                 }
-
-                File customDatabaseImplFile = new File(
-                        IConstants.Companion.get("CUSTOM_DATABASE_IMPL_FOLDER_NAME") + databaseImpl
-                );
-                CommonsKt.logInfo("Custom database: " + customDatabaseImplFile);
-
-                databaseClass = initCustom(customDatabaseImplFile);
             }
         } catch (Exception e) {
             throw new InitDatabaseClassException("An error occurred while initializing the database class", e);
@@ -86,12 +90,21 @@ public class Database implements IDatabase {
     }
 
     @SuppressWarnings("unchecked")
-    private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initDefault() throws ClassNotFoundException {
-        CommonsKt.logInfo("Initializing the default database");
+    private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initDefaultSqlite() throws ClassNotFoundException {
+        CommonsKt.logInfo("Initializing the default sqlite database");
 
-        Class<?> defaultDatabaseClass =
+        Class<?> defaultSqliteDatabaseClass =
                 Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultSQLiteDatabase");
-        return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultDatabaseClass;
+        return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultSqliteDatabaseClass;
+    }
+
+    @SuppressWarnings("unchecked")
+    private Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase> initDefaultMysql() throws ClassNotFoundException {
+        CommonsKt.logInfo("Initializing the default mysql database");
+
+        Class<?> defaultMysqlDatabaseClass =
+                Class.forName("io.github.gdrfgdrf.cutebedwars.database.impl.sqlite.DefaultMysqlDatabase");
+        return (Class<? extends io.github.gdrfgdrf.cutebedwars.database.base.IDatabase>) defaultMysqlDatabaseClass;
     }
 
     @SuppressWarnings("all")
