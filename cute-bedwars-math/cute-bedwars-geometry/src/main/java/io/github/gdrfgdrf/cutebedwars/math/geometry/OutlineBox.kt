@@ -30,6 +30,8 @@ class OutlineBox private constructor(
     override val k: ILine3D
     override val l: ILine3D
 
+    override val otherLines: MutableList<ILine3D> = arrayListOf()
+
     init {
         val x1 = pos1.x
         val y1 = pos1.y
@@ -107,6 +109,15 @@ class OutlineBox private constructor(
         val third2 = z <= maxZ
         val third = third1 && third2
         return third
+    }
+
+    override fun addLine(a: IPoint3D, b: IPoint3D) {
+        if (!contains(a) || !contains(b)) {
+            throw IllegalArgumentException("a or b is not in the box")
+        }
+
+        val line3d = ILine3D.new(a, b)
+        otherLines.add(line3d)
     }
 
     companion object {

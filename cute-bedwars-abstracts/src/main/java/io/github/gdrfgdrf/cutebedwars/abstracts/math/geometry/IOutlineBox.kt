@@ -29,7 +29,17 @@ interface IOutlineBox : IShape {
     val k: ILine3D
     val l: ILine3D
 
+    val otherLines: List<ILine3D>
+
+    /**
+     * 某点是否在该 Box 中
+     */
     fun contains(point3d: IPoint3D): Boolean
+
+    /**
+     * 添加一条线，a，b 均要位于该 Box 中
+     */
+    fun addLine(a: IPoint3D, b: IPoint3D)
 
     companion object {
         fun new(pos1: IPoint3D, pos2: IPoint3D): IOutlineBox =
