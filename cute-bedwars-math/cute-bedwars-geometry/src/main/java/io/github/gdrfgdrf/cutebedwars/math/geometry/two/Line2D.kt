@@ -47,12 +47,12 @@ class Line2D(
         }
     }
 
-    override fun divide(step: IMathNumber): List<IPoint> {
+    override fun divide2d(step: IMathNumber): List<IPoint2D> {
         val space = Spaces.EUCLIDEAN
         val dimension = Dimensions.TWO
 
         var current = step
-        val result = arrayListOf<IPoint>()
+        val result = arrayListOf<IPoint2D>()
         result.add(start)
 
         runCatching {

@@ -32,8 +32,8 @@ class Circle2D(
         }
     }
 
-    override fun divide(step: IMathNumber): List<IPoint> {
-        return divide(step, 0.mathNumber(), 0.mathNumber())
+    override fun divide2d(step: IMathNumber): List<IPoint2D> {
+        return divide(step, 0.mathNumber())
     }
 
     override fun divide(step: IMathNumber, offset: IMathNumber): List<IPoint2D> {

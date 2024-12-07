@@ -17,26 +17,26 @@ class OutlineBox private constructor(
 ) : IOutlineBox {
     override val otherLines: MutableList<ILine3D> = arrayListOf()
 
-    override fun divide(step: IMathNumber): List<IPoint> {
-        val result = arrayListOf<IPoint>().apply {
-            addAll(a.divide(step))
-            addAll(b.divide(step))
-            addAll(c.divide(step))
-            addAll(d.divide(step))
+    override fun divide3d(step: IMathNumber): List<IPoint3D> {
+        val result = arrayListOf<IPoint3D>().apply {
+            addAll(a.divide3d(step))
+            addAll(b.divide3d(step))
+            addAll(c.divide3d(step))
+            addAll(d.divide3d(step))
 
-            addAll(e.divide(step))
-            addAll(f.divide(step))
-            addAll(g.divide(step))
-            addAll(h.divide(step))
+            addAll(e.divide3d(step))
+            addAll(f.divide3d(step))
+            addAll(g.divide3d(step))
+            addAll(h.divide3d(step))
 
-            addAll(i.divide(step))
-            addAll(j.divide(step))
-            addAll(k.divide(step))
-            addAll(l.divide(step))
+            addAll(i.divide3d(step))
+            addAll(j.divide3d(step))
+            addAll(k.divide3d(step))
+            addAll(l.divide3d(step))
 
             val otherPoints = otherLines.stream()
                 .map {
-                    it.divide(step)
+                    it.divide3d(step)
                 }.flatMap {
                     it.stream()
                 }.toList()
