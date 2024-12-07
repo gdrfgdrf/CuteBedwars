@@ -24,6 +24,9 @@ class Circle2D(
     )
 
     init {
+        if (!center.isValid()) {
+            throw IllegalArgumentException("the point of center is not valid")
+        }
         if (R <= 0) {
             throw IllegalArgumentException("the radius of a circle cannot less or equal than zero")
         }
@@ -45,7 +48,7 @@ class Circle2D(
                 current,
                 offset
             )
-            if (point.x.toDouble().isNaN() || point.y.toDouble().isNaN()) {
+            if (!point.isValid()) {
                 break
             }
             result.add(point)
@@ -78,7 +81,7 @@ class Circle2D(
                 current,
                 offset
             )
-            if (point.x.toDouble().isNaN() || point.y.toDouble().isNaN()) {
+            if (!point.isValid()) {
                 break
             }
             val point3d = IPoint3D.new(point.x, y, point.y)
