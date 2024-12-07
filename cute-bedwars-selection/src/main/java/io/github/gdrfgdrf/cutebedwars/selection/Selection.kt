@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IBoxes
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IBoxes
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber

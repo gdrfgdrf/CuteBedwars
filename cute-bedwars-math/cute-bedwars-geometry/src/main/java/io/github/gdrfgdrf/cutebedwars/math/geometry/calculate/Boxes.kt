@@ -1,7 +1,7 @@
-package io.github.gdrfgdrf.cutebedwars.math.calculate
+package io.github.gdrfgdrf.cutebedwars.math.geometry.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IBoxes
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IBoxes
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("boxes")

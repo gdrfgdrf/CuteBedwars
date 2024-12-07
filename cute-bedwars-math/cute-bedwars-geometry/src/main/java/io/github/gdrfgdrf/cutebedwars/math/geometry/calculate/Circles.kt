@@ -1,8 +1,8 @@
-package io.github.gdrfgdrf.cutebedwars.math.calculate
+package io.github.gdrfgdrf.cutebedwars.math.geometry.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICircles
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.ICircles
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("circles")

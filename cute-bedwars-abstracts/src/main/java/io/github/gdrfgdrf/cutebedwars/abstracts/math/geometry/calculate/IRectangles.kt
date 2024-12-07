@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.multimodulemediator.Mediator

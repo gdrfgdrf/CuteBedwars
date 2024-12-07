@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.ILine
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
-import io.github.gdrfgdrf.cutebedwars.math.calculate.Lines
+import io.github.gdrfgdrf.cutebedwars.math.geometry.calculate.Lines
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces
 import io.github.gdrfgdrf.cutebedwars.math.formula.distance.DistanceFormula
