@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IBoxes
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape3D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
@@ -86,6 +87,9 @@ interface IOutlineBox : IShape3D {
         get() = ILine3D.new(C, B)
     val l: ILine3D
         get() = ILine3D.new(B, A)
+
+    val center: IPoint3D
+        get() = IBoxes.instance().geometricCenter(pos1, pos2)
 
     val otherShapes: List<IShape3D>
 
