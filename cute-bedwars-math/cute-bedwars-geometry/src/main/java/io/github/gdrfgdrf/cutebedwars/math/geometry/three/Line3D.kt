@@ -56,29 +56,29 @@ class Line3D(
         val result = arrayListOf<IPoint>()
         result.add(start)
 
-        while (true) {
-            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD_ThreeDimension(start, end, current)
-            // 计算错误时 break
-            if (C.x.toDouble().isNaN() || C.y.toDouble().isNaN() || C.z.toDouble().isNaN()) {
-                break
-            }
+        runCatching {
+            while (true) {
+                val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD_ThreeDimension(start, end, current)
 
-            val distance = DistanceFormula.calculate(space, dimension, C, start)
-            if (distance < 0) {
-                throw IllegalArgumentException("distance cannot be negative")
-            }
-            result.add(C)
+                val distance = DistanceFormula.calculate(space, dimension, C, start)
+                if (distance < 0) {
+                    throw IllegalArgumentException("distance cannot be negative")
+                }
+                result.add(C)
 
-            // 无法继续往下分时 break
-            if (distance <= step) {
-                break
-            }
+                // 无法继续往下分时 break
+                if (distance <= step) {
+                    break
+                }
 
-            current += step
+                current += step
+            }
+        }.onFailure {
+            result.add(end)
+            return result
         }
 
         result.add(end)
-
         return result
     }
 
