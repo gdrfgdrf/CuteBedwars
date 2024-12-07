@@ -1,10 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape3D
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
@@ -14,6 +14,12 @@ class OutlineBox private constructor(
     override var pos1: IPoint3D,
     override var pos2: IPoint3D,
 ) : IOutlineBox {
+    init {
+        if (pos1 == pos2) {
+            throw IllegalArgumentException("pos1 and pos2 cannot be the same")
+        }
+    }
+
     override val otherShapes: MutableList<IShape3D> = arrayListOf()
 
     override fun divide3d(step: IMathNumber): List<IPoint3D> {
