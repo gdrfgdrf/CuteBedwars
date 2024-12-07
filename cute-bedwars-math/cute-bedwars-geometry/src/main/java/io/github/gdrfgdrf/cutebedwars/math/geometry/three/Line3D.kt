@@ -46,6 +46,9 @@ class Line3D(
         if (!start.isValid() || !end.isValid()) {
             throw IllegalArgumentException("the point of start or the point of end is not valid")
         }
+        if (start == end) {
+            throw IllegalArgumentException("start and end cannot be the same")
+        }
     }
 
     override fun divide3d(step: IMathNumber): List<IPoint3D> {
