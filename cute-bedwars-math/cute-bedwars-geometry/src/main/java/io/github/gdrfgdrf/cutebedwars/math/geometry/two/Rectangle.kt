@@ -3,9 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.math.geometry.two
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IRectangle
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -16,14 +14,14 @@ class Rectangle(
     override val pos1: IPoint2D,
     override val pos2: IPoint2D
 ) : IRectangle {
-    constructor(argumentSet: ArgumentSet): this(
+    constructor(argumentSet: ArgumentSet) : this(
         argumentSet.args[0] as IPoint2D,
         argumentSet.args[1] as IPoint2D
     )
 
     init {
         if (pos1 == pos2) {
-            throw IllegalArgumentException("start point and end point cannot be the same")
+            throw IllegalArgumentException("pos1 and pos2 cannot be the same")
         }
     }
 
