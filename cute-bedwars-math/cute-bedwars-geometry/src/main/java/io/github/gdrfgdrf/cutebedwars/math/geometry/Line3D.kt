@@ -81,7 +81,7 @@ class Line3D(
     }
 
     override fun toString(): String {
-        return "(${start.x}, ${start.y}, ${start.z}) -> (${end.x}, ${end.y}, ${end.z})"
+        return "$start -> $end (Line3D)"
     }
 
 
