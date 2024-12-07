@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 @KotlinSingleton
 interface IBoxes {
     /**
-     * 计算矩形的几何中心
+     * 计算 Box 的几何中心
      */
     fun geometricCenter(A: IPoint3D, B: IPoint3D): IPoint3D
 
