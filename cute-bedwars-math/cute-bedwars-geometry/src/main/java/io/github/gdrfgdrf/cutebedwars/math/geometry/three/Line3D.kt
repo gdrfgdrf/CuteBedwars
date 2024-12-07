@@ -52,21 +52,18 @@ class Line3D(
         val space = Spaces.EUCLIDEAN
         val dimension = Dimensions.THREE
 
-        val pos1 = Point3D.of(start.x, start.y, start.z)
-        val pos2 = Point3D.of(end.x, end.y, end.z)
-
         var current = step
         val result = arrayListOf<IPoint>()
         result.add(start)
 
         while (true) {
-            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD_ThreeDimension(pos1, pos2, current)
+            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD_ThreeDimension(start, end, current)
             // 计算错误时 break
             if (C.x.toDouble().isNaN() || C.y.toDouble().isNaN() || C.z.toDouble().isNaN()) {
                 break
             }
 
-            val distance = DistanceFormula.calculate(space, dimension, C, pos1)
+            val distance = DistanceFormula.calculate(space, dimension, C, start)
             if (distance < 0) {
                 throw IllegalArgumentException("distance cannot be negative")
             }
