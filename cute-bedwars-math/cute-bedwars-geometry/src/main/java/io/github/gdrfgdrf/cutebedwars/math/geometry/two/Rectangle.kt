@@ -1,7 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.two
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
@@ -26,6 +28,24 @@ class Rectangle(
     }
 
     override val otherShapes: MutableList<IShape2D> = arrayListOf()
+
+    override fun divide2d(step: IMathNumber): List<IPoint2D> {
+        val result = arrayListOf<IPoint2D>().apply {
+            addAll(a.divide2d(step))
+            addAll(b.divide2d(step))
+            addAll(c.divide2d(step))
+            addAll(d.divide2d(step))
+
+            val otherPoints = otherShapes.stream()
+                .map {
+                    it.divide2d(step)
+                }.flatMap {
+                    it.stream()
+                }.toList()
+            addAll(otherPoints)
+        }
+        return result
+    }
 
     override fun contains(point2d: IPoint2D): Boolean {
         val minX = minOf(pos1.x, pos2.x)
