@@ -1,7 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IBoxes
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape3D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service

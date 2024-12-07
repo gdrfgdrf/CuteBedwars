@@ -4,7 +4,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IRectangles
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape2D
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("rectangle", singleton = false)

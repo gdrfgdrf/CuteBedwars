@@ -1,9 +1,8 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import java.util.*
 
 interface IShape2D : IShape {

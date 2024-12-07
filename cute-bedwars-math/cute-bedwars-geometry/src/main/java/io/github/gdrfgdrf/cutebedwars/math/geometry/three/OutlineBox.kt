@@ -5,7 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape3D
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
