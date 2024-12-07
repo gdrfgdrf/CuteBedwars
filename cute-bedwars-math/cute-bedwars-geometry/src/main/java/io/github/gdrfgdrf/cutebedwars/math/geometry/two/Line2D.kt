@@ -45,6 +45,9 @@ class Line2D(
         if (!start.isValid() || !end.isValid()) {
             throw IllegalArgumentException("the point of start or the point of end is not valid")
         }
+        if (start == end) {
+            throw IllegalArgumentException("start and end cannot be the same")
+        }
     }
 
     override fun divide2d(step: IMathNumber): List<IPoint2D> {
