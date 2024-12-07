@@ -38,8 +38,16 @@ $$\begin{eqnarray}
 ---
 
 OutlineBox 的空间图像  
-![box in 3d space coordinate system.png](box%20in%203d%20space%20coordinate%20system.png)  
-其中 A' 为 pos1: (x1, y1, z1)， C 为 pos2: (x2, y2, z2)
+![box in 3d space coordinate system.png](box%20in%203d%20space%20coordinate%20system.png)
+A: (x1, y1, z2)，  
+B: (x1, y2, z2)，  
+C 为 pos2: (x2, y2, z2)，  
+O: (x2, y1, z2)，
+
+A' 为 pos1: (x1, y1, z1)，  
+B': (x1, y2, z1)，  
+C': (x2, y2, z1)，  
+D': (x2, y1, z1)，  
 
 a，b，c，d 为 OutlineBox 的上部四条线，其中  
 a 与 X 轴平行，位于 X 轴正上方  

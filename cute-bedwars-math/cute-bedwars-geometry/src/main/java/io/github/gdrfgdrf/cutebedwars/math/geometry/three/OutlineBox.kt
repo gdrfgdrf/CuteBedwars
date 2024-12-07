@@ -15,20 +15,12 @@ class OutlineBox private constructor(
     override var pos1: IPoint3D,
     override var pos2: IPoint3D,
 ) : IOutlineBox {
-    override val a: ILine3D
-    override val b: ILine3D
-    override val c: ILine3D
-    override val d: ILine3D
-
-    override val e: ILine3D
-    override val f: ILine3D
-    override val g: ILine3D
-    override val h: ILine3D
-
-    override val i: ILine3D
-    override val j: ILine3D
-    override val k: ILine3D
-    override val l: ILine3D
+    override val A: IPoint3D
+    override val B: IPoint3D
+    override val O: IPoint3D
+    override val B_: IPoint3D
+    override val C_: IPoint3D
+    override val D_: IPoint3D
 
     override val otherLines: MutableList<ILine3D> = arrayListOf()
 
@@ -41,20 +33,13 @@ class OutlineBox private constructor(
         val y2 = pos2.y
         val z2 = pos2.z
 
-        a = ILine3D.new(x1, y1, z1, x2, y1, z1)
-        b = ILine3D.new(x2, y1, z1, x2, y2, z1)
-        c = ILine3D.new(x2, y2, z1, x1, y2, z1)
-        d = ILine3D.new(x1, y2, z1, x1, y1, z1)
+        A = IPoint3D.new(x1, y1, z2)
+        B = IPoint3D.new(x1, y2, z2)
+        O = IPoint3D.new(x2, y1, z2)
 
-        e = ILine3D.new(x1, y1, z1, x1, y1, z2)
-        f = ILine3D.new(x2, y1, z1, x2, y1, z2)
-        g = ILine3D.new(x2, y2, z1, x2, y2, z2)
-        h = ILine3D.new(x1, y2, z1, x1, y2, z2)
-
-        i = ILine3D.new(x1, y1, z2, x2, y1, z2)
-        j = ILine3D.new(x2, y1, z2, x2, y2, z2)
-        k = ILine3D.new(x2, y2, z2, x1, y2, z2)
-        l = ILine3D.new(x1, y2, z2, x1, y1, z2)
+        B_ = IPoint3D.new(x1, y2, z1)
+        C_ = IPoint3D.new(x2, y2, z1)
+        D_ = IPoint3D.new(x2, y1, z1)
     }
 
     override fun divide(step: IMathNumber): List<IPoint> {
@@ -73,6 +58,14 @@ class OutlineBox private constructor(
             addAll(j.divide(step))
             addAll(k.divide(step))
             addAll(l.divide(step))
+
+            val otherPoints = otherLines.stream()
+                .map {
+                    it.divide(step)
+                }.flatMap {
+                    it.stream()
+                }.toList()
+            addAll(otherPoints)
         }
         return result
     }
