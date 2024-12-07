@@ -1,11 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.math.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IBoxes
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
-@ServiceImpl("cuboids")
-object Cuboids : ICuboids {
+@ServiceImpl("boxes")
+object Boxes : IBoxes {
     override fun geometricCenter(A: IPoint3D, B: IPoint3D): IPoint3D {
         val x1 = A.x
         val y1 = A.y

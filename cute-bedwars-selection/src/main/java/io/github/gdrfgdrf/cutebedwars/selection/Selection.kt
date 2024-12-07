@@ -4,7 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IBoxes
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
@@ -458,7 +458,7 @@ class Selection(
                 val line1 = lines[20]
                 val line2 = lines[21]
 
-                val center = ICuboids.instance().geometricCenter(blockPoint3d1, blockPoint3d2)
+                val center = IBoxes.instance().geometricCenter(blockPoint3d1, blockPoint3d2)
                 val center2d = IPoint2D.new(center.x, center.z)
 
                 val R1 = (line1.length / 2) - (lines[17].length / 4)
