@@ -120,6 +120,10 @@ class OutlineBox private constructor(
         otherLines.add(line3d)
     }
 
+    override fun toString(): String {
+        return "$pos1 -> $pos2 (OutlineBox)"
+    }
+
     companion object {
         fun create(pos1: IPoint3D, pos2: IPoint3D): IOutlineBox {
             if (pos1.x == pos2.x || pos1.y == pos2.y || pos1.z == pos2.z) {
