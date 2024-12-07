@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IRectangles
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
@@ -50,6 +51,8 @@ interface IRectangle : IShape2D {
         get() = (a.length + b.length) * 2
     val area: IMathNumber
         get() = a.length * b.length
+    val center: IPoint2D
+        get() = IRectangles.instance().geometricCenter(pos1, pos2)
 
     val otherShapes: List<IShape2D>
 
