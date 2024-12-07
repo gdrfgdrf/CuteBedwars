@@ -33,10 +33,14 @@ class Line3D(
     }
 
     override fun half(): ILine3D {
+        return Line3D(start, midPoint())
+    }
+
+    override fun midPoint(): IPoint3D {
         val x = (start.x + end.x) / 2
         val y = (start.y + end.y) / 2
         val z = (start.z + end.z) / 2
-        return Line3D(start, IPoint3D.new(x, y, z))
+        return IPoint3D.new(x, y, z)
     }
 
     override fun divide(step: IMathNumber): List<IPoint> {

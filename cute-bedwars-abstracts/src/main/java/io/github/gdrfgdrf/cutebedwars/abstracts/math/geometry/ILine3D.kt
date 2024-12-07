@@ -9,11 +9,19 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("line_3d", singleton = false)
 interface ILine3D : IShape {
+    /**
+     * 线的起点
+     */
     val start: IPoint3D
+
+    /**
+     * 线的终点
+     */
     val end: IPoint3D
 
     fun length(): IMathNumber
     fun half(): ILine3D
+    fun midPoint(): IPoint3D
 
     companion object {
         fun new(start: IPoint3D, end: IPoint3D): ILine3D =
