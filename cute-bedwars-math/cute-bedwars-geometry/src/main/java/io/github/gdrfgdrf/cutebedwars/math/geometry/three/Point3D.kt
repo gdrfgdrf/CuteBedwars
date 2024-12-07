@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.math.geometry
+package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
