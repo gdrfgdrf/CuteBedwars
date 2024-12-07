@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.two
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D

@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator

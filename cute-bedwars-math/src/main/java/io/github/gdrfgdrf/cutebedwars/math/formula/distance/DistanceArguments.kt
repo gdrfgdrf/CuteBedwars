@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.math.formula.distance
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.math.common.*
 import io.github.gdrfgdrf.cutebedwars.math.enums.Dimensions
 import io.github.gdrfgdrf.cutebedwars.math.enums.Spaces

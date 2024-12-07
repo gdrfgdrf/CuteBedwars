@@ -1,10 +1,10 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl

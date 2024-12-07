@@ -1,4 +1,4 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math.base
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 
