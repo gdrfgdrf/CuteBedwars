@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.ILine
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IShape
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
@@ -8,21 +9,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("line_3d", singleton = false)
-interface ILine3D : IShape {
-    /**
-     * 线的起点
-     */
-    val start: IPoint3D
-
-    /**
-     * 线的终点
-     */
-    val end: IPoint3D
-
-    fun length(): IMathNumber
-    fun half(): ILine3D
-    fun midPoint(): IPoint3D
-
+interface ILine3D : ILine {
     companion object {
         fun new(start: IPoint3D, end: IPoint3D): ILine3D =
             Mediator.get(ILine3D::class.java, ArgumentSet(arrayOf(start, end)))!!

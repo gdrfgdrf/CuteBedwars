@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.ILine
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
@@ -21,32 +22,30 @@ class Line3D(
         argumentSet.args[1] as IPoint3D
     )
 
-    private var length: IMathNumber? = null
+    override val length: IMathNumber by lazy {
+        DistanceFormula.calculate(
+            Spaces.EUCLIDEAN,
+            Dimensions.THREE,
+            start,
+            end
+        )
+    }
+
+    override val midPoint: IPoint by lazy {
+        val x = (start.x + end.x) / 2
+        val y = (start.y + end.y) / 2
+        val z = (start.z + end.z) / 2
+        IPoint3D.new(x, y, z)
+    }
+
+    override val half: ILine by lazy {
+        Line3D(start, midPoint as IPoint3D)
+    }
 
     init {
         if (!start.isValid() || !end.isValid()) {
             throw IllegalArgumentException("the point of start or the point of end is not valid")
         }
-    }
-
-    override fun length(): IMathNumber {
-        if (length != null) {
-            return length!!
-        }
-
-        length = DistanceFormula.calculate(Spaces.EUCLIDEAN, Dimensions.THREE, start, end)
-        return length!!
-    }
-
-    override fun half(): ILine3D {
-        return Line3D(start, midPoint())
-    }
-
-    override fun midPoint(): IPoint3D {
-        val x = (start.x + end.x) / 2
-        val y = (start.y + end.y) / 2
-        val z = (start.z + end.z) / 2
-        return IPoint3D.new(x, y, z)
     }
 
     override fun divide(step: IMathNumber): List<IPoint> {
