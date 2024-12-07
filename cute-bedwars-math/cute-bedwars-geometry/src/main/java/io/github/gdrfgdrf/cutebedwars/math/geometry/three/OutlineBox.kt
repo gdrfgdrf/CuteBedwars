@@ -15,32 +15,7 @@ class OutlineBox private constructor(
     override var pos1: IPoint3D,
     override var pos2: IPoint3D,
 ) : IOutlineBox {
-    override val A: IPoint3D
-    override val B: IPoint3D
-    override val O: IPoint3D
-    override val B_: IPoint3D
-    override val C_: IPoint3D
-    override val D_: IPoint3D
-
     override val otherLines: MutableList<ILine3D> = arrayListOf()
-
-    init {
-        val x1 = pos1.x
-        val y1 = pos1.y
-        val z1 = pos1.z
-
-        val x2 = pos2.x
-        val y2 = pos2.y
-        val z2 = pos2.z
-
-        A = IPoint3D.new(x1, y1, z2)
-        B = IPoint3D.new(x1, y2, z2)
-        O = IPoint3D.new(x2, y1, z2)
-
-        B_ = IPoint3D.new(x1, y2, z1)
-        C_ = IPoint3D.new(x2, y2, z1)
-        D_ = IPoint3D.new(x2, y1, z1)
-    }
 
     override fun divide(step: IMathNumber): List<IPoint> {
         val result = arrayListOf<IPoint>().apply {

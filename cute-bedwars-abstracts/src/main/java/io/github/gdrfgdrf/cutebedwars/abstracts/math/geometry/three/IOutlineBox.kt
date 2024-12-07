@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IShape
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
@@ -17,16 +16,46 @@ interface IOutlineBox : IShape {
     val pos2: IPoint3D
 
     val A: IPoint3D
+        get() = IPoint3D.new(
+            pos1.x,
+            pos1.y,
+            pos2.z
+        )
     val B: IPoint3D
+        get() = IPoint3D.new(
+            pos1.x,
+            pos2.y,
+            pos2.z
+        )
     val C: IPoint3D
         get() = pos2
     val O: IPoint3D
+        get() = IPoint3D.new(
+            pos2.x,
+            pos1.y,
+            pos2.z
+        )
 
     val A_: IPoint3D
         get() = pos1
     val B_: IPoint3D
+        get() = IPoint3D.new(
+            pos1.x,
+            pos2.y,
+            pos1.z
+        )
     val C_: IPoint3D
+        get() = IPoint3D.new(
+            pos2.x,
+            pos2.y,
+            pos1.z
+        )
     val D_: IPoint3D
+        get() = IPoint3D.new(
+            pos2.x,
+            pos1.y,
+            pos1.z
+        )
 
     val a: ILine3D
         get() = ILine3D.new(A_, B_)
