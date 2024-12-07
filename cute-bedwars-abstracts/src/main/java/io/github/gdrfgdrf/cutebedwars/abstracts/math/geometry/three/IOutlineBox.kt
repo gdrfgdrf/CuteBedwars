@@ -87,7 +87,7 @@ interface IOutlineBox : IShape3D {
     val l: ILine3D
         get() = ILine3D.new(B, A)
 
-    val otherShape: List<IShape3D>
+    val otherShapes: List<IShape3D>
 
     /**
      * 某点是否在该 Box 中

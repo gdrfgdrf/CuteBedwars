@@ -1,8 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
@@ -16,7 +14,7 @@ class OutlineBox private constructor(
     override var pos1: IPoint3D,
     override var pos2: IPoint3D,
 ) : IOutlineBox {
-    override val otherShape: MutableList<IShape3D> = arrayListOf()
+    override val otherShapes: MutableList<IShape3D> = arrayListOf()
 
     override fun divide3d(step: IMathNumber): List<IPoint3D> {
         val result = arrayListOf<IPoint3D>().apply {
@@ -35,7 +33,7 @@ class OutlineBox private constructor(
             addAll(k.divide3d(step))
             addAll(l.divide3d(step))
 
-            val otherPoints = otherShape.stream()
+            val otherPoints = otherShapes.stream()
                 .map {
                     it.divide3d(step)
                 }.flatMap {
@@ -86,7 +84,7 @@ class OutlineBox private constructor(
                 throw IllegalArgumentException("one of the shape's points is not in the box")
             }
         }
-        otherShape.add(shape3d)
+        otherShapes.add(shape3d)
     }
 
     override fun toString(): String {
