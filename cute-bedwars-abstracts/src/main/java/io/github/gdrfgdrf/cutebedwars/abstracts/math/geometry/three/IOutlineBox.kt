@@ -92,9 +92,9 @@ interface IOutlineBox : IShape {
     fun contains(point3d: IPoint3D): Boolean
 
     /**
-     * 添加一条线，a，b 均要位于该 Box 中
+     * 添加一条线，start，end 均要位于该 Box 中
      */
-    fun addLine(a: IPoint3D, b: IPoint3D)
+    fun addLine(start: IPoint3D, end: IPoint3D)
 
     companion object {
         fun new(pos1: IPoint3D, pos2: IPoint3D): IOutlineBox =

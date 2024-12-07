@@ -79,12 +79,12 @@ class OutlineBox private constructor(
         return third
     }
 
-    override fun addLine(a: IPoint3D, b: IPoint3D) {
-        if (!contains(a) || !contains(b)) {
+    override fun addLine(start: IPoint3D, end: IPoint3D) {
+        if (!contains(start) || !contains(end)) {
             throw IllegalArgumentException("a or b is not in the box")
         }
 
-        val line3d = ILine3D.new(a, b)
+        val line3d = ILine3D.new(start, end)
         otherLines.add(line3d)
     }
 
