@@ -60,7 +60,7 @@ class Line3D(
         result.add(start)
 
         while (true) {
-            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(pos1, pos2, current)
+            val C = Lines.findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD_ThreeDimension(pos1, pos2, current)
             // 计算错误时 break
             if (C.x.toDouble().isNaN() || C.y.toDouble().isNaN() || C.z.toDouble().isNaN()) {
                 break

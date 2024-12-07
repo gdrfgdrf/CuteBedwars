@@ -11,7 +11,7 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
 @ServiceImpl("lines")
 object Lines : ILines {
-    override fun findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD(A: IPoint3D, B: IPoint3D, D: IMathNumber): IPoint3D {
+    override fun findAPointCOnALineABInSpaceSuchThatTheDistanceOfBCIsAFixedValueD_ThreeDimension(A: IPoint3D, B: IPoint3D, D: IMathNumber): IPoint3D {
         val norm = DistanceFormula.calculate(Spaces.EUCLIDEAN, Dimensions.THREE, A, B)
 
         val x1 = A.x
