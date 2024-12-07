@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.geometry.two
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IRectangle
@@ -24,7 +25,7 @@ class Rectangle(
         }
     }
 
-    override val otherLines: MutableList<ILine2D> = arrayListOf()
+    override val otherShapes: MutableList<IShape2D> = arrayListOf()
 
     override fun contains(point2d: IPoint2D): Boolean {
         val minX = minOf(pos1.x, pos2.x)
@@ -49,13 +50,13 @@ class Rectangle(
         return second
     }
 
-    override fun addLine(start: IPoint2D, end: IPoint2D) {
-        if (!contains(start) || !contains(end)) {
-            throw IllegalArgumentException("a or b is not in the box")
+    override fun addShape(shape2d: IShape2D) {
+        shape2d.points2d.forEach {
+            if (!contains(it)) {
+                throw IllegalArgumentException("one of the shape's points is not in the rectangle")
+            }
         }
-
-        val line2d = ILine2D.new(start, end)
-        otherLines.add(line2d)
+        otherShapes.add(shape2d)
     }
 
 }

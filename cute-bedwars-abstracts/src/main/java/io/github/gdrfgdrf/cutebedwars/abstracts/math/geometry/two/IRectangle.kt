@@ -51,14 +51,14 @@ interface IRectangle : IShape2D {
     val area: IMathNumber
         get() = a.length * b.length
 
-    val otherLines: List<ILine2D>
+    val otherShapes: List<IShape2D>
 
     /**
      * 某点是否在该矩形中
      */
     fun contains(point2d: IPoint2D): Boolean
     /**
-     * 添加一条线，a，b 均要位于该矩形中
+     * 将某个 2D 形状添加在该矩形中，该形状必须整个位于该矩形中
      */
-    fun addLine(start: IPoint2D, end: IPoint2D)
+    fun addShape(shape2d: IShape2D)
 }
