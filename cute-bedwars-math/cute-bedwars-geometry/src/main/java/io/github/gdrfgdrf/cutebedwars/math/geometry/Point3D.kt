@@ -22,7 +22,7 @@ class Point3D(
     )
 
     override val step: Int = 3
-    override val all: Array<IMathNumber> = arrayOf(x, y, z)
+    override val pointSet: Array<IMathNumber> = arrayOf(x, y, z)
 
     override fun vector3i(other: IPoint3D): IVector3i {
         return Vector3i.of(other.x - x, other.y - y, other.z - z)

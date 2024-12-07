@@ -4,5 +4,5 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 
 interface IPoint {
     val step: Int
-    val all: Array<IMathNumber>
+    val pointSet: Array<IMathNumber>
 }

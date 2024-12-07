@@ -17,7 +17,7 @@ class Point2D private constructor(
     )
 
     override val step: Int = 2
-    override val all: Array<IMathNumber> = arrayOf(x, y)
+    override val pointSet: Array<IMathNumber> = arrayOf(x, y)
 
     override fun toString(): String {
         return "($x, $y)"
