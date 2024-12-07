@@ -24,6 +24,12 @@ class Point3D(
     override val step: Int = 3
     override val numbers: Array<IMathNumber> = arrayOf(x, y, z)
 
+    init {
+        if (x.toDouble().isNaN() || y.toDouble().isNaN() || z.toDouble().isNaN()) {
+            throw IllegalArgumentException("x or y or z is NaN")
+        }
+    }
+
     override fun vector3i(other: IPoint3D): IVector3i {
         return Vector3i.of(other.x - x, other.y - y, other.z - z)
     }
