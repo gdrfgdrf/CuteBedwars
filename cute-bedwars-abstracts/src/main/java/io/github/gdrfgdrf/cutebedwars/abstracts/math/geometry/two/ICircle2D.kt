@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
@@ -10,6 +11,9 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("circle_2d", singleton = false)
 interface ICircle2D : IShape {
+    override val points: Array<IPoint>
+        get() = arrayOf(center)
+
     val center: IPoint2D
     val R: IMathNumber
     val half: Boolean

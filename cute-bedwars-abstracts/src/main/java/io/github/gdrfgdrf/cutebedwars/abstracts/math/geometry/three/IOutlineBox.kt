@@ -1,5 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IShape
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
@@ -12,6 +13,9 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
  */
 @Service("box", singleton = false)
 interface IOutlineBox : IShape {
+    override val points: Array<IPoint>
+        get() = arrayOf(pos1, pos2)
+
     val pos1: IPoint3D
     val pos2: IPoint3D
 

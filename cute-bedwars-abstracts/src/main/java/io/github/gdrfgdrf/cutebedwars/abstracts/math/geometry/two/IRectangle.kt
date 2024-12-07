@@ -1,12 +1,17 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("rectangle", singleton = false)
-interface IRectangle {
+interface IRectangle : IShape {
+    override val points: Array<IPoint>
+        get() = arrayOf(pos1, pos2)
+
     /**
      * 使用两点确定一矩形中的一点
      */
