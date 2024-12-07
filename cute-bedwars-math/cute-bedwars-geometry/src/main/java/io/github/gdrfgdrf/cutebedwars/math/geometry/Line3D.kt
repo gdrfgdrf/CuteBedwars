@@ -23,6 +23,12 @@ class Line3D(
 
     private var length: IMathNumber? = null
 
+    init {
+        if (!start.isValid() || !end.isValid()) {
+            throw IllegalArgumentException("the point of start or the point of end is not valid")
+        }
+    }
+
     override fun length(): IMathNumber {
         if (length != null) {
             return length!!
