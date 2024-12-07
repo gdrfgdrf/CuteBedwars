@@ -37,7 +37,7 @@ class DistanceArguments private constructor(private val arguments: Arguments) {
         val all = arrayListOf<IMathNumber>()
         for (i1 in 0 until pointStep) {
             for (i2 in 0 until 2) {
-                all.add(pointGroup[i2].pointSet[i1])
+                all.add(pointGroup[i2].numbers[i1])
             }
         }
 
