@@ -1,13 +1,17 @@
 package io.github.gdrfgdrf.cutebedwars.math.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.IEquations
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.times
+import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 
-object Equations {
-    /**
-     * 求一元二次方程的实数解
-     */
-    fun quadraticOneVariable(a: IMathNumber, b: IMathNumber, c: IMathNumber): Pair<IMathNumber?, IMathNumber?> {
+@ServiceImpl("equations")
+object Equations : IEquations {
+    override fun quadraticOneVariable(
+        a: IMathNumber,
+        b: IMathNumber,
+        c: IMathNumber
+    ): Pair<IMathNumber?, IMathNumber?> {
         var x1: IMathNumber? = null
         var x2: IMathNumber? = null
 
