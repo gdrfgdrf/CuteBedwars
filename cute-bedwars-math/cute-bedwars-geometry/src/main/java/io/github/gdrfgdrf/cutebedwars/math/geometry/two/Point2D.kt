@@ -19,6 +19,12 @@ class Point2D private constructor(
     override val step: Int = 2
     override val numbers: Array<IMathNumber> = arrayOf(x, y)
 
+    init {
+        if (x.toDouble().isNaN() || y.toDouble().isNaN()) {
+            throw IllegalArgumentException("x or y is NaN")
+        }
+    }
+
     override fun toString(): String {
         return "($x, $y)"
     }
