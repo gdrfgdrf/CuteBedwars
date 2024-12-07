@@ -1,9 +1,8 @@
 package io.github.gdrfgdrf.cutebedwars.math.base
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.IIFormula
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IIFormula
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.math.common.Argument
-import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
 
 interface IFormula : IIFormula {
     override fun calculate(vararg any: Any): IMathNumber {

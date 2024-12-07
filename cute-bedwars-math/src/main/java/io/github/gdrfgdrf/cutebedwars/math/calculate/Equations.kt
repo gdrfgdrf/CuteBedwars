@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.math.calculate
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.times
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.times
 
 object Equations {
     /**

@@ -2,7 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.math.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.enums.ISteps
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
 
 @EnumServiceImpl("steps")

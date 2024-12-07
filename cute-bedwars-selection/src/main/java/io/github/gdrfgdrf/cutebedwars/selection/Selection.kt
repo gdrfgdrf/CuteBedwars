@@ -1,13 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.IOutlineBox
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ICircle2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.ILine3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelection

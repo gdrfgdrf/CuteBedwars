@@ -1,6 +1,6 @@
 package io.github.gdrfgdrf.cutebedwars.math.calculate
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.calculate.ICuboids
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 

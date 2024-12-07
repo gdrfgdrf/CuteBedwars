@@ -1,4 +1,6 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.common
+
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 
 operator fun Int.plus(mathNumber: IMathNumber): IMathNumber {
     return mathNumber + this

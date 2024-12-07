@@ -1,9 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.IVector3i
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IVector3i
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.math.common.Vector3i
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl

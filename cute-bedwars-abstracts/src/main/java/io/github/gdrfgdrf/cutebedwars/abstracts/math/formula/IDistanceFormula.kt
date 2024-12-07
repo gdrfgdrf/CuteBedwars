@@ -1,5 +1,6 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.math
+package io.github.gdrfgdrf.cutebedwars.abstracts.math.formula
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.base.IIFormula
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
