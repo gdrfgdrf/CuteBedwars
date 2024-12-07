@@ -23,6 +23,27 @@ class Point2D private constructor(
         return "($x, $y)"
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (other == null) {
+            return false
+        }
+        if (other !is IPoint2D) {
+            return false
+        }
+
+        if (x == other.x && y == other.y) {
+            return true
+        }
+        return false
+    }
+
+    override fun hashCode(): Int {
+        var result = x.hashCode()
+        result = 31 * result + y.hashCode()
+        result = 31 * result + step
+        return result
+    }
+
     companion object {
         fun of(x: Number, y: Number) = of(x.mathNumber(), y.mathNumber())
         fun of(x: IMathNumber, y: IMathNumber) = Point2D(x, y)
