@@ -1,7 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape3D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -12,8 +12,8 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
  * 所有用于区分的撇（如 A'，B' 等）在该类中均改成杠（如 A_, B_ 等）
  */
 @Service("box", singleton = false)
-interface IOutlineBox : IShape {
-    override val points: Array<IPoint>
+interface IOutlineBox : IShape3D {
+    override val points3d: Array<IPoint3D>
         get() = arrayOf(pos1, pos2)
 
     val pos1: IPoint3D

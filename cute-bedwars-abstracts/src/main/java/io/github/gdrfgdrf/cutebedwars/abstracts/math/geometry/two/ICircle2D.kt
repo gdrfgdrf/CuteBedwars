@@ -5,13 +5,14 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape2D
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
 @Service("circle_2d", singleton = false)
-interface ICircle2D : IShape {
-    override val points: Array<IPoint>
+interface ICircle2D : IShape2D {
+    override val points2d: Array<IPoint2D>
         get() = arrayOf(center)
 
     val center: IPoint2D

@@ -48,12 +48,12 @@ class Line3D(
         }
     }
 
-    override fun divide(step: IMathNumber): List<IPoint> {
+    override fun divide3d(step: IMathNumber): List<IPoint3D> {
         val space = Spaces.EUCLIDEAN
         val dimension = Dimensions.THREE
 
         var current = step
-        val result = arrayListOf<IPoint>()
+        val result = arrayListOf<IPoint3D>()
         result.add(start)
 
         runCatching {

@@ -2,13 +2,18 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.ILine
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape3D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
+import java.util.*
 
 @Service("line_3d", singleton = false)
-interface ILine3D : ILine {
+interface ILine3D : ILine, IShape3D {
+    override val points3d: Array<IPoint3D>
+        get() = arrayOf(start as IPoint3D, end as IPoint3D)
+
     companion object {
         fun new(start: IPoint3D, end: IPoint3D): ILine3D =
             Mediator.get(ILine3D::class.java, ArgumentSet(arrayOf(start, end)))!!

@@ -2,10 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 
-interface ILine : IShape {
-    override val points: Array<IPoint>
-        get() = arrayOf(start, end)
-
+interface ILine {
     val start: IPoint
     val end: IPoint
     val length: IMathNumber

@@ -5,11 +5,12 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape2D
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
 @Service("rectangle", singleton = false)
-interface IRectangle : IShape {
-    override val points: Array<IPoint>
+interface IRectangle : IShape2D {
+    override val points2d: Array<IPoint2D>
         get() = arrayOf(pos1, pos2)
 
     /**
