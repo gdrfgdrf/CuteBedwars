@@ -79,6 +79,31 @@ class Vector3i private constructor(
         return of(x / vector3i.x, y / vector3i.y, z / vector3i.z)
     }
 
+    override fun dot(x2: IMathNumber, y2: IMathNumber, z2: IMathNumber): IMathNumber {
+        return x * x2 + y * y2 + z * z2
+    }
+
+    override fun dot(vector3i: IVector3i): IMathNumber {
+        return x * vector3i.x + y * vector3i.y + z * vector3i.z
+    }
+
+    override fun cross(x2: IMathNumber, y2: IMathNumber, z2: IMathNumber): IVector3i {
+        return of(y * z2 - z * y2, z * x2 - x * z2, x * y2 - y * x2)
+    }
+
+    override fun cross(vector3i: IVector3i): IVector3i {
+        return of(
+            y * vector3i.z - z * vector3i.y,
+            z * vector3i.x - x * vector3i.z,
+            x * vector3i.y - y * vector3i.x
+        )
+    }
+
+    override fun normalize(): IVector3i {
+        val norm = norm()
+        return of(x / norm, y / norm, z / norm)
+    }
+
     companion object {
         fun of(x: Number, y: Number, z: Number) = Vector3i(x.mathNumber(), y.mathNumber(), z.mathNumber())
         fun of(x: IMathNumber, y: IMathNumber, z: IMathNumber) = Vector3i(x, y, z)

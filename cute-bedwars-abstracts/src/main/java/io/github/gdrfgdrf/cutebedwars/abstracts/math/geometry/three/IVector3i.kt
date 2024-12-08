@@ -32,6 +32,14 @@ interface IVector3i {
     operator fun div(number: IMathNumber): IVector3i
     operator fun div(vector3i: IVector3i): IVector3i
 
+    fun dot(x2: IMathNumber, y2: IMathNumber, z2: IMathNumber): IMathNumber
+    fun dot(vector3i: IVector3i): IMathNumber
+
+    fun cross(x2: IMathNumber, y2: IMathNumber, z2: IMathNumber): IVector3i
+    fun cross(vector3i: IVector3i): IVector3i
+
+    fun normalize(): IVector3i
+
     companion object {
         fun new(x: IMathNumber, y: IMathNumber, z: IMathNumber): IVector3i = Mediator.get(
             IVector3i::class.java, ArgumentSet(
