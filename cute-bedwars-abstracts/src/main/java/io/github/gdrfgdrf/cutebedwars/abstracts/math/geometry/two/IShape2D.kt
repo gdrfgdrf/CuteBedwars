@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IShape
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import java.util.*
 
 interface IShape2D : IShape {
@@ -19,5 +20,17 @@ interface IShape2D : IShape {
         return divide2d(step)
     }
 
+    /**
+     * 将 divide2d 返回的所有二维点转换成所有具有同一 Y 轴的三维点
+     */
+    fun divide3d(step: IMathNumber, y: IMathNumber): List<IPoint3D> {
+        return divide2d(step).stream()
+            .map {
+                val x = it.x
+                val z = it.y
+                IPoint3D.new(x, y, z)
+            }
+            .toList()
+    }
     fun divide2d(step: IMathNumber): List<IPoint2D>
 }
