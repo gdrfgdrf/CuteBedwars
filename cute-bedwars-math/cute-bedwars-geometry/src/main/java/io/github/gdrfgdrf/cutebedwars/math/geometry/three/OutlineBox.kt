@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.math.geometry.three
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape3D
@@ -91,6 +92,11 @@ class OutlineBox private constructor(
             }
         }
         otherShapes.add(shape3d)
+    }
+
+    override fun addLine(start: IPoint3D, end: IPoint3D) {
+        val line3d = ILine3D.new(start, end)
+        addShape(line3d)
     }
 
     override fun toString(): String {

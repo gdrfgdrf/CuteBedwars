@@ -100,6 +100,7 @@ interface IOutlineBox : IShape3D {
      * 将某个 3D 形状添加在该 Box 中，该形状必须整个位于该 Box 中
      */
     fun addShape(shape3d: IShape3D)
+    fun addLine(start: IPoint3D, end: IPoint3D)
 
     companion object {
         fun new(pos1: IPoint3D, pos2: IPoint3D): IOutlineBox =
