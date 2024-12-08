@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minus
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IVector3i
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
+import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.KotlinSingleton
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 
@@ -54,4 +55,8 @@ interface IRotates {
      * 返回旋转后的点
      */
     fun rotatePoint3d(P: IPoint3D, n: IVector3i, a: IMathNumber): IPoint3D
+
+    companion object {
+        fun instance(): IRotates = Mediator.get(IRotates::class.java)!!
+    }
 }
