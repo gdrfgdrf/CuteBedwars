@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
@@ -37,5 +38,7 @@ interface IVector3i {
                 arrayOf(x, y, z)
             )
         )!!
+
+        fun new(x: Number, y: Number, z: Number) = new(x.mathNumber(), y.mathNumber(), z.mathNumber())
     }
 }
