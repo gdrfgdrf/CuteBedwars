@@ -61,4 +61,5 @@ interface IRectangle : IShape2D {
      * 将某个 2D 形状添加在该矩形中，该形状必须整个位于该矩形中
      */
     fun addShape(shape2d: IShape2D)
+    fun addLine(start: IPoint2D, end: IPoint2D)
 }

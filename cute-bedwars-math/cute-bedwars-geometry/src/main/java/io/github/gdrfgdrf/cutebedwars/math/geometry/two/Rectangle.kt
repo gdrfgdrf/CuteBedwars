@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.math.geometry.two
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.maxOf
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.minOf
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IRectangle
@@ -75,6 +76,11 @@ class Rectangle(
             }
         }
         otherShapes.add(shape2d)
+    }
+
+    override fun addLine(start: IPoint2D, end: IPoint2D) {
+        val line2d = ILine2D.new(start, end)
+        addShape(line2d)
     }
 
 }
