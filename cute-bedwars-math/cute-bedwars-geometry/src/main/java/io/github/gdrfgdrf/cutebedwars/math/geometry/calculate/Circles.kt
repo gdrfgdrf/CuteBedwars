@@ -14,8 +14,8 @@ object Circles : ICircles {
         a: IMathNumber,
         offset: IMathNumber
     ): IPoint2D {
-        val resultX = x0 + R * (a + offset).toRadians().cos()
-        val resultY = y0 + R * (a + offset).toRadians().sin()
+        val resultX = x0 + R * (a + offset).radians().cos()
+        val resultY = y0 + R * (a + offset).radians().sin()
 
         return IPoint2D.new(resultX, resultY)
     }

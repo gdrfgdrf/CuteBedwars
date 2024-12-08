@@ -326,7 +326,7 @@ class MathNumber private constructor(override val number: Number) : IMathNumber,
         return 1 / this
     }
 
-    override fun toRadians(): IMathNumber {
+    override fun radians(): IMathNumber {
         if (number is Int) {
             return of(Math.toRadians(toDouble()))
         }

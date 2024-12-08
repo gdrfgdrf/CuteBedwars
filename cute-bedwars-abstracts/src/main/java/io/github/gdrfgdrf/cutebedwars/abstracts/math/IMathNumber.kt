@@ -41,7 +41,7 @@ interface IMathNumber {
     fun cut(precisions: IPrecisions): IMathNumber
     fun reciprocal(): IMathNumber
 
-    fun toRadians(): IMathNumber
+    fun radians(): IMathNumber
 
     fun cos(): IMathNumber
     fun sin(): IMathNumber
