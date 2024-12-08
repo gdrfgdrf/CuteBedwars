@@ -4,20 +4,21 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IBoxes
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IRectangle
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticles
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelection
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IStopSignal
-import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.Particle
 import org.bukkit.entity.Player
+import java.util.stream.Stream
 import kotlin.math.absoluteValue
 
 @ServiceImpl("selection", needArgument = true)
@@ -93,553 +94,106 @@ class Selection(
         centerPoint.y = (pos1.y + pos2.y) / 2
         centerPoint.z = (pos1.z + pos2.z) / 2
 
-        val blockCoordinate1 = fix(centerPoint, pos1)
-        val blockCoordinate2 = fix(centerPoint, pos2)
+        val baseBlockCoordinate1 = fix(centerPoint, pos1)
+        val baseBlockCoordinate2 = fix(centerPoint, pos2)
 
-        lines.apply {
-            run {
-                "Calculating the top of the selection".logDebug()
+        // 保证 blockCoordinate1 始终在 blockCoordinate2 之上
+        val blockCoordinate1 = if (baseBlockCoordinate1.y >= baseBlockCoordinate2.y) {
+            baseBlockCoordinate1
+        } else {
+            baseBlockCoordinate2
+        }
+        val blockCoordinate2 = if (baseBlockCoordinate2.y < baseBlockCoordinate1.y) {
+            baseBlockCoordinate2
+        } else {
+            baseBlockCoordinate1
+        }
 
-                run {
-                    val coordinate = Coordinate()
-                    coordinate.x = blockCoordinate2.x
-                    coordinate.y = blockCoordinate1.y
-                    coordinate.z = blockCoordinate1.z
+        val outlineBox = IOutlineBox.new(blockCoordinate1, blockCoordinate2)
 
-                    val line = ILine3D.new(blockCoordinate1, coordinate)
-                    add(line)
+        // 对角线
+        outlineBox.addLine(outlineBox.A_, outlineBox.C)
+        outlineBox.addLine(outlineBox.C_, outlineBox.A)
+        outlineBox.addLine(outlineBox.B_, outlineBox.O)
+        outlineBox.addLine(outlineBox.D_, outlineBox.B)
 
-                    "(x, y, z)(pos1) -> (x2, y, z) is $line".logDebug()
-                }
-                run {
-                    val coordinate = Coordinate()
-                    coordinate.x = blockCoordinate1.x
-                    coordinate.y = blockCoordinate1.y
-                    coordinate.z = blockCoordinate2.z
+        // 顶部交叉
+        outlineBox.addLine(outlineBox.A_, outlineBox.O)
+        outlineBox.addLine(outlineBox.D_, outlineBox.A)
+        // 底部交叉
+        outlineBox.addLine(outlineBox.B_, outlineBox.C)
+        outlineBox.addLine(outlineBox.C_, outlineBox.B)
 
-                    val line = ILine3D.new(blockCoordinate1, coordinate)
-                    add(line)
+        // 三分之一
+        val oneThirdY = (blockCoordinate1.y - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
 
-                    "(x, y, z)(pos1) -> (x, y, z2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[0].end as IPoint3D
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = blockCoordinate1.y
-                    coordinate2.z = blockCoordinate2.z
+        // 三分之一处矩形
+        val rectangle = IRectangle.new(
+            blockCoordinate1.x,
+            blockCoordinate1.z,
+            blockCoordinate2.x,
+            blockCoordinate2.z
+        )
 
-                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
-                    add(line)
+        // 三分之一处十字的起点和终点
+        val crossLine1Start = rectangle.a.half.end as IPoint2D
+        val crossLine1End = rectangle.c.half.end as IPoint2D
+        val crossLine2Start = rectangle.b.half.end as IPoint2D
+        val crossLine2End = rectangle.d.half.end as IPoint2D
 
-                    "(x2, y, z) -> (x2, y, z2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[1].end as IPoint3D
-                    val coordinate2 = lines[2].end as IPoint3D
+        // 三分之一处十字
+        val crossLine1 = ILine2D.new(crossLine1Start, crossLine1End)
+        val crossLine2 = ILine2D.new(crossLine2Start, crossLine2End)
 
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
+        // 将三分之一处十字添加到矩形中
+        rectangle.addShape(crossLine1)
+        rectangle.addShape(crossLine2)
 
-                    "(x, y, z2) -> (x2, y, z2) is $line".logDebug()
+        // 三分之一处的四个半圆的半径
+        val semiCircleR1 = rectangle.a.length / 4
+        val semiCircleR2 = rectangle.b.length / 4
+
+        // 三分之一处的四个半圆
+        val semicircle1 = ICircle2D.new(crossLine1Start, semiCircleR1)
+            .divide3d(0.5.mathNumber(), oneThirdY)
+        val semicircle2 = ICircle2D.new(crossLine2Start, semiCircleR2)
+            .divide3d(0.5.mathNumber(), oneThirdY)
+        val semicircle3 = ICircle2D.new(crossLine1End, semiCircleR1)
+            .divide3d(0.5.mathNumber(), oneThirdY)
+        val semicircle4 = ICircle2D.new(crossLine2End, semiCircleR2)
+            .divide3d(0.5.mathNumber(), oneThirdY)
+
+        // 将三分之一处的四个半圆添加到 Outline Box 中
+        Stream.of(semicircle1, semicircle2, semicircle3, semicircle4)
+            .flatMap {
+                it.stream()
+            }
+            .forEach { point3d ->
+                runCatching {
+                    outlineBox.addPoint(point3d)
                 }
             }
 
-            run {
-                "Calculating the bottom of the selection".logDebug()
-
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = blockCoordinate2.y
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = blockCoordinate2.y
-                    coordinate2.z = blockCoordinate1.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y2, z) -> (x2, y2, z) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[4].start as IPoint3D
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate1.x
-                    coordinate2.y = blockCoordinate2.y
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
-                    add(line)
-
-                    "(x, y2, z) -> (x, y2, z2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[4].end as IPoint3D
-                    val line = ILine3D.new(coordinate1.coordinate(), blockCoordinate2)
-                    add(line)
-
-                    "(x2, y2, z) -> (x2, y2, z2)(pos2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[5].end as IPoint3D
-                    val line = ILine3D.new(coordinate1.coordinate(), blockCoordinate2)
-                    add(line)
-
-                    "(x, y2, z2) -> (x2, y2, z2)(pos2) is $line".logDebug()
-                }
-            }
-
-            run {
-                "Calculating the middle of the selection".logDebug()
-
-                run {
-                    val coordinate2 = lines[4].start as IPoint3D
-                    val line = ILine3D.new(blockCoordinate1, coordinate2.coordinate())
-                    add(line)
-
-                    "(x, y, z) -> (x, y2, z) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[0].end as IPoint3D
-                    val coordinate2 = lines[4].end as IPoint3D
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x2, y, z) -> (x2, y2, z) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[1].end as IPoint3D
-                    val coordinate2 = lines[5].end as IPoint3D
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z2) is (x, y2, z2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[2].end as IPoint3D
-                    val line = ILine3D.new(coordinate1.coordinate(), blockCoordinate2)
-                    add(line)
-
-                    "(x2, y, z2) -> (x2, y2, z2) is $line".logDebug()
-                }
-            }
-
-            run {
-                "Calculating the diagonal line of the selection".logDebug()
-
-                run {
-                    val line = ILine3D.new(blockCoordinate1, blockCoordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1) -> (x2, y2, z2)(pos2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[2].end as IPoint3D
-                    val coordinate2 = lines[4].start as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x2, y, z2) -> (x, y2, z) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[0].end as IPoint3D
-                    val coordinate2 = lines[5].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x2, y, z) -> (x, y2, z2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[1].end as IPoint3D
-                    val coordinate2 = lines[4].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z2) -> (x2, y2, z) is $line".logDebug()
-                }
-            }
-
-            val biggerY = if (blockCoordinate1.y >= blockCoordinate2.y) {
-                blockCoordinate1.y
-            } else {
-                blockCoordinate2.y
-            }
-
-            val oneThirdY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
-
-            run {
-                "Calculating the 1 / 3 y cross of the selection".logDebug()
-
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = oneThirdY.toDouble()
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = oneThirdY.toDouble()
-                    coordinate2.z = blockCoordinate1.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1)( 1 / 3 y ) -> (x2, y, z)( 1 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = oneThirdY.toDouble()
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate1.x
-                    coordinate2.y = oneThirdY.toDouble()
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1)( 1 / 3 y ) -> (x, y, z2)( 1 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[16].end as IPoint3D
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = oneThirdY.toDouble()
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
-                    add(line)
-
-                    "(x2, y, z)( 1 / 3 y ) -> (x2, y, z2)( 1 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[17].end as IPoint3D
-                    val coordinate2 = lines[18].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z2)( 1 / 3 y ) -> (x2, y, z2)( 1 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[6].half.end as IPoint3D
-                    val coordinate2 = lines[5].half.end as IPoint3D
-
-                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThirdY, coordinate1.z)
-                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThirdY, coordinate2.z)
-
-                    val line = ILine3D.new(coordinate1Result, coordinate2Result)
-                    add(line)
-
-                    "(x2, y2, z) -> (x2, y2, z2)(pos2) / 2 ( 1 / 3 y2 ) -> (x, y2, z) -> (x, y2, z2) / 2 ( 1 / 3 y2 ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[4].half.end as IPoint3D
-                    val coordinate2 = lines[7].half.end as IPoint3D
-
-                    val coordinate1Result = IPoint3D.new(coordinate1.x, oneThirdY, coordinate1.z)
-                    val coordinate2Result = IPoint3D.new(coordinate2.x, oneThirdY, coordinate2.z)
-
-                    val line = ILine3D.new(coordinate1Result, coordinate2Result)
-                    add(line)
-
-                    ("(x, y2, z) -> (x2, y2, z) / 2 ( 1 / 3 y2 ) -> (x, y2, z2) -> (x2, y2, z2)(pos2) / 2 ( 1 / 3 y2 ) is $line").logDebug()
-                }
-            }
-
-            run {
-                "Calculating the 1 / 3 y semicircle of the selection".logDebug()
-
-                val box = IOutlineBox.new(blockCoordinate1, blockCoordinate2)
-
-                run {
-                    val line = lines[21]
-                    val line2 = lines[16]
-
-                    val center2dX = (line.start as IPoint3D).x
-                    val center2dY = (line.start as IPoint3D).z
-                    val R = line2.length / 4
-
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
-                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
-                    result = result.stream()
-                        .filter {
-                            return@filter box.contains(it)
-                        }
-                        .toList()
-
-                    otherPoints.addAll(result)
-
-                    "center x: $center2dX, center y: ${(line.start as IPoint3D).y}, center z: $center2dY, r: $R".logDebug()
-                }
-                run {
-                    val line = lines[21]
-                    val line2 = lines[16]
-
-                    val center2dX = (line.end as IPoint3D).x
-                    val center2dY = (line.end as IPoint3D).z
-                    val R = line2.length / 4
-
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
-                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
-                    result = result.stream()
-                        .filter {
-                            return@filter box.contains(it)
-                        }
-                        .toList()
-
-                    otherPoints.addAll(result)
-
-                    "center x: $center2dX, center y: ${(line.end as IPoint3D).y}, center z: $center2dY, r: $R".logDebug()
-                }
-                run {
-                    val line = lines[20]
-                    val line2 = lines[17]
-
-                    val center2dX = (line.start as IPoint3D).x
-                    val center2dY = (line.start as IPoint3D).z
-                    val R = line2.length / 4
-
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
-                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
-                    result = result.stream()
-                        .filter {
-                            return@filter box.contains(it)
-                        }
-                        .toList()
-
-                    otherPoints.addAll(result)
-
-                    "center x: $center2dX, center y: ${(line.start as IPoint3D).y}, center z: $center2dY, r: $R".logDebug()
-                }
-                run {
-                    val line = lines[20]
-                    val line2 = lines[17]
-
-                    val center2dX = (line.end as IPoint3D).x
-                    val center2dY = (line.end as IPoint3D).z
-                    val R = line2.length / 4
-
-                    val circle2d = ICircle2D.new(center2dX, center2dY, R)
-                    var result = circle2d.divide(1.mathNumber(), y = oneThirdY)
-                    result = result.stream()
-                        .filter {
-                            return@filter box.contains(it)
-                        }
-                        .toList()
-
-                    otherPoints.addAll(result)
-
-                    "center x: $center2dX, center y: ${(line.end as IPoint3D).y}, center z: $center2dY, r: $R".logDebug()
-                }
-            }
-
-            run {
-                "Calculating the 1 / 3 central circle of the selection".logDebug()
-
-                val blockPoint3d1 = IPoint3D.new(
-                    blockCoordinate1.x,
-                    blockCoordinate1.y,
-                    blockCoordinate1.z
-                )
-                val blockPoint3d2 = IPoint3D.new(
-                    blockCoordinate2.x,
-                    blockCoordinate2.y,
-                    blockCoordinate2.z
-                )
-                val line1 = lines[20]
-                val line2 = lines[21]
-
-                val center = IBoxes.instance().geometricCenter(blockPoint3d1, blockPoint3d2)
-                val center2d = IPoint2D.new(center.x, center.z)
-
-                val R1 = (line1.length / 2) - (lines[17].length / 4)
-                val R2 = (line2.length / 2) - (lines[16].length / 4)
-                val R = if (R1 >= R2) {
-                    R2.abs()
-                } else {
-                    R1.abs()
-                }
-
-                val circle = ICircle2D.new(center2d, R)
-                val result = circle.divide(1.mathNumber(), y = oneThirdY)
-
-                otherPoints.addAll(result)
-
-                "center x: ${center.x}, center y: ${center.y}, center z: ${center.z}, r: $R".logDebug()
-            }
-
-            val twoThirdsY = (biggerY - ( 2 * (blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
-
-            run {
-                "Calculating the 2 / 3 y cross of the selection".logDebug()
-
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = twoThirdsY.toDouble()
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = twoThirdsY.toDouble()
-                    coordinate2.z = blockCoordinate1.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1)( 2 / 3 y ) -> (x2, y, z)( 2 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = twoThirdsY.toDouble()
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate1.x
-                    coordinate2.y = twoThirdsY.toDouble()
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1)( 2 / 3 y ) -> (x, y, z2)( 2 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[22].end as IPoint3D
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = twoThirdsY.toDouble()
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
-                    add(line)
-
-                    "(x2, y, z)( 2 / 3 y ) -> (x2, y, z2)( 2 / 3 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[23].end as IPoint3D
-                    val coordinate2 = lines[24].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z2)( 2 / 3 y ) -> (x2, y, z2)( 2 / 3 y ) is $line".logDebug()
-                }
-            }
-
-            val oneFirstY = (biggerY - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 2)).mathNumber()
-
-            run {
-                "Calculating the 1 / 2 y cross of the selection".logDebug()
-
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = oneFirstY.toDouble()
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = oneFirstY.toDouble()
-                    coordinate2.z = blockCoordinate1.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1)( 1 / 2 y ) -> (x2, y, z)( 1 / 2 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = Coordinate()
-                    coordinate1.x = blockCoordinate1.x
-                    coordinate1.y = oneFirstY.toDouble()
-                    coordinate1.z = blockCoordinate1.z
-
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate1.x
-                    coordinate2.y = oneFirstY.toDouble()
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1)( 1 / 2 y ) -> (x, y, z2)( 1 / 2 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[26].end as IPoint3D
-                    val coordinate2 = Coordinate()
-                    coordinate2.x = blockCoordinate2.x
-                    coordinate2.y = oneFirstY.toDouble()
-                    coordinate2.z = blockCoordinate2.z
-
-                    val line = ILine3D.new(coordinate1.coordinate(), coordinate2)
-                    add(line)
-
-                    "(x2, y, z)( 1 / 2 y ) -> (x2, y, z2)( 1 / 2 y ) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[27].end as IPoint3D
-                    val coordinate2 = lines[28].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z2)( 1 / 2 y ) -> (x2, y, z2)( 1 / 2 y ) is $line".logDebug()
-                }
-            }
-
-            run {
-                "Calculating the top cross of the selection".logDebug()
-
-                run {
-                    val coordinate2 = (lines[2].end as IPoint3D).coordinate()
-
-                    val line = ILine3D.new(blockCoordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z)(pos1) -> (x2, y, z2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[1].end as IPoint3D
-                    val coordinate2 = lines[0].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y, z2) -> (x2, y, z) is $line".logDebug()
-                }
-            }
-
-            run {
-                "Calculating the bottom cross of the selection".logDebug()
-
-                run {
-                    val coordinate1 = (lines[8].end as IPoint3D).coordinate()
-
-                    val line = ILine3D.new(coordinate1, blockCoordinate2)
-                    add(line)
-
-                    "(x, y2, z) -> (x2, y2, z2)(pos2) is $line".logDebug()
-                }
-                run {
-                    val coordinate1 = lines[5].end as IPoint3D
-                    val coordinate2 = lines[4].end as IPoint3D
-
-                    val line = ILine3D.new(coordinate1, coordinate2)
-                    add(line)
-
-                    "(x, y2, z2) -> (x2, y2, z) is $line".logDebug()
-                }
-            }
+        // 三分之一处中心圆的半径
+        val centralCircleR1 = (crossLine1.length / 2) - semiCircleR1
+        val centralCircleR2 = (crossLine2.length / 2) - semiCircleR2
+        val centralCircleR = if (centralCircleR1 >= centralCircleR2) {
+            centralCircleR2.abs()
+        } else {
+            centralCircleR1.abs()
+        }
+        // 三分之一处中心圆
+        val centralCircle = ICircle2D.new(rectangle.center, centralCircleR)
+
+        // 将三分之一处中心圆添加到矩形中
+        rectangle.addShape(centralCircle)
+
+        // 将矩形添加到 Outline Box 中
+        outlineBox.addShape(rectangle, 0.5.mathNumber(), oneThirdY)
+
+        // 添加到选区内
+        outlineBox.divide3d(0.5.mathNumber()).forEach {
+            otherPoints.add(it)
         }
 
         initialized = true
