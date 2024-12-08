@@ -115,6 +115,18 @@ class OutlineBox private constructor(
         addShape(line3d)
     }
 
+    override fun addPoint(point3d: IPoint3D) {
+        if (!contains(point3d)) {
+            throw IllegalArgumentException("the point is not in the box")
+        }
+        otherPoints.add(point3d)
+    }
+
+    override fun addPoint(point2d: IPoint2D, y: IMathNumber) {
+        val point3d = IPoint3D.new(point2d.x, y, point2d.y)
+        addPoint(point3d)
+    }
+
     override fun toString(): String {
         return "$pos1 -> $pos2 (OutlineBox)"
     }

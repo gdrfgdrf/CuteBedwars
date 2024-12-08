@@ -107,6 +107,9 @@ interface IOutlineBox : IShape3D {
     fun addShape(shape2d: IShape2D, step: IMathNumber, y: IMathNumber)
     fun addLine(start: IPoint3D, end: IPoint3D)
 
+    fun addPoint(point3d: IPoint3D)
+    fun addPoint(point2d: IPoint2D, y: IMathNumber)
+
     companion object {
         fun new(pos1: IPoint3D, pos2: IPoint3D): IOutlineBox =
             Mediator.get(IOutlineBox::class.java, ArgumentSet(arrayOf(pos1, pos2)))!!
