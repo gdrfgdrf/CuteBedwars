@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
@@ -11,6 +12,8 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 interface IPoint2D : IPoint {
     val x: IMathNumber
     val y: IMathNumber
+
+    fun three(y: IMathNumber): IPoint3D
 
     companion object {
         fun new(x: IMathNumber, y: IMathNumber): IPoint2D =

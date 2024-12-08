@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.math.geometry.two
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
@@ -23,6 +24,10 @@ class Point2D private constructor(
         if (x.toDouble().isNaN() || y.toDouble().isNaN()) {
             throw IllegalArgumentException("x or y is NaN")
         }
+    }
+
+    override fun three(y: IMathNumber): IPoint3D {
+        return IPoint3D.new(x, y, this.y)
     }
 
     override fun toString(): String {
