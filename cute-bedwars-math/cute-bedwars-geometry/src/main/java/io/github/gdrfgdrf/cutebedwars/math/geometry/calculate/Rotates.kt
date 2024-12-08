@@ -43,51 +43,36 @@ object Rotates : IRotates {
 
     override fun rotatePoint3d(
         P: IPoint3D,
-        n: IVector3i,
+        axis: IVector3i,
         a: IMathNumber
     ): IPoint3D {
-        val theta = a.radians()
+        val normalizedAxis = axis.normalize()
+        val cosTheta = a.radians().cos()
+        val sinTheta = a.radians().sin()
+        val K = 1 - cosTheta
+
+        val x = normalizedAxis.x
+        val y = normalizedAxis.y
+        val z = normalizedAxis.z
 
         val px = P.x
         val py = P.y
         val pz = P.z
 
-        val nx = n.x
-        val ny = n.y
-        val nz = n.z
+        val xx = x * y
+        val yy = y * y
+        val zz = z * z
+        val xy = x * y
+        val xz = x * z
+        val yz = y * z
+        val xSinTheta = x * sinTheta
+        val ySinTheta = y * sinTheta
+        val zSinTheta = z * sinTheta
 
-        val t0 = nx * px + ny * py + nz * pz
+        val resultX = x * (x * px + y * py + z * pz) * K + px * cosTheta + (y * zSinTheta - z * ySinTheta) * py + (z * xSinTheta - x * zSinTheta) * pz
+        val resultY = (x * xy + y * (y * py + z * pz) * K) + py * cosTheta + (z * xSinTheta + x * ySinTheta) * px + (x * zSinTheta - z * xSinTheta) * pz
+        val resultZ = (x * xz + z * (x * px + y * py) * K) + pz * cosTheta + (y * xSinTheta + x * zSinTheta) * px + (y * ySinTheta + y * xSinTheta) * py
 
-        val xc = nx * t0
-        val yc = ny * t0
-        val zc = nz * t0
-
-        val r = ((px - xc) * (px - xc) + ((py - yc) * (py - yc)) + ((pz - zc) * (pz - zc))).sqrt()
-
-        val opX = (px - xc) / r
-        val opY = (py - yc) / r
-        val opZ = (pz - zc) / r
-
-        val yPrimeX = nx * opY - ny * opZ
-        val yPrimeY = ny * opZ - nz * opX
-
-        val cosTheta = theta.cos()
-        val sinTheta = theta.sin()
-
-        val R11 = nx * nx + (ny * ny + nz * nz) * cosTheta
-        val R12 = nx * ny * (1 - cosTheta) - nz * sinTheta
-        val R13 = nx * nz * (1 - cosTheta) + ny * sinTheta
-        val R21 = ny * nx * (1 - cosTheta) + nz * sinTheta
-        val R22 = ny * ny + (nx * nx + nz * nz) * cosTheta
-        val R23 = ny * nz * (1 - cosTheta) - nx * sinTheta
-        val R31 = nz * nx * (1 - cosTheta) - ny * sinTheta
-        val R32 = nz * ny * (1 - cosTheta) + nx * sinTheta
-        val R33 = nz * nz + (nx * nx + ny * ny) * cosTheta
-
-        val pxPrime = R11 * opX + R12 * yPrimeX + R13 * yPrimeY + xc
-        val pyPrime = R21 * opX + R22 * yPrimeX + R23 * yPrimeY + yc
-        val pzPrime = R31 * opX + R32 * yPrimeX + R33 * yPrimeY + zc
-
-        return IPoint3D.new(pxPrime, pyPrime, pzPrime)
+        return IPoint3D.new(resultX, resultY, resultZ)
     }
 }

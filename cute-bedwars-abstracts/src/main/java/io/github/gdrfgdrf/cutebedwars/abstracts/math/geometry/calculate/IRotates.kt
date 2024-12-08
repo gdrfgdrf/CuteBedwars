@@ -48,7 +48,6 @@ interface IRotates {
      * 基于 https://blog.csdn.net/maple_2014/article/details/104443928，
      * 将某点绕某个轴旋转指定角度
      *
-     * Q 的取值为 0, 0, 0
      * P: 原始点,
      * n: 旋转轴的单位方向向量
      * a: 旋转角度 (角度制，运行时转为弧度制)
