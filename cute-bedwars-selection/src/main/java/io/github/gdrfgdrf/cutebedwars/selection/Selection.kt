@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IRectangles
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IRectangle
 import io.github.gdrfgdrf.cutebedwars.abstracts.particles.IParticleGroup
@@ -123,6 +124,14 @@ class Selection(
         // 底部交叉
         outlineBox.addLine(outlineBox.B_, outlineBox.C)
         outlineBox.addLine(outlineBox.C_, outlineBox.B)
+
+        // 中心线
+        val centerLineStart = IRectangles.instance().geometricCenter(outlineBox.B_.two(), outlineBox.C.two())
+        val centerLineEnd = IRectangles.instance().geometricCenter(outlineBox.D_.two(), outlineBox.A.two())
+        outlineBox.addLine(
+            centerLineStart.three(blockCoordinate1.y.mathNumber()),
+            centerLineEnd.three(blockCoordinate2.y.mathNumber())
+        )
 
         // 三分之一
         val oneThirdY = (blockCoordinate1.y - ((blockCoordinate1.y - blockCoordinate2.y).absoluteValue / 3)).mathNumber()
