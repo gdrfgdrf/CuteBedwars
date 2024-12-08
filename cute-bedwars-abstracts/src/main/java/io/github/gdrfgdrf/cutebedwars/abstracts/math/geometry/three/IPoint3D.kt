@@ -3,6 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -14,6 +15,7 @@ interface IPoint3D : IPoint {
     val y: IMathNumber
     val z: IMathNumber
 
+    fun two(): IPoint2D
     fun vector3i(other: IPoint3D): IVector3i
     fun coordinate(): Coordinate
 

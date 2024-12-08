@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IVector3i
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.math.common.Vector3i
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -28,6 +29,10 @@ class Point3D(
         if (x.toDouble().isNaN() || y.toDouble().isNaN() || z.toDouble().isNaN()) {
             throw IllegalArgumentException("x or y or z is NaN")
         }
+    }
+
+    override fun two(): IPoint2D {
+        return IPoint2D.new(x, z)
     }
 
     override fun vector3i(other: IPoint3D): IVector3i {
