@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IRotates
 import io.github.gdrfgdrf.cutebedwars.math.geometry.calculate.Circles
 import io.github.gdrfgdrf.cutebedwars.math.common.MathNumber
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -66,6 +67,18 @@ class Circle2D(
         }
 
         return result
+    }
+
+    override fun divideRotate(step: IMathNumber, a: IMathNumber): List<IPoint2D> {
+        if (!half) {
+            return divide2d(step)
+        }
+
+        return divide2d(step).stream()
+            .map {
+                IRotates.instance().rotatePoint2d(center, it, a)
+            }
+            .toList()
     }
 
     override fun divide(step: IMathNumber, y: IMathNumber, offset: IMathNumber): List<IPoint3D> {

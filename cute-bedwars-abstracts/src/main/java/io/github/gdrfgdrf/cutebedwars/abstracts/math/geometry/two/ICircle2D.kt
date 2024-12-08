@@ -22,6 +22,11 @@ interface ICircle2D : IShape2D {
     fun divide(step: IMathNumber, offset: IMathNumber = 0.mathNumber()): List<IPoint2D>
 
     /**
+     * 按照一定的角度进行步进获取圆上的二维点，并将二维点按照一定的角度进行旋转，通常用在半圆的旋转中
+     */
+    fun divideRotate(step: IMathNumber, a: IMathNumber): List<IPoint2D>
+
+    /**
      * 按照一定的角度进行步进获取圆上的点，返回的点集的 y 轴将始终为给定的参数 y，若要进行旋转则需要 offset，方向为顺时针
      */
     fun divide(step: IMathNumber, y: IMathNumber, offset: IMathNumber = 0.mathNumber()): List<IPoint3D>
