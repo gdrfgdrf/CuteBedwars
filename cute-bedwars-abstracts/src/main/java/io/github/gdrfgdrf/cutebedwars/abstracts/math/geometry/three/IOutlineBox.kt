@@ -64,7 +64,7 @@ interface IOutlineBox : IShape3D {
         )
 
     val a: ILine3D
-        get() = ILine3D.new(A_, B_)
+        get() = ILine3D.new(A_, D_)
     val b: ILine3D
         get() = ILine3D.new(D_, C_)
     val c: ILine3D
