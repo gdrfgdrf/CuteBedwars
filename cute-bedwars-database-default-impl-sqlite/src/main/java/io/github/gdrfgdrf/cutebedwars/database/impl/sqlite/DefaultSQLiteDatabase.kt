@@ -100,7 +100,7 @@ class DefaultSQLiteDatabase : IDatabase {
                 if (serviceClass.isAssignableFrom(implClass)) {
                     serviceClassToImplClass[serviceClass as Class<out IService>] = implClass
 
-                    "Service mapping: $serviceClass -> $implClass".logInfo()
+                    "Service mapping: $serviceClass -> $implClass".logDebug()
 
                     return@search true
                 }
