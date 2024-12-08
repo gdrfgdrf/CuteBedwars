@@ -1,6 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.IMathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IBoxes
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape2D
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.multimodulemediator.Mediator
 import io.github.gdrfgdrf.multimodulemediator.annotation.Service
@@ -91,6 +94,7 @@ interface IOutlineBox : IShape3D {
         get() = IBoxes.instance().geometricCenter(pos1, pos2)
 
     val otherShapes: List<IShape3D>
+    val otherPoints: List<IPoint3D>
 
     /**
      * 某点是否在该 Box 中
@@ -100,6 +104,7 @@ interface IOutlineBox : IShape3D {
      * 将某个 3D 形状添加在该 Box 中，该形状必须整个位于该 Box 中
      */
     fun addShape(shape3d: IShape3D)
+    fun addShape(shape2d: IShape2D, step: IMathNumber, y: IMathNumber)
     fun addLine(start: IPoint3D, end: IPoint3D)
 
     companion object {

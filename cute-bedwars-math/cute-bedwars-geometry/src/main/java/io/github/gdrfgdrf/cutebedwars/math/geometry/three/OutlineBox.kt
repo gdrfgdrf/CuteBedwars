@@ -7,6 +7,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IShape3D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IShape2D
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 
@@ -22,6 +24,7 @@ class OutlineBox private constructor(
     }
 
     override val otherShapes: MutableList<IShape3D> = arrayListOf()
+    override val otherPoints: MutableList<IPoint3D> = arrayListOf()
 
     override fun divide3d(step: IMathNumber): List<IPoint3D> {
         val result = arrayListOf<IPoint3D>().apply {
@@ -47,6 +50,7 @@ class OutlineBox private constructor(
                     it.stream()
                 }.toList()
             addAll(otherPoints)
+            addAll(this@OutlineBox.otherPoints)
         }
         return result
     }
@@ -92,6 +96,18 @@ class OutlineBox private constructor(
             }
         }
         otherShapes.add(shape3d)
+    }
+
+    override fun addShape(shape2d: IShape2D, step: IMathNumber, y: IMathNumber) {
+        shape2d.points2d.forEach {
+            val point3d = IPoint3D.new(it.x, y, it.y)
+            if (!contains(point3d)) {
+                throw IllegalArgumentException("one of the shape's points is not in the box")
+            }
+        }
+        shape2d.divide3d(step, y).forEach {
+            otherPoints.add(it)
+        }
     }
 
     override fun addLine(start: IPoint3D, end: IPoint3D) {
