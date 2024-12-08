@@ -34,7 +34,7 @@ interface IVector3i {
 
     companion object {
         fun new(x: IMathNumber, y: IMathNumber, z: IMathNumber): IVector3i = Mediator.get(
-            IMathNumber::class.java, ArgumentSet(
+            IVector3i::class.java, ArgumentSet(
                 arrayOf(x, y, z)
             )
         )!!
