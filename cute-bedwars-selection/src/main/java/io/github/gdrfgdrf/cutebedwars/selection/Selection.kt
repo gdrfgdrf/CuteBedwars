@@ -1,11 +1,9 @@
 package io.github.gdrfgdrf.cutebedwars.selection
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.base.IPoint
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IPoint2D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IPoint3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ICircle2D
-import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.ILine3D
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.common.mathNumber
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.calculate.IRectangles
 import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.ILine2D
@@ -32,8 +30,7 @@ class Selection(
         argumentSet.args[1] as Coordinate
     )
 
-    private val lines = arrayListOf<ILine3D>()
-    private val otherPoints = arrayListOf<IPoint3D>()
+    private val points = arrayListOf<IPoint3D>()
     private var cachedParticleGroup: IParticleGroup? = null
 
     private var initialized = false
@@ -61,17 +58,7 @@ class Selection(
         val managedParticle = IParticles.instance().getOrCreate(particle)
         val particleGroup = managedParticle.create("selection-particle")
 
-        lines.forEach { line3d ->
-            line3d.divide(0.5.mathNumber()).forEach { point: IPoint ->
-                val point3d = point as IPoint3D
-
-                val x = point3d.x
-                val y = point3d.y
-                val z = point3d.z
-                particleGroup.add(x.toDouble(), y.toDouble(), z.toDouble())
-            }
-        }
-        otherPoints.forEach { point3d ->
+        points.forEach { point3d ->
             val x = point3d.x
             val y = point3d.y
             val z = point3d.z
@@ -84,8 +71,7 @@ class Selection(
 
     override fun destroy() {
         destroyed = true
-        lines.clear()
-        otherPoints.clear()
+        points.clear()
         cachedParticleGroup?.clear()
     }
 
@@ -202,7 +188,7 @@ class Selection(
 
         // 添加到选区内
         outlineBox.divide3d(0.5.mathNumber()).forEach {
-            otherPoints.add(it)
+            points.add(it)
         }
 
         initialized = true
