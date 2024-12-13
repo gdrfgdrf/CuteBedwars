@@ -10,7 +10,10 @@ import kotlin.streams.toList
 class TranslationTextAgent(
     override var cuteText: ICuteText
 ) : ITranslationTextAgent {
-    override val enablePart: Boolean = cuteText.enablePart
+    override val enablePart: Boolean
+        get() {
+            return cuteText.enablePart
+        }
     override val string: String = cuteText.string
 
     private fun clickAction(action: ClickEvent.Action, value: String): ITranslationTextAgent {
