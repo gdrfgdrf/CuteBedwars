@@ -23,6 +23,13 @@ class ChatPage(
         if (pages.isEmpty()) {
             initPages()
         }
+        if (pages.isEmpty()) {
+            localizationScope(pageRequest.getSender()) {
+                message(CommonLanguage.PAGE_LIST_EMPTY)
+                    .send()
+            }
+            return
+        }
 
         if (index >= pages.size) {
             localizationScope(pageRequest.getSender()) {

@@ -36,6 +36,7 @@ public class CommonLanguage implements IILanguageCollect {
     public static ILanguageString PAGE_TOP;
     public static ILanguageString PAGE_BOTTOM;
     public static ILanguageString PAGE_INDEX_OUT_OF_BOUNDS;
+    public static ILanguageString PAGE_LIST_EMPTY;
 
     public static ILanguageString STATUS_UNKNOWN;
     public static ILanguageString STATUS_DISABLED;
