@@ -13,6 +13,12 @@ interface ISphere : IShape3D {
     val center: IPoint3D
     val R: IMathNumber
 
+    override fun divide3d(step: IMathNumber): List<IPoint3D> {
+        return divide3d()
+    }
+
+    fun divide3d(): List<IPoint3D>
+
     companion object {
         fun new(center: IPoint3D, R: IMathNumber): ISphere =
             Mediator.get(ISphere::class.java, ArgumentSet(arrayOf(center, R)))!!

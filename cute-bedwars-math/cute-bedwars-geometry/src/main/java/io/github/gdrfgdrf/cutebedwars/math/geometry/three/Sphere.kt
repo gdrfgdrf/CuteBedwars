@@ -20,10 +20,7 @@ class Sphere(
         argumentSet.args[1] as IMathNumber
     )
 
-    /**
-     * 该方法中的 step 不发挥作用
-     */
-    override fun divide3d(step: IMathNumber): List<IPoint3D> {
+    override fun divide3d(): List<IPoint3D> {
         val result = arrayListOf<IPoint3D>()
         val deltaTheta = ((16 * Math.PI / 3) / R.pow(2)).sqrt()
         val deltaPhi = deltaTheta
