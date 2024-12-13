@@ -36,7 +36,7 @@ class CommonLanguage implements IILanguageBlock {
     public static final ILanguageString PAGE_TOP = ILanguageString.Companion.create("&6&l--------------------- &b&l%d &l&7/ &b&l%d &6&l---------------------");
     public static final ILanguageString PAGE_BOTTOM = ILanguageString.Companion.create("&6&l--------------------- &b&l%d &l&7/ &b&l%d &6&l---------------------");
     public static final ILanguageString PAGE_INDEX_OUT_OF_BOUNDS = ILanguageString.Companion.create("&c只有 &e&l%s &r&c页");
-    public static final ILanguageString PAGE_INDEX_EMPTY = ILanguageString.Companion.create("&c列表为空");
+    public static final ILanguageString PAGE_LIST_EMPTY = ILanguageString.Companion.create("&c列表为空");
 
     public static final ILanguageString STATUS_UNKNOWN = ILanguageString.Companion.create("&f未知");
     public static final ILanguageString STATUS_DISABLED = ILanguageString.Companion.create("&c已禁用");
