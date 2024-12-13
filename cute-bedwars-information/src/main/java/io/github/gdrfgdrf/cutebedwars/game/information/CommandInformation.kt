@@ -13,14 +13,14 @@ import org.bukkit.command.CommandSender
 object CommandInformation : ICommandInformation {
     override fun convert(sender: CommandSender, command: ICommands): List<ITranslationAgent> =
         localizationScope(sender) {
-            val subCommand = ISubCommandManager.instance().get(command)
+            val subCommand = ISubCommandManager.instance().get(command) ?: return@localizationScope arrayListOf()
 
             val messages = arrayListOf<ITranslationAgent>().apply {
                 add(
                     message(CommonLanguage.COMMAND_RAW_IS)
                         .format0(command.getRaw())
                 )
-                subCommand?.description?.let { description ->
+                subCommand.description?.let { description ->
                     add(
                         message(CommonLanguage.COMMAND_DESCRIPTION_IS)
                             .format0(
@@ -50,6 +50,7 @@ object CommandInformation : ICommandInformation {
                 } else {
                     command.paramSchemes!!.forEach { paramScheme ->
                         val content = paramScheme.content(true)
+                        val noPartDividerContent = paramScheme.content()
                         add(
                             message(CommonLanguage.PARAM_SCHEME_FORMAT)
                                 .format0(content)
@@ -76,6 +77,12 @@ object CommandInformation : ICommandInformation {
                                                 runCommandInPart(i, "/cbw query description args ${description.name.lowercase()}")
                                             } else {
                                                 runCommand("/cbw query description args ${description.name.lowercase()}")
+                                            }
+
+                                            if (enablePart) {
+                                                suggestCommandInPart(i, "${subCommand.command.getRaw()} $noPartDividerContent")
+                                            } else {
+                                                suggestCommand("${subCommand.command.getRaw()} $noPartDividerContent")
                                             }
                                         }
                                     }
