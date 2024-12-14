@@ -39,6 +39,7 @@
         <module>cute-bedwars-particles</module>
         <module>cute-bedwars-frequency-tasks</module>
         <module>cute-bedwars-database-default-impl-mysql</module>
+        <module>cute-bedwars-mixins</module>
     </modules>
 
     <repositories>
@@ -51,6 +52,11 @@
             <id>codemc-repo</id>
             <url>https://repo.codemc.io/repository/maven-public/</url>
             <layout>default</layout>
+        </repository>
+
+        <repository>
+            <id>fabricmc</id>
+            <url>https://maven.fabricmc.net/</url>
         </repository>
     </repositories>
 
@@ -235,10 +241,34 @@
                 <artifactId>database-default-impl-mysql</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
+                <artifactId>mixins</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>space.vectrix.ignite</groupId>
+            <artifactId>ignite-api</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.fabricmc</groupId>
+            <artifactId>sponge-mixin</artifactId>
+            <version>0.15.2+mixin.0.8.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.llamalad7</groupId>
+            <artifactId>mixinextras-common</artifactId>
+            <version>0.4.1</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.fierioziy.particlenativeapi</groupId>
             <artifactId>ParticleNativeAPI-core</artifactId>

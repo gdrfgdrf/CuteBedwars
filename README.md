@@ -107,6 +107,7 @@ CuteBedwars
 | cute-bedwars-geometry                    | 几何模块，位于数学模块下                                         |
 | cute-bedwars-enums                       | 所有枚举类                                                |
 | cute-bedwars-utils                       | 工具模块                                                 |
+| cute-bedwars-mixins                      | mixin 模块，包括了所有 mixin 类                               |
 | cute-bedwars-abstracts                   | 解耦模块，对上面所有的模块进行解耦，包含大量的接口，并且使用中介进行通讯                 |
 | cute-bedwars-packer                      | 打包模块，将上面所有的模块打包为一个 Jar 包                             |
 
