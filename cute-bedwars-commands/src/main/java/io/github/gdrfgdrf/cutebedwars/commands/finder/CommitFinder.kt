@@ -9,7 +9,7 @@ object CommitFinder {
     fun linkFind(editor: AbstractEditor<*>, commitId: String): MutableList<Commit>? {
         if (editor is AbstractAreaEditor) {
             val commitStorage = editor.t.manager.commitStorage ?: return null
-            val commitsList = commitStorage.get()?.commitsList ?: return null
+            val commitsList = commitStorage.commits()?.commitsList ?: return null
 
             val targetCommit = commitsList.stream()
                 .filter {
@@ -33,7 +33,7 @@ object CommitFinder {
         if (editor is AbstractGameEditor) {
             val gameContext = editor.t
 
-            val commitsList = gameContext.commitStorage.get()?.commitsList ?: return null
+            val commitsList = gameContext.commitStorage.commits()?.commitsList ?: return null
             val targetCommit = commitsList.stream()
                 .filter {
                     it.id == commitId
@@ -58,7 +58,7 @@ object CommitFinder {
 
     fun find(editor: AbstractEditor<*>, commitId: String): Commit? {
         if (editor is AbstractAreaEditor) {
-            return editor.t.manager.commitStorage?.get()?.commitsList?.stream()
+            return editor.t.manager.commitStorage?.commits()?.commitsList?.stream()
                 ?.filter {
                     it.id == commitId
                 }
@@ -69,7 +69,7 @@ object CommitFinder {
             val gameContext = editor.t
 
             val commitsList =
-                gameContext.commitStorage.get()?.commitsList
+                gameContext.commitStorage.commits()?.commitsList
             return commitsList?.stream()
                 ?.filter {
                     it.id == commitId

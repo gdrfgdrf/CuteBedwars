@@ -33,7 +33,7 @@ object EditListGameCommits : AbstractSubCommand(
             val areaManager = BetterAreaFinder.find(sender, areaFindType!!, areaIdentifier) ?: return@localizationScope
             val gameContext = BetterGameFinder.find(sender, gameFindType!!, areaManager, gameIdentifier) ?: return@localizationScope
 
-            val protobufCommits = gameContext.commitStorage.get()
+            val protobufCommits = gameContext.commitStorage.commits()
             if (protobufCommits == null) {
                 message(AreaManagementLanguage.GAME_COMMITS_IS_NULL)
                     .send()

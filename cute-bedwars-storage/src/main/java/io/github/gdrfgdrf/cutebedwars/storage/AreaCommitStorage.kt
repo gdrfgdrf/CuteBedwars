@@ -18,7 +18,7 @@ class AreaCommitStorage(folder: String) : AbstractAreaCommitStorage() {
     private val areaCommitFile = File(folder, "area")
     private val areaProtobuf = protobufStorage.protobuf(areaCommitFile, Commits.parser(), Commits.newBuilder())
 
-    override fun get(): Commits? = areaProtobuf.message
+    override fun commits(): Commits? = areaProtobuf.message
 
     override fun save(commit: ICommit<*>, finished: () -> Unit) {
         val commitProtobuf = Convertors.protobufCommit(commit)

@@ -28,7 +28,7 @@ object EditListAreaCommits : AbstractSubCommand(
             val pageIndex = paramCombination.pageIndex()
 
             val areaManager = BetterAreaFinder.find(sender, findType!!, areaIdentifier) ?: return@localizationScope
-            val protobufCommits = areaManager.commitStorage?.get()
+            val protobufCommits = areaManager.commitStorage?.commits()
             if (protobufCommits == null) {
                 message(AreaManagementLanguage.AREA_COMMITS_IS_NULL)
                     .send()

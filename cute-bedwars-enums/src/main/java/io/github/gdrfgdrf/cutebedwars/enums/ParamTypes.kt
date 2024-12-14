@@ -279,7 +279,7 @@ enum class ParamTypes : IParamTypes {
             if (editor != null) {
                 if (editor is AbstractAreaEditor) {
                     val commitStorage = (editor as AbstractAreaEditor).t.manager.commitStorage ?: return arrayListOf()
-                    val commits = commitStorage.get()
+                    val commits = commitStorage.commits()
                     commits?.commitsList?.forEach {
                         ids.add(it.id)
                     }
@@ -288,7 +288,7 @@ enum class ParamTypes : IParamTypes {
                     val gameContext = (editor as AbstractGameEditor).t
 
                     val commitStorage = gameContext.commitStorage
-                    val gameCommits = commitStorage.get()
+                    val gameCommits = commitStorage.commits()
 
                     gameCommits?.commitsList?.forEach {
                         ids.add(it.id)
