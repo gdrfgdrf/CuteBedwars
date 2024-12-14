@@ -137,7 +137,7 @@ enum class Items(override val item: IItem) : IItems {
 private fun setPostProcessor(itemProperties: IItemProperties, enum: Items) {
     itemProperties.postProcessor = { itemStack ->
         NBT.modify(itemStack) { nbt ->
-            nbt.setEnum("cute-bedwars-item-enum", enum)
+            nbt.setString("cute-bedwars-item-enum", enum.name)
         }
     }
 }
