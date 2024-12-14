@@ -132,8 +132,8 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
 
         val game = t.game
         val region = Region()
-        previousValuePos1 = region.pos1.parsableString()
-        previousValuePos2 = region.pos2.parsableString()
+        previousValuePos1 = region.pos1?.parsableString()
+        previousValuePos2 = region.pos2?.parsableString()
 
         if (pos1 == null && pos2 == null) {
             region.pos1 = null
