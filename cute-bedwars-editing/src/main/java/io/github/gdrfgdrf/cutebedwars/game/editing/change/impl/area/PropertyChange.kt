@@ -18,7 +18,7 @@ class PropertyChange(
     private val value: Any?,
 ) : AbstractChange<IAreaContext>() {
     constructor(changeData: ChangeData) : this(changeData[0], changeData[1]) {
-        if (changeData.length() > 2) {
+        if (changeData.length() == 3) {
             previousValue = changeData[2]
         }
     }
