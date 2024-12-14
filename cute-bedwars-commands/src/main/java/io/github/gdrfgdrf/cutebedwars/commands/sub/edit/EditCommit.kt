@@ -52,6 +52,8 @@ object EditCommit : AbstractSubCommand(
 
             val result = editor.tryAdd(commit)
             if (!result) {
+                changes.unFinish()
+
                 message(EditorLanguage.COMMIT_ERROR)
                     .send()
                 return@localizationScope
@@ -62,6 +64,8 @@ object EditCommit : AbstractSubCommand(
 
             val applyResult = commit.tryApply(editor.t!!)
             if (!applyResult) {
+                changes.unFinish()
+
                 message(EditorLanguage.APPLY_ERROR)
                     .send()
                 return@localizationScope
