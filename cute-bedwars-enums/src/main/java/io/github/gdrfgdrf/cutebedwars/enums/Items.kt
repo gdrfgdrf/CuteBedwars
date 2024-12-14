@@ -1,9 +1,11 @@
 package io.github.gdrfgdrf.cutebedwars.enums
 
+import de.tr7zw.changeme.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IItems
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelect
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
@@ -124,8 +126,18 @@ enum class Items(override val item: IItem) : IItems {
                   }
               }
           }
+
+          setPostProcessor(this, SELECTION_TOOL)
       }.build(true)
     ),
 
     ;
+}
+
+private fun setPostProcessor(itemProperties: IItemProperties, enum: Items) {
+    itemProperties.postProcessor = { itemStack ->
+        NBT.modify(itemStack) { nbt ->
+            nbt.setEnum("cute-bedwars-item-enum", enum)
+        }
+    }
 }
