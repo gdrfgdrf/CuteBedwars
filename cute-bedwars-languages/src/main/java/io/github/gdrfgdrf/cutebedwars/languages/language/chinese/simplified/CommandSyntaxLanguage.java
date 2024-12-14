@@ -30,6 +30,7 @@ class CommandSyntaxLanguage implements IILanguageBlock {
     public static final ILanguageString EDIT_EXIT = string("EDIT_EXIT");
 
     public static final ILanguageString EDIT_LIST_AREA_COMMITS = string("EDIT_LIST_AREA_COMMITS");
+    public static final ILanguageString EDIT_LIST_GAME_COMMITS = string("EDIT_LIST_GAME_COMMITS");
 
     private static ILanguageString string(String name) {
         return ILanguageString.Companion.create(ICommands.Companion.valueOf(name).getShort());

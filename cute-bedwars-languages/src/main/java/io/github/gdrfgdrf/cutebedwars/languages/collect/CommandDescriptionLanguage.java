@@ -29,4 +29,5 @@ public class CommandDescriptionLanguage implements IILanguageCollect {
     public static ILanguageString EDIT_EXIT;
 
     public static ILanguageString EDIT_LIST_AREA_COMMITS;
+    public static ILanguageString EDIT_LIST_GAME_COMMITS;
 }

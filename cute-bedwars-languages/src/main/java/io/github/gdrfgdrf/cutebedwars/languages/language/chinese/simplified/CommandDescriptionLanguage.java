@@ -29,4 +29,5 @@ class CommandDescriptionLanguage implements IILanguageBlock {
     public static final ILanguageString EDIT_EXIT = ILanguageString.Companion.create("退出编辑模式");
 
     public static final ILanguageString EDIT_LIST_AREA_COMMITS = ILanguageString.Companion.create("查看区域的提交");
+    public static final ILanguageString EDIT_LIST_GAME_COMMITS = ILanguageString.Companion.create("查看游戏的提交");
 }

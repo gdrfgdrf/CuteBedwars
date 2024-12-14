@@ -37,8 +37,13 @@ object EditMake : AbstractSubCommand(
                 return@localizationScope
             }
             val change: AbstractChange<*> = changeClassHolder.create(*(newArgs as Array<out Any>))
+            message(EditorLanguage.PRELOADING_CHANGE)
+                .send()
+
             runCatching {
                 if (!change.preload(sender)) {
+                    message(EditorLanguage.PRELOAD_CHANGE_SUCCESS)
+                        .send()
                     return@localizationScope
                 }
             }.onFailure {
