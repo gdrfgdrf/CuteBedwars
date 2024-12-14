@@ -2,7 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.generator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.level.GeneratorGroupLevel;
 import lombok.Data;
 
@@ -19,8 +18,6 @@ public class GeneratorGroup {
     private int displayOrder;
     @JsonProperty(value = "display-name")
     private String displayName;
-    @UndefinableForPropertyChange
     private List<Generator> generators = new ArrayList<>();
-    @UndefinableForPropertyChange
     private List<GeneratorGroupLevel> levels = new ArrayList<>();
 }

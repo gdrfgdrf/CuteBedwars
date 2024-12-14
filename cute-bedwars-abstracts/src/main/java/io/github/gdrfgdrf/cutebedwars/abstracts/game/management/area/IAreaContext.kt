@@ -20,8 +20,6 @@ interface IAreaContext {
     fun getGame(id: Long): IGameContext?
     fun getGame(name: String): List<IGameContext>
 
-    fun validate(sender: CommandSender? = null)
-
     companion object {
         fun new(manager: IAreaManager): IAreaContext =
             Mediator.get(IAreaContext::class.java, ArgumentSet(arrayOf(manager)))!!

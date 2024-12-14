@@ -2,8 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status;
@@ -20,37 +18,28 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Game {
-    @UndefinableForPropertyChange
     private Long id;
-    @UndefinableForPropertyChange
     @JsonProperty(value = "area-id")
     private Long areaId;
 
     private String name;
     private Status status = Status.DISABLED;
 
-    @PositiveNumber
     @JsonProperty(value = "min-player")
     private int minPlayer;
-    @PositiveNumber
     @JsonProperty(value = "max-player")
     private int maxPlayer;
 
-    @UndefinableForPropertyChange
     private Region region;
 
     @JsonProperty(value = "waiting-room")
-    @UndefinableForPropertyChange
     private WaitingRoom waitingRoom;
 
     @JsonProperty(value = "spectator-spawnpoint-coordinate")
-    @UndefinableForPropertyChange
     private Coordinate spectatorSpawnpointCoordinate;
 
-    @UndefinableForPropertyChange
     @JsonProperty(value = "generator-groups")
     private List<GeneratorGroup> generatorGroups = new ArrayList<>();
 
-    @UndefinableForPropertyChange
     private List<Team> teams = new ArrayList<>();
 }

@@ -7,16 +7,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageBlock;
  * @author gdrfgdrf
  */
 class AreaManagementLanguage implements IILanguageBlock {
-    public static final ILanguageString AREA_VALIDATE_FAILED = ILanguageString.Companion.create("&c区域 &e&l%s 校验失败");
-    public static final ILanguageString GAME_VALIDATE_FAILED = ILanguageString.Companion.create("&c区域 &e&l%s 的游戏 &e&l%s 校验失败，已禁用该游戏: ");
-
-    public static final ILanguageString GAME_MIN_PLAYER_ERROR = ILanguageString.Companion.create("&c最小玩家数配置错误，必须 &e>= &a所有队伍的最小玩家数的总和，&c且必须 &e<= &a最大玩家数");
-    public static final ILanguageString GAME_MAX_PLAYER_ERROR = ILanguageString.Companion.create("&c最大玩家数配置错误，必须 &e<= &a所有队伍的最大玩家数的总和，&c且必须 &e>= &a最小玩家数");
-
-    public static final ILanguageString GAME_TEAM_NEED_POSITIVE_ERROR = ILanguageString.Companion.create("&c队伍 &e&l%s &c的参数 &e&l%s &c配置错误，必须为正数");
-    public static final ILanguageString GAME_TEAM_COUNT_ERROR = ILanguageString.Companion.create("&c必须拥有 > 1 个队伍");
-    public static final ILanguageString GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER = ILanguageString.Companion.create("&c队伍 &e&l%s 的最小人数 > 最大人数");
-
     public static final ILanguageString DUPLICATE_AREA_NAME_WARNING = ILanguageString.Companion.create("&c名为 &e&l%s &r&c的区域已经存在，若继续创建，对其进行操作则需要使用 &earea_id &c加入。请在 &e&l%s &r&c秒内再次输入以确定");
     public static final ILanguageString DUPLICATE_AREA_ID_ERROR = ILanguageString.Companion.create("&c无法创建区域，因为程序生成的 &earea_id %s &c和其他区域重复，出现该错误一般为服务器的系统时间被回拨，请检查服务器的系统时间是否为最新");
     public static final ILanguageString CREATING_AREA = ILanguageString.Companion.create("&e正在创建区域 %s");

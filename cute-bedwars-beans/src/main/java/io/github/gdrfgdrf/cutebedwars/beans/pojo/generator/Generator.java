@@ -2,7 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.generator;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Item;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
@@ -17,21 +16,16 @@ import java.util.List;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Generator {
-    @UndefinableForPropertyChange
     @JsonProperty(value = "region")
     private Region region;
-    @UndefinableForPropertyChange
     @JsonProperty(value = "operable-coordinates")
     private List<Coordinate> operableCoordinates;
 
     @JsonProperty(value = "display-name")
     private String displayName;
-    @UndefinableForPropertyChange
     @JsonProperty(value = "generate-coordinate")
     private Coordinate generateCoordinate;
 
-    @UndefinableForPropertyChange
     private Item display;
-    @UndefinableForPropertyChange
     private List<Item> products = new ArrayList<>();
 }

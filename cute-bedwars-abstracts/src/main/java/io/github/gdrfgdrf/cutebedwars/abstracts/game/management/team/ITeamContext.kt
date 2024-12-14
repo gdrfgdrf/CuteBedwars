@@ -9,8 +9,6 @@ import org.bukkit.command.CommandSender
 
 @Service("team_context", singleton = false)
 interface ITeamContext {
-    fun validate(sender: CommandSender? = null, withHeader: Boolean = false): Boolean
-
     companion object {
         fun new(gameContext: IGameContext, team: Team): ITeamContext = Mediator.get(
             ITeamContext::class.java, ArgumentSet(

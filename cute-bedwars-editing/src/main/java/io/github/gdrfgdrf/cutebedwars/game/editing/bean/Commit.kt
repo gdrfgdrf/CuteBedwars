@@ -34,6 +34,7 @@ class Commit<T>(
         runCatching {
             changes.apply(any as T, sender)
         }.onFailure {
+            it.printStackTrace()
             return false
         }
         return true

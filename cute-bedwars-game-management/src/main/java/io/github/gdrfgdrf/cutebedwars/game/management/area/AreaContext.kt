@@ -73,30 +73,4 @@ class AreaContext(
             }
             .toList()
     }
-
-    override fun validate(sender: CommandSender?) {
-        var success = true
-
-        games.forEach {
-            if (!it.validate(sender, true)) {
-                success = false
-            }
-        }
-
-        if (!success) {
-            if (sender == null) {
-                INotifications.instance().messageAdministrator {
-                    arrayOf(
-                        message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                            .format0(manager.area.name),
-                    )
-                }
-            } else {
-                localizationScope(sender) {
-                    message(AreaManagementLanguage.AREA_VALIDATE_FAILED)
-                        .format0(manager.area.name)
-                }
-            }
-        }
-    }
 }

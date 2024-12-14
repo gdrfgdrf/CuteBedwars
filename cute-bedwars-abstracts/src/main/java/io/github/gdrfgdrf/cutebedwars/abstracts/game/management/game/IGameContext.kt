@@ -18,7 +18,6 @@ interface IGameContext {
     val teams: List<ITeamContext>
 
     fun addTeam(team: Team)
-    fun validate(sender: CommandSender? = null, withHeader: Boolean = false): Boolean
 
     companion object {
         fun new(game: Game): IGameContext = Mediator.get(IGameContext::class.java, ArgumentSet(arrayOf(game)))!!

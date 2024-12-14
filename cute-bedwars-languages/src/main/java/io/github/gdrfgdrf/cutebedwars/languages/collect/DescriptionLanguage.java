@@ -116,6 +116,7 @@ public class DescriptionLanguage implements IILanguageCollect {
     public static ILanguageString AREA_PROPERTY_CHANGE;
     public static ILanguageString GAME_PROPERTY_CHANGE;
     public static ILanguageString GAME_REGION_CHANGE;
+    public static ILanguageString GAME_COORDINATE_CHANGE;
 
     public static ILanguageString FIND_BY_ID_OR_NAME;
     public static ILanguageString BY_ID;

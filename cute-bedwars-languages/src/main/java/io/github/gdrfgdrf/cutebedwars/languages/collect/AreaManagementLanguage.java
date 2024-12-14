@@ -7,16 +7,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageCollect;
  * @author gdrfgdrf
  */
 public class AreaManagementLanguage implements IILanguageCollect {
-    public static ILanguageString AREA_VALIDATE_FAILED;
-    public static ILanguageString GAME_VALIDATE_FAILED;
-
-    public static ILanguageString GAME_MIN_PLAYER_ERROR;
-    public static ILanguageString GAME_MAX_PLAYER_ERROR;
-
-    public static ILanguageString GAME_TEAM_NEED_POSITIVE_ERROR;
-    public static ILanguageString GAME_TEAM_COUNT_ERROR;
-    public static ILanguageString GAME_TEAM_MIN_PLAYER_BIGGER_THAN_MAX_PLAYER;
-
     public static ILanguageString DUPLICATE_AREA_NAME_WARNING;
     public static ILanguageString DUPLICATE_AREA_ID_ERROR;
     public static ILanguageString CREATING_AREA;
