@@ -47,9 +47,4 @@ public class Coordinate {
         return result;
     }
 
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static <T> T convert(Class<?> targetType, Object obj) {
-        return (T) Double.valueOf(Double.parseDouble(obj.toString()));
-    }
 }
