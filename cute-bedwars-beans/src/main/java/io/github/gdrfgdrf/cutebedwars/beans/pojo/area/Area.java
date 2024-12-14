@@ -38,16 +38,4 @@ public class Area {
 
     @UndefinableForPropertyChange
     private List<Game> games = new ArrayList<>();
-
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static <T> T convert(Class<?> targetType, Object obj) {
-        if (targetType == String.class) {
-            return (T) obj.toString();
-        }
-        if (targetType == long.class || targetType == Long.class) {
-            return (T) Long.valueOf(Long.parseLong(obj.toString()));
-        }
-        return null;
-    }
 }
