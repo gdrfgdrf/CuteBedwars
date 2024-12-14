@@ -121,6 +121,7 @@ enum class Descriptions(
     CHANGE_TYPE(DescriptionLanguage::CHANGE_TYPE, true),
     AREA_PROPERTY_CHANGE(DescriptionLanguage::AREA_PROPERTY_CHANGE, true),
     GAME_PROPERTY_CHANGE(DescriptionLanguage::GAME_PROPERTY_CHANGE, true),
+    GAME_REGION_CHANGE(DescriptionLanguage::GAME_REGION_CHANGE, true),
 
     FIND_BY_ID_OR_NAME(DescriptionLanguage::FIND_BY_ID_OR_NAME),
     BY_ID(DescriptionLanguage::BY_ID),

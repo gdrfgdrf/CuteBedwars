@@ -120,6 +120,7 @@ class DescriptionLanguage implements IILanguageBlock {
     public static final ILanguageString CHANGE_TYPE = ILanguageString.Companion.create("修改类型");
     public static final ILanguageString AREA_PROPERTY_CHANGE = ILanguageString.Companion.create("区域属性修改，可接受两个参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 default-template-id，status，world-name，lobby-world-name，lobby-spawnpoint-coordinate");
     public static final ILanguageString GAME_PROPERTY_CHANGE = ILanguageString.Companion.create("游戏属性修改，可接受两个二参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 status、min-player、max-player、spectator-spawnpoint-coordinate");
+    public static final ILanguageString GAME_REGION_CHANGE = ILanguageString.Companion.create("游戏范围修改，可接受六个参数，需选择两个点，前三个参数为第一个点的 x, y, z，后三个点为第二个点的 x, y, z。可直接输入六个坐标或不带参数使用，不带参数则给予选区工具。选区工具选择完成两个点后，将会使用粒子效果显示选区和辅助线，若确定选区正确再次添加修改即可完成");
 
     public static final ILanguageString FIND_BY_ID_OR_NAME = ILanguageString.Companion.create("通过 id 或名称来查找，值为 by-id 或 by-name");
     public static final ILanguageString BY_ID = ILanguageString.Companion.create("通过 id 进行查找，值为 by-id");
