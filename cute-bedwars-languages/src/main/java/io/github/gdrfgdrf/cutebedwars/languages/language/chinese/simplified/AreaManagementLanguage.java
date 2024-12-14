@@ -7,9 +7,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageBlock;
  * @author gdrfgdrf
  */
 class AreaManagementLanguage implements IILanguageBlock {
-    public static final ILanguageString GAME_MIN_PLAYER_FIXED = ILanguageString.Companion.create("&a已修正游戏 &e&l%s &a的最小玩家数为 %d");
-    public static final ILanguageString GAME_MAX_PLAYER_FIXED = ILanguageString.Companion.create("&a已修正游戏 &e&l%s &a的最大玩家数为 %d");
-
     public static final ILanguageString AREA_VALIDATE_FAILED = ILanguageString.Companion.create("&c区域 &e&l%s 校验失败");
     public static final ILanguageString GAME_VALIDATE_FAILED = ILanguageString.Companion.create("&c区域 &e&l%s 的游戏 &e&l%s 校验失败，已禁用该游戏: ");
 
@@ -54,24 +51,10 @@ class AreaManagementLanguage implements IILanguageBlock {
 
     public static final ILanguageString GAME_GENERATOR_GROUP_FORMAT = ILanguageString.Companion.create(" &8- &e&l%s");
 
-    public static final ILanguageString GENERATOR_FORMAT = ILanguageString.Companion.create(" &8- &e&l%s &8(%s&8) &8(%s&8)");
-    public static final ILanguageString GENERATOR_LEVEL_FORMAT = ILanguageString.Companion.create("%s -> ");
-    public static final ILanguageString GENERATOR_LEVEL_FORMAT_END = ILanguageString.Companion.create("%s");
-
-    public static final ILanguageString ITEM_FORMAT = ILanguageString.Companion.create("%s, ");
-    public static final ILanguageString ITEM_FORMAT_END = ILanguageString.Companion.create("%s");
-
     public static final ILanguageString TEAM_FORMAT = ILanguageString.Companion.create(" &8- &l%s");
 
     public static final ILanguageString WAITING_ROOM_REGION_IS = ILanguageString.Companion.create(" &a范围&8: ");
     public static final ILanguageString WAITING_ROOM_SPAWNPOINT_COORDINATE = ILanguageString.Companion.create(" &a重生点&8: %s");
-
-    public static final ILanguageString NOT_FOUND_PROPERTY = ILanguageString.Companion.create("&c没有找到名为 &e&l%s &c的属性");
-    public static final ILanguageString PROPERTY_CANNOT_ACCESS = ILanguageString.Companion.create("&c无法访问名为 &e&l%s &c的属性，该错误不应该出现，请确认插件是否为最新版本");
-    public static final ILanguageString PROPERTY_IS_UNDEFINABLE = ILanguageString.Companion.create("&c属性 &e&l%s &c无法通过指令进行定义，需要使用其他手段");
-    public static final ILanguageString NOT_POSITIVE_NUMBER = ILanguageString.Companion.create("&c属性 &e&l%s &c需要正整数");
-    public static final ILanguageString CONVERT_ERROR = ILanguageString.Companion.create("&c类型转换失败");
-    public static final ILanguageString SET_PROPERTY_SUCCESS = ILanguageString.Companion.create("&a成功将属性 &e&l%s &a的值设为 &e&l%s");
 
     public static final ILanguageString AREA_IS_EMPTY = ILanguageString.Companion.create("&c当前没有任何一个区域");
     public static final ILanguageString DUPLICATE_AREA_NAME_ERROR_FIND_BY_ID = ILanguageString.Companion.create("&c存在多个 area_id 包括 &e%s &c的区域，请使用完整的 &earea_id &c进行索引");

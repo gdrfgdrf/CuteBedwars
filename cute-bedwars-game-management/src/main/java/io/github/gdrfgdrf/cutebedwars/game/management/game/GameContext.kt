@@ -8,11 +8,9 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractGameCommitStorage
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
-import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.team.TeamContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
@@ -23,7 +21,7 @@ import org.bukkit.command.CommandSender
 @ServiceImpl("game_context", needArgument = true)
 class GameContext(
     argumentSet: ArgumentSet,
-) : IGameContext, SetterImpl<Game>() {
+) : IGameContext {
     override val areaContext: IAreaContext = argumentSet.args[0] as IAreaContext
     override val game = argumentSet.args[1] as Game
     override val teams = ArrayList<ITeamContext>()
@@ -31,13 +29,6 @@ class GameContext(
     override val commitStorage: AbstractGameCommitStorage
 
     init {
-        instanceGetter = {
-            game
-        }
-        convert = { clazz, any ->
-            Convertible.of(Game::class.java).invoke(clazz, any)
-        }
-
         if (game.id == null) {
             val id = YitIdHelper.nextId()
             "Set an id: $id to a game (area's id: ${game.areaId})".logInfo()

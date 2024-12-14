@@ -5,10 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManage
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.beans.Convertible
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
-import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.game.management.game.GameContext
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
@@ -19,17 +16,11 @@ import org.bukkit.command.CommandSender
 @ServiceImpl("area_context", needArgument = true)
 class AreaContext(
     argumentSet: ArgumentSet,
-) : IAreaContext, SetterImpl<Area>() {
+) : IAreaContext {
     override val manager = argumentSet.args[0] as IAreaManager
     override val games = ArrayList<IGameContext>()
 
     init {
-        instanceGetter = {
-            manager.area
-        }
-        convert = { clazz, any ->
-            Convertible.of(Area::class.java).invoke(clazz, any)
-        }
         manager.area.games.forEach {
             addGame(it, false)
         }
@@ -44,22 +35,6 @@ class AreaContext(
         val game = Game()
         game.areaId = this.manager.area.id
         game.name = name
-
-//        val fakeCoordinate1 = Coordinate()
-//        fakeCoordinate1.x = 5.0
-//        fakeCoordinate1.y = 4.0
-//        fakeCoordinate1.z = 6.0
-//
-//        val fakeCoordinate2 = Coordinate()
-//        fakeCoordinate2.x = 10.0
-//        fakeCoordinate2.y = 13.0
-//        fakeCoordinate2.z = 11.0
-//
-//        val fakeRegion = Region()
-//        fakeRegion.firstCoordinate = fakeCoordinate1
-//        fakeRegion.secondCoordinate = fakeCoordinate2
-//
-//        game.region = fakeRegion
 
         return GameContext(this, game)
     }

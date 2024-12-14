@@ -5,8 +5,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IBooleanConditions
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
-import io.github.gdrfgdrf.cutebedwars.beans.Convertible
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.game.Game
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeData
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata

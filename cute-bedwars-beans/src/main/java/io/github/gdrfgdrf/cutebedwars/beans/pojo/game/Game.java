@@ -2,7 +2,6 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.github.gdrfgdrf.cutebedwars.beans.annotation.ConvertPropertyFunction;
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber;
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.UndefinableForPropertyChange;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;

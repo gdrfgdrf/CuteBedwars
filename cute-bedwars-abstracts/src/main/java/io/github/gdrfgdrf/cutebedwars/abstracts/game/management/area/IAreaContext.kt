@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
 
 @Service("area_context", singleton = false)
-interface IAreaContext : ISetter {
+interface IAreaContext {
     val manager: IAreaManager
     val games: List<IGameContext>
 

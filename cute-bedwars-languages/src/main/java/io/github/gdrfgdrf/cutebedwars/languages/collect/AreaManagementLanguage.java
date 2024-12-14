@@ -7,9 +7,6 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IILanguageCollect;
  * @author gdrfgdrf
  */
 public class AreaManagementLanguage implements IILanguageCollect {
-    public static ILanguageString GAME_MIN_PLAYER_FIXED;
-    public static ILanguageString GAME_MAX_PLAYER_FIXED;
-
     public static ILanguageString AREA_VALIDATE_FAILED;
     public static ILanguageString GAME_VALIDATE_FAILED;
 
@@ -54,24 +51,10 @@ public class AreaManagementLanguage implements IILanguageCollect {
 
     public static ILanguageString GAME_GENERATOR_GROUP_FORMAT;
 
-    public static ILanguageString GENERATOR_FORMAT;
-    public static ILanguageString GENERATOR_LEVEL_FORMAT;
-    public static ILanguageString GENERATOR_LEVEL_FORMAT_END;
-
-    public static ILanguageString ITEM_FORMAT;
-    public static ILanguageString ITEM_FORMAT_END;
-
     public static ILanguageString TEAM_FORMAT;
 
     public static ILanguageString WAITING_ROOM_REGION_IS;
     public static ILanguageString WAITING_ROOM_SPAWNPOINT_COORDINATE;
-
-    public static ILanguageString NOT_FOUND_PROPERTY;
-    public static ILanguageString PROPERTY_CANNOT_ACCESS;
-    public static ILanguageString PROPERTY_IS_UNDEFINABLE;
-    public static ILanguageString NOT_POSITIVE_NUMBER;
-    public static ILanguageString CONVERT_ERROR;
-    public static ILanguageString SET_PROPERTY_SUCCESS;
 
     public static ILanguageString AREA_IS_EMPTY;
     public static ILanguageString DUPLICATE_AREA_NAME_ERROR_FIND_BY_ID;

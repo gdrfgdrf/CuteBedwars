@@ -1,6 +1,5 @@
 package io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game
 
-import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.ISetter
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.storage.AbstractGameCommitStorage
@@ -12,7 +11,7 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 import org.bukkit.command.CommandSender
 
 @Service("game_context", singleton = false)
-interface IGameContext : ISetter {
+interface IGameContext {
     val areaContext: IAreaContext
     val game: Game
     val commitStorage: AbstractGameCommitStorage

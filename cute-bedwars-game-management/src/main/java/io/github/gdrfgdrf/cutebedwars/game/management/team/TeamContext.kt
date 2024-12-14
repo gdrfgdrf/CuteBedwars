@@ -4,10 +4,8 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.game.IGameContex
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.team.ITeamContext
 import io.github.gdrfgdrf.cutebedwars.abstracts.notifications.INotifications
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IConvertors
-import io.github.gdrfgdrf.cutebedwars.beans.Convertible
 import io.github.gdrfgdrf.cutebedwars.beans.annotation.PositiveNumber
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team
-import io.github.gdrfgdrf.cutebedwars.game.management.SetterImpl
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -17,18 +15,9 @@ import org.bukkit.command.CommandSender
 @ServiceImpl("team_context", needArgument = true)
 class TeamContext(
     argumentSet: ArgumentSet,
-) : ITeamContext, SetterImpl<Team>() {
+) : ITeamContext {
     private val gameContext: IGameContext = argumentSet.args[0] as IGameContext
     private val team = argumentSet.args[1] as Team
-
-    init {
-        instanceGetter = {
-            team
-        }
-        convert = { clazz, any ->
-            Convertible.of(Team::class.java).invoke(clazz, any)
-        }
-    }
 
     constructor(gameContext: IGameContext, team: Team)
             : this(ArgumentSet(arrayOf(gameContext, team)))
@@ -122,25 +111,5 @@ class TeamContext(
         }
 
         return !needDisableGame
-    }
-
-    override fun set(sender: CommandSender, jsonKey: String, any: Any) {
-        super.set(sender, jsonKey, any)
-
-        val game = gameContext.game
-        if (team.fixGameMinPlayer(game)) {
-            localizationScope(sender) {
-                message(AreaManagementLanguage.GAME_MIN_PLAYER_FIXED)
-                    .format0(game.id, game.minPlayer)
-                    .send()
-            }
-        }
-        if (team.fixGameMaxPlayer(game)) {
-            localizationScope(sender) {
-                message(AreaManagementLanguage.GAME_MAX_PLAYER_FIXED)
-                    .format0(game.id, game.maxPlayer)
-                    .send()
-            }
-        }
     }
 }
