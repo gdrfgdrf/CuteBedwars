@@ -74,17 +74,8 @@ object Help : AbstractSubCommand(
         commands: ICommands,
         subCommand: AbstractSubCommand,
     ) {
-        val array: Array<Any?>? = if (sender is Player) {
-            ICommands.values().toList().stream()
-                .filter {
-                    return@filter IPermissions.valueOf("INFO_COMMANDS").hasPermission(sender)
-                }
-                .filter {
-                    return@filter !((it as ICommands).permissions.needOps &&
-                            !IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender))
-                }
-                .toList()
-                .toTypedArray()
+        val array: Array<*>? = if (sender is Player) {
+            ICommands.values()
         } else {
             null
         }
@@ -99,7 +90,7 @@ object Help : AbstractSubCommand(
                             get0().showText(subCommand.description!!.operate().string)
 
                             if (indexOf!! >= 0) {
-                                get0().runCommand("/cbw info commands args ${indexOf + 1}")
+                                get0().runCommand("/cbw info commands args ${subCommand.command.name}")
                             }
                         }
                         .send("")
@@ -119,7 +110,7 @@ object Help : AbstractSubCommand(
                         .format0(commands.get(), "null")
                         .apply {
                             if (indexOf!! >= 0) {
-                                get0().runCommand("/cbw info commands args ${indexOf + 1}")
+                                get0().runCommand("/cbw info commands args ${subCommand.command.name}")
                             }
                         }
                         .send("")

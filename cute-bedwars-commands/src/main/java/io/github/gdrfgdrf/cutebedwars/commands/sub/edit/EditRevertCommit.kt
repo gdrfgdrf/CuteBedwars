@@ -59,7 +59,7 @@ object EditRevertCommit : AbstractSubCommand(
                         return@localizationScope
                     }
 
-                    val applyResult = revertedCommit.tryApply(editor.t!!)
+                    val applyResult = revertedCommit.tryApply(editor.t!!, sender)
                     if (!applyResult) {
                         message(EditorLanguage.APPLY_ERROR)
                             .send()

@@ -13,8 +13,6 @@ interface IAreaContext : ISetter {
     val manager: IAreaManager
     val games: List<IGameContext>
 
-    fun initialize()
-
     fun createGame(name: String): IGameContext
     fun addGame(game: Game, addToBean: Boolean = true)
     fun addGame(gameContext: IGameContext, addToBean: Boolean = true)

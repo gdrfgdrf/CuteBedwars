@@ -1,12 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.three.IOutlineBox
+import io.github.gdrfgdrf.cutebedwars.abstracts.math.geometry.two.IRectangle
 import org.bukkit.command.CommandSender
 
 object RegionInformation {
@@ -16,7 +17,7 @@ object RegionInformation {
             val type = result.type
             val message = type.message()
 
-            val resultMessage = if (type == Type.REGION_VALIDATION) {
+            val resultMessage = if (type == Type.REGION_ERROR) {
                 message(message)
             } else {
                 val top = result.top
@@ -28,10 +29,10 @@ object RegionInformation {
 
                 val topMessage = message(CommonLanguage.COORDINATE_FULL)
                     .format0(top.x.toString(), top.y.toString(), top.z.toString())
-                    .toString()
+                    .buildString()
                 val bottomMessage = message(CommonLanguage.COORDINATE_FULL)
                     .format0(bottom.x.toString(), bottom.y.toString(), bottom.z.toString())
-                    .toString()
+                    .buildString()
 
                 when (type) {
                     Type.REGION_1 -> message(message)
@@ -130,72 +131,23 @@ object RegionInformation {
 
 
     enum class Type(val message: () -> ILanguageString, val test: (Region) -> CalculateResult) {
-        REGION_VALIDATION(CommonLanguage::REGION_ERROR, { region ->
-            val first = region.firstCoordinate
-            val second = region.secondCoordinate
+        REGION_ERROR(CommonLanguage::REGION_ERROR, { region ->
+            val first = region.pos1
+            val second = region.pos2
 
-            val result = CalculateResult(REGION_VALIDATION, true, null, null)
+            val result = CalculateResult(REGION_ERROR, true, null, null)
 
-            // compare first to itself
-            if (first.x == first.y) {
-                result.result = false
-            }
-            if (first.x == first.z) {
-                result.result = false
-            }
-            if (first.y == first.z) {
-                result.result = false
-            }
-
-            // compare second to itself
-            if (second.x == second.y) {
-                result.result = false
-            }
-            if (second.x == second.z) {
-                result.result = false
-            }
-            if (second.y == second.z) {
-                result.result = false
-            }
-
-            // compare first's x to second
-            if (first.x == second.x) {
-                result.result = false
-            }
-            if (first.x == second.y) {
-                result.result = false
-            }
-            if (first.x == second.z) {
-                result.result = false
-            }
-
-            // compare first's y to second
-            if (first.y == second.x) {
-                result.result = false
-            }
-            if (first.y == second.y) {
-                result.result = false
-            }
-            if (first.y == second.z) {
-                result.result = false
-            }
-
-            // compare first's z to second
-            if (first.z == second.x) {
-                result.result = false
-            }
-            if (first.z == second.y) {
-                result.result = false
-            }
-            if (first.z == second.z) {
+            val outlineBox = IOutlineBox.new(first, second)
+            val size = outlineBox.size
+            if (size < 2) {
                 result.result = false
             }
 
             result
         }),
         REGION_1(CommonLanguage::REGION_1, { region ->
-            val first = region.firstCoordinate
-            val second = region.secondCoordinate
+            val first = region.pos1
+            val second = region.pos2
             val result = CalculateResult(REGION_1, true, null, null)
 
             if (first.y == second.y) {
@@ -224,8 +176,8 @@ object RegionInformation {
             result
         }),
         REGION_2(CommonLanguage::REGION_2, { region ->
-            val first = region.firstCoordinate
-            val second = region.secondCoordinate
+            val first = region.pos1
+            val second = region.pos2
             val result = CalculateResult(REGION_2, true, null, null)
 
             if (first.y == second.y) {
@@ -253,8 +205,8 @@ object RegionInformation {
             result
         }),
         REGION_3(CommonLanguage::REGION_3, { region ->
-            val first = region.firstCoordinate
-            val second = region.secondCoordinate
+            val first = region.pos1
+            val second = region.pos2
             val result = CalculateResult(REGION_3, true, null, null)
 
             if (first.y == second.y) {
@@ -282,8 +234,8 @@ object RegionInformation {
             result
         }),
         REGION_4(CommonLanguage::REGION_4, { region ->
-            val first = region.firstCoordinate
-            val second = region.secondCoordinate
+            val first = region.pos1
+            val second = region.pos2
             val result = CalculateResult(REGION_4, true, null, null)
 
             if (first.y == second.y) {
@@ -316,7 +268,7 @@ object RegionInformation {
             fun calculate(region: Region): CalculateResult? {
                 var result: CalculateResult?
 
-                result = REGION_VALIDATION.test(region)
+                result = REGION_ERROR.test(region)
                 if (!result.result) {
                     return result
                 }

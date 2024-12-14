@@ -27,7 +27,7 @@ class PropertyChange(
 
     private var previousValue: Any? = null
 
-    override fun validate(): Boolean {
+    override fun validate(sender: CommandSender): Boolean {
         if (value == null) {
             return false
         }
@@ -45,8 +45,8 @@ class PropertyChange(
         return true
     }
 
-    override fun apply(t: IAreaContext) {
-        if (!validate()) {
+    override fun apply(t: IAreaContext, sender: CommandSender) {
+        if (!validate(sender)) {
             throw ApplyException("area property change applies only to keys \"name\", \"default-template-id\", \"world-name\", \"lobby-world-name\"")
         }
 

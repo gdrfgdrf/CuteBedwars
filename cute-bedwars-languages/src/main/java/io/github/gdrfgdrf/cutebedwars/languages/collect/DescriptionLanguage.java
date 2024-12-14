@@ -123,4 +123,6 @@ public class DescriptionLanguage implements IILanguageCollect {
     public static ILanguageString CHANGE_ID;
     public static ILanguageString VALUE;
     public static ILanguageString PAGE_INDEX;
+    public static ILanguageString COMMAND_ENUM;
+
 }

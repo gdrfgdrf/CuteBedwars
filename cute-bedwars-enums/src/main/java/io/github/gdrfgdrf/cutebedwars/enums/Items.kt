@@ -2,10 +2,12 @@ package io.github.gdrfgdrf.cutebedwars.enums
 
 import de.tr7zw.changeme.nbtapi.NBT
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IItems
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.given.ISpecialGivenItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.item.IBuiltItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.builder.IItemBuilder
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.item.IItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.item.ISpecialBuiltItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.property.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelect
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
@@ -30,38 +32,7 @@ enum class Items(override val item: IItem) : IItems {
           movable = true
           droppable = false
 
-          val updateLores: (ISelect, ICommonItem) -> Unit = { select, commonItem ->
-              val properties = commonItem.properties
-              val pos1 = select.pos1()
-              val pos2 = select.pos2()
-              var update = false
-
-              if (pos1 != null) {
-                  properties.lores[0] = ItemLanguage.SELECTION_TOOL_LORE_ONE.operate().string
-                      .format(pos1)
-                      .replaceToColorSymbol()
-                  update = true
-              }
-              if (pos2 != null) {
-                  properties.lores[1] = ItemLanguage.SELECTION_TOOL_LORE_TWO.operate().string
-                      .format(pos2)
-                      .replaceToColorSymbol()
-                  update = true
-              }
-
-              if (update) {
-                  commonItem.update()
-              }
-          }
-
-          onGiven = onGiven@ { player, commonItem ->
-              val selections = ISelections.instance()
-              val select = selections.get(player)
-              select?.let {
-                  updateLores(select, commonItem)
-              }
-          }
-          onLeftClick = onLeftClick@ { event, commonItem ->
+          onLeftClick = onLeftClick@ { event, _ ->
               // pos1
               if (!event.hasBlock()) {
                   return@onLeftClick
@@ -85,8 +56,6 @@ enum class Items(override val item: IItem) : IItems {
                       select.trySpawnParticle(Particle.END_ROD, 1000)
                   }
 
-                  updateLores(select, commonItem)
-
                   localizationScope(player) {
                       message(CommonLanguage.SELECTED_POS_1)
                           .format0(coordinate)
@@ -94,7 +63,7 @@ enum class Items(override val item: IItem) : IItems {
                   }
               }
           }
-          onRightClick = onRightClick@ { event, commonItem ->
+          onRightClick = onRightClick@ { event, _ ->
               // pos2
               if (!event.hasBlock()) {
                   return@onRightClick
@@ -117,8 +86,6 @@ enum class Items(override val item: IItem) : IItems {
                       select.trySpawnParticle(Particle.END_ROD, 1000)
                   }
 
-                  updateLores(select, commonItem)
-
                   localizationScope(player) {
                       message(CommonLanguage.SELECTED_POS_2)
                           .format0(coordinate)
@@ -128,10 +95,18 @@ enum class Items(override val item: IItem) : IItems {
           }
 
           setPostProcessor(this, "SELECTION_TOOL", true)
-      }.build(true)
+      }.buildSpecial()
     ),
 
     ;
+
+    override fun builtItem(): IBuiltItem {
+        return item as IBuiltItem
+    }
+
+    override fun special(): ISpecialBuiltItem {
+        return item as ISpecialBuiltItem
+    }
 }
 
 private fun setPostProcessor(itemProperties: IItemProperties, enum: String, special: Boolean) {

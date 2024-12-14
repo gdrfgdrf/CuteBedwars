@@ -74,12 +74,6 @@ object CommandInformation : ICommandInformation {
                                             }
 
                                             if (enablePart) {
-                                                runCommandInPart(i, "/cbw query description args ${description.name.lowercase()}")
-                                            } else {
-                                                runCommand("/cbw query description args ${description.name.lowercase()}")
-                                            }
-
-                                            if (enablePart) {
                                                 suggestCommandInPart(i, "${subCommand.command.getRaw()} args $noPartDividerContent")
                                             } else {
                                                 suggestCommand("${subCommand.command.getRaw()} args $noPartDividerContent")

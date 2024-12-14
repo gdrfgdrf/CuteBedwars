@@ -92,6 +92,8 @@ interface IOutlineBox : IShape3D {
 
     val center: IPoint3D
         get() = IBoxes.instance().geometricCenter(pos1, pos2)
+    val size: IMathNumber
+        get() = IBoxes.instance().size(pos1, pos2)
 
     val otherShapes: List<IShape3D>
     val otherPoints: List<IPoint3D>

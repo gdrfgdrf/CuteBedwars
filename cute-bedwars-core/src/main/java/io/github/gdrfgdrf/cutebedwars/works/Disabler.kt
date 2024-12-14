@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.core.IDisabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.database.IDatabase
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.frequencytasks.IFrequencyTaskManager
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.cutebedwars.abstracts.requests.IRequests
 import io.github.gdrfgdrf.cutebedwars.abstracts.tasks.ITaskManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
@@ -76,6 +77,5 @@ object Disabler : IDisabler {
     private fun disableChangeTypeRegistry() {
         IChangeTypeRegistry.instance().clear()
     }
-
 
 }

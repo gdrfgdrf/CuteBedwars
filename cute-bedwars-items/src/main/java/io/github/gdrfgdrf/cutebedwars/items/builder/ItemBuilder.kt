@@ -2,11 +2,12 @@ package io.github.gdrfgdrf.cutebedwars.items.builder
 
 import de.tr7zw.changeme.nbtapi.NBT
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteItemNBT
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItem
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemBuilder
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
-import io.github.gdrfgdrf.cutebedwars.items.Item
-import io.github.gdrfgdrf.cutebedwars.items.item.SpecialItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.item.IBuiltItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.builder.IItemBuilder
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.item.ISpecialBuiltItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.property.IItemProperties
+import io.github.gdrfgdrf.cutebedwars.items.item.BuiltItem
+import io.github.gdrfgdrf.cutebedwars.items.item.SpecialBuiltItem
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
 import org.bukkit.inventory.ItemStack
 
@@ -19,7 +20,7 @@ class ItemBuilder : IItemBuilder {
         return this
     }
 
-    override fun build(special: Boolean, nbtModifier: ((ReadWriteItemNBT) -> Unit)?): IItem {
+    override fun build(nbtModifier: ((ReadWriteItemNBT) -> Unit)?): IBuiltItem {
         properties.check()
 
         val itemStack = ItemStack(properties.material)
@@ -29,12 +30,21 @@ class ItemBuilder : IItemBuilder {
             NBT.modify(itemStack, nbtModifier)
         }
 
-        if (special) {
-            val specialItem = SpecialItem(itemStack, properties)
-            return specialItem
+        val item = BuiltItem(itemStack, properties)
+        return item
+    }
+
+    override fun buildSpecial(nbtModifier: ((ReadWriteItemNBT) -> Unit)?): ISpecialBuiltItem {
+        properties.check()
+
+        val itemStack = ItemStack(properties.material)
+        properties.applyTo(itemStack, false)
+
+        if (nbtModifier != null) {
+            NBT.modify(itemStack, nbtModifier)
         }
 
-        val item = Item(itemStack, properties)
-        return item
+        val specialItem = SpecialBuiltItem(itemStack, properties)
+        return specialItem
     }
 }

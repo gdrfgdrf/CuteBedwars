@@ -128,7 +128,8 @@ enum class Descriptions(
 
     CHANGE_ID(DescriptionLanguage::CHANGE_ID),
     VALUE(DescriptionLanguage::VALUE),
-    PAGE_INDEX(DescriptionLanguage::PAGE_INDEX)
+    PAGE_INDEX(DescriptionLanguage::PAGE_INDEX),
+    COMMAND_ENUM(DescriptionLanguage::COMMAND_ENUM)
 
     ;
 

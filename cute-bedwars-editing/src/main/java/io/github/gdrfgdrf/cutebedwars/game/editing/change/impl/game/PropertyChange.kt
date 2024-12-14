@@ -27,7 +27,7 @@ class PropertyChange(
 
     private var previousValue: Any? = null
 
-    override fun validate(): Boolean {
+    override fun validate(sender: CommandSender): Boolean {
         if (value == null) {
             return false
         }
@@ -44,8 +44,8 @@ class PropertyChange(
         return true
     }
 
-    override fun apply(t: IGameContext) {
-        if (!validate()) {
+    override fun apply(t: IGameContext, sender: CommandSender) {
+        if (!validate(sender)) {
             throw ApplyException("game property change applies only to keys \"name\", \"min-player\", \"max-player\"")
         }
 

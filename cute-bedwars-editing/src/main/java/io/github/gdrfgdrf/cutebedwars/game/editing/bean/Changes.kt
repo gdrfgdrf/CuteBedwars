@@ -8,6 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.game.editing.exception.InoperableChangesEx
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.RedoException
 import io.github.gdrfgdrf.cutebedwars.game.editing.exception.UndoException
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
+import org.bukkit.command.CommandSender
 import java.util.concurrent.LinkedBlockingQueue
 
 @ServiceImpl("changes")
@@ -28,10 +29,10 @@ class Changes<T> : IChanges<T> {
         }
     }
 
-    override fun apply(t: T) {
+    override fun apply(t: T, sender: CommandSender) {
         "Applying all changes (Changes)".logInfo()
         changes.forEach {
-            it.apply(t)
+            it.apply(t, sender)
         }
     }
 

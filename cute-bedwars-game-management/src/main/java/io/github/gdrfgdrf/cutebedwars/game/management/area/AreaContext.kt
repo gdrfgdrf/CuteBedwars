@@ -30,16 +30,13 @@ class AreaContext(
         convert = { clazz, any ->
             Convertible.of(Area::class.java).invoke(clazz, any)
         }
-    }
-
-    constructor(areaManager: IAreaManager)
-            : this(ArgumentSet(arrayOf(areaManager)))
-
-    override fun initialize() {
         manager.area.games.forEach {
             addGame(it, false)
         }
     }
+
+    constructor(areaManager: IAreaManager)
+            : this(ArgumentSet(arrayOf(areaManager)))
 
     override fun createGame(name: String): IGameContext {
         "Creating a game under an area, game's name: $name, area's name: ${manager.area.name}".logInfo()

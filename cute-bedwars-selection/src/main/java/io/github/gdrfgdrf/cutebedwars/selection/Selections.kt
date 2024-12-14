@@ -16,6 +16,10 @@ object Selections : ISelections {
         return map[player.uuid()]
     }
 
+    override fun has(player: Player): Boolean {
+        return get(player) != null
+    }
+
     override fun create(player: Player): ISelect {
         remove(player)
 

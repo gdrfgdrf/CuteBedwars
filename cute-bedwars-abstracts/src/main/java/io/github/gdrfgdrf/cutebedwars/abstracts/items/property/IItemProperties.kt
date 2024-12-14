@@ -1,5 +1,6 @@
-package io.github.gdrfgdrf.cutebedwars.abstracts.items
+package io.github.gdrfgdrf.cutebedwars.abstracts.items.property
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.given.ISpecialGivenItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ICustomList
 import io.github.gdrfgdrf.multimodulemediator.Mediator
@@ -18,10 +19,10 @@ interface IItemProperties {
     val lores: ICustomList<String>
     val flags: ICustomList<ItemFlag>
 
-    var onGiven: ((Player, ICommonItem) -> Unit)?
-    var onClick: ((PlayerInteractEvent, ICommonItem) -> Unit)?
-    var onLeftClick: ((PlayerInteractEvent, ICommonItem) -> Unit)?
-    var onRightClick: ((PlayerInteractEvent, ICommonItem) -> Unit)?
+    var onGiven: ((Player, ISpecialGivenItem) -> Unit)?
+    var onClick: ((PlayerInteractEvent, ISpecialGivenItem) -> Unit)?
+    var onLeftClick: ((PlayerInteractEvent, ISpecialGivenItem) -> Unit)?
+    var onRightClick: ((PlayerInteractEvent, ISpecialGivenItem) -> Unit)?
 
     var unbreakable: Boolean
     var droppable: Boolean

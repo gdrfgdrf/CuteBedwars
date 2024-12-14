@@ -128,5 +128,5 @@ class DescriptionLanguage implements IILanguageBlock {
     public static final ILanguageString CHANGE_ID = ILanguageString.Companion.create("修改的 id，玩家将鼠标放在上方即可查看，控制台会直接显示");
     public static final ILanguageString VALUE = ILanguageString.Companion.create("值，类型视情况而定");
     public static final ILanguageString PAGE_INDEX = ILanguageString.Companion.create("页码");
-
+    public static final ILanguageString COMMAND_ENUM = ILanguageString.Companion.create("命令枚举名");
 }

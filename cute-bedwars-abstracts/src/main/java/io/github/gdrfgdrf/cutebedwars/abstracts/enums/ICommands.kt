@@ -13,6 +13,7 @@ interface ICommands {
     val allowEmptyParam: Boolean
     val node: ICommandNodes
     val paramSchemes: Array<IParamScheme>?
+    val name: String
 
     fun getRaw(): String
     fun getShort(): String

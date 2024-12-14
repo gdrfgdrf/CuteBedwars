@@ -19,6 +19,15 @@ class ChangeData(
         return null
     }
 
+    fun getStringOrBlank(index: Int): String {
+        runCatching {
+            return get(index)
+        }.onFailure {
+            return ""
+        }
+        return ""
+    }
+
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun of(vararg any: Any) = ChangeData(any as Array<Any?>)

@@ -6,6 +6,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.ISubCommandManager
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IEnabler
 import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
@@ -25,6 +26,7 @@ object Enabler : IEnabler {
 
             enableNbtApi()
             enableEventListeners()
+            startPlayerInventoryScanning()
         }.onFailure {
             javaPlugin.logger.severe("An error occurred while enabling CuteBedwars")
         }
@@ -37,6 +39,7 @@ object Enabler : IEnabler {
 
         "Start reloading (Enabler)".logInfo()
         ISubCommandManager.instance().scanAndRegister()
+        startPlayerInventoryScanning()
 
         "------------------------ CuteBedwars Reloading Phase (Enabler) ------------------------".logInfo()
     }
@@ -65,5 +68,9 @@ object Enabler : IEnabler {
 
             Bukkit.getServer().pluginManager.registerEvents(listener as Listener, javaPlugin)
         }
+    }
+
+    private fun startPlayerInventoryScanning() {
+        IItemCollections.instance().startPlayerInventoryScanning()
     }
 }

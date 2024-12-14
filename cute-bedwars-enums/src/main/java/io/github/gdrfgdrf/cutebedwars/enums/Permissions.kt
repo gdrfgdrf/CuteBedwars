@@ -43,6 +43,7 @@ enum class Permissions(
     EDIT_EXIT(PermissionGroups.ADMIN, "edit.exit"),
 
     EDIT_LIST_AREA_COMMITS(PermissionGroups.ADMIN, "edit.list_area_commits"),
+    EDIT_LIST_GAME_COMMITS(PermissionGroups.ADMIN, "edit.list_game_commits"),
 
 
     RECEIVE_NOTIFICATION(PermissionGroups.USER, "receive.notification"),

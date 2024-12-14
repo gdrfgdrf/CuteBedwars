@@ -21,7 +21,16 @@ object InfoCommands : AbstractSubCommand(
     override val description: ILanguageString = CommandDescriptionLanguage.INFO_COMMANDS
 
     override fun run(sender: CommandSender, args: Array<String>, paramCombination: IParamCombination) {
-        val pageIndex = paramCombination.pageIndex()
+        val pageIndex = if (paramCombination.paramSchemeIndex == 0) {
+            paramCombination.pageIndex()
+        } else {
+            1
+        }
+        val enumName = if (paramCombination.paramSchemeIndex == 1) {
+            paramCombination.notNullString("COMMAND_ENUM")
+        } else {
+            ""
+        }
 
         val array = ICommands.values().toList().stream()
             .map {
@@ -37,10 +46,14 @@ object InfoCommands : AbstractSubCommand(
             .filter {
                 return@filter it != ICommands.valueOf("ROOT")
             }
-            .map {
-                it as ICommands
+            .filter {
+                if (enumName.isBlank()) {
+                    return@filter true
+                }
+                return@filter it.name == enumName.uppercase()
             }
             .toList()
+            .reversed()
 
         localizationScope(sender) {
             if (array.isEmpty()) {
@@ -52,8 +65,9 @@ object InfoCommands : AbstractSubCommand(
             val chatPage = IChatPages.instance().cache(
                 sender,
                 IPageRequestTypes.valueOf("INFO_COMMANDS"),
-                IPermissions.valueOf("INFO_COMMANDS").hasPermission(sender)
-                    .toString() + " | " + IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender)
+                "${IPermissions.valueOf("INFO_COMMANDS").hasPermission(sender)} | " +
+                        "${IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender)} | " +
+                        enumName,
             ) {
                 return@cache arrayListOf()
             }

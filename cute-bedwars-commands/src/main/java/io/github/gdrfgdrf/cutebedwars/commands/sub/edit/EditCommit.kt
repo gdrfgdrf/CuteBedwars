@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractAreaEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.AbstractGameEditor
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
+import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.IManagers
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.asyncTask
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterChangesFinder
@@ -62,7 +63,7 @@ object EditCommit : AbstractSubCommand(
             message(EditorLanguage.APPLYING_CHANGES)
                 .send()
 
-            val applyResult = commit.tryApply(editor.t!!)
+            val applyResult = commit.tryApply(editor.t!!, sender)
             if (!applyResult) {
                 changes.unFinish()
 
@@ -72,6 +73,11 @@ object EditCommit : AbstractSubCommand(
             } else {
                 if (editor is AbstractAreaEditor) {
                     editor.t.manager.save()
+                }
+                if (editor is AbstractGameEditor) {
+                    val areaId = editor.t.game.areaId
+                    val areaManager = IManagers.instance().get(areaId)
+                    areaManager?.save()
                 }
             }
             editor.newChanges()

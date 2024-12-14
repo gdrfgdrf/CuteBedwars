@@ -9,6 +9,7 @@ import org.bukkit.entity.Player
 @KotlinSingleton
 interface ISelections {
     fun get(player: Player): ISelect?
+    fun has(player: Player): Boolean
     fun create(player: Player): ISelect
     fun remove(player: Player)
 

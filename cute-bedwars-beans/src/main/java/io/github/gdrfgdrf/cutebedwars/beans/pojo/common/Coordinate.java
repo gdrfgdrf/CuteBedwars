@@ -27,6 +27,10 @@ public class Coordinate {
         return "(%s, %s, %s)".formatted(x, y, z);
     }
 
+    public String parsableString() {
+        return  "%s %s %s".formatted(x, y, z);
+    }
+
     public static Coordinate parse(String string) {
         String[] split = string.split(" ");
         if (split.length != 3) {

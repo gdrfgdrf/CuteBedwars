@@ -2,8 +2,8 @@ package io.github.gdrfgdrf.cutebedwars.items.property
 
 import com.github.yitter.idgen.YitIdHelper
 import de.tr7zw.changeme.nbtapi.NBT
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.ICommonItem
-import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.given.ISpecialGivenItem
+import io.github.gdrfgdrf.cutebedwars.abstracts.items.property.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.ICustomList
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.customList
@@ -23,10 +23,10 @@ class ItemProperties : IItemProperties {
     override val lores: ICustomList<String> = customList()
     override val flags: ICustomList<ItemFlag> = customList()
 
-    override var onGiven: ((Player, ICommonItem) -> Unit)? = null
-    override var onClick: ((PlayerInteractEvent, ICommonItem) -> Unit)? = null
-    override var onLeftClick: ((PlayerInteractEvent, ICommonItem) -> Unit)? = null
-    override var onRightClick: ((PlayerInteractEvent, ICommonItem) -> Unit)? = null
+    override var onGiven: ((Player, ISpecialGivenItem) -> Unit)? = null
+    override var onClick: ((PlayerInteractEvent, ISpecialGivenItem) -> Unit)? = null
+    override var onLeftClick: ((PlayerInteractEvent, ISpecialGivenItem) -> Unit)? = null
+    override var onRightClick: ((PlayerInteractEvent, ISpecialGivenItem) -> Unit)? = null
 
     override var unbreakable: Boolean = false
     override var droppable: Boolean = true
@@ -99,7 +99,7 @@ class ItemProperties : IItemProperties {
 
         NBT.modify(itemStack) { operableNbt ->
             if (!stackable) {
-                operableNbt.setLong("cute-bedwars-item-id", YitIdHelper.nextId())
+                operableNbt.setLong("cute-bedwars-item-unstackable", YitIdHelper.nextId())
             }
 
             val canPlaceOnList = operableNbt.getStringList("CanPlaceOn")

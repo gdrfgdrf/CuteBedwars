@@ -13,8 +13,8 @@ abstract class AbstractChange<T> {
         return true
     }
 
-    abstract fun validate(): Boolean
-    abstract fun apply(t: T)
+    abstract fun validate(sender: CommandSender): Boolean
+    abstract fun apply(t: T, sender: CommandSender)
     abstract fun makeUndo(): AbstractChange<T>
     abstract fun args(): Array<Any?>
 

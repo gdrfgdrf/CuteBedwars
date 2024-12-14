@@ -39,6 +39,9 @@ enum class Commands(
         arrayOf(
             IParamScheme.new {
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
+            },
+            IParamScheme.new {
+                add("COMMAND_ENUM", "NOT_BLANK_STRING")
             }
         )
     ),
