@@ -17,6 +17,9 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameContext>() {
+    private var previousValuePos1: String? = null
+    private var previousValuePos2: String? = null
+
     constructor(changeData: ChangeData) : this(
         "${changeData.getStringOrBlank(0)} ${changeData.getStringOrBlank(1)} ${changeData.getStringOrBlank(2)}",
         "${changeData.getStringOrBlank(3)} ${changeData.getStringOrBlank(4)} ${changeData.getStringOrBlank(5)}"
@@ -65,9 +68,6 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
         }
         return true
     }
-
-    private var previousValuePos1: String? = null
-    private var previousValuePos2: String? = null
 
     override fun makeUndo(): AbstractChange<IGameContext> {
         val regionChange = RegionChange(previousValuePos1, previousValuePos2)
