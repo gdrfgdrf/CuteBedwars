@@ -52,11 +52,19 @@ class PropertyChange(
         "Applying $key: $value to game, game's id: ${t.game.id}, area's id: ${t.game.areaId}".logInfo()
 
         val game = t.game
-        val convertible = Convertible.of(Game::class.java)
         when (key) {
-            "name" -> game.name = convertible.invoke(java.lang.String::class.java, value)
-            "min-player" -> game.minPlayer = convertible.invoke(java.lang.Integer::class.java, value)
-            "max-player" -> game.maxPlayer = convertible.invoke(java.lang.Integer::class.java, value)
+            "name" -> {
+                previousValue = game.name
+                game.name = value.toString()
+            }
+            "min-player" -> {
+                previousValue = game.minPlayer
+                game.minPlayer = value.toString().toInt()
+            }
+            "max-player" -> {
+                previousValue = game.maxPlayer
+                game.maxPlayer = value.toString().toInt()
+            }
         }
     }
 
