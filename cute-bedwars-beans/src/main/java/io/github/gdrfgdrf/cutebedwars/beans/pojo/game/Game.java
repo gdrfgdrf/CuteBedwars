@@ -54,19 +54,4 @@ public class Game {
 
     @UndefinableForPropertyChange
     private List<Team> teams = new ArrayList<>();
-
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static  <T> T convert(Class<?> targetType, Object obj) {
-        if (targetType == String.class) {
-            return (T) obj.toString();
-        }
-        if (targetType == boolean.class || targetType == Boolean.class) {
-            return (T) Boolean.valueOf(Boolean.parseBoolean(obj.toString()));
-        }
-        if (targetType == int.class || targetType == Integer.class) {
-            return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
-        }
-        return null;
-    }
 }
