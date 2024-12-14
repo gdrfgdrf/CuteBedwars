@@ -72,4 +72,7 @@ public class EditorLanguage implements IILanguageCollect {
     public static ILanguageString GAME_REGION_CHANGE;
     public static ILanguageString GAME_REGION_CHANGE_NAME;
 
+    public static ILanguageString GAME_COORDINATE_CHANGE;
+    public static ILanguageString GAME_COORDINATE_CHANGE_NAME;
+
 }
