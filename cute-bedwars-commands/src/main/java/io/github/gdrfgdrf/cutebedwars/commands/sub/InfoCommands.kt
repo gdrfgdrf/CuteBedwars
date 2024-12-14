@@ -24,12 +24,18 @@ object InfoCommands : AbstractSubCommand(
         val pageIndex = paramCombination.pageIndex()
 
         val array = ICommands.values().toList().stream()
+            .map {
+                it as ICommands
+            }
             .filter {
                 return@filter IPermissions.valueOf("INFO_COMMANDS").hasPermission(sender)
             }
             .filter {
                 return@filter !((it as ICommands).permissions.needOps &&
                         !IPermissions.valueOf("INFO_ADMINISTRATION_COMMANDS").hasPermission(sender))
+            }
+            .filter {
+                return@filter it != ICommands.valueOf("ROOT")
             }
             .map {
                 it as ICommands
