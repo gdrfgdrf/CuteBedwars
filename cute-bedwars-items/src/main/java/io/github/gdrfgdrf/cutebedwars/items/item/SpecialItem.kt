@@ -37,7 +37,7 @@ class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties)
             itemStack.clone(),
             this,
             player,
-            amount
+            1
         )
         ItemCollections.add(player, givenItem)
         givenItem.give(slotIndex)
