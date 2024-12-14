@@ -29,6 +29,7 @@ object FrequencyTaskManager : IFrequencyTaskManager {
 
     override fun terminate() {
         "Terminating frequency task manager".logInfo()
+        list.clear()
         terminated = true
     }
 
