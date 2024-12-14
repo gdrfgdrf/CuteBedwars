@@ -28,6 +28,15 @@ class ChangeData(
         return ""
     }
 
+    fun getStringOrDefault(index: Int, default: String): String {
+        runCatching {
+            return get(index)
+        }.onFailure {
+            return default
+        }
+        return default
+    }
+
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun of(vararg any: Any) = ChangeData(any as Array<Any?>)

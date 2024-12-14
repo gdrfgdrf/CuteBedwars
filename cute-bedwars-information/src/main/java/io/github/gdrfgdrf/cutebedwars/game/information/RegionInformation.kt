@@ -137,10 +137,12 @@ object RegionInformation {
 
             val result = CalculateResult(REGION_ERROR, true, null, null)
 
-            val outlineBox = IOutlineBox.new(first, second)
-            val size = outlineBox.size
-            if (size < 2) {
-                result.result = false
+            if (first != null && second != null) {
+                val outlineBox = IOutlineBox.new(first, second)
+                val size = outlineBox.size
+                if (size < 2) {
+                    result.result = false
+                }
             }
 
             result

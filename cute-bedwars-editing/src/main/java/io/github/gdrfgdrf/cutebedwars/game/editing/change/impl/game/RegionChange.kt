@@ -7,6 +7,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.items.item.ISpecialBuiltItem
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.abstracts.selection.ISelections
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IBooleanConditions
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region
 import io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod
@@ -16,17 +17,36 @@ import io.github.gdrfgdrf.cutebedwars.languages.collect.EditorLanguage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameContext>() {
-    private var previousValuePos1: String? = null
-    private var previousValuePos2: String? = null
+class RegionChange(
+    var x1: String?,
+    var y1: String?,
+    var z1: String?,
+    var x2: String?,
+    var y2: String?,
+    var z2: String?
+) : AbstractChange<IGameContext>() {
+    private var previousValueX1: String? = null
+    private var previousValueY1: String? = null
+    private var previousValueZ1: String? = null
+    private var previousValueX2: String? = null
+    private var previousValueY2: String? = null
+    private var previousValueZ2: String? = null
 
     constructor(changeData: ChangeData) : this(
-        "${changeData.getStringOrBlank(0)} ${changeData.getStringOrBlank(1)} ${changeData.getStringOrBlank(2)}",
-        "${changeData.getStringOrBlank(3)} ${changeData.getStringOrBlank(4)} ${changeData.getStringOrBlank(5)}"
+        changeData.getStringOrBlank(0),
+        changeData.getStringOrBlank(1),
+        changeData.getStringOrBlank(2),
+        changeData.getStringOrBlank(3),
+        changeData.getStringOrBlank(4),
+        changeData.getStringOrBlank(5)
     ) {
         if (changeData.length() == 12) {
-            previousValuePos1 = "${changeData.getStringOrBlank(6)} ${changeData.getStringOrBlank(7)} ${changeData.getStringOrBlank(8)}"
-            previousValuePos2 = "${changeData.getStringOrBlank(9)} ${changeData.getStringOrBlank(10)} ${changeData.getStringOrBlank(11)}"
+            previousValueX1 = changeData.getStringOrBlank(6)
+            previousValueY1 = changeData.getStringOrBlank(7)
+            previousValueZ1 = changeData.getStringOrBlank(8)
+            previousValueX2 = changeData.getStringOrBlank(9)
+            previousValueY2 = changeData.getStringOrBlank(10)
+            previousValueZ2 = changeData.getStringOrBlank(11)
         }
     }
 
@@ -34,13 +54,19 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
         if (sender !is Player) {
             throw IllegalArgumentException("only player can do this")
         }
-        if (!pos1.isNullOrBlank() || !pos2.isNullOrBlank()) {
+        if (!x1.isNullOrBlank() ||
+            !y1.isNullOrBlank() ||
+            !z1.isNullOrBlank() ||
+            !x2.isNullOrBlank() ||
+            !y2.isNullOrBlank() ||
+            !z2.isNullOrBlank()) {
             return true
         }
 
         val item = IItems.valueOf("SELECTION_TOOL").special()
         if (item.has(sender) && ISelections.instance().has(sender)) {
-            return true
+            val select = ISelections.instance().get(sender)!!
+            return select.pos1() != null && select.pos2() != null
         }
 
         item.give(sender)
@@ -53,16 +79,28 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
         if (sender !is Player) {
             return false
         }
-        if (pos1.isNullOrBlank() && pos2.isNullOrBlank()) {
+        if (x1.isNullOrBlank() &&
+            y1.isNullOrBlank() &&
+            z1.isNullOrBlank() &&
+            x2.isNullOrBlank() &&
+            y2.isNullOrBlank() &&
+            z2.isNullOrBlank()) {
             ISelections.instance().get(sender)?.let {
-                pos1 = it.pos1()?.parsableString()
-                pos2 = it.pos2()?.parsableString()
+                val pos1 = it.pos1()
+                val pos2 = it.pos2()
+
+                x1 = pos1?.x.toString()
+                y1 = pos1?.y.toString()
+                z1 = pos1?.z.toString()
+                x2 = pos2?.x.toString()
+                y2 = pos2?.y.toString()
+                z2 = pos2?.z.toString()
             }
         }
 
         runCatching {
-            Coordinate.parse(pos1)
-            Coordinate.parse(pos2)
+            Coordinate.tryParse(x1, y1, z1)
+            Coordinate.tryParse(x2, y2, z2)
         }.onFailure {
             return false
         }
@@ -70,17 +108,28 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
     }
 
     override fun makeUndo(): AbstractChange<IGameContext> {
-        val regionChange = RegionChange(previousValuePos1, previousValuePos2)
-        regionChange.previousValuePos1 = pos1
-        regionChange.previousValuePos2 = pos2
+        val regionChange = RegionChange(
+            previousValueX1,
+            previousValueY1,
+            previousValueZ1,
+            previousValueX2,
+            previousValueY2,
+            previousValueZ2
+        )
+        regionChange.previousValueX1 = x1
+        regionChange.previousValueY1 = y1
+        regionChange.previousValueZ1 = z1
+        regionChange.previousValueX2 = x2
+        regionChange.previousValueY2 = y2
+        regionChange.previousValueZ2 = z2
         return regionChange
     }
 
     override fun args(): Array<Any?> {
-        val pos1Coordinate = Coordinate.tryParse(pos1)
-        val pos2Coordinate = Coordinate.tryParse(pos2)
-        val previousPos1Coordinate = Coordinate.tryParse(previousValuePos1)
-        val previousPos2Coordinate = Coordinate.tryParse(previousValuePos2)
+        val pos1Coordinate = Coordinate.tryParse(x1, y1, z1)
+        val pos2Coordinate = Coordinate.tryParse(x2, y2, z2)
+        val previousPos1Coordinate = Coordinate.tryParse(previousValueX1, previousValueY1, previousValueZ1)
+        val previousPos2Coordinate = Coordinate.tryParse(previousValueX2, previousValueY2, previousValueZ2)
 
         val x1 = pos1Coordinate?.x ?: ""
         val y1 = pos1Coordinate?.y ?: ""
@@ -113,14 +162,22 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
     }
 
     override fun name(): String {
-        return "change \"from $previousValuePos1 -> $previousValuePos2\" to \"from $pos1 -> $pos2\""
+        val pos1Coordinate = Coordinate.tryParse(x1, y1, z1)
+        val pos2Coordinate = Coordinate.tryParse(x2, y2, z2)
+        val previousPos1Coordinate = Coordinate.tryParse(previousValueX1, previousValueY1, previousValueZ1)
+        val previousPos2Coordinate = Coordinate.tryParse(previousValueX2, previousValueY2, previousValueZ2)
+        return "change \"from $previousPos1Coordinate -> $previousPos2Coordinate\" to \"from $pos1Coordinate -> $pos2Coordinate\""
     }
 
     override fun localizedName(): (CommandSender) -> ITranslationAgent {
         return { sender ->
+            val pos1Coordinate = Coordinate.tryParse(x1, y1, z1)
+            val pos2Coordinate = Coordinate.tryParse(x2, y2, z2)
+            val previousPos1Coordinate = Coordinate.tryParse(previousValueX1, previousValueY1, previousValueZ1)
+            val previousPos2Coordinate = Coordinate.tryParse(previousValueX2, previousValueY2, previousValueZ2)
             localizationScope(sender) {
                 message(EditorLanguage.GAME_REGION_CHANGE_NAME)
-                    .format0(previousValuePos1 ?: "null", previousValuePos2 ?: "null", pos1 ?: "null", pos2 ?: "null")
+                    .format0(previousPos1Coordinate ?: "null", previousPos2Coordinate ?: "null", pos1Coordinate ?: "null", pos2Coordinate ?: "null")
             }
         }
     }
@@ -131,18 +188,43 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
         }
 
         val game = t.game
-        val region = Region()
-        previousValuePos1 = region.pos1?.parsableString()
-        previousValuePos2 = region.pos2?.parsableString()
 
-        if (pos1 == null && pos2 == null) {
-            region.pos1 = null
-            region.pos2 = null
+        val previousRegion = game.region
+        previousValueX1 = previousRegion?.pos1?.x.toString()
+        previousValueY1 = previousRegion?.pos1?.y.toString()
+        previousValueZ1 = previousRegion?.pos1?.z.toString()
+        previousValueX2 = previousRegion?.pos2?.x.toString()
+        previousValueY2 = previousRegion?.pos2?.y.toString()
+        previousValueZ2 = previousRegion?.pos2?.z.toString()
+
+        var newRegion: Region? = Region()
+
+        var newPos1: Coordinate? = Coordinate()
+        if (!x1.isNullOrBlank() && !y1.isNullOrBlank() && !z1.isNullOrBlank()) {
+            newPos1!!.x = x1.toString().toDouble()
+            newPos1.y = y1.toString().toDouble()
+            newPos1.z = z1.toString().toDouble()
         } else {
-            region.pos1 = Coordinate.parse(pos1)
-            region.pos2 = Coordinate.parse(pos2)
+            newPos1 = null
         }
-        game.region = region
+
+        var newPos2: Coordinate? = Coordinate()
+        if (!x2.isNullOrBlank() && !y2.isNullOrBlank() && !z2.isNullOrBlank()) {
+            newPos2!!.x = x2.toString().toDouble()
+            newPos2.y = y2.toString().toDouble()
+            newPos2.z = z2.toString().toDouble()
+        } else {
+            newPos2 = null
+        }
+
+        if (newPos1 != null && newPos2 != null) {
+            newRegion!!.pos1 = newPos1
+            newRegion.pos2 = newPos2
+        } else {
+            newRegion = null
+        }
+
+        game.region = newRegion
 
         ISelections.instance().remove(sender as Player)
     }

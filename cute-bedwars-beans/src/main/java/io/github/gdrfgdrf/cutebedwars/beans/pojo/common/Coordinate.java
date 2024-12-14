@@ -52,7 +52,23 @@ public class Coordinate {
         try {
             return parse(string);
         } catch (Exception e) {
-            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Nullable
+    public static Coordinate tryParse(String x, String y, String z) {
+        try {
+            if (x == null || y == null || z == null) {
+                return null;
+            }
+
+            Coordinate result = new Coordinate();
+            result.x = Double.parseDouble(x);
+            result.y = Double.parseDouble(y);
+            result.z = Double.parseDouble(z);
+            return result;
+        } catch (Exception e) {
             return null;
         }
     }
