@@ -80,9 +80,9 @@ object CommandInformation : ICommandInformation {
                                             }
 
                                             if (enablePart) {
-                                                suggestCommandInPart(i, "${subCommand.command.getRaw()} $noPartDividerContent")
+                                                suggestCommandInPart(i, "${subCommand.command.getRaw()} args $noPartDividerContent")
                                             } else {
-                                                suggestCommand("${subCommand.command.getRaw()} $noPartDividerContent")
+                                                suggestCommand("${subCommand.command.getRaw()} args $noPartDividerContent")
                                             }
                                         }
                                     }
