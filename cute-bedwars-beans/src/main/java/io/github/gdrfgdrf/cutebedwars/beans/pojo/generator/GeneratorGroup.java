@@ -24,16 +24,4 @@ public class GeneratorGroup {
     private List<Generator> generators = new ArrayList<>();
     @UndefinableForPropertyChange
     private List<GeneratorGroupLevel> levels = new ArrayList<>();
-
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static <T> T convert(Class<?> targetType, Object obj) {
-        if (targetType == String.class) {
-            return (T) obj.toString();
-        }
-        if (targetType == int.class || targetType == Integer.class) {
-            return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
-        }
-        return null;
-    }
 }
