@@ -16,12 +16,11 @@ class GameCommitStorage(file: String) : AbstractGameCommitStorage() {
     private val protobufStorage = ProtobufStorage()
 
     private val gameCommitFile = File(file)
-    private val gameProtobuf =
-        protobufStorage.protobuf(gameCommitFile, Commits.parser(), Commits.newBuilder())
+    private val gameProtobuf = protobufStorage.protobuf(gameCommitFile, Commits.parser(), Commits.newBuilder())
 
     override fun get(): Commits? = gameProtobuf.message
 
-    override fun save(gameId: Long, commit: ICommit<*>, finished: () -> Unit) {
+    override fun save(commit: ICommit<*>, finished: () -> Unit) {
         val commitProtobuf = Convertors.protobufCommit(commit)
         gameProtobuf.rebuild {
             it!!.toBuilder()

@@ -9,7 +9,7 @@ import io.github.gdrfgdrf.multimodulemediator.bean.ArgumentSet
 @Service("game_commit_storage", singleton = false)
 abstract class AbstractGameCommitStorage {
     abstract fun get(): Commits?
-    abstract fun save(gameId: Long, commit: ICommit<*>, finished: () -> Unit)
+    abstract fun save(commit: ICommit<*>, finished: () -> Unit)
 
     companion object {
         fun new(folder: String): AbstractGameCommitStorage = Mediator.get(

@@ -13,6 +13,7 @@ enum class PageRequestTypes(
     INFO_GAME(false),
 
     EDIT_LIST_CHANGES(false),
-    EDIT_LIST_AREA_COMMITS(false)
+    EDIT_LIST_AREA_COMMITS(false),
+    EDIT_LIST_GAME_COMMITS(false)
     ;
 }

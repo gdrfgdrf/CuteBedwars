@@ -1,9 +1,13 @@
 package io.github.gdrfgdrf.cutebedwars.commands.sub.edit
 
+import io.github.gdrfgdrf.cutebedwars.abstracts.chatpage.IChatPages
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.AbstractSubCommand
 import io.github.gdrfgdrf.cutebedwars.abstracts.commands.IParamCombination
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.ICommands
+import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPageRequestTypes
+import io.github.gdrfgdrf.cutebedwars.abstracts.information.IProtobufCommitInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
+import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterAreaFinder
 import io.github.gdrfgdrf.cutebedwars.commands.finder.BetterGameFinder
@@ -35,11 +39,40 @@ object EditListGameCommits : AbstractSubCommand(
                     .send()
                 return@localizationScope
             }
-            if (protobufCommits.commitsList.isNullOrEmpty()) {
+            val commitsList = protobufCommits.commitsList
+            if (commitsList.isNullOrEmpty()) {
                 message(AreaManagementLanguage.GAME_COMMITS_IS_EMPTY)
                     .send()
                 return@localizationScope
             }
+
+            val chatPage = IChatPages.instance().cache(
+                sender,
+                IPageRequestTypes.valueOf("EDIT_LIST_GAME_COMMITS"),
+                areaIdentifier
+            ) {
+                return@cache arrayListOf()
+            }
+            chatPage.enableDefaultTopAndBottom = false
+
+            commitsList.forEach { commit ->
+                chatPage.addPage { pageIndex ->
+                    arrayListOf<ITranslationAgent>().apply {
+                        add(
+                            message(AreaManagementLanguage.GAME_COMMITS_TOP)
+                                .format0(commit.submitter, pageIndex, commitsList.size)
+                        )
+                        addAll(
+                            IProtobufCommitInformation.instance().convert(sender, commit)
+                        )
+                        add(
+                            message(AreaManagementLanguage.GAME_COMMITS_BOTTOM)
+                                .format0(commit.submitter, pageIndex, commitsList.size)
+                        )
+                    }
+                }
+            }
+            chatPage.send(pageIndex - 1)
         }
     }
 }
