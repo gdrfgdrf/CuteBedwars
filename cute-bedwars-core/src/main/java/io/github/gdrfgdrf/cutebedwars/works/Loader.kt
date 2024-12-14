@@ -149,6 +149,10 @@ object Loader : ILoader {
     }
 
     private fun loadAreas() {
+        IManagers.instance().merge().forEach {
+            IManagers.instance().unregister(it)
+        }
+
         val folder = File(IConstants["AREA_FOLDER"])
         if (!folder.exists()) {
             folder.mkdirs()
