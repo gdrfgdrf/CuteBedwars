@@ -36,6 +36,8 @@ class ItemProperties : IItemProperties {
     override val canPlaceOn: ICustomList<Material> = customList()
     override val canDestroy: ICustomList<Material> = customList()
 
+    override var postProcessor: ((ItemStack) -> Unit)? = null
+
     override fun check() {
         if (material == null) {
             throw IllegalArgumentException("material is required")
@@ -62,6 +64,9 @@ class ItemProperties : IItemProperties {
 
         properties.canPlaceOn.add(*this.canPlaceOn.list.toTypedArray())
         properties.canDestroy.add(*this.canDestroy.list.toTypedArray())
+
+        properties.postProcessor = postProcessor
+
         return properties
     }
 
@@ -110,6 +115,10 @@ class ItemProperties : IItemProperties {
             canDestroy.list.forEach { canDestroyMaterial ->
                 canDestroyList.add("minecraft:${canDestroyMaterial.name.lowercase()}")
             }
+        }
+
+        postProcessor?.let {
+            it(itemStack)
         }
     }
 }

@@ -31,6 +31,8 @@ interface IItemProperties {
     val canPlaceOn: ICustomList<Material>
     val canDestroy: ICustomList<Material>
 
+    var postProcessor: ((ItemStack) -> Unit)?
+
     fun check()
     fun copy(): IItemProperties
     fun generate(withName: Boolean = true): ItemStack
