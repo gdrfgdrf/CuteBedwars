@@ -10,6 +10,15 @@ class ChangeData(
         return args[index] as T
     }
 
+    fun <T> getOrNull(index: Int): T? {
+        runCatching {
+            return get(index)
+        }.onFailure {
+            return null
+        }
+        return null
+    }
+
     companion object {
         @Suppress("UNCHECKED_CAST")
         fun of(vararg any: Any) = ChangeData(any as Array<Any?>)
