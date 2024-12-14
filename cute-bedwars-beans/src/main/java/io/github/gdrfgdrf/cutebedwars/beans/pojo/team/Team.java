@@ -57,21 +57,6 @@ public class Team {
     @JsonProperty(value = "generator-groups")
     private List<GeneratorGroup> generatorGroups = new ArrayList<>();
 
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static  <T> T convert(Class<?> targetType, Object obj) {
-        if (targetType == String.class) {
-            return (T) obj.toString();
-        }
-        if (targetType == int.class || targetType == Integer.class) {
-            return (T) Integer.valueOf(Integer.parseInt(obj.toString()));
-        }
-        if (targetType == TeamColor.class) {
-            return (T) TeamColor.valueOf(obj.toString());
-        }
-        return null;
-    }
-
     public boolean fixGameMinPlayer(Game game) {
         int totalMinPlayer = 0;
         List<Team> teams = game.getTeams();
