@@ -53,26 +53,25 @@ class PropertyChange(
         "Applying $key: $value to area, area's id: ${t.manager.area.id}".logInfo()
 
         val area = t.manager.area
-        val convertible = Convertible.of(Area::class.java)
         when (key) {
             "name" -> {
                 previousValue = area.name
-                area.name = convertible.invoke(java.lang.String::class.java, value)
+                area.name = value.toString()
             }
 
             "default-template-id" -> {
                 previousValue = area.defaultTemplateId
-                area.defaultTemplateId = convertible.invoke(java.lang.Long::class.java, value)
+                area.defaultTemplateId = value.toString().toLong()
             }
 
             "world-name" -> {
                 previousValue = area.worldName
-                area.worldName = convertible.invoke(java.lang.String::class.java, value)
+                area.worldName = value.toString()
             }
 
             "lobby-world-name" -> {
                 previousValue = area.lobbyWorldName
-                area.lobbyWorldName = convertible.invoke(java.lang.String::class.java, value)
+                area.lobbyWorldName = value.toString()
             }
         }
     }
