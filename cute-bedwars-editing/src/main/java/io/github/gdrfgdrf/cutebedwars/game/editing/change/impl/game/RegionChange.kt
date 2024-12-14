@@ -24,7 +24,7 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
         "${changeData.getStringOrBlank(0)} ${changeData.getStringOrBlank(1)} ${changeData.getStringOrBlank(2)}",
         "${changeData.getStringOrBlank(3)} ${changeData.getStringOrBlank(4)} ${changeData.getStringOrBlank(5)}"
     ) {
-        if (changeData.length() == 8) {
+        if (changeData.length() == 12) {
             previousValuePos1 = changeData[6]
             previousValuePos2 = changeData[7]
         }
@@ -123,7 +123,7 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
                 "game-region-change",
                 IGameContext::class.java,
                 0..6,
-                8,
+                12,
                 EditorLanguage::GAME_REGION_CHANGE
             )
         }
