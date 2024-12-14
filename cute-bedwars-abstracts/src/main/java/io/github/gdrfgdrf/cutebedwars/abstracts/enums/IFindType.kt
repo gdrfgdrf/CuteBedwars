@@ -7,6 +7,6 @@ import io.github.gdrfgdrf.multimodulemediator.annotation.EnumService
 interface IFindType {
     companion object {
         fun valueOf(name: String): IFindType = Mediator.valueOf(IFindType::class.java, name)!!
-        fun find(name: String): IFindType = Mediator.search<IFindType>(IFindType::class.java, name)!![0]
+        fun find(name: String): List<IFindType> = Mediator.search<IFindType>(IFindType::class.java, name)!!
     }
 }

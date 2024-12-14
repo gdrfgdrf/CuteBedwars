@@ -86,7 +86,7 @@ class ParamCombination(
             }
         }
 
-        return IFindType.find(findType)
+        return IFindType.find(findType).getOrNull(0)
     }
 
     override fun findType(): IFindType? {
