@@ -13,10 +13,4 @@ import lombok.Data;
 public class Item {
     @UndefinableForPropertyChange
     private String nbt;
-
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static  <T> T convert(Class<?> targetType, Object obj) {
-        return (T) obj.toString();
-    }
 }
