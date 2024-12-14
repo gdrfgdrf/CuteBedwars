@@ -35,13 +35,4 @@ public class Generator {
     private Item display;
     @UndefinableForPropertyChange
     private List<Item> products = new ArrayList<>();
-
-    @SuppressWarnings("unchecked")
-    @ConvertPropertyFunction
-    public static <T> T convert(Class<?> targetType, Object obj) {
-        if (targetType == String.class) {
-            return (T) obj.toString();
-        }
-        return null;
-    }
 }
