@@ -103,7 +103,7 @@ class PropertyChange(
                 "area-property-change",
                 IAreaContext::class.java,
                 2..2,
-                3,
+                3..3,
                 EditorLanguage::AREA_PROPERTY_CHANGE
             )
         }

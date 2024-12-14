@@ -6,7 +6,7 @@ class ChangeMetadata(
     val identifier: String,
     val type: Class<*>,
     val argsRange: IntRange,
-    val maxArgsForProtobuf: Int,
+    val argsRangeForProtobuf: IntRange,
     private val localizedIdentifier: () -> ILanguageString,
 ) {
     fun identifier(): String = identifier

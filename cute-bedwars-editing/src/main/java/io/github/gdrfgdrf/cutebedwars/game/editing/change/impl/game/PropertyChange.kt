@@ -95,7 +95,7 @@ class PropertyChange(
                 "game-property-change",
                 IGameContext::class.java,
                 2..2,
-                3,
+                2..3,
                 EditorLanguage::GAME_PROPERTY_CHANGE
             )
         }

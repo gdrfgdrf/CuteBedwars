@@ -25,8 +25,8 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
         "${changeData.getStringOrBlank(3)} ${changeData.getStringOrBlank(4)} ${changeData.getStringOrBlank(5)}"
     ) {
         if (changeData.length() == 12) {
-            previousValuePos1 = changeData[6]
-            previousValuePos2 = changeData[7]
+            previousValuePos1 = "${changeData.getStringOrBlank(6)} ${changeData.getStringOrBlank(7)} ${changeData.getStringOrBlank(8)}"
+            previousValuePos2 = "${changeData.getStringOrBlank(9)} ${changeData.getStringOrBlank(10)} ${changeData.getStringOrBlank(11)}"
         }
     }
 
@@ -77,7 +77,39 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
     }
 
     override fun args(): Array<Any?> {
-        return arrayOf(pos1, pos2)
+        val pos1Coordinate = Coordinate.tryParse(pos1)
+        val pos2Coordinate = Coordinate.tryParse(pos2)
+        val previousPos1Coordinate = Coordinate.tryParse(previousValuePos1)
+        val previousPos2Coordinate = Coordinate.tryParse(previousValuePos2)
+
+        val x1 = pos1Coordinate?.x ?: ""
+        val y1 = pos1Coordinate?.y ?: ""
+        val z1 = pos1Coordinate?.z ?: ""
+        val x2 = pos2Coordinate?.x ?: ""
+        val y2 = pos2Coordinate?.y ?: ""
+        val z2 = pos2Coordinate?.z ?: ""
+
+        val previousX1 = previousPos1Coordinate?.x ?: ""
+        val previousY1 = previousPos1Coordinate?.y ?: ""
+        val previousZ1 = previousPos1Coordinate?.z ?: ""
+        val previousX2 = previousPos2Coordinate?.x ?: ""
+        val previousY2 = previousPos2Coordinate?.y ?: ""
+        val previousZ2 = previousPos2Coordinate?.z ?: ""
+
+        return arrayOf(
+            x1,
+            y1,
+            z1,
+            x2,
+            y2,
+            z2,
+            previousX1,
+            previousY1,
+            previousZ1,
+            previousX2,
+            previousY2,
+            previousZ2
+        )
     }
 
     override fun name(): String {
@@ -123,7 +155,7 @@ class RegionChange(var pos1: String?, var pos2: String?) : AbstractChange<IGameC
                 "game-region-change",
                 IGameContext::class.java,
                 0..6,
-                12,
+                12..12,
                 EditorLanguage::GAME_REGION_CHANGE
             )
         }

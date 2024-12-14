@@ -2,6 +2,7 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author gdrfgdrf
@@ -44,6 +45,16 @@ public class Coordinate {
         result.y = y;
         result.z = z;
         return result;
+    }
+
+    @Nullable
+    public static Coordinate tryParse(String string) {
+        try {
+            return parse(string);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

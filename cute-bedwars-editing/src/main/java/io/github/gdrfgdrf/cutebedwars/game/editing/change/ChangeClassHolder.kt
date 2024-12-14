@@ -13,7 +13,7 @@ class ChangeClassHolder<T : AbstractChange<*>>(
 
     override fun validateArgsLength(protobuf: Boolean, vararg any: Any): Boolean {
         val argsRange = if (protobuf) {
-            metadata.argsRange.first..metadata.maxArgsForProtobuf
+            metadata.argsRangeForProtobuf
         } else {
             metadata.argsRange
         }
