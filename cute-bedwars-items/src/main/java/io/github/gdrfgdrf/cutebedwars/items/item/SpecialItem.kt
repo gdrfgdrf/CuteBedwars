@@ -5,6 +5,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemProperties
 import io.github.gdrfgdrf.cutebedwars.items.GivenItem
 import io.github.gdrfgdrf.cutebedwars.items.Item
+import io.github.gdrfgdrf.cutebedwars.items.ItemCollections
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
@@ -38,6 +39,7 @@ class SpecialItem(private val itemStack: ItemStack, properties: IItemProperties)
             player,
             amount
         )
+        ItemCollections.add(player, givenItem)
         givenItem.give(slotIndex)
         properties.onGiven?.invoke(player, givenItem)
 

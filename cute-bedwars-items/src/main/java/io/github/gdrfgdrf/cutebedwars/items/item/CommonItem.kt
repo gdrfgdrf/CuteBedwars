@@ -40,7 +40,6 @@ open class CommonItem(
     }
 
     override fun give(slotIndex: Int) {
-        ItemCollections.add(player, this)
         if (slotIndex == -1) {
             player.inventory.addItem(itemStack)
         } else {
