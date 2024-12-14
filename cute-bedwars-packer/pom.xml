@@ -168,11 +168,6 @@
             <groupId>io.github.gdrfgdrf.cute-bedwars</groupId>
             <artifactId>database-default-impl-mysql</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.gdrfgdrf.cutebedwars</groupId>
-            <artifactId>mixins</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
