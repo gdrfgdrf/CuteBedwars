@@ -127,17 +127,17 @@ enum class Items(override val item: IItem) : IItems {
               }
           }
 
-          setPostProcessor(this, SELECTION_TOOL, true)
+          setPostProcessor(this, "SELECTION_TOOL", true)
       }.build(true)
     ),
 
     ;
 }
 
-private fun setPostProcessor(itemProperties: IItemProperties, enum: Items, special: Boolean) {
+private fun setPostProcessor(itemProperties: IItemProperties, enum: String, special: Boolean) {
     itemProperties.postProcessor = { itemStack ->
         NBT.modify(itemStack) { nbt ->
-            nbt.setString("cute-bedwars-item-enum", enum.name)
+            nbt.setString("cute-bedwars-item-enum", enum)
             nbt.setBoolean("cute-bedwars-item-special", special)
         }
     }
