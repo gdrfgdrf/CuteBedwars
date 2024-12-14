@@ -181,12 +181,30 @@ enum class Commands(
         "area", false, 2..3, Permissions.EDIT_LIST_AREA_COMMITS, false, CommandNodes.EDIT_LIST_COMMITS,
         arrayOf(
             IParamScheme.new {
-                add("BY_ID", "BY_ID")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
             },
             IParamScheme.new {
-                add("BY_ID", "BY_ID")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
                 add("AREA", "AREAS")
+                add("PAGE_INDEX", "POSITIVE_NUMBER")
+            }
+        )
+    ),
+    EDIT_LIST_GAME_COMMITS(
+        "game", false, 4..5, Permissions.EDIT_LIST_GAME_COMMITS, false, CommandNodes.EDIT_LIST_COMMITS,
+        arrayOf(
+            IParamScheme.new {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("GAME", "GAMES")
+            },
+            IParamScheme.new {
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("AREA", "AREAS")
+                add("FIND_BY_ID_OR_NAME", "FIND_BY_ID_OR_NAME")
+                add("GAME", "GAMES")
                 add("PAGE_INDEX", "POSITIVE_NUMBER")
             }
         )

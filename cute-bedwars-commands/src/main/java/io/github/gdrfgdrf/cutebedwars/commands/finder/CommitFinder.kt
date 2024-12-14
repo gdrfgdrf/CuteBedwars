@@ -33,10 +33,7 @@ object CommitFinder {
         if (editor is AbstractGameEditor) {
             val gameContext = editor.t
 
-            val commitsList =
-                gameContext.commitStorage.get()?.getMapOrDefault(gameContext.game.id.toString(), null)?.commitsList
-                    ?: return null
-
+            val commitsList = gameContext.commitStorage.get()?.commitsList ?: return null
             val targetCommit = commitsList.stream()
                 .filter {
                     it.id == commitId
@@ -72,7 +69,7 @@ object CommitFinder {
             val gameContext = editor.t
 
             val commitsList =
-                gameContext.commitStorage.get()?.getMapOrDefault(gameContext.game.id.toString(), null)?.commitsList
+                gameContext.commitStorage.get()?.commitsList
             return commitsList?.stream()
                 ?.filter {
                     it.id == commitId

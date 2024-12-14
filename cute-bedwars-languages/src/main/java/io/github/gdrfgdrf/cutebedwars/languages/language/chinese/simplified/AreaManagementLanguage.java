@@ -83,4 +83,9 @@ class AreaManagementLanguage implements IILanguageBlock {
     public static final ILanguageString AREA_COMMITS_IS_EMPTY = ILanguageString.Companion.create("&c该区域没有提交记录");
     public static final ILanguageString AREA_COMMITS_TOP = ILanguageString.Companion.create("&6&l--------------------- &d&l%s 的提交 &r&8(&b&l%d &l&7/ &b&l%d&8) &6&l---------------------");
     public static final ILanguageString AREA_COMMITS_BOTTOM = ILanguageString.Companion.create("&6&l--------------------- &d&l%s 的提交 &r&8(&b&l%d &l&7/ &b&l%d&8) &6&l---------------------");
+
+    public static final ILanguageString GAME_COMMITS_IS_NULL = ILanguageString.Companion.create("&c无法加载该游戏的提交记录");
+    public static final ILanguageString GAME_COMMITS_IS_EMPTY = ILanguageString.Companion.create("&c该游戏没有提交记录");
+    public static final ILanguageString GAME_COMMITS_TOP = ILanguageString.Companion.create("&6&l--------------------- &d&l%s 的提交 &r&8(&b&l%d &l&7/ &b&l%d&8) &6&l---------------------");
+    public static final ILanguageString GAME_COMMITS_BOTTOM = ILanguageString.Companion.create("&6&l--------------------- &d&l%s 的提交 &r&8(&b&l%d &l&7/ &b&l%d&8) &6&l---------------------");
 }

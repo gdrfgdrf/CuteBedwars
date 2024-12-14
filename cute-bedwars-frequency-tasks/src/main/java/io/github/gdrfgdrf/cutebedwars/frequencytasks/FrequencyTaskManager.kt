@@ -17,6 +17,7 @@ object FrequencyTaskManager : IFrequencyTaskManager {
 
     override fun start() {
         "Starting frequency task manager".logInfo()
+        terminated = false
         asyncTask {
             while (!terminated) {
                 run()

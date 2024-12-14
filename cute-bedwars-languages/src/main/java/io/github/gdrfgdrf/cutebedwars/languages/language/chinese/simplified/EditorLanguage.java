@@ -21,6 +21,9 @@ class EditorLanguage implements IILanguageBlock {
     public static final ILanguageString CREATING_CHANGE_LIST = ILanguageString.Companion.create("&e正在创建修改列表");
     public static final ILanguageString CREATE_CHANGE_LIST_FINISHED = ILanguageString.Companion.create("&a修改列表已创建");
 
+    public static final ILanguageString PRELOADING_CHANGE = ILanguageString.Companion.create("&e正在预加载修改");
+    public static final ILanguageString PRELOAD_SUCCESS = ILanguageString.Companion.create("&a预加载修改成功");
+
     public static final ILanguageString ADD_CHANGE_ERROR = ILanguageString.Companion.create("&c无法添加修改");
     public static final ILanguageString ADD_CHANGE_SUCCESS = ILanguageString.Companion.create("&a添加修改成功");
 

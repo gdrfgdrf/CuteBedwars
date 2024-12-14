@@ -21,6 +21,9 @@ public class EditorLanguage implements IILanguageCollect {
     public static ILanguageString CREATING_CHANGE_LIST;
     public static ILanguageString CREATE_CHANGE_LIST_FINISHED;
 
+    public static ILanguageString PRELOADING_CHANGE;
+    public static ILanguageString PRELOAD_CHANGE_SUCCESS;
+
     public static ILanguageString ADD_CHANGE_ERROR;
     public static ILanguageString ADD_CHANGE_SUCCESS;
 

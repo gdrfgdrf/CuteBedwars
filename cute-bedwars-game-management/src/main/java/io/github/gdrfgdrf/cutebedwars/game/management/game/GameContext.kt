@@ -49,8 +49,7 @@ class GameContext(
         }
 
         "Creating the commit storage for a game id: ${game.id}, name: ${game.name}, area's id: ${game.areaId}".logInfo()
-        commitStorage = AbstractGameCommitStorage.new(
-            IConstants["AREA_FOLDER"] + game.areaId + "/" + "commits" + "/" + "games")
+        commitStorage = AbstractGameCommitStorage.new("${IConstants["AREA_FOLDER"]}/${game.areaId}/commits/games/${game.id}")
     }
 
     constructor(areaContext: IAreaContext, game: Game)

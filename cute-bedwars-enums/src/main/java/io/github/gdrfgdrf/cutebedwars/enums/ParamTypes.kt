@@ -289,9 +289,8 @@ enum class ParamTypes : IParamTypes {
 
                     val commitStorage = gameContext.commitStorage
                     val gameCommits = commitStorage.get()
-                    val commitsList = gameCommits?.getMapOrDefault(gameContext.game.id.toString(), null)?.commitsList
 
-                    commitsList?.forEach {
+                    gameCommits?.commitsList?.forEach {
                         ids.add(it.id)
                     }
                 }

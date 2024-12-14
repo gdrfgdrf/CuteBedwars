@@ -83,4 +83,9 @@ public class AreaManagementLanguage implements IILanguageCollect {
     public static ILanguageString AREA_COMMITS_IS_EMPTY;
     public static ILanguageString AREA_COMMITS_TOP;
     public static ILanguageString AREA_COMMITS_BOTTOM;
+
+    public static ILanguageString GAME_COMMITS_IS_NULL;
+    public static ILanguageString GAME_COMMITS_IS_EMPTY;
+    public static ILanguageString GAME_COMMITS_TOP;
+    public static ILanguageString GAME_COMMITS_BOTTOM;
 }
