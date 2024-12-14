@@ -23,6 +23,7 @@ public class EditorLanguage implements IILanguageCollect {
 
     public static ILanguageString PRELOADING_CHANGE;
     public static ILanguageString PRELOAD_CHANGE_SUCCESS;
+    public static ILanguageString CANNOT_PRELOAD_CHANGE;
 
     public static ILanguageString ADD_CHANGE_ERROR;
     public static ILanguageString ADD_CHANGE_SUCCESS;
@@ -71,5 +72,4 @@ public class EditorLanguage implements IILanguageCollect {
     public static ILanguageString GAME_REGION_CHANGE;
     public static ILanguageString GAME_REGION_CHANGE_NAME;
 
-    public static ILanguageString CANNOT_PRELOAD_CHANGE;
 }

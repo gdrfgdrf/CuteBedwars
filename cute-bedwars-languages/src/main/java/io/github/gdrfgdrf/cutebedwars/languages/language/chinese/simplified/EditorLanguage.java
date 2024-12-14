@@ -22,7 +22,8 @@ class EditorLanguage implements IILanguageBlock {
     public static final ILanguageString CREATE_CHANGE_LIST_FINISHED = ILanguageString.Companion.create("&a修改列表已创建");
 
     public static final ILanguageString PRELOADING_CHANGE = ILanguageString.Companion.create("&e正在预加载修改");
-    public static final ILanguageString PRELOAD_SUCCESS = ILanguageString.Companion.create("&a预加载修改成功");
+    public static final ILanguageString PRELOAD_CHANGE_SUCCESS = ILanguageString.Companion.create("&a预加载修改成功");
+    public static final ILanguageString CANNOT_PRELOAD_CHANGE = ILanguageString.Companion.create("&c无法预加载修改");
 
     public static final ILanguageString ADD_CHANGE_ERROR = ILanguageString.Companion.create("&c无法添加修改");
     public static final ILanguageString ADD_CHANGE_SUCCESS = ILanguageString.Companion.create("&a添加修改成功");
@@ -70,6 +71,5 @@ class EditorLanguage implements IILanguageBlock {
 
     public static final ILanguageString GAME_REGION_CHANGE = ILanguageString.Companion.create("游戏区域修改");
     public static final ILanguageString GAME_REGION_CHANGE_NAME = ILanguageString.Companion.create("将 %s -> %s 修改为 %s -> %s");
-    public static final ILanguageString CANNOT_PRELOAD_CHANGE = ILanguageString.Companion.create("无法加载修改");
 
 }
