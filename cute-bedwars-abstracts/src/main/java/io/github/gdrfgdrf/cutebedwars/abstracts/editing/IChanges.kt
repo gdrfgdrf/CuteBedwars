@@ -14,6 +14,7 @@ interface IChanges<T> {
     fun undo()
     fun redo()
     fun finish(): ICommit<T>
+    fun unFinish()
 
     fun forEach(block: (AbstractChange<T>) -> Unit)
     fun find(id: Long): AbstractChange<T>?

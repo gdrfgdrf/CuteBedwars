@@ -103,6 +103,11 @@ class Changes<T> : IChanges<T> {
         return Commit(this)
     }
 
+    override fun unFinish() {
+        "Un-Finishing changes".logInfo()
+        operable = true
+    }
+
     override fun forEach(block: (AbstractChange<T>) -> Unit) {
         changes.forEach(block)
     }
