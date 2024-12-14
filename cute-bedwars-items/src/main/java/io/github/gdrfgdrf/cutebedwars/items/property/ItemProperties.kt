@@ -99,7 +99,7 @@ class ItemProperties : IItemProperties {
 
         NBT.modify(itemStack) { operableNbt ->
             if (!stackable) {
-                operableNbt.setLong("cute-bedwars-item", YitIdHelper.nextId())
+                operableNbt.setLong("cute-bedwars-item-id", YitIdHelper.nextId())
             }
 
             val canPlaceOnList = operableNbt.getStringList("CanPlaceOn")
