@@ -1,6 +1,7 @@
 package io.github.gdrfgdrf.cutebedwars.database.impl.mysql.common
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.database.exception.DatabaseException
 import io.github.gdrfgdrf.cutebedwars.database.impl.mysql.MySQLMybatisConfigurer
@@ -19,7 +20,7 @@ object Mappers {
             return map[clazz] as T
         }
 
-        "Creating the mapper: $clazz".logInfo()
+        "Creating the mapper: $clazz".logDebug()
         val session = MySQLMybatisConfigurer.sqlSessionFactory!!.openSession(true)
         val mapper = session.getMapper(clazz)
         if (mapper is CreatableMapper) {
