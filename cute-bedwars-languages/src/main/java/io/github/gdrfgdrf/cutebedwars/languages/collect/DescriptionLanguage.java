@@ -114,6 +114,7 @@ public class DescriptionLanguage implements IILanguageCollect {
     public static ILanguageString COMMIT_MESSAGE;
     public static ILanguageString CHANGE_TYPE;
     public static ILanguageString AREA_PROPERTY_CHANGE;
+    public static ILanguageString AREA_WORLD_CHANGE;
     public static ILanguageString GAME_PROPERTY_CHANGE;
     public static ILanguageString GAME_REGION_CHANGE;
     public static ILanguageString GAME_COORDINATE_CHANGE;

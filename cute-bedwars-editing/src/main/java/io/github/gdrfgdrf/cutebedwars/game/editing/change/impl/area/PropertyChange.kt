@@ -30,9 +30,7 @@ class PropertyChange(
             return false
         }
         if (key != "name" &&
-            key != "default-template-id" &&
-            key != "world-name" &&
-            key != "lobby-world-name"
+            key != "default-template-id"
         ) {
             return false
         }
@@ -60,16 +58,6 @@ class PropertyChange(
             "default-template-id" -> {
                 previousValue = area.defaultTemplateId
                 area.defaultTemplateId = value.toString().toLong()
-            }
-
-            "world-name" -> {
-                previousValue = area.worldName
-                area.worldName = value.toString()
-            }
-
-            "lobby-world-name" -> {
-                previousValue = area.lobbyWorldName
-                area.lobbyWorldName = value.toString()
             }
         }
     }

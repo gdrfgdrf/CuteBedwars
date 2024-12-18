@@ -118,7 +118,8 @@ class DescriptionLanguage implements IILanguageBlock {
 
     public static final ILanguageString COMMIT_MESSAGE = ILanguageString.Companion.create("提交描述信息");
     public static final ILanguageString CHANGE_TYPE = ILanguageString.Companion.create("修改类型");
-    public static final ILanguageString AREA_PROPERTY_CHANGE = ILanguageString.Companion.create("区域属性修改，可接受两个参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 default-template-id，status，world-name，lobby-world-name，lobby-spawnpoint-coordinate");
+    public static final ILanguageString AREA_PROPERTY_CHANGE = ILanguageString.Companion.create("区域属性修改，可接受两个参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 default-template-id，status，lobby-spawnpoint-coordinate");
+    public static final ILanguageString AREA_WORLD_CHANGE = ILanguageString.Companion.create("区域世界属性修改，可接受两个参数，参数一为需要修改的世界的属性名，参数二为目标世界的名字，若仅提供属性名，不提供世界名，则默认为玩家当前处在的世界，提供的世界名必须实际存在。可修改的世界属性为 world-name, lobby-world-name");
     public static final ILanguageString GAME_PROPERTY_CHANGE = ILanguageString.Companion.create("游戏属性修改，可接受两个二参数，参数一为需要修改的属性，参数二为目标值。可修改的属性为 status、min-player、max-player、spectator-spawnpoint-coordinate");
     public static final ILanguageString GAME_REGION_CHANGE = ILanguageString.Companion.create("游戏范围修改，可接受六个参数，需选择两个点，前三个参数为第一个点的 x, y, z，后三个点为第二个点的 x, y, z。可直接输入六个坐标或不带参数使用，不带参数则给予选区工具。选区工具选择完成两个点后，将会使用粒子效果显示选区和辅助线，若确定选区正确再次添加修改即可完成");
     public static final ILanguageString GAME_COORDINATE_CHANGE = ILanguageString.Companion.create("游戏坐标属性修改，可接受四个参数，参数一为需要修改的属性，后面的参数二，三，四分别为坐标的 x, y, z。可修改的属性为 spectator-spawnpoint-coordinate");

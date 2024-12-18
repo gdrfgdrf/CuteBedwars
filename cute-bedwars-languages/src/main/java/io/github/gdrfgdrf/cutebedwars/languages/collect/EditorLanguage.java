@@ -66,6 +66,9 @@ public class EditorLanguage implements IILanguageCollect {
     public static ILanguageString AREA_PROPERTY_CHANGE;
     public static ILanguageString AREA_PROPERTY_CHANGE_NAME;
 
+    public static ILanguageString AREA_WORLD_CHANGE;
+    public static ILanguageString AREA_WORLD_CHANGE_NAME;
+
     public static ILanguageString GAME_PROPERTY_CHANGE;
     public static ILanguageString GAME_PROPERTY_CHANGE_NAME;
 
