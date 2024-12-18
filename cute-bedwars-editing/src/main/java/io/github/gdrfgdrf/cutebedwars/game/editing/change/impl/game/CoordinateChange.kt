@@ -105,8 +105,8 @@ class CoordinateChange(
         when (key) {
             "spectator-spawnpoint-coordinate" -> {
                 previousCoordinateX = game.spectatorSpawnpointCoordinate?.x.toString()
-                previousCoordinateY = game.spectatorSpawnpointCoordinate?.x.toString()
-                previousCoordinateZ = game.spectatorSpawnpointCoordinate?.x.toString()
+                previousCoordinateY = game.spectatorSpawnpointCoordinate?.y.toString()
+                previousCoordinateZ = game.spectatorSpawnpointCoordinate?.z.toString()
                 game.spectatorSpawnpointCoordinate = coordinate
             }
         }
