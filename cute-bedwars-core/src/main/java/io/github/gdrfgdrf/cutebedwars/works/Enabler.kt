@@ -8,6 +8,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.core.IPlugin
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IPluginState
 import io.github.gdrfgdrf.cutebedwars.abstracts.items.IItemCollections
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logError
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.multimodulemediator.annotation.ServiceImpl
@@ -63,7 +64,7 @@ object Enabler : IEnabler {
         }
 
         classes.forEach { listenerClass ->
-            "Registering a event listener: $listenerClass".logInfo()
+            "Registering an event listener: $listenerClass".logDebug()
             val listener = listenerClass.getDeclaredConstructor().newInstance()
 
             Bukkit.getServer().pluginManager.registerEvents(listener as Listener, javaPlugin)
