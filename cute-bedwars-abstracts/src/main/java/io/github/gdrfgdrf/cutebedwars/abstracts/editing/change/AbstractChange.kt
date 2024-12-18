@@ -31,7 +31,7 @@ abstract class AbstractChange<T> {
             return metadata!!
         }
 
-        val changeMetadataMethodClass = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.annotation.ChangeMetadataMethod")
+        val changeMetadataMethodClass = Class.forName("io.github.gdrfgdrf.cutebedwars.editing.change.annotation.ChangeMetadataMethod")
         val metadataMethod = this::class.java.methods.toList().stream()
             .filter {
                 it.isAnnotationPresent(changeMetadataMethodClass as Class<out Annotation>)
@@ -50,7 +50,7 @@ abstract class AbstractChange<T> {
             return identifier!!
         }
 
-        val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata")
+        val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.editing.change.data.ChangeMetadata")
         val identifierField = changeMetadata.getMethod("identifier")
         identifier = identifierField.invoke(metadata()) as String
 
@@ -63,7 +63,7 @@ abstract class AbstractChange<T> {
             return localizedIdentifier!!
         }
 
-        val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.game.editing.change.data.ChangeMetadata")
+        val changeMetadata = Class.forName("io.github.gdrfgdrf.cutebedwars.editing.change.data.ChangeMetadata")
         val localizedIdentifierField = changeMetadata.getMethod("localizedIdentifier")
         localizedIdentifier = (localizedIdentifierField.invoke(metadata()) as  () -> ILanguageString)()
 
