@@ -4,6 +4,7 @@ import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.AbstractChange
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.IChangeTypeRegistry
 import io.github.gdrfgdrf.cutebedwars.abstracts.editing.change.IChangeClassHolder
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.IClasses
+import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logDebug
 import io.github.gdrfgdrf.cutebedwars.abstracts.utils.logInfo
 import io.github.gdrfgdrf.cutebedwars.editing.change.annotation.ChangeMetadataMethod
 import io.github.gdrfgdrf.cutebedwars.editing.change.data.ChangeMetadata
@@ -16,7 +17,7 @@ object ChangeTypeRegistry : IChangeTypeRegistry {
     private val map = ConcurrentHashMap<String, IChangeClassHolder<AbstractChange<*>>>()
 
     private fun register(identifier: String, abstractChangeClass: Class<AbstractChange<*>>, metadata: ChangeMetadata) {
-        "Registering change type, identifier: $identifier, class: ${abstractChangeClass.simpleName}, type: ${metadata.type}".logInfo()
+        "Registering the change type, identifier: $identifier, class: ${abstractChangeClass.simpleName}, type: ${metadata.type}".logDebug()
         map[identifier] = ChangeClassHolder.create(abstractChangeClass, metadata)
     }
 
