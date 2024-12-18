@@ -121,6 +121,7 @@ enum class Descriptions(
     CHANGE_TYPE(DescriptionLanguage::CHANGE_TYPE, true),
     AREA_PROPERTY_CHANGE(DescriptionLanguage::AREA_PROPERTY_CHANGE, true),
     AREA_WORLD_CHANGE(DescriptionLanguage::AREA_WORLD_CHANGE, true),
+    AREA_COORDINATE_CHANGE(DescriptionLanguage::AREA_COORDINATE_CHANGE, true),
     GAME_PROPERTY_CHANGE(DescriptionLanguage::GAME_PROPERTY_CHANGE, true),
     GAME_REGION_CHANGE(DescriptionLanguage::GAME_REGION_CHANGE, true),
     GAME_COORDINATE_CHANGE(DescriptionLanguage::GAME_COORDINATE_CHANGE, true),

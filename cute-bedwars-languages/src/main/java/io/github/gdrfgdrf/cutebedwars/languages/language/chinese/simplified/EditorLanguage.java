@@ -69,6 +69,9 @@ class EditorLanguage implements IILanguageBlock {
     public static final ILanguageString AREA_WORLD_CHANGE = ILanguageString.Companion.create("区域世界属性修改");
     public static final ILanguageString AREA_WORLD_CHANGE_NAME = ILanguageString.Companion.create("将世界属性 %s 从 %s 修改为 %s");
 
+    public static final ILanguageString AREA_COORDINATE_CHANGE = ILanguageString.Companion.create("区域坐标属性修改");
+    public static final ILanguageString AREA_COORDINATE_CHANGE_NAME = ILanguageString.Companion.create("将坐标属性 %s 从 %s 修改为 %s");
+
     public static final ILanguageString GAME_PROPERTY_CHANGE = ILanguageString.Companion.create("游戏属性修改");
     public static final ILanguageString GAME_PROPERTY_CHANGE_NAME = ILanguageString.Companion.create("将 %s 从 %s 修改为 %s");
 
