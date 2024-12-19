@@ -1,7 +1,7 @@
 # CuteBedwars
 **[English](https://github.com/gdrfgdrf/CuteBedwars/blob/dev/README.md)** | [简体中文](https://github.com/gdrfgdrf/CuteBedwars/blob/dev/README_chinese.md) 
 
-A Minecraft Bed Wars plugin designed for a thrilling player experience,
+A Minecraft Bed Wars plugin,
 based on version 1.12.2
 and using [multi-module-mediator](https://github.com/gdrfgdrf/multi-module-mediator) for modularity.  
 ⚠ Still in development, not usable ⚠
