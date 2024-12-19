@@ -6,6 +6,8 @@ based on version 1.12.2
 and using [multi-module-mediator](https://github.com/gdrfgdrf/multi-module-mediator) for modularity.  
 ⚠ Still in development, not usable ⚠
 
+For specific information on the math and geometry modules, please visit the [Math README](https://github.com/gdrfgdrf/CuteBedwars/blob/dev/math/math-readme.md).
+
 ## Features
 
 - **Modular Design**: Decoupled architecture for maintainability.

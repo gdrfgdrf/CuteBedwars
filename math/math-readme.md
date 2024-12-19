@@ -38,7 +38,7 @@ $$\begin{eqnarray}
 ---
 
 OutlineBox 的空间图像  
-![box in 3d space coordinate system.png](box%20in%203d%20space%20coordinate%20system.png)
+![box in 3d space coordinate system.png](box%20in%203d%20space%20coordinate%20system.png)  
 A: (x1, y1, z2)，  
 B: (x1, y2, z2)，  
 C 为 pos2: (x2, y2, z2)，  
@@ -83,7 +83,7 @@ l: (x1, y2, z2) -> (x1, y1, z2)
 
 ---
 
-Rectangle 的图像
+Rectangle 的图像  
 ![rectangle.png](rectangle.png)  
 A 为 pos1: (x1, y1)，
 B: (x2, y1)，  
