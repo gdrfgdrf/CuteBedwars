@@ -2,10 +2,9 @@ package io.github.gdrfgdrf.cutebedwars.game.information
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.information.IAreaInformation
 import io.github.gdrfgdrf.cutebedwars.abstracts.game.management.area.IAreaManager
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationMessage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationAgent
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.area.Area
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.GameStatus
 import io.github.gdrfgdrf.cutebedwars.languages.collect.AreaManagementLanguage
 import io.github.gdrfgdrf.cutebedwars.languages.collect.CommonLanguage
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.localizationScope
@@ -35,10 +34,10 @@ object AreaInformation : IAreaInformation {
             } else {
                 area.games.forEach {
                     val statusMessage = when (it.status) {
-                        Status.DISABLED -> CommonLanguage.STATUS_DISABLED
-                        Status.EDITING -> CommonLanguage.STATUS_EDITING
-                        Status.ENABLED -> CommonLanguage.STATUS_ENABLED
-                        Status.INDEPENDENT -> CommonLanguage.STATUS_INDEPENDENT
+                        GameStatus.DISABLED -> CommonLanguage.STATUS_DISABLED
+                        GameStatus.EDITING -> CommonLanguage.STATUS_EDITING
+                        GameStatus.ENABLED -> CommonLanguage.STATUS_ENABLED
+                        GameStatus.INDEPENDENT -> CommonLanguage.STATUS_INDEPENDENT
                         null -> CommonLanguage.STATUS_UNKNOWN
                     }
 

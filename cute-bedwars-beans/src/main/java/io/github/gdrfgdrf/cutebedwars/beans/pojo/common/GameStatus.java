@@ -3,7 +3,7 @@ package io.github.gdrfgdrf.cutebedwars.beans.pojo.common;
 /**
  * @author gdrfgdrf
  */
-public enum Status {
+public enum GameStatus {
     DISABLED,
     EDITING,
     ENABLED,

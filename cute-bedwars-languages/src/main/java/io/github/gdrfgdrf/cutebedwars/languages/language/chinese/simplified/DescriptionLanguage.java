@@ -25,7 +25,8 @@ class DescriptionLanguage implements IILanguageBlock {
     public static final ILanguageString AREA_STATUS = ILanguageString.Companion.create("区域的状态。" +
             "当值为 DISABLED (已禁用) 时，玩家不可进入该区域下的任何游戏，即使游戏已的状态为 ENABLED (已启用)，" +
 //            "当值为 EDITING (编辑中) 时，表明该区域下有游戏正在被编辑，自动保存将会对该区域启用，玩家可以仅可以进入状态为 ENABLED (已启用) 的游戏，" +
-            "当值为 EDITING (编辑中) 时，表明该区域下有游戏正在被编辑，玩家可以仅可以进入状态为 ENABLED (已启用) 的游戏，" +
+            "当值为 EDITING_GAME (编辑游戏中) 时，表明该区域下有游戏正在被编辑，玩家可以仅可以进入状态为 ENABLED (已启用) 的游戏，" +
+            "当值为 EDITING (编辑中) 时，表明该区域正在被编辑，玩家不可进入该区域下的任何游戏" +
             "当值为 ENABLED (已启用) 时，表明该区域下的游戏可以被进入，并且不可编辑。" +
             "当值不是以上三者时，将会被直接切换到 DISABLED (已禁用)");
     public static final ILanguageString AREA_WORLD_NAME = ILanguageString.Companion.create("区域地图名，该区域下的所有游戏都将使用该地图");
@@ -95,7 +96,7 @@ class DescriptionLanguage implements IILanguageBlock {
     public static final ILanguageString VILLAGER = ILanguageString.Companion.create("村民，不可独立存在，必须存在于队伍下");
     public static final ILanguageString VILLAGER_TYPE = ILanguageString.Companion.create("村民的类型，仅允许 STORE (商店), UPGRADE (升级)");
 
-    public static final ILanguageString STATUS = ILanguageString.Companion.create("状态，有以下值 DISABLED (已禁用), EDITING (编辑中), ENABLED (已启用), INDEPENDENT (独立的)");
+    public static final ILanguageString GAME_STATUS = ILanguageString.Companion.create("游戏状态，有以下值 DISABLED (已禁用), EDITING (编辑中), ENABLED (已启用), INDEPENDENT (独立的)");
 
     public static final ILanguageString COORDINATE = ILanguageString.Companion.create("坐标");
     public static final ILanguageString COORDINATE_X = ILanguageString.Companion.create("坐标 X 轴");

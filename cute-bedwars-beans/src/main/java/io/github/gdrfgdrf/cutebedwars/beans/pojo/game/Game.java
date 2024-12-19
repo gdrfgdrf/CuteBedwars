@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Coordinate;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Region;
-import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.Status;
+import io.github.gdrfgdrf.cutebedwars.beans.pojo.common.GameStatus;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.generator.GeneratorGroup;
 import io.github.gdrfgdrf.cutebedwars.beans.pojo.team.Team;
 import lombok.Data;
@@ -23,7 +23,7 @@ public class Game {
     private Long areaId;
 
     private String name;
-    private Status status = Status.DISABLED;
+    private GameStatus status = GameStatus.DISABLED;
 
     @JsonProperty(value = "min-player")
     private int minPlayer;

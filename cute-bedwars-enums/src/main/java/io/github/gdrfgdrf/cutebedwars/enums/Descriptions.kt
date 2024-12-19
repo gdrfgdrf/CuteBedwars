@@ -97,7 +97,7 @@ enum class Descriptions(
     VILLAGER(DescriptionLanguage::VILLAGER),
     VILLAGER_TYPE(DescriptionLanguage::VILLAGER_TYPE),
 
-    STATUS(DescriptionLanguage::STATUS, true),
+    GAME_STATUS(DescriptionLanguage::STATUS, true),
 
     COORDINATE(DescriptionLanguage::COORDINATE, true),
     COORDINATE_X(DescriptionLanguage::COORDINATE_X, true),
