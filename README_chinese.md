@@ -4,7 +4,7 @@
 一个为Minecraft设计的起床战争插件，基于 1.12.2 版本开发，并使用 [multi-module-mediator](https://github.com/gdrfgdrf/multi-module-mediator) 实现模块化。  
 ⚠ 目前仍在开发中，不能正常使用 ⚠
 
-对于数学和几何模块的一些具体信息请前往 [Math README]("https://github.com/gdrfgdrf/CuteBedwars/blob/dev/math/math-readme.md")
+对于数学和几何模块的一些具体信息请前往 [Math README](https://github.com/gdrfgdrf/CuteBedwars/blob/dev/math/math-readme.md)
 
 ## 特性
 
