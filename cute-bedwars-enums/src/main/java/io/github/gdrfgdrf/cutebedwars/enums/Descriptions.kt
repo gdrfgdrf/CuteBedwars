@@ -2,11 +2,8 @@ package io.github.gdrfgdrf.cutebedwars.enums
 
 import io.github.gdrfgdrf.cutebedwars.abstracts.enums.IDescriptions
 import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILanguageString
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ILocalizationContext
-import io.github.gdrfgdrf.cutebedwars.abstracts.locale.ITranslationTextAgent
 import io.github.gdrfgdrf.cutebedwars.languages.collect.DescriptionLanguage
 import io.github.gdrfgdrf.multimodulemediator.annotation.EnumServiceImpl
-import org.bukkit.command.CommandSender
 import java.util.regex.Pattern
 
 @EnumServiceImpl("descriptions_enum", searcher = "search")
@@ -97,7 +94,7 @@ enum class Descriptions(
     VILLAGER(DescriptionLanguage::VILLAGER),
     VILLAGER_TYPE(DescriptionLanguage::VILLAGER_TYPE),
 
-    GAME_STATUS(DescriptionLanguage::STATUS, true),
+    GAME_STATUS(DescriptionLanguage::GAME_STATUS, true),
 
     COORDINATE(DescriptionLanguage::COORDINATE, true),
     COORDINATE_X(DescriptionLanguage::COORDINATE_X, true),

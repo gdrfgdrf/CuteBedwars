@@ -90,7 +90,7 @@ public class DescriptionLanguage implements IILanguageCollect {
     public static ILanguageString VILLAGER;
     public static ILanguageString VILLAGER_TYPE;
 
-    public static ILanguageString STATUS;
+    public static ILanguageString GAME_STATUS;
 
     public static ILanguageString COORDINATE;
     public static ILanguageString COORDINATE_X;
